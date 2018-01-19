@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/bottom_navigation_explorer"
+        android:id="@+id/bottom_navigation_timer"
         android:enabled="true"
         android:icon="@drawable/ic_timer_white"
         android:title="@string/bottom_navigation_timers"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/bottom_navigation_wishlist"
+        android:id="@+id/bottom_navigation_timeline"
         android:enabled="true"
         android:icon="@drawable/ic_timeline_white"
         android:title="@string/bottom_navigation_stats"

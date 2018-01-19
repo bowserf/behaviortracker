@@ -45,6 +45,8 @@ android {
             res.srcDirs = [
                     'src/main/res/common',
                     'src/main/res/home',
+                    'src/main/res/timer',
+                    'src/main/res/stat',
             ]
         }
     }

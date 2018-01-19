@@ -18,7 +18,7 @@ class BehaviorTrackerApp : Application(){
                     .penaltyLog()
                     .build())
         }
-        
+
         super.onCreate()
     }
 
