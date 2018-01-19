@@ -1,0 +1,12 @@
+// Android
+def supportLibraryVersion = "27.0.2"
+
+rootProject.ext.dependencies = [
+
+        // Support library
+        supportDesign                       : "com.android.support:design:$supportLibraryVersion",
+        supportConstraint                   : "com.android.support.constraint:constraint-layout:1.0.2",
+
+]
+
+
