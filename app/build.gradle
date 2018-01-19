@@ -18,6 +18,8 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
+        resConfigs "en", "fr"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
