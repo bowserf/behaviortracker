@@ -22,4 +22,6 @@
     <dimen name="text_size_xxl">22sp</dimen>
     <dimen name="text_size_xxxl">26sp</dimen>
 
+    <dimen name="default_shadow_height">4dp</dimen>
+
 </resources>
