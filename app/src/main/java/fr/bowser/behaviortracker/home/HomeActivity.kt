@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.stat.StatFragment
 import fr.bowser.behaviortracker.timer.TimerFragment
@@ -22,6 +23,8 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
         setupGraph()
 
+        initializeToolbar()
+
         initializeBottomBar()
     }
 
@@ -31,6 +34,11 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     override fun displayTimelineView() {
         displayFragment(StatFragment() , StatFragment.TAG)
+    }
+
+    private fun initializeToolbar() {
+        val myToolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(myToolbar)
     }
 
     private fun displayFragment(fragment:Fragment, tag: String){
