@@ -1,11 +1,16 @@
-// Android
 def supportLibraryVersion = "27.0.2"
+def dagger2Version = "2.14.1"
 
 rootProject.ext.dependencies = [
 
         // Support library
         supportDesign                       : "com.android.support:design:$supportLibraryVersion",
         supportConstraint                   : "com.android.support.constraint:constraint-layout:1.0.2",
+
+        // Other
+        dagger2                             : "com.google.dagger:dagger:$dagger2Version",
+        annotationProcessorDagger2          : "com.google.dagger:dagger-compiler:$dagger2Version",
+
 
 ]
 

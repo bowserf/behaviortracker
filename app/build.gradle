@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 apply from: '../config/dependency/dependencies.gradle'
 
 android {
@@ -60,6 +62,10 @@ dependencies {
     // Support library
     implementation rootProject.ext.dependencies.supportConstraint
     implementation rootProject.ext.dependencies.supportDesign
+
+    // Other
+    implementation rootProject.ext.dependencies.dagger2
+    kapt rootProject.ext.dependencies.annotationProcessorDagger2
 
     // Test
     testImplementation 'junit:junit:4.12'
