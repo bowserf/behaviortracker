@@ -14,7 +14,7 @@ class TimerRowView(context: Context) : ConstraintLayout(context) {
     private val name: TextView
     private val menu: ImageView
     private val reduceChrono: TextView
-    private val increateChrono: TextView
+    private val increaseChrono: TextView
 
     var listener: ActionListener? = null
 
@@ -31,8 +31,8 @@ class TimerRowView(context: Context) : ConstraintLayout(context) {
         menu = findViewById(R.id.timer_menu)
         reduceChrono = findViewById(R.id.timer_reduce_time)
         reduceChrono.setOnClickListener { listener?.onClickDecreaseTime() }
-        increateChrono = findViewById(R.id.timer_increase_time)
-        increateChrono.setOnClickListener { listener?.onClickIncreaseTime() }
+        increaseChrono = findViewById(R.id.timer_increase_time)
+        increaseChrono.setOnClickListener { listener?.onClickIncreaseTime() }
     }
 
     fun setTimer(timer: Timer) {
