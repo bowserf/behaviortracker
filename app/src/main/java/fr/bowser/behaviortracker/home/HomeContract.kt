@@ -12,6 +12,8 @@ interface HomeContract {
 
     interface Presenter{
 
+        fun start()
+
         fun onClickTimer()
 
         fun onClickTimeline()

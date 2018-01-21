@@ -26,6 +26,8 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         initializeToolbar()
 
         initializeBottomBar()
+
+        presenter.start()
     }
 
     override fun displayTimerView() {
