@@ -5,6 +5,10 @@ import fr.bowser.behaviortracker.model.Timer
 
 class TimerPresenter(val view: TimerContract.View) : TimerContract.Presenter, TimerActionListener{
 
+    override fun onClickAddTimer() {
+        view.displayCreateTimerView()
+    }
+
     override fun onTimerStateChange(timer: Timer) {
 
     }

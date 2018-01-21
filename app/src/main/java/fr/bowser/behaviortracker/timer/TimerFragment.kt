@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.createtimer.CreateTimerActivity
 import fr.bowser.behaviortracker.home.DaggerTimerComponent
 import fr.bowser.behaviortracker.home.TimerContract
 import fr.bowser.behaviortracker.home.TimerModule
@@ -36,6 +37,12 @@ class TimerFragment : Fragment(), TimerContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         initializeList(view)
+
+        view.findViewById<View>(R.id.button_add_timer).setOnClickListener{ presenter.onClickAddTimer() }
+    }
+
+    override fun displayCreateTimerView() {
+        CreateTimerActivity.startActivity(context)
     }
 
     private fun setupGraph() {

@@ -8,10 +8,23 @@
         android:id="@+id/list_timers"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/default_space_1_5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="@dimen/default_space_1_5"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_add_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_space_2"
+        android:layout_marginEnd="@dimen/default_space_2"
+        android:elevation="@dimen/default_space"
+        android:src="@drawable/ic_add_white"
+        app:fabSize="normal"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
