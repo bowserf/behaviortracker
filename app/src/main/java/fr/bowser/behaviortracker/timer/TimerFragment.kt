@@ -49,11 +49,12 @@ class TimerFragment : Fragment(), TimerContract.View {
         val list = view.findViewById<RecyclerView>(R.id.list_timers)
         list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         list.setHasFixedSize(true)
-        timerAdapter = TimerAdapter()
+        timerAdapter = TimerAdapter(presenter)
         list.adapter = timerAdapter
 
         val timerList:MutableList<Timer> = ArrayList()
         timerList.add(Timer(1, 6000, "Work", Color.RED))
+        timerList.add(Timer(2, 12345, "Break", Color.BLUE))
         timerAdapter.setTimersList(timerList)
     }
 
