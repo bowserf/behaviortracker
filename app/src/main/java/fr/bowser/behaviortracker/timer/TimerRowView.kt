@@ -21,6 +21,9 @@ class TimerRowView(context: Context) : ConstraintLayout(context) {
     init {
         inflate(context, R.layout.item_timer, this)
 
+        val padding = resources.getDimensionPixelOffset(R.dimen.default_space)
+        setPadding(padding, padding, padding, padding)
+
         setOnClickListener { listener?.onTimerStateChange() }
 
         chrono = findViewById(R.id.timer_chrono)
