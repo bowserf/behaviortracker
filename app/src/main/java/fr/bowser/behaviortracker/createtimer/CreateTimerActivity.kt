@@ -6,14 +6,29 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import javax.inject.Inject
 
-class CreateTimerActivity : AppCompatActivity() {
+class CreateTimerActivity : AppCompatActivity(), CreateTimerContract.View {
+
+    @Inject
+    lateinit var presenter: CreateTimerPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_timer)
 
+        setupGraph()
+
         initToolbar()
+    }
+
+    private fun setupGraph(){
+        val component = DaggerCreateTimerComponent.builder()
+                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+                .createTimerModule(CreateTimerModule())
+                .build()
+        component.inject(this)
     }
 
     private fun initToolbar(){
