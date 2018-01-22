@@ -10,8 +10,14 @@ class CreateTimerModule {
 
     @GenericScope(component = CreateTimerComponent::class)
     @Provides
-    fun provideCreateTimerPresenter(database: DatabaseManager) : CreateTimerPresenter {
-        return CreateTimerPresenter(database.provideTimerDAO())
+    fun provideCreateTimerManager(databaseManager: DatabaseManager): CreateTimerManager{
+        return CreateTimerManager(databaseManager.provideTimerDAO())
+    }
+
+    @GenericScope(component = CreateTimerComponent::class)
+    @Provides
+    fun provideCreateTimerPresenter(manager: CreateTimerManager) : CreateTimerPresenter {
+        return CreateTimerPresenter(manager)
     }
 
 }
