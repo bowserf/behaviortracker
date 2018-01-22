@@ -64,6 +64,10 @@ dependencies {
     implementation rootProject.ext.dependencies.supportConstraint
     implementation rootProject.ext.dependencies.supportDesign
 
+    // Architecture component
+    implementation rootProject.ext.dependencies.room
+    kapt rootProject.ext.dependencies.annotationProcessorRoom
+
     // Other
     implementation rootProject.ext.dependencies.dagger2
     kapt rootProject.ext.dependencies.annotationProcessorDagger2

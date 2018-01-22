@@ -1,11 +1,16 @@
 def supportLibraryVersion = "27.0.2"
 def dagger2Version = "2.14.1"
+def architectureComponentVersion = "1.0.0"
 
 rootProject.ext.dependencies = [
 
         // Support library
         supportDesign                       : "com.android.support:design:$supportLibraryVersion",
         supportConstraint                   : "com.android.support.constraint:constraint-layout:1.0.2",
+
+        // Architecture component
+        room                                : "android.arch.persistence.room:runtime:$architectureComponentVersion",
+        annotationProcessorRoom             : "android.arch.persistence.room:compiler:$architectureComponentVersion",
 
         // Other
         dagger2                             : "com.google.dagger:dagger:$dagger2Version",
