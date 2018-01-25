@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.stat.StatFragment
-import fr.bowser.behaviortracker.timer.TimerFragment
+import fr.bowser.behaviortracker.timerlist.TimerFragment
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), HomeContract.View {

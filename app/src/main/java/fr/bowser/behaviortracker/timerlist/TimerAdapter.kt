@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.timer
+package fr.bowser.behaviortracker.timerlist
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

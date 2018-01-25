@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.timer
+package fr.bowser.behaviortracker.timerlist
 
 import fr.bowser.behaviortracker.model.Timer
 

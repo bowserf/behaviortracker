@@ -2,8 +2,8 @@ package fr.bowser.behaviortracker.home
 
 
 import dagger.Component
-import fr.bowser.behaviortracker.timer.TimerFragment
-import fr.bowser.behaviortracker.timer.TimerPresenter
+import fr.bowser.behaviortracker.timerlist.TimerFragment
+import fr.bowser.behaviortracker.timerlist.TimerPresenter
 import javax.inject.Singleton
 
 @Singleton

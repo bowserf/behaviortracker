@@ -2,7 +2,7 @@ package fr.bowser.behaviortracker.home
 
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.timer.TimerPresenter
+import fr.bowser.behaviortracker.timerlist.TimerPresenter
 import javax.inject.Singleton
 
 @Module
