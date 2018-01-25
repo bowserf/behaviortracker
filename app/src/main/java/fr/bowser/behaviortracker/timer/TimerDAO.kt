@@ -1,9 +1,8 @@
-package fr.bowser.behaviortracker.database
+package fr.bowser.behaviortracker.timer
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
-import fr.bowser.behaviortracker.model.Timer
 
 @Dao
 interface TimerDAO {

@@ -5,7 +5,7 @@ import android.support.constraint.ConstraintLayout
 import android.widget.ImageView
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
-import fr.bowser.behaviortracker.model.Timer
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.TimeConverter
 
 class TimerRowView(context: Context) : ConstraintLayout(context) {

@@ -1,6 +1,6 @@
 package fr.bowser.behaviortracker.timerlist
 
-import fr.bowser.behaviortracker.model.Timer
+import fr.bowser.behaviortracker.timer.Timer
 
 interface TimerActionListener {
 
