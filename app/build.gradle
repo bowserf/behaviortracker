@@ -50,6 +50,7 @@ android {
                     'src/main/res/timer',
                     'src/main/res/stat',
                     'src/main/res/createtimer',
+                    'src/main/res/timerlist',
             ]
         }
     }
