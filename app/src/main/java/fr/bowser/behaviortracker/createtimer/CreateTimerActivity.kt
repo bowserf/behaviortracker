@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.EditText
@@ -75,7 +76,12 @@ class CreateTimerActivity : AppCompatActivity(), CreateTimerContract.View {
     }
 
     private fun initUI() {
-
+        editTimerName = findViewById(R.id.creation_timer_name)
+        findViewById<FloatingActionButton>(R.id.button_create_timer).setOnClickListener {
+            val timerName = editTimerName.text.toString()
+            val color: Int = chooseColor.adapter.getItem(chooseColor.selectedItemPosition) as Int
+            presenter.createTimer(timerName, color)
+        }
     }
 
     companion object {
