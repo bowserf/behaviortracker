@@ -36,7 +36,7 @@ class TimerFragment : Fragment(), TimerContract.View {
 
         initializeList(view)
 
-        view.findViewById<View>(R.id.button_add_timer).setOnClickListener{ presenter.onClickAddTimer() }
+        view.findViewById<View>(R.id.button_add_timer).setOnClickListener { presenter.onClickAddTimer() }
     }
 
     override fun displayCreateTimerView() {
@@ -54,22 +54,22 @@ class TimerFragment : Fragment(), TimerContract.View {
         val list = view.findViewById<RecyclerView>(R.id.list_timers)
         list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         list.setHasFixedSize(true)
-        timerAdapter = TimerAdapter(presenter)
+        timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
 
         val margin = resources.getDimensionPixelOffset(R.dimen.margin_between_timer_items)
-        list.addItemDecoration(object: RecyclerView.ItemDecoration() {
+        list.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
                 val currentPosition = parent?.getChildLayoutPosition(view)
-                if(parent?.adapter?.itemCount != currentPosition) {
+                if (parent?.adapter?.itemCount != currentPosition) {
                     outRect?.bottom = margin
                 }
             }
         })
 
-        val timerList:MutableList<Timer> = ArrayList()
-        timerList.add(Timer(1, 6000, "Work", Color.RED))
-        timerList.add(Timer(2, 12345, "Break", Color.BLUE))
+        val timerList: MutableList<Timer> = ArrayList()
+        timerList.add(Timer(1, 0, "Work", Color.RED))
+        timerList.add(Timer(2, 0, "Break", Color.BLUE))
         timerAdapter.setTimersList(timerList)
     }
 

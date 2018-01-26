@@ -18,8 +18,6 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
     private val reduceChrono: TextView
     private val increaseChrono: TextView
 
-    var listener: ActionListener? = null
-
     @Inject
     lateinit var presenter: TimerItemPresenter
 
@@ -31,23 +29,15 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
         val padding = resources.getDimensionPixelOffset(R.dimen.default_space)
         setPadding(padding, padding, padding, padding)
 
-        setOnClickListener { listener?.onTimerStateChange() }
+        setOnClickListener { presenter.onTimerStateChange() }
 
         chrono = findViewById(R.id.timer_chrono)
         name = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
         reduceChrono = findViewById(R.id.timer_reduce_time)
-        reduceChrono.setOnClickListener { listener?.onClickDecreaseTime() }
+        reduceChrono.setOnClickListener { presenter.onClickDecreaseTime() }
         increaseChrono = findViewById(R.id.timer_increase_time)
-        increaseChrono.setOnClickListener { listener?.onClickIncreaseTime() }
-    }
-
-    private fun setupGraph(){
-        val component = DaggerTimerItemComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-                .timerItemModule(TimerItemModule(this))
-                .build()
-        component.inject(this)
+        increaseChrono.setOnClickListener { presenter.onClickIncreaseTime() }
     }
 
     fun setTimer(timer: Timer) {
@@ -56,10 +46,16 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
         setBackgroundColor(timer.color)
     }
 
-    interface ActionListener {
-        fun onTimerStateChange()
-        fun onClickIncreaseTime()
-        fun onClickDecreaseTime()
+    override fun timerUpdated(newTime: Long) {
+        chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
+    }
+
+    private fun setupGraph() {
+        val component = DaggerTimerItemComponent.builder()
+                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
+                .timerItemModule(TimerItemModule(this))
+                .build()
+        component.inject(this)
     }
 
 }

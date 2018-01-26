@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timeritem.TimerRowView
 
-class TimerAdapter(val listener: TimerActionListener) : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
+class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
     var timers: List<Timer> = ArrayList()
 
@@ -15,10 +15,9 @@ class TimerAdapter(val listener: TimerActionListener) : RecyclerView.Adapter<Tim
         val layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        timerRowView.setLayoutParams(layoutParams)
+        timerRowView.layoutParams = layoutParams
 
-
-        return TimerViewHolder(timerRowView, listener)
+        return TimerViewHolder(timerRowView)
     }
 
     override fun onBindViewHolder(holder: TimerViewHolder?, position: Int) {
@@ -30,29 +29,11 @@ class TimerAdapter(val listener: TimerActionListener) : RecyclerView.Adapter<Tim
         return timers.size
     }
 
-    fun setTimersList(timers: List<Timer>){
+    fun setTimersList(timers: List<Timer>) {
         this.timers = timers
         notifyDataSetChanged()
     }
 
-    inner class TimerViewHolder(val view: TimerRowView, listener: TimerActionListener) : RecyclerView.ViewHolder(view) {
-
-        init{
-            view.listener = object: TimerRowView.ActionListener{
-                override fun onTimerStateChange() {
-                    listener.onTimerStateChange(timers[adapterPosition])
-                }
-
-                override fun onClickIncreaseTime() {
-                    listener.onClickIncreaseTime(timers[adapterPosition])
-                }
-
-                override fun onClickDecreaseTime() {
-                    listener.onClickDecreaseTime (timers[adapterPosition])
-                }
-            }
-        }
-
-    }
+    inner class TimerViewHolder(val view: TimerRowView) : RecyclerView.ViewHolder(view)
 
 }
