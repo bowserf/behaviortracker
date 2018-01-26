@@ -67,7 +67,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         }
     }
 
-    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
+    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
         beginTransaction().func().commit()
     }
 
