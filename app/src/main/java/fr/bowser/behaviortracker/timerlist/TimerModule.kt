@@ -1,18 +1,17 @@
-package fr.bowser.behaviortracker.home
+package fr.bowser.behaviortracker.timerlist
 
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timerlist.TimerPresenter
-import javax.inject.Singleton
+import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-internal class TimerModule(private val timerView: TimerContract.View, private val timerManager: TimerManager) {
+class TimerModule(private val timerView: TimerContract.View) {
 
-    @Singleton
+    @GenericScope(component = TimerComponent::class)
     @Provides
     fun provideTimerPresenter(): TimerPresenter {
-        return TimerPresenter(timerView, timerManager)
+        return TimerPresenter(timerView)
     }
 
 }

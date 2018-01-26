@@ -1,11 +1,8 @@
 package fr.bowser.behaviortracker.timerlist
 
-import fr.bowser.behaviortracker.home.TimerContract
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerManager
 
-class TimerPresenter(private val view: TimerContract.View,
-                     private val timerManager: TimerManager)
+class TimerPresenter(private val view: TimerContract.View)
     : TimerContract.Presenter,
         TimerActionListener {
 

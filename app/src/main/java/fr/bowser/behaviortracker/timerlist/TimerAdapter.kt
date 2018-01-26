@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.timerlist
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timeritem.TimerRowView
 
 class TimerAdapter(val listener: TimerActionListener) : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
