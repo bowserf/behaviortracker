@@ -8,9 +8,9 @@ import android.arch.persistence.room.Query
 interface TimerDAO {
 
     @Query("SELECT * FROM Timer")
-    abstract fun getCategories(): List<Timer>
+    fun getCategories(): List<Timer>
 
     @Insert
-    abstract fun addTimer(timer: Timer)
+    fun addTimer(timer: Timer)
 
 }
