@@ -57,12 +57,18 @@ class TimerFragment : Fragment(), TimerContract.View {
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
 
-        val margin = resources.getDimensionPixelOffset(R.dimen.margin_between_timer_items)
+        val spaceBetweenItems = resources.getDimensionPixelOffset(R.dimen.margin_between_timer_items)
+        val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         list.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
                 val currentPosition = parent?.getChildLayoutPosition(view)
                 if (parent?.adapter?.itemCount != currentPosition) {
-                    outRect?.bottom = margin
+                    outRect?.bottom = spaceBetweenItems
+                    outRect?.left = margin
+                    outRect?.right = margin
+                }
+                if(currentPosition == 0){
+                    outRect?.top =  margin
                 }
             }
         })

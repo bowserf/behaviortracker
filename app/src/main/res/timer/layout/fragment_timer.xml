@@ -8,7 +8,6 @@
         android:id="@+id/list_timers"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/default_space_1_5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
