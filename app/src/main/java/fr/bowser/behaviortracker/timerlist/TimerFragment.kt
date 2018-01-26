@@ -11,9 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.createtimer.CreateTimerActivity
-import fr.bowser.behaviortracker.home.DaggerTimerComponent
-import fr.bowser.behaviortracker.home.TimerContract
-import fr.bowser.behaviortracker.home.TimerModule
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
