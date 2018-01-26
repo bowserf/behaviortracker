@@ -1,12 +1,10 @@
-package fr.bowser.behaviortracker.home
+package fr.bowser.behaviortracker.timerlist
 
 
 import dagger.Component
-import fr.bowser.behaviortracker.timerlist.TimerFragment
-import fr.bowser.behaviortracker.timerlist.TimerPresenter
-import javax.inject.Singleton
+import fr.bowser.behaviortracker.utils.GenericScope
 
-@Singleton
+@GenericScope(component = TimerComponent::class)
 @Component(modules = arrayOf(TimerModule::class))
 interface TimerComponent {
 
