@@ -15,7 +15,9 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
 
-class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContract.View {
+class TimerRowView(context: Context) :
+        ConstraintLayout(context),
+        TimerItemContract.View {
 
     private val chrono: TextView
     private val name: TextView
@@ -83,7 +85,7 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
                     presenter.onClickResetTimer()
                 }
                 R.id.item_timer_delete -> {
-                    presenter.onClickDeleteTimer()
+                    displayRemoveConfirmationDialog()
                 }
                 R.id.item_timer_rename -> {
                     presenter.onClickRenameTimer()
@@ -115,6 +117,19 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
         alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })
 
         alertDialog.show()
+    }
+
+    private fun displayRemoveConfirmationDialog() {
+        val message = resources.getString(R.string.item_timer_remove_message)
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(message)
+                .setPositiveButton(android.R.string.yes, { dialog, which ->
+                    presenter.onClickDeleteTimer()
+                })
+                .setNegativeButton(android.R.string.no, { dialog, which ->
+                    // do nothing
+                })
+                .show()
     }
 
     private fun setupGraph() {

@@ -20,13 +20,13 @@ interface TimerItemContract {
 
         fun stop()
 
+        fun setTimer(timerState: TimerState)
+
         fun onTimerStateChange()
 
         fun onClickDecreaseTime()
 
         fun onClickIncreaseTime()
-
-        fun setTimer(timerState: TimerState)
 
         fun onClickDeleteTimer()
 

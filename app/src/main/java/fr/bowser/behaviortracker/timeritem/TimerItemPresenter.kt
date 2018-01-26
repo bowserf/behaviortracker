@@ -82,7 +82,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         }
     }
 
-    private val updateTimerCallback = object : TimeManager.UpdateTimerCallback {
+    private val updateTimerCallback = object:TimeManager.UpdateTimerCallback{
         override fun timeUpdated() {
             timerState.timer.currentTime++
 
