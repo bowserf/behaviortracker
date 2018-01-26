@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.home
+package fr.bowser.behaviortracker.timerlist
 
 interface TimerContract {
 
