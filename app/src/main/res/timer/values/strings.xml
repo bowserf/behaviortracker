@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="item_timer_reduce_time">-15s</string>
-    <string name="item_timer_increase_time">+15s</string>
+    <string name="item_timer_remove">Remove</string>
+    <string name="item_timer_rename">Rename</string>
 
 </resources>
