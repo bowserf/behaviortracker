@@ -29,6 +29,17 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
     }
 
+    fun registerTimerCallback(timerCallback: TimerCallback): Boolean{
+        if(callbacks.contains(timerCallback)){
+            return false
+        }
+        return callbacks.add(timerCallback)
+    }
+
+    fun unregisterTimerCallback(timerCallback: TimerCallback): Boolean{
+        return callbacks.remove(timerCallback)
+    }
+
     interface TimerCallback {
         fun onTimerRemoved(timer:Timer)
         fun onTimerAdded(timer:Timer)
