@@ -44,6 +44,8 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
     }
 
     fun setTimer(timer: Timer) {
+        presenter.setTimer(timer)
+
         chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
         name.text = timer.name
         setBackgroundColor(timer.color)

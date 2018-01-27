@@ -1,5 +1,7 @@
 package fr.bowser.behaviortracker.timeritem
 
+import fr.bowser.behaviortracker.timer.Timer
+
 interface TimerItemContract {
 
     interface View{
@@ -15,6 +17,8 @@ interface TimerItemContract {
         fun onClickDecreaseTime()
 
         fun onClickIncreaseTime()
+
+        fun setTimer(timer: Timer)
 
     }
 

@@ -1,12 +1,13 @@
 package fr.bowser.behaviortracker.timeritem
 
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
 
 class TimerItemPresenter(private val view: TimerItemContract.View, private val timerManager: TimerManager) : TimerItemContract.Presenter {
 
     private var isActivate = false
 
-    private var currentTime: Long = 0
+    private lateinit var timer: Timer
 
     override fun onTimerStateChange() {
         isActivate = !isActivate
@@ -17,24 +18,28 @@ class TimerItemPresenter(private val view: TimerItemContract.View, private val t
         }
     }
 
+    override fun setTimer(timer: Timer) {
+        this.timer = timer
+    }
+
     override fun onClickDecreaseTime() {
-        currentTime -= DEFAULT_TIMER_MODIFICATOR
-        if(currentTime < 0){
-            currentTime = 0
+        timer.currentTime -= DEFAULT_TIMER_MODIFICATOR
+        if(timer.currentTime < 0){
+            timer.currentTime = 0
         }
-        view.timerUpdated(currentTime)
+        view.timerUpdated(timer.currentTime)
     }
 
     override fun onClickIncreaseTime() {
-        currentTime += DEFAULT_TIMER_MODIFICATOR
-        view.timerUpdated(currentTime)
+        timer.currentTime += DEFAULT_TIMER_MODIFICATOR
+        view.timerUpdated(timer.currentTime)
     }
 
     private val updateTimerCallback = object:TimerManager.UpdateTimerCallback{
         override fun timeUpdated() {
-            currentTime++
+            timer.currentTime++
 
-            view.timerUpdated(currentTime)
+            view.timerUpdated(timer.currentTime)
 
             //TODO notify database
         }
