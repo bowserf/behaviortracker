@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.timerlist
 
-import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerActivity
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
@@ -39,12 +39,22 @@ class TimerFragment : Fragment(), TimerContract.View {
         view.findViewById<View>(R.id.button_add_timer).setOnClickListener { presenter.onClickAddTimer() }
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.start()
+    }
+
     override fun displayCreateTimerView() {
         CreateTimerActivity.startActivity(context)
     }
 
+    override fun displayTimerList(timers: ArrayList<Timer>) {
+        timerAdapter.timers = timers
+    }
+
     private fun setupGraph() {
         val build = DaggerTimerComponent.builder()
+                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
                 .timerModule(TimerModule(this))
                 .build()
         build.inject(this)
@@ -67,16 +77,11 @@ class TimerFragment : Fragment(), TimerContract.View {
                     outRect?.left = margin
                     outRect?.right = margin
                 }
-                if(currentPosition == 0){
-                    outRect?.top =  margin
+                if (currentPosition == 0) {
+                    outRect?.top = margin
                 }
             }
         })
-
-        val timerList: MutableList<Timer> = ArrayList()
-        timerList.add(Timer(1, 0, "Work", Color.RED))
-        timerList.add(Timer(2, 0, "Break", Color.BLUE))
-        timerAdapter.setTimersList(timerList)
     }
 
     companion object {

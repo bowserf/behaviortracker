@@ -5,12 +5,12 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class TimerManagerModule {
+class TimeManagerModule {
 
     @Singleton
     @Provides
-    fun provideTimerManager(): TimerManager {
-        return TimerManager()
+    fun provideTimeManager(): TimeManager {
+        return TimeManager()
     }
 
 }

@@ -1,9 +1,9 @@
 package fr.bowser.behaviortracker.timeritem
 
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerManager
+import fr.bowser.behaviortracker.timer.TimeManager
 
-class TimerItemPresenter(private val view: TimerItemContract.View, private val timerManager: TimerManager) : TimerItemContract.Presenter {
+class TimerItemPresenter(private val view: TimerItemContract.View, private val timeManager: TimeManager) : TimerItemContract.Presenter {
 
     private var isActivate = false
 
@@ -12,9 +12,9 @@ class TimerItemPresenter(private val view: TimerItemContract.View, private val t
     override fun onTimerStateChange() {
         isActivate = !isActivate
         if(isActivate){
-            timerManager.registerUpdateTimerCallback(updateTimerCallback)
+            timeManager.registerUpdateTimerCallback(updateTimerCallback)
         }else{
-            timerManager.unregisterUpdateTimerCallback(updateTimerCallback)
+            timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
         }
     }
 
@@ -35,7 +35,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View, private val t
         view.timerUpdated(timer.currentTime)
     }
 
-    private val updateTimerCallback = object:TimerManager.UpdateTimerCallback{
+    private val updateTimerCallback = object: TimeManager.UpdateTimerCallback{
         override fun timeUpdated() {
             timer.currentTime++
 
