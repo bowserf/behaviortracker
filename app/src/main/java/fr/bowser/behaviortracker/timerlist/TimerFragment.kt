@@ -54,7 +54,7 @@ class TimerFragment : Fragment(), TimerContract.View {
     }
 
     override fun displayTimerList(timers: ArrayList<Timer>) {
-        timerAdapter.timers = timers
+        timerAdapter.setTimersList(timers)
     }
 
     override fun onTimerRemoved(timer: Timer) {
