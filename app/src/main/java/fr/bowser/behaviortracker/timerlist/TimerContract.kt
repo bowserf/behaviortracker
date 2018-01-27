@@ -10,11 +10,17 @@ interface TimerContract {
 
         fun displayTimerList(timers: ArrayList<Timer>)
 
+        fun onTimerRemoved(timer: Timer)
+
+        fun onTimerAdded(timer: Timer)
+
     }
 
     interface Presenter{
 
         fun start()
+
+        fun stop()
 
         fun onClickAddTimer()
 

@@ -44,12 +44,25 @@ class TimerFragment : Fragment(), TimerContract.View {
         presenter.start()
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
+    }
+
     override fun displayCreateTimerView() {
         CreateTimerActivity.startActivity(context)
     }
 
     override fun displayTimerList(timers: ArrayList<Timer>) {
         timerAdapter.timers = timers
+    }
+
+    override fun onTimerRemoved(timer: Timer) {
+        timerAdapter.notifyDataSetChanged()
+    }
+
+    override fun onTimerAdded(timer: Timer) {
+        timerAdapter.notifyDataSetChanged()
     }
 
     private fun setupGraph() {

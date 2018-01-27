@@ -2,8 +2,11 @@ package fr.bowser.behaviortracker.timeritem
 
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer.TimerListManager
 
-class TimerItemPresenter(private val view: TimerItemContract.View, private val timeManager: TimeManager) : TimerItemContract.Presenter {
+class TimerItemPresenter(private val view: TimerItemContract.View,
+                         private val timeManager: TimeManager,
+                         private val timerListManager: TimerListManager) : TimerItemContract.Presenter {
 
     private var isActivate = false
 
@@ -20,6 +23,10 @@ class TimerItemPresenter(private val view: TimerItemContract.View, private val t
 
     override fun setTimer(timer: Timer) {
         this.timer = timer
+    }
+
+    override fun onClickDeleteTimer() {
+        timerListManager.removeTimer(timer)
     }
 
     override fun onClickDecreaseTime() {

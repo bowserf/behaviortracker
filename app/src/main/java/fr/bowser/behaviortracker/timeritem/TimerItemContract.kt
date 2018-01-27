@@ -20,6 +20,8 @@ interface TimerItemContract {
 
         fun setTimer(timer: Timer)
 
+        fun onClickDeleteTimer()
+
     }
 
 }
