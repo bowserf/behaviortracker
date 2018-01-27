@@ -60,6 +60,7 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
 
         popup.setOnMenuItemClickListener { item ->
             when(item.itemId){
+                R.id.item_timer_reset -> {}
                 R.id.item_timer_delete -> {}
                 R.id.item_timer_rename -> {}
             }

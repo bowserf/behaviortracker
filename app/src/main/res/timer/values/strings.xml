@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="item_timer_reset">Reset</string>
     <string name="item_timer_remove">Remove</string>
     <string name="item_timer_rename">Rename</string>
 
