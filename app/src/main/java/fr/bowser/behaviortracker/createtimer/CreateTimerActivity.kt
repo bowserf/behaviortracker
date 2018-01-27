@@ -62,7 +62,7 @@ class CreateTimerActivity : AppCompatActivity(), CreateTimerContract.View {
     private fun setupGraph(){
         val component = DaggerCreateTimerComponent.builder()
                 .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-                .createTimerModule(CreateTimerModule())
+                .createTimerModule(CreateTimerModule(this))
                 .build()
         component.inject(this)
     }

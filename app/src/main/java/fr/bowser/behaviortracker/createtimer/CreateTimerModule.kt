@@ -6,7 +6,7 @@ import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-class CreateTimerModule {
+class CreateTimerModule(private val view : CreateTimerContract.View) {
 
     @GenericScope(component = CreateTimerComponent::class)
     @Provides
@@ -17,7 +17,7 @@ class CreateTimerModule {
     @GenericScope(component = CreateTimerComponent::class)
     @Provides
     fun provideCreateTimerPresenter(manager: CreateTimerManager) : CreateTimerPresenter {
-        return CreateTimerPresenter(manager)
+        return CreateTimerPresenter(view, manager)
     }
 
 }
