@@ -10,7 +10,7 @@ interface CreateTimerContract {
 
     interface Presenter{
 
-        fun createTimer(name: String, color: Int)
+        fun createTimer(name: String, color: Int, startNow : Boolean)
 
     }
 

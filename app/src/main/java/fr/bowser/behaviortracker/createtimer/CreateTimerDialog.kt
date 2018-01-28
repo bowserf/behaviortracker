@@ -3,12 +3,15 @@ package fr.bowser.behaviortracker.createtimer
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
 import fr.bowser.behaviortracker.R
@@ -23,6 +26,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private lateinit var editTimerName: EditText
     private lateinit var chooseColor: Spinner
+    private lateinit var startNow: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +100,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private fun initUI(root: View) {
         editTimerName = root.findViewById(R.id.creation_timer_name)
+        startNow = root.findViewById(R.id.start_after_creation)
     }
 
     private fun exitWithAnimation(){
@@ -108,7 +113,8 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     private fun saveTimer() {
         val timerName = editTimerName.text.toString()
         val color: Int = chooseColor.adapter.getItem(chooseColor.selectedItemPosition) as Int
-        presenter.createTimer(timerName, color)
+
+        presenter.createTimer(timerName, color, startNow.isChecked)
     }
 
     companion object {

@@ -24,8 +24,8 @@ class TimerPresenter(private val view: TimerContract.View,
         view.onTimerRemoved(timer)
     }
 
-    override fun onTimerAdded(timer: Timer) {
-        view.onTimerAdded(timer)
+    override fun onTimerAdded(timer: Timer, startNow : Boolean) {
+        view.onTimerAdded(timer, startNow)
     }
 
     override fun onClickAddTimer() {

@@ -15,10 +15,10 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         timers.add(Timer(3, 0, "Lunch", Color.GREEN))
     }
 
-    fun addTimer(timer:Timer){
+    fun addTimer(timer:Timer, startNow : Boolean){
         timers.add(timer)
         for (callback in callbacks) {
-            callback.onTimerAdded(timer)
+            callback.onTimerAdded(timer, startNow)
         }
     }
 
@@ -42,7 +42,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
 
     interface TimerCallback {
         fun onTimerRemoved(timer:Timer)
-        fun onTimerAdded(timer:Timer)
+        fun onTimerAdded(timer:Timer, startNow : Boolean)
     }
 
 }

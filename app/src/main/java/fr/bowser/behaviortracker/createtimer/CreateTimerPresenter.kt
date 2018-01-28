@@ -6,9 +6,9 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 class CreateTimerPresenter(private val view : CreateTimerContract.View,
                            private val timerListManager: TimerListManager) : CreateTimerContract.Presenter{
 
-    override fun createTimer(name: String, color: Int) {
+    override fun createTimer(name: String, color: Int, startNow : Boolean) {
         val timer = Timer(name, color)
-        timerListManager.addTimer(timer)
+        timerListManager.addTimer(timer, startNow)
 
         view.exitViewAfterSucceedTimerCreation()
     }

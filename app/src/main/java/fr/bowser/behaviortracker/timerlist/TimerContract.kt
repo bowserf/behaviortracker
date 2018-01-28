@@ -13,7 +13,7 @@ interface TimerContract {
 
         fun onTimerRemoved(timer: Timer)
 
-        fun onTimerAdded(timer: Timer)
+        fun onTimerAdded(timer: Timer, startNow : Boolean)
 
     }
 
