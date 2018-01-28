@@ -8,6 +8,10 @@ interface TimerItemContract {
 
         fun timerUpdated(newTime: Long)
 
+        fun nameUpdated(newName: String)
+
+        fun displayRenameDialog(oldName: String)
+
     }
 
     interface Presenter {
@@ -27,6 +31,10 @@ interface TimerItemContract {
         fun onClickDeleteTimer()
 
         fun onClickResetTimer()
+
+        fun onClickRenameTimer()
+
+        fun onTimerNameUpdated(newTimerName: String)
 
     }
 

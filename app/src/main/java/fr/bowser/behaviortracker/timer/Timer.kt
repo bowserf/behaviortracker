@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "Timer" )
 data class Timer(@PrimaryKey @ColumnInfo(name = "id") var id: Long,
                  @ColumnInfo(name = "current_time") var currentTime: Long,
-                 @ColumnInfo(name = "name") val name: String,
+                 @ColumnInfo(name = "name") var name: String,
                  @ColumnInfo(name = "color") var color: Int){
     @Ignore
     constructor(name: String, color: Int)

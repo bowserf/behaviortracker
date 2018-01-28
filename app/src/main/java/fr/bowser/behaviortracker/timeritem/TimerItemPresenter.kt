@@ -52,6 +52,17 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         view.timerUpdated(timerState.timer.currentTime)
     }
 
+    override fun onClickRenameTimer() {
+        view.displayRenameDialog(timerState.timer.name)
+    }
+
+    override fun onTimerNameUpdated(newTimerName: String) {
+        timerState.timer.name = newTimerName
+
+        //TODO update with TimerListManager
+        //TODO update database
+    }
+
     override fun onTimerAdded(timer: Timer) {
 
     }

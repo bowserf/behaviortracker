@@ -2,12 +2,14 @@ package fr.bowser.behaviortracker.timeritem
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.PopupMenu
+import android.view.LayoutInflater
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerState
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
@@ -37,7 +39,7 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
         chrono = findViewById(R.id.timer_chrono)
         name = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
-        menu.setOnClickListener{ displayMenu() }
+        menu.setOnClickListener { displayMenu() }
         reduceChrono = findViewById(R.id.timer_reduce_time)
         reduceChrono.setOnClickListener { presenter.onClickDecreaseTime() }
         increaseChrono = findViewById(R.id.timer_increase_time)
@@ -66,21 +68,53 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
         chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
     }
 
+    override fun nameUpdated(newName: String) {
+        name.text = newName
+    }
+
     private fun displayMenu() {
         val popup = PopupMenu(context, menu)
 
         popup.menuInflater.inflate(R.menu.menu_item_timer, popup.menu)
 
         popup.setOnMenuItemClickListener { item ->
-            when(item.itemId){
-                R.id.item_timer_reset -> { presenter.onClickResetTimer() }
-                R.id.item_timer_delete -> { presenter.onClickDeleteTimer()}
-                R.id.item_timer_rename -> {}
+            when (item.itemId) {
+                R.id.item_timer_reset -> {
+                    presenter.onClickResetTimer()
+                }
+                R.id.item_timer_delete -> {
+                    presenter.onClickDeleteTimer()
+                }
+                R.id.item_timer_rename -> {
+                    presenter.onClickRenameTimer()
+                }
             }
             true
         }
 
         popup.show()
+    }
+
+    override fun displayRenameDialog(oldName: String) {
+        val alertDialog = AlertDialog.Builder(context)
+        alertDialog.setTitle(resources.getString(R.string.timer_row_rename))
+
+        val rootView = LayoutInflater.from(context).inflate(R.layout.dialog_rename_timer, null)
+        val input = rootView.findViewById<EditText>(R.id.edittext)
+
+        input.setText(oldName)
+
+        alertDialog.setView(rootView)
+
+        alertDialog.setPositiveButton(android.R.string.yes, { dialog, which ->
+            val newName = input.text.toString()
+            presenter.onTimerNameUpdated(newName)
+            name.text = newName
+        })
+
+        alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })
+
+        alertDialog.show()
     }
 
     private fun setupGraph() {
