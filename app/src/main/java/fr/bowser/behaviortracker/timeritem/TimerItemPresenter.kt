@@ -1,52 +1,50 @@
 package fr.bowser.behaviortracker.timeritem
 
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer.TimerState
 
 class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val timeManager: TimeManager,
                          private val timerListManager: TimerListManager) : TimerItemContract.Presenter {
 
-    private var isActivate = false
-
-    private lateinit var timer: Timer
+    private lateinit var timerState: TimerState
 
     override fun onTimerStateChange() {
-        isActivate = !isActivate
-        if(isActivate){
+        timerState.isActivate = !timerState.isActivate
+        if (timerState.isActivate) {
             timeManager.registerUpdateTimerCallback(updateTimerCallback)
-        }else{
+        } else {
             timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
         }
     }
 
-    override fun setTimer(timer: Timer) {
-        this.timer = timer
+    override fun setTimer(timerState: TimerState) {
+        this.timerState = timerState
     }
 
     override fun onClickDeleteTimer() {
-        timerListManager.removeTimer(timer)
+        timerListManager.removeTimer(timerState.timer)
     }
 
     override fun onClickDecreaseTime() {
-        timer.currentTime -= DEFAULT_TIMER_MODIFICATOR
-        if(timer.currentTime < 0){
-            timer.currentTime = 0
+        timerState.timer.currentTime -= DEFAULT_TIMER_MODIFICATOR
+        if (timerState.timer.currentTime < 0) {
+            timerState.timer.currentTime = 0
         }
-        view.timerUpdated(timer.currentTime)
+        view.timerUpdated(timerState.timer.currentTime)
     }
 
     override fun onClickIncreaseTime() {
-        timer.currentTime += DEFAULT_TIMER_MODIFICATOR
-        view.timerUpdated(timer.currentTime)
+        timerState.timer.currentTime += DEFAULT_TIMER_MODIFICATOR
+        view.timerUpdated(timerState.timer.currentTime)
     }
 
-    private val updateTimerCallback = object: TimeManager.UpdateTimerCallback{
+    private val updateTimerCallback = object : TimeManager.UpdateTimerCallback {
         override fun timeUpdated() {
-            timer.currentTime++
+            timerState.timer.currentTime++
 
-            view.timerUpdated(timer.currentTime)
+            view.timerUpdated(timerState.timer.currentTime)
 
             //TODO notify database
         }

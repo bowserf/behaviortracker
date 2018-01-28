@@ -12,6 +12,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerActivity
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerState
 import javax.inject.Inject
 
 class TimerFragment : Fragment(), TimerContract.View {
@@ -53,11 +54,13 @@ class TimerFragment : Fragment(), TimerContract.View {
         CreateTimerActivity.startActivity(context)
     }
 
-    override fun displayTimerList(timers: ArrayList<Timer>) {
+    override fun displayTimerList(timers: ArrayList<TimerState>) {
         timerAdapter.setTimersList(timers)
     }
 
     override fun onTimerRemoved(timer: Timer) {
+        val timerState = timerAdapter.getTimerStateFromTimer(timer)
+        timerAdapter.removeTimer(timerState)
         timerAdapter.notifyDataSetChanged()
     }
 

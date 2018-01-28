@@ -8,6 +8,7 @@ import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerState
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
@@ -43,12 +44,12 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
         increaseChrono.setOnClickListener { presenter.onClickIncreaseTime() }
     }
 
-    fun setTimer(timer: Timer) {
-        presenter.setTimer(timer)
+    fun setTimer(timerState: TimerState) {
+        presenter.setTimer(timerState)
 
-        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
-        name.text = timer.name
-        setBackgroundColor(timer.color)
+        chrono.text = TimeConverter.convertSecondsToHumanTime(timerState.timer.currentTime)
+        name.text = timerState.timer.name
+        setBackgroundColor(timerState.timer.color)
     }
 
     override fun timerUpdated(newTime: Long) {

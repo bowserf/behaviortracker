@@ -1,3 +1,3 @@
 package fr.bowser.behaviortracker.timer
 
-data class TimerState(var isActivate : Boolean, val timer: Timer)
+data class TimerState(var isActivate : Boolean, var timer: Timer)
