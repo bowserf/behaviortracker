@@ -65,7 +65,9 @@ class TimerFragment : Fragment(), TimerContract.View {
     }
 
     override fun onTimerAdded(timer: Timer) {
-        timerAdapter.notifyDataSetChanged()
+        val timerState = TimerState(false, timer)
+        timerAdapter.addTimer(timerState)
+
     }
 
     private fun setupGraph() {

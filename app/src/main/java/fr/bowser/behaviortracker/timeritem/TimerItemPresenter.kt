@@ -64,7 +64,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onTimerAdded(timer: Timer) {
-
+        // nothing to do
     }
 
     override fun onTimerRemoved(timer: Timer) {
