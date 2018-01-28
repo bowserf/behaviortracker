@@ -1,17 +1,20 @@
 package fr.bowser.behaviortracker.timeritem
 
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerState
 
 interface TimerItemContract {
 
-    interface View{
+    interface View {
 
         fun timerUpdated(newTime: Long)
 
     }
 
-    interface Presenter{
+    interface Presenter {
+
+        fun start()
+
+        fun stop()
 
         fun onTimerStateChange()
 

@@ -1,26 +1,33 @@
 package fr.bowser.behaviortracker.timeritem
 
 import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.timer.TimerState
 
 class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val timeManager: TimeManager,
-                         private val timerListManager: TimerListManager) : TimerItemContract.Presenter {
+                         private val timerListManager: TimerListManager)
+    : TimerItemContract.Presenter, TimerListManager.TimerCallback {
 
     private lateinit var timerState: TimerState
 
-    override fun onTimerStateChange() {
-        timerState.isActivate = !timerState.isActivate
-        if (timerState.isActivate) {
-            timeManager.registerUpdateTimerCallback(updateTimerCallback)
-        } else {
-            timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
-        }
+    override fun start() {
+        timerListManager.registerTimerCallback(this)
+    }
+
+    override fun stop() {
+        timerListManager.unregisterTimerCallback(this)
     }
 
     override fun setTimer(timerState: TimerState) {
         this.timerState = timerState
+        manageUpdateTimerCallback()
+    }
+
+    override fun onTimerStateChange() {
+        timerState.isActivate = !timerState.isActivate
+        manageUpdateTimerCallback()
     }
 
     override fun onClickDeleteTimer() {
@@ -38,6 +45,25 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     override fun onClickIncreaseTime() {
         timerState.timer.currentTime += DEFAULT_TIMER_MODIFICATOR
         view.timerUpdated(timerState.timer.currentTime)
+    }
+
+    override fun onTimerAdded(timer: Timer) {
+
+    }
+
+    override fun onTimerRemoved(timer: Timer) {
+        if (timerState.timer == timer) {
+            timerState.isActivate = false
+            timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+        }
+    }
+
+    private fun manageUpdateTimerCallback(){
+        if (timerState.isActivate) {
+            timeManager.registerUpdateTimerCallback(updateTimerCallback)
+        } else {
+            timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+        }
     }
 
     private val updateTimerCallback = object : TimeManager.UpdateTimerCallback {

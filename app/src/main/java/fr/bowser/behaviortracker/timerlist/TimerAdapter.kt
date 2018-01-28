@@ -36,7 +36,11 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
     }
 
     fun removeTimer(timer:TimerState){
-        timers.remove(timer)
+        val position = timers.indexOf(timer)
+        val success = timers.remove(timer)
+        if(success) {
+            notifyItemRemoved(position)
+        }
     }
 
     fun getTimerStateFromTimer(timer:Timer):TimerState{

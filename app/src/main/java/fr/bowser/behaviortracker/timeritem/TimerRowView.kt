@@ -44,6 +44,16 @@ class TimerRowView(context: Context) : ConstraintLayout(context), TimerItemContr
         increaseChrono.setOnClickListener { presenter.onClickIncreaseTime() }
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        presenter.start()
+    }
+
+    override fun onDetachedFromWindow() {
+        presenter.stop()
+        super.onDetachedFromWindow()
+    }
+
     fun setTimer(timerState: TimerState) {
         presenter.setTimer(timerState)
 
