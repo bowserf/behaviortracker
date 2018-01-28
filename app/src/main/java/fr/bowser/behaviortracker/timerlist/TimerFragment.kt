@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.timerlist
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.createtimer.CreateTimerActivity
+import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerState
 import javax.inject.Inject
@@ -51,7 +52,7 @@ class TimerFragment : Fragment(), TimerContract.View {
     }
 
     override fun displayCreateTimerView() {
-        CreateTimerActivity.startActivity(context)
+        CreateTimerDialog.showDialog(activity as AppCompatActivity, false)
     }
 
     override fun displayTimerList(timers: ArrayList<TimerState>) {

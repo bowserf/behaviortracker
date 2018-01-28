@@ -3,5 +3,9 @@
 
     <string name="timer_name">Name</string>
     <string name="start_timer_after_creation">Directly start timer</string>
+    <string name="create_timer_title">Create timer</string>
+
+    <!-- Menu -->
+    <string name="item_create_timer_save">SAVE</string>
 
 </resources>
