@@ -61,7 +61,6 @@ class TimerFragment : Fragment(), TimerContract.View {
     override fun onTimerRemoved(timer: Timer) {
         val timerState = timerAdapter.getTimerStateFromTimer(timer)
         timerAdapter.removeTimer(timerState)
-        timerAdapter.notifyDataSetChanged()
     }
 
     override fun onTimerAdded(timer: Timer) {
