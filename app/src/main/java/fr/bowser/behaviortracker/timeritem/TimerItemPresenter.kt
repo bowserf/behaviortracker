@@ -47,6 +47,11 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         view.timerUpdated(timerState.timer.currentTime)
     }
 
+    override fun onClickResetTimer() {
+        timerState.timer.currentTime = 0
+        view.timerUpdated(timerState.timer.currentTime)
+    }
+
     override fun onTimerAdded(timer: Timer) {
 
     }

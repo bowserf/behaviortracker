@@ -26,6 +26,8 @@ interface TimerItemContract {
 
         fun onClickDeleteTimer()
 
+        fun onClickResetTimer()
+
     }
 
 }
