@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.timerlist
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerState
 import fr.bowser.behaviortracker.timeritem.TimerRowView
 
@@ -47,11 +46,6 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         if(success) {
             notifyItemRemoved(position)
         }
-    }
-
-    fun getTimerStateFromTimer(timer:Timer):TimerState{
-        timers.filter { it.timer == timer }.forEach { return it }
-        throw IllegalStateException("Timer is not in the list of timers")
     }
 
     inner class TimerViewHolder(val view: TimerRowView) : RecyclerView.ViewHolder(view)

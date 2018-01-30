@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.timerlist
 
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerState
 
 interface TimerContract {
@@ -11,9 +10,9 @@ interface TimerContract {
 
         fun displayTimerList(timers: ArrayList<TimerState>)
 
-        fun onTimerRemoved(timer: Timer)
+        fun onTimerRemoved(timer: TimerState)
 
-        fun onTimerAdded(timer: Timer, startNow : Boolean)
+        fun onTimerAdded(timer: TimerState)
 
     }
 

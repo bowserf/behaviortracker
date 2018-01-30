@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerState
 import javax.inject.Inject
 
@@ -59,14 +58,12 @@ class TimerFragment : Fragment(), TimerContract.View {
         timerAdapter.setTimersList(timers)
     }
 
-    override fun onTimerRemoved(timer: Timer) {
-        val timerState = timerAdapter.getTimerStateFromTimer(timer)
-        timerAdapter.removeTimer(timerState)
+    override fun onTimerRemoved(timer: TimerState) {
+        timerAdapter.removeTimer(timer)
     }
 
-    override fun onTimerAdded(timer: Timer, startNow : Boolean) {
-        val timerState = TimerState(startNow, timer)
-        timerAdapter.addTimer(timerState)
+    override fun onTimerAdded(timer: TimerState) {
+        timerAdapter.addTimer(timer)
     }
 
     private fun setupGraph() {

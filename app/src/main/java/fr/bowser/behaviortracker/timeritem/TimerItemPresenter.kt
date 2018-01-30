@@ -1,7 +1,6 @@
 package fr.bowser.behaviortracker.timeritem
 
 import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.timer.TimerState
 
@@ -31,7 +30,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onClickDeleteTimer() {
-        timerListManager.removeTimer(timerState.timer)
+        timerListManager.removeTimer(timerState)
     }
 
     override fun onClickDecreaseTime() {
@@ -63,12 +62,12 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         //TODO update database
     }
 
-    override fun onTimerAdded(timer: Timer, startNow : Boolean) {
+    override fun onTimerAdded(timer: TimerState) {
         // nothing to do
     }
 
-    override fun onTimerRemoved(timer: Timer) {
-        if (timerState.timer == timer) {
+    override fun onTimerRemoved(timer: TimerState) {
+        if (timerState == timer) {
             timerState.isActivate = false
             timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
         }

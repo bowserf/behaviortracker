@@ -5,24 +5,24 @@ import android.graphics.Color
 
 class TimerListManager(private val timerDAO: TimerDAO) {
 
-    val timers = ArrayList<Timer>()
+    val timers = ArrayList<TimerState>()
 
     private val callbacks = ArrayList<TimerCallback>()
 
     init{
-        timers.add(Timer(1, 0, "Work", Color.RED))
-        timers.add(Timer(2, 0, "Break", Color.BLUE))
-        timers.add(Timer(3, 0, "Lunch", Color.GREEN))
+        timers.add(TimerState(false, Timer(1, 0, "Work", Color.RED)))
+        timers.add(TimerState(false, Timer(2, 0, "Break", Color.BLUE)))
+        timers.add(TimerState(false, Timer(3, 0, "Lunch", Color.GREEN)))
     }
 
-    fun addTimer(timer:Timer, startNow : Boolean){
+    fun addTimer(timer:TimerState){
         timers.add(timer)
         for (callback in callbacks) {
-            callback.onTimerAdded(timer, startNow)
+            callback.onTimerAdded(timer)
         }
     }
 
-    fun removeTimer(timer:Timer){
+    fun removeTimer(timer:TimerState){
         timers.remove(timer)
         for (callback in callbacks) {
             callback.onTimerRemoved(timer)
@@ -41,8 +41,8 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     }
 
     interface TimerCallback {
-        fun onTimerRemoved(timer:Timer)
-        fun onTimerAdded(timer:Timer, startNow : Boolean)
+        fun onTimerRemoved(timer:TimerState)
+        fun onTimerAdded(timer:TimerState)
     }
 
 }
