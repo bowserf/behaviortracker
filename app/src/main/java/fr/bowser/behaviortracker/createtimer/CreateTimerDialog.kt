@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.createtimer
 
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
@@ -11,12 +12,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
+
+
 
 
 class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
@@ -52,6 +56,11 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         initToolbar(view)
         initSpinner(view)
         initUI(view)
+    }
+
+    override fun onStop() {
+        hideKeyboard()
+        super.onStop()
     }
 
     override fun exitViewAfterSucceedTimerCreation() {
@@ -100,7 +109,22 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private fun initUI(root: View) {
         editTimerName = root.findViewById(R.id.creation_timer_name)
+
+        // methods to display keyboard and dselect edittext
+        displayKeyboard()
+
         startNow = root.findViewById(R.id.start_after_creation)
+    }
+
+    private fun displayKeyboard(){
+        editTimerName.requestFocus()
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    }
+
+    private fun hideKeyboard(){
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editTimerName.windowToken, 0)
     }
 
     private fun exitWithAnimation(){
