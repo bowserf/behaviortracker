@@ -6,7 +6,7 @@ import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "Timer" )
-data class Timer(@PrimaryKey @ColumnInfo(name = "id") var id: Long,
+data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
                  @ColumnInfo(name = "current_time") var currentTime: Long,
                  @ColumnInfo(name = "name") var name: String,
                  @ColumnInfo(name = "color") var color: Int){
