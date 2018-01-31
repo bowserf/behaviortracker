@@ -66,7 +66,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         // nothing to do
     }
 
-    override fun onTimerRemoved(timer: TimerState) {
+    override fun onTimerRemoved(timer: TimerState, position:Int) {
         if (timerState == timer) {
             timerState.isActivate = false
             timeManager.unregisterUpdateTimerCallback(updateTimerCallback)

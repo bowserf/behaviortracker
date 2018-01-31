@@ -58,8 +58,8 @@ class TimerFragment : Fragment(), TimerContract.View {
         timerAdapter.setTimersList(timers)
     }
 
-    override fun onTimerRemoved(timer: TimerState) {
-        timerAdapter.removeTimer(timer)
+    override fun onTimerRemoved(timer: TimerState, position:Int) {
+        timerAdapter.removeTimer(timer, position)
     }
 
     override fun onTimerAdded(timer: TimerState) {

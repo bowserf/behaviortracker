@@ -17,8 +17,8 @@ class TimerPresenter(private val view: TimerContract.View,
         timerListManager.unregisterTimerCallback(this)
     }
 
-    override fun onTimerRemoved(timer: TimerState) {
-        view.onTimerRemoved(timer)
+    override fun onTimerRemoved(timer: TimerState, position:Int) {
+        view.onTimerRemoved(timer, position)
     }
 
     override fun onTimerAdded(timer: TimerState) {

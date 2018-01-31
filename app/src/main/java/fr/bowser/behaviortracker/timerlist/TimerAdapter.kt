@@ -34,18 +34,14 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addTimer(timerState: TimerState){
+    fun addTimer(timerState: TimerState) {
         timers.add(timerState)
         val position = timers.indexOf(timerState)
         notifyItemInserted(position)
     }
 
-    fun removeTimer(timer:TimerState){
-        val position = timers.indexOf(timer)
-        val success = timers.remove(timer)
-        if(success) {
-            notifyItemRemoved(position)
-        }
+    fun removeTimer(timer: TimerState, position: Int) {
+        notifyItemRemoved(position)
     }
 
     inner class TimerViewHolder(val view: TimerRowView) : RecyclerView.ViewHolder(view)

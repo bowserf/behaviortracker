@@ -23,9 +23,10 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     }
 
     fun removeTimer(timer:TimerState){
+        val position = timers.indexOf(timer)
         timers.remove(timer)
         for (callback in callbacks) {
-            callback.onTimerRemoved(timer)
+            callback.onTimerRemoved(timer, position)
         }
     }
 
@@ -41,7 +42,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     }
 
     interface TimerCallback {
-        fun onTimerRemoved(timer:TimerState)
+        fun onTimerRemoved(timer:TimerState, position:Int)
         fun onTimerAdded(timer:TimerState)
     }
 
