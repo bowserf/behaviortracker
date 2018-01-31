@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@android:color/white">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/create_timer_toolbar"
@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@id/creation_timer_name_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/creation_timer_name_layout"
@@ -31,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/timer_name"
-            android:singleLine="true" />
+            android:inputType="textCapSentences"
+            android:singleLine="true"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -43,7 +44,7 @@
         android:tint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="@id/choose_color"
         app:layout_constraintLeft_toLeftOf="@id/creation_timer_name_layout"
-        app:layout_constraintTop_toTopOf="@id/choose_color" />
+        app:layout_constraintTop_toTopOf="@id/choose_color"/>
 
     <Spinner
         android:id="@+id/choose_color"
@@ -54,7 +55,7 @@
         android:layout_marginTop="@dimen/default_space"
         app:layout_constraintLeft_toRightOf="@id/icon_color"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/creation_timer_name_layout" />
+        app:layout_constraintTop_toBottomOf="@id/creation_timer_name_layout"/>
 
     <CheckBox
         android:id="@+id/start_after_creation"
@@ -63,7 +64,7 @@
         android:layout_marginTop="@dimen/default_space"
         android:text="@string/start_timer_after_creation"
         app:layout_constraintLeft_toLeftOf="@id/icon_color"
-        app:layout_constraintTop_toBottomOf="@id/choose_color" />
+        app:layout_constraintTop_toBottomOf="@id/choose_color"/>
 
     <View
         android:layout_width="0dp"
@@ -71,6 +72,6 @@
         android:background="@drawable/background_shadow_bottom"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/create_timer_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/create_timer_toolbar"/>
 
 </android.support.constraint.ConstraintLayout>
