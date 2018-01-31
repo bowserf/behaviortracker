@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer
 
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 
@@ -12,5 +13,8 @@ interface TimerDAO {
 
     @Insert
     fun addTimer(timer: Timer)
+
+    @Delete
+    fun removeTimer(timer: Timer)
 
 }

@@ -34,9 +34,7 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addTimer(timerState: TimerState) {
-        timers.add(timerState)
-        val position = timers.indexOf(timerState)
+    fun addTimer(timerState: TimerState, position: Int) {
         notifyItemInserted(position)
     }
 

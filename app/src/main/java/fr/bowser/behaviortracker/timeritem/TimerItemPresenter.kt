@@ -62,7 +62,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         //TODO update database
     }
 
-    override fun onTimerAdded(timer: TimerState) {
+    override fun onTimerAdded(timer: TimerState, position: Int) {
         // nothing to do
     }
 

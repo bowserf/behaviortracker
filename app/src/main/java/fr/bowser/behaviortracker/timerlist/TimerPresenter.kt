@@ -9,7 +9,7 @@ class TimerPresenter(private val view: TimerContract.View,
 
     override fun start() {
         timerListManager.registerTimerCallback(this)
-        val timers = timerListManager.timers
+        val timers = timerListManager.timersState
         view.displayTimerList(timers)
     }
 
@@ -21,8 +21,8 @@ class TimerPresenter(private val view: TimerContract.View,
         view.onTimerRemoved(timer, position)
     }
 
-    override fun onTimerAdded(timer: TimerState) {
-        view.onTimerAdded(timer)
+    override fun onTimerAdded(timer: TimerState, position: Int) {
+        view.onTimerAdded(timer, position)
     }
 
     override fun onClickAddTimer() {

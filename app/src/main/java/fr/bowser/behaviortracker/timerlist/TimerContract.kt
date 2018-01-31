@@ -12,7 +12,7 @@ interface TimerContract {
 
         fun onTimerRemoved(timer: TimerState, position:Int)
 
-        fun onTimerAdded(timer: TimerState)
+        fun onTimerAdded(timer: TimerState, position: Int)
 
     }
 

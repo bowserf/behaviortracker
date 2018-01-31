@@ -1,49 +1,62 @@
 package fr.bowser.behaviortracker.timer
 
-import android.graphics.Color
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
 
 class TimerListManager(private val timerDAO: TimerDAO) {
 
-    val timers = ArrayList<TimerState>()
+    internal val background = newFixedThreadPoolContext(2, "bg")
+
+    val timersState = ArrayList<TimerState>()
 
     private val callbacks = ArrayList<TimerCallback>()
 
-    init{
-        timers.add(TimerState(false, Timer(1, 0, "Work", Color.RED)))
-        timers.add(TimerState(false, Timer(2, 0, "Break", Color.BLUE)))
-        timers.add(TimerState(false, Timer(3, 0, "Lunch", Color.GREEN)))
-    }
-
-    fun addTimer(timer:TimerState){
-        timers.add(timer)
-        for (callback in callbacks) {
-            callback.onTimerAdded(timer)
+    init {
+        launch(background) {
+            val timers = timerDAO.getCategories()
+            timers.mapTo(timersState) { TimerState(false, it) }
         }
     }
 
-    fun removeTimer(timer:TimerState){
-        val position = timers.indexOf(timer)
-        timers.remove(timer)
+    fun addTimer(timerState: TimerState) {
+        timersState.add(timerState)
+        val position = timersState.indexOf(timerState)
         for (callback in callbacks) {
-            callback.onTimerRemoved(timer, position)
+            callback.onTimerAdded(timerState, position)
+        }
+
+        launch(background) {
+            timerDAO.addTimer(timerState.timer)
         }
     }
 
-    fun registerTimerCallback(timerCallback: TimerCallback): Boolean{
-        if(callbacks.contains(timerCallback)){
+    fun removeTimer(timerState: TimerState) {
+        val position = timersState.indexOf(timerState)
+        timersState.remove(timerState)
+        for (callback in callbacks) {
+            callback.onTimerRemoved(timerState, position)
+        }
+
+        launch(background) {
+            timerDAO.removeTimer(timerState.timer)
+        }
+    }
+
+    fun registerTimerCallback(timerCallback: TimerCallback): Boolean {
+        if (callbacks.contains(timerCallback)) {
             return false
         }
         return callbacks.add(timerCallback)
     }
 
-    fun unregisterTimerCallback(timerCallback: TimerCallback): Boolean{
+    fun unregisterTimerCallback(timerCallback: TimerCallback): Boolean {
         return callbacks.remove(timerCallback)
     }
 
     interface TimerCallback {
-        fun onTimerRemoved(timer:TimerState, position:Int)
-        fun onTimerAdded(timer:TimerState)
+        fun onTimerRemoved(timer: TimerState, position: Int)
+        fun onTimerAdded(timer: TimerState, position: Int)
     }
 
 }
