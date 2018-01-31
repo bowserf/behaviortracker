@@ -7,6 +7,7 @@ rootProject.ext.dependencies = [
         // Support library
         supportDesign                       : "com.android.support:design:$supportLibraryVersion",
         supportConstraint                   : "com.android.support.constraint:constraint-layout:1.0.2",
+        supportCardView                     : "com.android.support:cardview-v7:$supportLibraryVersion",
 
         // Architecture component
         room                                : "android.arch.persistence.room:runtime:$architectureComponentVersion",

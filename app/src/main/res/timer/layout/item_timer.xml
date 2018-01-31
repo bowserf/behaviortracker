@@ -3,56 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:parentTag="android.support.v7.widget.CardView">
 
-    <TextView
-        android:id="@+id/timer_chrono"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_timer_chrono"
-        app:layout_constraintBottom_toTopOf="@id/timer_reduce_time"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1:27:54" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_space">
 
-    <ImageView
-        android:id="@+id/timer_menu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_more_vert_white"
-        app:layout_constraintBottom_toBottomOf="@id/timer_chrono"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/timer_chrono" />
+        <TextView
+            android:id="@+id/timer_chrono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_timer_chrono"
+            app:layout_constraintBottom_toTopOf="@id/timer_reduce_time"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1:27:54" />
 
-    <TextView
-        android:id="@+id/timer_name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="@id/timer_reduce_time"
-        app:layout_constraintLeft_toLeftOf="@id/timer_chrono"
-        app:layout_constraintRight_toLeftOf="@id/timer_reduce_time"
-        app:layout_constraintTop_toTopOf="@id/timer_reduce_time"
-        tools:text="Work" />
+        <ImageView
+            android:id="@+id/timer_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_more_vert_white"
+            app:layout_constraintBottom_toBottomOf="@id/timer_chrono"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/timer_chrono" />
 
-    <TextView
-        android:id="@+id/timer_reduce_time"
-        android:layout_width="@dimen/modify_chrono_width"
-        android:layout_height="@dimen/modify_chrono_height"
-        android:gravity="center"
-        android:text="@string/item_timer_reduce_time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/timer_name"
-        app:layout_constraintRight_toLeftOf="@id/timer_increase_time"
-        app:layout_constraintTop_toBottomOf="@id/timer_chrono" />
+        <TextView
+            android:id="@+id/timer_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="@id/timer_reduce_time"
+            app:layout_constraintLeft_toLeftOf="@id/timer_chrono"
+            app:layout_constraintRight_toLeftOf="@id/timer_reduce_time"
+            app:layout_constraintTop_toTopOf="@id/timer_reduce_time"
+            tools:text="Work" />
 
-    <TextView
-        android:id="@+id/timer_increase_time"
-        android:layout_width="@dimen/modify_chrono_width"
-        android:layout_height="@dimen/modify_chrono_height"
-        android:gravity="center"
-        android:text="@string/item_timer_increase_time"
-        app:layout_constraintBottom_toBottomOf="@id/timer_reduce_time"
-        app:layout_constraintLeft_toRightOf="@id/timer_reduce_time"
-        app:layout_constraintRight_toRightOf="parent" />
+        <TextView
+            android:id="@+id/timer_reduce_time"
+            android:layout_width="@dimen/modify_chrono_width"
+            android:layout_height="@dimen/modify_chrono_height"
+            android:gravity="center"
+            android:text="@string/item_timer_reduce_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/timer_name"
+            app:layout_constraintRight_toLeftOf="@id/timer_increase_time"
+            app:layout_constraintTop_toBottomOf="@id/timer_chrono" />
+
+        <TextView
+            android:id="@+id/timer_increase_time"
+            android:layout_width="@dimen/modify_chrono_width"
+            android:layout_height="@dimen/modify_chrono_height"
+            android:gravity="center"
+            android:text="@string/item_timer_increase_time"
+            app:layout_constraintBottom_toBottomOf="@id/timer_reduce_time"
+            app:layout_constraintLeft_toRightOf="@id/timer_reduce_time"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </merge>

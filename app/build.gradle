@@ -72,6 +72,7 @@ dependencies {
     // Support library
     implementation rootProject.ext.dependencies.supportConstraint
     implementation rootProject.ext.dependencies.supportDesign
+    implementation rootProject.ext.dependencies.supportCardView
 
     // Architecture component
     implementation rootProject.ext.dependencies.room

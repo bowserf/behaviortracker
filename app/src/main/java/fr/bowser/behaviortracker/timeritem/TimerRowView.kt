@@ -1,8 +1,8 @@
 package fr.bowser.behaviortracker.timeritem
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.CardView
 import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 
 class TimerRowView(context: Context) :
-        ConstraintLayout(context),
+        CardView(context),
         TimerItemContract.View {
 
     private val chrono: TextView
@@ -33,8 +33,8 @@ class TimerRowView(context: Context) :
 
         inflate(context, R.layout.item_timer, this)
 
-        val padding = resources.getDimensionPixelOffset(R.dimen.default_space)
-        setPadding(padding, padding, padding, padding)
+        // card radius
+        radius = resources.getDimension(R.dimen.default_space)
 
         setOnClickListener { presenter.onTimerStateChange() }
 
@@ -63,7 +63,7 @@ class TimerRowView(context: Context) :
 
         chrono.text = TimeConverter.convertSecondsToHumanTime(timerState.timer.currentTime)
         name.text = timerState.timer.name
-        setBackgroundColor(timerState.timer.color)
+        setCardBackgroundColor(timerState.timer.color)
     }
 
     override fun timerUpdated(newTime: Long) {
