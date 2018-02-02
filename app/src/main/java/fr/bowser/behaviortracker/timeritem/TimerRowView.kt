@@ -110,8 +110,8 @@ class TimerRowView(context: Context) :
 
         alertDialog.setPositiveButton(android.R.string.yes, { dialog, which ->
             val newName = input.text.toString()
-            presenter.onTimerNameUpdated(newName)
             name.text = newName
+            presenter.onTimerNameUpdated(newName)
         })
 
         alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })

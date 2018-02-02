@@ -56,10 +56,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onTimerNameUpdated(newTimerName: String) {
-        timerState.timer.name = newTimerName
-
-        //TODO update with TimerListManager
-        //TODO update database
+        timerListManager.renameTimer(timerState.timer.id, newTimerName)
     }
 
     override fun onTimerAdded(timer: TimerState, position: Int) {
@@ -83,9 +80,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
     private val updateTimerCallback = object:TimeManager.UpdateTimerCallback{
         override fun timeUpdated() {
-            timerState.timer.currentTime++
-
-            view.timerUpdated(timerState.timer.currentTime)
+            view.timerUpdated(++timerState.timer.currentTime)
 
             //TODO notify database
         }

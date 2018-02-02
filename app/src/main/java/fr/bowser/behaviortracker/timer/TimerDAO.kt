@@ -17,4 +17,7 @@ interface TimerDAO {
     @Delete
     fun removeTimer(timer: Timer)
 
+    @Query("UPDATE Timer SET name = :name WHERE id = :id")
+    fun renameTimer(id:Long, name:String)
+
 }
