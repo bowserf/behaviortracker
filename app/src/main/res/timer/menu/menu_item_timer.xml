@@ -8,17 +8,16 @@
         android:title="@string/item_timer_reset"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/item_timer_rename"
+        android:enabled="true"
+        android:title="@string/item_timer_rename"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/item_timer_delete"
         android:enabled="true"
         android:title="@string/item_timer_remove"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/item_timer_rename"
-        android:enabled="true"
-        android:title="@string/item_timer_rename"
         app:showAsAction="ifRoom" />
 
 </menu>
