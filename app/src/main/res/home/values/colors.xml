@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="navigation_text_selected">#232d66</color>
-    <color name="navigation_text_default">#3F51B5</color>
+    <color name="navigation_text_selected">@color/colorPrimary</color>
+    <color name="navigation_text_default">@color/colorPrimaryLight</color>
 
-    <color name="navigation_icon_selected">#232d66</color>
-    <color name="navigation_icon_default">#3F51B5</color>
+    <color name="navigation_icon_selected">@color/colorPrimary</color>
+    <color name="navigation_icon_default">@color/colorPrimaryLight</color>
 
 </resources>
