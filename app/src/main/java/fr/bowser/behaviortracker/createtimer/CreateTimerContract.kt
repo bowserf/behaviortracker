@@ -6,6 +6,8 @@ interface CreateTimerContract {
 
         fun exitViewAfterSucceedTimerCreation()
 
+        fun displayNameError()
+
     }
 
     interface Presenter{

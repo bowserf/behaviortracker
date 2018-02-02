@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.createtimer
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
@@ -31,6 +32,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     private lateinit var editTimerName: EditText
     private lateinit var chooseColor: Spinner
     private lateinit var startNow: CheckBox
+    private lateinit var editTimerNameLayout: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +67,10 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     override fun exitViewAfterSucceedTimerCreation() {
         exitWithAnimation()
+    }
+
+    override fun displayNameError() {
+        editTimerNameLayout.error = resources.getString(R.string.create_timer_name_error)
     }
 
     private fun initSpinner(root: View) {
@@ -127,6 +133,8 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         displayKeyboard()
 
         startNow = root.findViewById(R.id.start_after_creation)
+
+        editTimerNameLayout = root.findViewById(R.id.creation_timer_name_layout)
     }
 
     private fun displayKeyboard(){
