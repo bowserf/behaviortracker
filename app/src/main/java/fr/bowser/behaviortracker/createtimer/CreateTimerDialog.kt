@@ -2,10 +2,10 @@ package fr.bowser.behaviortracker.createtimer
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
@@ -75,11 +75,24 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private fun provideColors(): MutableList<Int>? {
         val colors = ArrayList<Int>()
-        colors.add(Color.RED)
-        colors.add(Color.BLUE)
-        colors.add(Color.YELLOW)
-        colors.add(Color.GREEN)
-        colors.add(Color.CYAN)
+        colors.add(ContextCompat.getColor(context!!, R.color.purple))
+        colors.add(ContextCompat.getColor(context!!, R.color.pink))
+        colors.add(ContextCompat.getColor(context!!, R.color.red))
+        colors.add(ContextCompat.getColor(context!!, R.color.blue))
+        colors.add(ContextCompat.getColor(context!!, R.color.indigo))
+        colors.add(ContextCompat.getColor(context!!, R.color.deep_purple))
+        colors.add(ContextCompat.getColor(context!!, R.color.teal))
+        colors.add(ContextCompat.getColor(context!!, R.color.cyan))
+        colors.add(ContextCompat.getColor(context!!, R.color.light_blue))
+        colors.add(ContextCompat.getColor(context!!, R.color.lime))
+        colors.add(ContextCompat.getColor(context!!, R.color.light_green))
+        colors.add(ContextCompat.getColor(context!!, R.color.gren))
+        colors.add(ContextCompat.getColor(context!!, R.color.amber))
+        colors.add(ContextCompat.getColor(context!!, R.color.orange))
+        colors.add(ContextCompat.getColor(context!!, R.color.deep_orange))
+        colors.add(ContextCompat.getColor(context!!, R.color.brown))
+        colors.add(ContextCompat.getColor(context!!, R.color.grey))
+        colors.add(ContextCompat.getColor(context!!, R.color.blue_grey))
         return colors
     }
 
