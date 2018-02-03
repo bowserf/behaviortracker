@@ -6,23 +6,30 @@
     android:layout_height="wrap_content"
     tools:parentTag="android.support.v7.widget.CardView">
 
+    <!--android:layout_height="match_parent"-->
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:background="@color/colorPrimaryLight">
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/timer_color"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorPrimaryLight" />
 
         <TextView
             android:id="@+id/timer_chrono"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_space"
             android:layout_marginLeft="@dimen/default_space"
-            android:layout_marginTop="@dimen/default_space"
             android:includeFontPadding="false"
             android:textSize="@dimen/text_timer_chrono"
-            app:layout_constraintBottom_toTopOf="@id/timer_row_bottom_container"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/timer_color"
+            app:layout_constraintBottom_toBottomOf="@id/timer_color"
             tools:text="1:27:54" />
 
         <ImageView
@@ -30,57 +37,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_space"
-            android:src="@drawable/ic_more_vert_white"
             android:padding="@dimen/default_space_half"
+            android:src="@drawable/ic_more_vert_white"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/timer_chrono" />
 
-        <FrameLayout
-            android:id="@+id/timer_row_bottom_container"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/timer_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:clickable="true"
-            android:paddingLeft="@dimen/default_space"
-            android:paddingRight="@dimen/default_space"
+            android:layout_marginBottom="@dimen/default_space"
+            android:layout_marginLeft="@dimen/default_space"
+            android:layout_marginTop="@dimen/default_space"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_xxl"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/timer_reduce_time"
+            app:layout_constraintTop_toBottomOf="@id/timer_color"
+            tools:text="Work" />
+
+        <TextView
+            android:id="@+id/timer_reduce_time"
+            android:layout_width="@dimen/modify_chrono_width"
+            android:layout_height="@dimen/modify_chrono_height"
+            android:layout_marginBottom="@dimen/default_space"
+            android:layout_marginRight="@dimen/default_space"
+            android:layout_marginTop="@dimen/default_space"
+            android:background="@drawable/bg_reduce"
+            android:gravity="center"
+            android:text="@string/item_timer_change_time"
+            android:textSize="@dimen/text_size_xs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/timer_increase_time"
+            app:layout_constraintTop_toBottomOf="@id/timer_color" />
+
+        <TextView
+            android:id="@+id/timer_increase_time"
+            android:layout_width="@dimen/modify_chrono_width"
+            android:layout_height="@dimen/modify_chrono_height"
+            android:layout_marginBottom="@dimen/default_space"
+            android:layout_marginRight="@dimen/default_space"
+            android:layout_marginTop="@dimen/default_space"
+            android:background="@drawable/bg_increase"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/item_timer_change_time"
+            android:textSize="@dimen/text_size_xs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timer_chrono">
-
-            <TextView
-                android:id="@+id/timer_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_space"
-                android:layout_marginTop="@dimen/default_space"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size_xxl"
-                tools:text="Work" />
-
-            <TextView
-                android:id="@+id/timer_reduce_time"
-                android:layout_width="@dimen/modify_chrono_width"
-                android:layout_height="@dimen/modify_chrono_height"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/timer_row_reduce_margin_right"
-                android:background="@drawable/bg_reduce"
-                android:gravity="center"
-                android:text="@string/item_timer_change_time"
-                android:textSize="@dimen/text_size_xs" />
-
-            <TextView
-                android:id="@+id/timer_increase_time"
-                android:layout_width="@dimen/modify_chrono_width"
-                android:layout_height="@dimen/modify_chrono_height"
-                android:layout_gravity="right|center_vertical"
-                android:background="@drawable/bg_increase"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="@string/item_timer_change_time"
-                android:textSize="@dimen/text_size_xs" />
-
-        </FrameLayout>
+            app:layout_constraintTop_toBottomOf="@id/timer_color" />
 
     </android.support.constraint.ConstraintLayout>
 

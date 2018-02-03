@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.CardView
 import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,6 +25,7 @@ class TimerRowView(context: Context) :
     private val menu: ImageView
     private val reduceChrono: TextView
     private val increaseChrono: TextView
+    private val color: View
 
     @Inject
     lateinit var presenter: TimerItemPresenter
@@ -38,6 +40,7 @@ class TimerRowView(context: Context) :
 
         setOnClickListener { presenter.onTimerStateChange() }
 
+        color = findViewById(R.id.timer_color)
         chrono = findViewById(R.id.timer_chrono)
         name = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
@@ -63,7 +66,7 @@ class TimerRowView(context: Context) :
 
         chrono.text = TimeConverter.convertSecondsToHumanTime(timerState.timer.currentTime)
         name.text = timerState.timer.name
-        setCardBackgroundColor(timerState.timer.color)
+        color.setBackgroundColor(timerState.timer.color)
     }
 
     override fun timerUpdated(newTime: Long) {
