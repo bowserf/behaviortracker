@@ -34,7 +34,7 @@ class TimerRowView(context: Context) :
         inflate(context, R.layout.item_timer, this)
 
         // card radius
-        radius = resources.getDimension(R.dimen.default_space)
+        radius = resources.getDimension(R.dimen.default_space_half)
 
         setOnClickListener { presenter.onTimerStateChange() }
 
