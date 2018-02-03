@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:bottom="@dimen/default_space_half"
+        android:drawable="@drawable/ic_increase"
+        android:left="@dimen/default_space_half"
+        android:right="@dimen/default_space_half"
+        android:top="@dimen/default_space_half" />
+
+</layer-list>
