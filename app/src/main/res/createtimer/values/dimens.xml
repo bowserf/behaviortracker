@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="item_color_height">42dp</dimen>
+    <dimen name="item_color_size">32dp</dimen>
+    <dimen name="create_timer_color_size">30dp</dimen>
+
+    <dimen name="create_dialog_width">360dp</dimen>
 
 </resources>

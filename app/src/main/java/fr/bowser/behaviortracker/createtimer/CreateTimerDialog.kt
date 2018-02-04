@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
@@ -58,6 +59,17 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         initToolbar(view)
         initSpinner(view)
         initUI(view)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (dialog == null) {
+            return
+        }
+
+        val dialogWidth = resources.getDimensionPixelOffset(R.dimen.create_dialog_width)
+        getDialog().getWindow().setLayout(dialogWidth, WRAP_CONTENT)
     }
 
     override fun onStop() {
