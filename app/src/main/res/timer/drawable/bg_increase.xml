@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:colorControlHighlight">
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
 
     <item
         android:bottom="@dimen/default_space_half"
@@ -8,4 +15,4 @@
         android:right="@dimen/default_space_half"
         android:top="@dimen/default_space_half" />
 
-</layer-list>
+</ripple>
