@@ -27,7 +27,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
 
         launch(background) {
-            timerDAO.addTimer(timerState.timer)
+            timerState.timer.id = timerDAO.addTimer(timerState.timer)
         }
     }
 

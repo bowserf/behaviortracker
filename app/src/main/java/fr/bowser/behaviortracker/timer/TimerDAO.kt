@@ -12,7 +12,7 @@ interface TimerDAO {
     fun getCategories(): List<Timer>
 
     @Insert
-    fun addTimer(timer: Timer)
+    fun addTimer(timer: Timer): Long
 
     @Delete
     fun removeTimer(timer: Timer)
