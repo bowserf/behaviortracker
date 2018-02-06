@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.NO_POSITION
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,7 +85,14 @@ class TimerFragment : Fragment(), TimerContract.View {
         val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         list.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
-                val currentPosition = parent?.getChildAdapterPosition(view)
+                var currentPosition = parent?.getChildAdapterPosition(view)
+                // When an item is removed, getChildAdapterPosition returns NO_POSITION but this
+                // method is call at the animation start so position = -1 and we don't apply the
+                // good top margin. By calling getChildLayoutPosition, we get the view position
+                // and we fix the temporary animation issue.
+                if(currentPosition == NO_POSITION){
+                    currentPosition = parent?.getChildLayoutPosition(view)
+                }
                 if (currentPosition == 0) {
                     outRect?.top = margin
                 }
