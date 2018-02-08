@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.showmode.ShowModeActivity
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
@@ -151,6 +152,10 @@ class TimerRowView(context: Context) :
 
     override fun timerRenamed(name: String) {
         tvName.text = name
+    }
+
+    override fun startShowMode(id: Long) {
+        ShowModeActivity.startActivity(context, id)
     }
 
     private fun displayRemoveConfirmationDialog() {

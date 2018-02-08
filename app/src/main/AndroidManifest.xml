@@ -25,6 +25,8 @@
 
         <activity android:name=".setting.SettingActivity" android:label="@string/activity_setting_title"/>
 
+        <activity android:name=".showmode.ShowModeActivity"/>
+
         <receiver
             android:name=".notification.TimerReceiver"
             android:exported="false"/>
