@@ -9,8 +9,8 @@ class TimeManagerModule {
 
     @Singleton
     @Provides
-    fun provideTimeManager(): TimeManager {
-        return TimeManager()
+    fun provideTimeManager(timerListManager: TimerListManager): TimeManager {
+        return TimeManager(timerListManager)
     }
 
 }

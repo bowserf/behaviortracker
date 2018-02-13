@@ -17,6 +17,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
     override fun stop() {
         timerListManager.unregisterTimerCallback(this)
+        timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
     }
 
     override fun setTimer(timerState: TimerState) {
@@ -80,9 +81,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
     private val updateTimerCallback = object:TimeManager.UpdateTimerCallback{
         override fun timeUpdated() {
-            view.timerUpdated(++timerState.timer.currentTime)
-
-            //TODO notify database
+            view.timerUpdated(timerState.timer.currentTime)
         }
     }
 
