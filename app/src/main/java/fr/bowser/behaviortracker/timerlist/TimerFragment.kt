@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.NO_POSITION
 import android.view.LayoutInflater
@@ -26,12 +26,16 @@ class TimerFragment : Fragment(), TimerContract.View {
 
     private lateinit var timerAdapter: TimerAdapter
 
-    private lateinit var fab: FloatingActionButton;
+    private lateinit var fab: FloatingActionButton
+
+    private var mSpanCount: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupGraph()
+
+        mSpanCount = resources.getInteger(R.integer.list_timers_number_spans)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -83,7 +87,8 @@ class TimerFragment : Fragment(), TimerContract.View {
 
     private fun initializeList(view: View) {
         val list = view.findViewById<RecyclerView>(R.id.list_timers)
-        list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+
+        list.layoutManager = GridLayoutManager(activity, mSpanCount, GridLayoutManager.VERTICAL, false)
         list.setHasFixedSize(true)
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
@@ -110,7 +115,7 @@ class TimerFragment : Fragment(), TimerContract.View {
                 if(currentPosition == NO_POSITION){
                     currentPosition = parent?.getChildLayoutPosition(view)
                 }
-                if (currentPosition == 0) {
+                if (currentPosition != null && currentPosition < mSpanCount) {
                     outRect?.top = margin
                 }
 
