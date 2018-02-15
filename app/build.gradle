@@ -77,7 +77,6 @@ android {
                     'src/main/res/common',
                     'src/main/res/home',
                     'src/main/res/timer',
-                    'src/main/res/stat',
                     'src/main/res/createtimer',
                     'src/main/res/timerlist',
             ]
