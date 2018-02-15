@@ -1,6 +1,8 @@
 package fr.bowser.behaviortracker.showmodeitem
 
 import android.content.Context
+import android.graphics.PorterDuff
+import android.graphics.drawable.RippleDrawable
 import android.support.constraint.ConstraintLayout
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
@@ -25,6 +27,8 @@ class ShowModeTimerView(context: Context) : ConstraintLayout(context),
 
         setOnClickListener { presenter.onClickView() }
 
+        setBackgroundResource(R.drawable.bg_show_mode_item)
+
         chrono = findViewById(R.id.show_mode_timer_time)
         timerName = findViewById(R.id.show_mode_timer_name)
     }
@@ -46,7 +50,8 @@ class ShowModeTimerView(context: Context) : ConstraintLayout(context),
     fun setTimer(timer: Timer) {
         presenter.setTimer(timer)
 
-        setBackgroundColor(timer.color)
+        val drawable = background as RippleDrawable
+        drawable.setColorFilter(timer.color, PorterDuff.Mode.SRC_ATOP)
 
         chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
         timerName.text = timer.name
