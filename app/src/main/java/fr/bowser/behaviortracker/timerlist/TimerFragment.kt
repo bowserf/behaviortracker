@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.timerlist
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -16,12 +17,16 @@ import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.timer.TimerState
 import javax.inject.Inject
 
+
+
 class TimerFragment : Fragment(), TimerContract.View {
 
     @Inject
     lateinit var presenter: TimerPresenter
 
     private lateinit var timerAdapter: TimerAdapter
+
+    private lateinit var fab: FloatingActionButton;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +43,8 @@ class TimerFragment : Fragment(), TimerContract.View {
 
         initializeList(view)
 
-        view.findViewById<View>(R.id.button_add_timer).setOnClickListener { presenter.onClickAddTimer() }
+        fab = view.findViewById(R.id.button_add_timer)
+        fab.setOnClickListener { presenter.onClickAddTimer() }
     }
 
     override fun onStart() {
@@ -81,6 +87,17 @@ class TimerFragment : Fragment(), TimerContract.View {
         list.setHasFixedSize(true)
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
+
+        list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    fab.hide()
+                } else {
+                    fab.show()
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
 
         val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         list.addItemDecoration(object : RecyclerView.ItemDecoration() {
