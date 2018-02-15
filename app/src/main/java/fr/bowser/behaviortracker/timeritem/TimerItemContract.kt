@@ -22,7 +22,7 @@ interface TimerItemContract {
 
         fun setTimer(timerState: TimerState)
 
-        fun onTimerStateChange()
+        fun onTimerStateChange(): Boolean
 
         fun onClickDecreaseTime()
 

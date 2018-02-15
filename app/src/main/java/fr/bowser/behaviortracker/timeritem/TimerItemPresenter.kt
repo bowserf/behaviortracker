@@ -25,9 +25,10 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         manageUpdateTimerCallback()
     }
 
-    override fun onTimerStateChange() {
+    override fun onTimerStateChange(): Boolean {
         timerState.isActivate = !timerState.isActivate
         manageUpdateTimerCallback()
+        return timerState.isActivate
     }
 
     override fun onClickDeleteTimer() {

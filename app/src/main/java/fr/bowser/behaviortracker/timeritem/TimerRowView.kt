@@ -26,6 +26,7 @@ class TimerRowView(context: Context) :
     private val reduceChrono: TextView
     private val increaseChrono: TextView
     private val color: View
+    private val btnPlayPause: ImageView
 
     @Inject
     lateinit var presenter: TimerItemPresenter
@@ -38,9 +39,12 @@ class TimerRowView(context: Context) :
         // card radius
         radius = resources.getDimension(R.dimen.default_space_half)
 
-        setOnClickListener { presenter.onTimerStateChange() }
+        setOnClickListener { manageClickPlayPauseButton() }
+
+        btnPlayPause = findViewById(R.id.timer_play_pause)
 
         color = findViewById(R.id.timer_color)
+        color.setOnClickListener { /*TODO display show mode */}
         chrono = findViewById(R.id.timer_chrono)
         name = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
@@ -67,6 +71,8 @@ class TimerRowView(context: Context) :
         chrono.text = TimeConverter.convertSecondsToHumanTime(timerState.timer.currentTime)
         name.text = timerState.timer.name
         color.setBackgroundColor(timerState.timer.color)
+
+        updateBtnPlayPause(timerState.isActivate)
     }
 
     override fun timerUpdated(newTime: Long) {
@@ -98,6 +104,19 @@ class TimerRowView(context: Context) :
         }
 
         popup.show()
+    }
+
+    private fun manageClickPlayPauseButton() {
+        val isActivate = presenter.onTimerStateChange()
+        updateBtnPlayPause(isActivate)
+    }
+
+    private fun updateBtnPlayPause(isActivate:Boolean){
+        if(isActivate){
+            btnPlayPause.setImageResource(R.drawable.ic_pause)
+        }else {
+            btnPlayPause.setImageResource(R.drawable.ic_play)
+        }
     }
 
     override fun displayRenameDialog(oldName: String) {
