@@ -3,7 +3,11 @@ package fr.bowser.behaviortracker.config
 import android.app.Application
 import android.content.Context
 import android.os.StrictMode
+import com.crashlytics.android.Crashlytics
 import fr.bowser.behaviortracker.BuildConfig
+import io.fabric.sdk.android.Fabric
+
+
 
 
 class BehaviorTrackerApp : Application(){
@@ -25,6 +29,12 @@ class BehaviorTrackerApp : Application(){
         super.onCreate()
 
         setupGraph()
+
+        setupCrashlytics()
+    }
+
+    private fun setupCrashlytics() {
+        Fabric.with(this, Crashlytics())
     }
 
     private fun setupGraph(){
