@@ -15,7 +15,7 @@ class TimeManager(val timerListManager: TimerListManager) {
         if(!listeners.contains(callback)){
             // start the runnable if we will put the first listener
             if(listeners.isEmpty()){
-                handler.post(timerRunnable)
+                handler.postDelayed(timerRunnable, DELAY)
             }
             return listeners.add(callback)
         }
