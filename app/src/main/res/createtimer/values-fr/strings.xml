@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="timer_name">Nom</string>
+    <string name="start_timer_after_creation">Commencer tout de suite le chronomètre</string>
+    <string name="create_timer_title">Créer un chornomètre</string>
+    <string name="create_timer_name_error">Vous devez entrer un nom.</string>
+
+    <!-- Menu -->
+    <string name="item_create_timer_save">SAUVEGARDER</string>
+
+</resources>
