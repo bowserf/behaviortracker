@@ -40,6 +40,35 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    flavorDimensions "density"
+
+    productFlavors {
+        // Dimension flavors
+        universal {
+            dimension "density"
+        }
+        mdpi {
+            dimension "density"
+            resConfigs "mdpi"
+        }
+        hdpi {
+            dimension "density"
+            resConfigs "hdpi"
+        }
+        xhdpi {
+            dimension "density"
+            resConfigs "xhdpi"
+        }
+        xxhdpi {
+            dimension "density"
+            resConfigs "xxhdpi"
+        }
+        xxxhdpi {
+            dimension "density"
+            resConfigs "xxxhdpi"
+        }
+    }
+
     sourceSets {
         main {
             // Split resources.
@@ -88,4 +117,38 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+}
+
+android.applicationVariants.all { variant ->
+    makeVersionCodeForVariant(variant)
+}
+
+def makeVersionCodeForVariant(variant) {
+    def dimensions = getProductFlavorsDimensions(variant.productFlavors)
+    def densityNameDimension = dimensions.get("density")
+
+    if (densityNameDimension == null) {
+        throw new IllegalStateException("Missing density dimension")
+    }
+
+    def versionCode = makeVersionCode(densityNameDimension)
+    variant.outputs.all {
+        setVersionCodeOverride(versionCode)
+    }
+}
+
+static def getProductFlavorsDimensions(productFlavors) {
+    def dimensions = new HashMap<String, String>()
+    productFlavors.each { productFlavor ->
+        def dimension = productFlavor.getDimension()
+        def name = productFlavor.getName()
+        dimensions.put(dimension, name)
+    }
+    return dimensions
+}
+
+def makeVersionCode(String densityDimension) {
+    def densityCodes = [universal: 1, mdpi: 2, hdpi: 3, xhdpi: 4, xxhdpi: 5, xxxhdpi: 6]
+    def densityCode = densityCodes.get(densityDimension)
+    return densityCode * 1_000_00_00 + rootProject.ext.versionCode
 }
