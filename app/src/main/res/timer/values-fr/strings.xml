@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Timer row view menu -->
-    <string name="item_timer_reset">Rmettre à 0</string>
+    <string name="item_timer_reset">Remettre à 0</string>
     <string name="item_timer_remove">Supprimer</string>
     <string name="item_timer_rename">Renommer</string>
 
