@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- Bottom navigation view -->
-    <string name="bottom_navigation_timers">Timers</string>
-    <string name="bottom_navigation_stats">Stats</string>
-
-</resources>

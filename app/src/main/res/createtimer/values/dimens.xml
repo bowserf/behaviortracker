@@ -2,7 +2,6 @@
 <resources>
 
     <dimen name="item_color_size">32dp</dimen>
-    <dimen name="create_timer_color_size">30dp</dimen>
 
     <dimen name="create_dialog_width">300dp</dimen>
 

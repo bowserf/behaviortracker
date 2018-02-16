@@ -157,7 +157,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     }
 
     companion object {
-        const val TAG = "CreateTimerActivity"
+        private const val TAG = "CreateTimerActivity"
 
         fun showDialog(activity: AppCompatActivity, isLargeScreen: Boolean) {
             val newFragment = CreateTimerDialog()

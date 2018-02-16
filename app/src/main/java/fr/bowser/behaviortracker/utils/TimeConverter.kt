@@ -26,11 +26,11 @@ object TimeConverter {
 
         val seconds = remainingTime
         if(seconds < 10){
-            string += "0";
+            string += "0"
         }
-        string += seconds;
+        string += seconds
 
-        return string;
+        return string
     }
 
 }

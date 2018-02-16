@@ -5,7 +5,6 @@
     <dimen name="modify_chrono_width">32dp</dimen>
     <dimen name="modify_chrono_height">32dp</dimen>
     <dimen name="text_timer_chrono">56sp</dimen>
-    <dimen name="margin_between_timer_items">@dimen/default_space</dimen>
     <dimen name="timer_play_pause_size">32dp</dimen>
 
 </resources>

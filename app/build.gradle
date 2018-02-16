@@ -113,7 +113,7 @@ dependencies {
     kapt rootProject.ext.dependencies.annotationProcessorDagger2
 
     compile('com.crashlytics.sdk.android:crashlytics:2.9.0@aar') {
-        transitive = true;
+        transitive = true
     }
 
     // Test
