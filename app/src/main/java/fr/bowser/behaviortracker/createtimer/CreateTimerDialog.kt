@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentTransaction
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +18,9 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.Spinner
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
-
-
-
 
 class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
@@ -31,7 +28,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     lateinit var presenter: CreateTimerPresenter
 
     private lateinit var editTimerName: EditText
-    private lateinit var chooseColor: Spinner
+    private lateinit var chooseColor: RecyclerView
     private lateinit var startNow: CheckBox
     private lateinit var editTimerNameLayout: TextInputLayout
 
@@ -69,7 +66,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         }
 
         val dialogWidth = resources.getDimensionPixelOffset(R.dimen.create_dialog_width)
-        getDialog().getWindow().setLayout(dialogWidth, WRAP_CONTENT)
+        dialog.window.setLayout(dialogWidth, WRAP_CONTENT)
     }
 
     override fun onStop() {
@@ -85,33 +82,19 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         editTimerNameLayout.error = resources.getString(R.string.create_timer_name_error)
     }
 
-    private fun initSpinner(root: View) {
-        chooseColor = root.findViewById(R.id.choose_color)
-        val colorAdapter = ColorAdapter(context, android.R.layout.simple_spinner_item, provideColors())
-        chooseColor.adapter = colorAdapter
+    override fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int) {
+        chooseColor.adapter.notifyItemChanged(oldSelectedPosition)
+        chooseColor.adapter.notifyItemChanged(selectedPosition)
     }
 
-    private fun provideColors(): MutableList<Int>? {
-        val colors = ArrayList<Int>()
-        colors.add(ContextCompat.getColor(context!!, R.color.purple))
-        colors.add(ContextCompat.getColor(context!!, R.color.pink))
-        colors.add(ContextCompat.getColor(context!!, R.color.red))
-        colors.add(ContextCompat.getColor(context!!, R.color.blue))
-        colors.add(ContextCompat.getColor(context!!, R.color.indigo))
-        colors.add(ContextCompat.getColor(context!!, R.color.deep_purple))
-        colors.add(ContextCompat.getColor(context!!, R.color.teal))
-        colors.add(ContextCompat.getColor(context!!, R.color.cyan))
-        colors.add(ContextCompat.getColor(context!!, R.color.light_blue))
-        colors.add(ContextCompat.getColor(context!!, R.color.lime))
-        colors.add(ContextCompat.getColor(context!!, R.color.light_green))
-        colors.add(ContextCompat.getColor(context!!, R.color.gren))
-        colors.add(ContextCompat.getColor(context!!, R.color.amber))
-        colors.add(ContextCompat.getColor(context!!, R.color.orange))
-        colors.add(ContextCompat.getColor(context!!, R.color.deep_orange))
-        colors.add(ContextCompat.getColor(context!!, R.color.brown))
-        colors.add(ContextCompat.getColor(context!!, R.color.grey))
-        colors.add(ContextCompat.getColor(context!!, R.color.blue_grey))
-        return colors
+    private fun initSpinner(root: View) {
+        chooseColor = root.findViewById(R.id.list_colors)
+        chooseColor.layoutManager = GridLayoutManager(activity,
+                resources.getInteger(R.integer.create_timer_number_colors_row),
+                GridLayoutManager.VERTICAL,
+                false)
+        chooseColor.setHasFixedSize(true)
+        chooseColor.adapter = ColorAdapter(context!!, presenter)
     }
 
     private fun setupGraph() {
@@ -149,18 +132,18 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         editTimerNameLayout = root.findViewById(R.id.creation_timer_name_layout)
     }
 
-    private fun displayKeyboard(){
+    private fun displayKeyboard() {
         editTimerName.requestFocus()
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
     }
 
-    private fun hideKeyboard(){
+    private fun hideKeyboard() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(editTimerName.windowToken, 0)
     }
 
-    private fun exitWithAnimation(){
+    private fun exitWithAnimation() {
         activity?.supportFragmentManager?.beginTransaction()
                 ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                 ?.remove(this)
@@ -169,8 +152,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private fun saveTimer() {
         val timerName = editTimerName.text.toString()
-        val color: Int = chooseColor.adapter.getItem(chooseColor.selectedItemPosition) as Int
-
+        val color: Int = presenter.selectedColor
         presenter.createTimer(timerName, color, startNow.isChecked)
     }
 

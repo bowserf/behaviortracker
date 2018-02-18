@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="create_timer_number_colors_row">5</integer>
+
+</resources>

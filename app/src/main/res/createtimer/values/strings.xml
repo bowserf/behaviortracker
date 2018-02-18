@@ -5,6 +5,7 @@
     <string name="start_timer_after_creation">Directly start timer</string>
     <string name="create_timer_title">Create timer</string>
     <string name="create_timer_name_error">You must enter a name.</string>
+    <string name="create_timer_title_color">Select a color :</string>
 
     <!-- Menu -->
     <string name="item_create_timer_save">SAVE</string>
