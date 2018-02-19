@@ -70,11 +70,9 @@
 
         <TextView
             android:id="@+id/timer_reduce_time"
-            android:layout_width="@dimen/modify_chrono_width"
-            android:layout_height="@dimen/modify_chrono_height"
-            android:layout_marginBottom="@dimen/default_space"
+            android:layout_width="@dimen/modify_chrono_size"
+            android:layout_height="@dimen/modify_chrono_size"
             android:layout_marginRight="@dimen/default_space"
-            android:layout_marginTop="@dimen/default_space"
             android:background="@drawable/bg_reduce"
             android:gravity="center"
             android:text="@string/item_timer_change_time"
@@ -85,11 +83,9 @@
 
         <TextView
             android:id="@+id/timer_increase_time"
-            android:layout_width="@dimen/modify_chrono_width"
-            android:layout_height="@dimen/modify_chrono_height"
-            android:layout_marginBottom="@dimen/default_space"
+            android:layout_width="@dimen/modify_chrono_size"
+            android:layout_height="@dimen/modify_chrono_size"
             android:layout_marginRight="@dimen/default_space"
-            android:layout_marginTop="@dimen/default_space"
             android:background="@drawable/bg_increase"
             android:gravity="center"
             android:padding="4dp"

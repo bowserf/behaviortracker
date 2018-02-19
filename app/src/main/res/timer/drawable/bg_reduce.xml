@@ -9,10 +9,10 @@
     </item>
 
     <item
-        android:bottom="@dimen/default_space_half"
+        android:bottom="@dimen/default_space"
         android:drawable="@drawable/ic_reduce"
-        android:left="@dimen/default_space_half"
-        android:right="@dimen/default_space_half"
-        android:top="@dimen/default_space_half" />
+        android:left="@dimen/default_space"
+        android:right="@dimen/default_space"
+        android:top="@dimen/default_space" />
 
 </ripple>
