@@ -38,7 +38,7 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         notifyItemInserted(position)
     }
 
-    fun removeTimer(timer: TimerState, position: Int) {
+    fun removeTimer(timerState: TimerState, position: Int) {
         notifyItemRemoved(position)
     }
 

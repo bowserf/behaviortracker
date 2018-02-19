@@ -43,6 +43,15 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
     }
 
+    fun updateTimerState(timerState: TimerState, isActivate : Boolean) {
+        timerState.isActivate = isActivate
+
+        val position = timersState.indexOf(timerState)
+        for (callback in callbacks) {
+            callback.onTimerStateChanged(timerState, position)
+        }
+    }
+
     fun renameTimer(id: Long, newName:String){
         for (timerState in timersState) {
             if(timerState.timer.id == id){
@@ -69,6 +78,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     interface TimerCallback {
         fun onTimerRemoved(timer: TimerState, position: Int)
         fun onTimerAdded(timer: TimerState, position: Int)
+        fun onTimerStateChanged(timer: TimerState, position: Int)
     }
 
 }

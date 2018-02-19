@@ -5,6 +5,8 @@ import dagger.BindsInstance
 import dagger.Component
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
+import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
+import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimeManagerModule
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -14,6 +16,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(DatabaseManagerModule::class,
         TimeManagerModule::class,
+        TimeNotificationManagerModule::class,
         TimerListManagerModule::class))
 interface BehaviorTrackerAppComponent {
 
@@ -22,6 +25,8 @@ interface BehaviorTrackerAppComponent {
     fun provideTimeManager(): TimeManager
 
     fun provideTimerListManager(): TimerListManager
+
+    fun provideTimerNotificationManager(): TimerNotificationManager
 
     @Component.Builder
     interface Builder {

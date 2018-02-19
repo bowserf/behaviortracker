@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="timer_notif_channel_id" translatable="false">timer_notif_channel_id</string>
+    <string name="timer_notif_channel_name">Timer</string>
+    <string name="timer_notif_channel_description">Display and control current running timer.</string>
+
+    <string name="timer_notif_start">Start</string>
+    <string name="timer_notif_pause">Pause</string>
+
+</resources>

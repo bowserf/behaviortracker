@@ -142,6 +142,10 @@ class TimerRowView(context: Context) :
         alertDialog.show()
     }
 
+    override fun statusUpdated(activate: Boolean) {
+        updateBtnPlayPause(activate)
+    }
+
     private fun displayRemoveConfirmationDialog() {
         val message = resources.getString(R.string.item_timer_remove_message)
         val builder = AlertDialog.Builder(context)

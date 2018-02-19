@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name=".notification.TimerReceiver"
+            android:exported="false"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="7621ce7dc1bd434d2715677e23600e7686de8b45" />

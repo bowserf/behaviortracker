@@ -1,12 +1,14 @@
 package fr.bowser.behaviortracker.timeritem
 
+import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.timer.TimerState
 
 class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val timeManager: TimeManager,
-                         private val timerListManager: TimerListManager)
+                         private val timerListManager: TimerListManager,
+                         private val timerNotificationManager: TimerNotificationManager)
     : TimerItemContract.Presenter, TimerListManager.TimerCallback {
 
     private lateinit var timerState: TimerState
@@ -41,16 +43,22 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
             timerState.timer.currentTime = 0
         }
         view.timerUpdated(timerState.timer.currentTime)
+
+        timerNotificationManager.updateTimerNotif(timerState)
     }
 
     override fun onClickIncreaseTime() {
         timerState.timer.currentTime += DEFAULT_TIMER_MODIFICATOR
         view.timerUpdated(timerState.timer.currentTime)
+
+        timerNotificationManager.updateTimerNotif(timerState)
     }
 
     override fun onClickResetTimer() {
         timerState.timer.currentTime = 0
         view.timerUpdated(timerState.timer.currentTime)
+
+        timerNotificationManager.updateTimerNotif(timerState)
     }
 
     override fun onClickRenameTimer() {
@@ -59,28 +67,45 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
     override fun onTimerNameUpdated(newTimerName: String) {
         timerListManager.renameTimer(timerState.timer.id, newTimerName)
+
+        timerNotificationManager.renameTimerNotif(timerState)
     }
 
     override fun onTimerAdded(timer: TimerState, position: Int) {
         // nothing to do
     }
 
-    override fun onTimerRemoved(timer: TimerState, position:Int) {
+    override fun onTimerRemoved(timer: TimerState, position: Int) {
         if (timerState == timer) {
             timerState.isActivate = false
             timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+
+            timerNotificationManager.destroyNotif(timerState)
         }
     }
 
-    private fun manageUpdateTimerCallback(){
+    override fun onTimerStateChanged(timer: TimerState, position: Int) {
+        if(timerState == timer){
+            view.statusUpdated(timer.isActivate)
+            if(timer.isActivate){
+                timeManager.registerUpdateTimerCallback(updateTimerCallback)
+            }else{
+                timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+            }
+        }
+    }
+
+    private fun manageUpdateTimerCallback() {
         if (timerState.isActivate) {
             timeManager.registerUpdateTimerCallback(updateTimerCallback)
+            timerNotificationManager.displayTimerNotif(timerState)
         } else {
+            timerNotificationManager.pauseTimerNotif()
             timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
         }
     }
 
-    private val updateTimerCallback = object:TimeManager.UpdateTimerCallback{
+    private val updateTimerCallback = object : TimeManager.UpdateTimerCallback {
         override fun timeUpdated() {
             view.timerUpdated(timerState.timer.currentTime)
         }

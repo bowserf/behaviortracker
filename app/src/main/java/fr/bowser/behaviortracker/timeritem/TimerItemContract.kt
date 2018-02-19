@@ -12,6 +12,8 @@ interface TimerItemContract {
 
         fun displayRenameDialog(oldName: String)
 
+        fun statusUpdated(activate: Boolean)
+
     }
 
     interface Presenter {

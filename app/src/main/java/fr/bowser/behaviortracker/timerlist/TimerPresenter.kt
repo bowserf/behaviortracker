@@ -29,4 +29,7 @@ class TimerPresenter(private val view: TimerContract.View,
         view.displayCreateTimerView()
     }
 
+    override fun onTimerStateChanged(timer: TimerState, position: Int) {
+        // nothing to do
+    }
 }
