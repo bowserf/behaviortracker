@@ -12,6 +12,7 @@ import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.TimerState
+import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
@@ -70,7 +71,7 @@ class TimerRowView(context: Context) :
 
         chrono.text = TimeConverter.convertSecondsToHumanTime(timerState.timer.currentTime)
         name.text = timerState.timer.name
-        color.setBackgroundColor(timerState.timer.color)
+        color.setBackgroundColor(ColorUtils.getColor(context!!, timerState.timer.color))
 
         updateBtnPlayPause(timerState.isActivate)
     }

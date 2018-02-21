@@ -14,9 +14,9 @@ interface CreateTimerContract {
 
     interface Presenter{
 
-        fun createTimer(name: String, color: Int, startNow : Boolean)
+        fun createTimer(name: String, startNow : Boolean)
 
-        fun changeSelectedColor(color: Int, oldSelectedPosition : Int, selectedPosition : Int)
+        fun changeSelectedColor(oldSelectedPosition : Int, selectedPosition : Int)
 
     }
 

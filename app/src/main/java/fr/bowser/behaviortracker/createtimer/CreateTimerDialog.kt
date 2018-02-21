@@ -152,8 +152,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private fun saveTimer() {
         val timerName = editTimerName.text.toString()
-        val color: Int = presenter.selectedColor
-        presenter.createTimer(timerName, color, startNow.isChecked)
+        presenter.createTimer(timerName, startNow.isChecked)
     }
 
     companion object {

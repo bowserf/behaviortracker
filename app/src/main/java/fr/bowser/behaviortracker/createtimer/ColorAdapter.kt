@@ -3,19 +3,17 @@ package fr.bowser.behaviortracker.createtimer
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.utils.ColorUtils
 
 class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
 
-    private val colorsList = provideColors()
-
-    private var selectedItemPosition = -1
+    private var selectedItemPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ColorViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_color, parent, false)
@@ -23,30 +21,30 @@ class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) : 
     }
 
     override fun getItemCount(): Int {
-        return colorsList.size
+        return ColorUtils.NUMBER_COLORS
     }
 
     override fun onBindViewHolder(holder: ColorViewHolder?, position: Int) {
-        val color = colorsList[position]
+        val color = ColorUtils.getColor(context, position)
         val background = holder?.colorView?.background as GradientDrawable?
         background?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
-        if(position == selectedItemPosition) {
+        if (position == selectedItemPosition) {
             holder?.colorView?.setImageResource(R.drawable.ic_check)
-        }else{
+        } else {
             holder?.colorView?.setImageResource(0)
         }
 
         holder?.colorView?.drawable
 
         holder?.view?.setOnClickListener {
-            presenter.changeSelectedColor(color, selectedItemPosition, position)
+            presenter.changeSelectedColor(selectedItemPosition, position)
 
             selectedItemPosition = position
         }
     }
 
-    private fun provideColors(): MutableList<Int> {
+    /*private fun provideColors(): MutableList<Int> {
         val colors = ArrayList<Int>()
         colors.add(ContextCompat.getColor(context, R.color.purple))
         colors.add(ContextCompat.getColor(context, R.color.pink))
@@ -67,7 +65,7 @@ class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) : 
         colors.add(ContextCompat.getColor(context, R.color.grey))
         colors.add(ContextCompat.getColor(context, R.color.blue_grey))
         return colors
-    }
+    }*/
 
     inner class ColorViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 

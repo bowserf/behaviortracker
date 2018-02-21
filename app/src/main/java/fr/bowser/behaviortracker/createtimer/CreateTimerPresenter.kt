@@ -10,18 +10,18 @@ class CreateTimerPresenter(private val view : CreateTimerContract.View,
     var selectedColor:Int = 0
         private set
 
-    override fun changeSelectedColor(color: Int, oldSelectedPosition : Int, selectedPosition : Int) {
-        selectedColor = color
+    override fun changeSelectedColor(oldSelectedPosition : Int, selectedPosition : Int) {
+        selectedColor = selectedPosition
         view.updateColorList(oldSelectedPosition, selectedPosition)
     }
 
-    override fun createTimer(name: String, color: Int, startNow : Boolean) {
+    override fun createTimer(name: String, startNow : Boolean) {
         if(name.isEmpty()){
             view.displayNameError()
             return
         }
 
-        val timer = TimerState(startNow, Timer(name, color))
+        val timer = TimerState(startNow, Timer(name, selectedColor))
         timerListManager.addTimer(timer)
 
         view.exitViewAfterSucceedTimerCreation()
