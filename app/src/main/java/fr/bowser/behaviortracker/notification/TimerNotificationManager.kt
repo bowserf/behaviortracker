@@ -46,6 +46,7 @@ class TimerNotificationManager(private val context: Context,
 
         // action when click on notification
         val homeIntent = Intent(context, HomeActivity::class.java)
+        homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
         val resultPendingIntent = PendingIntent.getActivity(
                 context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
