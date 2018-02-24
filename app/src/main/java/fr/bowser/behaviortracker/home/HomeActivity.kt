@@ -6,17 +6,42 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timerlist.TimerFragment
+import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), HomeContract.View {
+
+    @Inject
+    lateinit var presenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        setupGraph()
+
         initializeToolbar()
 
         displayTimerFragment()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.start()
+    }
+
+    override fun onPause() {
+        presenter.stop()
+        super.onPause()
+    }
+
+    private fun setupGraph() {
+        val build = DaggerHomeComponent.builder()
+                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+                .homeModule(HomeModule(this))
+                .build()
+        build.inject(this)
     }
 
     private fun initializeToolbar() {
@@ -24,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(myToolbar)
     }
 
-    private fun displayTimerFragment(){
+    private fun displayTimerFragment() {
         supportFragmentManager.inTransaction {
             replace(R.id.fragment_container, TimerFragment(), TimerFragment.TAG)
         }
