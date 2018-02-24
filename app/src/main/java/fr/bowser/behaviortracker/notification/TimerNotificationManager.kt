@@ -105,6 +105,15 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
+    fun changeNotifOngoing(isOngoing : Boolean){
+        timerNotificationBuilder?.setOngoing(isOngoing)
+        timerNotificationBuilder?.let {
+            notificationManager.notify(
+                    TIMER_NOTIFICATION_ID,
+                    timerNotificationBuilder?.build())
+        }
+    }
+
     fun destroyNotif(removedTimer: TimerState) {
         if(timerState == removedTimer) {
             isNotificationDisplayed = false
