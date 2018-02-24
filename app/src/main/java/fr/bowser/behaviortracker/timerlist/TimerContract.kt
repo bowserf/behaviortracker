@@ -14,6 +14,10 @@ interface TimerContract {
 
         fun onTimerAdded(timer: TimerState, position: Int)
 
+        fun displayEmptyListView()
+
+        fun displayListView()
+
     }
 
     interface Presenter{

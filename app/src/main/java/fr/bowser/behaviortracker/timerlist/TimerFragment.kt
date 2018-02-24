@@ -10,13 +10,15 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.NO_POSITION
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.timer.TimerState
 import javax.inject.Inject
-
 
 
 class TimerFragment : Fragment(), TimerContract.View {
@@ -27,6 +29,12 @@ class TimerFragment : Fragment(), TimerContract.View {
     private lateinit var timerAdapter: TimerAdapter
 
     private lateinit var fab: FloatingActionButton
+
+    private lateinit var emptyListView: ImageView
+
+    private lateinit var emptyListText: TextView
+
+    private lateinit var list: RecyclerView
 
     private var mSpanCount: Int = 1
 
@@ -49,6 +57,9 @@ class TimerFragment : Fragment(), TimerContract.View {
 
         fab = view.findViewById(R.id.button_add_timer)
         fab.setOnClickListener { presenter.onClickAddTimer() }
+
+        emptyListView = view.findViewById(R.id.empty_list_view)
+        emptyListText = view.findViewById(R.id.empty_list_text)
     }
 
     override fun onStart() {
@@ -69,12 +80,24 @@ class TimerFragment : Fragment(), TimerContract.View {
         timerAdapter.setTimersList(timers)
     }
 
-    override fun onTimerRemoved(timer: TimerState, position:Int) {
+    override fun onTimerRemoved(timer: TimerState, position: Int) {
         timerAdapter.removeTimer(timer, position)
     }
 
     override fun onTimerAdded(timer: TimerState, position: Int) {
         timerAdapter.addTimer(timer, position)
+    }
+
+    override fun displayEmptyListView() {
+        list.visibility = GONE
+        emptyListView.visibility = View.VISIBLE
+        emptyListText.visibility = View.VISIBLE
+    }
+
+    override fun displayListView() {
+        list.visibility = View.VISIBLE
+        emptyListView.visibility = View.GONE
+        emptyListText.visibility = View.GONE
     }
 
     private fun setupGraph() {
@@ -86,7 +109,7 @@ class TimerFragment : Fragment(), TimerContract.View {
     }
 
     private fun initializeList(view: View) {
-        val list = view.findViewById<RecyclerView>(R.id.list_timers)
+        list = view.findViewById(R.id.list_timers)
 
         list.layoutManager = GridLayoutManager(activity, mSpanCount, GridLayoutManager.VERTICAL, false)
         list.setHasFixedSize(true)
@@ -112,7 +135,7 @@ class TimerFragment : Fragment(), TimerContract.View {
                 // method is call at the animation start so position = -1 and we don't apply the
                 // good top margin. By calling getChildLayoutPosition, we get the view position
                 // and we fix the temporary animation issue.
-                if(currentPosition == NO_POSITION){
+                if (currentPosition == NO_POSITION) {
                     currentPosition = parent?.getChildLayoutPosition(view)
                 }
                 if (currentPosition != null && currentPosition < mSpanCount) {

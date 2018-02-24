@@ -19,7 +19,9 @@ their time problems too, I would be very happy ! =)
 This is a list of future features which will come in the application :
 
 - The possibility to link timers between them to stop one when the other is started.
-- Notification to show which timers are active and be able to manage them.
+- Possibility to delete a Timer by swiping on it.
+- Possibility to reorder Timers list.
 - Curves to track your behavior during a day.
 - Add widget to the home screen to manage timers more easily.
 - Android Wear support to use this application more easily.
+- Several animations to improve user experience.
