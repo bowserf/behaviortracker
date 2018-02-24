@@ -113,7 +113,7 @@ dependencies {
     implementation rootProject.ext.dependencies.dagger2
     kapt rootProject.ext.dependencies.annotationProcessorDagger2
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.9.0@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.0@aar') {
         transitive = true
     }
 
