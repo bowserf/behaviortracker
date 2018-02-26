@@ -106,6 +106,9 @@ class TimerNotificationManager(private val context: Context,
     }
 
     fun changeNotifOngoing(isOngoing : Boolean){
+        if(!isNotificationDisplayed){
+            return
+        }
         timerNotificationBuilder?.setOngoing(isOngoing)
         timerNotificationBuilder?.let {
             notificationManager.notify(
