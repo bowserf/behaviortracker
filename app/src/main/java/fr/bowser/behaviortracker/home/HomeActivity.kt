@@ -3,8 +3,11 @@ package fr.bowser.behaviortracker.home
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timerlist.TimerFragment
@@ -34,6 +37,34 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     override fun onPause() {
         presenter.stop()
         super.onPause()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_home, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.menu_reset_all ->  {
+                presenter.onClickResetAll()
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun displayResetAllDialog() {
+        val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(message)
+                .setPositiveButton(android.R.string.yes, { dialog, which ->
+                    presenter.onClickResetAllTimers()
+                })
+                .setNegativeButton(android.R.string.no, { dialog, which ->
+                    // do nothing
+                })
+                .show()
     }
 
     private fun setupGraph() {

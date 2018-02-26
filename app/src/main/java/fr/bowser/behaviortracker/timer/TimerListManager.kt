@@ -52,6 +52,15 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
     }
 
+    fun updateTime(timerState: TimerState, newTime: Long) {
+        timerState.timer.currentTime = newTime
+
+        val position = timersState.indexOf(timerState)
+        for (callback in callbacks) {
+            callback.onTimerTimeChanged(timerState, position)
+        }
+    }
+
     fun renameTimer(id: Long, newName:String){
         for (timerState in timersState) {
             if(timerState.timer.id == id){
@@ -79,6 +88,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         fun onTimerRemoved(timer: TimerState, position: Int)
         fun onTimerAdded(timer: TimerState, position: Int)
         fun onTimerStateChanged(timer: TimerState, position: Int)
+        fun onTimerTimeChanged(timerState: TimerState, position: Int)
     }
 
 }

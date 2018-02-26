@@ -95,6 +95,12 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         }
     }
 
+    override fun onTimerTimeChanged(timer: TimerState, position: Int) {
+        if(timerState == timer){
+            view.timerUpdated(0)
+        }
+    }
+
     private fun manageUpdateTimerCallback() {
         if (timerState.isActivate) {
             timeManager.registerUpdateTimerCallback(updateTimerCallback)

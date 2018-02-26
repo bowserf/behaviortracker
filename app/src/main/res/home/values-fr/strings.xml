@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Menu -->
+    <string name="menu_reset_all">Tout remettre à 0</string>
+    <string name="home_dialog_confirm_reset_all_timers">Voulez vous vraiment remettre tous les chronomètres à 0 ?</string>
+
+</resources>
