@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.StrictMode
 import com.crashlytics.android.Crashlytics
+import com.google.firebase.analytics.FirebaseAnalytics
 import fr.bowser.behaviortracker.BuildConfig
 import io.fabric.sdk.android.Fabric
 
@@ -31,6 +32,8 @@ class BehaviorTrackerApp : Application(){
         setupGraph()
 
         setupCrashlytics()
+
+        setupFirebaseAnalytics()
     }
 
     private fun setupCrashlytics() {
@@ -41,6 +44,10 @@ class BehaviorTrackerApp : Application(){
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
                 .context(this)
                 .build()
+    }
+
+    private fun setupFirebaseAnalytics() {
+        FirebaseAnalytics.getInstance(this)
     }
 
     companion object {

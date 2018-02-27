@@ -109,6 +109,9 @@ dependencies {
     implementation rootProject.ext.dependencies.room
     kapt rootProject.ext.dependencies.annotationProcessorRoom
 
+    // Firebase
+    compile rootProject.ext.dependencies.firebaseCore
+
     // Other
     implementation rootProject.ext.dependencies.dagger2
     kapt rootProject.ext.dependencies.annotationProcessorDagger2
@@ -158,3 +161,5 @@ def makeVersionCode(String densityDimension) {
     def densityCode = densityCodes.get(densityDimension)
     return densityCode * 1_000_00_00 + rootProject.ext.versionCode
 }
+
+apply plugin: 'com.google.gms.google-services'
