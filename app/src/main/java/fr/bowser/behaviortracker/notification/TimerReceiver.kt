@@ -15,7 +15,7 @@ class TimerReceiver : BroadcastReceiver() {
                 startTimer(context!!)
             }
             ACTION_PAUSE -> {
-                pausetimer(context!!)
+                pauseTimer(context!!)
             }
             ACTION_NOTIFICATION_DISMISS -> {
                 notificationDismiss(context!!)
@@ -28,18 +28,22 @@ class TimerReceiver : BroadcastReceiver() {
         notifManager.notificationDismiss()
     }
 
-    private fun pausetimer(context: Context){
+    private fun pauseTimer(context: Context) {
         val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
         val timerListManager = BehaviorTrackerApp.getAppComponent(context).provideTimerListManager()
-        timerListManager.updateTimerState(notifManager.timerState!!, false)
-        notifManager.pauseTimerNotif()
+        notifManager.timerState?.let {
+            timerListManager.updateTimerState(notifManager.timerState!!, false)
+            notifManager.pauseTimerNotif()
+        }
     }
 
-    private fun startTimer(context: Context){
+    private fun startTimer(context: Context) {
         val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
         val timerListManager = BehaviorTrackerApp.getAppComponent(context).provideTimerListManager()
-        timerListManager.updateTimerState(notifManager.timerState!!, true)
-        notifManager.resumeTimerNotif()
+        notifManager.timerState?.let {
+            timerListManager.updateTimerState(notifManager.timerState!!, true)
+            notifManager.resumeTimerNotif()
+        }
     }
 
     companion object {
