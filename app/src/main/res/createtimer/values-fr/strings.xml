@@ -5,6 +5,7 @@
     <string name="start_timer_after_creation">Démarrer immédiatement le chronomètre</string>
     <string name="create_timer_title">Créer un chronomètre</string>
     <string name="create_timer_name_error">Vous devez entrer un nom.</string>
+    <string name="create_timer_title_color">Sélectionner une couleur :</string>
 
     <!-- Menu -->
     <string name="item_create_timer_save">SAUVEGARDER</string>
