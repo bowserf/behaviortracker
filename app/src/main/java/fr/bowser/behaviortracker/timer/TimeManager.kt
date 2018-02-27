@@ -3,7 +3,7 @@ package fr.bowser.behaviortracker.timer
 import android.os.Handler
 import java.util.*
 
-class TimeManager(val timerListManager: TimerListManager) {
+class TimeManager(private val timerListManager: TimerListManager) {
 
     private val listeners = ArrayList<UpdateTimerCallback>()
 
@@ -45,7 +45,9 @@ class TimeManager(val timerListManager: TimerListManager) {
         override fun run() {
             timerListManager.timersState
                     .filter { it.isActivate }
-                    .forEach { it.timer.currentTime++ }
+                    .forEach {
+                        timerListManager.updateTime(it, it.timer.currentTime + 1)
+                    }
             for (listener in listeners) {
                 listener.timeUpdated()
             }

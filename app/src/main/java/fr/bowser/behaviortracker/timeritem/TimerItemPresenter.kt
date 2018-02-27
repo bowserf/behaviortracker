@@ -38,24 +38,24 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onClickDecreaseTime() {
-        timerState.timer.currentTime -= DEFAULT_TIMER_MODIFICATOR
-        if (timerState.timer.currentTime < 0) {
-            timerState.timer.currentTime = 0
-        }
+        timerListManager.updateTime(timerState, timerState.timer.currentTime - DEFAULT_TIMER_MODIFICATOR)
+
         view.timerUpdated(timerState.timer.currentTime)
 
         timerNotificationManager.updateTimerNotif(timerState)
     }
 
     override fun onClickIncreaseTime() {
-        timerState.timer.currentTime += DEFAULT_TIMER_MODIFICATOR
+        timerListManager.updateTime(timerState, timerState.timer.currentTime + DEFAULT_TIMER_MODIFICATOR)
+
         view.timerUpdated(timerState.timer.currentTime)
 
         timerNotificationManager.updateTimerNotif(timerState)
     }
 
     override fun onClickResetTimer() {
-        timerState.timer.currentTime = 0
+        timerListManager.updateTime(timerState, 0)
+
         view.timerUpdated(timerState.timer.currentTime)
 
         timerNotificationManager.updateTimerNotif(timerState)

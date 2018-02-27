@@ -9,7 +9,7 @@ import android.arch.persistence.room.Query
 interface TimerDAO {
 
     @Query("SELECT * FROM Timer")
-    fun getCategories(): List<Timer>
+    fun getTimers(): List<Timer>
 
     @Insert
     fun addTimer(timer: Timer): Long
@@ -19,5 +19,8 @@ interface TimerDAO {
 
     @Query("UPDATE Timer SET name = :name WHERE id = :id")
     fun renameTimer(id:Long, name:String)
+
+    @Query("UPDATE Timer SET current_time = :currentTime WHERE id = :id")
+    fun updateTimerTime(id:Long, currentTime:Long)
 
 }
