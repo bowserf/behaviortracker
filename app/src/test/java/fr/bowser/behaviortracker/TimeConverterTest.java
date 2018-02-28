@@ -2,12 +2,9 @@ package fr.bowser.behaviortracker;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit4ClassRunner;
-import org.junit.runner.RunWith;
 
 import fr.bowser.behaviortracker.utils.TimeConverter;
 
-@RunWith(JUnit4ClassRunner.class)
 public class TimeConverterTest {
 
     @Test
