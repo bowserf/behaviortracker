@@ -131,6 +131,39 @@ dependencies {
 
 android.applicationVariants.all { variant ->
     makeVersionCodeForVariant(variant)
+    copyMappingAndApk(variant)
+}
+
+def copyMappingAndApk(variant) {
+    if (variant.buildType.name == "release") {
+        variant.assemble.doLast {
+            def versionCode = rootProject.ext.versionCode
+            def versionName = variant.mergedFlavor.versionName
+
+            // create root directory
+            File flavorRootDir = new File(projectDir.getAbsolutePath()
+                    + "/build/release-"
+                    + versionCode + "/")
+            if (!flavorRootDir.exists()) {
+                flavorRootDir.mkdir()
+            }
+
+            // we remove Release word from variantName
+            def variantName = variant.name.replace("Release", "")
+
+            // copy mapping
+            tasks.create("taskCopyMapping" + variantName, Copy) {
+                from "build/outputs/mapping/" + variantName + "/release/mapping.txt"
+                into flavorRootDir.absolutePath + "/" + variantName + "/"
+            }.execute()
+
+            // copy apk
+            tasks.create("taskCopyApk" + variantName, Copy) {
+                from variant.outputs[0].outputFile
+                into flavorRootDir.absolutePath + "/" + variantName + "/"
+            }.execute()
+        }
+    }
 }
 
 def makeVersionCodeForVariant(variant) {
