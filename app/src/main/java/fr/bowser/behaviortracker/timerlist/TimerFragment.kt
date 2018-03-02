@@ -1,7 +1,9 @@
 package fr.bowser.behaviortracker.timerlist
 
+import android.animation.ObjectAnimator
 import android.graphics.Rect
 import android.os.Bundle
+import android.support.annotation.Keep
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -12,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
@@ -92,6 +95,13 @@ class TimerFragment : Fragment(), TimerContract.View {
         list.visibility = GONE
         emptyListView.visibility = View.VISIBLE
         emptyListText.visibility = View.VISIBLE
+
+        val fabAnimator = ObjectAnimator.ofFloat(this, PROPERTY_FAB_ANIMATION, 1f, 1.15f, 1f)
+        fabAnimator.duration = FAB_ANIMATION_DURATION
+        fabAnimator.repeatCount = 1
+        fabAnimator.interpolator = AccelerateDecelerateInterpolator()
+        fabAnimator.startDelay = FAB_ANIMATION_DELAY  
+        fabAnimator.start()
     }
 
     override fun displayListView() {
@@ -149,8 +159,22 @@ class TimerFragment : Fragment(), TimerContract.View {
         })
     }
 
+    /**
+     * Setter used by {@link #
+     */
+    @Keep
+    private fun setFabScale(scale : Float){
+        fab.scaleX = scale
+        fab.scaleY = scale
+    }
+
     companion object {
         const val TAG = "TimerFragment"
+
+        private const val PROPERTY_FAB_ANIMATION = "fabScale"
+
+        private const val FAB_ANIMATION_DURATION = 1000L
+        private const val FAB_ANIMATION_DELAY = 400L
     }
 
 }
