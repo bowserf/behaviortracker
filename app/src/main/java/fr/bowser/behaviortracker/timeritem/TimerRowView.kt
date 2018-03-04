@@ -122,7 +122,7 @@ class TimerRowView(context: Context) :
 
     override fun displayRenameDialog(oldName: String) {
         val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle(resources.getString(R.string.timer_row_rename))
+        alertDialog.setMessage(resources.getString(R.string.timer_row_rename))
 
         val rootView = LayoutInflater.from(context).inflate(R.layout.dialog_rename_timer, null)
         val input = rootView.findViewById<EditText>(R.id.edittext)
@@ -149,7 +149,7 @@ class TimerRowView(context: Context) :
     private fun displayRemoveConfirmationDialog() {
         val message = resources.getString(R.string.item_timer_remove_message)
         val builder = AlertDialog.Builder(context)
-        builder.setTitle(message)
+        builder.setMessage(message)
                 .setPositiveButton(android.R.string.yes, { dialog, which ->
                     presenter.onClickDeleteTimer()
                 })

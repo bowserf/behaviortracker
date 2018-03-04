@@ -57,7 +57,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     override fun displayResetAllDialog() {
         val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(message)
+        builder.setMessage(message)
                 .setPositiveButton(android.R.string.yes, { dialog, which ->
                     presenter.onClickResetAllTimers()
                 })

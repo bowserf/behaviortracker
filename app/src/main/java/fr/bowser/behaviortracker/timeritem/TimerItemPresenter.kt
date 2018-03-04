@@ -118,7 +118,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     companion object {
-        private val DEFAULT_TIMER_MODIFICATOR = 15
+        private val DEFAULT_TIMER_MODIFICATOR = 60
     }
 
 
