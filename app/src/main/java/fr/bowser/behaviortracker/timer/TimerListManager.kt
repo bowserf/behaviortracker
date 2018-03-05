@@ -94,10 +94,10 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     }
 
     interface TimerCallback {
-        fun onTimerRemoved(timer: TimerState, position: Int)
-        fun onTimerAdded(timer: TimerState, position: Int)
-        fun onTimerStateChanged(timer: TimerState, position: Int)
-        fun onTimerTimeChanged(timerState: TimerState, position: Int)
+        fun onTimerRemoved(updatedTimerState: TimerState, position: Int)
+        fun onTimerAdded(updatedTimerState: TimerState, position: Int)
+        fun onTimerStateChanged(updatedTimerState: TimerState, position: Int)
+        fun onTimerTimeChanged(updatedTimerState: TimerState, position: Int)
     }
 
 }
