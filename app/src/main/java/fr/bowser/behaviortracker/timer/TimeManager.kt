@@ -11,42 +11,56 @@ class TimeManager(private val timerListManager: TimerListManager) {
 
     private val timerRunnable = TimerRunnable()
 
-    fun registerUpdateTimerCallback(callback: UpdateTimerCallback): Boolean{
-        if(!listeners.contains(callback)){
+    private var isTimerRunning = false
+
+    fun registerUpdateTimerCallback(callback: UpdateTimerCallback): Boolean {
+        if (!listeners.contains(callback)) {
             // start the runnable if we will put the first listener
-            if(listeners.isEmpty()){
-                handler.postDelayed(timerRunnable, DELAY)
+            if (!isTimerRunning) {
+                val numberActiveTimers = timerListManager.timersState
+                        .filter { it.isActivate }
+                        .size
+                if (numberActiveTimers > 0) {
+                    isTimerRunning = true
+                    handler.postDelayed(timerRunnable, DELAY)
+                }
             }
             return listeners.add(callback)
         }
         return false
     }
 
-    fun unregisterUpdateTimerCallback(callback: UpdateTimerCallback){
+    fun unregisterUpdateTimerCallback(callback: UpdateTimerCallback) {
         listeners.remove(callback)
 
         // stop runnable if there is no listener anymore
-        if(listeners.isEmpty()){
-            handler.removeCallbacks(timerRunnable)
+        if (isTimerRunning) {
+            val numberActiveTimers = timerListManager.timersState
+                    .filter { it.isActivate }
+                    .size
+            if (numberActiveTimers == 0) {
+                isTimerRunning = false
+                handler.removeCallbacks(timerRunnable)
+            }
         }
     }
 
     companion object {
-        private val DELAY = 1000L
+        private const val DELAY = 1000L
     }
 
-    interface UpdateTimerCallback{
+    interface UpdateTimerCallback {
 
         fun timeUpdated()
 
     }
 
-    inner class TimerRunnable: Runnable{
+    inner class TimerRunnable : Runnable {
         override fun run() {
             timerListManager.timersState
                     .filter { it.isActivate }
                     .forEach {
-                        timerListManager.updateTime(it, it.timer.currentTime + 1)
+                        timerListManager.updateTime(it, it.timer.currentTime + 1, false)
                     }
             for (listener in listeners) {
                 listener.timeUpdated()

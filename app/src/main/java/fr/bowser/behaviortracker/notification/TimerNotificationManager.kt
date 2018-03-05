@@ -178,7 +178,7 @@ class TimerNotificationManager(private val context: Context,
 
     companion object {
 
-        private val TIMER_NOTIFICATION_ID = 42
+        private const val TIMER_NOTIFICATION_ID = 42
 
     }
 
