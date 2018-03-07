@@ -41,6 +41,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     override fun onTimerStateChange(): Boolean {
         timerState.isActivate = !timerState.isActivate
         manageUpdateTimerCallback()
+        manageNotification()
         return timerState.isActivate
     }
 
@@ -115,10 +116,16 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     private fun manageUpdateTimerCallback() {
         if (timerState.isActivate) {
             timeManager.registerUpdateTimerCallback(updateTimerCallback)
+        } else {
+            timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+        }
+    }
+
+    private fun manageNotification(){
+        if (timerState.isActivate) {
             timerNotificationManager.displayTimerNotif(timerState)
         } else {
-            timerNotificationManager.pauseTimerNotif()
-            timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+            timerNotificationManager.pauseTimerNotif(timerState)
         }
     }
 

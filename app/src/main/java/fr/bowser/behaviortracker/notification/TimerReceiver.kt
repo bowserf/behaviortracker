@@ -33,7 +33,7 @@ class TimerReceiver : BroadcastReceiver() {
         val timerListManager = BehaviorTrackerApp.getAppComponent(context).provideTimerListManager()
         notifManager.timerState?.let {
             timerListManager.updateTimerState(notifManager.timerState!!, false)
-            notifManager.pauseTimerNotif()
+            notifManager.pauseTimerNotif(notifManager.timerState!!)
         }
     }
 
@@ -42,7 +42,7 @@ class TimerReceiver : BroadcastReceiver() {
         val timerListManager = BehaviorTrackerApp.getAppComponent(context).provideTimerListManager()
         notifManager.timerState?.let {
             timerListManager.updateTimerState(notifManager.timerState!!, true)
-            notifManager.resumeTimerNotif()
+            notifManager.resumeTimerNotif(notifManager.timerState!!)
         }
     }
 

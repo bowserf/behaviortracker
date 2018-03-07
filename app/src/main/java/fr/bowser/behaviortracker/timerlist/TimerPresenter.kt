@@ -1,10 +1,12 @@
 package fr.bowser.behaviortracker.timerlist
 
+import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.timer.TimerState
 
 class TimerPresenter(private val view: TimerContract.View,
-                     private val timerListManager: TimerListManager)
+                     private val timerListManager: TimerListManager,
+                     private val timerNotificationManager: TimerNotificationManager)
     : TimerContract.Presenter, TimerListManager.TimerCallback {
 
     override fun start() {
@@ -33,6 +35,10 @@ class TimerPresenter(private val view: TimerContract.View,
     override fun onTimerAdded(updatedTimerState: TimerState, position: Int) {
         if(!timerListManager.timersState.isEmpty()){
             view.displayListView()
+        }
+        // if timer is directly activate, display it in the notification
+        if(updatedTimerState.isActivate){
+            timerNotificationManager.displayTimerNotif(updatedTimerState)
         }
         view.onTimerAdded(updatedTimerState, position)
     }

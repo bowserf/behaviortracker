@@ -41,37 +41,41 @@ class TimerNotificationManager(private val context: Context,
         timerState?.let { updateTimerNotif() }
     }
 
-    fun displayTimerNotif(timerState: TimerState) {
-        this.timerState = timerState
+    fun displayTimerNotif(modifiedTimer: TimerState) {
+        if(timerState == modifiedTimer){
+            resumeTimerNotif(modifiedTimer)
+        }else {
+            this.timerState = modifiedTimer
 
-        isNotificationDisplayed = true
+            isNotificationDisplayed = true
 
-        // action when click on notification
-        val homeIntent = Intent(context, HomeActivity::class.java)
-        homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        val resultPendingIntent = PendingIntent.getActivity(
-                context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            // action when click on notification
+            val homeIntent = Intent(context, HomeActivity::class.java)
+            homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            val resultPendingIntent = PendingIntent.getActivity(
+                    context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        timerNotificationBuilder = NotificationCompat.Builder(context, context.resources.getString(R.string.timer_notif_channel_id))
-                .setContentTitle(timerState.timer.name)
-                .setContentText(TimeConverter.convertSecondsToHumanTime(
-                        timerState.timer.currentTime))
-                .setSmallIcon(R.drawable.ic_timer)
-                .setContentIntent(resultPendingIntent)
-                .setDeleteIntent(TimerReceiver.getDeletePendingIntent(context))
-                .addAction(R.drawable.ic_pause,
-                        context.resources.getString(R.string.timer_notif_pause),
-                        TimerReceiver.getPausePendingIntent(context))
+            timerNotificationBuilder = NotificationCompat.Builder(context, context.resources.getString(R.string.timer_notif_channel_id))
+                    .setContentTitle(modifiedTimer.timer.name)
+                    .setContentText(TimeConverter.convertSecondsToHumanTime(
+                            modifiedTimer.timer.currentTime))
+                    .setSmallIcon(R.drawable.ic_timer)
+                    .setContentIntent(resultPendingIntent)
+                    .setDeleteIntent(TimerReceiver.getDeletePendingIntent(context))
+                    .addAction(R.drawable.ic_pause,
+                            context.resources.getString(R.string.timer_notif_pause),
+                            TimerReceiver.getPausePendingIntent(context))
 
-        notificationManager.notify(
-                TIMER_NOTIFICATION_ID,
-                timerNotificationBuilder?.build())
+            notificationManager.notify(
+                    TIMER_NOTIFICATION_ID,
+                    timerNotificationBuilder?.build())
 
-        timeManager.registerUpdateTimerCallback(this)
+            timeManager.registerUpdateTimerCallback(this)
+        }
     }
 
-    fun resumeTimerNotif() {
-        if(!isNotificationDisplayed){
+    fun resumeTimerNotif(modifiedTimer: TimerState) {
+        if(!isNotificationDisplayed || timerState != modifiedTimer){
             return
         }
 
@@ -91,8 +95,8 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    fun pauseTimerNotif() {
-        if(!isNotificationDisplayed){
+    fun pauseTimerNotif(modifiedTimer: TimerState) {
+        if(!isNotificationDisplayed || timerState != modifiedTimer){
             return
         }
 
