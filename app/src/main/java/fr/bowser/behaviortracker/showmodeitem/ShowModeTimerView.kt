@@ -8,6 +8,7 @@ import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
@@ -51,7 +52,7 @@ class ShowModeTimerView(context: Context) : ConstraintLayout(context),
         presenter.setTimer(timer)
 
         val drawable = background as RippleDrawable
-        drawable.setColorFilter(timer.color, PorterDuff.Mode.SRC_ATOP)
+        drawable.setColorFilter(ColorUtils.getColor(context, timer.color), PorterDuff.Mode.SRC_ATOP)
 
         chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
         timerName.text = timer.name
