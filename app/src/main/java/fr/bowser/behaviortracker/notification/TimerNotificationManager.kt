@@ -27,6 +27,8 @@ class TimerNotificationManager(private val context: Context,
 
     private var isNotificationDisplayed = false
 
+    private var isAppInBackground = false
+
     var timerState: TimerState? = null
 
     init {
@@ -75,6 +77,8 @@ class TimerNotificationManager(private val context: Context,
 
         timeManager.registerUpdateTimerCallback(this)
 
+        timerNotificationBuilder?.setOngoing(isAppInBackground)
+
         timerNotificationBuilder?.mActions?.clear()
         timerNotificationBuilder?.addAction(R.drawable.ic_pause,
                 context.resources.getString(R.string.timer_notif_pause),
@@ -91,6 +95,10 @@ class TimerNotificationManager(private val context: Context,
         if(!isNotificationDisplayed){
             return
         }
+
+        // allow to remove notification when timer is not running
+        timerNotificationBuilder?.setOngoing(false)
+        
         timerNotificationBuilder?.mActions?.clear()
         timerNotificationBuilder?.addAction(R.drawable.ic_play,
                 context.resources.getString(R.string.timer_notif_start),
@@ -105,11 +113,12 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    fun changeNotifOngoing(isOngoing : Boolean){
+    fun changeNotifOngoing(isAppInBackground : Boolean){
         if(!isNotificationDisplayed){
             return
         }
-        timerNotificationBuilder?.setOngoing(isOngoing)
+        this.isAppInBackground = isAppInBackground
+        timerNotificationBuilder?.setOngoing(isAppInBackground)
         timerNotificationBuilder?.let {
             notificationManager.notify(
                     TIMER_NOTIFICATION_ID,
