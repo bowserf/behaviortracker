@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_timers"
@@ -12,12 +12,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/empty_list_view"
         android:layout_width="@dimen/empty_view_size"
         android:layout_height="@dimen/empty_view_size"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_timer_alpha"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/empty_list_text"
@@ -25,7 +26,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:visibility="visible" />
+        tools:visibility="visible"/>
 
     <TextView
         android:id="@+id/empty_list_text"
@@ -41,7 +42,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/empty_list_view"
-        tools:visibility="visible" />
+        tools:visibility="visible"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_add_timer"
@@ -54,6 +55,6 @@
         app:fabSize="normal"
         app:layout_anchorGravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
