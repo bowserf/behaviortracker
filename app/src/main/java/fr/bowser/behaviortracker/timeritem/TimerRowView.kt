@@ -46,7 +46,7 @@ class TimerRowView(context: Context) :
         btnPlayPause = findViewById(R.id.timer_play_pause)
 
         color = findViewById(R.id.timer_color)
-        color.setOnClickListener { /*TODO display show mode */ }
+        color.setOnClickListener { presenter.onClickCard() }
         chrono = findViewById(R.id.timer_chrono)
         tvName = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
