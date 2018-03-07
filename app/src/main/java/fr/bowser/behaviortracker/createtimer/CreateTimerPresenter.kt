@@ -7,8 +7,7 @@ import fr.bowser.behaviortracker.timer.TimerState
 class CreateTimerPresenter(private val view : CreateTimerContract.View,
                            private val timerListManager: TimerListManager) : CreateTimerContract.Presenter{
 
-    var selectedColor:Int = 0
-        private set
+    private var selectedColor:Int = 0
 
     override fun changeSelectedColor(oldSelectedPosition : Int, selectedPosition : Int) {
         selectedColor = selectedPosition

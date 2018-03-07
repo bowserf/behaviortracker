@@ -33,7 +33,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             versionNameSuffix ".dev"
         }
     }
@@ -97,7 +97,7 @@ android {
 dependencies {
 
     // Kotlin
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.20"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.20"
 
@@ -142,7 +142,6 @@ def copyMappingAndApk(variant) {
     if (variant.buildType.name == "release") {
         variant.assemble.doLast {
             def versionCode = rootProject.ext.versionCode
-            def versionName = variant.mergedFlavor.versionName
 
             // create root directory
             File flavorRootDir = new File(projectDir.getAbsolutePath()

@@ -48,8 +48,6 @@ class TimerReceiver : BroadcastReceiver() {
 
     companion object {
 
-        private val TAG = "TimerReceiver"
-
         private val ACTION_PLAY = "timer_receiver.action.play"
 
         private val ACTION_PAUSE = "timer_receiver.action.pause"

@@ -7,8 +7,8 @@ import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = HomeComponent::class)
 @Component(
-        modules = arrayOf(HomeModule::class),
-        dependencies = arrayOf(BehaviorTrackerAppComponent::class))
+        modules = [(HomeModule::class)],
+        dependencies = [(BehaviorTrackerAppComponent::class)])
 interface HomeComponent {
 
     fun inject(activity: HomeActivity)

@@ -100,7 +100,7 @@ class TimerFragment : Fragment(), TimerContract.View {
         fabAnimator.duration = FAB_ANIMATION_DURATION
         fabAnimator.repeatCount = 1
         fabAnimator.interpolator = AccelerateDecelerateInterpolator()
-        fabAnimator.startDelay = FAB_ANIMATION_DELAY  
+        fabAnimator.startDelay = FAB_ANIMATION_DELAY
         fabAnimator.start()
     }
 
@@ -160,10 +160,11 @@ class TimerFragment : Fragment(), TimerContract.View {
     }
 
     /**
-     * Setter used by {@link #
+     * Setter used by {@link #fabAnimator}
      */
     @Keep
-    private fun setFabScale(scale : Float){
+    @SuppressWarnings("unused")
+    private fun setFabScale(scale: Float) {
         fab.scaleX = scale
         fab.scaleY = scale
     }

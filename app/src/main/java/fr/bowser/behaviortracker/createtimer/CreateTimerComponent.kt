@@ -6,8 +6,8 @@ import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = CreateTimerComponent::class)
 @Component(
-        modules = arrayOf(CreateTimerModule::class),
-        dependencies = arrayOf(BehaviorTrackerAppComponent::class))
+        modules = [(CreateTimerModule::class)],
+        dependencies = [(BehaviorTrackerAppComponent::class)])
 interface CreateTimerComponent {
 
     fun inject(dialog: CreateTimerDialog)

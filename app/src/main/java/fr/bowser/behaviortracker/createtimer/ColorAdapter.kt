@@ -39,42 +39,14 @@ class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) : 
 
         holder?.view?.setOnClickListener {
             presenter.changeSelectedColor(selectedItemPosition, position)
-
             selectedItemPosition = position
         }
     }
 
-    /*private fun provideColors(): MutableList<Int> {
-        val colors = ArrayList<Int>()
-        colors.add(ContextCompat.getColor(context, R.color.purple))
-        colors.add(ContextCompat.getColor(context, R.color.pink))
-        colors.add(ContextCompat.getColor(context, R.color.red))
-        colors.add(ContextCompat.getColor(context, R.color.blue))
-        colors.add(ContextCompat.getColor(context, R.color.indigo))
-        colors.add(ContextCompat.getColor(context, R.color.deep_purple))
-        colors.add(ContextCompat.getColor(context, R.color.teal))
-        colors.add(ContextCompat.getColor(context, R.color.cyan))
-        colors.add(ContextCompat.getColor(context, R.color.light_blue))
-        colors.add(ContextCompat.getColor(context, R.color.lime))
-        colors.add(ContextCompat.getColor(context, R.color.light_green))
-        colors.add(ContextCompat.getColor(context, R.color.gren))
-        colors.add(ContextCompat.getColor(context, R.color.amber))
-        colors.add(ContextCompat.getColor(context, R.color.orange))
-        colors.add(ContextCompat.getColor(context, R.color.deep_orange))
-        colors.add(ContextCompat.getColor(context, R.color.brown))
-        colors.add(ContextCompat.getColor(context, R.color.grey))
-        colors.add(ContextCompat.getColor(context, R.color.blue_grey))
-        return colors
-    }*/
-
     inner class ColorViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val colorView = view.findViewById<ImageView>(R.id.item_color)
+        val colorView : ImageView = view.findViewById(R.id.item_color)
 
-    }
-
-    companion object {
-        val SCALE_ANIMATION_DURATION = 1200L
     }
 
 }
