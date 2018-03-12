@@ -3,6 +3,7 @@
 
     <!-- Menu -->
     <string name="menu_reset_all">Reset all timers</string>
+    <string name="menu_setting">Settings</string>
     <string name="home_dialog_confirm_reset_all_timers">Are you sur you want to reset all timers ?</string>
 
 </resources>

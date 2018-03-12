@@ -66,6 +66,11 @@ class TimerRowView(context: Context) :
         super.onDetachedFromWindow()
     }
 
+    override fun updateTimeModification(timeModification: Int) {
+        reduceChrono.text = timeModification.toString()
+        increaseChrono.text = timeModification.toString()
+    }
+
     fun setTimer(timer: Timer) {
         presenter.setTimer(timer)
 

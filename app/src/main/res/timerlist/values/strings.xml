@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="item_timer_change_time" translatable="false">15</string>
-
     <string name="empty_list_view_text">What are you going to time today?</string>
 
 </resources>

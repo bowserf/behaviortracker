@@ -29,4 +29,8 @@ class HomePresenter(private val view: HomeContract.View,
             timeManager.stopTimer(timer)
         }
     }
+
+    override fun onClickSettings() {
+        view.displaySettingsView()
+    }
 }

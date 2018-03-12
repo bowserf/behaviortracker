@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timeritem
 
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
+import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -8,7 +9,8 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val timeManager: TimeManager,
                          private val timerListManager: TimerListManager,
-                         private val timerNotificationManager: TimerNotificationManager)
+                         private val timerNotificationManager: TimerNotificationManager,
+                         private val settingManager: SettingManager)
     : TimerItemContract.Presenter,
         TimerListManager.TimerCallback {
 
@@ -18,6 +20,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         timerListManager.registerTimerCallback(this)
         timeManager.registerUpdateTimerCallback(updateTimerCallback)
 
+        view.updateTimeModification(settingManager.timeModification)
         view.timerUpdated(timer.currentTime)
         view.statusUpdated(timer.isActivate)
     }
@@ -42,13 +45,13 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onClickDecreaseTime() {
-        timeManager.updateTime(timer, timer.currentTime - DEFAULT_TIMER_MODIFICATION)
+        timeManager.updateTime(timer, timer.currentTime - settingManager.timeModification)
 
         view.timerUpdated(timer.currentTime)
     }
 
     override fun onClickIncreaseTime() {
-        timeManager.updateTime(timer, timer.currentTime + DEFAULT_TIMER_MODIFICATION)
+        timeManager.updateTime(timer, timer.currentTime + settingManager.timeModification)
 
         view.timerUpdated(timer.currentTime)
     }
@@ -110,10 +113,5 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
                     }
                 }
             }
-
-    companion object {
-        private const val DEFAULT_TIMER_MODIFICATION = 15
-    }
-
 
 }

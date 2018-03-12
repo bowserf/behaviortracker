@@ -8,4 +8,10 @@
         android:title="@string/menu_reset_all"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_settings"
+        android:enabled="true"
+        android:title="@string/menu_setting"
+        app:showAsAction="never" />
+
 </menu>

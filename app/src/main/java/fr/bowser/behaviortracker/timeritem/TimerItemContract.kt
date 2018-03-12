@@ -17,6 +17,8 @@ interface TimerItemContract {
 
         fun timerRenamed(name: String)
 
+        fun updateTimeModification(timeModification: Int)
+
     }
 
     interface Presenter {

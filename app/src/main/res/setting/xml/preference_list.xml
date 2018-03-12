@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="@string/pref_key_timer_category"
+        android:title="@string/settings_category_timer">
+
+        <fr.bowser.behaviortracker.setting.TimeModificationSettings
+            android:defaultValue="@integer/settings_default_value_time_modification"
+            android:dialogMessage="@string/settings_cell_time_modification_message"
+            android:key="@string/pref_key_time_modification"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/settings_cell_time_modification_message"
+            android:title="@string/settings_cell_time_modification_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

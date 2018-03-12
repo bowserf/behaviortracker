@@ -83,6 +83,7 @@ android {
                     'src/main/res/createtimer',
                     'src/main/res/timerlist',
                     'src/main/res/notification',
+                    'src/main/res/setting',
             ]
         }
     }

@@ -3,6 +3,7 @@
 
     <!-- Menu -->
     <string name="menu_reset_all">Tout remettre à 0</string>
+    <string name="menu_setting">Paramètres</string>
     <string name="home_dialog_confirm_reset_all_timers">Voulez vous vraiment remettre tous les chronomètres à 0 ?</string>
 
 </resources>

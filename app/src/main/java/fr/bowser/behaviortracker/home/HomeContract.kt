@@ -6,6 +6,8 @@ interface HomeContract {
 
         fun displayResetAllDialog()
 
+        fun displaySettingsView()
+
     }
 
     interface Presenter {
@@ -17,6 +19,8 @@ interface HomeContract {
         fun onClickResetAll()
 
         fun onClickResetAllTimers()
+
+        fun onClickSettings()
 
     }
 

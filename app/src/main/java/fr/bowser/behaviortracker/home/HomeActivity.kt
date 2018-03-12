@@ -11,6 +11,7 @@ import android.view.MenuItem
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
+import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timerlist.TimerFragment
 import javax.inject.Inject
 
@@ -53,6 +54,10 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
                 presenter.onClickResetAll()
                 return true
             }
+            R.id.menu_settings ->  {
+                presenter.onClickSettings()
+                return true
+            }
         }
         return false
     }
@@ -68,6 +73,10 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
                     // do nothing
                 })
                 .show()
+    }
+
+    override fun displaySettingsView() {
+        SettingActivity.startActivity(this)
     }
 
     private fun setupGraph() {
