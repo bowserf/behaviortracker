@@ -1,0 +1,14 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="create_timer"
+        android:icon="@drawable/ic_add_white"
+        android:shortcutShortLabel="@string/create_timer_shortcut_short_label"
+        android:shortcutLongLabel="@string/create_timer_shortcut_long_label">
+        <intent
+            android:action="android.intent.action.CREATE_TIMER"
+            android:targetPackage="fr.bowser.time"
+            android:targetClass="fr.bowser.behaviortracker.home.HomeActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+</shortcuts>

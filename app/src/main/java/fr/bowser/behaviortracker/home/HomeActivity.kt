@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.timerlist.TimerFragment
 import javax.inject.Inject
 
@@ -27,6 +28,8 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         initializeToolbar()
 
         displayTimerFragment()
+
+        manageIntent()
     }
 
     override fun onStart() {
@@ -45,8 +48,8 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId){
-            R.id.menu_reset_all ->  {
+        when (item?.itemId) {
+            R.id.menu_reset_all -> {
                 presenter.onClickResetAll()
                 return true
             }
@@ -86,8 +89,18 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         }
     }
 
+    private fun manageIntent() {
+        if (intent.action == CREATE_TIMER_FROM_SHORTCUT) {
+            CreateTimerDialog.showDialog(this, true)
+        }
+    }
+
     private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
         beginTransaction().func().commit()
+    }
+
+    companion object {
+        const val CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER";
     }
 
 }
