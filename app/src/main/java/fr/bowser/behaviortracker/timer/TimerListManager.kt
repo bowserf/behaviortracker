@@ -72,15 +72,10 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
     }
 
-    fun renameTimer(id: Long, newName:String){
-        for (timerState in timersState) {
-            if(timerState.timer.id == id){
-                timerState.timer.name = newName
-                break
-            }
-        }
+    fun renameTimer(timerState: TimerState, newName:String){
+        timerState.timer.name = newName
         launch(background) {
-            timerDAO.renameTimer(id, newName)
+            timerDAO.renameTimer(timerState.timer.id, newName)
         }
     }
 

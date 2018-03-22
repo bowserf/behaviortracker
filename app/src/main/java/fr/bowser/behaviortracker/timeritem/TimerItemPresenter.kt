@@ -78,7 +78,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onTimerNameUpdated(newTimerName: String) {
-        timerListManager.renameTimer(timerState.timer.id, newTimerName)
+        timerListManager.renameTimer(timerState, newTimerName)
 
         timerNotificationManager.renameTimerNotif(timerState)
     }
