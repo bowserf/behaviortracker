@@ -113,6 +113,12 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         }
     }
 
+    override fun onTimerRenamed(updatedTimerState: TimerState, position: Int) {
+        if(timerState == updatedTimerState) {
+            view.timerRenamed(updatedTimerState.timer.name)
+        }
+    }
+
     private fun manageUpdateTimerCallback() {
         if (timerState.isActivate) {
             timeManager.registerUpdateTimerCallback(updateTimerCallback)

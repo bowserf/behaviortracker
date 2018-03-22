@@ -14,6 +14,8 @@ interface TimerItemContract {
 
         fun statusUpdated(activate: Boolean)
 
+        fun timerRenamed(name: String)
+
     }
 
     interface Presenter {

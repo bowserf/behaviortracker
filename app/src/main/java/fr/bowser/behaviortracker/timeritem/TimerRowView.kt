@@ -22,7 +22,7 @@ class TimerRowView(context: Context) :
         TimerItemContract.View {
 
     private val chrono: TextView
-    private val name: TextView
+    private val tvName: TextView
     private val menu: ImageView
     private val reduceChrono: TextView
     private val increaseChrono: TextView
@@ -47,7 +47,7 @@ class TimerRowView(context: Context) :
         color = findViewById(R.id.timer_color)
         color.setOnClickListener { /*TODO display show mode */}
         chrono = findViewById(R.id.timer_chrono)
-        name = findViewById(R.id.timer_name)
+        tvName = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
         menu.setOnClickListener { displayMenu() }
         reduceChrono = findViewById(R.id.timer_reduce_time)
@@ -70,7 +70,7 @@ class TimerRowView(context: Context) :
         presenter.setTimer(timerState)
 
         chrono.text = TimeConverter.convertSecondsToHumanTime(timerState.timer.currentTime)
-        name.text = timerState.timer.name
+        tvName.text = timerState.timer.name
         color.setBackgroundColor(ColorUtils.getColor(context!!, timerState.timer.color))
 
         updateBtnPlayPause(timerState.isActivate)
@@ -81,7 +81,7 @@ class TimerRowView(context: Context) :
     }
 
     override fun nameUpdated(newName: String) {
-        name.text = newName
+        tvName.text = newName
     }
 
     private fun displayMenu() {
@@ -133,7 +133,6 @@ class TimerRowView(context: Context) :
 
         alertDialog.setPositiveButton(android.R.string.yes, { dialog, which ->
             val newName = input.text.toString()
-            name.text = newName
             presenter.onTimerNameUpdated(newName)
         })
 
@@ -144,6 +143,10 @@ class TimerRowView(context: Context) :
 
     override fun statusUpdated(activate: Boolean) {
         updateBtnPlayPause(activate)
+    }
+
+    override fun timerRenamed(name: String) {
+        tvName.text = name
     }
 
     private fun displayRemoveConfirmationDialog() {

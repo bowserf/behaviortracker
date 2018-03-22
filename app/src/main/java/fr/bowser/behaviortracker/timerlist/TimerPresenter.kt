@@ -25,6 +25,10 @@ class TimerPresenter(private val view: TimerContract.View,
         timerListManager.unregisterTimerCallback(this)
     }
 
+    override fun onClickAddTimer() {
+        view.displayCreateTimerView()
+    }
+
     override fun onTimerRemoved(updatedTimerState: TimerState, position:Int) {
         if(timerListManager.timersState.isEmpty()){
             view.displayEmptyListView()
@@ -43,15 +47,15 @@ class TimerPresenter(private val view: TimerContract.View,
         view.onTimerAdded(updatedTimerState, position)
     }
 
-    override fun onClickAddTimer() {
-        view.displayCreateTimerView()
-    }
-
     override fun onTimerStateChanged(updatedTimerState: TimerState, position: Int) {
         // nothing to do
     }
 
     override fun onTimerTimeChanged(updatedTimerState: TimerState, position: Int) {
+        // nothing to do
+    }
+
+    override fun onTimerRenamed(updatedTimerState: TimerState, position: Int) {
         // nothing to do
     }
 }

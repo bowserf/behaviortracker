@@ -43,7 +43,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
     }
 
-    fun updateTimerState(timerState: TimerState, isActivate : Boolean) {
+    fun updateTimerState(timerState: TimerState, isActivate: Boolean) {
         timerState.isActivate = isActivate
 
         val position = timersState.indexOf(timerState)
@@ -54,7 +54,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
 
     fun updateTime(timerState: TimerState, newTime: Long, notifyListeners: Boolean) {
         var currentNewTime = newTime
-        if(currentNewTime < 0){
+        if (currentNewTime < 0) {
             currentNewTime = 0
         }
 
@@ -64,7 +64,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
             timerDAO.updateTimerTime(timerState.timer.id, timerState.timer.currentTime)
         }
 
-        if(notifyListeners) {
+        if (notifyListeners) {
             val position = timersState.indexOf(timerState)
             for (callback in callbacks) {
                 callback.onTimerTimeChanged(timerState, position)
@@ -72,10 +72,15 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
     }
 
-    fun renameTimer(timerState: TimerState, newName:String){
+    fun renameTimer(timerState: TimerState, newName: String) {
         timerState.timer.name = newName
         launch(background) {
             timerDAO.renameTimer(timerState.timer.id, newName)
+        }
+
+        val position = timersState.indexOf(timerState)
+        for (callback in callbacks) {
+            callback.onTimerRenamed(timerState, position)
         }
     }
 
@@ -93,6 +98,7 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     interface TimerCallback {
         fun onTimerRemoved(updatedTimerState: TimerState, position: Int)
         fun onTimerAdded(updatedTimerState: TimerState, position: Int)
+        fun onTimerRenamed(updatedTimerState: TimerState, position: Int)
         fun onTimerStateChanged(updatedTimerState: TimerState, position: Int)
         fun onTimerTimeChanged(updatedTimerState: TimerState, position: Int)
     }
