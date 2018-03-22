@@ -48,11 +48,11 @@ class TimerReceiver : BroadcastReceiver() {
 
     companion object {
 
-        private val ACTION_PLAY = "timer_receiver.action.play"
+        private const val ACTION_PLAY = "timer_receiver.action.play"
 
-        private val ACTION_PAUSE = "timer_receiver.action.pause"
+        private const val ACTION_PAUSE = "timer_receiver.action.pause"
 
-        private val ACTION_NOTIFICATION_DISMISS = "timer_receiver.action.notification_dismiss"
+        private const val ACTION_NOTIFICATION_DISMISS = "timer_receiver.action.notification_dismiss"
 
         fun getPlayPendingIntent(context: Context): PendingIntent {
             return getPendingIntent(context, ACTION_PLAY)
