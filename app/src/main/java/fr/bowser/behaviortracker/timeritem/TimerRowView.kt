@@ -108,8 +108,7 @@ class TimerRowView(context: Context) :
     }
 
     private fun manageClickPlayPauseButton() {
-        val isActivate = presenter.onTimerStateChange()
-        updateBtnPlayPause(isActivate)
+        presenter.timerStateChange()
     }
 
     private fun updateBtnPlayPause(isActivate:Boolean){

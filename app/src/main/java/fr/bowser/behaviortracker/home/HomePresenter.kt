@@ -1,10 +1,12 @@
 package fr.bowser.behaviortracker.home
 
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
+import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class HomePresenter(private val view: HomeContract.View,
                     private val timerNotificationManager: TimerNotificationManager,
+                    private val timeManager:TimeManager,
                     private val timerListManager: TimerListManager)
     : HomeContract.Presenter {
 
@@ -25,7 +27,8 @@ class HomePresenter(private val view: HomeContract.View,
         timerState.forEach { timer ->
             timerListManager.updateTime(timer, 0, true)
             timerListManager.updateTimerState(timer, false)
-            timerNotificationManager.updateTimerNotif(timer)
+            timeManager.stopTimer(timer)
+            timerNotificationManager.updateTimeNotif(timer)
         }
     }
 }

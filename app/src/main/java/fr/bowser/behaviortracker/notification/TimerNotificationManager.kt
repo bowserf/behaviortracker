@@ -20,8 +20,7 @@ class TimerNotificationManager(private val context: Context,
                                private val timeManager: TimeManager)
     : TimeManager.UpdateTimerCallback {
 
-    private val notificationManager: NotificationManager
-            = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    private val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     private var timerNotificationBuilder: NotificationCompat.Builder? = null
 
@@ -30,21 +29,20 @@ class TimerNotificationManager(private val context: Context,
     private var isAppInBackground = false
 
     var timerState: TimerState? = null
+        private set
 
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             generateNotificationChannel(context.resources)
         }
-    }
 
-    override fun timeUpdated() {
-        timerState?.let { updateTimerNotif() }
+        timeManager.registerUpdateTimerCallback(this)
     }
 
     fun displayTimerNotif(modifiedTimer: TimerState) {
-        if(timerState == modifiedTimer){
+        if (timerState == modifiedTimer) {
             resumeTimerNotif(modifiedTimer)
-        }else {
+        } else {
             this.timerState = modifiedTimer
 
             isNotificationDisplayed = true
@@ -69,17 +67,15 @@ class TimerNotificationManager(private val context: Context,
             notificationManager.notify(
                     TIMER_NOTIFICATION_ID,
                     timerNotificationBuilder?.build())
-
-            timeManager.registerUpdateTimerCallback(this)
         }
     }
 
     fun resumeTimerNotif(modifiedTimer: TimerState) {
-        if(!isNotificationDisplayed || timerState != modifiedTimer){
+        if (!isNotificationDisplayed || timerState != modifiedTimer) {
             return
         }
 
-        timeManager.registerUpdateTimerCallback(this)
+        timeManager.startTimer(modifiedTimer)
 
         timerNotificationBuilder?.setOngoing(isAppInBackground)
 
@@ -96,19 +92,19 @@ class TimerNotificationManager(private val context: Context,
     }
 
     fun pauseTimerNotif(modifiedTimer: TimerState) {
-        if(!isNotificationDisplayed || timerState != modifiedTimer){
+        if (!isNotificationDisplayed || timerState != modifiedTimer) {
             return
         }
 
+        timeManager.stopTimer(modifiedTimer)
+
         // allow to remove notification when timer is not running
         timerNotificationBuilder?.setOngoing(false)
-        
+
         timerNotificationBuilder?.mActions?.clear()
         timerNotificationBuilder?.addAction(R.drawable.ic_play,
                 context.resources.getString(R.string.timer_notif_start),
                 TimerReceiver.getPlayPendingIntent(context))
-
-        timeManager.unregisterUpdateTimerCallback(this)
 
         timerNotificationBuilder?.let {
             notificationManager.notify(
@@ -117,8 +113,8 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    fun changeNotifOngoing(isAppInBackground : Boolean){
-        if(!isNotificationDisplayed){
+    fun changeNotifOngoing(isAppInBackground: Boolean) {
+        if (!isNotificationDisplayed) {
             return
         }
         this.isAppInBackground = isAppInBackground
@@ -130,18 +126,8 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    fun destroyNotif(removedTimer: TimerState) {
-        if(timerState == removedTimer) {
-            isNotificationDisplayed = false
-
-            timerState = null
-            timeManager.unregisterUpdateTimerCallback(this)
-            notificationManager.cancel(TIMER_NOTIFICATION_ID)
-        }
-    }
-
-    fun renameTimerNotif(updatedTimer : TimerState) {
-        if(timerState == updatedTimer) {
+    fun renameTimerNotif(updatedTimer: TimerState) {
+        if (timerState == updatedTimer) {
             timerNotificationBuilder?.setContentTitle(timerState!!.timer.name)
             timerNotificationBuilder?.let {
                 notificationManager.notify(
@@ -151,18 +137,30 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    fun updateTimerNotif(updatedTimer : TimerState){
-        if(timerState == updatedTimer) {
-            updateTimerNotif()
+    fun destroyNotif(removedTimer: TimerState) {
+        if (timerState == removedTimer) {
+            notificationManager.cancel(TIMER_NOTIFICATION_ID)
+            notificationDismiss()
         }
     }
 
     fun notificationDismiss() {
+        timerState = null
         isNotificationDisplayed = false
         timeManager.unregisterUpdateTimerCallback(this)
     }
 
-    private fun updateTimerNotif() {
+    fun updateTimeNotif(updatedTimer: TimerState) {
+        if (timerState == updatedTimer) {
+            updateTimeNotif()
+        }
+    }
+
+    override fun timeUpdated() {
+        timerState?.let { updateTimeNotif() }
+    }
+
+    private fun updateTimeNotif() {
         timerNotificationBuilder?.setContentText(
                 TimeConverter.convertSecondsToHumanTime(timerState!!.timer.currentTime))
         timerNotificationBuilder?.let {
