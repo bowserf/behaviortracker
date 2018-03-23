@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.timeritem.TimerRowView
 
 class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
-    private var timers = ArrayList<TimerState>()
+    private var timerStateList = ArrayList<TimerState>()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TimerViewHolder {
         val timerRowView = TimerRowView(parent!!.context)
@@ -21,24 +21,28 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TimerViewHolder?, position: Int) {
-        val timer = timers[position]
+        val timer = timerStateList[position]
         holder?.view?.setTimer(timer)
     }
 
     override fun getItemCount(): Int {
-        return timers.size
+        return timerStateList.size
     }
 
     fun setTimersList(timers: ArrayList<TimerState>) {
-        this.timers = timers
+        timerStateList = ArrayList(timers)
         notifyDataSetChanged()
     }
 
-    fun addTimer(timerState: TimerState, position: Int) {
+    fun addTimer(timerState: TimerState) {
+        timerStateList.add(timerState)
+        val position = timerStateList.indexOf(timerState)
         notifyItemInserted(position)
     }
 
-    fun removeTimer(timerState: TimerState, position: Int) {
+    fun removeTimer(timerState: TimerState) {
+        val position = timerStateList.indexOf(timerState)
+        timerStateList.remove(timerState)
         notifyItemRemoved(position)
     }
 

@@ -29,14 +29,14 @@ class TimerPresenter(private val view: TimerContract.View,
         view.displayCreateTimerView()
     }
 
-    override fun onTimerRemoved(updatedTimerState: TimerState, position:Int) {
+    override fun onTimerRemoved(updatedTimerState: TimerState) {
         if(timerListManager.timersState.isEmpty()){
             view.displayEmptyListView()
         }
-        view.onTimerRemoved(updatedTimerState, position)
+        view.onTimerRemoved(updatedTimerState)
     }
 
-    override fun onTimerAdded(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerAdded(updatedTimerState: TimerState) {
         if(!timerListManager.timersState.isEmpty()){
             view.displayListView()
         }
@@ -44,18 +44,18 @@ class TimerPresenter(private val view: TimerContract.View,
         if(updatedTimerState.isActivate){
             timerNotificationManager.displayTimerNotif(updatedTimerState)
         }
-        view.onTimerAdded(updatedTimerState, position)
+        view.onTimerAdded(updatedTimerState)
     }
 
-    override fun onTimerStateChanged(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerStateChanged(updatedTimerState: TimerState) {
         // nothing to do
     }
 
-    override fun onTimerTimeChanged(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerTimeChanged(updatedTimerState: TimerState) {
         // nothing to do
     }
 
-    override fun onTimerRenamed(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerRenamed(updatedTimerState: TimerState) {
         // nothing to do
     }
 }

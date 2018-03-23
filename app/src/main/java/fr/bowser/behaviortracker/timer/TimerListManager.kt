@@ -21,9 +21,8 @@ class TimerListManager(private val timerDAO: TimerDAO) {
 
     fun addTimer(timerState: TimerState) {
         timersState.add(timerState)
-        val position = timersState.indexOf(timerState)
         for (callback in callbacks) {
-            callback.onTimerAdded(timerState, position)
+            callback.onTimerAdded(timerState)
         }
 
         launch(background) {
@@ -32,10 +31,9 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     }
 
     fun removeTimer(timerState: TimerState) {
-        val position = timersState.indexOf(timerState)
         timersState.remove(timerState)
         for (callback in callbacks) {
-            callback.onTimerRemoved(timerState, position)
+            callback.onTimerRemoved(timerState)
         }
 
         launch(background) {
@@ -46,9 +44,8 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     fun updateTimerState(timerState: TimerState, isActivate: Boolean) {
         timerState.isActivate = isActivate
 
-        val position = timersState.indexOf(timerState)
         for (callback in callbacks) {
-            callback.onTimerStateChanged(timerState, position)
+            callback.onTimerStateChanged(timerState)
         }
     }
 
@@ -65,9 +62,8 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         }
 
         if (notifyListeners) {
-            val position = timersState.indexOf(timerState)
             for (callback in callbacks) {
-                callback.onTimerTimeChanged(timerState, position)
+                callback.onTimerTimeChanged(timerState)
             }
         }
     }
@@ -78,9 +74,8 @@ class TimerListManager(private val timerDAO: TimerDAO) {
             timerDAO.renameTimer(timerState.timer.id, newName)
         }
 
-        val position = timersState.indexOf(timerState)
         for (callback in callbacks) {
-            callback.onTimerRenamed(timerState, position)
+            callback.onTimerRenamed(timerState)
         }
     }
 
@@ -96,11 +91,11 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     }
 
     interface TimerCallback {
-        fun onTimerRemoved(updatedTimerState: TimerState, position: Int)
-        fun onTimerAdded(updatedTimerState: TimerState, position: Int)
-        fun onTimerRenamed(updatedTimerState: TimerState, position: Int)
-        fun onTimerStateChanged(updatedTimerState: TimerState, position: Int)
-        fun onTimerTimeChanged(updatedTimerState: TimerState, position: Int)
+        fun onTimerRemoved(updatedTimerState: TimerState)
+        fun onTimerAdded(updatedTimerState: TimerState)
+        fun onTimerRenamed(updatedTimerState: TimerState)
+        fun onTimerStateChanged(updatedTimerState: TimerState)
+        fun onTimerTimeChanged(updatedTimerState: TimerState)
     }
 
 }

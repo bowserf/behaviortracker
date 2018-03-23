@@ -77,11 +77,11 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         timerNotificationManager.renameTimerNotif(timerState)
     }
 
-    override fun onTimerAdded(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerAdded(updatedTimerState: TimerState) {
         // nothing to do
     }
 
-    override fun onTimerRemoved(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerRemoved(updatedTimerState: TimerState) {
         if (timerState == updatedTimerState) {
             timerState.isActivate = false
             timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
@@ -90,19 +90,19 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         }
     }
 
-    override fun onTimerStateChanged(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerStateChanged(updatedTimerState: TimerState) {
         if (timerState == updatedTimerState) {
             view.statusUpdated(updatedTimerState.isActivate)
         }
     }
 
-    override fun onTimerTimeChanged(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerTimeChanged(updatedTimerState: TimerState) {
         if (timerState == updatedTimerState) {
             view.timerUpdated(updatedTimerState.timer.currentTime)
         }
     }
 
-    override fun onTimerRenamed(updatedTimerState: TimerState, position: Int) {
+    override fun onTimerRenamed(updatedTimerState: TimerState) {
         if (timerState == updatedTimerState) {
             view.timerRenamed(updatedTimerState.timer.name)
         }

@@ -4,15 +4,15 @@ import fr.bowser.behaviortracker.timer.TimerState
 
 interface TimerContract {
 
-    interface View{
+    interface View {
 
         fun displayCreateTimerView()
 
         fun displayTimerList(timers: ArrayList<TimerState>)
 
-        fun onTimerRemoved(timer: TimerState, position:Int)
+        fun onTimerRemoved(timer: TimerState)
 
-        fun onTimerAdded(timer: TimerState, position: Int)
+        fun onTimerAdded(timer: TimerState)
 
         fun displayEmptyListView()
 
@@ -20,7 +20,7 @@ interface TimerContract {
 
     }
 
-    interface Presenter{
+    interface Presenter {
 
         fun start()
 
