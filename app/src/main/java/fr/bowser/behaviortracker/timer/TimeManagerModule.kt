@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.timer
 
 import dagger.Module
 import dagger.Provides
+import fr.bowser.behaviortracker.database.DatabaseManager
 import javax.inject.Singleton
 
 @Module
@@ -9,8 +10,8 @@ class TimeManagerModule {
 
     @Singleton
     @Provides
-    fun provideTimeManager(timerListManager: TimerListManager): TimeManager {
-        return TimeManager(timerListManager)
+    fun provideTimeManager(databaseManager: DatabaseManager): TimeManager {
+        return TimeManager(databaseManager.provideTimerDAO())
     }
 
 }

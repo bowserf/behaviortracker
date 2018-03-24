@@ -1,10 +1,7 @@
 package fr.bowser.behaviortracker
 
 import android.graphics.Color
-import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerDAO
-import fr.bowser.behaviortracker.timer.TimerListManager
-import fr.bowser.behaviortracker.timer.TimerState
+import fr.bowser.behaviortracker.timer.*
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,9 +14,12 @@ class TimerListManagerTest {
     @Mock
     private lateinit var timerDAO: TimerDAO
 
+    @Mock
+    private lateinit var timeManager: TimeManager
+
     @Test
     fun addTimerTest(){
-        val timerListManager = TimerListManager(timerDAO)
+        val timerListManager = TimerListManager(timerDAO, timeManager)
 
         val timer = Timer(1, 1000, "MyTimer", Color.RED)
         val timerState = TimerState(false, timer)

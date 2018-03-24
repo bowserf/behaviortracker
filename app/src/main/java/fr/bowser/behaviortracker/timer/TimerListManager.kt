@@ -4,7 +4,8 @@ import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
 
-class TimerListManager(private val timerDAO: TimerDAO) {
+class TimerListManager(private val timerDAO: TimerDAO,
+                       private val timeManager: TimeManager) {
 
     internal val background = newFixedThreadPoolContext(2, "bg")
 
@@ -31,6 +32,8 @@ class TimerListManager(private val timerDAO: TimerDAO) {
     }
 
     fun removeTimer(timerState: TimerState) {
+        timeManager.stopTimer(timerState)
+
         timersState.remove(timerState)
         for (callback in callbacks) {
             callback.onTimerRemoved(timerState)
@@ -38,33 +41,6 @@ class TimerListManager(private val timerDAO: TimerDAO) {
 
         launch(background) {
             timerDAO.removeTimer(timerState.timer)
-        }
-    }
-
-    fun updateTimerState(timerState: TimerState, isActivate: Boolean) {
-        timerState.isActivate = isActivate
-
-        for (callback in callbacks) {
-            callback.onTimerStateChanged(timerState)
-        }
-    }
-
-    fun updateTime(timerState: TimerState, newTime: Long, notifyListeners: Boolean) {
-        var currentNewTime = newTime
-        if (currentNewTime < 0) {
-            currentNewTime = 0
-        }
-
-        timerState.timer.currentTime = currentNewTime
-
-        launch(background) {
-            timerDAO.updateTimerTime(timerState.timer.id, timerState.timer.currentTime)
-        }
-
-        if (notifyListeners) {
-            for (callback in callbacks) {
-                callback.onTimerTimeChanged(timerState)
-            }
         }
     }
 
@@ -94,8 +70,6 @@ class TimerListManager(private val timerDAO: TimerDAO) {
         fun onTimerRemoved(updatedTimerState: TimerState)
         fun onTimerAdded(updatedTimerState: TimerState)
         fun onTimerRenamed(updatedTimerState: TimerState)
-        fun onTimerStateChanged(updatedTimerState: TimerState)
-        fun onTimerTimeChanged(updatedTimerState: TimerState)
     }
 
 }

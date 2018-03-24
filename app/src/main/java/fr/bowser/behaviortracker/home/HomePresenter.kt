@@ -25,10 +25,8 @@ class HomePresenter(private val view: HomeContract.View,
     override fun onClickResetAllTimers() {
         val timerState = timerListManager.timersState
         timerState.forEach { timer ->
-            timerListManager.updateTime(timer, 0, true)
-            timerListManager.updateTimerState(timer, false)
+            timeManager.updateTime(timer, 0)
             timeManager.stopTimer(timer)
-            timerNotificationManager.updateTimeNotif(timer)
         }
     }
 }

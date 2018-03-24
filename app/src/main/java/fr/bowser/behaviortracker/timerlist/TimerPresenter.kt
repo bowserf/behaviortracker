@@ -47,14 +47,6 @@ class TimerPresenter(private val view: TimerContract.View,
         view.onTimerAdded(updatedTimerState)
     }
 
-    override fun onTimerStateChanged(updatedTimerState: TimerState) {
-        // nothing to do
-    }
-
-    override fun onTimerTimeChanged(updatedTimerState: TimerState) {
-        // nothing to do
-    }
-
     override fun onTimerRenamed(updatedTimerState: TimerState) {
         // nothing to do
     }
