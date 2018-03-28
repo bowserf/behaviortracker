@@ -1,102 +1,20 @@
 package fr.bowser.behaviortracker.timer
 
-import android.os.Handler
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.newFixedThreadPoolContext
+interface TimeManager {
 
-class TimeManager(private val timerDAO: TimerDAO) {
+    fun startTimer(timerState: TimerState)
 
-    internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
+    fun stopTimer(timerState: TimerState)
 
-    private val listeners = ArrayList<TimerCallback>()
+    fun updateTime(timerState: TimerState, newTime: Long)
 
-    private val handler = Handler()
+    fun registerUpdateTimerCallback(callback: TimerCallback): Boolean
 
-    private val timerRunnable = TimerRunnable()
-
-    private val timerList = ArrayList<TimerState>()
-
-    fun startTimer(timerState: TimerState) {
-        if (timerState.isActivate) {
-            return
-        }
-
-        timerState.isActivate = true
-        for (callback in listeners) {
-            callback.onTimerStateChanged(timerState)
-        }
-
-        if (!timerList.contains(timerState)) {
-            if (timerList.isEmpty()) { // start runnable
-                handler.postDelayed(timerRunnable, DELAY)
-            }
-            timerList.add(timerState)
-        }
-    }
-
-    fun stopTimer(timerState: TimerState) {
-        if (!timerState.isActivate) {
-            return
-        }
-
-        timerState.isActivate = false
-        for (callback in listeners) {
-            callback.onTimerStateChanged(timerState)
-        }
-
-        timerList.remove(timerState)
-
-        if (timerList.isEmpty()) {
-            handler.removeCallbacks(timerRunnable)
-        }
-    }
-
-
-    fun updateTime(timerState: TimerState, newTime: Long) {
-        var currentNewTime = newTime
-        if (currentNewTime < 0) {
-            currentNewTime = 0
-        }
-
-        timerState.timer.currentTime = currentNewTime
-
-        launch(background) {
-            timerDAO.updateTimerTime(timerState.timer.id, timerState.timer.currentTime)
-        }
-
-        for (callback in listeners) {
-            callback.onTimerTimeChanged(timerState)
-        }
-    }
-
-    fun registerUpdateTimerCallback(callback: TimerCallback): Boolean {
-        if (!listeners.contains(callback)) {
-            return listeners.add(callback)
-        }
-        return false
-    }
-
-    fun unregisterUpdateTimerCallback(callback: TimerCallback) {
-        listeners.remove(callback)
-    }
+    fun unregisterUpdateTimerCallback(callback: TimerCallback)
 
     interface TimerCallback {
         fun onTimerStateChanged(updatedTimerState: TimerState)
         fun onTimerTimeChanged(updatedTimerState: TimerState)
-    }
-
-    inner class TimerRunnable : Runnable {
-        override fun run() {
-            timerList.forEach {
-                updateTime(it, it.timer.currentTime + 1)
-            }
-
-            handler.postDelayed(this, DELAY)
-        }
-    }
-
-    companion object {
-        private const val DELAY = 1000L
     }
 
 }
