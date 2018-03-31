@@ -4,13 +4,11 @@ import android.os.Handler
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
-class TimeManagerImpl(private val timerDAO: TimerDAO) : TimeManager{
+class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handler?) : TimeManager{
 
     internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
 
     private val listeners = ArrayList<TimeManager.TimerCallback>()
-
-    private val handler = Handler()
 
     private val timerRunnable = TimerRunnable()
 
@@ -28,7 +26,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO) : TimeManager{
 
         if (!timerList.contains(timerState)) {
             if (timerList.isEmpty()) { // start runnable
-                handler.postDelayed(timerRunnable, DELAY)
+                handler?.postDelayed(timerRunnable, DELAY)
             }
             timerList.add(timerState)
         }
@@ -47,10 +45,9 @@ class TimeManagerImpl(private val timerDAO: TimerDAO) : TimeManager{
         timerList.remove(timerState)
 
         if (timerList.isEmpty()) {
-            handler.removeCallbacks(timerRunnable)
+            handler?.removeCallbacks(timerRunnable)
         }
     }
-
 
     override fun updateTime(timerState: TimerState, newTime: Long) {
         var currentNewTime = newTime
@@ -86,7 +83,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO) : TimeManager{
                 updateTime(it, it.timer.currentTime + 1)
             }
 
-            handler.postDelayed(this, DELAY)
+            handler?.postDelayed(this, DELAY)
         }
     }
 
