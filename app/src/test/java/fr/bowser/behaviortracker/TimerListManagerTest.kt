@@ -35,6 +35,8 @@ class TimerListManagerTest {
 
         val timer = Timer("MyTimer", Color.RED)
 
+        var result = false
+
         val timerListManagerCallback = object : TimerListManager.TimerCallback {
             override fun onTimerRemoved(updatedTimer: Timer) {
                 Assert.assertTrue(false)
@@ -45,13 +47,15 @@ class TimerListManagerTest {
             }
 
             override fun onTimerAdded(updatedTimer: Timer) {
-                Assert.assertEquals(timer, updatedTimer)
+                result = timer == updatedTimer
             }
         }
 
         timerListManager.registerTimerCallback(timerListManagerCallback)
 
         timerListManager.addTimer(timer)
+
+        Assert.assertTrue(result)
     }
 
     @Test
@@ -72,9 +76,11 @@ class TimerListManagerTest {
 
         val timer = Timer("MyTimer", Color.RED)
 
+        var result = false
+
         val timerListManagerCallback = object : TimerListManager.TimerCallback {
             override fun onTimerRemoved(updatedTimer: Timer) {
-                Assert.assertEquals(timer, updatedTimer)
+                result = timer == updatedTimer
             }
 
             override fun onTimerRenamed(updatedTimer: Timer) {
@@ -92,6 +98,8 @@ class TimerListManagerTest {
         timerListManager.registerTimerCallback(timerListManagerCallback)
 
         timerListManager.removeTimer(timer)
+
+        Assert.assertTrue(result)
     }
 
     @Test
@@ -117,13 +125,15 @@ class TimerListManagerTest {
 
         val newName = "MyTimer2"
 
+        var result = false
+
         val timerListManagerCallback = object : TimerListManager.TimerCallback {
             override fun onTimerRemoved(updatedTimer: Timer) {
                 Assert.assertTrue(false)
             }
 
             override fun onTimerRenamed(updatedTimer: Timer) {
-                Assert.assertEquals(newName, updatedTimer.name)
+                result = newName == updatedTimer.name
             }
 
             override fun onTimerAdded(updatedTimer: Timer) {
@@ -137,6 +147,8 @@ class TimerListManagerTest {
         timerListManager.registerTimerCallback(timerListManagerCallback)
 
         timerListManager.renameTimer(timer, newName)
+
+        Assert.assertTrue(result)
     }
 
 }
