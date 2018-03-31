@@ -10,7 +10,12 @@ data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var i
                  @ColumnInfo(name = "current_time") var currentTime: Long,
                  @ColumnInfo(name = "name") var name: String,
                  @ColumnInfo(name = "color") var color: Int){
+
+    var isActivate: Boolean = false
+
     @Ignore
-    constructor(name: String, color: Int)
-            : this(0, 0, name, color)
+    constructor(name: String, color: Int, isActivate: Boolean = false)
+            : this(0, 0, name, color){
+        this.isActivate = isActivate
+    }
 }

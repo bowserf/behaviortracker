@@ -2,19 +2,19 @@ package fr.bowser.behaviortracker.timer
 
 interface TimeManager {
 
-    fun startTimer(timerState: TimerState)
+    fun startTimer(timer: Timer)
 
-    fun stopTimer(timerState: TimerState)
+    fun stopTimer(timer: Timer)
 
-    fun updateTime(timerState: TimerState, newTime: Long)
+    fun updateTime(timer: Timer, newTime: Long)
 
     fun registerUpdateTimerCallback(callback: TimerCallback): Boolean
 
     fun unregisterUpdateTimerCallback(callback: TimerCallback)
 
     interface TimerCallback {
-        fun onTimerStateChanged(updatedTimerState: TimerState)
-        fun onTimerTimeChanged(updatedTimerState: TimerState)
+        fun onTimerStateChanged(updatedTimer: Timer)
+        fun onTimerTimeChanged(updatedTimer: Timer)
     }
 
 }

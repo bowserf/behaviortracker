@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.timer.TimerState
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
@@ -66,14 +66,14 @@ class TimerRowView(context: Context) :
         super.onDetachedFromWindow()
     }
 
-    fun setTimer(timerState: TimerState) {
-        presenter.setTimer(timerState)
+    fun setTimer(timer: Timer) {
+        presenter.setTimer(timer)
 
-        chrono.text = TimeConverter.convertSecondsToHumanTime(timerState.timer.currentTime)
-        tvName.text = timerState.timer.name
-        color.setBackgroundColor(ColorUtils.getColor(context!!, timerState.timer.color))
+        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
+        tvName.text = timer.name
+        color.setBackgroundColor(ColorUtils.getColor(context!!, timer.color))
 
-        updateBtnPlayPause(timerState.isActivate)
+        updateBtnPlayPause(timer.isActivate)
     }
 
     override fun timerUpdated(newTime: Long) {

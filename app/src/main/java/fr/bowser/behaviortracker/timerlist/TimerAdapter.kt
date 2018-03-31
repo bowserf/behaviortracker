@@ -2,12 +2,12 @@ package fr.bowser.behaviortracker.timerlist
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import fr.bowser.behaviortracker.timer.TimerState
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timeritem.TimerRowView
 
 class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
-    private var timerStateList = ArrayList<TimerState>()
+    private var timerList = ArrayList<Timer>()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TimerViewHolder {
         val timerRowView = TimerRowView(parent!!.context)
@@ -21,28 +21,28 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TimerViewHolder?, position: Int) {
-        val timer = timerStateList[position]
+        val timer = timerList[position]
         holder?.view?.setTimer(timer)
     }
 
     override fun getItemCount(): Int {
-        return timerStateList.size
+        return timerList.size
     }
 
-    fun setTimersList(timers: List<TimerState>) {
-        timerStateList = ArrayList(timers)
+    fun setTimersList(timers: List<Timer>) {
+        timerList = ArrayList(timers)
         notifyDataSetChanged()
     }
 
-    fun addTimer(timerState: TimerState) {
-        timerStateList.add(timerState)
-        val position = timerStateList.indexOf(timerState)
+    fun addTimer(timer: Timer) {
+        timerList.add(timer)
+        val position = timerList.indexOf(timer)
         notifyItemInserted(position)
     }
 
-    fun removeTimer(timerState: TimerState) {
-        val position = timerStateList.indexOf(timerState)
-        timerStateList.remove(timerState)
+    fun removeTimer(timer: Timer) {
+        val position = timerList.indexOf(timer)
+        timerList.remove(timer)
         notifyItemRemoved(position)
     }
 

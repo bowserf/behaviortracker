@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timeritem
 
-import fr.bowser.behaviortracker.timer.TimerState
+import fr.bowser.behaviortracker.timer.Timer
+
 
 interface TimerItemContract {
 
@@ -24,7 +25,7 @@ interface TimerItemContract {
 
         fun stop()
 
-        fun setTimer(timerState: TimerState)
+        fun setTimer(timer: Timer)
 
         fun timerStateChange()
 

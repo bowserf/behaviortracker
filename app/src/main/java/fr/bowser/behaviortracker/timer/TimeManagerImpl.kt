@@ -12,57 +12,57 @@ class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handl
 
     private val timerRunnable = TimerRunnable()
 
-    private val timerList = ArrayList<TimerState>()
+    private val timerList = ArrayList<Timer>()
 
-    override fun startTimer(timerState: TimerState) {
-        if (timerState.isActivate) {
+    override fun startTimer(timer: Timer) {
+        if (timer.isActivate) {
             return
         }
 
-        timerState.isActivate = true
+        timer.isActivate = true
         for (callback in listeners) {
-            callback.onTimerStateChanged(timerState)
+            callback.onTimerStateChanged(timer)
         }
 
-        if (!timerList.contains(timerState)) {
+        if (!timerList.contains(timer)) {
             if (timerList.isEmpty()) { // start runnable
                 handler?.postDelayed(timerRunnable, DELAY)
             }
-            timerList.add(timerState)
+            timerList.add(timer)
         }
     }
 
-    override fun stopTimer(timerState: TimerState) {
-        if (!timerState.isActivate) {
+    override fun stopTimer(timer: Timer) {
+        if (!timer.isActivate) {
             return
         }
 
-        timerState.isActivate = false
+        timer.isActivate = false
         for (callback in listeners) {
-            callback.onTimerStateChanged(timerState)
+            callback.onTimerStateChanged(timer)
         }
 
-        timerList.remove(timerState)
+        timerList.remove(timer)
 
         if (timerList.isEmpty()) {
             handler?.removeCallbacks(timerRunnable)
         }
     }
 
-    override fun updateTime(timerState: TimerState, newTime: Long) {
+    override fun updateTime(timer: Timer, newTime: Long) {
         var currentNewTime = newTime
         if (currentNewTime < 0) {
             currentNewTime = 0
         }
 
-        timerState.timer.currentTime = currentNewTime
+        timer.currentTime = currentNewTime
 
         launch(background) {
-            timerDAO.updateTimerTime(timerState.timer.id, timerState.timer.currentTime)
+            timerDAO.updateTimerTime(timer.id, timer.currentTime)
         }
 
         for (callback in listeners) {
-            callback.onTimerTimeChanged(timerState)
+            callback.onTimerTimeChanged(timer)
         }
     }
 
@@ -80,7 +80,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handl
     inner class TimerRunnable : Runnable {
         override fun run() {
             timerList.forEach {
-                updateTime(it, it.timer.currentTime + 1)
+                updateTime(it, it.currentTime + 1)
             }
 
             handler?.postDelayed(this, DELAY)

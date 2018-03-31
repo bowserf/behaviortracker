@@ -31,16 +31,16 @@ class TimerReceiver : BroadcastReceiver() {
     private fun pauseTimer(context: Context) {
         val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
         val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
-        notifManager.timerState?.let {
-            timeManager.stopTimer(notifManager.timerState!!)
+        notifManager.timer?.let {
+            timeManager.stopTimer(notifManager.timer!!)
         }
     }
 
     private fun startTimer(context: Context) {
         val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
         val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
-        notifManager.timerState?.let {
-            timeManager.startTimer(notifManager.timerState!!)
+        notifManager.timer?.let {
+            timeManager.startTimer(notifManager.timer!!)
         }
     }
 

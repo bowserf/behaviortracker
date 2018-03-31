@@ -1,7 +1,10 @@
 package fr.bowser.behaviortracker
 
 import android.graphics.Color
-import fr.bowser.behaviortracker.timer.*
+import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer.TimeManagerImpl
+import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerDAO
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +21,7 @@ class TimeManagerTest {
     fun startTimer() {
         val timeManager = TimeManagerImpl(timerDao, null)
 
-        val timerState = TimerState(false, Timer(1, 1000000, "MyTimer", Color.RED))
+        val timerState = Timer("MyTimer", Color.RED)
 
         timeManager.startTimer(timerState)
 
@@ -29,16 +32,16 @@ class TimeManagerTest {
     fun startTimerCallback() {
         val timeManager = TimeManagerImpl(timerDao, null)
 
-        val timerState = TimerState(false, Timer(1, 1000000, "MyTimer", Color.RED))
+        val timerState = Timer("MyTimer", Color.RED)
 
         var result = false
 
         val timerManagerCallback = object : TimeManager.TimerCallback {
-            override fun onTimerStateChanged(updatedTimerState: TimerState) {
-                result = updatedTimerState.isActivate
+            override fun onTimerStateChanged(updatedTimer : Timer) {
+                result = updatedTimer.isActivate
             }
 
-            override fun onTimerTimeChanged(updatedTimerState: TimerState) {
+            override fun onTimerTimeChanged(updatedTimer: Timer) {
                 Assert.assertTrue(false)
             }
         }
@@ -54,7 +57,7 @@ class TimeManagerTest {
     fun stopTimer() {
         val timeManager = TimeManagerImpl(timerDao, null)
 
-        val timerState = TimerState(true, Timer(1, 1000000, "MyTimer", Color.RED))
+        val timerState = Timer("MyTimer", Color.RED, true)
 
         timeManager.stopTimer(timerState)
 
@@ -65,16 +68,16 @@ class TimeManagerTest {
     fun stopTimerCallback() {
         val timeManager = TimeManagerImpl(timerDao, null)
 
-        val timerState = TimerState(true, Timer(1, 1000000, "MyTimer", Color.RED))
+        val timerState = Timer("MyTimer", Color.RED, true)
 
         var result = false
 
         val timerManagerCallback = object : TimeManager.TimerCallback {
-            override fun onTimerStateChanged(updatedTimerState: TimerState) {
-                result = !updatedTimerState.isActivate
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                result = !updatedTimer.isActivate
             }
 
-            override fun onTimerTimeChanged(updatedTimerState: TimerState) {
+            override fun onTimerTimeChanged(updatedTimer: Timer) {
                 Assert.assertTrue(false)
             }
         }

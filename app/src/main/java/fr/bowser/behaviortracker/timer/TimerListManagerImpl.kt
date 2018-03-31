@@ -9,53 +9,52 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
 
     internal val background = newFixedThreadPoolContext(2, "bg")
 
-    val timersState = ArrayList<TimerState>()
+    val timersState = ArrayList<Timer>()
 
     private val callbacks = ArrayList<TimerListManager.TimerCallback>()
 
     init {
         launch(background) {
-            val timers = timerDAO.getTimers()
-            timers.mapTo(timersState) { TimerState(false, it) }
+            timersState.addAll(timerDAO.getTimers())
         }
     }
 
-    override fun addTimer(timerState: TimerState) {
-        timersState.add(timerState)
+    override fun addTimer(timer: Timer) {
+        timersState.add(timer)
         for (callback in callbacks) {
-            callback.onTimerAdded(timerState)
+            callback.onTimerAdded(timer)
         }
 
         launch(background) {
-            timerState.timer.id = timerDAO.addTimer(timerState.timer)
+            timer.id = timerDAO.addTimer(timer)
         }
     }
 
-    override fun removeTimer(timerState: TimerState) {
-        timeManager.stopTimer(timerState)
+    override fun removeTimer(timer: Timer) {
+        timeManager.stopTimer(timer)
 
-        timersState.remove(timerState)
+        timersState.remove(timer)
         for (callback in callbacks) {
-            callback.onTimerRemoved(timerState)
+            callback.onTimerRemoved(timer)
         }
 
         launch(background) {
-            timerDAO.removeTimer(timerState.timer)
+            timerDAO.removeTimer(timer)
         }
     }
 
-    override fun getTimerList(): List<TimerState> {
+    override fun getTimerList(): List<Timer> {
         return timersState
     }
 
-    override fun renameTimer(timerState: TimerState, newName: String) {
-        timerState.timer.name = newName
+    override fun renameTimer(timer: Timer, newName: String) {
+        timer.name = newName
         launch(background) {
-            timerDAO.renameTimer(timerState.timer.id, newName)
+            timerDAO.renameTimer(timer.id, newName)
         }
 
         for (callback in callbacks) {
-            callback.onTimerRenamed(timerState)
+            callback.onTimerRenamed(timer)
         }
     }
 

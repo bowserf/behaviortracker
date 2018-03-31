@@ -3,22 +3,22 @@ package fr.bowser.behaviortracker.timer
 
 interface TimerListManager {
 
-    fun addTimer(timerState: TimerState)
+    fun addTimer(timer: Timer)
 
-    fun removeTimer(timerState: TimerState)
+    fun removeTimer(timer: Timer)
 
-    fun getTimerList(): List<TimerState>
+    fun getTimerList(): List<Timer>
 
-    fun renameTimer(timerState: TimerState, newName: String)
+    fun renameTimer(timer: Timer, newName: String)
 
     fun registerTimerCallback(timerCallback: TimerCallback): Boolean
 
     fun unregisterTimerCallback(timerCallback: TimerCallback): Boolean
 
     interface TimerCallback {
-        fun onTimerRemoved(updatedTimerState: TimerState)
-        fun onTimerAdded(updatedTimerState: TimerState)
-        fun onTimerRenamed(updatedTimerState: TimerState)
+        fun onTimerRemoved(updatedTimer: Timer)
+        fun onTimerAdded(updatedTimer: Timer)
+        fun onTimerRenamed(updatedTimer: Timer)
     }
 
 }

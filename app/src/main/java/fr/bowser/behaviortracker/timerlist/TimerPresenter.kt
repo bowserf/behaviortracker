@@ -1,8 +1,8 @@
 package fr.bowser.behaviortracker.timerlist
 
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
-import fr.bowser.behaviortracker.timer.TimerState
 
 class TimerPresenter(private val view: TimerContract.View,
                      private val timerListManager: TimerListManager,
@@ -29,25 +29,25 @@ class TimerPresenter(private val view: TimerContract.View,
         view.displayCreateTimerView()
     }
 
-    override fun onTimerRemoved(updatedTimerState: TimerState) {
+    override fun onTimerRemoved(updatedTimer: Timer) {
         if(timerListManager.getTimerList().isEmpty()){
             view.displayEmptyListView()
         }
-        view.onTimerRemoved(updatedTimerState)
+        view.onTimerRemoved(updatedTimer)
     }
 
-    override fun onTimerAdded(updatedTimerState: TimerState) {
+    override fun onTimerAdded(updatedTimer: Timer) {
         if(!timerListManager.getTimerList().isEmpty()){
             view.displayListView()
         }
         // if timer is directly activate, display it in the notification
-        if(updatedTimerState.isActivate){
-            timerNotificationManager.displayTimerNotif(updatedTimerState)
+        if(updatedTimer.isActivate){
+            timerNotificationManager.displayTimerNotif(updatedTimer)
         }
-        view.onTimerAdded(updatedTimerState)
+        view.onTimerAdded(updatedTimer)
     }
 
-    override fun onTimerRenamed(updatedTimerState: TimerState) {
+    override fun onTimerRenamed(updatedTimer: Timer) {
         // nothing to do
     }
 }

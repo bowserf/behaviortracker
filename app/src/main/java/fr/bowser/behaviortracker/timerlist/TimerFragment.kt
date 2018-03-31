@@ -20,7 +20,7 @@ import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
-import fr.bowser.behaviortracker.timer.TimerState
+import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
 
@@ -79,15 +79,15 @@ class TimerFragment : Fragment(), TimerContract.View {
         CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
     }
 
-    override fun displayTimerList(timers: List<TimerState>) {
+    override fun displayTimerList(timers: List<Timer >) {
         timerAdapter.setTimersList(timers)
     }
 
-    override fun onTimerRemoved(timer: TimerState) {
+    override fun onTimerRemoved(timer: Timer) {
         timerAdapter.removeTimer(timer)
     }
 
-    override fun onTimerAdded(timer: TimerState) {
+    override fun onTimerAdded(timer: Timer) {
         timerAdapter.addTimer(timer)
     }
 
