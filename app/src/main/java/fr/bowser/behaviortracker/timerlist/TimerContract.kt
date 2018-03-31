@@ -8,7 +8,7 @@ interface TimerContract {
 
         fun displayCreateTimerView()
 
-        fun displayTimerList(timers: ArrayList<TimerState>)
+        fun displayTimerList(timers: List<TimerState>)
 
         fun onTimerRemoved(timer: TimerState)
 

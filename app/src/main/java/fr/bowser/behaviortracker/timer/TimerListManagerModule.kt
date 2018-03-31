@@ -11,7 +11,7 @@ class TimerListManagerModule {
     @Singleton
     @Provides
     fun provideTimerListManager(databaseManager: DatabaseManager, timeManager: TimeManager): TimerListManager {
-        return TimerListManager(databaseManager.provideTimerDAO(), timeManager)
+        return TimerListManagerImpl(databaseManager.provideTimerDAO(), timeManager)
     }
 
 }

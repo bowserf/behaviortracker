@@ -29,7 +29,7 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         return timerStateList.size
     }
 
-    fun setTimersList(timers: ArrayList<TimerState>) {
+    fun setTimersList(timers: List<TimerState>) {
         timerStateList = ArrayList(timers)
         notifyDataSetChanged()
     }

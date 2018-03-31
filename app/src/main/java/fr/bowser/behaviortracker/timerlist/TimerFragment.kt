@@ -79,7 +79,7 @@ class TimerFragment : Fragment(), TimerContract.View {
         CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
     }
 
-    override fun displayTimerList(timers: ArrayList<TimerState>) {
+    override fun displayTimerList(timers: List<TimerState>) {
         timerAdapter.setTimersList(timers)
     }
 

@@ -11,7 +11,7 @@ class TimerPresenter(private val view: TimerContract.View,
 
     override fun start() {
         timerListManager.registerTimerCallback(this)
-        val timers = timerListManager.timersState
+        val timers = timerListManager.getTimerList()
         view.displayTimerList(timers)
 
         if(timers.isEmpty()){
@@ -30,14 +30,14 @@ class TimerPresenter(private val view: TimerContract.View,
     }
 
     override fun onTimerRemoved(updatedTimerState: TimerState) {
-        if(timerListManager.timersState.isEmpty()){
+        if(timerListManager.getTimerList().isEmpty()){
             view.displayEmptyListView()
         }
         view.onTimerRemoved(updatedTimerState)
     }
 
     override fun onTimerAdded(updatedTimerState: TimerState) {
-        if(!timerListManager.timersState.isEmpty()){
+        if(!timerListManager.getTimerList().isEmpty()){
             view.displayListView()
         }
         // if timer is directly activate, display it in the notification

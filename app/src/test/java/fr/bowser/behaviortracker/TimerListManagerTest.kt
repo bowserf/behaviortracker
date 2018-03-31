@@ -19,20 +19,20 @@ class TimerListManagerTest {
 
     @Test
     fun addTimer() {
-        val timerListManager = TimerListManager(timerDAO, timeManager)
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer(1, 1000, "MyTimer", Color.RED)
         val timerState = TimerState(false, timer)
 
         timerListManager.addTimer(timerState)
 
-        Assert.assertEquals(1, timerListManager.timersState.size)
-        Assert.assertEquals(timer, timerListManager.timersState[0].timer)
+        Assert.assertEquals(1, timerListManager.getTimerList().size)
+        Assert.assertEquals(timer, timerListManager.getTimerList()[0].timer)
     }
 
     @Test
     fun receiveAddTimerCallback() {
-        val timerListManager = TimerListManager(timerDAO, timeManager)
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer(1, 1000, "MyTimer", Color.RED)
         val timerState = TimerState(false, timer)
@@ -58,7 +58,7 @@ class TimerListManagerTest {
 
     @Test
     fun removeTimer() {
-        val timerListManager = TimerListManager(timerDAO, timeManager)
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer(1, 1000, "MyTimer", Color.RED)
         val timerState = TimerState(false, timer)
@@ -66,12 +66,12 @@ class TimerListManagerTest {
         timerListManager.addTimer(timerState)
         timerListManager.removeTimer(timerState)
 
-        Assert.assertEquals(0, timerListManager.timersState.size)
+        Assert.assertEquals(0, timerListManager.getTimerList().size)
     }
 
     @Test
     fun receiveRemoveTimerCallback() {
-        val timerListManager = TimerListManager(timerDAO, timeManager)
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer(1, 1000, "MyTimer", Color.RED)
         val timerState = TimerState(false, timer)
@@ -100,7 +100,7 @@ class TimerListManagerTest {
 
     @Test
     fun renameTimer() {
-        val timerListManager = TimerListManager(timerDAO, timeManager)
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer(1, 1000, "MyTimer", Color.RED)
         val timerState = TimerState(false, timer)
@@ -111,12 +111,12 @@ class TimerListManagerTest {
         timerListManager.renameTimer(timerState, newName)
 
         Assert.assertEquals(newName, timerState.timer.name)
-        Assert.assertEquals(newName, timerListManager.timersState[0].timer.name)
+        Assert.assertEquals(newName, timerListManager.getTimerList()[0].timer.name)
     }
 
     @Test
     fun receiveRenameTimerCallback() {
-        val timerListManager = TimerListManager(timerDAO, timeManager)
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer(1, 1000, "MyTimer", Color.RED)
         val timerState = TimerState(false, timer)
