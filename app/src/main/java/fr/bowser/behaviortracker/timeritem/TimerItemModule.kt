@@ -12,7 +12,7 @@ class TimerItemModule(private val view: TimerItemContract.View) {
 
     @GenericScope(component = TimerItemComponent::class)
     @Provides
-    fun provideTimerItemPresenter(timeManager: TimeManager, timerListManager: TimerListManager, timerNotificationManager: TimerNotificationManager): TimerItemPresenter{
+    fun provideTimerItemPresenter(timeManager: TimeManager, timerListManager: TimerListManager, timerNotificationManager: TimerNotificationManager): TimerItemPresenter {
         return TimerItemPresenter(view, timeManager, timerListManager, timerNotificationManager)
     }
 

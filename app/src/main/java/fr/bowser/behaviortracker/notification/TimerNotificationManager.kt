@@ -17,7 +17,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 
 
 class TimerNotificationManager(private val context: Context,
-                               private val timeManager: TimeManager)
+                               timeManager: TimeManager)
     : TimeManager.TimerCallback {
 
     private val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -70,7 +70,7 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    fun pauseTimerNotif(modifiedTimer: Timer) {
+    private fun pauseTimerNotif(modifiedTimer: Timer) {
         if (!isNotificationDisplayed || timer != modifiedTimer) {
             return
         }

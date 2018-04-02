@@ -4,7 +4,7 @@ import android.os.Handler
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
-class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handler?) : TimeManager{
+class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handler?) : TimeManager {
 
     internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
 

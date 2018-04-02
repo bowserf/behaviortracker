@@ -52,7 +52,7 @@ object ColorUtils {
             COLOR_RED -> colorRes = R.color.red
             COLOR_PINK -> colorRes = R.color.pink
             COLOR_PURPLE -> colorRes = R.color.purple
-            else -> throw IllegalStateException("This color value doesn't exist : " + colorValue)
+            else -> throw IllegalStateException("This color value doesn't exist : $colorValue")
         }
         return ContextCompat.getColor(context, colorRes)
     }

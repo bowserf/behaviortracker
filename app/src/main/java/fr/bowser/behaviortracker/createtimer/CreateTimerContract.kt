@@ -2,21 +2,21 @@ package fr.bowser.behaviortracker.createtimer
 
 interface CreateTimerContract {
 
-    interface View{
+    interface View {
 
         fun exitViewAfterSucceedTimerCreation()
 
         fun displayNameError()
 
-        fun updateColorList(oldSelectedPosition : Int, selectedPosition : Int)
+        fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int)
 
     }
 
-    interface Presenter{
+    interface Presenter {
 
-        fun createTimer(name: String, startNow : Boolean)
+        fun createTimer(name: String, startNow: Boolean)
 
-        fun changeSelectedColor(oldSelectedPosition : Int, selectedPosition : Int)
+        fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int)
 
     }
 

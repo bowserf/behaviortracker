@@ -2,13 +2,13 @@ package fr.bowser.behaviortracker.home
 
 interface HomeContract {
 
-    interface View{
+    interface View {
 
         fun displayResetAllDialog()
 
     }
 
-    interface Presenter{
+    interface Presenter {
 
         fun start()
 

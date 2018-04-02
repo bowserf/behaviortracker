@@ -100,7 +100,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     companion object {
-        const val CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER";
+        const val CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER"
     }
 
 }

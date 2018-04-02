@@ -9,18 +9,18 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
 
     internal val background = newFixedThreadPoolContext(2, "bg")
 
-    val timersState = ArrayList<Timer>()
+    private val timers = ArrayList<Timer>()
 
     private val callbacks = ArrayList<TimerListManager.TimerCallback>()
 
     init {
         launch(background) {
-            timersState.addAll(timerDAO.getTimers())
+            timers.addAll(timerDAO.getTimers())
         }
     }
 
     override fun addTimer(timer: Timer) {
-        timersState.add(timer)
+        timers.add(timer)
         for (callback in callbacks) {
             callback.onTimerAdded(timer)
         }
@@ -33,7 +33,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
     override fun removeTimer(timer: Timer) {
         timeManager.stopTimer(timer)
 
-        timersState.remove(timer)
+        timers.remove(timer)
         for (callback in callbacks) {
             callback.onTimerRemoved(timer)
         }
@@ -44,7 +44,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
     }
 
     override fun getTimerList(): List<Timer> {
-        return timersState
+        return timers
     }
 
     override fun renameTimer(timer: Timer, newName: String) {

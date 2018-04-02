@@ -10,7 +10,7 @@ class DatabaseManagerModule {
 
     @Singleton
     @Provides
-    fun provideDatabaseManager(context: Context) : DatabaseManager{
+    fun provideDatabaseManager(context: Context): DatabaseManager {
         return DatabaseManager(context)
     }
 

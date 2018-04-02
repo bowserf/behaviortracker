@@ -22,7 +22,7 @@ class DatabaseManager(context: Context) {
 
     companion object {
 
-        private val DATABASE_NAME = "behaviortracker.db"
+        private const val DATABASE_NAME = "behaviortracker.db"
     }
 
 }

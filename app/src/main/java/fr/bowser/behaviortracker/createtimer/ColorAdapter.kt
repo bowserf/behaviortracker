@@ -45,7 +45,7 @@ class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) : 
 
     inner class ColorViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val colorView : ImageView = view.findViewById(R.id.item_color)
+        val colorView: ImageView = view.findViewById(R.id.item_color)
 
     }
 

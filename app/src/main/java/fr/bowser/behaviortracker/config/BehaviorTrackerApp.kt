@@ -9,9 +9,7 @@ import fr.bowser.behaviortracker.BuildConfig
 import io.fabric.sdk.android.Fabric
 
 
-
-
-class BehaviorTrackerApp : Application(){
+class BehaviorTrackerApp : Application() {
 
     lateinit var appComponent: BehaviorTrackerAppComponent
 
@@ -40,7 +38,7 @@ class BehaviorTrackerApp : Application(){
         Fabric.with(this, Crashlytics())
     }
 
-    private fun setupGraph(){
+    private fun setupGraph() {
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
                 .context(this)
                 .build()
@@ -53,7 +51,7 @@ class BehaviorTrackerApp : Application(){
     companion object {
 
         @JvmStatic
-        fun getAppComponent(context: Context): BehaviorTrackerAppComponent{
+        fun getAppComponent(context: Context): BehaviorTrackerAppComponent {
             val app = context.applicationContext as BehaviorTrackerApp
             return app.appComponent
         }

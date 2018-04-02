@@ -66,7 +66,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     override fun onTimerNameUpdated(newTimerName: String) {
         timerListManager.renameTimer(timer, newTimerName)
 
-        timerNotificationManager.renameTimerNotif(timer)
+        timerNotificationManager.renameTimerNotif(timer) //TODO TimerNotificationManager can listen to TimerListManager
     }
 
     override fun onTimerAdded(updatedTimer: Timer) {
@@ -77,7 +77,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         if (timer == updatedTimer) {
             timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
 
-            timerNotificationManager.destroyNotif(timer)
+            timerNotificationManager.destroyNotif(timer) //TODO TimerNotificationManager can listen to TimerListManager
         }
     }
 
