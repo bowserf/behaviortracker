@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timeritem.TimerRowView
+import java.util.*
 
 class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
@@ -44,6 +45,10 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         val position = timerList.indexOf(timer)
         timerList.remove(timer)
         notifyItemRemoved(position)
+    }
+
+    fun getTimer(position: Int) : Timer{
+        return timerList[position]
     }
 
     inner class TimerViewHolder(val view: TimerRowView) : RecyclerView.ViewHolder(view)

@@ -29,6 +29,10 @@ class TimerPresenter(private val view: TimerContract.View,
         view.displayCreateTimerView()
     }
 
+    override fun onTimerSwiped(timer: Timer) {
+        timerListManager.removeTimer(timer)
+    }
+
     override fun onTimerRemoved(updatedTimer: Timer) {
         if (timerListManager.getTimerList().isEmpty()) {
             view.displayEmptyListView()

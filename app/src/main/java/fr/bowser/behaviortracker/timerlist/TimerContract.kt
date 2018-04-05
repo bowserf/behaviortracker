@@ -28,6 +28,8 @@ interface TimerContract {
 
         fun onClickAddTimer()
 
+        fun onTimerSwiped(timer: Timer)
+
     }
 
 }

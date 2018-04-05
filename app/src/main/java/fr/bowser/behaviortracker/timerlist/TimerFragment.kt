@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.NO_POSITION
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -126,6 +127,10 @@ class TimerFragment : Fragment(), TimerContract.View {
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
 
+        val swipeHandler = SwipeToDeleteCallback(MyItemTouchCallback())
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(list)
+
         list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 if (dy > 0) {
@@ -167,6 +172,13 @@ class TimerFragment : Fragment(), TimerContract.View {
     private fun setFabScale(scale: Float) {
         fab.scaleX = scale
         fab.scaleY = scale
+    }
+
+    inner class MyItemTouchCallback : SwipeToDeleteCallback.ItemTouchCallback {
+        override fun onSwiped(position: Int) {
+            val timer = timerAdapter.getTimer(position)
+            presenter.onTimerSwiped(timer)
+        }
     }
 
     companion object {
