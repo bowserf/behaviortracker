@@ -9,13 +9,14 @@ import android.arch.persistence.room.PrimaryKey
 data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
                  @ColumnInfo(name = "current_time") var currentTime: Long,
                  @ColumnInfo(name = "name") var name: String,
-                 @ColumnInfo(name = "color") var color: Int) {
+                 @ColumnInfo(name = "color") var color: Int,
+                 @ColumnInfo(name = "position") var position: Int) {
 
     var isActivate: Boolean = false
 
     @Ignore
-    constructor(name: String, color: Int, isActivate: Boolean = false)
-            : this(0, 0, name, color) {
+    constructor(name: String, color: Int, isActivate: Boolean = false, position: Int = 0)
+            : this(0, 0, name, color, position) {
         this.isActivate = isActivate
     }
 }

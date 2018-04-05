@@ -8,7 +8,7 @@ import android.arch.persistence.room.Query
 @Dao
 interface TimerDAO {
 
-    @Query("SELECT * FROM Timer")
+    @Query("SELECT * FROM Timer ORDER BY position")
     fun getTimers(): List<Timer>
 
     @Insert
@@ -22,5 +22,8 @@ interface TimerDAO {
 
     @Query("UPDATE Timer SET current_time = :currentTime WHERE id = :id")
     fun updateTimerTime(id: Long, currentTime: Long)
+
+    @Query("UPDATE Timer SET position = :position WHERE id = :id")
+    fun updateTimerPosition(id: Long, position: Int)
 
 }

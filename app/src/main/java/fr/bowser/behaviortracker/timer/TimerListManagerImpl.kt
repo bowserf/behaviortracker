@@ -20,7 +20,10 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
     }
 
     override fun addTimer(timer: Timer) {
+        timer.position = timers.size
+
         timers.add(timer)
+
         for (callback in callbacks) {
             callback.onTimerAdded(timer)
         }
@@ -40,6 +43,16 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
 
         launch(background) {
             timerDAO.removeTimer(timer)
+        }
+    }
+
+    override fun reorderTimerList(timerList : List<Timer>){
+        launch(background) {
+            for (i in 0 until timerList.size) {
+                val timer = timerList[i]
+                timer.position = i
+                timerDAO.updateTimerPosition(timer.id, i)
+            }
         }
     }
 

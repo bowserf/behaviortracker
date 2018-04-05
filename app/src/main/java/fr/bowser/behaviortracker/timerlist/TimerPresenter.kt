@@ -34,7 +34,7 @@ class TimerPresenter(private val view: TimerContract.View,
     }
 
     override fun onReorderFinished(timerList: List<Timer>) {
-        //TODO
+        timerListManager.reorderTimerList(timerList)
     }
 
     override fun onTimerRemoved(updatedTimer: Timer) {

@@ -11,6 +11,8 @@ interface TimerListManager {
 
     fun renameTimer(timer: Timer, newName: String)
 
+    fun reorderTimerList(timerList : List<Timer>)
+
     fun registerTimerCallback(timerCallback: TimerCallback): Boolean
 
     fun unregisterTimerCallback(timerCallback: TimerCallback): Boolean
