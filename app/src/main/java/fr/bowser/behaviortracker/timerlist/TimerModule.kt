@@ -13,7 +13,9 @@ class TimerModule(private val timerView: TimerContract.View) {
     @Provides
     fun provideTimerPresenter(timerListManager: TimerListManager,
                               timerNotificationManager: TimerNotificationManager): TimerPresenter {
-        return TimerPresenter(timerView, timerListManager, timerNotificationManager)
+        return TimerPresenter(timerView,
+                timerListManager,
+                timerNotificationManager)
     }
 
 }

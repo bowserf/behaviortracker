@@ -127,7 +127,7 @@ class TimerFragment : Fragment(), TimerContract.View {
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
 
-        val swipeHandler = SwipeToDeleteCallback(MyItemTouchCallback())
+        val swipeHandler = TimerListGesture(TimerListGestureCallback())
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(list)
 
@@ -174,7 +174,16 @@ class TimerFragment : Fragment(), TimerContract.View {
         fab.scaleY = scale
     }
 
-    inner class MyItemTouchCallback : SwipeToDeleteCallback.ItemTouchCallback {
+    inner class TimerListGestureCallback : TimerListGesture.GestureCallback {
+        override fun onItemMove(fromPosition: Int, toPosition: Int) {
+            timerAdapter.onItemMove(fromPosition, toPosition)
+        }
+
+        override fun onSelectedChangedUp() {
+            val timerList = timerAdapter.getTimerList()
+            presenter.onReorderFinished(timerList)
+        }
+
         override fun onSwiped(position: Int) {
             val timer = timerAdapter.getTimer(position)
             presenter.onTimerSwiped(timer)

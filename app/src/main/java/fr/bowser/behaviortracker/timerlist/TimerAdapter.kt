@@ -47,8 +47,25 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         notifyItemRemoved(position)
     }
 
+    fun onItemMove(fromPosition: Int, toPosition: Int) {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(timerList, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(timerList, i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
     fun getTimer(position: Int) : Timer{
         return timerList[position]
+    }
+
+    fun getTimerList() : List<Timer>{
+        return timerList
     }
 
     inner class TimerViewHolder(val view: TimerRowView) : RecyclerView.ViewHolder(view)

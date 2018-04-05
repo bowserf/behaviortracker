@@ -121,7 +121,7 @@ class TimerListManagerTest {
     fun receiveRenameTimerCallback() {
         val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
-        val timer = Timer(1, 1000, "MyTimer", Color.RED)
+        val timer = Timer("MyTimer", Color.RED)
 
         val newName = "MyTimer2"
 

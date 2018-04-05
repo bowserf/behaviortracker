@@ -30,6 +30,8 @@ interface TimerContract {
 
         fun onTimerSwiped(timer: Timer)
 
+        fun onReorderFinished(timerList: List<Timer>)
+
     }
 
 }

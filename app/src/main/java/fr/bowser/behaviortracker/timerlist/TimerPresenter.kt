@@ -33,6 +33,10 @@ class TimerPresenter(private val view: TimerContract.View,
         timerListManager.removeTimer(timer)
     }
 
+    override fun onReorderFinished(timerList: List<Timer>) {
+        //TODO
+    }
+
     override fun onTimerRemoved(updatedTimer: Timer) {
         if (timerListManager.getTimerList().isEmpty()) {
             view.displayEmptyListView()
