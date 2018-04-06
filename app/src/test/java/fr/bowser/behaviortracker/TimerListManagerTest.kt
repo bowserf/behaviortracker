@@ -151,4 +151,35 @@ class TimerListManagerTest {
         Assert.assertTrue(result)
     }
 
+    @Test
+    fun reorderTimerList() {
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+
+        val timer1 = Timer("Timer1", Color.RED)
+        val timer2 = Timer("Timer2", Color.RED)
+        val timer3 = Timer("Timer3", Color.RED)
+
+        timerListManager.addTimer(timer1)
+        timerListManager.addTimer(timer2)
+        timerListManager.addTimer(timer3)
+
+        val reorderList = mutableListOf(timer3, timer2, timer1)
+
+        timerListManager.reorderTimerList(reorderList)
+
+        Assert.assertEquals(0, timer3.position)
+        Assert.assertEquals(1, timer2.position)
+        Assert.assertEquals(2, timer1.position)
+    }
+
+    @Test
+    fun setPositionWhenAddTimer(){
+        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+
+        val timer1 = Timer("Timer1", Color.RED, false, -1)
+        timerListManager.addTimer(timer1)
+
+        Assert.assertEquals(0, timer1.position)
+    }
+
 }
