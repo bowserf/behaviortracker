@@ -9,6 +9,8 @@ interface ShowModeTimerViewContract {
 
         fun timerUpdated(newTime: Long)
 
+        fun statusUpdated(activate: Boolean)
+
     }
 
     interface Presenter {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.RippleDrawable
 import android.support.constraint.ConstraintLayout
+import android.widget.ImageView
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
@@ -18,8 +19,9 @@ class ShowModeTimerView(context: Context) : ConstraintLayout(context),
     @Inject
     lateinit var presenter: ShowModeTimerViewPresenter
 
-    private var chrono: TextView
-    private var timerName: TextView
+    private val chrono: TextView
+    private val timerName: TextView
+    private val timerState: ImageView
 
     init {
         setupGraph()
@@ -32,6 +34,7 @@ class ShowModeTimerView(context: Context) : ConstraintLayout(context),
 
         chrono = findViewById(R.id.show_mode_timer_time)
         timerName = findViewById(R.id.show_mode_timer_name)
+        timerState = findViewById(R.id.show_mode_timer_status)
     }
 
     override fun onAttachedToWindow() {
@@ -42,6 +45,14 @@ class ShowModeTimerView(context: Context) : ConstraintLayout(context),
     override fun onDetachedFromWindow() {
         presenter.stop()
         super.onDetachedFromWindow()
+    }
+
+    override fun statusUpdated(activate: Boolean) {
+        if (activate) {
+            timerState.setImageResource(R.drawable.ic_pause)
+        } else {
+            timerState.setImageResource(R.drawable.ic_play)
+        }
     }
 
     override fun timerUpdated(newTime: Long) {

@@ -19,6 +19,8 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
 
     override fun setTimer(timer: Timer) {
         this.timer = timer
+
+        view.statusUpdated(timer.isActivate)
     }
 
     override fun onClickView() {
@@ -27,15 +29,18 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
         }else{
             timeManager.startTimer(timer)
         }
+        view.statusUpdated(timer.isActivate)
     }
 
     private val updateTimerCallback = object : TimeManager.TimerCallback {
         override fun onTimerStateChanged(updatedTimer: Timer) {
-            // nothing to do
+            if (timer == updatedTimer) {
+                view.statusUpdated(updatedTimer.isActivate)
+            }
         }
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {
-            if(updatedTimer == timer) {
+            if(timer == updatedTimer) {
                 view.timerUpdated(timer.currentTime)
             }
         }
