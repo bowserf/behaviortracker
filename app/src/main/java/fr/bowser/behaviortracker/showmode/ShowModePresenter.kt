@@ -5,6 +5,8 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 class ShowModePresenter(val view: ShowModeContract.View, val timerListManager: TimerListManager)
     : ShowModeContract.Presenter {
 
+    private var keepScreeOn = false
+
     override fun start(selectedTimerId: Long) {
         val timers = timerListManager.getTimerList()
 
@@ -19,5 +21,17 @@ class ShowModePresenter(val view: ShowModeContract.View, val timerListManager: T
         view.displayTimerList(timers, selectedTimerPosition)
     }
 
+    override fun onClickScreeOn() {
+        keepScreeOn = true
+        view.keepScreeOn(true)
+    }
 
+    override fun onClickScreeOff() {
+        keepScreeOn = false
+        view.keepScreeOn(false)
+    }
+
+    override fun keepScreenOn(): Boolean {
+        return keepScreeOn
+    }
 }

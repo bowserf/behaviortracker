@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_keep_screen_on">Keep screen ON</string>
+    <string name="menu_keep_screen_off">Don\'t keep screen ON</string>
+
+</resources>

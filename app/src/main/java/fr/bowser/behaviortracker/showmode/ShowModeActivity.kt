@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
+import android.view.WindowManager
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
@@ -37,6 +40,40 @@ class ShowModeActivity : AppCompatActivity(), ShowModeContract.View {
         return true
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_showmode, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val menuScreenOff = menu?.findItem(R.id.menu_keep_screen_off)
+        val menuScreenOn = menu?.findItem(R.id.menu_keep_screen_on)
+
+        if (presenter.keepScreenOn()) {
+            menuScreenOff?.isVisible = true
+            menuScreenOn?.isVisible = false
+        } else {
+            menuScreenOff?.isVisible = false
+            menuScreenOn?.isVisible = true
+        }
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_keep_screen_on -> {
+                presenter.onClickScreeOn()
+                return true
+            }
+            R.id.menu_keep_screen_off -> {
+                presenter.onClickScreeOff()
+                return true
+            }
+        }
+        return false
+    }
+
     private fun setupGraph() {
         val build = DaggerShowModeComponent.builder()
                 .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
@@ -65,6 +102,15 @@ class ShowModeActivity : AppCompatActivity(), ShowModeContract.View {
     override fun displayTimerList(timers: List<Timer>, selectedTimerPosition: Int) {
         adapter.setData(timers)
         viewPager.currentItem = selectedTimerPosition
+    }
+
+    override fun keepScreeOn(keepScreenOn: Boolean) {
+        if (keepScreenOn) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        } else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        invalidateOptionsMenu()
     }
 
     companion object {
