@@ -8,7 +8,7 @@ import fr.bowser.behaviortracker.timer.Timer
 
 class ShowModeAdapter : PagerAdapter() {
 
-    private lateinit var timers: List<Timer>
+    private val timers: ArrayList<Timer> = ArrayList()
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val showModTimerView = ShowModeTimerView(container.context)
@@ -30,7 +30,8 @@ class ShowModeAdapter : PagerAdapter() {
     }
 
     fun setData(timers: List<Timer>) {
-        this.timers = timers
+        this.timers.clear()
+        this.timers.addAll(timers)
         notifyDataSetChanged()
     }
 }
