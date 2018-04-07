@@ -48,10 +48,6 @@ class TimerPresenter(private val view: TimerContract.View,
         if (!timerListManager.getTimerList().isEmpty()) {
             view.displayListView()
         }
-        // if timer is directly activate, display it in the notification
-        if (updatedTimer.isActivate) {
-            timerNotificationManager.displayTimerNotif(updatedTimer)
-        }
         view.onTimerAdded(updatedTimer)
     }
 

@@ -13,12 +13,14 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.home.HomeActivity
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.TimeConverter
 
 
 class TimerNotificationManager(private val context: Context,
-                               timeManager: TimeManager)
-    : TimeManager.TimerCallback {
+                               timeManager: TimeManager,
+                               timerListManager: TimerListManager)
+    : TimeManager.TimerCallback, TimerListManager.TimerCallback {
 
     private val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -37,9 +39,61 @@ class TimerNotificationManager(private val context: Context,
         }
 
         timeManager.registerUpdateTimerCallback(this)
+        timerListManager.registerTimerCallback(this)
     }
 
-    fun displayTimerNotif(modifiedTimer: Timer) {
+    fun changeNotifOngoing(isAppInBackground: Boolean) {
+        if (!isNotificationDisplayed) {
+            return
+        }
+        this.isAppInBackground = isAppInBackground
+        timerNotificationBuilder?.setOngoing(isAppInBackground)
+        timerNotificationBuilder?.let {
+            notificationManager.notify(
+                    TIMER_NOTIFICATION_ID,
+                    timerNotificationBuilder?.build())
+        }
+    }
+
+    fun notificationDismiss() {
+        timer = null
+        isNotificationDisplayed = false
+    }
+
+    override fun onTimerStateChanged(updatedTimer: Timer) {
+        if (updatedTimer.isActivate) {
+            displayTimerNotif(updatedTimer)
+        } else {
+            pauseTimerNotif(updatedTimer)
+        }
+    }
+
+    override fun onTimerTimeChanged(updatedTimer: Timer) {
+        if (timer == updatedTimer) {
+            updateTimeNotif()
+        }
+    }
+
+    override fun onTimerRemoved(updatedTimer: Timer) {
+        if (timer == updatedTimer) {
+            destroyNotif(updatedTimer)
+        }
+    }
+
+    override fun onTimerAdded(updatedTimer: Timer) {
+        // if timer is directly activate, display it in the notification
+        if (updatedTimer.isActivate) {
+            displayTimerNotif(updatedTimer)
+        }
+    }
+
+    override fun onTimerRenamed(updatedTimer: Timer) {
+        if (timer == updatedTimer) {
+            renameTimerNotif(updatedTimer)
+        }
+    }
+
+    private fun displayTimerNotif(modifiedTimer: Timer) {
         if (timer == modifiedTimer) {
             resumeTimerNotif(modifiedTimer)
         } else {
@@ -70,40 +124,14 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    private fun pauseTimerNotif(modifiedTimer: Timer) {
-        if (!isNotificationDisplayed || timer != modifiedTimer) {
-            return
-        }
-
-        // allow to remove notification when timer is not running
-        timerNotificationBuilder?.setOngoing(false)
-
-        timerNotificationBuilder?.mActions?.clear()
-        timerNotificationBuilder?.addAction(R.drawable.ic_play,
-                context.resources.getString(R.string.timer_notif_start),
-                TimerReceiver.getPlayPendingIntent(context))
-
-        timerNotificationBuilder?.let {
-            notificationManager.notify(
-                    TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder?.build())
+    private fun destroyNotif(removedTimer: Timer) {
+        if (timer == removedTimer) {
+            notificationManager.cancel(TIMER_NOTIFICATION_ID)
+            notificationDismiss()
         }
     }
 
-    fun changeNotifOngoing(isAppInBackground: Boolean) {
-        if (!isNotificationDisplayed) {
-            return
-        }
-        this.isAppInBackground = isAppInBackground
-        timerNotificationBuilder?.setOngoing(isAppInBackground)
-        timerNotificationBuilder?.let {
-            notificationManager.notify(
-                    TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder?.build())
-        }
-    }
-
-    fun renameTimerNotif(updatedTimer: Timer) {
+    private fun renameTimerNotif(updatedTimer: Timer) {
         if (timer == updatedTimer) {
             timerNotificationBuilder?.setContentTitle(timer!!.name)
             timerNotificationBuilder?.let {
@@ -111,32 +139,6 @@ class TimerNotificationManager(private val context: Context,
                         TIMER_NOTIFICATION_ID,
                         timerNotificationBuilder?.build())
             }
-        }
-    }
-
-    fun destroyNotif(removedTimer: Timer) {
-        if (timer == removedTimer) {
-            notificationManager.cancel(TIMER_NOTIFICATION_ID)
-            notificationDismiss()
-        }
-    }
-
-    fun notificationDismiss() {
-        timer = null
-        isNotificationDisplayed = false
-    }
-
-    override fun onTimerStateChanged(updatedTimer: Timer) {
-        if (updatedTimer.isActivate) {
-            displayTimerNotif(updatedTimer)
-        } else {
-            pauseTimerNotif(updatedTimer)
-        }
-    }
-
-    override fun onTimerTimeChanged(updatedTimer: Timer) {
-        if (timer == updatedTimer) {
-            updateTimeNotif()
         }
     }
 
@@ -151,6 +153,26 @@ class TimerNotificationManager(private val context: Context,
         timerNotificationBuilder?.addAction(R.drawable.ic_pause,
                 context.resources.getString(R.string.timer_notif_pause),
                 TimerReceiver.getPausePendingIntent(context))
+
+        timerNotificationBuilder?.let {
+            notificationManager.notify(
+                    TIMER_NOTIFICATION_ID,
+                    timerNotificationBuilder?.build())
+        }
+    }
+
+    private fun pauseTimerNotif(modifiedTimer: Timer) {
+        if (!isNotificationDisplayed || timer != modifiedTimer) {
+            return
+        }
+
+        // allow to remove notification when timer is not running
+        timerNotificationBuilder?.setOngoing(false)
+
+        timerNotificationBuilder?.mActions?.clear()
+        timerNotificationBuilder?.addAction(R.drawable.ic_play,
+                context.resources.getString(R.string.timer_notif_start),
+                TimerReceiver.getPlayPendingIntent(context))
 
         timerNotificationBuilder?.let {
             notificationManager.notify(
