@@ -1,10 +1,13 @@
 package fr.bowser.behaviortracker.timer
 
 import android.os.Handler
+import fr.bowser.behaviortracker.setting.SettingManager
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
-class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handler?) : TimeManager {
+class TimeManagerImpl(private val timerDAO: TimerDAO,
+                      private val settingManager: SettingManager,
+                      private val handler: Handler?) : TimeManager {
 
     internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
 
@@ -17,6 +20,10 @@ class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handl
     override fun startTimer(timer: Timer) {
         if (timer.isActivate) {
             return
+        }
+
+        if(settingManager.isOneActiveTimerAtATime()){
+            stopAllRunningTimers()
         }
 
         timer.isActivate = true
@@ -75,6 +82,17 @@ class TimeManagerImpl(private val timerDAO: TimerDAO, private val handler: Handl
 
     override fun unregisterUpdateTimerCallback(callback: TimeManager.TimerCallback) {
         listeners.remove(callback)
+    }
+
+    private fun stopAllRunningTimers(){
+        for (timerToStop in timerList) {
+            timerToStop.isActivate = false
+            for (callback in listeners) {
+                callback.onTimerStateChanged(timerToStop)
+            }
+        }
+        timerList.clear()
+        handler?.removeCallbacks(timerRunnable)
     }
 
     inner class TimerRunnable : Runnable {

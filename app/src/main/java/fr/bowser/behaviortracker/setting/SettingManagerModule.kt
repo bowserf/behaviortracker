@@ -11,7 +11,7 @@ class SettingManagerModule {
     @Singleton
     @Provides
     fun provideSettingManager(context: Context): SettingManager {
-        return SettingManager(context)
+        return SettingManagerImpl(context)
     }
 
 }

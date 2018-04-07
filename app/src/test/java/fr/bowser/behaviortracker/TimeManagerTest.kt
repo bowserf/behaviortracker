@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker
 
 import android.graphics.Color
+import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimeManagerImpl
 import fr.bowser.behaviortracker.timer.Timer
@@ -17,9 +18,12 @@ class TimeManagerTest {
     @Mock
     private lateinit var timerDao: TimerDAO
 
+    @Mock
+    private lateinit var settingManager: SettingManager
+
     @Test
     fun startTimer() {
-        val timeManager = TimeManagerImpl(timerDao, null)
+        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         val timerState = Timer("MyTimer", Color.RED)
 
@@ -30,14 +34,14 @@ class TimeManagerTest {
 
     @Test
     fun startTimerCallback() {
-        val timeManager = TimeManagerImpl(timerDao, null)
+        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         val timerState = Timer("MyTimer", Color.RED)
 
         var result = false
 
         val timerManagerCallback = object : TimeManager.TimerCallback {
-            override fun onTimerStateChanged(updatedTimer : Timer) {
+            override fun onTimerStateChanged(updatedTimer: Timer) {
                 result = updatedTimer.isActivate
             }
 
@@ -55,7 +59,7 @@ class TimeManagerTest {
 
     @Test
     fun stopTimer() {
-        val timeManager = TimeManagerImpl(timerDao, null)
+        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         val timerState = Timer("MyTimer", Color.RED, true)
 
@@ -66,7 +70,7 @@ class TimeManagerTest {
 
     @Test
     fun stopTimerCallback() {
-        val timeManager = TimeManagerImpl(timerDao, null)
+        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         val timerState = Timer("MyTimer", Color.RED, true)
 

@@ -20,7 +20,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         timerListManager.registerTimerCallback(this)
         timeManager.registerUpdateTimerCallback(updateTimerCallback)
 
-        view.updateTimeModification(settingManager.timeModification)
+        view.updateTimeModification(settingManager.getTimerModification())
         view.timerUpdated(timer.currentTime)
         view.statusUpdated(timer.isActivate)
     }
@@ -45,13 +45,13 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onClickDecreaseTime() {
-        timeManager.updateTime(timer, timer.currentTime - settingManager.timeModification)
+        timeManager.updateTime(timer, timer.currentTime - settingManager.getTimerModification())
 
         view.timerUpdated(timer.currentTime)
     }
 
     override fun onClickIncreaseTime() {
-        timeManager.updateTime(timer, timer.currentTime + settingManager.timeModification)
+        timeManager.updateTime(timer, timer.currentTime + settingManager.getTimerModification())
 
         view.timerUpdated(timer.currentTime)
     }

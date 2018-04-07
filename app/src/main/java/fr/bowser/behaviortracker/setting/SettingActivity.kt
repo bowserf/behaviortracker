@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import fr.bowser.behaviortracker.R
 
-class SettingActivity : AppCompatActivity() {
+class
+SettingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
