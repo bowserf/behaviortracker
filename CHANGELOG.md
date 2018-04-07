@@ -1,3 +1,12 @@
+### Op'Time v0.2.1
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2018-04-07
+* Change log:
+    - Avoid to create a column in database for isActivate field of Timer class.
+    - Destroy database if no migration strategy has been provided.
+
+
+
 ### Op'Time v0.2
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2018-04-07
