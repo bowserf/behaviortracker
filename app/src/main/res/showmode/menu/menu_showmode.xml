@@ -6,12 +6,12 @@
         android:id="@+id/menu_keep_screen_on"
         android:enabled="true"
         android:title="@string/menu_keep_screen_on"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_keep_screen_off"
         android:enabled="true"
         android:title="@string/menu_keep_screen_off"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
 </menu>
