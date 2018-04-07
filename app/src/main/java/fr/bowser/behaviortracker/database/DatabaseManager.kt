@@ -18,6 +18,7 @@ class DatabaseManager(context: Context) {
                 DatabaseProvider::class.java,
                 DATABASE_NAME)
                 .addMigrations(MIGRATION_1_3)
+                .fallbackToDestructiveMigration()
                 .build()
     }
 
