@@ -1,10 +1,12 @@
 package fr.bowser.behaviortracker.createtimer
 
+import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class CreateTimerPresenter(private val view: CreateTimerContract.View,
-                           private val timerListManager: TimerListManager) : CreateTimerContract.Presenter {
+                           private val timerListManager: TimerListManager,
+                           private val timeManager: TimeManager) : CreateTimerContract.Presenter {
 
     private var selectedColor: Int = 0
 
@@ -19,8 +21,12 @@ class CreateTimerPresenter(private val view: CreateTimerContract.View,
             return
         }
 
-        val timer = Timer(name, selectedColor, startNow)
+        val timer = Timer(name, selectedColor)
         timerListManager.addTimer(timer)
+
+        if(startNow){
+            timeManager.startTimer(timer)
+        }
 
         view.exitViewAfterSucceedTimerCreation()
     }
