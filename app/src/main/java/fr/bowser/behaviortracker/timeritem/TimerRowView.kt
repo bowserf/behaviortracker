@@ -133,6 +133,7 @@ class TimerRowView(context: Context) :
         val input = rootView.findViewById<EditText>(R.id.edittext)
 
         input.setText(oldName)
+        input.setSelection(input.text.length)
 
         alertDialog.setView(rootView)
 
