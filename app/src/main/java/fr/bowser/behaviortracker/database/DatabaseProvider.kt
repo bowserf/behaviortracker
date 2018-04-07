@@ -5,7 +5,7 @@ import android.arch.persistence.room.RoomDatabase
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerDAO
 
-@Database(entities = [(Timer::class)], version = 2)
+@Database(entities = [(Timer::class)], version = 3)
 abstract class DatabaseProvider : RoomDatabase() {
 
     abstract fun timerDAO(): TimerDAO

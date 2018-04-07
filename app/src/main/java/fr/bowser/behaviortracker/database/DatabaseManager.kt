@@ -17,7 +17,7 @@ class DatabaseManager(context: Context) {
         database = Room.databaseBuilder(context,
                 DatabaseProvider::class.java,
                 DATABASE_NAME)
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_3)
                 .build()
     }
 
@@ -29,12 +29,11 @@ class DatabaseManager(context: Context) {
 
         private const val DATABASE_NAME = "behaviortracker.db"
 
-        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+        val MIGRATION_1_3: Migration = object : Migration(1, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE Timer ADD COLUMN position INTEGER NOT NULL DEFAULT '0'")
             }
         }
-
 
     }
 

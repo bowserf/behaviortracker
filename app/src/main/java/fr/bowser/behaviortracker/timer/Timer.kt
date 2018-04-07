@@ -12,6 +12,7 @@ data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var i
                  @ColumnInfo(name = "color") var color: Int,
                  @ColumnInfo(name = "position") var position: Int) {
 
+    @Ignore
     var isActivate: Boolean = false
 
     @Ignore
