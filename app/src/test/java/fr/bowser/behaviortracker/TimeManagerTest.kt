@@ -10,7 +10,10 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
+
+
 
 @RunWith(MockitoJUnitRunner::class)
 class TimeManagerTest {
@@ -91,6 +94,62 @@ class TimeManagerTest {
         timeManager.stopTimer(timerState)
 
         Assert.assertTrue(result)
+    }
+
+    @Test
+    fun stopRunningTimerWhenStartANewOne(){
+        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
+
+        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(false)
+
+        val timer1 = Timer("MyTimer1", Color.RED)
+        timeManager.startTimer(timer1)
+
+        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(true)
+
+        val timer2 = Timer("MyTimer2", Color.BLUE)
+        timeManager.startTimer(timer2)
+
+        Assert.assertFalse(timer1.isActivate)
+        Assert.assertTrue(timer2.isActivate)
+    }
+
+    @Test
+    fun stopRunningTimerWhenStartANewOneCallback(){
+        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
+
+        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(false)
+
+        val timer1 = Timer("MyTimer1", Color.RED)
+        timeManager.startTimer(timer1)
+
+        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(true)
+
+        val timer2 = Timer("MyTimer2", Color.BLUE)
+
+        var timer1IsStopped = false
+        var timer2IsActive = false
+
+        val timerManagerCallback = object : TimeManager.TimerCallback {
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                if(updatedTimer == timer1 && !updatedTimer.isActivate){
+                    timer1IsStopped = true
+                }
+                if(updatedTimer == timer2 && updatedTimer.isActivate){
+                    timer2IsActive = true
+                }
+            }
+
+            override fun onTimerTimeChanged(updatedTimer: Timer) {
+                Assert.assertTrue(false)
+            }
+        }
+
+        timeManager.registerUpdateTimerCallback(timerManagerCallback)
+
+        timeManager.startTimer(timer2)
+
+        Assert.assertTrue(timer1IsStopped && timer2IsActive)
     }
 
 }
