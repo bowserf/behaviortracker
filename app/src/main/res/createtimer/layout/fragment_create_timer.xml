@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/timer_name"
-                    android:imeOptions="flagNoExtractUi"
+                    android:imeOptions="flagNoExtractUi|actionDone"
                     android:inputType="textCapSentences"
                     android:singleLine="true"/>
 
