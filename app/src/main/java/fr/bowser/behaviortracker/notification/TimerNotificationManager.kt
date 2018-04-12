@@ -10,6 +10,7 @@ import android.content.res.Resources
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.config.KillAppDetection
 import fr.bowser.behaviortracker.home.HomeActivity
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
@@ -58,6 +59,20 @@ class TimerNotificationManager(private val context: Context,
     fun notificationDismiss() {
         timer = null
         isNotificationDisplayed = false
+
+        stopKillAppDectectionService()
+    }
+
+    fun removeNotification(killProcess: Boolean){
+        if (!isNotificationDisplayed) {
+            return
+        }
+
+        notificationManager.cancel(TIMER_NOTIFICATION_ID)
+
+        if(killProcess){
+            stopKillAppDectectionService()
+        }
     }
 
     override fun onTimerStateChanged(updatedTimer: Timer) {
@@ -121,6 +136,8 @@ class TimerNotificationManager(private val context: Context,
             notificationManager.notify(
                     TIMER_NOTIFICATION_ID,
                     timerNotificationBuilder?.build())
+
+            startKillAppDectectionService()
         }
     }
 
@@ -189,6 +206,16 @@ class TimerNotificationManager(private val context: Context,
                     TIMER_NOTIFICATION_ID,
                     timerNotificationBuilder?.build())
         }
+    }
+
+    private fun startKillAppDectectionService(){
+        val serviceIntent = Intent(context, KillAppDetection::class.java)
+        context.startService(serviceIntent)
+    }
+
+    private fun stopKillAppDectectionService(){
+        val serviceIntent = Intent(context, KillAppDetection::class.java)
+        context.stopService(serviceIntent)
     }
 
     @TargetApi(Build.VERSION_CODES.O)
