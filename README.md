@@ -18,11 +18,8 @@ I would be very happy ! =)
 
 This is a list of future features which will come in the application :
 
-- Show mode to display a Timer in full screen.
-- the possibility to manually add an action already done.
-- The possibility to link timers between them to stop one when the other is started.
-- Possibility to delete a Timer by swiping on it.
-- Possibility to reorder Timers list.
+- Pomodoro timer which schedule 25 min of work and after 5 min of pause.
+- Possibility to manually add an action already done.
 - List of order activities in the day.
 - Curves to track your behavior during a day.
 - Add widget to the home screen to manage timers more easily.
