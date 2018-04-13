@@ -7,4 +7,7 @@
     <string name="menu_setting">Paramètres</string>
     <string name="home_dialog_confirm_reset_all_timers">Voulez vous vraiment remettre tous les chronomètres à 0 ?</string>
 
+    <!-- Bottom navigation view -->
+    <string name="bottom_navigation_timer_view">Chronomètre</string>
+
 </resources>
