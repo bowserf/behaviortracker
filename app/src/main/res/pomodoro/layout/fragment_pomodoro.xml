@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/pomodoro_spinner_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/pomodoro_spinner_action_rest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pomodoro_spinner_action" />
+
+    <TextView
+        android:id="@+id/pomodoro_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/default_space"
+        android:textSize="@dimen/text_size_xxxl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/pomodoro_reset_timer"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="14:27" />
+
+    <ImageView
+        android:id="@+id/pomodoro_reset_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white"
+        app:layout_constraintBottom_toBottomOf="@id/pomodoro_timer"
+        app:layout_constraintLeft_toRightOf="@id/pomodoro_timer"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pomodoro_timer" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/pomodoro_button_manage_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_space_2"
+        android:layout_marginRight="@dimen/default_space_2"
+        android:elevation="@dimen/default_space"
+        android:src="@drawable/ic_add_white"
+        app:fabSize="normal"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
