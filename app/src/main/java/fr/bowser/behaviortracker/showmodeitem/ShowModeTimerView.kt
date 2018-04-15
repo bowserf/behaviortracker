@@ -3,8 +3,9 @@ package fr.bowser.behaviortracker.showmodeitem
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.RippleDrawable
-import android.support.constraint.ConstraintLayout
+import android.view.Gravity
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
@@ -13,7 +14,7 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
-class ShowModeTimerView(context: Context) : ConstraintLayout(context),
+class ShowModeTimerView(context: Context) : LinearLayout(context),
         ShowModeTimerViewContract.View {
 
     @Inject
@@ -27,6 +28,9 @@ class ShowModeTimerView(context: Context) : ConstraintLayout(context),
         setupGraph()
 
         inflate(context, R.layout.item_show_mode, this)
+
+        orientation = LinearLayout.VERTICAL
+        gravity = Gravity.CENTER
 
         setOnClickListener { presenter.onClickView() }
 
