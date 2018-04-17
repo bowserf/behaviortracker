@@ -1,5 +1,7 @@
 # Timer
 
+<img src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/background/english/background.png" width="384" height="187" title="Op'Time">
+
 ## Goal
 
 Timer is a simple application helping you to track different moments of your day. If you have no
@@ -13,6 +15,14 @@ This application is my playground to test what I learned in Kotlin.
 It's also an app which can help me to be more productive by finding when I loose time during the day
 and fix this. If I can help other people with this application, to fix their time problems too,
 I would be very happy ! =)
+
+## Play store
+
+### Link
+
+https://play.google.com/store/apps/details?id=fr.bowser.time
+
+<img src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/screenshoot/timer_fragment_english.png" width="288" height="512" title="Timers list"> <img src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/screenshoot/create_timer_english.png" width="288" height="512" title="Create a timer">
 
 ## The future
 
