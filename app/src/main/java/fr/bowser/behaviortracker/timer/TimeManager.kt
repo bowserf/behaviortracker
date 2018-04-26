@@ -6,7 +6,7 @@ interface TimeManager {
 
     fun stopTimer(timer: Timer)
 
-    fun updateTime(timer: Timer, newTime: Long)
+    fun updateTime(timer: Timer, newTime: Float)
 
     fun registerUpdateTimerCallback(callback: TimerCallback): Boolean
 

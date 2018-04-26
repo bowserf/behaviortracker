@@ -125,7 +125,7 @@ class TimerNotificationManager(private val context: Context,
             timerNotificationBuilder = NotificationCompat.Builder(context, context.resources.getString(R.string.timer_notif_channel_id))
                     .setContentTitle(modifiedTimer.name)
                     .setContentText(TimeConverter.convertSecondsToHumanTime(
-                            modifiedTimer.currentTime))
+                            modifiedTimer.time.toLong()))
                     .setSmallIcon(R.drawable.ic_timer)
                     .setContentIntent(resultPendingIntent)
                     .setDeleteIntent(TimerReceiver.getDeletePendingIntent(context))
@@ -200,7 +200,7 @@ class TimerNotificationManager(private val context: Context,
 
     private fun updateTimeNotif() {
         timerNotificationBuilder?.setContentText(
-                TimeConverter.convertSecondsToHumanTime(timer!!.currentTime))
+                TimeConverter.convertSecondsToHumanTime(timer!!.time.toLong()))
         timerNotificationBuilder?.let {
             notificationManager.notify(
                     TIMER_NOTIFICATION_ID,

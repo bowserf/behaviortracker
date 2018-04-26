@@ -67,7 +67,7 @@ class TimerDAOTest {
 
         val timers = timerDAO.getTimers()
 
-        Assert.assertEquals(newCurrentTime, timers[0].currentTime)
+        Assert.assertEquals(newCurrentTime, timers[0].time.toLong())
     }
 
     @Test

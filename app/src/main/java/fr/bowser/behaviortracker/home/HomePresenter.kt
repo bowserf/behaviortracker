@@ -25,7 +25,7 @@ class HomePresenter(private val view: HomeContract.View,
     override fun onClickResetAllTimers() {
         val timers = timerListManager.getTimerList()
         timers.forEach { timer ->
-            timeManager.updateTime(timer, 0)
+            timeManager.updateTime(timer, 0f)
             timeManager.stopTimer(timer)
         }
     }

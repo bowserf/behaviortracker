@@ -9,7 +9,7 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
 
     private lateinit var timer: Timer
 
-    override fun start(){
+    override fun start() {
         timeManager.registerUpdateTimerCallback(updateTimerCallback)
     }
 
@@ -24,9 +24,9 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
     }
 
     override fun onClickView() {
-        if(timer.isActivate){
+        if (timer.isActivate) {
             timeManager.stopTimer(timer)
-        }else{
+        } else {
             timeManager.startTimer(timer)
         }
         view.statusUpdated(timer.isActivate)
@@ -40,8 +40,8 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
         }
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {
-            if(timer == updatedTimer) {
-                view.timerUpdated(timer.currentTime)
+            if (timer == updatedTimer) {
+                view.timerUpdated(timer.time.toLong())
             }
         }
 

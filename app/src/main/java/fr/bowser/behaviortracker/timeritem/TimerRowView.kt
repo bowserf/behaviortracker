@@ -77,7 +77,7 @@ class TimerRowView(context: Context) :
     fun setTimer(timer: Timer) {
         presenter.setTimer(timer)
 
-        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
+        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
         tvName.text = timer.name
         color.setBackgroundColor(ColorUtils.getColor(context!!, timer.color))
 
@@ -147,7 +147,7 @@ class TimerRowView(context: Context) :
         alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })
 
         val dialog = alertDialog.create()
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         dialog.show()
     }
 

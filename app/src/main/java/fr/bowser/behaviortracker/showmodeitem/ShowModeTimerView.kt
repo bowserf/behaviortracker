@@ -69,7 +69,7 @@ class ShowModeTimerView(context: Context) : LinearLayout(context),
         val drawable = background as RippleDrawable
         drawable.setColorFilter(ColorUtils.getColor(context, timer.color), PorterDuff.Mode.SRC_ATOP)
 
-        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
+        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
         timerName.text = timer.name
     }
 

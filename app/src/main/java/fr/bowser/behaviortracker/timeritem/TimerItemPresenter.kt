@@ -21,7 +21,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         timeManager.registerUpdateTimerCallback(updateTimerCallback)
 
         view.updateTimeModification(settingManager.getTimerModification())
-        view.timerUpdated(timer.currentTime)
+        view.timerUpdated(timer.time.toLong())
         view.statusUpdated(timer.isActivate)
     }
 
@@ -49,21 +49,21 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     override fun onClickDecreaseTime() {
-        timeManager.updateTime(timer, timer.currentTime - settingManager.getTimerModification())
+        timeManager.updateTime(timer, timer.time - settingManager.getTimerModification())
 
-        view.timerUpdated(timer.currentTime)
+        view.timerUpdated(timer.time.toLong())
     }
 
     override fun onClickIncreaseTime() {
-        timeManager.updateTime(timer, timer.currentTime + settingManager.getTimerModification())
+        timeManager.updateTime(timer, timer.time + settingManager.getTimerModification())
 
-        view.timerUpdated(timer.currentTime)
+        view.timerUpdated(timer.time.toLong())
     }
 
     override fun onClickResetTimer() {
-        timeManager.updateTime(timer, 0)
+        timeManager.updateTime(timer, 0f)
 
-        view.timerUpdated(timer.currentTime)
+        view.timerUpdated(timer.time.toLong())
     }
 
     override fun onClickRenameTimer() {
@@ -109,7 +109,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
                 override fun onTimerTimeChanged(updatedTimer: Timer) {
                     if (timer == updatedTimer) {
-                        view.timerUpdated(updatedTimer.currentTime)
+                        view.timerUpdated(updatedTimer.time.toLong())
                     }
                 }
             }
