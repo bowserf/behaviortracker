@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.notification.TimerNotificationManager
 
 class KillAppDetection : Service() {
 
-    private lateinit var notificationManager : TimerNotificationManager
+    private lateinit var notificationManager: TimerNotificationManager
 
     override fun onCreate() {
         super.onCreate()

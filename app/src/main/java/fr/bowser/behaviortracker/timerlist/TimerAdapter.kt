@@ -60,11 +60,11 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         notifyItemMoved(fromPosition, toPosition)
     }
 
-    fun getTimer(position: Int) : Timer{
+    fun getTimer(position: Int): Timer {
         return timerList[position]
     }
 
-    fun getTimerList() : List<Timer>{
+    fun getTimerList(): List<Timer> {
         return timerList
     }
 

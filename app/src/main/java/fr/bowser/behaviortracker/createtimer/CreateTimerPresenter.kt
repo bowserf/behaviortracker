@@ -24,7 +24,7 @@ class CreateTimerPresenter(private val view: CreateTimerContract.View,
         val timer = Timer(name, selectedColor)
         timerListManager.addTimer(timer)
 
-        if(startNow){
+        if (startNow) {
             timeManager.startTimer(timer)
         }
 

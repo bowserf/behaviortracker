@@ -46,7 +46,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
         }
     }
 
-    override fun reorderTimerList(timerList : List<Timer>){
+    override fun reorderTimerList(timerList: List<Timer>) {
         for (i in 0 until timerList.size) {
             val timer = timerList[i]
             timer.position = i

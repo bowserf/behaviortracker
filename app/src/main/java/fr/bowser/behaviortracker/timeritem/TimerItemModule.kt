@@ -17,7 +17,7 @@ class TimerItemModule(private val view: TimerItemContract.View) {
     fun provideTimerItemPresenter(timeManager: TimeManager,
                                   timerListManager: TimerListManager,
                                   timerNotificationManager: TimerNotificationManager,
-                                  settingManager: SettingManager): TimerItemPresenter{
+                                  settingManager: SettingManager): TimerItemPresenter {
         return TimerItemPresenter(
                 view,
                 timeManager,

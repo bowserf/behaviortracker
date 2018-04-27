@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils.replace
 import android.view.Menu
 import android.view.MenuItem
 import fr.bowser.behaviortracker.R
@@ -54,7 +55,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
                 presenter.onClickResetAll()
                 return true
             }
-            R.id.menu_settings ->  {
+            R.id.menu_settings -> {
                 presenter.onClickSettings()
                 return true
             }

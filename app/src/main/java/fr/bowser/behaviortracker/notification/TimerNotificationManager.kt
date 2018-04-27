@@ -63,14 +63,14 @@ class TimerNotificationManager(private val context: Context,
         stopKillAppDectectionService()
     }
 
-    fun removeNotification(killProcess: Boolean){
+    fun removeNotification(killProcess: Boolean) {
         if (!isNotificationDisplayed) {
             return
         }
 
         notificationManager.cancel(TIMER_NOTIFICATION_ID)
 
-        if(killProcess){
+        if (killProcess) {
             stopKillAppDectectionService()
         }
     }
@@ -208,12 +208,12 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    private fun startKillAppDectectionService(){
+    private fun startKillAppDectectionService() {
         val serviceIntent = Intent(context, KillAppDetection::class.java)
         context.startService(serviceIntent)
     }
 
-    private fun stopKillAppDectectionService(){
+    private fun stopKillAppDectectionService() {
         val serviceIntent = Intent(context, KillAppDetection::class.java)
         context.stopService(serviceIntent)
     }
