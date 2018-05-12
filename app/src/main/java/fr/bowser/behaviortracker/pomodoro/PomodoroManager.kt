@@ -1,100 +1,33 @@
 package fr.bowser.behaviortracker.pomodoro
 
-import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 
-class PomodoroManager(private val timeManager: TimeManager) {
-
-    var actionTimer: Timer? = null
-        private set
-    var restTimer: Timer? = null
-        private set
-
-    var pomodoroTime = 0L
-        private set
-    var currentTimer: Timer? = null
-        private set
-
-    var isRunning = false
-        private set
-    var isStarted = false
-        private set
-
-    var callback: Callback? = null
-
-    private var actionDuration = 0L
-    private var restDuration = 0L
+interface PomodoroManager {
 
     fun startPomodoro(actionTimer: Timer,
                       actionDuration: Long,
                       restTimer: Timer,
-                      restDuration: Long) {
-        this.actionTimer = actionTimer
-        this.restTimer = restTimer
-        this.actionDuration = actionDuration
-        this.restDuration = restDuration
+                      restDuration: Long)
 
-        currentTimer = actionTimer
-        pomodoroTime = actionDuration
+    fun resume()
 
-        isStarted = true
-        isRunning = true
+    fun pause()
 
-        timeManager.registerUpdateTimerCallback(timeManagerCallback)
+    fun stop()
 
-        timeManager.startTimer(currentTimer!!)
-    }
+    fun getPomodoroActionTimer(): Timer?
 
-    fun resume() {
-        if (!isStarted) {
-            return
-        }
-        isRunning = true
-        timeManager.startTimer(currentTimer!!)
-    }
+    fun getPomodoroRestTimer(): Timer?
 
-    fun pause() {
-        if (!isStarted) {
-            return
-        }
-        isRunning = false
-        timeManager.stopTimer(currentTimer!!)
-    }
+    fun isPomodoroStarted(): Boolean
 
-    fun stop() {
-        isStarted = false
-        actionTimer = null
-        restTimer = null
-        timeManager.unregisterUpdateTimerCallback(timeManagerCallback)
-    }
+    fun isPomodoroRunning(): Boolean
 
-    private val timeManagerCallback = object : TimeManager.TimerCallback {
-        override fun onTimerStateChanged(updatedTimer: Timer) {
-            if (actionTimer == updatedTimer || updatedTimer == restTimer) {
-                callback?.onTimerStateChanged(updatedTimer)
-            }
-        }
+    fun getPomodoroCurrentTimer(): Timer?
 
-        override fun onTimerTimeChanged(updatedTimer: Timer) {
-            if (updatedTimer != currentTimer) {
-                return
-            }
+    fun getPomodoroTime(): Long
 
-            pomodoroTime--
-            callback?.updateTime(currentTimer!!, pomodoroTime)
-
-            if (pomodoroTime > 0L) {
-                return
-            }
-
-            if (currentTimer == actionTimer) {
-                currentTimer = restTimer
-            } else if (currentTimer == restTimer) {
-                currentTimer = actionTimer
-            }
-            callback?.onCountFinished(currentTimer!!)
-        }
-    }
+    fun setPomodoroCallback(callback: Callback?)
 
     interface Callback {
         fun onTimerStateChanged(updatedTimer: Timer)

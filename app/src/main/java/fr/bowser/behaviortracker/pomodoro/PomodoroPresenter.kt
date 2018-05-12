@@ -12,17 +12,17 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         view.populateSpinnerAction(generateActionsForSpinnerAction())
         view.populateSpinnerRestAction(generateRestActionsForSpinnerAction())
 
-        pomodoroManager.callback = pomodoroManagerCallback
+        pomodoroManager.setPomodoroCallback(pomodoroManagerCallback)
 
-        if (!pomodoroManager.isStarted) {
+        if (!pomodoroManager.isPomodoroStarted()) {
             view.updatePomodoroTime(null, POMODORO_DURATION)
         } else {
             view.updatePomodoroTime(
-                    pomodoroManager.currentTimer,
-                    pomodoroManager.pomodoroTime)
+                    pomodoroManager.getPomodoroCurrentTimer(),
+                    pomodoroManager.getPomodoroTime())
         }
 
-        if (pomodoroManager.isRunning) {
+        if (pomodoroManager.isPomodoroRunning()) {
             view.startCurrentAction()
         } else {
             view.pauseCurrentAction()
@@ -30,7 +30,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     override fun stop() {
-        pomodoroManager.callback = null
+        pomodoroManager.setPomodoroCallback(null)
     }
 
     override fun onChangePomodoroStatus(actionPosition: Int, restTimerPosition: Int) {
@@ -38,7 +38,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
             return
         }
 
-        if (!pomodoroManager.isStarted) {
+        if (!pomodoroManager.isPomodoroStarted()) {
             pomodoroManager.startPomodoro(timerListManager.getTimerList()[actionPosition],
                     POMODORO_DURATION,
                     timerListManager.getTimerList()[restTimerPosition],
@@ -47,7 +47,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
             return
         }
 
-        if (pomodoroManager.isRunning) {
+        if (pomodoroManager.isPomodoroRunning()) {
             pomodoroManager.pause()
             view.pauseCurrentAction()
         } else {
@@ -90,8 +90,8 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     companion object {
-        private const val POMODORO_DURATION = (25 * 60).toLong()
-        private const val REST_DURATION = (5 * 60).toLong()
+        const val POMODORO_DURATION = (25 * 60).toLong()
+        const val REST_DURATION = (5 * 60).toLong()
     }
 
 }

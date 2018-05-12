@@ -11,7 +11,7 @@ class PomodoroManagerModule {
     @Singleton
     @Provides
     fun providePomodoroManager(timeManager: TimeManager): PomodoroManager {
-        return PomodoroManager(timeManager)
+        return PomodoroManagerImpl(timeManager)
     }
 
 }
