@@ -11,6 +11,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
 class PomodoroFragment : Fragment(), PomodoroContract.View {
@@ -39,6 +40,26 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI(view)
+    }
+
+    override fun populateSpinnerAction(actions: List<String>) {
+
+    }
+
+    override fun populateSpinnerRestAction(actions: List<String>) {
+
+    }
+
+    override fun startCurrentAction() {
+
+    }
+
+    override fun pauseCurrentAction() {
+
+    }
+
+    override fun updatePomodoroTime(timer: Timer?, pomodoroTime: Long) {
+
     }
 
     private fun setupGraph() {
