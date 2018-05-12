@@ -3,18 +3,20 @@ package fr.bowser.behaviortracker.utils
 object TimeConverter {
 
     @JvmStatic
-    fun convertSecondsToHumanTime(time: Long): String {
+    fun convertSecondsToHumanTime(time: Long, displayHours: Boolean = true): String {
         var remainingTime = time
         var string = ""
 
-        val hours = remainingTime / 3600
+        if(displayHours) {
+            val hours = remainingTime / 3600
 
-        if (hours < 10) {
-            string = "0"
+            if (hours < 10) {
+                string = "0"
+            }
+            string = "$string$hours:"
+
+            remainingTime %= 3600
         }
-        string = "$string$hours:"
-
-        remainingTime %= 3600
 
         val minutes = remainingTime / 60
         if (minutes < 10) {
