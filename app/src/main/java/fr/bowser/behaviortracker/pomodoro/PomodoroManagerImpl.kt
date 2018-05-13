@@ -65,6 +65,10 @@ class PomodoroManagerImpl(private val timeManager: TimeManager) : PomodoroManage
         timeManager.unregisterUpdateTimerCallback(timeManagerCallback)
     }
 
+    override fun resetPomodoroTimer() {
+        pomodoroTime = if (currentTimer == actionTimer) actionDuration else restDuration
+    }
+
     override fun getPomodoroActionTimer(): Timer? {
         return actionTimer
     }

@@ -57,6 +57,13 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         }
     }
 
+    override fun onClickResetPomodoroTimer() {
+        pomodoroManager.resetPomodoroTimer()
+        view.updatePomodoroTime(
+                pomodoroManager.getPomodoroCurrentTimer(),
+                pomodoroManager.getPomodoroTime())
+    }
+
     private fun generateActionsForSpinnerAction(): List<String> {
         val timerList = timerListManager.getTimerList()
         val spinnerActions = mutableListOf<String>()

@@ -89,6 +89,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     private fun initUI(view: View) {
         timer = view.findViewById(R.id.pomodoro_timer)
         resetTimer = view.findViewById(R.id.pomodoro_reset_timer)
+        resetTimer.setOnClickListener {
+            presenter.onClickResetPomodoroTimer()
+        }
         manageStatus = view.findViewById(R.id.pomodoro_button_manage_status)
         spinnerAction = view.findViewById(R.id.pomodoro_spinner_action)
         spinnerActionRest = view.findViewById(R.id.pomodoro_spinner_action_rest)

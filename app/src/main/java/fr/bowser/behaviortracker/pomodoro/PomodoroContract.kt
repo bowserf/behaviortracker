@@ -12,6 +12,8 @@ interface PomodoroContract {
 
         fun onChangePomodoroStatus(actionPosition: Int, restTimerPosition: Int)
 
+        fun onClickResetPomodoroTimer()
+
     }
 
     interface View {

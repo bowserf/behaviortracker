@@ -15,6 +15,8 @@ interface PomodoroManager {
 
     fun stop()
 
+    fun resetPomodoroTimer()
+
     fun getPomodoroActionTimer(): Timer?
 
     fun getPomodoroRestTimer(): Timer?
