@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
@@ -90,8 +91,8 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     companion object {
-        const val POMODORO_DURATION = (25 * 60).toLong()
-        const val REST_DURATION = (5 * 60).toLong()
+        val POMODORO_DURATION = if(BuildConfig.DEBUG) 10L else (25 * 60).toLong()
+        val REST_DURATION = if(BuildConfig.DEBUG) 5L else (5 * 60).toLong()
     }
 
 }
