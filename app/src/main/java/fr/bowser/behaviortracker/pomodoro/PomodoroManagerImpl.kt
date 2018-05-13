@@ -9,9 +9,9 @@ class PomodoroManagerImpl(private val timeManager: TimeManager) : PomodoroManage
 
     private var restTimer: Timer? = null
 
-    private var pomodoroTime = 0L
-
     private var currentTimer: Timer? = null
+
+    private var pomodoroTime = 0L
 
     private var isRunning = false
 
@@ -119,11 +119,20 @@ class PomodoroManagerImpl(private val timeManager: TimeManager) : PomodoroManage
                 return
             }
 
+            val previousTimer: Timer
             if (currentTimer == actionTimer) {
                 currentTimer = restTimer
-            } else if (currentTimer == restTimer) {
+                previousTimer = actionTimer!!
+                pomodoroTime = restDuration
+            } else {
                 currentTimer = actionTimer
+                previousTimer = restTimer!!
+                pomodoroTime = actionDuration
             }
+
+            timeManager.startTimer(currentTimer!!)
+            timeManager.stopTimer(previousTimer)
+
             callbacks.forEach { it.onCountFinished(currentTimer!!) }
         }
     }
