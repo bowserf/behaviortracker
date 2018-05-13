@@ -27,11 +27,17 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     @Inject
     lateinit var presenter: HomePresenter
 
+    private lateinit var pomodoroView: PomodoroFragment
+    private lateinit var timerView: TimerFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         setupGraph()
+
+        pomodoroView = PomodoroFragment()
+        timerView = TimerFragment()
 
         initializeToolbar()
 
@@ -106,13 +112,13 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     override fun displayPomodoroView() {
         supportFragmentManager.inTransaction {
-            replace(R.id.fragment_container, PomodoroFragment(), PomodoroFragment.TAG)
+            replace(R.id.fragment_container, pomodoroView, PomodoroFragment.TAG)
         }
     }
 
     override fun displayTimerView() {
         supportFragmentManager.inTransaction {
-            replace(R.id.fragment_container, TimerFragment(), TimerFragment.TAG)
+            replace(R.id.fragment_container, timerView, TimerFragment.TAG)
         }
     }
 
