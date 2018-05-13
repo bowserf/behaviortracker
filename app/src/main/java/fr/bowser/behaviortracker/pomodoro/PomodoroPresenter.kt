@@ -12,7 +12,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         view.populateSpinnerAction(generateActionsForSpinnerAction())
         view.populateSpinnerRestAction(generateRestActionsForSpinnerAction())
 
-        pomodoroManager.setPomodoroCallback(pomodoroManagerCallback)
+        pomodoroManager.addPomodoroCallback(pomodoroManagerCallback)
 
         if (!pomodoroManager.isPomodoroStarted()) {
             view.updatePomodoroTime(null, POMODORO_DURATION)
@@ -30,7 +30,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     override fun stop() {
-        pomodoroManager.setPomodoroCallback(null)
+        pomodoroManager.removePomodoroCallback(pomodoroManagerCallback)
     }
 
     override fun onChangePomodoroStatus(actionPosition: Int, restTimerPosition: Int) {

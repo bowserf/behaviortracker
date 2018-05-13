@@ -27,7 +27,9 @@ interface PomodoroManager {
 
     fun getPomodoroTime(): Long
 
-    fun setPomodoroCallback(callback: Callback?)
+    fun addPomodoroCallback(callback: Callback)
+
+    fun removePomodoroCallback(callback: Callback)
 
     interface Callback {
         fun onTimerStateChanged(updatedTimer: Timer)
