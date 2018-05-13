@@ -4,6 +4,10 @@ object TimeConverter {
 
     @JvmStatic
     fun convertSecondsToHumanTime(time: Long, displayHours: Boolean = true): String {
+        if(time < 0){
+            throw IllegalStateException("time can't be negative")
+        }
+
         var remainingTime = time
         var string = ""
 
