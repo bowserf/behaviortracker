@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
 class PomodoroFragment : Fragment(), PomodoroContract.View {
@@ -42,24 +44,38 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         initUI(view)
     }
 
-    override fun populateSpinnerAction(actions: List<String>) {
+    override fun onStart() {
+        super.onStart()
+        presenter.start()
+    }
 
+    override fun onStop() {
+        presenter.stop()
+        super.onStop()
+    }
+
+    override fun populateSpinnerAction(actions: List<String>) {
+        val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAction.adapter = adapter
     }
 
     override fun populateSpinnerRestAction(actions: List<String>) {
-
+        val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerActionRest.adapter = adapter
     }
 
     override fun startCurrentAction() {
-
+        manageStatus.setImageResource(R.drawable.ic_pause)
     }
 
     override fun pauseCurrentAction() {
-
+        manageStatus.setImageResource(R.drawable.ic_play)
     }
 
-    override fun updatePomodoroTime(timer: Timer?, pomodoroTime: Long) {
-
+    override fun updatePomodoroTime(currentTimer: Timer?, pomodoroTime: Long) {
+        timer.text = TimeConverter.convertSecondsToHumanTime(pomodoroTime, false)
     }
 
     private fun setupGraph() {
@@ -76,6 +92,11 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         manageStatus = view.findViewById(R.id.pomodoro_button_manage_status)
         spinnerAction = view.findViewById(R.id.pomodoro_spinner_action)
         spinnerActionRest = view.findViewById(R.id.pomodoro_spinner_action_rest)
+
+        manageStatus.setOnClickListener {
+            presenter.onChangePomodoroStatus(
+                    spinnerAction.selectedItemPosition, spinnerActionRest.selectedItemPosition)
+        }
     }
 
     companion object {
