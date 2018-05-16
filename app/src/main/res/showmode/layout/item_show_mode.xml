@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blue"
-    tools:gravity="center"
-    tools:orientation="vertical"
-    tools:parentTag="android.widget.LinearLayout">
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/blue"
+       tools:gravity="center"
+       tools:orientation="vertical"
+       tools:parentTag="android.widget.LinearLayout">
 
     <TextView
         android:id="@+id/show_mode_timer_time"
@@ -18,13 +18,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="00:12:48" />
+        tools:text="00:12:48"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_space_1_5"
-        android:layout_marginRight="@dimen/default_space_1_5"
+        android:layout_marginLeft="@dimen/default_space_3"
+        android:layout_marginRight="@dimen/default_space_3"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -33,15 +33,16 @@
             android:layout_width="@dimen/timer_play_pause_size"
             android:layout_height="@dimen/timer_play_pause_size"
             android:layout_marginRight="@dimen/default_space"
-            tools:src="@drawable/ic_play" />
+            tools:src="@drawable/ic_play"/>
 
         <TextView
             android:id="@+id/show_mode_timer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:maxLines="3"
             android:textSize="@dimen/show_mode_timer_name_text"
-            tools:text="Work" />
+            tools:text="Work"/>
 
     </LinearLayout>
 
