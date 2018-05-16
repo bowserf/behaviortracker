@@ -6,6 +6,8 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.inflate
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -144,7 +146,9 @@ class TimerRowView(context: Context) :
 
         alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })
 
-        alertDialog.show()
+        val dialog = alertDialog.create()
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.show()
     }
 
     override fun statusUpdated(activate: Boolean) {
