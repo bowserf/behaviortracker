@@ -22,9 +22,9 @@ interface PomodoroContract {
 
     interface View {
 
-        fun populateSpinnerAction(actions: List<String>)
+        fun populateSpinnerAction(actions: MutableList<String>)
 
-        fun populateSpinnerRestAction(actions: List<String>)
+        fun populateSpinnerRestAction(actions: MutableList<String>)
 
         fun startCurrentAction()
 
@@ -32,11 +32,13 @@ interface PomodoroContract {
 
         fun updatePomodoroTime(timer: Timer?, pomodoroTime: Long)
 
-        fun displayColorOfSelectedRestTimer(color: Int)
+        fun displayColorOfSelectedRestTimer(colorIndex: Int)
 
-        fun displayColorOfSelectedActionTimer(color: Int)
+        fun displayColorOfSelectedActionTimer(colorIndex: Int)
 
-        fun displayActionColorTimer(color: Int)
+        fun displayActionColorTimer(colorIndex: Int)
+
+        fun displayColorNoRest()
 
     }
 

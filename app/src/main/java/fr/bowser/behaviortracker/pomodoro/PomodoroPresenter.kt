@@ -67,16 +67,26 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     override fun onItemSelectedForAction(position: Int) {
-        val timer = timerListManager.getTimerList()[position]
-        view.displayColorOfSelectedActionTimer(timer.color)
+        if(position < timerListManager.getTimerList().size) {
+            val timer = timerListManager.getTimerList()[position]
+            view.displayColorOfSelectedActionTimer(timer.color)
+        }
     }
 
     override fun onItemSelectedForRest(position: Int) {
-        val timer = timerListManager.getTimerList()[position]
-        view.displayColorOfSelectedRestTimer(timer.color)
+        // position 0 is for "no rest timer"
+        if(position == 0){
+            view.displayColorNoRest()
+            return
+        }
+        val positionInTimerList = position - 1
+        if(positionInTimerList < timerListManager.getTimerList().size) {
+            val timer = timerListManager.getTimerList()[positionInTimerList]
+            view.displayColorOfSelectedRestTimer(timer.color)
+        }
     }
 
-    private fun generateActionsForSpinnerAction(): List<String> {
+    private fun generateActionsForSpinnerAction(): MutableList<String> {
         val timerList = timerListManager.getTimerList()
         val spinnerActions = mutableListOf<String>()
         for (timer in timerList) {
@@ -85,7 +95,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         return spinnerActions
     }
 
-    private fun generateRestActionsForSpinnerAction(): List<String> {
+    private fun generateRestActionsForSpinnerAction(): MutableList<String> {
         val timerList = timerListManager.getTimerList()
         val spinnerActions = mutableListOf<String>()
         for (timer in timerList) {

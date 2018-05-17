@@ -3,5 +3,6 @@
 
     <dimen name="pomodoro_timer_bg">260dp</dimen>
     <dimen name="pomodoro_container_padding">8dp</dimen>
+    <dimen name="pomodoro_stroke_width">4dp</dimen>
 
 </resources>

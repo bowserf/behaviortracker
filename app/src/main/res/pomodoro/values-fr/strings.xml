@@ -3,5 +3,6 @@
 
     <string name="pomodoro_choose_an_action">Action :</string>
     <string name="pomodoro_choose_rest">Repos :</string>
+    <string name="pomodoro_no_rest_timer">Pas de chornomètre</string>
 
 </resources>

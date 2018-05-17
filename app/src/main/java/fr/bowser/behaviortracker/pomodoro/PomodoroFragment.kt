@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.pomodoro
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,13 +55,14 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         super.onStop()
     }
 
-    override fun populateSpinnerAction(actions: List<String>) {
+    override fun populateSpinnerAction(actions: MutableList<String>) {
         val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerAction.adapter = adapter
     }
 
-    override fun populateSpinnerRestAction(actions: List<String>) {
+    override fun populateSpinnerRestAction(actions: MutableList<String>) {
+        actions.add(0, resources.getString(R.string.pomodoro_no_rest_timer))
         val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerActionRest.adapter = adapter
@@ -78,20 +80,33 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         timer.text = TimeConverter.convertSecondsToHumanTime(pomodoroTime, false)
     }
 
-    override fun displayColorOfSelectedRestTimer(color: Int) {
+    override fun displayColorOfSelectedRestTimer(colorIndex: Int) {
         val drawable = restContainer.background as GradientDrawable
-        drawable.setColor(ColorUtils.getColor(context!!, color))
+        val color = ColorUtils.getColor(context!!, colorIndex)
+        drawable.setColor(color)
+        drawable.setStroke(resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width), color)
     }
 
-    override fun displayColorOfSelectedActionTimer(color: Int) {
+    override fun displayColorOfSelectedActionTimer(colorIndex: Int) {
         val drawable = actionContainer.background as GradientDrawable
-        drawable.setColor(ColorUtils.getColor(context!!, color))
+        val color = ColorUtils.getColor(context!!, colorIndex)
+        drawable.setColor(color)
+        drawable.setStroke(resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width), color)
     }
 
-    override fun displayActionColorTimer(color: Int) {
+    override fun displayActionColorTimer(colorIndex: Int) {
         val drawable = timerBtn.background as GradientDrawable
-        drawable.setColor(ColorUtils.getColor(context!!, color))
-        drawable.setStroke(0, 0)
+        val color = ColorUtils.getColor(context!!, colorIndex)
+        drawable.setColor(color)
+        drawable.setStroke(resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width), color)
+    }
+
+    override fun displayColorNoRest() {
+        val drawable = restContainer.background as GradientDrawable
+        drawable.setColor(ContextCompat.getColor(context!!, android.R.color.transparent))
+        drawable.setStroke(
+                resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width),
+                ContextCompat.getColor(context!!, R.color.grey))
     }
 
     private fun setupGraph() {
