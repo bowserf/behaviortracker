@@ -40,11 +40,13 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         }
 
         if (!pomodoroManager.isPomodoroStarted()) {
-            pomodoroManager.startPomodoro(timerListManager.getTimerList()[actionPosition],
+            val actionTimer = timerListManager.getTimerList()[actionPosition]
+            pomodoroManager.startPomodoro(actionTimer,
                     POMODORO_DURATION,
                     timerListManager.getTimerList()[restTimerPosition],
                     REST_DURATION)
             view.startCurrentAction()
+            view.displayActionColorTimer(actionTimer.color)
             return
         }
 
@@ -62,6 +64,16 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         view.updatePomodoroTime(
                 pomodoroManager.getPomodoroCurrentTimer(),
                 pomodoroManager.getPomodoroTime())
+    }
+
+    override fun onItemSelectedForAction(position: Int) {
+        val timer = timerListManager.getTimerList()[position]
+        view.displayColorOfSelectedActionTimer(timer.color)
+    }
+
+    override fun onItemSelectedForRest(position: Int) {
+        val timer = timerListManager.getTimerList()[position]
+        view.displayColorOfSelectedRestTimer(timer.color)
     }
 
     private fun generateActionsForSpinnerAction(): List<String> {
@@ -92,7 +104,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         }
 
         override fun onCountFinished(newTimer: Timer) {
-            //TODO
+            view.displayActionColorTimer(newTimer.color)
         }
 
     }

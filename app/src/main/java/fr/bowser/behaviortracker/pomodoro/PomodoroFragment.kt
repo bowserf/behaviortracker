@@ -1,18 +1,16 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
@@ -22,10 +20,12 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     lateinit var presenter: PomodoroPresenter
 
     private lateinit var timer: TextView
-    private lateinit var resetTimer: ImageView
-    private lateinit var manageStatus: FloatingActionButton
+    private lateinit var timerBtn: View
     private lateinit var spinnerAction: Spinner
     private lateinit var spinnerActionRest: Spinner
+    private lateinit var timerStatus: ImageView
+    private lateinit var actionContainer: View
+    private lateinit var restContainer: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,15 +67,31 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     }
 
     override fun startCurrentAction() {
-        manageStatus.setImageResource(R.drawable.ic_pause)
+        timerStatus.setImageResource(R.drawable.ic_pause)
     }
 
     override fun pauseCurrentAction() {
-        manageStatus.setImageResource(R.drawable.ic_play)
+        timerStatus.setImageResource(R.drawable.ic_play)
     }
 
     override fun updatePomodoroTime(currentTimer: Timer?, pomodoroTime: Long) {
         timer.text = TimeConverter.convertSecondsToHumanTime(pomodoroTime, false)
+    }
+
+    override fun displayColorOfSelectedRestTimer(color: Int) {
+        val drawable = restContainer.background as GradientDrawable
+        drawable.setColor(ColorUtils.getColor(context!!, color))
+    }
+
+    override fun displayColorOfSelectedActionTimer(color: Int) {
+        val drawable = actionContainer.background as GradientDrawable
+        drawable.setColor(ColorUtils.getColor(context!!, color))
+    }
+
+    override fun displayActionColorTimer(color: Int) {
+        val drawable = timerBtn.background as GradientDrawable
+        drawable.setColor(ColorUtils.getColor(context!!, color))
+        drawable.setStroke(0, 0)
     }
 
     private fun setupGraph() {
@@ -87,16 +103,36 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     }
 
     private fun initUI(view: View) {
+        actionContainer = view.findViewById(R.id.pomodoro_container_action)
+        restContainer = view.findViewById(R.id.pomodoro_container_rest)
+
         timer = view.findViewById(R.id.pomodoro_timer)
-        resetTimer = view.findViewById(R.id.pomodoro_reset_timer)
-        resetTimer.setOnClickListener {
-            presenter.onClickResetPomodoroTimer()
-        }
-        manageStatus = view.findViewById(R.id.pomodoro_button_manage_status)
+        timerStatus = view.findViewById(R.id.pomodoro_timer_status)
+        timerBtn = view.findViewById(R.id.pomodoro_timer_bg)
         spinnerAction = view.findViewById(R.id.pomodoro_spinner_action)
         spinnerActionRest = view.findViewById(R.id.pomodoro_spinner_action_rest)
 
-        manageStatus.setOnClickListener {
+        spinnerAction.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // nothing to do
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                presenter.onItemSelectedForAction(position)
+            }
+        }
+
+        spinnerActionRest.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // nothing to do
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                presenter.onItemSelectedForRest(position)
+            }
+        }
+
+        timerBtn.setOnClickListener {
             presenter.onChangePomodoroStatus(
                     spinnerAction.selectedItemPosition, spinnerActionRest.selectedItemPosition)
         }

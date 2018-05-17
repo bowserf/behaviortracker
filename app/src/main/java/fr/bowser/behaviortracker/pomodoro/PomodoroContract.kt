@@ -14,6 +14,10 @@ interface PomodoroContract {
 
         fun onClickResetPomodoroTimer()
 
+        fun onItemSelectedForAction(position: Int)
+
+        fun onItemSelectedForRest(position: Int)
+
     }
 
     interface View {
@@ -27,6 +31,12 @@ interface PomodoroContract {
         fun pauseCurrentAction()
 
         fun updatePomodoroTime(timer: Timer?, pomodoroTime: Long)
+
+        fun displayColorOfSelectedRestTimer(color: Int)
+
+        fun displayColorOfSelectedActionTimer(color: Int)
+
+        fun displayActionColorTimer(color: Int)
 
     }
 

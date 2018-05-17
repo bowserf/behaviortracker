@@ -1,58 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/pomodoro_spinner_action"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/pomodoro_container_action"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="@dimen/default_space_4"
+        android:layout_marginRight="@dimen/default_space_4"
+        android:layout_marginBottom="@dimen/default_space_1_5"
+        android:background="@drawable/pomodoro_container_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/pomodoro_container_padding"
+        app:layout_constraintBottom_toTopOf="@id/pomodoro_timer_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
-    <Spinner
-        android:id="@+id/pomodoro_spinner_action_rest"
-        android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/pomodoro_timer_action_explication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_space"
+            android:text="@string/pomodoro_choose_an_action"/>
+
+        <Spinner
+            android:id="@+id/pomodoro_spinner_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pomodoro_container_rest"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pomodoro_spinner_action" />
+        android:layout_marginLeft="@dimen/default_space_4"
+        android:layout_marginTop="@dimen/default_space_1_5"
+        android:layout_marginRight="@dimen/default_space_4"
+        android:background="@drawable/pomodoro_container_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/pomodoro_container_padding"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pomodoro_timer_bg">
+
+        <TextView
+            android:id="@+id/pomodoro_timer_rest_explication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_space"
+            android:text="@string/pomodoro_choose_rest"/>
+
+        <Spinner
+            android:id="@+id/pomodoro_spinner_action_rest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/pomodoro_timer_bg"
+        android:layout_width="@dimen/pomodoro_timer_bg"
+        android:layout_height="@dimen/pomodoro_timer_bg"
+        android:background="@drawable/pomodoro_timer_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/pomodoro_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/default_space"
-        android:textSize="@dimen/text_size_xxxl"
+        android:textSize="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/pomodoro_reset_timer"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="14:27" />
+        tools:text="14:27"/>
 
     <ImageView
-        android:id="@+id/pomodoro_reset_timer"
+        android:id="@+id/pomodoro_timer_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_white"
-        android:tint="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@id/pomodoro_timer"
-        app:layout_constraintLeft_toRightOf="@id/pomodoro_timer"
+        android:tint="@color/grey"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pomodoro_timer" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/pomodoro_button_manage_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_space_2"
-        android:layout_marginRight="@dimen/default_space_2"
-        android:elevation="@dimen/default_space"
-        android:src="@drawable/ic_play"
-        android:tint="@color/white"
-        app:fabSize="normal"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pomodoro_timer"
+        tools:src="@drawable/ic_play"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pomodoro_choose_an_action">Action :</string>
+    <string name="pomodoro_choose_rest">Rest :</string>
+
+</resources>
