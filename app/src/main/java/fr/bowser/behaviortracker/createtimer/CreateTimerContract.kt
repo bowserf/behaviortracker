@@ -10,6 +10,8 @@ interface CreateTimerContract {
 
         fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int)
 
+        fun hideStartNow()
+
     }
 
     interface Presenter {
@@ -17,6 +19,8 @@ interface CreateTimerContract {
         fun createTimer(name: String, startNow: Boolean)
 
         fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int)
+
+        fun viewCreated(displayStartNow: Boolean)
 
     }
 

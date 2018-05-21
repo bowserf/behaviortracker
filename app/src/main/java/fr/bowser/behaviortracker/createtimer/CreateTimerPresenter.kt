@@ -36,4 +36,9 @@ class CreateTimerPresenter(private val view: CreateTimerContract.View,
         view.exitViewAfterSucceedTimerCreation()
     }
 
+    override fun viewCreated(displayStartNow: Boolean) {
+        if (!displayStartNow) {
+            view.hideStartNow()
+        }
+    }
 }

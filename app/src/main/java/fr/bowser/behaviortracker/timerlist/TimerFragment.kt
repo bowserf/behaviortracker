@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.annotation.Keep
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.NO_POSITION
@@ -79,7 +78,7 @@ class TimerFragment : Fragment(), TimerContract.View {
     }
 
     override fun displayCreateTimerView() {
-        CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
+        CreateTimerDialog.showDialog(activity!!)
     }
 
     override fun displayTimerList(timers: List<Timer>) {

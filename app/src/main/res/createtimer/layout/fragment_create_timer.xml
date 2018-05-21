@@ -55,7 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_space"
-                android:overScrollMode="never"/>
+                android:overScrollMode="never"
+                android:layout_marginBottom="@dimen/default_space"/>
 
             <CheckBox
                 android:id="@+id/start_after_creation"
@@ -64,7 +65,6 @@
                 android:layout_marginBottom="@dimen/default_space_1_5"
                 android:layout_marginEnd="@dimen/default_space_1_5"
                 android:layout_marginStart="@dimen/default_space_1_5"
-                android:layout_marginTop="@dimen/default_space"
                 android:text="@string/start_timer_after_creation"/>
 
         </LinearLayout>

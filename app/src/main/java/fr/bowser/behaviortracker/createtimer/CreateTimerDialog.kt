@@ -5,8 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
@@ -56,6 +56,9 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         initToolbar(view)
         initSpinner(view)
         initUI(view)
+
+        val displayStartNow = arguments?.getBoolean(ExtraDisplayStartNow) ?: false
+        presenter.viewCreated(displayStartNow)
     }
 
     override fun onStart() {
@@ -85,6 +88,10 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     override fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int) {
         chooseColor.adapter.notifyItemChanged(oldSelectedPosition)
         chooseColor.adapter.notifyItemChanged(selectedPosition)
+    }
+
+    override fun hideStartNow() {
+        startNow.visibility = View.GONE
     }
 
     private fun initSpinner(root: View) {
@@ -158,8 +165,13 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     companion object {
         private const val TAG = "CreateTimerActivity"
 
-        fun showDialog(activity: AppCompatActivity, isLargeScreen: Boolean) {
+        private const val ExtraDisplayStartNow = "createtimerdialog.extra.displaystartnow"
+
+        fun showDialog(activity: FragmentActivity, isLargeScreen: Boolean = true, displayStartNow: Boolean = false) {
             val newFragment = CreateTimerDialog()
+            val bundle = Bundle()
+            bundle.putBoolean(ExtraDisplayStartNow, displayStartNow)
+            newFragment.arguments = bundle
             if (isLargeScreen) {
                 // The device is using a large layout, so show the fragment as a dialog
                 newFragment.show(activity.supportFragmentManager, TAG)
