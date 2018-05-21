@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
@@ -56,6 +57,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     }
 
     override fun populateSpinnerAction(actions: MutableList<String>) {
+        actions.add(resources.getString(R.string.pomodoro_create_timer))
         val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerAction.adapter = adapter
@@ -107,6 +109,14 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         drawable.setStroke(
                 resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width),
                 ContextCompat.getColor(context!!, R.color.grey))
+    }
+
+    override fun createTimer() {
+        CreateTimerDialog.showDialog(activity!!)
+    }
+
+    override fun selectActionTimer(positionNewTimer: Int) {
+        spinnerAction.setSelection(positionNewTimer)
     }
 
     private fun setupGraph() {

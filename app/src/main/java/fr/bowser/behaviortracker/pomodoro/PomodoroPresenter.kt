@@ -28,9 +28,12 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         } else {
             view.pauseCurrentAction()
         }
+
+        timerListManager.registerTimerCallback(timerListManagerCallback)
     }
 
     override fun stop() {
+        timerListManager.unregisterTimerCallback(timerListManagerCallback)
         pomodoroManager.removePomodoroCallback(pomodoroManagerCallback)
     }
 
@@ -67,7 +70,11 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     override fun onItemSelectedForAction(position: Int) {
-        if(position < timerListManager.getTimerList().size) {
+        if (position == timerListManager.getTimerList().size) {
+            view.createTimer()
+        }
+
+        if (position < timerListManager.getTimerList().size) {
             val timer = timerListManager.getTimerList()[position]
             view.displayColorOfSelectedActionTimer(timer.color)
         }
@@ -75,12 +82,12 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
 
     override fun onItemSelectedForRest(position: Int) {
         // position 0 is for "no rest timer"
-        if(position == 0){
+        if (position == 0) {
             view.displayColorNoRest()
             return
         }
         val positionInTimerList = position - 1
-        if(positionInTimerList < timerListManager.getTimerList().size) {
+        if (positionInTimerList < timerListManager.getTimerList().size) {
             val timer = timerListManager.getTimerList()[positionInTimerList]
             view.displayColorOfSelectedRestTimer(timer.color)
         }
@@ -119,9 +126,25 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
 
     }
 
+    private val timerListManagerCallback = object : TimerListManager.TimerCallback {
+        override fun onTimerRemoved(updatedTimer: Timer) {
+            // nothing to do
+        }
+
+        override fun onTimerAdded(updatedTimer: Timer) {
+            view.populateSpinnerAction(generateActionsForSpinnerAction())
+            val positionNewTimer = timerListManager.getTimerList().indexOf(updatedTimer)
+            view.selectActionTimer(positionNewTimer)
+        }
+
+        override fun onTimerRenamed(updatedTimer: Timer) {
+            // nothing to do
+        }
+    }
+
     companion object {
-        val POMODORO_DURATION = if(BuildConfig.DEBUG) 10L else (25 * 60).toLong()
-        val REST_DURATION = if(BuildConfig.DEBUG) 5L else (5 * 60).toLong()
+        val POMODORO_DURATION = if (BuildConfig.DEBUG) 10L else (25 * 60).toLong()
+        val REST_DURATION = if (BuildConfig.DEBUG) 5L else (5 * 60).toLong()
     }
 
 }

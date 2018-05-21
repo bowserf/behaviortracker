@@ -27,7 +27,7 @@
             android:layout_marginRight="@dimen/default_space"
             android:text="@string/pomodoro_choose_an_action"/>
 
-        <Spinner
+        <fr.bowser.behaviortracker.pomodoro.SpinnerReselect
             android:id="@+id/pomodoro_spinner_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -56,7 +56,7 @@
             android:layout_marginRight="@dimen/default_space"
             android:text="@string/pomodoro_choose_rest"/>
 
-        <Spinner
+        <fr.bowser.behaviortracker.pomodoro.SpinnerReselect
             android:id="@+id/pomodoro_spinner_action_rest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

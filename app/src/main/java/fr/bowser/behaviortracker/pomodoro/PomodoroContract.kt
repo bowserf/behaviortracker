@@ -40,6 +40,10 @@ interface PomodoroContract {
 
         fun displayColorNoRest()
 
+        fun createTimer()
+
+        fun selectActionTimer(positionNewTimer: Int)
+
     }
 
 }
