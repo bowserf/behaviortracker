@@ -26,6 +26,8 @@ import javax.inject.Singleton
         TimerListManagerModule::class))
 interface BehaviorTrackerAppComponent {
 
+    fun provideContext(): Context
+
     fun provideDatabaseManager(): DatabaseManager
 
     fun provideTimeManager(): TimeManager
