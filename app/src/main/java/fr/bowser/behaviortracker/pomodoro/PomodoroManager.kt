@@ -36,7 +36,7 @@ interface PomodoroManager {
     interface Callback {
         fun onTimerStateChanged(updatedTimer: Timer)
         fun updateTime(timer: Timer, currentTime: Long)
-        fun onCountFinished(newTimer: Timer)
+        fun onCountFinished(newTimer: Timer, duration: Long)
     }
 
 }

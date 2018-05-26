@@ -137,7 +137,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager) : PomodoroManage
             timeManager.startTimer(currentTimer!!)
             timeManager.stopTimer(previousTimer)
 
-            callbacks.forEach { it.onCountFinished(currentTimer!!) }
+            callbacks.forEach { it.onCountFinished(currentTimer!!, pomodoroTime) }
         }
     }
 

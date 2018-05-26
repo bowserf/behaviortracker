@@ -151,12 +151,13 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
             view.updatePomodoroTime(timer, currentTime)
         }
 
-        override fun onCountFinished(newTimer: Timer) {
+        override fun onCountFinished(newTimer: Timer, duration: Long) {
             if (newTimer.id == DEFAULT_REST_TIMER_ID) {
                 view.displayActionDefaultRestTimer()
             } else {
                 view.displayActionColorTimer(newTimer.color)
             }
+            view.updatePomodoroTime(newTimer, duration)
         }
 
     }
