@@ -69,7 +69,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         }
     }
 
-    override fun populateSpinnerRestAction(actions: MutableList<String>) {
+    override fun populateSpinnerRest(actions: MutableList<String>) {
         actions.add(0, resources.getString(R.string.pomodoro_no_rest_timer))
         val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

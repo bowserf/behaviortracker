@@ -24,7 +24,7 @@ interface PomodoroContract {
 
         fun populateSpinnerAction(actions: MutableList<String>)
 
-        fun populateSpinnerRestAction(actions: MutableList<String>)
+        fun populateSpinnerRest(rest: MutableList<String>)
 
         fun startCurrentAction()
 

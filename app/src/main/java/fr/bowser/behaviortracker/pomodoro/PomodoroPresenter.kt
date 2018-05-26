@@ -11,7 +11,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
 
     override fun start() {
         view.populateSpinnerAction(generateActionsForSpinnerAction())
-        view.populateSpinnerRestAction(generateRestActionsForSpinnerAction())
+        view.populateSpinnerRest(generateRestForSpinnerRest())
 
         pomodoroManager.addPomodoroCallback(pomodoroManagerCallback)
 
@@ -108,7 +108,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         return spinnerActions
     }
 
-    private fun generateRestActionsForSpinnerAction(): MutableList<String> {
+    private fun generateRestForSpinnerRest(): MutableList<String> {
         val timerList = timerListManager.getTimerList()
         val spinnerActions = mutableListOf<String>()
         for (timer in timerList) {
@@ -139,6 +139,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
 
         override fun onTimerAdded(updatedTimer: Timer) {
             view.populateSpinnerAction(generateActionsForSpinnerAction())
+            view.populateSpinnerRest(generateRestForSpinnerRest())
             val positionNewTimer = timerListManager.getTimerList().indexOf(updatedTimer)
             view.selectActionTimer(positionNewTimer)
         }
