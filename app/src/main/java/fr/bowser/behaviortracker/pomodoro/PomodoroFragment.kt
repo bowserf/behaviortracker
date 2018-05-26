@@ -29,6 +29,8 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     private lateinit var actionContainer: View
     private lateinit var restContainer: View
 
+    private var notDisplayCreateTimer = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,6 +63,10 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerAction.adapter = adapter
+
+        if(actions.size == 1){
+            notDisplayCreateTimer = true
+        }
     }
 
     override fun populateSpinnerRestAction(actions: MutableList<String>) {
@@ -103,6 +109,14 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         drawable.setStroke(resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width), color)
     }
 
+    override fun displayColorNoAction() {
+        val drawable = actionContainer.background as GradientDrawable
+        drawable.setColor(ContextCompat.getColor(context!!, android.R.color.transparent))
+        drawable.setStroke(
+                resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width),
+                ContextCompat.getColor(context!!, R.color.grey))
+    }
+
     override fun displayColorNoRest() {
         val drawable = restContainer.background as GradientDrawable
         drawable.setColor(ContextCompat.getColor(context!!, android.R.color.transparent))
@@ -112,6 +126,10 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     }
 
     override fun createTimer() {
+        if(notDisplayCreateTimer){
+            notDisplayCreateTimer = false
+            return
+        }
         CreateTimerDialog.showDialog(activity!!)
     }
 

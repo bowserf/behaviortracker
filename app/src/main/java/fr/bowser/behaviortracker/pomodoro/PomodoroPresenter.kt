@@ -71,7 +71,9 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
 
     override fun onItemSelectedForAction(position: Int) {
         if (position == timerListManager.getTimerList().size) {
+            view.displayColorNoAction()
             view.createTimer()
+            return
         }
 
         if (position < timerListManager.getTimerList().size) {
