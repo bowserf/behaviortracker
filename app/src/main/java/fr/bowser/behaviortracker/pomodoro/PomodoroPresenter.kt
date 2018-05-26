@@ -13,6 +13,18 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         view.populateSpinnerAction(generateActionsForSpinnerAction())
         view.populateSpinnerRest(generateRestForSpinnerRest())
 
+        val actionTimer = pomodoroManager.getPomodoroActionTimer()
+        if(actionTimer != null) {
+            val position = timerListManager.getTimerList().indexOf(actionTimer)
+            view.selectActionTimer(position)
+        }
+
+        val restTimer = pomodoroManager.getPomodoroRestTimer()
+        if(restTimer != null) {
+            val position = timerListManager.getTimerList().indexOf(restTimer) + 1
+            view.selectRestTimer(position)
+        }
+
         pomodoroManager.addPomodoroCallback(pomodoroManagerCallback)
 
         if (!pomodoroManager.isPomodoroStarted()) {

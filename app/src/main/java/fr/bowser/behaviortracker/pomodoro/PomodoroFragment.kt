@@ -24,7 +24,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     private lateinit var timer: TextView
     private lateinit var timerBtn: View
     private lateinit var spinnerAction: Spinner
-    private lateinit var spinnerActionRest: Spinner
+    private lateinit var spinnerRest: Spinner
     private lateinit var timerStatus: ImageView
     private lateinit var actionContainer: View
     private lateinit var restContainer: View
@@ -73,7 +73,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         actions.add(0, resources.getString(R.string.pomodoro_no_rest_timer))
         val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, actions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerActionRest.adapter = adapter
+        spinnerRest.adapter = adapter
     }
 
     override fun startCurrentAction() {
@@ -137,6 +137,10 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         spinnerAction.setSelection(positionNewTimer)
     }
 
+    override fun selectRestTimer(position: Int) {
+        spinnerRest.setSelection(position)
+    }
+
     override fun noActionTimerSelected() {
         Toast.makeText(context,
                 R.string.pomodoro_no_action_timer_selected,
@@ -160,7 +164,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         timerStatus = view.findViewById(R.id.pomodoro_timer_status)
         timerBtn = view.findViewById(R.id.pomodoro_timer_bg)
         spinnerAction = view.findViewById(R.id.pomodoro_spinner_action)
-        spinnerActionRest = view.findViewById(R.id.pomodoro_spinner_action_rest)
+        spinnerRest = view.findViewById(R.id.pomodoro_spinner_action_rest)
 
         spinnerAction.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -172,7 +176,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
             }
         }
 
-        spinnerActionRest.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinnerRest.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // nothing to do
             }
@@ -184,7 +188,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
 
         timerBtn.setOnClickListener {
             presenter.onChangePomodoroStatus(
-                    spinnerAction.selectedItemPosition, spinnerActionRest.selectedItemPosition)
+                    spinnerAction.selectedItemPosition, spinnerRest.selectedItemPosition)
         }
     }
 
