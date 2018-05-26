@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.pomodoro
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.utils.FakeTimer
 
 class PomodoroPresenter(private val view: PomodoroContract.View,
                         private val pomodoroManager: PomodoroManager,
@@ -14,13 +15,13 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         view.populateSpinnerRest(generateRestForSpinnerRest())
 
         val actionTimer = pomodoroManager.getPomodoroActionTimer()
-        if(actionTimer != null) {
+        if (actionTimer != null) {
             val position = timerListManager.getTimerList().indexOf(actionTimer)
             view.selectActionTimer(position)
         }
 
         val restTimer = pomodoroManager.getPomodoroRestTimer()
-        if(restTimer != null) {
+        if (restTimer != null) {
             val position = timerListManager.getTimerList().indexOf(restTimer) + 1
             view.selectRestTimer(position)
         }
@@ -50,7 +51,7 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     override fun onChangePomodoroStatus(actionPosition: Int, restTimerPosition: Int) {
-        if(actionPosition == timerListManager.getTimerList().size){
+        if (actionPosition == timerListManager.getTimerList().size) {
             view.noActionTimerSelected()
         }
 
@@ -60,10 +61,14 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
 
         if (!pomodoroManager.isPomodoroStarted()) {
             val actionTimer = timerListManager.getTimerList()[actionPosition]
-            // remove 1 to rest position because of "no rest timer" to position 0
-            val restTimer = timerListManager.getTimerList()[restTimerPosition - 1]
+            val restTimer = if (restTimerPosition == 0) {
+                FakeTimer.timer
+            } else {
+                // remove 1 to rest position because of "no rest timer" to position 0
+                timerListManager.getTimerList()[restTimerPosition - 1]
+            }
 
-            if(actionTimer.id == restTimer.id){
+            if (actionTimer.id == restTimer.id) {
                 view.sameTimerIsSelectedForBothRoles()
                 return
             }
@@ -147,7 +152,11 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
         }
 
         override fun onCountFinished(newTimer: Timer) {
-            view.displayActionColorTimer(newTimer.color)
+            if (newTimer.id == DEFAULT_REST_TIMER_ID) {
+                view.displayActionDefaultRestTimer()
+            } else {
+                view.displayActionColorTimer(newTimer.color)
+            }
         }
 
     }
@@ -172,6 +181,8 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     companion object {
         val POMODORO_DURATION = if (BuildConfig.DEBUG) 10L else (25 * 60).toLong()
         val REST_DURATION = if (BuildConfig.DEBUG) 5L else (5 * 60).toLong()
+
+        const val DEFAULT_REST_TIMER_ID = -1L
     }
 
 }

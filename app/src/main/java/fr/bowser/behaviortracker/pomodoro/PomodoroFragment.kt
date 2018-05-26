@@ -109,6 +109,14 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         drawable.setStroke(resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width), color)
     }
 
+    override fun displayActionDefaultRestTimer() {
+        val drawable = timerBtn.background as GradientDrawable
+        drawable.setColor(ContextCompat.getColor(context!!, android.R.color.transparent))
+        drawable.setStroke(
+                resources.getDimensionPixelOffset(R.dimen.pomodoro_stroke_width),
+                ContextCompat.getColor(context!!, R.color.grey))
+    }
+
     override fun displayColorNoAction() {
         val drawable = actionContainer.background as GradientDrawable
         drawable.setColor(ContextCompat.getColor(context!!, android.R.color.transparent))

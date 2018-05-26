@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.timer
 
 import android.os.Handler
 import fr.bowser.behaviortracker.setting.SettingManager
+import fr.bowser.behaviortracker.utils.FakeTimer
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
@@ -70,8 +71,10 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
 
         timer.time = currentNewTime
 
-        launch(background) {
-            timerDAO.updateTimerTime(timer.id, timer.time.toLong())
+        if(timer.id != FakeTimer.timer.id) {
+            launch(background) {
+                timerDAO.updateTimerTime(timer.id, timer.time.toLong())
+            }
         }
 
         for (callback in listeners) {

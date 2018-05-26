@@ -15,6 +15,7 @@ import fr.bowser.behaviortracker.home.HomeActivity
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.utils.FakeTimer
 import fr.bowser.behaviortracker.utils.TimeConverter
 
 
@@ -76,6 +77,10 @@ class TimerNotificationManager(private val context: Context,
     }
 
     override fun onTimerStateChanged(updatedTimer: Timer) {
+        if(updatedTimer.id == FakeTimer.timer.id){
+            return
+        }
+
         if (updatedTimer.isActivate) {
             displayTimerNotif(updatedTimer)
         } else {
