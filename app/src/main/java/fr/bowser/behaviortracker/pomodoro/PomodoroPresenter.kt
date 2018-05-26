@@ -60,9 +60,11 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
 
         if (!pomodoroManager.isPomodoroStarted()) {
             val actionTimer = timerListManager.getTimerList()[actionPosition]
+            // remove 1 to rest position because of "no rest timer" to position 0
+            val restTimer = timerListManager.getTimerList()[restTimerPosition - 1]
             pomodoroManager.startPomodoro(actionTimer,
                     POMODORO_DURATION,
-                    timerListManager.getTimerList()[restTimerPosition],
+                    restTimer,
                     REST_DURATION)
             view.startCurrentAction()
             view.displayActionColorTimer(actionTimer.color)
