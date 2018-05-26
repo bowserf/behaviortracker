@@ -5,5 +5,6 @@
     <string name="pomodoro_choose_rest">Rest :</string>
     <string name="pomodoro_no_rest_timer">No rest timer</string>
     <string name="pomodoro_create_timer">Create timer</string>
+    <string name="pomodoro_no_action_timer_selected">Select a timer to start</string>
 
 </resources>

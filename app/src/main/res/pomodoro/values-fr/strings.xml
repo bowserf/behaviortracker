@@ -5,5 +5,6 @@
     <string name="pomodoro_choose_rest">Repos :</string>
     <string name="pomodoro_no_rest_timer">Pas de chronomètre</string>
     <string name="pomodoro_create_timer">Créer un chronomètre</string>
+    <string name="pomodoro_no_action_timer_selected">Sélectionnez un chronomètre pour commencer.</string>
 
 </resources>

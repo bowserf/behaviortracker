@@ -64,7 +64,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerAction.adapter = adapter
 
-        if(actions.size == 1){
+        if (actions.size == 1) {
             notDisplayCreateTimer = true
         }
     }
@@ -126,7 +126,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
     }
 
     override fun createTimer() {
-        if(notDisplayCreateTimer){
+        if (notDisplayCreateTimer) {
             notDisplayCreateTimer = false
             return
         }
@@ -135,6 +135,13 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
 
     override fun selectActionTimer(positionNewTimer: Int) {
         spinnerAction.setSelection(positionNewTimer)
+    }
+
+    override fun noActionTimerSelected() {
+        Toast.makeText(context,
+                R.string.pomodoro_no_action_timer_selected,
+                Toast.LENGTH_LONG)
+                .show()
     }
 
     private fun setupGraph() {

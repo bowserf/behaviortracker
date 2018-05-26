@@ -46,6 +46,8 @@ interface PomodoroContract {
 
         fun selectActionTimer(positionNewTimer: Int)
 
+        fun noActionTimerSelected()
+
     }
 
 }

@@ -38,6 +38,10 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
     }
 
     override fun onChangePomodoroStatus(actionPosition: Int, restTimerPosition: Int) {
+        if(actionPosition == timerListManager.getTimerList().size){
+            view.noActionTimerSelected()
+        }
+
         if (timerListManager.getTimerList().isEmpty()) {
             return
         }
