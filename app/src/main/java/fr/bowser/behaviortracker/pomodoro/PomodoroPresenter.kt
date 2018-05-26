@@ -62,6 +62,12 @@ class PomodoroPresenter(private val view: PomodoroContract.View,
             val actionTimer = timerListManager.getTimerList()[actionPosition]
             // remove 1 to rest position because of "no rest timer" to position 0
             val restTimer = timerListManager.getTimerList()[restTimerPosition - 1]
+
+            if(actionTimer.id == restTimer.id){
+                view.sameTimerIsSelectedForBothRoles()
+                return
+            }
+
             pomodoroManager.startPomodoro(actionTimer,
                     POMODORO_DURATION,
                     restTimer,

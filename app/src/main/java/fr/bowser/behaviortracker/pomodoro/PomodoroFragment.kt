@@ -148,6 +148,13 @@ class PomodoroFragment : Fragment(), PomodoroContract.View {
                 .show()
     }
 
+    override fun sameTimerIsSelectedForBothRoles() {
+        Toast.makeText(context,
+                R.string.pomodoro_cant_select_same_timer_for_rest_and_action,
+                Toast.LENGTH_LONG)
+                .show()
+    }
+
     private fun setupGraph() {
         val builder = DaggerPomodoroComponent.builder()
                 .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))

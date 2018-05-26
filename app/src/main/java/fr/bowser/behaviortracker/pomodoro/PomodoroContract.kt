@@ -50,6 +50,8 @@ interface PomodoroContract {
 
         fun noActionTimerSelected()
 
+        fun sameTimerIsSelectedForBothRoles()
+
     }
 
 }
