@@ -5,12 +5,21 @@
     <string name="activity_setting_title">Paramètres</string>
 
     <!-- UI -->
-    <string name="settings_category_timer">Chronomètres</string>
+    <string name="settings_category_timer">Chronomètre</string>
+    <string name="settings_category_other">Autre</string>
 
     <string name="settings_cell_one_active_timer">Un chronomètre actif à la fois</string>
     <string name="settings_cell_one_active_message">Arrêter le chronomètre actif précédent si un nouveau est démarré</string>
 
     <string name="settings_cell_time_modification_title">Modificateur de temps.</string>
     <string name="settings_cell_time_modification_message">Ajustez le temps passé sur vos actions</string>
+
+    <string name="settings_cell_send_commentary_title">Envoyer une suggestion</string>
+    <string name="settings_cell_send_commentary_message">Dites nous comment améliorer Op\'Time</string>
+
+    <!-- Send email -->
+    <string name="settings_send_email_choose_app">Envoyer un mail :</string>
+    <string name="settings_send_email_no_application_available">Aucune application disponible pour envoyer un mail</string>
+    <string name="settings_send_email_subject">Comment améliorer Op\'Time</string>
 
 </resources>

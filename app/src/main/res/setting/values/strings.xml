@@ -3,21 +3,32 @@
 
     <!-- Category keys -->
     <string name="pref_key_timer_category" translatable="false">pref_key_timer_category</string>
+    <string name="pref_key_timer_other" translatable="false">pref_key_timer_other</string>
 
     <!-- SharedPreferences keys -->
     <string name="pref_key_time_modification" translatable="false">pref_key_time_modification</string>
     <string name="pref_key_one_active_timer" translatable="false">pref_key_one_active_timer</string>
+    <string name="pref_key_send_commentary" translatable="false">pref_key_send_commentary</string>
 
     <!-- Activity -->
     <string name="activity_setting_title">Settings</string>
 
     <!-- UI -->
-    <string name="settings_category_timer">Timers</string>
+    <string name="settings_category_timer">Timer</string>
+    <string name="settings_category_other">Other</string>
 
     <string name="settings_cell_one_active_timer">One active timer at a time</string>
     <string name="settings_cell_one_active_message">Stop previous active timer if a new one is started</string>
 
     <string name="settings_cell_time_modification_title">Time modification</string>
     <string name="settings_cell_time_modification_message">Adjust time you spend on your actions</string>
+
+    <string name="settings_cell_send_commentary_title">Send a suggestion</string>
+    <string name="settings_cell_send_commentary_message">Tell us how to improve Op\'Time</string>
+
+    <!-- Send email -->
+    <string name="settings_send_email_choose_app">Send email :</string>
+    <string name="settings_send_email_no_application_available">There are no email clients installed.</string>
+    <string name="settings_send_email_subject">How to improve Op\'Time</string>
 
 </resources>

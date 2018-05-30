@@ -22,4 +22,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="@string/pref_key_timer_other"
+        android:title="@string/settings_category_other">
+
+        <Preference android:key="@string/pref_key_send_commentary"
+            android:title="@string/settings_cell_send_commentary_title"
+            android:summary="@string/settings_cell_send_commentary_message"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
