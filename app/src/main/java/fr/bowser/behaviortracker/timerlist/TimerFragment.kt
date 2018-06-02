@@ -64,6 +64,8 @@ class TimerFragment : Fragment(), TimerContract.View {
 
         emptyListView = view.findViewById(R.id.empty_list_view)
         emptyListText = view.findViewById(R.id.empty_list_text)
+
+        presenter.init()
     }
 
     override fun onStart() {

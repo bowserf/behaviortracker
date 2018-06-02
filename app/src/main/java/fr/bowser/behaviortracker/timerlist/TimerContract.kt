@@ -22,6 +22,8 @@ interface TimerContract {
 
     interface Presenter {
 
+        fun init()
+
         fun start()
 
         fun stop()

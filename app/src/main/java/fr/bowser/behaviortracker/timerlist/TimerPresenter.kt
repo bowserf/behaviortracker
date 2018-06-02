@@ -9,8 +9,7 @@ class TimerPresenter(private val view: TimerContract.View,
                      private val timerNotificationManager: TimerNotificationManager)
     : TimerContract.Presenter, TimerListManager.TimerCallback {
 
-    override fun start() {
-        timerListManager.registerTimerCallback(this)
+    override fun init() {
         val timers = timerListManager.getTimerList()
         view.displayTimerList(timers)
 
@@ -19,6 +18,10 @@ class TimerPresenter(private val view: TimerContract.View,
         } else {
             view.displayListView()
         }
+    }
+
+    override fun start() {
+        timerListManager.registerTimerCallback(this)
     }
 
     override fun stop() {
