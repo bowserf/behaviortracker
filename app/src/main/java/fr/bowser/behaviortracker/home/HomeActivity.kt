@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.text.TextUtils.replace
 import android.view.Menu
 import android.view.MenuItem
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.setting.SettingActivity
@@ -59,6 +59,9 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
                 presenter.onClickSettings()
                 return true
             }
+            R.id.menu_alarm -> {
+                presenter.onClickAlarm()
+            }
         }
         return false
     }
@@ -67,17 +70,23 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
         val builder = AlertDialog.Builder(this)
         builder.setMessage(message)
-                .setPositiveButton(android.R.string.yes, { dialog, which ->
+                .setPositiveButton(android.R.string.yes) { dialog, which ->
                     presenter.onClickResetAllTimers()
-                })
-                .setNegativeButton(android.R.string.no, { dialog, which ->
+                }
+                .setNegativeButton(android.R.string.no) { dialog, which ->
                     // do nothing
-                })
+                }
                 .show()
     }
 
     override fun displaySettingsView() {
         SettingActivity.startActivity(this)
+    }
+
+    override fun displayAlarmTimerDialog() {
+        val fragmentManager = supportFragmentManager
+        val alertDialog = AlarmTimerDialog.newInstance()
+        alertDialog.show(fragmentManager, AlarmTimerDialog.TAG)
     }
 
     private fun setupGraph() {

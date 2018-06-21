@@ -33,4 +33,8 @@ class HomePresenter(private val view: HomeContract.View,
     override fun onClickSettings() {
         view.displaySettingsView()
     }
+
+    override fun onClickAlarm() {
+        view.displayAlarmTimerDialog()
+    }
 }

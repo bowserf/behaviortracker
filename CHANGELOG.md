@@ -1,5 +1,18 @@
 ### Op'Time v0.2.1
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2018-06-20
+* Change log:
+    - Fix way timer time is computed because in some cases, background process was stopped so time didn't increase.
+    - Remove current notification if app is killed.
+    - Set max line and ellipsize end for very long timer name.
+    - Change icon.
+    - Send event for some user actions (create timer, change settings).
+    - User can send commentary for the application.
+
+
+
+### Op'Time v0.2.1
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2018-04-07
 * Change log:
     - Avoid to create a column in database for isActivate field of Timer class.

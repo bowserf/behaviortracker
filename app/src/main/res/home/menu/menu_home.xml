@@ -3,6 +3,12 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_alarm"
+        android:enabled="true"
+        android:title="@string/menu_alarm"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_reset_all"
         android:enabled="true"
         android:title="@string/menu_reset_all"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="alarm_timer_notif_channel_name">Alarme</string>
+    <string name="alarm_timer_notif_channel_description">Rappel pour commencer un chronomètre et </string>
+
+    <string name="alarm_timer_title">Souvenez vous de chronomètrer vos activités</string>
+    <string name="alarm_timer_content">Commencez la journée en chronométrant une activité</string>
+
+    <!-- Alarm dialog -->
+    <string name="alarm_timer_status">Activer l\'alarme</string>
+    <string name="alarm_timer_dialog_title">Rappel</string>
+    <string name="alarm_timer_dialog_content">Afficher un rappel pour suivre vos activités.</string>
+
+    <string name="alarm_timer_alarm_enabled">L\'alarme vient d\'être activée</string>
+    <string name="alarm_timer_alarm_disabled">L\'alarme vient d\'être désactivée</string>
+
+</resources>

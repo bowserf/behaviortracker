@@ -15,7 +15,10 @@ internal class HomeModule(private val homeView: HomeContract.View) {
     fun provideHomePresenter(timerNotificationManager: TimerNotificationManager,
                              timeManager: TimeManager,
                              timerListManager: TimerListManager): HomePresenter {
-        return HomePresenter(homeView, timerNotificationManager, timeManager, timerListManager)
+        return HomePresenter(homeView,
+                timerNotificationManager,
+                timeManager,
+                timerListManager)
     }
 
 }

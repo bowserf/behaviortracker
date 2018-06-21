@@ -3,6 +3,9 @@ package fr.bowser.behaviortracker.config
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import fr.bowser.behaviortracker.alarm.AlarmStorageManager
+import fr.bowser.behaviortracker.alarm.AlarmTimerManager
+import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.event.EventManager
@@ -23,6 +26,7 @@ import javax.inject.Singleton
         TimeNotificationManagerModule::class,
         SettingManagerModule::class,
         EventManagerModule::class,
+        AlarmTimerManagerModule::class,
         TimerListManagerModule::class))
 interface BehaviorTrackerAppComponent {
 
@@ -39,6 +43,10 @@ interface BehaviorTrackerAppComponent {
     fun provideSettingManager(): SettingManager
 
     fun provideEventManager(): EventManager
+
+    fun provideAlarmTimerManager(): AlarmTimerManager
+
+    fun provideAlarmStorageManager(): AlarmStorageManager
 
     @Component.Builder
     interface Builder {

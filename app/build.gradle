@@ -92,6 +92,7 @@ android {
                     'src/main/res/notification',
                     'src/main/res/setting',
                     'src/main/res/showmode',
+                    'src/main/res/alarm',
             ]
         }
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())

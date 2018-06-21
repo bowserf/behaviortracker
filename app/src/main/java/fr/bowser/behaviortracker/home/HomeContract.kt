@@ -8,6 +8,8 @@ interface HomeContract {
 
         fun displaySettingsView()
 
+        fun displayAlarmTimerDialog()
+
     }
 
     interface Presenter {
@@ -21,6 +23,8 @@ interface HomeContract {
         fun onClickResetAllTimers()
 
         fun onClickSettings()
+
+        fun onClickAlarm()
 
     }
 
