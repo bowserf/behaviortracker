@@ -35,7 +35,7 @@ class AlarmNotification {
                     .setContentText(context.resources.getString(R.string.alarm_timer_content))
                     .setSmallIcon(R.drawable.ic_timer)
                     .setAutoCancel(true)
-                    .setLights(Color.YELLOW, 500, 2000)
+                    .setLights(Color.YELLOW, 500, 3000)
                     .setContentIntent(resultPendingIntent)
 
             notificationManager.notify(
