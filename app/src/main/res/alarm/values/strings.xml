@@ -5,7 +5,7 @@
     <string name="alarm_timer_notif_channel_name">Alarm</string>
     <string name="alarm_timer_notif_channel_description">Remind you to start a timer to track your activities</string>
 
-    <string name="alarm_timer_title">Remember to track your daily activities</string>
+    <string name="alarm_timer_title">Track daily activities</string>
     <string name="alarm_timer_content">Start the day by tracking your first activity</string>
 
     <!-- Alarm dialog -->
@@ -13,7 +13,7 @@
     <string name="alarm_timer_dialog_title">Reminder</string>
     <string name="alarm_timer_dialog_content">Remind you to track your activities.</string>
 
-    <string name="alarm_timer_alarm_enabled">Alarm has been activated</string>
-    <string name="alarm_timer_alarm_disabled">Alarm is now disabled</string>
+    <string name="alarm_timer_alarm_enabled">Alarm is activated</string>
+    <string name="alarm_timer_alarm_disabled">Alarm is disabled</string>
 
 </resources>
