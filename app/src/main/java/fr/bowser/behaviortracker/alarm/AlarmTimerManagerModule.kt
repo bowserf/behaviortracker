@@ -11,13 +11,13 @@ class AlarmTimerManagerModule {
     @Singleton
     @Provides
     fun provideAlarmStorageManager(context: Context): AlarmStorageManager {
-        return AlarmStorageManager(context)
+        return AlarmStorageManagerImpl(context)
     }
 
     @Singleton
     @Provides
     fun provideAlarmTimerManager(context: Context, alarmStorageManager: AlarmStorageManager): AlarmTimerManager {
-        return AlarmTimerManager(context, alarmStorageManager)
+        return AlarmTimerManagerImpl(context, alarmStorageManager)
     }
 
 }

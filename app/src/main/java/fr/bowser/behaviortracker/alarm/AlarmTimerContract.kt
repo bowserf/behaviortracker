@@ -6,13 +6,13 @@ interface AlarmTimerContract {
 
         fun start()
 
-        fun onClickValidate(alarmTime: AlarmStorageManager.AlarmTime)
+        fun onClickValidate(alarmTime: AlarmTime)
 
     }
 
     interface View {
 
-        fun restoreAlarmStatus(alarmTime: AlarmStorageManager.AlarmTime)
+        fun restoreAlarmStatus(alarmTime: AlarmTime)
 
         fun displayMessageAlarmEnabled()
 

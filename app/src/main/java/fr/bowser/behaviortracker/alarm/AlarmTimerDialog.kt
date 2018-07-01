@@ -46,7 +46,7 @@ class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
                 hour = timerPicker.currentHour
                 minute = timerPicker.currentMinute
             }
-            val alarmTime = AlarmStorageManager.AlarmTime(hour, minute, alarmStatus.isChecked)
+            val alarmTime = AlarmTime(hour, minute, alarmStatus.isChecked)
             presenter.onClickValidate(alarmTime)
         }
         dialogBuilder.setNegativeButton(android.R.string.cancel, null)
@@ -62,7 +62,7 @@ class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
     }
 
     @Suppress("DEPRECATION")
-    override fun restoreAlarmStatus(alarmTime: AlarmStorageManager.AlarmTime) {
+    override fun restoreAlarmStatus(alarmTime: AlarmTime) {
         alarmStatus.isChecked = alarmTime.isActivated
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             timerPicker.hour = alarmTime.hour
