@@ -1,6 +1,6 @@
-### Op'Time v0.2.1
+### Op'Time v0.3.0
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
-* Date :  2018-06-20
+* Date :  2018-07-01
 * Change log:
     - Fix way timer time is computed because in some cases, background process was stopped so time didn't increase.
     - Remove current notification if app is killed.
