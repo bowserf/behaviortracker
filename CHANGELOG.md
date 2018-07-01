@@ -8,6 +8,7 @@
     - Change icon.
     - Send event for some user actions (create timer, change settings).
     - User can send commentary for the application.
+    - Alarm to display a notification and remind the user to track his activities.
 
 
 
