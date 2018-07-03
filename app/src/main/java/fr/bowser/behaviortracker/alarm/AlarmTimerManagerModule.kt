@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.alarm
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import fr.bowser.behaviortracker.BuildConfig
 import javax.inject.Singleton
 
 @Module
@@ -11,7 +12,11 @@ class AlarmTimerManagerModule {
     @Singleton
     @Provides
     fun provideAlarmStorageManager(context: Context): AlarmStorageManager {
-        return AlarmStorageManagerImpl(context)
+        if(BuildConfig.UA){
+            return AlarmStorageManagerUA()
+        }else {
+            return AlarmStorageManagerImpl(context)
+        }
     }
 
     @Singleton

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="release_screenshot_timer_work">Travail</string>
+    <string name="release_screenshot_timer_transport">Transport</string>
+    <string name="release_screenshot_timer_sport">Sport</string>
+
+</resources>

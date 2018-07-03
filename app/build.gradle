@@ -39,9 +39,16 @@ android {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'boolean', 'UA', 'false'
         }
         debug {
             versionNameSuffix ".dev"
+            buildConfigField 'boolean', 'UA', 'false'
+        }
+        ua {
+            initWith debug
+            versionNameSuffix ".ua"
+            buildConfigField 'boolean', 'UA', 'true'
         }
     }
 
@@ -64,6 +71,7 @@ android {
                     'src/main/res/setting',
                     'src/main/res/showmode',
                     'src/main/res/alarm',
+                    'src/main/res/ua',
             ]
         }
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
