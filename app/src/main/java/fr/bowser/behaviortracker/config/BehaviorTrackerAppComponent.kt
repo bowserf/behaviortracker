@@ -14,10 +14,7 @@ import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
-import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.timer.TimeManagerModule
-import fr.bowser.behaviortracker.timer.TimerListManager
-import fr.bowser.behaviortracker.timer.TimerListManagerModule
+import fr.bowser.behaviortracker.timer.*
 import javax.inject.Singleton
 
 @Singleton
@@ -33,6 +30,8 @@ interface BehaviorTrackerAppComponent {
     fun provideContext(): Context
 
     fun provideDatabaseManager(): DatabaseManager
+
+    fun provideTimerDAO(): TimerDAO
 
     fun provideTimeManager(): TimeManager
 

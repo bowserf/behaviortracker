@@ -3,7 +3,6 @@ package fr.bowser.behaviortracker.timer
 import android.os.Handler
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import javax.inject.Singleton
 
@@ -12,8 +11,8 @@ class TimeManagerModule {
 
     @Singleton
     @Provides
-    fun provideTimeManager(databaseManager: DatabaseManager, settingManager: SettingManager): TimeManager {
-        return TimeManagerImpl(databaseManager.provideTimerDAO(), settingManager, Handler())
+    fun provideTimeManager(timerDAO: TimerDAO, settingManager: SettingManager): TimeManager {
+        return TimeManagerImpl(timerDAO, settingManager, Handler())
     }
 
 }
