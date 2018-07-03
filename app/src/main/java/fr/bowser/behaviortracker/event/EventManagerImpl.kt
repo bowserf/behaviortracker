@@ -11,7 +11,7 @@ class EventManagerImpl(context: Context) : EventManager {
     override fun sendTimerCreateEvent(startNow: Boolean) {
         val bundle = Bundle()
         bundle.putBoolean(EVENT_EXTRA_TIMER_CREATED, startNow)
-        firebaseAnalytics.logEvent(EVENT_TIMER_CREATED, null)
+        firebaseAnalytics.logEvent(EVENT_TIMER_CREATED, bundle)
     }
 
     override fun sendExclusiveTimerMode(isExclusive: Boolean) {
@@ -28,7 +28,7 @@ class EventManagerImpl(context: Context) : EventManager {
 
     companion object {
         const val EVENT_TIMER_CREATED = "timer_created"
-        const val EVENT_EXTRA_TIMER_CREATED = "v"
+        const val EVENT_EXTRA_TIMER_CREATED = "start_now"
 
         const val EVENT_EXCLUSIVE_TIMER_MODE = "exclusive_timer_mode"
         const val EVENT_EXTRA_EXCLUSIVE_TIMER_MODE = "is_exclusive"
