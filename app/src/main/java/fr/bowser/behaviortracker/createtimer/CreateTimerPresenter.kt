@@ -4,16 +4,17 @@ import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.utils.ColorUtils
 
 class CreateTimerPresenter(private val view: CreateTimerContract.View,
                            private val timerListManager: TimerListManager,
                            private val timeManager: TimeManager,
                            private val eventManager: EventManager) : CreateTimerContract.Presenter {
 
-    private var selectedColor: Int = 0
+    private var colorPosition: Int = 0
 
     override fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int) {
-        selectedColor = selectedPosition
+        colorPosition = selectedPosition
         view.updateColorList(oldSelectedPosition, selectedPosition)
     }
 
@@ -23,7 +24,7 @@ class CreateTimerPresenter(private val view: CreateTimerContract.View,
             return
         }
 
-        val timer = Timer(name, selectedColor)
+        val timer = Timer(name, ColorUtils.convertPositionToColor(colorPosition))
         timerListManager.addTimer(timer)
 
         eventManager.sendTimerCreateEvent(startNow)
