@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.home
 
 import dagger.Module
 import dagger.Provides
+import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -14,11 +15,13 @@ internal class HomeModule(private val homeView: HomeContract.View) {
     @Provides
     fun provideHomePresenter(timerNotificationManager: TimerNotificationManager,
                              timeManager: TimeManager,
-                             timerListManager: TimerListManager): HomePresenter {
+                             timerListManager: TimerListManager,
+                             eventManager: EventManager): HomePresenter {
         return HomePresenter(homeView,
                 timerNotificationManager,
                 timeManager,
-                timerListManager)
+                timerListManager,
+                eventManager)
     }
 
 }

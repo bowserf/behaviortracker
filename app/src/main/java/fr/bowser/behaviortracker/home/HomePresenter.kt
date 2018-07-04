@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.home
 
+import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -7,7 +8,8 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 class HomePresenter(private val view: HomeContract.View,
                     private val timerNotificationManager: TimerNotificationManager,
                     private val timeManager: TimeManager,
-                    private val timerListManager: TimerListManager)
+                    private val timerListManager: TimerListManager,
+                    private val eventManager: EventManager)
     : HomeContract.Presenter {
 
     override fun start() {
@@ -36,5 +38,9 @@ class HomePresenter(private val view: HomeContract.View,
 
     override fun onClickAlarm() {
         view.displayAlarmTimerDialog()
+    }
+
+    override fun onAlarmNotificationClicked() {
+        eventManager.sendAlarmNotificationClickedEvent()
     }
 }

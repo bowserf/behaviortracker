@@ -1,7 +1,10 @@
 package fr.bowser.behaviortracker.alarm
 
+import fr.bowser.behaviortracker.event.EventManager
+
 class AlarmDialogPresenter(private val view: AlarmTimerContract.View,
-                           private val alarmTimerManager: AlarmTimerManager) : AlarmTimerContract.Presenter {
+                           private val alarmTimerManager: AlarmTimerManager,
+                           private val eventManager: EventManager) : AlarmTimerContract.Presenter {
 
     override fun start() {
         val alarmTimer = alarmTimerManager.getSavedAlarmTimer()
@@ -9,13 +12,14 @@ class AlarmDialogPresenter(private val view: AlarmTimerContract.View,
     }
 
     override fun onClickValidate(alarmTime: AlarmTime) {
-        if(alarmTime.isActivated) {
+        if (alarmTime.isActivated) {
             view.displayMessageAlarmEnabled()
             alarmTimerManager.setAlarm(alarmTime.hour, alarmTime.minute)
-        }else{
+        } else {
             view.displayMessageAlarmDisabled()
             alarmTimerManager.removeAlarm()
         }
+        eventManager.sendSetAlarmEvent(alarmTime.isActivated)
     }
 
 }

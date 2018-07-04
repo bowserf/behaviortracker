@@ -26,6 +26,8 @@ interface HomeContract {
 
         fun onClickAlarm()
 
+        fun onAlarmNotificationClicked()
+
     }
 
 }

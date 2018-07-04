@@ -26,7 +26,28 @@ class EventManagerImpl(context: Context) : EventManager {
         firebaseAnalytics.logEvent(EVENT_NEW_TIMER_FIX_TIMER_DURATION, bundle)
     }
 
+    override fun sendSetAlarmEvent(enable: Boolean) {
+        val bundle = Bundle()
+        bundle.putBoolean(EVENT_EXTRA_ENABLE_ALARM, enable)
+        firebaseAnalytics.logEvent(EVENT_SET_ALARM, bundle)
+    }
+
+    override fun sendDisplayAlarmNotificationEvent() {
+        firebaseAnalytics.logEvent(EVENT_ALARM_NOTIF_DISPLAYED, null)
+    }
+
+    override fun sendAlarmNotificationClickedEvent() {
+        firebaseAnalytics.logEvent(EVENT_ALARM_NOTIF_CLICKED, null)
+    }
+
     companion object {
+        const val EVENT_ALARM_NOTIF_CLICKED = "click_alarm_notif"
+
+        const val EVENT_ALARM_NOTIF_DISPLAYED = "display_alarm_notif"
+
+        const val EVENT_SET_ALARM = "set_alarm"
+        const val EVENT_EXTRA_ENABLE_ALARM = "is_enable"
+
         const val EVENT_TIMER_CREATED = "timer_created"
         const val EVENT_EXTRA_TIMER_CREATED = "start_now"
 

@@ -11,55 +11,59 @@ import android.graphics.Color
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home.HomeActivity
 
-class AlarmNotification {
+object AlarmNotification {
 
-    companion object {
-        private const val ALARM_NOTIFICATION_ID = 786
+    const val INTENT_EXTRA_ALARM_REQUEST_CODE = "alarm_notification.intent_extra.alarm_clicked"
 
-        fun displayAlarmNotif(context: Context) {
-            val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    private const val ALARM_NOTIFICATION_ID = 786
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                generateNotificationChannel(notificationManager, context.resources)
-            }
+    fun displayAlarmNotif(context: Context) {
+        val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            val homeIntent = Intent(context, HomeActivity::class.java)
-            homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            val resultPendingIntent = PendingIntent.getActivity(
-                    context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-            val notifBuilder = NotificationCompat.Builder(context, context.resources.getString(R.string.alarm_timer_notif_channel_id))
-                    .setContentTitle(context.resources.getString(R.string.alarm_timer_title))
-                    .setContentText(context.resources.getString(R.string.alarm_timer_content))
-                    .setSmallIcon(R.drawable.ic_timer)
-                    .setAutoCancel(true)
-                    .setLights(Color.YELLOW, 500, 3000)
-                    .setContentIntent(resultPendingIntent)
-
-            notificationManager.notify(
-                    ALARM_NOTIFICATION_ID,
-                    notifBuilder.build())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            generateNotificationChannel(notificationManager, context.resources)
         }
 
-        @TargetApi(Build.VERSION_CODES.O)
-        private fun generateNotificationChannel(notificationManager: NotificationManager, res: Resources) {
-            val channelId = res.getString(R.string.alarm_timer_notif_channel_id)
-            val channelName = res.getString(R.string.alarm_timer_notif_channel_name)
-            val channelDescription = res.getString(R.string.alarm_timer_notif_channel_description)
-            val channelImportance = NotificationManager.IMPORTANCE_LOW
-            val notificationChannel = NotificationChannel(
-                    channelId,
-                    channelName,
-                    channelImportance)
-            notificationChannel.description = channelDescription
-            notificationChannel.enableVibration(false)
-            notificationChannel.enableLights(true)
-            notificationChannel.setShowBadge(false)
-            notificationManager.createNotificationChannel(notificationChannel)
-        }
+        val homeIntent = Intent(context, HomeActivity::class.java)
+        homeIntent.putExtra(INTENT_EXTRA_ALARM_REQUEST_CODE, true)
+        homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        val resultPendingIntent = PendingIntent.getActivity(
+                context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
+        val notifBuilder = NotificationCompat.Builder(context, context.resources.getString(R.string.alarm_timer_notif_channel_id))
+                .setContentTitle(context.resources.getString(R.string.alarm_timer_title))
+                .setContentText(context.resources.getString(R.string.alarm_timer_content))
+                .setSmallIcon(R.drawable.ic_timer)
+                .setAutoCancel(true)
+                .setLights(Color.YELLOW, 500, 3000)
+                .setContentIntent(resultPendingIntent)
+
+        notificationManager.notify(
+                ALARM_NOTIFICATION_ID,
+                notifBuilder.build())
+
+        val eventManager = BehaviorTrackerApp.getAppComponent(context).provideEventManager()
+        eventManager.sendDisplayAlarmNotificationEvent()
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private fun generateNotificationChannel(notificationManager: NotificationManager, res: Resources) {
+        val channelId = res.getString(R.string.alarm_timer_notif_channel_id)
+        val channelName = res.getString(R.string.alarm_timer_notif_channel_name)
+        val channelDescription = res.getString(R.string.alarm_timer_notif_channel_description)
+        val channelImportance = NotificationManager.IMPORTANCE_LOW
+        val notificationChannel = NotificationChannel(
+                channelId,
+                channelName,
+                channelImportance)
+        notificationChannel.description = channelDescription
+        notificationChannel.enableVibration(false)
+        notificationChannel.enableLights(true)
+        notificationChannel.setShowBadge(false)
+        notificationManager.createNotificationChannel(notificationChannel)
     }
 
 }

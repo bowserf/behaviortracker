@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.alarm.AlarmNotification
 import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
@@ -32,6 +34,13 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         displayTimerFragment()
 
         manageIntent()
+
+        activityStartedFromAlarmNotif()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        activityStartedFromAlarmNotif()
     }
 
     override fun onStart() {
@@ -111,6 +120,16 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     private fun manageIntent() {
         if (intent.action == CREATE_TIMER_FROM_SHORTCUT) {
             CreateTimerDialog.showDialog(this, true)
+        }
+    }
+
+    private fun activityStartedFromAlarmNotif(){
+        if(intent.extras == null) {
+            return
+        }
+        val isAlarmNotifClicked = intent.extras.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
+        if(isAlarmNotifClicked){
+            presenter.onAlarmNotificationClicked()
         }
     }
 

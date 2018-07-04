@@ -8,4 +8,10 @@ interface EventManager {
 
     fun sendNewTimeFixTimerDurationEvent(newTimer: Int)
 
+    fun sendSetAlarmEvent(enable: Boolean)
+
+    fun sendDisplayAlarmNotificationEvent()
+
+    fun sendAlarmNotificationClickedEvent()
+
 }
