@@ -4,8 +4,8 @@ interface EventManager {
 
     fun sendTimerCreateEvent(startNow: Boolean)
 
-    fun sendExclusiveTimerMode(isExclusive: Boolean)
+    fun sendExclusiveTimerModeEvent(isExclusive: Boolean)
 
-    fun sendNewTimeFixTimerDuration(newTimer: Int)
+    fun sendNewTimeFixTimerDurationEvent(newTimer: Int)
 
 }

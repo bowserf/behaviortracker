@@ -14,16 +14,16 @@ class EventManagerImpl(context: Context) : EventManager {
         firebaseAnalytics.logEvent(EVENT_TIMER_CREATED, bundle)
     }
 
-    override fun sendExclusiveTimerMode(isExclusive: Boolean) {
+    override fun sendExclusiveTimerModeEvent(isExclusive: Boolean) {
         val bundle = Bundle()
         bundle.putBoolean(EVENT_EXTRA_EXCLUSIVE_TIMER_MODE, isExclusive)
         firebaseAnalytics.logEvent(EVENT_EXCLUSIVE_TIMER_MODE, bundle)
     }
 
-    override fun sendNewTimeFixTimerDuration(newTimer: Int) {
+    override fun sendNewTimeFixTimerDurationEvent(newTimer: Int) {
         val bundle = Bundle()
-        bundle.putInt(EVENT_NEW_TIMER_FIX_TIMER_DURATION, newTimer)
-        firebaseAnalytics.logEvent(EVENT_EXTRA_NEW_TIMER_FIX_TIMER_DURATION, bundle)
+        bundle.putInt(EVENT_EXTRA_NEW_TIMER_FIX_TIMER_DURATION, newTimer)
+        firebaseAnalytics.logEvent(EVENT_NEW_TIMER_FIX_TIMER_DURATION, bundle)
     }
 
     companion object {
@@ -33,7 +33,7 @@ class EventManagerImpl(context: Context) : EventManager {
         const val EVENT_EXCLUSIVE_TIMER_MODE = "exclusive_timer_mode"
         const val EVENT_EXTRA_EXCLUSIVE_TIMER_MODE = "is_exclusive"
 
-        const val EVENT_NEW_TIMER_FIX_TIMER_DURATION = "new_time_fix_timer_duration"
+        const val EVENT_NEW_TIMER_FIX_TIMER_DURATION = "new_timer_duration_modificator"
         const val EVENT_EXTRA_NEW_TIMER_FIX_TIMER_DURATION = "new_time"
     }
 

@@ -26,10 +26,10 @@ class SettingPresenter(private val context:Context,
             = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
         when (key) {
             context.getString(R.string.pref_key_time_modification) -> {
-                eventManager.sendNewTimeFixTimerDuration(sharedPreferences.getInt(key, -1))
+                eventManager.sendNewTimeFixTimerDurationEvent(sharedPreferences.getInt(key, -1))
             }
             context.getString(R.string.pref_key_one_active_timer) -> {
-                eventManager.sendExclusiveTimerMode(sharedPreferences.getBoolean(key, false))
+                eventManager.sendExclusiveTimerModeEvent(sharedPreferences.getBoolean(key, false))
             }
         }
     }
