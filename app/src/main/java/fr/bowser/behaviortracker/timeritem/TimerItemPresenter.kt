@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.timeritem
 
-import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
@@ -9,7 +8,6 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val timeManager: TimeManager,
                          private val timerListManager: TimerListManager,
-                         private val timerNotificationManager: TimerNotificationManager,
                          private val settingManager: SettingManager)
     : TimerItemContract.Presenter,
         TimerListManager.TimerCallback {
