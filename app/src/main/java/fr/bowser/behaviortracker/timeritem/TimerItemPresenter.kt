@@ -10,7 +10,9 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val timerListManager: TimerListManager,
                          private val settingManager: SettingManager)
     : TimerItemContract.Presenter,
-        TimerListManager.TimerCallback {
+        TimerListManager.TimerCallback,
+        SettingManager.TimerModificationListener {
+
 
     private lateinit var timer: Timer
 
@@ -18,12 +20,15 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         timerListManager.registerTimerCallback(this)
         timeManager.registerUpdateTimerCallback(updateTimerCallback)
 
+        settingManager.registerTimerModificationListener(this)
+
         view.updateTimeModification(settingManager.getTimerModification())
         view.timerUpdated(timer.time.toLong())
         view.statusUpdated(timer.isActivate)
     }
 
     override fun stop() {
+        settingManager.unregisterTimerModificationListener(this)
         timerListManager.unregisterTimerCallback(this)
         timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
     }
@@ -86,6 +91,10 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         if (timer == updatedTimer) {
             view.timerRenamed(updatedTimer.name)
         }
+    }
+
+    override fun onTimerModificationChanged(timerModification: Int) {
+        view.updateTimeModification(timerModification)
     }
 
     private fun manageTimerUpdate() {

@@ -6,4 +6,14 @@ interface SettingManager {
 
     fun isOneActiveTimerAtATime(): Boolean
 
+    fun registerTimerModificationListener(listener: TimerModificationListener)
+
+    fun unregisterTimerModificationListener(listener: TimerModificationListener)
+
+    interface TimerModificationListener {
+
+        fun onTimerModificationChanged(timerModification: Int)
+
+    }
+
 }

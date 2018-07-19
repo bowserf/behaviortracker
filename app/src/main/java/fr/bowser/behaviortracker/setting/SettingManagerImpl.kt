@@ -8,6 +8,8 @@ import fr.bowser.behaviortracker.R
 class SettingManagerImpl(private val context: Context) : SettingManager,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private var timerModificationListener = mutableSetOf<SettingManager.TimerModificationListener>()
+
     private var timeModification = 0
 
     private var oneActiveTimerAtATime = false
@@ -33,11 +35,20 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
                         key,
                         context.resources.getInteger(
                                 R.integer.settings_default_value_time_modification))
+                timerModificationListener.forEach { it.onTimerModificationChanged(timeModification) }
             }
             context.getString(R.string.pref_key_one_active_timer) -> {
                 oneActiveTimerAtATime = sharedPreferences.getBoolean(key, false)
             }
         }
+    }
+
+    override fun registerTimerModificationListener(listener: SettingManager.TimerModificationListener) {
+        timerModificationListener.add(listener)
+    }
+
+    override fun unregisterTimerModificationListener(listener: SettingManager.TimerModificationListener) {
+        timerModificationListener.remove(listener)
     }
 
     override fun getTimerModification(): Int {
