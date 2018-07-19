@@ -4,5 +4,7 @@
     <string name="release_screenshot_timer_work">Work</string>
     <string name="release_screenshot_timer_transport">Transport</string>
     <string name="release_screenshot_timer_sport">Sport</string>
+    <string name="release_screenshot_timer_cooking">Cooking</string>
+    <string name="release_screenshot_timer_watch_series">Series</string>
 
 </resources>
