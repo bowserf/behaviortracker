@@ -13,11 +13,11 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
 
     private val listeners = ArrayList<TimeManager.TimerCallback>()
 
+    private val lastUpdatedTime = HashMap<Timer, Long>()
+
     private val timerRunnable = TimerRunnable()
 
     private val timerList = ArrayList<Timer>()
-
-    private val lastUpdatedTime = HashMap<Long, Long>()
 
     override fun startTimer(timer: Timer) {
         if (timer.isActivate) {
@@ -28,7 +28,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
             stopAllRunningTimers()
         }
 
-        lastUpdatedTime[timer.id] = getCurrentTimeSeconds()
+        lastUpdatedTime[timer] = getCurrentTimeSeconds()
 
         timer.isActivate = true
         for (callback in listeners) {
@@ -48,7 +48,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
             return
         }
 
-        lastUpdatedTime.remove(timer.id)
+        lastUpdatedTime.remove(timer)
 
         timer.isActivate = false
         for (callback in listeners) {
@@ -109,9 +109,9 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
         override fun run() {
             val currentTime = getCurrentTimeSeconds()
             timerList.forEach {
-                val diff = currentTime - lastUpdatedTime[it.id]!!
+                val diff = currentTime - lastUpdatedTime[it]!!
                 updateTime(it, it.time + diff)
-                lastUpdatedTime[it.id] = currentTime
+                lastUpdatedTime[it] = currentTime
             }
 
             handler?.postDelayed(this, DELAY)

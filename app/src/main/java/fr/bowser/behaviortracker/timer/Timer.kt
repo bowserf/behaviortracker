@@ -24,6 +24,25 @@ data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var i
         this.isActivate = isActivate
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (other is Timer) {
+            if(other.id == id
+                    && other.color == color
+                    && other.isActivate == isActivate
+                    && other.currentTime == currentTime
+                    && other.name == name
+                    && other.time == time
+                    && other.position == position){
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
+
     init {
         time = currentTime.toFloat()
     }
