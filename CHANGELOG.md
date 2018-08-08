@@ -1,3 +1,12 @@
+### Op'Time v0.3.1
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2018-08-08
+* Change log:
+    - Add listener to notify when time modification value is updated.
+    - Fix bug relative to directly start timer.
+
+
+
 ### Op'Time v0.3.0
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2018-07-01
