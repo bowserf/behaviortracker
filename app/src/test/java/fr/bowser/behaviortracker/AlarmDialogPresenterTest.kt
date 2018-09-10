@@ -4,6 +4,7 @@ import fr.bowser.behaviortracker.alarm.AlarmDialogPresenter
 import fr.bowser.behaviortracker.alarm.AlarmTime
 import fr.bowser.behaviortracker.alarm.AlarmTimerContract
 import fr.bowser.behaviortracker.alarm.AlarmTimerManager
+import fr.bowser.behaviortracker.event.EventManager
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,11 +22,14 @@ class AlarmDialogPresenterTest {
     @Mock
     private lateinit var view: AlarmTimerContract.View
 
+    @Mock
+    private lateinit var eventManager: EventManager
+
     private lateinit var presenter: AlarmDialogPresenter
 
     @Before
     fun initPresenter() {
-        presenter = AlarmDialogPresenter(view, alarmTimerManager)
+        presenter = AlarmDialogPresenter(view, alarmTimerManager, eventManager)
     }
 
     @Test
