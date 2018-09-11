@@ -1,8 +1,8 @@
-package fr.bowser.behaviortracker.rewards
+package fr.bowser.behaviortracker.inapp
 
 import com.android.billingclient.api.SkuDetails
 
-interface InappRepository {
+interface InAppRepository {
 
     fun getInApp(sku: String): InApp
 

@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.rewards
+package fr.bowser.behaviortracker.inapp
 
 import android.app.Activity
 import android.content.Context

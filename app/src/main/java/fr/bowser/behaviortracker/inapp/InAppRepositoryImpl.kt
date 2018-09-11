@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.rewards
+package fr.bowser.behaviortracker.inapp
 
 import android.content.SharedPreferences
 import android.support.annotation.VisibleForTesting
@@ -6,7 +6,7 @@ import com.android.billingclient.api.SkuDetails
 import java.util.*
 
 class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
-                          private val inAppConfiguration: InAppConfiguration) : InappRepository {
+                          private val inAppConfiguration: InAppConfiguration) : InAppRepository {
 
     private val detailsList: MutableList<InApp> = mutableListOf()
 

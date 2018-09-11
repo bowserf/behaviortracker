@@ -1,5 +1,7 @@
-package fr.bowser.behaviortracker.rewards
+package fr.bowser.behaviortracker.inapp
 
+import fr.bowser.behaviortracker.inapp.InAppConfigurationImpl
+import fr.bowser.behaviortracker.inapp.InAppConfigurationParser
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

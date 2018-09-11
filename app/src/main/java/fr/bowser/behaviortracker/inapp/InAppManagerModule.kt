@@ -1,24 +1,23 @@
-package fr.bowser.behaviortracker.rewards
+package fr.bowser.behaviortracker.inapp
 
 import android.content.Context
-import android.content.res.AssetManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-internal class InAppManagerModule(private val assetManager: AssetManager) {
+class InAppManagerModule {
 
     @Singleton
     @Provides
-    fun provideInAppConfiguration(): InAppConfiguration {
-        val inAppConfigurationParser = InAppConfigurationParserImpl(assetManager)
+    fun provideInAppConfiguration(context: Context): InAppConfiguration {
+        val inAppConfigurationParser = InAppConfigurationParserImpl(context.assets)
         return InAppConfigurationImpl(inAppConfigurationParser)
     }
 
     @Singleton
     @Provides
-    fun provideInAppRepository(context: Context, inAppConfiguration: InAppConfiguration): InappRepository {
+    fun provideInAppRepository(context: Context, inAppConfiguration: InAppConfiguration): InAppRepository {
         val sharedPreferences = context.getSharedPreferences(
                 InAppRepositoryImpl.SHARED_PREF_KEY,
                 Context.MODE_PRIVATE)
@@ -29,9 +28,9 @@ internal class InAppManagerModule(private val assetManager: AssetManager) {
     @Provides
     fun provideInAppManager(context: Context,
                             inAppConfiguration: InAppConfiguration,
-                            inappRepository: InappRepository): InAppManager {
+                            inAppRepository: InAppRepository): InAppManager {
         val playBillingManager = PlayBillingManager(context)
-        return InAppManagerImpl(playBillingManager, inAppConfiguration, inappRepository)
+        return InAppManagerImpl(playBillingManager, inAppConfiguration, inAppRepository)
     }
 
 }

@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.rewards
+package fr.bowser.behaviortracker.inapp
 
 import android.app.Activity
 import android.util.Log
@@ -7,7 +7,7 @@ import com.android.billingclient.api.*
 
 class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
                        private val inAppConfiguration: InAppConfiguration,
-                       private val inAppRepository: InappRepository) : InAppManager {
+                       private val inAppRepository: InAppRepository) : InAppManager {
 
     private val ownedSku = mutableListOf<String>()
 

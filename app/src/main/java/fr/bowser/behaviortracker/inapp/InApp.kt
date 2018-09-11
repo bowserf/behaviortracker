@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.rewards
+package fr.bowser.behaviortracker.inapp
 
 import org.json.JSONException
 import org.json.JSONObject
