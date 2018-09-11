@@ -15,6 +15,10 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
         throw IllegalStateException("Unknown product ID $sku.")
     }
 
+    override fun getInApps(): List<InApp> {
+        return inAppList.toList()
+    }
+
     override fun parse(fileName: String): List<InApp> {
         val inAppConfigFile = inAppConfigurationParser.getInAppConfigFile(fileName)
         inAppList.clear()

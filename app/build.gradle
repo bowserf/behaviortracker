@@ -96,6 +96,9 @@ dependencies {
     implementation rootProject.ext.dependencies.supportDesign
     implementation rootProject.ext.dependencies.supportCardView
 
+    // Billing
+    implementation 'com.android.billingclient:billing:1.1'
+
     // Architecture component
     implementation rootProject.ext.dependencies.room
     kapt rootProject.ext.dependencies.annotationProcessorRoom

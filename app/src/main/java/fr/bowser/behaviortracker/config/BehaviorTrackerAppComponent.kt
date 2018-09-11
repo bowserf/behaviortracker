@@ -12,6 +12,8 @@ import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
 import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
+import fr.bowser.behaviortracker.rewards.InAppManager
+import fr.bowser.behaviortracker.rewards.InAppManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
 import fr.bowser.behaviortracker.timer.*
@@ -24,6 +26,7 @@ import javax.inject.Singleton
         SettingManagerModule::class,
         EventManagerModule::class,
         AlarmTimerManagerModule::class,
+        InAppManagerModule::class,
         TimerListManagerModule::class))
 interface BehaviorTrackerAppComponent {
 
@@ -46,6 +49,8 @@ interface BehaviorTrackerAppComponent {
     fun provideAlarmTimerManager(): AlarmTimerManager
 
     fun provideAlarmStorageManager(): AlarmStorageManager
+
+    fun provideInAppManager(): InAppManager
 
     @Component.Builder
     interface Builder {
