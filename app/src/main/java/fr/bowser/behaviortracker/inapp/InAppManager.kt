@@ -7,7 +7,7 @@ interface InAppManager {
 
     fun initialize()
 
-    fun purchase(activity: Activity, sku: String)
+    fun purchase(activityContainer: InAppManager.ActivityContainer, sku: String)
 
     fun addListener(listener: Listener)
 
@@ -18,6 +18,12 @@ interface InAppManager {
         fun onPurchaseSucceed(purchases: List<Purchase>)
 
         fun onPurchaseFailed()
+
+    }
+
+    interface ActivityContainer{
+
+        fun get(): Activity
 
     }
 

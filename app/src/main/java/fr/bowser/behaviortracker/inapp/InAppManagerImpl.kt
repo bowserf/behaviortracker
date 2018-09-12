@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.inapp
 
-import android.app.Activity
 import android.util.Log
 import com.android.billingclient.api.*
 
@@ -20,13 +19,15 @@ class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
         querySkuDetailsAsync()
     }
 
-    override fun purchase(activity: Activity, sku: String) {
+    override fun purchase(activityContainer: InAppManager.ActivityContainer, sku: String) {
         val purchaseFlowRequest = Runnable {
             val builder = BillingFlowParams
                     .newBuilder()
                     .setSku(sku)
                     .setType(BillingClient.SkuType.INAPP)
-            val responseCode = playBillingManager.launchBillingFlow(activity, builder.build())
+            val responseCode = playBillingManager.launchBillingFlow(
+                    activityContainer.get(),
+                    builder.build())
             if (responseCode == BillingClient.BillingResponse.ITEM_ALREADY_OWNED) {
                 Log.e(TAG, "User already owns this in-app : $sku")
                 notifyPurchaseFailed()
