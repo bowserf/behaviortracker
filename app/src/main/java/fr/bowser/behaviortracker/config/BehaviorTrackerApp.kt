@@ -32,6 +32,13 @@ class BehaviorTrackerApp : Application() {
         setupCrashlytics()
 
         setupFirebaseAnalytics()
+
+        setupInAppManager()
+    }
+
+    private fun setupInAppManager() {
+        val inAppManager = appComponent.provideInAppManager()
+        inAppManager.initialize()
     }
 
     private fun setupCrashlytics() {
