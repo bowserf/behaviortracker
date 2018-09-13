@@ -40,6 +40,12 @@ class EventManagerImpl(context: Context) : EventManager {
         firebaseAnalytics.logEvent(EVENT_ALARM_NOTIF_CLICKED, null)
     }
 
+    override fun sendClickBuyInAppEvent(sku: String) {
+        val bundle = Bundle()
+        bundle.putString(EVENT_EXTRA_CLICK_BUY_IN_APP, sku)
+        firebaseAnalytics.logEvent(EVENT_CLICK_BUY_IN_APP, bundle)
+    }
+
     companion object {
         const val EVENT_ALARM_NOTIF_CLICKED = "click_alarm_notif"
 
@@ -56,6 +62,9 @@ class EventManagerImpl(context: Context) : EventManager {
 
         const val EVENT_NEW_TIMER_FIX_TIMER_DURATION = "new_timer_duration_modificator"
         const val EVENT_EXTRA_NEW_TIMER_FIX_TIMER_DURATION = "new_time"
+
+        const val EVENT_CLICK_BUY_IN_APP = "click_buy_in_app"
+        const val EVENT_EXTRA_CLICK_BUY_IN_APP = "product_id"
     }
 
 }
