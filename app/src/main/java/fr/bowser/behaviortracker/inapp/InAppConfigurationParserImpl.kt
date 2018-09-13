@@ -9,7 +9,7 @@ class InAppConfigurationParserImpl(private val assetManager: AssetManager) : InA
         val size = inputStream.available()
         val buffer = ByteArray(size)
         inputStream.read(buffer)
-        assetManager.close()
+        inputStream.close()
         return String(buffer)
     }
 
