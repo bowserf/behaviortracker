@@ -113,7 +113,9 @@ class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
     private fun createSkuDetailsResponseListener(): SkuDetailsResponseListener {
         return SkuDetailsResponseListener { responseCode, skuDetailsList ->
             if (responseCode == BillingClient.BillingResponse.OK) {
-                inAppRepository.set(skuDetailsList)
+                if(skuDetailsList.size != 0) {
+                    inAppRepository.set(skuDetailsList)
+                }
                 updatePurchasedInApp()
             }
         }
