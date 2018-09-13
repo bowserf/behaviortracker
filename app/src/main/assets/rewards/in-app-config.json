@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "in-apps": [
+    {
+      "identifier": "fr.bowser.behaviortrack.product.marshmallow",
+      "default_name": "Marshmallow",
+      "default_price": "0.59 €"
+    },
+    {
+      "identifier": "fr.bowser.behaviortrack.product.nougat",
+      "default_name": "Nougat",
+      "default_price": "0.99 €"
+    },
+    {
+      "identifier": "fr.bowser.behaviortrack.product.oreo",
+      "default_name": "Oreo",
+      "default_price": "1.99 €"
+    },
+    {
+      "identifier": "fr.bowser.behaviortrack.product.pie",
+      "default_name": "Pie",
+      "default_price": "2.99 €"
+    }
+  ]
+}

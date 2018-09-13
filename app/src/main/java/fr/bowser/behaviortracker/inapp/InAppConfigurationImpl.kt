@@ -6,6 +6,10 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
 
     private val inAppList = mutableListOf<InApp>()
 
+    init {
+        parse(IN_APP_CONFIG_FILE_PATH + IN_APP_CONFIG_FILE_NAME)
+    }
+
     override fun getInApp(sku: String): InApp {
         for (inApp in inAppList) {
             if(inApp.sku == sku){
