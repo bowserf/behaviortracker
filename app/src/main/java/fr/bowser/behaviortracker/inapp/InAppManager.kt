@@ -7,7 +7,7 @@ interface InAppManager {
 
     fun initialize()
 
-    fun purchase(activityContainer: InAppManager.ActivityContainer, sku: String)
+    fun purchase(sku: String, activityContainer: InAppManager.ActivityContainer)
 
     fun addListener(listener: Listener)
 

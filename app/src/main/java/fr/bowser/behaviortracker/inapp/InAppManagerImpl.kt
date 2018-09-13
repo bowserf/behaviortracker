@@ -19,7 +19,7 @@ class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
         querySkuDetailsAsync()
     }
 
-    override fun purchase(activityContainer: InAppManager.ActivityContainer, sku: String) {
+    override fun purchase(sku: String, activityContainer: InAppManager.ActivityContainer) {
         val purchaseFlowRequest = Runnable {
             val builder = BillingFlowParams
                     .newBuilder()
