@@ -20,7 +20,7 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
                 return inApp
             }
         }
-        return inAppConfiguration.getInApp(sku)
+       throw IllegalStateException("Unknown SKU : $sku")
     }
 
     override fun set(skuDetails: List<SkuDetails>) {
@@ -50,11 +50,15 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
 
     private fun restoreSubscriptionsDetailsFromStorage() {
         detailsList.clear()
-        val inAppSet = sharedPreferences.getStringSet(IN_APP_DETAILS_KEY,
-                HashSet<String>())
-        for (inAppJson in inAppSet!!) {
-            val inApp = InApp.fromJson(inAppJson)
-            detailsList.add(inApp)
+        val inAppSet = sharedPreferences.getStringSet(IN_APP_DETAILS_KEY, null)
+
+        if(inAppSet == null){
+            detailsList.addAll(inAppConfiguration.getInApps())
+        }else {
+            for (inAppJson in inAppSet) {
+                val inApp = InApp.fromJson(inAppJson)
+                detailsList.add(inApp)
+            }
         }
     }
 
@@ -62,7 +66,6 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
         const val SHARED_PREF_KEY = "in-app-details-storage"
         @VisibleForTesting
         const val IN_APP_DETAILS_KEY = "in_app_details_repository.key.details"
-        private const val DEFAULT_CURRENCY_CODE = "EUR"
     }
 
 }
