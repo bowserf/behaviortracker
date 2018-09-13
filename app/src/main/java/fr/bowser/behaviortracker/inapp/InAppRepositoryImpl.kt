@@ -14,6 +14,10 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
         restoreSubscriptionsDetailsFromStorage()
     }
 
+    override fun getInApps(): List<InApp> {
+        return detailsList
+    }
+
     override fun getInApp(sku: String): InApp {
         for (inApp in detailsList) {
             if (inApp.sku == sku) {
