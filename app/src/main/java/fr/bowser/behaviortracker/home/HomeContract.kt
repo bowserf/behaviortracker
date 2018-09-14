@@ -10,6 +10,8 @@ interface HomeContract {
 
         fun displayAlarmTimerDialog()
 
+        fun displayRewardsView()
+
     }
 
     interface Presenter {
@@ -27,6 +29,8 @@ interface HomeContract {
         fun onClickAlarm()
 
         fun onAlarmNotificationClicked()
+
+        fun onClickRewards()
 
     }
 

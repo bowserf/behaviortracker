@@ -14,6 +14,7 @@ import fr.bowser.behaviortracker.alarm.AlarmNotification
 import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
+import fr.bowser.behaviortracker.rewards.RewardsActivity
 import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timerlist.TimerFragment
 import javax.inject.Inject
@@ -71,6 +72,9 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
             R.id.menu_alarm -> {
                 presenter.onClickAlarm()
             }
+            R.id.menu_rewards -> {
+                presenter.onClickRewards()
+            }
         }
         return false
     }
@@ -96,6 +100,10 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         val fragmentManager = supportFragmentManager
         val alertDialog = AlarmTimerDialog.newInstance()
         alertDialog.show(fragmentManager, AlarmTimerDialog.TAG)
+    }
+
+    override fun displayRewardsView() {
+        RewardsActivity.startActivity(this)
     }
 
     private fun setupGraph() {

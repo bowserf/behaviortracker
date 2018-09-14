@@ -15,6 +15,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_rewards"
+        android:enabled="true"
+        android:title="@string/menu_rewards"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_settings"
         android:enabled="true"
         android:title="@string/menu_setting"

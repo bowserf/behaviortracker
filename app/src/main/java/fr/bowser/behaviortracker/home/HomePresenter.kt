@@ -40,6 +40,10 @@ class HomePresenter(private val view: HomeContract.View,
         view.displayAlarmTimerDialog()
     }
 
+    override fun onClickRewards() {
+        view.displayRewardsView()
+    }
+
     override fun onAlarmNotificationClicked() {
         eventManager.sendAlarmNotificationClickedEvent()
     }
