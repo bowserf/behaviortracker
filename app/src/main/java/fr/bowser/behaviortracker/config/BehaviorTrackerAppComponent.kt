@@ -12,6 +12,7 @@ import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
 import fr.bowser.behaviortracker.inapp.InAppManager
 import fr.bowser.behaviortracker.inapp.InAppManagerModule
+import fr.bowser.behaviortracker.inapp.InAppRepository
 import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.setting.SettingManager
@@ -51,6 +52,8 @@ interface BehaviorTrackerAppComponent {
     fun provideAlarmStorageManager(): AlarmStorageManager
 
     fun provideInAppManager(): InAppManager
+
+    fun provideInAppRepository(): InAppRepository
 
     @Component.Builder
     interface Builder {
