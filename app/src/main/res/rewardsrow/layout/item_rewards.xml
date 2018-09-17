@@ -15,9 +15,9 @@
             android:id="@+id/rewards_icon"
             android:layout_width="@dimen/item_rewards_icon_size"
             android:layout_height="@dimen/item_rewards_icon_size"
-            android:layout_marginBottom="@dimen/default_space"
+            android:layout_marginBottom="@dimen/default_space_1_5"
             android:layout_marginStart="@dimen/default_space_1_5"
-            android:layout_marginTop="@dimen/default_space"
+            android:layout_marginTop="@dimen/default_space_1_5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />

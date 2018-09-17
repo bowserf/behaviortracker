@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.rewardsrow
 
 import android.app.Activity
 import android.content.Context
+import android.support.annotation.DrawableRes
 import android.support.v7.widget.CardView
 import android.widget.ImageView
 import android.widget.TextView
@@ -60,6 +61,19 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
         inApp?.let {
             title.text = it.name
             price.text = it.price
+            icon.setImageResource(getIconId())
+        }
+    }
+
+    @DrawableRes
+    private fun getIconId(): Int {
+        val feature = inApp?.feature
+        return when (feature) {
+            InApp.FEATURE_MARSHMALLOW -> R.drawable.ic_marshmallow
+            InApp.FEATURE_NOUGAT -> R.drawable.ic_nougat
+            InApp.FEATURE_OREO -> R.drawable.ic_oreo
+            InApp.FEATURE_PIE -> R.drawable.ic_pie
+            else -> throw IllegalStateException("Unkown feature : $feature")
         }
     }
 
