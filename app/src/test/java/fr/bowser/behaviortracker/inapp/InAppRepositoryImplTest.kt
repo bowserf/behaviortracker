@@ -19,6 +19,8 @@ class InAppRepositoryImplTest {
     @Test
     fun insertAndGet() {
         // Given
+        val inAppConfig = InApp("sku", "name", "0.99 €", "feature")
+        Mockito.`when`(inAppConfiguration.getInApps()).thenReturn(listOf(inAppConfig))
         val sharedPreference = HashMapSharedPreference()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, inAppConfiguration)
         val list = mutableListOf<SkuDetails>()
@@ -38,6 +40,7 @@ class InAppRepositoryImplTest {
         Assert.assertEquals("sku", inApp.sku)
         Assert.assertEquals("name", inApp.name)
         Assert.assertEquals("0.99 €", inApp.price)
+        Assert.assertEquals("feature", inApp.feature)
     }
 
     @Test
@@ -45,8 +48,8 @@ class InAppRepositoryImplTest {
         // Given
         val sharedPreference = HashMapSharedPreference()
         val set = mutableSetOf<String>()
-        set.add(InApp("sku1", "name1", "0.99 €").toJson())
-        set.add(InApp("sku2", "name2", "0.59 €").toJson())
+        set.add(InApp("sku1", "name1", "0.99 €", "feature1").toJson())
+        set.add(InApp("sku2", "name2", "0.59 €", "feature2").toJson())
         sharedPreference.edit().putStringSet(InAppRepositoryImpl.IN_APP_DETAILS_KEY, set)
 
         // When
@@ -57,13 +60,14 @@ class InAppRepositoryImplTest {
         Assert.assertEquals("sku1", inApp.sku)
         Assert.assertEquals("name1", inApp.name)
         Assert.assertEquals("0.99 €", inApp.price)
+        Assert.assertEquals("feature1", inApp.feature)
     }
 
     @Test
     fun fillWithConfiguration() {
         // Given
-        val inAppConfig = InApp("sku1", "name1", "0.99 €")
-        Mockito.`when`(inAppConfiguration.getInApp("sku1")).thenReturn(inAppConfig)
+        val inAppConfig = InApp("sku1", "name1", "0.99 €", "feature")
+        Mockito.`when`(inAppConfiguration.getInApps()).thenReturn(listOf(inAppConfig))
         val sharedPreference = HashMapSharedPreference()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, inAppConfiguration)
 
@@ -74,6 +78,7 @@ class InAppRepositoryImplTest {
         Assert.assertEquals("sku1", inApp.sku)
         Assert.assertEquals("name1", inApp.name)
         Assert.assertEquals("0.99 €", inApp.price)
+        Assert.assertEquals("feature", inApp.feature)
     }
 
 }
