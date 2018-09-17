@@ -41,7 +41,8 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
             val sku = inAppObject.getString(SKU_KEY)
             val name = inAppObject.getString(DEFAULT_NAME_KEY)
             val defaultPrice = inAppObject.getString(DEFAULT_PRICE_KEY)
-            list.add(InApp(sku, name, defaultPrice))
+            val feature = inAppObject.getString(FEATURE)
+            list.add(InApp(sku, name, defaultPrice, feature))
         }
 
         return list
@@ -55,6 +56,7 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
         private const val SKU_KEY = "identifier"
         private const val DEFAULT_PRICE_KEY = "default_price"
         private const val DEFAULT_NAME_KEY = "default_name"
+        private const val FEATURE = "feature"
     }
 
 }

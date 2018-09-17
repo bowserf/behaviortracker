@@ -3,7 +3,7 @@ package fr.bowser.behaviortracker.inapp
 import org.json.JSONException
 import org.json.JSONObject
 
-data class InApp(val sku: String, val name: String, val price: String) {
+data class InApp(val sku: String, val name: String, val price: String, val feature: String) {
 
     fun toJson(): String {
         try {
@@ -11,6 +11,7 @@ data class InApp(val sku: String, val name: String, val price: String) {
             jsonObject.put(JSON_SKU_KEY, sku)
             jsonObject.put(JSON_NAME_KEY, name)
             jsonObject.put(JSON_PRICE_KEY, price)
+            jsonObject.put(JSON_FEATURE, feature)
             return jsonObject.toString()
         } catch (e: JSONException) {
             throw IllegalStateException("Error when trying to convert InApp to JSON : " + e.message)
@@ -18,9 +19,16 @@ data class InApp(val sku: String, val name: String, val price: String) {
     }
 
     companion object {
+
+        const val FEATURE_MARSHMALLOW = "marshmallow"
+        const val FEATURE_NOUGAT = "nougat"
+        const val FEATURE_OREO = "oreo"
+        const val FEATURE_PIE = "pie"
+
         private const val JSON_SKU_KEY = "sku"
         private const val JSON_NAME_KEY = "name"
         private const val JSON_PRICE_KEY = "price"
+        private const val JSON_FEATURE = "feature"
 
         fun fromJson(json: String): InApp {
             try {
@@ -28,7 +36,8 @@ data class InApp(val sku: String, val name: String, val price: String) {
                 val sku = jsonObject.getString(JSON_SKU_KEY)
                 val name = jsonObject.getString(JSON_NAME_KEY)
                 val price = jsonObject.getString(JSON_PRICE_KEY)
-                return InApp(sku, name, price)
+                val feature = jsonObject.getString(JSON_FEATURE)
+                return InApp(sku, name, price, feature)
             } catch (e: JSONException) {
                 throw IllegalStateException("Error when trying to convert JSON to" +
                         "InApp : " + e.message)

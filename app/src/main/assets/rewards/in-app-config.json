@@ -4,22 +4,26 @@
     {
       "identifier": "fr.bowser.behaviortrack.product.marshmallow",
       "default_name": "Marshmallow",
-      "default_price": "0.59 €"
+      "default_price": "0.59 €",
+      "feature": "marshmallow"
     },
     {
       "identifier": "fr.bowser.behaviortrack.product.nougat",
       "default_name": "Nougat",
-      "default_price": "0.99 €"
+      "default_price": "0.99 €",
+      "feature": "nougat"
     },
     {
       "identifier": "fr.bowser.behaviortrack.product.oreo",
       "default_name": "Oreo",
-      "default_price": "1.99 €"
+      "default_price": "1.99 €",
+      "feature": "oreo"
     },
     {
       "identifier": "fr.bowser.behaviortrack.product.pie",
       "default_name": "Pie",
-      "default_price": "2.99 €"
+      "default_price": "2.99 €",
+      "feature": "pie"
     }
   ]
 }

@@ -24,7 +24,7 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
                 return inApp
             }
         }
-       throw IllegalStateException("Unknown SKU : $sku")
+        throw IllegalStateException("Unknown SKU : $sku")
     }
 
     override fun set(skuDetails: List<SkuDetails>) {
@@ -33,13 +33,23 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
             val sku = skuDetail.sku
             val name = skuDetail.title
             val priceAndCurrency = skuDetail.price
-            list.add(InApp(sku, name, priceAndCurrency))
+            val feature = getFeatureFromSku(sku)
+            list.add(InApp(sku, name, priceAndCurrency, feature))
         }
 
         detailsList.clear()
         detailsList.addAll(list)
 
         saveSubscriptionDetailsListOnDisk()
+    }
+
+    private fun getFeatureFromSku(sku: String): String {
+        for (inApp in inAppConfiguration.getInApps()) {
+            if (inApp.sku == sku) {
+                return inApp.feature
+            }
+        }
+        throw IllegalStateException("Unknown sku : $sku")
     }
 
     private fun saveSubscriptionDetailsListOnDisk() {
@@ -56,9 +66,9 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
         detailsList.clear()
         val inAppSet = sharedPreferences.getStringSet(IN_APP_DETAILS_KEY, null)
 
-        if(inAppSet == null){
+        if (inAppSet == null) {
             detailsList.addAll(inAppConfiguration.getInApps())
-        }else {
+        } else {
             for (inAppJson in inAppSet) {
                 val inApp = InApp.fromJson(inAppJson)
                 detailsList.add(inApp)
