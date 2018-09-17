@@ -11,7 +11,8 @@ class InAppRepositoryImplTest {
     @Test
     fun insertAndGet() {
         // Given
-        val inAppConfig = InApp("sku", "name", "0.99 €", "feature")
+        val inAppConfig = InApp("sku", "name", "description", "0.99 €",
+                "feature")
         val sharedPreference = HashMapSharedPreference()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
         val list = mutableListOf<SkuDetails>()
@@ -20,6 +21,7 @@ class InAppRepositoryImplTest {
         jsonObject.put("type", "inapp")
         jsonObject.put("price", "0.99 €")
         jsonObject.put("title", "name")
+        jsonObject.put("description", "description")
         val skuDetails = SkuDetails(jsonObject.toString())
         list.add(skuDetails)
         inAppRepositoryImpl.set(list)
@@ -30,6 +32,7 @@ class InAppRepositoryImplTest {
         // Then
         Assert.assertEquals("sku", inApp.sku)
         Assert.assertEquals("name", inApp.name)
+        Assert.assertEquals("description", inApp.description)
         Assert.assertEquals("0.99 €", inApp.price)
         Assert.assertEquals("feature", inApp.feature)
     }
@@ -39,8 +42,10 @@ class InAppRepositoryImplTest {
         // Given
         val sharedPreference = HashMapSharedPreference()
         val set = mutableSetOf<String>()
-        set.add(InApp("sku1", "name1", "0.99 €", "feature1").toJson())
-        set.add(InApp("sku2", "name2", "0.59 €", "feature2").toJson())
+        set.add(InApp("sku1", "name1", "description1", "0.99 €",
+                "feature1").toJson())
+        set.add(InApp("sku2", "name2", "description2", "0.59 €",
+                "feature2").toJson())
         sharedPreference.edit().putStringSet(InAppRepositoryImpl.IN_APP_DETAILS_KEY, set)
 
         // When
@@ -50,6 +55,7 @@ class InAppRepositoryImplTest {
         // Then
         Assert.assertEquals("sku1", inApp.sku)
         Assert.assertEquals("name1", inApp.name)
+        Assert.assertEquals("description1", inApp.description)
         Assert.assertEquals("0.99 €", inApp.price)
         Assert.assertEquals("feature1", inApp.feature)
     }
@@ -57,7 +63,8 @@ class InAppRepositoryImplTest {
     @Test
     fun fillWithConfiguration() {
         // Given
-        val inAppConfig = InApp("sku1", "name1", "0.99 €", "feature")
+        val inAppConfig = InApp("sku1", "name1", "description1",
+                "0.99 €", "feature")
         val sharedPreference = HashMapSharedPreference()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
 
@@ -67,6 +74,7 @@ class InAppRepositoryImplTest {
         // Then
         Assert.assertEquals("sku1", inApp.sku)
         Assert.assertEquals("name1", inApp.name)
+        Assert.assertEquals("description1", inApp.description)
         Assert.assertEquals("0.99 €", inApp.price)
         Assert.assertEquals("feature", inApp.feature)
     }

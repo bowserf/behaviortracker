@@ -40,9 +40,10 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
             val inAppObject = jsonArray.getJSONObject(i)
             val sku = inAppObject.getString(SKU_KEY)
             val name = inAppObject.getString(DEFAULT_NAME_KEY)
+            val description = inAppObject.getString(DEFAULT_DESCRIPTION_KEY)
             val defaultPrice = inAppObject.getString(DEFAULT_PRICE_KEY)
             val feature = inAppObject.getString(FEATURE)
-            list.add(InApp(sku, name, defaultPrice, feature))
+            list.add(InApp(sku, name, description, defaultPrice, feature))
         }
 
         return list
@@ -56,6 +57,7 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
         private const val SKU_KEY = "identifier"
         private const val DEFAULT_PRICE_KEY = "default_price"
         private const val DEFAULT_NAME_KEY = "default_name"
+        private const val DEFAULT_DESCRIPTION_KEY = "default_description"
         private const val FEATURE = "feature"
     }
 

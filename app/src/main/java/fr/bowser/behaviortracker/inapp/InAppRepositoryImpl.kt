@@ -32,9 +32,10 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
         for (skuDetail in skuDetails) {
             val sku = skuDetail.sku
             val name = skuDetail.title
+            val description = skuDetail.description
             val priceAndCurrency = skuDetail.price
             val feature = getFeatureFromSku(sku)
-            list.add(InApp(sku, name, priceAndCurrency, feature))
+            list.add(InApp(sku, name, description, priceAndCurrency, feature))
         }
 
         detailsList.clear()

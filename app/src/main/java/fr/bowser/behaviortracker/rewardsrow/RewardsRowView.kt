@@ -59,7 +59,7 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
 
     private fun updateUI() {
         inApp?.let {
-            title.text = it.name
+            title.text = it.description
             price.text = it.price
             icon.setImageResource(getIconId())
         }
