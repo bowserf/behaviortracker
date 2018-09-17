@@ -4,25 +4,16 @@ import com.android.billingclient.api.SkuDetails
 import org.json.JSONObject
 import org.junit.Assert
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnitRunner
 
 
-@RunWith(MockitoJUnitRunner::class)
 class InAppRepositoryImplTest {
-
-    @Mock
-    private lateinit var inAppConfiguration: InAppConfiguration
 
     @Test
     fun insertAndGet() {
         // Given
         val inAppConfig = InApp("sku", "name", "0.99 €", "feature")
-        Mockito.`when`(inAppConfiguration.getInApps()).thenReturn(listOf(inAppConfig))
         val sharedPreference = HashMapSharedPreference()
-        val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, inAppConfiguration)
+        val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
         val list = mutableListOf<SkuDetails>()
         val jsonObject = JSONObject()
         jsonObject.put("productId", "sku")
@@ -53,7 +44,7 @@ class InAppRepositoryImplTest {
         sharedPreference.edit().putStringSet(InAppRepositoryImpl.IN_APP_DETAILS_KEY, set)
 
         // When
-        val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, inAppConfiguration)
+        val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf())
         val inApp = inAppRepositoryImpl.getInApp("sku1")
 
         // Then
@@ -67,9 +58,8 @@ class InAppRepositoryImplTest {
     fun fillWithConfiguration() {
         // Given
         val inAppConfig = InApp("sku1", "name1", "0.99 €", "feature")
-        Mockito.`when`(inAppConfiguration.getInApps()).thenReturn(listOf(inAppConfig))
         val sharedPreference = HashMapSharedPreference()
-        val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, inAppConfiguration)
+        val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
 
         // When
         val inApp = inAppRepositoryImpl.getInApp("sku1")

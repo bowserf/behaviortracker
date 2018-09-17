@@ -21,7 +21,7 @@ class InAppManagerModule {
         val sharedPreferences = context.getSharedPreferences(
                 InAppRepositoryImpl.SHARED_PREF_KEY,
                 Context.MODE_PRIVATE)
-        return InAppRepositoryImpl(sharedPreferences, inAppConfiguration)
+        return InAppRepositoryImpl(sharedPreferences, inAppConfiguration.getInApps())
     }
 
     @Singleton

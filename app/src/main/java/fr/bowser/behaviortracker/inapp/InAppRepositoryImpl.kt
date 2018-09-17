@@ -6,7 +6,7 @@ import com.android.billingclient.api.SkuDetails
 import java.util.*
 
 class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
-                          private val inAppConfiguration: InAppConfiguration) : InAppRepository {
+                          private val inAppsConfig: List<InApp>) : InAppRepository {
 
     private val detailsList: MutableList<InApp> = mutableListOf()
 
@@ -44,7 +44,7 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
     }
 
     private fun getFeatureFromSku(sku: String): String {
-        for (inApp in inAppConfiguration.getInApps()) {
+        for (inApp in inAppsConfig) {
             if (inApp.sku == sku) {
                 return inApp.feature
             }
@@ -67,7 +67,7 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
         val inAppSet = sharedPreferences.getStringSet(IN_APP_DETAILS_KEY, null)
 
         if (inAppSet == null) {
-            detailsList.addAll(inAppConfiguration.getInApps())
+            detailsList.addAll(inAppsConfig)
         } else {
             for (inAppJson in inAppSet) {
                 val inApp = InApp.fromJson(inAppJson)
