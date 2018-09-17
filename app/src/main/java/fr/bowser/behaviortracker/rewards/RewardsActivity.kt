@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -20,6 +21,8 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
 
     @Inject
     lateinit var presenter: RewardsPresenter
+
+    private lateinit var list: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,16 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
         rewardsAdapter.setInAppList(inApps)
     }
 
+    override fun displaySuccessPurchaseMessage() {
+        Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
+                .show()
+    }
+
+    override fun displayFailPurchaseMessage() {
+        Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
+                .show()
+    }
+
     private fun initializeToolbar() {
         val myToolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(myToolbar)
@@ -60,7 +73,7 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
     }
 
     private fun initRewardsList() {
-        val list = findViewById<RecyclerView>(R.id.list_rewards)
+        list = findViewById(R.id.list_rewards)
 
         list.layoutManager = LinearLayoutManager(this)
         list.setHasFixedSize(true)

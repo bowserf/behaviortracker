@@ -28,11 +28,11 @@ class RewardsPresenter(private val screen: RewardsContract.Screen,
     private fun createInAppManagerListener(): InAppManager.Listener {
         return object : InAppManager.Listener {
             override fun onPurchaseSucceed(purchases: List<Purchase>) {
-
+                screen.displaySuccessPurchaseMessage()
             }
 
             override fun onPurchaseFailed() {
-
+                screen.displayFailPurchaseMessage()
             }
 
         }

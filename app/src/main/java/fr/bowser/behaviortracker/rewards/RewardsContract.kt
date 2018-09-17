@@ -8,6 +8,10 @@ interface RewardsContract {
 
         fun displayListInApps(inApps: List<InApp>)
 
+        fun displaySuccessPurchaseMessage()
+
+        fun displayFailPurchaseMessage()
+
     }
 
     interface Presenter {
