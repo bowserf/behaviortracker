@@ -1,8 +1,8 @@
 package fr.bowser.behaviortracker.showmode
 
-import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager.widget.PagerAdapter
 import fr.bowser.behaviortracker.showmodeitem.ShowModeTimerView
 import fr.bowser.behaviortracker.timer.Timer
 
@@ -17,7 +17,7 @@ class ShowModeAdapter : PagerAdapter() {
         return showModTimerView
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `view`: Any) {
+    override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
         container.removeView(view as View)
     }
 

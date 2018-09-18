@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.inapp
 
 import android.content.SharedPreferences
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import com.android.billingclient.api.SkuDetails
 import java.util.*
 

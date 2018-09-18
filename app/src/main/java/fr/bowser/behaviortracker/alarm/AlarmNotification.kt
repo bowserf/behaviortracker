@@ -9,7 +9,7 @@ import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Build
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home.HomeActivity

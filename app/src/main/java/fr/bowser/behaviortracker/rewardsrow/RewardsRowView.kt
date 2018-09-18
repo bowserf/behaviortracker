@@ -2,10 +2,10 @@ package fr.bowser.behaviortracker.rewardsrow
 
 import android.app.Activity
 import android.content.Context
-import android.support.annotation.DrawableRes
-import android.support.v7.widget.CardView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.cardview.widget.CardView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.inapp.InApp

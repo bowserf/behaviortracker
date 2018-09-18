@@ -3,13 +3,6 @@ package fr.bowser.behaviortracker.createtimer
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +11,13 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputLayout
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
@@ -83,8 +83,8 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     }
 
     override fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int) {
-        chooseColor.adapter.notifyItemChanged(oldSelectedPosition)
-        chooseColor.adapter.notifyItemChanged(selectedPosition)
+        chooseColor.adapter?.notifyItemChanged(oldSelectedPosition)
+        chooseColor.adapter?.notifyItemChanged(selectedPosition)
     }
 
     private fun initSpinner(root: View) {

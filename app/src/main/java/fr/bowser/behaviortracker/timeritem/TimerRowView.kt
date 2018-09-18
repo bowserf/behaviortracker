@@ -1,16 +1,15 @@
 package fr.bowser.behaviortracker.timeritem
 
 import android.content.Context
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.CardView
-import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.PopupMenu
+import androidx.cardview.widget.CardView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.showmode.ShowModeActivity

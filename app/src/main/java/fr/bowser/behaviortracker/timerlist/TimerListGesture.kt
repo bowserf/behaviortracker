@@ -3,15 +3,14 @@ package fr.bowser.behaviortracker.timerlist
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.core.content.ContextCompat
 import fr.bowser.behaviortracker.R
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 
 class TimerListGesture(context: Context, private val callback: GestureCallback) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
 
     private var isMoving = false
-
 
     private val icon: Bitmap
     private val rightMargin: Int

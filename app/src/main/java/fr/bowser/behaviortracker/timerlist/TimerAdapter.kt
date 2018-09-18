@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.timerlist
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timeritem.TimerRowView
 import java.util.*

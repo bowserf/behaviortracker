@@ -4,15 +4,6 @@ import android.animation.ObjectAnimator
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.Keep
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.NO_POSITION
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -20,6 +11,15 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.Keep
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_POSITION
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
@@ -102,7 +102,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         timerAdapter.addTimer(timer)
     }
 
-    override fun isTimerListEmpty(): Boolean{
+    override fun isTimerListEmpty(): Boolean {
         return timerAdapter.getTimerList().isEmpty()
     }
 
@@ -151,7 +151,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     private fun initializeList(view: View) {
         list = view.findViewById(R.id.list_timers)
 
-        list.layoutManager = GridLayoutManager(activity, mSpanCount, GridLayoutManager.VERTICAL, false)
+        list.layoutManager = GridLayoutManager(activity, mSpanCount, RecyclerView.VERTICAL, false)
         list.setHasFixedSize(true)
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
@@ -161,7 +161,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         itemTouchHelper.attachToRecyclerView(list)
 
         list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) {
                     fab.hide()
                 } else {
@@ -173,22 +173,22 @@ class TimerFragment : Fragment(), TimerContract.Screen {
 
         val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         list.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
-                var currentPosition = parent?.getChildAdapterPosition(view)
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                var currentPosition = parent.getChildAdapterPosition(view)
                 // When an item is removed, getChildAdapterPosition returns NO_POSITION but this
                 // method is call at the animation start so position = -1 and we don't apply the
                 // good top margin. By calling getChildLayoutPosition, we get the view position
                 // and we fix the temporary animation issue.
                 if (currentPosition == NO_POSITION) {
-                    currentPosition = parent?.getChildLayoutPosition(view)
+                    currentPosition = parent.getChildLayoutPosition(view)
                 }
-                if (currentPosition != null && currentPosition < mSpanCount) {
-                    outRect?.top = margin
+                if (currentPosition < mSpanCount) {
+                    outRect.top = margin
                 }
 
-                outRect?.left = margin
-                outRect?.right = margin
-                outRect?.bottom = margin
+                outRect.left = margin
+                outRect.right = margin
+                outRect.bottom = margin
             }
 
         })

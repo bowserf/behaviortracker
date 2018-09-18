@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.preference.Preference
 import android.preference.PreferenceFragment
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.widget.Toast
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp

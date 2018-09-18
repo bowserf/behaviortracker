@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.rewards
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.inapp.InApp
 import fr.bowser.behaviortracker.rewardsrow.RewardsRowView
 

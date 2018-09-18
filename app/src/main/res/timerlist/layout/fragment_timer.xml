@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_timers"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -37,8 +38,8 @@
             android:id="@+id/empty_list_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_space_2"
             android:layout_marginStart="@dimen/default_space_2"
+            android:layout_marginEnd="@dimen/default_space_2"
             android:gravity="center"
             android:text="@string/empty_list_view_text"
             android:textSize="@dimen/text_size_xl"
@@ -49,17 +50,17 @@
             app:layout_constraintTop_toBottomOf="@id/empty_list_view"
             tools:visibility="visible"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_add_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/default_space_2"
         android:layout_marginRight="@dimen/default_space_2"
+        android:layout_marginBottom="@dimen/default_space_2"
         android:elevation="@dimen/default_space"
         android:src="@drawable/ic_add_white"
         app:fabSize="normal"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

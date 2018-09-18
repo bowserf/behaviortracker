@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.KillAppDetection
 import fr.bowser.behaviortracker.home.HomeActivity

@@ -1,8 +1,8 @@
 package fr.bowser.behaviortracker
 
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import fr.bowser.behaviortracker.database.DatabaseProvider
 import fr.bowser.behaviortracker.timer.Timer
 import org.junit.After
