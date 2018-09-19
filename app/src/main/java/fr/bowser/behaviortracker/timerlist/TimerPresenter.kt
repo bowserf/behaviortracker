@@ -43,13 +43,17 @@ class TimerPresenter(private val screen: TimerContract.Screen,
     }
 
     override fun definitivelyRemoveTimer() {
-        timerListManager.removeTimer(ongoingDeletionTimer!!)
-        ongoingDeletionTimer = null
+        if(ongoingDeletionTimer != null) {
+            timerListManager.removeTimer(ongoingDeletionTimer!!)
+            ongoingDeletionTimer = null
+        }
     }
 
     override fun cancelTimerDeletion() {
-        onTimerAdded(ongoingDeletionTimer!!)
-        ongoingDeletionTimer = null
+        if(ongoingDeletionTimer != null) {
+            onTimerAdded(ongoingDeletionTimer!!)
+            ongoingDeletionTimer = null
+        }
     }
 
     override fun onReorderFinished(timerList: List<Timer>) {
