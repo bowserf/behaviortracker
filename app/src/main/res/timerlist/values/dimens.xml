@@ -2,5 +2,6 @@
 <resources>
 
     <dimen name="empty_view_size">150dp</dimen>
+    <dimen name="timer_list_remove_icon_margin_right">32dp</dimen>
 
 </resources>

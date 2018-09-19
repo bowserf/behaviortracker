@@ -156,7 +156,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
 
-        val swipeHandler = TimerListGesture(TimerListGestureCallback())
+        val swipeHandler = TimerListGesture(context!!, TimerListGestureCallback())
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(list)
 
@@ -190,6 +190,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
                 outRect?.right = margin
                 outRect?.bottom = margin
             }
+
         })
     }
 
