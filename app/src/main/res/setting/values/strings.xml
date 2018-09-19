@@ -24,11 +24,11 @@
     <string name="settings_cell_time_modification_message">Adjust time you spend on your actions</string>
 
     <string name="settings_cell_send_commentary_title">Send a suggestion</string>
-    <string name="settings_cell_send_commentary_message">Tell us how to improve Op\'Time</string>
+    <string name="settings_cell_send_commentary_message">Tell us how to improve Time Tracker</string>
 
     <!-- Send email -->
     <string name="settings_send_email_choose_app">Send email :</string>
     <string name="settings_send_email_no_application_available">There are no email clients installed.</string>
-    <string name="settings_send_email_subject">How to improve Op\'Time</string>
+    <string name="settings_send_email_subject">How to improve Time Tracker</string>
 
 </resources>

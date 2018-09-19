@@ -15,11 +15,11 @@
     <string name="settings_cell_time_modification_message">Ajustez le temps passé sur vos actions</string>
 
     <string name="settings_cell_send_commentary_title">Envoyer une suggestion</string>
-    <string name="settings_cell_send_commentary_message">Dites nous comment améliorer Op\'Time</string>
+    <string name="settings_cell_send_commentary_message">Dites nous comment améliorer Time Tracker</string>
 
     <!-- Send email -->
     <string name="settings_send_email_choose_app">Envoyer un mail :</string>
     <string name="settings_send_email_no_application_available">Aucune application disponible pour envoyer un mail</string>
-    <string name="settings_send_email_subject">Comment améliorer Op\'Time</string>
+    <string name="settings_send_email_subject">Comment améliorer Time Tracker</string>
 
 </resources>
