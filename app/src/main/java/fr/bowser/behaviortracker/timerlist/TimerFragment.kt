@@ -3,8 +3,10 @@ package fr.bowser.behaviortracker.timerlist
 import android.animation.ObjectAnimator
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.Keep
 import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -25,7 +27,7 @@ import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
 
-class TimerFragment : Fragment(), TimerContract.View {
+class TimerFragment : Fragment(), TimerContract.Screen {
 
     @Inject
     lateinit var presenter: TimerPresenter
@@ -41,6 +43,12 @@ class TimerFragment : Fragment(), TimerContract.View {
     private lateinit var list: RecyclerView
 
     private var mSpanCount: Int = 1
+
+    private val handler = Handler()
+
+    private val runnable = Runnable {
+        presenter.definitivelyRemoveTimer()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,6 +102,10 @@ class TimerFragment : Fragment(), TimerContract.View {
         timerAdapter.addTimer(timer)
     }
 
+    override fun isTimerListEmpty(): Boolean{
+        return timerAdapter.getTimerList().isEmpty()
+    }
+
     override fun displayEmptyListView() {
         list.visibility = GONE
         emptyListView.visibility = View.VISIBLE
@@ -111,6 +123,21 @@ class TimerFragment : Fragment(), TimerContract.View {
         list.visibility = View.VISIBLE
         emptyListView.visibility = View.GONE
         emptyListText.visibility = View.GONE
+    }
+
+    override fun displayCancelDeletionView() {
+        handler.removeCallbacks(runnable)
+        handler.postDelayed(runnable, CANCEL_SUPPRESSION_DISPLAY_TIME.toLong())
+
+        Snackbar.make(
+                list,
+                getString(R.string.timer_view_timer_has_been_removed),
+                CANCEL_SUPPRESSION_DISPLAY_TIME)
+                .setAction(android.R.string.cancel) {
+                    handler.removeCallbacks(runnable)
+                    presenter.cancelTimerDeletion()
+                }
+                .show()
     }
 
     private fun setupGraph() {
@@ -199,6 +226,8 @@ class TimerFragment : Fragment(), TimerContract.View {
 
         private const val FAB_ANIMATION_DURATION = 1000L
         private const val FAB_ANIMATION_DELAY = 400L
+
+        private const val CANCEL_SUPPRESSION_DISPLAY_TIME = 3000
     }
 
 }

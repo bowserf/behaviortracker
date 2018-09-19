@@ -33,16 +33,19 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
         }
     }
 
-    override fun removeTimer(timer: Timer) {
-        timeManager.stopTimer(timer)
+    override fun removeTimer(oldTimer: Timer) {
+        timeManager.stopTimer(oldTimer)
 
-        timers.remove(timer)
+        timers.remove(oldTimer)
         for (callback in callbacks) {
-            callback.onTimerRemoved(timer)
+            callback.onTimerRemoved(oldTimer)
         }
 
         launch(background) {
-            timerDAO.removeTimer(timer)
+            timerDAO.removeTimer(oldTimer)
+
+            timers.sortBy { timer -> timer.position }
+            reorderTimerList(timers)
         }
     }
 

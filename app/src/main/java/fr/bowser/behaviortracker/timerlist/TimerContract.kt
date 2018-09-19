@@ -4,7 +4,7 @@ import fr.bowser.behaviortracker.timer.Timer
 
 interface TimerContract {
 
-    interface View {
+    interface Screen {
 
         fun displayCreateTimerView()
 
@@ -17,6 +17,10 @@ interface TimerContract {
         fun displayEmptyListView()
 
         fun displayListView()
+
+        fun displayCancelDeletionView()
+
+        fun isTimerListEmpty(): Boolean
 
     }
 
@@ -32,7 +36,11 @@ interface TimerContract {
 
         fun onTimerSwiped(timer: Timer)
 
+        fun definitivelyRemoveTimer()
+
         fun onReorderFinished(timerList: List<Timer>)
+
+        fun cancelTimerDeletion()
 
     }
 

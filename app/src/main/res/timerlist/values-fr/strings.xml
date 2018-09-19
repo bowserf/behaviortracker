@@ -2,5 +2,6 @@
 <resources>
 
     <string name="empty_list_view_text">Qu\'allez vous chronométrer aujourd\'hui ?</string>
+    <string name="timer_view_timer_has_been_removed">Un chronomètre a été supprimé</string>
 
 </resources>

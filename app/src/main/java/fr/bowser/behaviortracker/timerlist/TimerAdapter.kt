@@ -8,12 +8,13 @@ import java.util.*
 
 class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
-    private var timerList = ArrayList<Timer>()
+    private val timerList = mutableListOf<Timer>()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TimerViewHolder {
-        val timerRowView = TimerRowView(parent!!.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimerViewHolder {
+        val timerRowView = TimerRowView(parent.context)
 
-        val layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        val layoutParams = RecyclerView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
 
         timerRowView.layoutParams = layoutParams
@@ -21,9 +22,9 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         return TimerViewHolder(timerRowView)
     }
 
-    override fun onBindViewHolder(holder: TimerViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: TimerViewHolder, position: Int) {
         val timer = timerList[position]
-        holder?.view?.setTimer(timer)
+        holder.view.setTimer(timer)
     }
 
     override fun getItemCount(): Int {
@@ -31,20 +32,23 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
     }
 
     fun setTimersList(timers: List<Timer>) {
-        timerList = ArrayList(timers)
+        timerList.clear()
+        timerList.addAll(timers)
         notifyDataSetChanged()
     }
 
     fun addTimer(timer: Timer) {
-        timerList.add(timer)
+        timerList.add(timer.position, timer)
         val position = timerList.indexOf(timer)
         notifyItemInserted(position)
     }
 
     fun removeTimer(timer: Timer) {
         val position = timerList.indexOf(timer)
-        timerList.remove(timer)
-        notifyItemRemoved(position)
+        if (position != -1) {
+            timerList.remove(timer)
+            notifyItemRemoved(position)
+        }
     }
 
     fun onItemMove(fromPosition: Int, toPosition: Int) {
@@ -65,7 +69,7 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
     }
 
     fun getTimerList(): List<Timer> {
-        return timerList
+        return timerList.toList()
     }
 
     inner class TimerViewHolder(val view: TimerRowView) : RecyclerView.ViewHolder(view)

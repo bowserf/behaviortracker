@@ -3,18 +3,20 @@ package fr.bowser.behaviortracker.timerlist
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
-class TimerPresenter(private val view: TimerContract.View,
+class TimerPresenter(private val screen: TimerContract.Screen,
                      private val timerListManager: TimerListManager)
     : TimerContract.Presenter, TimerListManager.TimerCallback {
 
+    private var ongoingDeletionTimer: Timer? = null
+
     override fun init() {
         val timers = timerListManager.getTimerList()
-        view.displayTimerList(timers)
+        screen.displayTimerList(timers)
 
         if (timers.isEmpty()) {
-            view.displayEmptyListView()
+            screen.displayEmptyListView()
         } else {
-            view.displayListView()
+            screen.displayListView()
         }
     }
 
@@ -27,11 +29,27 @@ class TimerPresenter(private val view: TimerContract.View,
     }
 
     override fun onClickAddTimer() {
-        view.displayCreateTimerView()
+        screen.displayCreateTimerView()
     }
 
     override fun onTimerSwiped(timer: Timer) {
-        timerListManager.removeTimer(timer)
+        if(ongoingDeletionTimer != null){
+            definitivelyRemoveTimer()
+        }
+        ongoingDeletionTimer = timer
+        // simulation suppression
+        onTimerRemoved(timer)
+        screen.displayCancelDeletionView()
+    }
+
+    override fun definitivelyRemoveTimer() {
+        timerListManager.removeTimer(ongoingDeletionTimer!!)
+        ongoingDeletionTimer = null
+    }
+
+    override fun cancelTimerDeletion() {
+        onTimerAdded(ongoingDeletionTimer!!)
+        ongoingDeletionTimer = null
     }
 
     override fun onReorderFinished(timerList: List<Timer>) {
@@ -39,17 +57,17 @@ class TimerPresenter(private val view: TimerContract.View,
     }
 
     override fun onTimerRemoved(updatedTimer: Timer) {
-        if (timerListManager.getTimerList().isEmpty()) {
-            view.displayEmptyListView()
+        screen.onTimerRemoved(updatedTimer)
+        if (screen.isTimerListEmpty()) {
+            screen.displayEmptyListView()
         }
-        view.onTimerRemoved(updatedTimer)
     }
 
     override fun onTimerAdded(updatedTimer: Timer) {
-        if (!timerListManager.getTimerList().isEmpty()) {
-            view.displayListView()
+        screen.onTimerAdded(updatedTimer)
+        if (!screen.isTimerListEmpty()) {
+            screen.displayListView()
         }
-        view.onTimerAdded(updatedTimer)
     }
 
     override fun onTimerRenamed(updatedTimer: Timer) {
