@@ -4,7 +4,7 @@
     {
       "identifier": "fr.bowser.behaviortrack.product.marshmallow",
       "default_name": "Marshmallow",
-      "default_description": "Buy us a marshmallow...",
+      "default_description": "Buy us marshmallows...",
       "default_price": "0.59 €",
       "feature": "marshmallow"
     },

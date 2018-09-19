@@ -13,9 +13,9 @@ import javax.inject.Inject
 
 class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.Screen {
 
-    private val icon: ImageView
     private val title: TextView
     private val price: TextView
+    private val background: ImageView
 
     private var inApp: InApp? = null
 
@@ -32,9 +32,9 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
 
         setOnClickListener { presenter.onItemClicked(inApp!!.sku) }
 
-        icon = findViewById(R.id.rewards_icon)
         title = findViewById(R.id.rewards_title)
         price = findViewById(R.id.rewards_price)
+        background = findViewById(R.id.rewards_background)
     }
 
     override fun setInApp(inApp: InApp) {
@@ -61,18 +61,18 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
         inApp?.let {
             title.text = it.description
             price.text = it.price
-            icon.setImageResource(getIconId())
+            background.setImageDrawable(context.getDrawable(getDrawableId()))
         }
     }
 
     @DrawableRes
-    private fun getIconId(): Int {
+    private fun getDrawableId(): Int {
         val feature = inApp?.feature
         return when (feature) {
-            InApp.FEATURE_MARSHMALLOW -> R.drawable.ic_marshmallow
-            InApp.FEATURE_NOUGAT -> R.drawable.ic_nougat
-            InApp.FEATURE_OREO -> R.drawable.ic_oreo
-            InApp.FEATURE_PIE -> R.drawable.ic_pie
+            InApp.FEATURE_MARSHMALLOW -> R.drawable.marshmallow
+            InApp.FEATURE_NOUGAT -> R.drawable.nougat
+            InApp.FEATURE_OREO -> R.drawable.oreo
+            InApp.FEATURE_PIE -> R.drawable.pie
             else -> throw IllegalStateException("Unkown feature : $feature")
         }
     }
