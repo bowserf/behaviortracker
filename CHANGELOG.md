@@ -1,3 +1,12 @@
+### Op'Time v0.4.0
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2018-09-19
+* Change log:
+    - Display snackbar with cancel action when a user swipes a timer.
+    - Display "delete" icon behind item timer during a swipe.
+
+
+
 ### Op'Time v0.3.1
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2018-08-08
