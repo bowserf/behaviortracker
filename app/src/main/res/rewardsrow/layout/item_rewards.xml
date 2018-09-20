@@ -18,16 +18,22 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/pie"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shadow_sweets_height"
+            android:background="@drawable/shadow_sweets"
+            app:layout_constraintBottom_toBottomOf="@id/rewards_background"/>
+
         <TextView
             android:id="@+id/rewards_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_space_1_5"
+            android:layout_marginBottom="@dimen/default_space"
             android:layout_marginEnd="@dimen/default_space_1_5"
+            android:layout_marginStart="@dimen/default_space_1_5"
+            android:layout_marginTop="@dimen/default_space"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/default_space"
-            android:layout_marginBottom="@dimen/default_space"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/rewards_price"
@@ -38,10 +44,10 @@
             android:id="@+id/rewards_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_space_1_5"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/default_space"
             android:layout_marginBottom="@dimen/default_space"
+            android:layout_marginEnd="@dimen/default_space_1_5"
+            android:layout_marginTop="@dimen/default_space"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/rewards_title"
             app:layout_constraintRight_toRightOf="parent"
