@@ -10,6 +10,23 @@ apply from: '../config/dependency/dependencies.gradle'
 
 apply plugin: 'io.fabric'
 
+// If release config detected, install it and use it
+if (project.hasProperty("behaviorTrackerSigningPath")) {
+    apply from: "$behaviorTrackerSigningPath"
+
+    android {
+        signingConfigs {
+            releaseSigningConfig rootProject.ext.releaseSigningConfig
+        }
+
+        buildTypes {
+            release {
+                signingConfig signingConfigs.releaseSigningConfig
+            }
+        }
+    }
+}
+
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
