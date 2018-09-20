@@ -1,3 +1,13 @@
+### Op'Time v0.5.0
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2018-09-20
+* Change log:
+    - Target Android API 28.
+    - Add rewards view with in-app management.
+    - Migration to Android X.
+
+
+
 ### Op'Time v0.4.0
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2018-09-19
