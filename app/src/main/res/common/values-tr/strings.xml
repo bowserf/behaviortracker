@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="create_timer_shortcut_short_label">Yeni zamanlayıcı</string>
+    <string name="create_timer_shortcut_long_label">Bir aksiyonu ızlemek için yeni bir zamanlayıcı oluştur.</string>
+
+</resources>

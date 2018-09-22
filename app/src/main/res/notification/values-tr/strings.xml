@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="timer_notif_channel_name">Zamanlayıcı</string>
+    <string name="timer_notif_channel_description">Şu andaki çalışan zamanlayıcıyı görüntüle ve kontrol et.</string>
+    <string name="timer_notif_start">Başlat</string>
+    <string name="timer_notif_pause">Duraklat</string>
+
+</resources>

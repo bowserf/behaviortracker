@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activity_setting_title">Ayarlar</string>
+    <string name="settings_category_timer">Zamanlayıcı</string>
+    <string name="settings_category_other">Diğerleri</string>
+    <string name="settings_cell_one_active_timer">Aynı anda sadece bir aktif zamanlayıcı</string>
+    <string name="settings_cell_one_active_message">Aktif zamanlayıcıyı durdur eğer yeni zamanlayıcı başlamışsa.</string>
+    <string name="settings_cell_time_modification_title">Zaman değişikliği</string>
+    <string name="settings_cell_time_modification_message">Aktivitelerdeki harcanan zamanları ayarla.</string>
+    <string name="settings_cell_send_commentary_title">Öneride bulun</string>
+    <string name="settings_cell_send_commentary_message">Time Tracker\'ı nasıl geliştirmemizi istediğinizi bize söyleyin.</string>
+    <string name="settings_send_email_choose_app">Email gönder :</string>
+    <string name="settings_send_email_no_application_available">Herhangi bir email istemcisi yüklü değil.</string>
+    <string name="settings_send_email_subject">Time Tracker\'ı nasıl geliştiririz</string>
+
+</resources>

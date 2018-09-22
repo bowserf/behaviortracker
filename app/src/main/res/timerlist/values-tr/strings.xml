@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="empty_list_view_text">Bugün neyi zamanlamak istiyorsunuz?</string>
+    <string name="timer_view_timer_has_been_removed">Zmanlayıcı kaldırıldı</string>
+
+</resources>
