@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="alarm_timer_notif_channel_name">Allarme</string>
+    <string name="alarm_timer_notif_channel_description">Ricorda di avviare un timer per tenere traccia delle tue attività</string>
+    <string name="alarm_timer_title">Tieni traccia delle attività quotidiane</string>
+    <string name="alarm_timer_content">Inizia la giornata seguendo la tua prima attività</string>
+    <string name="alarm_timer_status">Abilita allarme</string>
+    <string name="alarm_timer_dialog_title">Promemoria</string>
+    <string name="alarm_timer_dialog_content">Ricorda di tenere traccia delle tue attività.</string>
+    <string name="alarm_timer_alarm_enabled">L\'allarme è attivato</string>
+    <string name="alarm_timer_alarm_disabled">L\'allarme è disabilitato</string>
+
+
+</resources>

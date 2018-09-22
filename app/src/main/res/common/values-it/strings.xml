@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="create_timer_shortcut_short_label">Nuovo timer</string>
+    <string name="create_timer_shortcut_long_label">Crea un nuovo timer per tracciare un\'azione.</string>
+
+
+</resources>

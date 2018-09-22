@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="timer_notif_channel_name">Timer</string>
+    <string name="timer_notif_channel_description">Visualizza e controlla il timer corrente.</string>
+    <string name="timer_notif_start">Inizio</string>
+    <string name="timer_notif_pause">Pausa</string>
+
+
+</resources>

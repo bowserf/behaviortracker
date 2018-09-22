@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activity_setting_title">Impostazioni</string>
+    <string name="settings_category_timer">Timer</string>
+    <string name="settings_category_other">Altro</string>
+    <string name="settings_cell_one_active_timer">Un timer attivo alla volta</string>
+    <string name="settings_cell_one_active_message">Interrompe il timer attivo se ne viene avviato uno nuovo.</string>
+    <string name="settings_cell_time_modification_title">Modifica del tempo</string>
+    <string name="settings_cell_time_modification_message">Regola il tempo che trascorri sulle tue azioni.</string>
+    <string name="settings_cell_send_commentary_title">Invia un suggerimento</string>
+    <string name="settings_cell_send_commentary_message">Dicci come migliorare Time Tracker.</string>
+    <string name="settings_send_email_choose_app">Invia una email :</string>
+    <string name="settings_send_email_no_application_available">Non ci sono client di posta installati.</string>
+    <string name="settings_send_email_subject">Come migliorare Time Tracker</string>
+
+
+</resources>

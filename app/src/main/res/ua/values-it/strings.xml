@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="release_screenshot_timer_work">Lavoro</string>
+    <string name="release_screenshot_timer_transport">Trasporto</string>
+    <string name="release_screenshot_timer_sport">Sport</string>
+    <string name="release_screenshot_timer_cooking">Cuoco</string>
+    <string name="release_screenshot_timer_watch_series">Serie</string>
+
+</resources>

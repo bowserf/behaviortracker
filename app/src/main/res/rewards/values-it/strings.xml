@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activity_rewards_title">Supporta gli sviluppatori</string>
+    <string name="rewards_purchase_fail">Si è verificato un errore durante l\'acquisto =\'( Per favore prova più tardi.</string>
+    <string name="rewards_purchase_success">Grazie per il vostro sostegno! Continueremo a lavorare sodo per migliorare l\'applicazione &lt;3</string>
+
+
+</resources>
