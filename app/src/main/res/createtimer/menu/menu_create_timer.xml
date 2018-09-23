@@ -6,7 +6,7 @@
         android:id="@+id/menu_create_timer_save"
         android:enabled="true"
         android:title="@string/item_create_timer_save"
-        android:icon="@drawable/ic_done_white"
+        android:icon="@drawable/ic_check"
         app:showAsAction="always" />
 
 </menu>

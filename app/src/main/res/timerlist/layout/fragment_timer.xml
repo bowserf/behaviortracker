@@ -60,7 +60,7 @@
         android:layout_marginRight="@dimen/default_space_2"
         android:layout_marginBottom="@dimen/default_space_2"
         android:elevation="@dimen/default_space"
-        android:src="@drawable/ic_add_white"
+        android:src="@drawable/ic_add"
         app:fabSize="normal"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

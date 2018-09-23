@@ -108,7 +108,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     private fun initToolbar(root: View) {
         val myToolbar = root.findViewById<Toolbar>(R.id.create_timer_toolbar)
         myToolbar.title = resources.getString(R.string.create_timer_title)
-        myToolbar.setNavigationIcon(R.drawable.ic_close_black)
+        myToolbar.setNavigationIcon(R.drawable.ic_close)
         myToolbar.setNavigationOnClickListener {
             exitWithAnimation()
         }

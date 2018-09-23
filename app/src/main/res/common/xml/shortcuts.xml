@@ -1,7 +1,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:shortcutId="create_timer"
-        android:icon="@drawable/ic_add_white"
+        android:icon="@drawable/ic_add"
         android:shortcutShortLabel="@string/create_timer_shortcut_short_label"
         android:shortcutLongLabel="@string/create_timer_shortcut_long_label">
         <intent
