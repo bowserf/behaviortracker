@@ -10,25 +10,25 @@ object ColorUtils {
 
     const val NUMBER_COLORS = 19
 
-    private const val COLOR_DEEP_ORANGE = 0
-    private const val COLOR_BROWN = 1
-    private const val COLOR_GREY = 2
-    private const val COLOR_BLUE_GREY = 3
-    private const val COLOR_YELLOW = 4
-    private const val COLOR_AMBER = 5
-    private const val COLOR_ORANGE = 6
-    private const val COLOR_GREEN = 7
-    private const val COLOR_LIGHT_GREEN = 8
-    private const val COLOR_LIME = 9
-    private const val COLOR_LIGHT_BLUE = 10
-    private const val COLOR_CYAN = 11
-    private const val COLOR_TEAL = 12
-    private const val COLOR_DEEP_PURPLE = 13
-    private const val COLOR_INDIGO = 14
-    private const val COLOR_BLUE = 15
-    private const val COLOR_RED = 16
-    private const val COLOR_PINK = 17
-    private const val COLOR_PURPLE = 18
+    const val COLOR_DEEP_ORANGE = 0
+    const val COLOR_BROWN = 1
+    const val COLOR_GREY = 2
+    const val COLOR_BLUE_GREY = 3
+    const val COLOR_YELLOW = 4
+    const val COLOR_AMBER = 5
+    const val COLOR_ORANGE = 6
+    const val COLOR_GREEN = 7
+    const val COLOR_LIGHT_GREEN = 8
+    const val COLOR_LIME = 9
+    const val COLOR_LIGHT_BLUE = 10
+    const val COLOR_CYAN = 11
+    const val COLOR_TEAL = 12
+    const val COLOR_DEEP_PURPLE = 13
+    const val COLOR_INDIGO = 14
+    const val COLOR_BLUE = 15
+    const val COLOR_RED = 16
+    const val COLOR_PINK = 17
+    const val COLOR_PURPLE = 18
 
     fun convertPositionToColor(colorPosition: Int): Int {
         val color: Int
