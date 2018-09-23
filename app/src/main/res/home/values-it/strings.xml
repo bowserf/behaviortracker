@@ -7,5 +7,7 @@
     <string name="menu_setting">Impostazioni</string>
     <string name="home_dialog_confirm_reset_all_timers">Sei sicuro di voler resettare tutti i timer?</string>
 
+    <!-- Bottom navigation view -->
+    <string name="bottom_navigation_timer_view">Timer</string>
 
 </resources>

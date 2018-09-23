@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="menu_alarm">Alarm</string>
+    <string name="menu_reset_all">Tüm zamanlayıcıları sıfırla</string>
+    <string name="menu_rewards">Geliştiricileri destekle</string>
+    <string name="menu_setting">Ayarlar</string>
+    <string name="home_dialog_confirm_reset_all_timers">Tüm zamanlayıcıları sıfırlamak istediğinizden emin misiniz ?</string>
+
+    <!-- Bottom navigation view -->
+    <string name="bottom_navigation_timer_view">Kronometre</string>
+
+</resources>
