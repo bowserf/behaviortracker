@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Alarm timer -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Pomodoro, when timer switched -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".config.BehaviorTrackerApp"
