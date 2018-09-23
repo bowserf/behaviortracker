@@ -39,7 +39,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
-        resConfigs "en", "fr"
+        resConfigs "en", "fr", "it", "tr"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
