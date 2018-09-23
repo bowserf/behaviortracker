@@ -62,7 +62,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
         }
     }
 
-    override fun updateTime(timer: Timer, newTime: Float) {
+    override fun updateTime(timer: Timer, newTime: Float, fakeTimer:Boolean) {
         var currentNewTime = newTime
         if (currentNewTime < 0) {
             currentNewTime = 0f
@@ -70,8 +70,10 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
 
         timer.time = currentNewTime
 
-        launch(background) {
-            timerDAO.updateTimerTime(timer.id, timer.time.toLong())
+        if(!fakeTimer) {
+            launch(background) {
+                timerDAO.updateTimerTime(timer.id, timer.time.toLong())
+            }
         }
 
         for (callback in listeners) {
