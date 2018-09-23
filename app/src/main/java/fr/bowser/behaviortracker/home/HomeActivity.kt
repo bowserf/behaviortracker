@@ -9,15 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmNotification
 import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
+import fr.bowser.behaviortracker.pomodoro.PomodoroFragment
 import fr.bowser.behaviortracker.rewards.RewardsActivity
 import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timerlist.TimerFragment
 import javax.inject.Inject
+
 
 class HomeActivity : AppCompatActivity(), HomeContract.View {
 
@@ -32,7 +35,9 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
         initializeToolbar()
 
-        displayTimerFragment()
+        initializeBottomNavigationView()
+
+        presenter.initialize()
 
         manageIntent()
 
@@ -102,8 +107,21 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         alertDialog.show(fragmentManager, AlarmTimerDialog.TAG)
     }
 
+
     override fun displayRewardsView() {
         RewardsActivity.startActivity(this)
+    }
+
+    override fun displayPomodoroView() {
+        supportFragmentManager.inTransaction {
+            replace(R.id.fragment_container, PomodoroFragment(), PomodoroFragment.TAG)
+        }
+    }
+
+    override fun displayTimerView() {
+        supportFragmentManager.inTransaction {
+            replace(R.id.fragment_container, TimerFragment(), TimerFragment.TAG)
+        }
     }
 
     private fun setupGraph() {
@@ -119,9 +137,15 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         setSupportActionBar(myToolbar)
     }
 
-    private fun displayTimerFragment() {
-        supportFragmentManager.inTransaction {
-            replace(R.id.fragment_container, TimerFragment(), TimerFragment.TAG)
+    private fun initializeBottomNavigationView() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.home_bottom_navigation)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_timer_view -> { presenter.onClickTimerView() }
+                R.id.menu_pomodoro_view -> { presenter.onClickPomodoroView() }
+            }
+            true
         }
     }
 

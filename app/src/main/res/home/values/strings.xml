@@ -8,4 +8,8 @@
     <string name="menu_setting">Settings</string>
     <string name="home_dialog_confirm_reset_all_timers">Are you sur you want to reset all timers ?</string>
 
+    <!-- Bottom navigation view -->
+    <string name="bottom_navigation_timer_view">Timer</string>
+    <string name="bottom_navigation_pomodoro_view" translatable="false">Pomodoro</string>
+
 </resources>
