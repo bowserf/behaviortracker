@@ -1,3 +1,13 @@
+### Op'Time v0.5.1
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2018-09-23
+* Change log:
+    - Add italian translation.
+    - Add turkish translation
+    - Fix in-apps SKU to final ones.
+
+
+
 ### Op'Time v0.5.0
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2018-09-20
