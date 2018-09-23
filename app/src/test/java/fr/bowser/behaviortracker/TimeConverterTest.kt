@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker
 import fr.bowser.behaviortracker.utils.TimeConverter
 import org.junit.Assert
 import org.junit.Test
+import org.mockito.Mockito.`when`
 
 class TimeConverterTest {
 
@@ -34,6 +35,23 @@ class TimeConverterTest {
     fun convertSecondsSmallTime() {
         val time1 = TimeConverter.convertSecondsToHumanTime(127)
         Assert.assertEquals("00:02:07", time1)
+    }
+
+    @Test
+    fun convertSecondsToMinutes() {
+        val time1 = TimeConverter.convertSecondsToHumanTime(127, false)
+        Assert.assertEquals("02:07", time1)
+    }
+
+    @Test
+    fun convertSecondsToHour() {
+        val time1 = TimeConverter.convertSecondsToHumanTime(3601, false)
+        Assert.assertEquals("60:01", time1)
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun cantAcceptNegativeTime() {
+        `when`(TimeConverter.convertSecondsToHumanTime(-1)).thenThrow(IllegalStateException())
     }
 
 }
