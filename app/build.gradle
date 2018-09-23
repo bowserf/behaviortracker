@@ -92,6 +92,7 @@ android {
                     'src/main/res/rewards',
                     'src/main/res/rewardsrow',
                     'src/main/res/pomodoro',
+                    'src/main/res/choosepomodorotimer',
             ]
         }
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())

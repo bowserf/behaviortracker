@@ -6,15 +6,17 @@ interface PomodoroContract {
 
     interface Screen {
 
-        fun getPauseTimer(): Timer
-
         fun updatePomodoroTime(timer: Timer, currentTime: Long)
 
         fun updatePomodoroTimer(timer: Timer, duration: Long)
 
+        fun displayChoosePomodoroTimer()
+
     }
 
     interface Presenter {
+
+        val timerList: List<Timer>
 
         fun start()
 

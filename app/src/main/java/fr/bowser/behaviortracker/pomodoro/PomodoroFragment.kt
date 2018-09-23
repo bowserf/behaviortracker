@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.choosepomodorotimer.ChoosePomodoroTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.utils.ColorUtils
 import javax.inject.Inject
 
 
@@ -72,8 +73,8 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         this.currentTime.text = duration.toString()
     }
 
-    override fun getPauseTimer(): Timer {
-        return Timer(resources.getString(R.string.pomodoro_timer_pause), ColorUtils.COLOR_BLUE_GREY)
+    override fun displayChoosePomodoroTimer() {
+        ChoosePomodoroTimerDialog.showDialog(activity as AppCompatActivity)
     }
 
     private fun setupGraph() {

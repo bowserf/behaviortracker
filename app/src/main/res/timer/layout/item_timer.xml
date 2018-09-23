@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_timer_card">
+        android:background="@drawable/bg_white_ripple">
 
         <View
             android:id="@+id/timer_color"

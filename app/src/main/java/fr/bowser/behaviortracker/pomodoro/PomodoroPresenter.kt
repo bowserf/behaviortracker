@@ -1,18 +1,17 @@
 package fr.bowser.behaviortracker.pomodoro
 
-import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.timer.Timer
 
 class PomodoroPresenter(private val screen: PomodoroContract.Screen,
                         private val pomodoroManager: PomodoroManager,
-                        private val timerList: List<Timer>) : PomodoroContract.Presenter {
+                        override val timerList: List<Timer>) : PomodoroContract.Presenter {
 
     private val pomodoroListener = createPomodoroManagerListener()
 
     override fun start() {
         pomodoroManager.listener = pomodoroListener
 
-        if(pomodoroManager.currentTimer != null) {
+        if (pomodoroManager.currentTimer != null) {
             screen.updatePomodoroTimer(pomodoroManager.currentTimer!!, pomodoroManager.pomodoroTime)
         }
     }
@@ -22,12 +21,7 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
     }
 
     override fun onClickFab() {
-        pomodoroManager.startPomodoro(
-                timerList[0],
-                POMODORO_DURATION,
-                screen.getPauseTimer(),
-                REST_DURATION)
-        screen.updatePomodoroTimer(timerList[0], POMODORO_DURATION)
+        screen.displayChoosePomodoroTimer()
     }
 
     private fun createPomodoroManagerListener(): PomodoroManager.Listener {
@@ -45,11 +39,6 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
             }
 
         }
-    }
-
-    companion object {
-        val POMODORO_DURATION = if (BuildConfig.DEBUG) 10L else (25 * 60).toLong()
-        val REST_DURATION = if (BuildConfig.DEBUG) 5L else (5 * 60).toLong()
     }
 
 }

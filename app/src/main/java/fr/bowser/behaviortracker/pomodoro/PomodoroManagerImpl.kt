@@ -5,7 +5,8 @@ import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 
 class PomodoroManagerImpl(private val timeManager: TimeManager,
-                          private val vibrator: Vibrator) : PomodoroManager{
+                          private val vibrator: Vibrator,
+                          private val debug: Boolean) : PomodoroManager {
 
     override var listener: PomodoroManager.Listener? = null
 
@@ -27,9 +28,9 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
     private var restDuration = 0L
 
     override fun startPomodoro(actionTimer: Timer,
-                      actionDuration: Long,
-                      restTimer: Timer,
-                      restDuration: Long) {
+                               actionDuration: Long,
+                               restTimer: Timer,
+                               restDuration: Long) {
         this.actionTimer = actionTimer
         this.restTimer = restTimer
         this.actionDuration = actionDuration
@@ -102,7 +103,9 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
                 pomodoroTime = actionDuration
             }
 
-            vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
+            if(!debug) {
+                vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
+            }
 
             timeManager.startTimer(currentTimer!!)
             timeManager.stopTimer(previousTimer)
