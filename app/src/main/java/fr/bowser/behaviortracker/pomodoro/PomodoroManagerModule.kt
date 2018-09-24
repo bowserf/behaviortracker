@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Vibrator
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.BuildConfig
+import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import javax.inject.Singleton
 
@@ -14,9 +14,11 @@ class PomodoroManagerModule {
 
     @Singleton
     @Provides
-    fun providePomodoroManager(context: Context, timeManager: TimeManager): PomodoroManager {
+    fun providePomodoroManager(context: Context,
+                               timeManager: TimeManager,
+                               settingManager: SettingManager): PomodoroManager {
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        return PomodoroManagerImpl(timeManager, vibrator, BuildConfig.DEBUG)
+        return PomodoroManagerImpl(timeManager, settingManager, vibrator)
     }
 
 }

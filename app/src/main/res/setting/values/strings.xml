@@ -4,11 +4,15 @@
     <!-- Category keys -->
     <string name="pref_key_timer_category" translatable="false">pref_key_timer_category</string>
     <string name="pref_key_timer_other" translatable="false">pref_key_timer_other</string>
+    <string name="pref_key_pomodoro" translatable="false">pref_key_pomodoro</string>
 
     <!-- SharedPreferences keys -->
     <string name="pref_key_time_modification" translatable="false">pref_key_time_modification</string>
     <string name="pref_key_one_active_timer" translatable="false">pref_key_one_active_timer</string>
     <string name="pref_key_send_commentary" translatable="false">pref_key_send_commentary</string>
+    <string name="pref_key_pomodoro_vibration" translatable="false">pref_key_pomodoro_vibration</string>
+    <string name="pref_key_pomodoro_stage" translatable="false">pref_key_pomodoro_stage</string>
+    <string name="pref_key_pomodoro_pause_stage" translatable="false">pref_key_pomodoro_pause_stage</string>
 
     <!-- Activity -->
     <string name="activity_setting_title">Settings</string>
@@ -25,6 +29,17 @@
 
     <string name="settings_cell_send_commentary_title">Send a suggestion</string>
     <string name="settings_cell_send_commentary_message">Tell us how to improve Time Tracker.</string>
+
+    <!-- Pomodoro -->
+    <string name="settings_category_pomodoro" translatable="false">Pomodoro</string>
+    <string name="settings_cell_pomodoro_vibration">Enable vibration</string>
+    <string name="settings_cell_pomodoro_vibration_message">Device vibrates when a pomodoro stage is finished.</string>
+
+    <string name="settings_cell_pomodoro_stage_title">Pomodoro stage duration</string>
+    <string name="settings_cell_pomodoro_stage_message">Duration of the timer during a pomodoro session.</string>
+
+    <string name="settings_cell_pomodoro_pause_stage_title">Pomodoro pause stage duration</string>
+    <string name="settings_cell_pomodoro_pause_stage_message">Duration of the pause during a pomodoro session.</string>
 
     <!-- Send email -->
     <string name="settings_send_email_choose_app">Send email :</string>

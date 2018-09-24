@@ -23,6 +23,36 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="@string/pref_key_pomodoro"
+        android:title="@string/settings_category_pomodoro">
+
+        <fr.bowser.behaviortracker.setting.TimeModificationSettings
+            android:defaultValue="@integer/settings_default_value_pomodoro_stage"
+            android:dialogMessage="@string/settings_cell_pomodoro_stage_message"
+            android:key="@string/pref_key_pomodoro_stage"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/settings_cell_pomodoro_stage_message"
+            android:title="@string/settings_cell_pomodoro_stage_title" />
+
+        <fr.bowser.behaviortracker.setting.TimeModificationSettings
+            android:defaultValue="@integer/settings_default_value_pomodoro_pause_stage"
+            android:dialogMessage="@string/settings_cell_pomodoro_pause_stage_message"
+            android:key="@string/pref_key_pomodoro_pause_stage"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/settings_cell_pomodoro_pause_stage_message"
+            android:title="@string/settings_cell_pomodoro_pause_stage_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_pomodoro_vibration"
+            android:summary="@string/settings_cell_pomodoro_vibration_message"
+            android:title="@string/settings_cell_pomodoro_vibration" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="@string/pref_key_timer_other"
         android:title="@string/settings_category_other">
 

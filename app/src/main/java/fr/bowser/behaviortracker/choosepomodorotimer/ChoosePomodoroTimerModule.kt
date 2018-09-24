@@ -3,10 +3,12 @@ package fr.bowser.behaviortracker.choosepomodorotimer
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.utils.PauseTimer
+import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
+import fr.bowser.behaviortracker.utils.PauseTimer
 
 @Module
 class ChoosePomodoroTimerModule {
@@ -15,9 +17,16 @@ class ChoosePomodoroTimerModule {
     @Provides
     fun provideChoosePomodoroTimerPresenter(context: Context,
                                             timerListManager: TimerListManager,
-                                            pomodoroManager: PomodoroManager): ChoosePomodoroTimerPresenter {
+                                            pomodoroManager: PomodoroManager,
+                                            settingManager: SettingManager): ChoosePomodoroTimerPresenter {
         val pauseTimer = PauseTimer.getTimer(context)
-        return ChoosePomodoroTimerPresenter(timerListManager, pomodoroManager, pauseTimer)
+        val pomodoroPauseStepDuration = if (BuildConfig.DEBUG) 5L else settingManager.getPomodoroPauseStepDuration()
+        val pomodoroStepDuration = if (BuildConfig.DEBUG) 10L else settingManager.getPomodoroStepDuration()
+        return ChoosePomodoroTimerPresenter(timerListManager,
+                pomodoroManager,
+                pomodoroStepDuration,
+                pomodoroPauseStepDuration,
+                pauseTimer)
     }
 
 }

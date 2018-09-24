@@ -1,7 +1,6 @@
 package fr.bowser.behaviortracker.setting
 
 import android.content.Context
-import android.content.res.Resources
 import android.preference.DialogPreference
 import android.util.AttributeSet
 import android.view.View
@@ -11,17 +10,11 @@ import fr.bowser.behaviortracker.R
 
 class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPreference(context, attrs) {
 
-    private var defaultValue: Int = 0
-
     private lateinit var slider: SeekBar
 
     private lateinit var timerModificationText: TextView
 
-    private var res: Resources = context.resources
-
     init {
-        defaultValue = res.getInteger(R.integer.settings_default_value_time_modification)
-
         dialogLayoutResource = R.layout.preference_dialog_time_modification
     }
 
@@ -40,7 +33,7 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
     override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
 
-        val timerModification = getPersistedInt(defaultValue) - MIN_VALUE_TIME
+        val timerModification = getPersistedInt(0) - MIN_VALUE_TIME
 
         slider.progress = timerModification
         timerModificationText.text = convertTime(timerModification).toString()

@@ -1,12 +1,13 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.os.Vibrator
+import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 
 class PomodoroManagerImpl(private val timeManager: TimeManager,
-                          private val vibrator: Vibrator,
-                          private val debug: Boolean) : PomodoroManager {
+                          private val settingManager: SettingManager,
+                          private val vibrator: Vibrator) : PomodoroManager {
 
     override var listener: PomodoroManager.Listener? = null
 
@@ -103,7 +104,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
                 pomodoroTime = actionDuration
             }
 
-            if(!debug) {
+            if(settingManager.isPomodoroVibrationEnable()) {
                 vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
             }
 

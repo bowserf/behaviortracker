@@ -2,5 +2,7 @@
 <resources>
 
     <integer name="settings_default_value_time_modification">15</integer>
+    <integer name="settings_default_value_pomodoro_stage">25</integer>
+    <integer name="settings_default_value_pomodoro_pause_stage">5</integer>
 
 </resources>

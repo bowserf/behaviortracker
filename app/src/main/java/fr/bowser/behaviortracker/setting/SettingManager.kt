@@ -6,6 +6,12 @@ interface SettingManager {
 
     fun isOneActiveTimerAtATime(): Boolean
 
+    fun isPomodoroVibrationEnable(): Boolean
+
+    fun getPomodoroPauseStepDuration():Long
+
+    fun getPomodoroStepDuration(): Long
+
     fun registerTimerModificationListener(listener: TimerModificationListener)
 
     fun unregisterTimerModificationListener(listener: TimerModificationListener)
