@@ -22,7 +22,7 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
     init {
         defaultValue = res.getInteger(R.integer.settings_default_value_time_modification)
 
-        dialogLayoutResource = R.layout.dialog_preference_automix
+        dialogLayoutResource = R.layout.preference_dialog_time_modification
     }
 
     override fun onCreateDialogView(): View {
