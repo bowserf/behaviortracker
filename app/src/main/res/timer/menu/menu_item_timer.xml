@@ -20,4 +20,10 @@
         android:title="@string/item_timer_remove"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/item_timer_start_pomodoro"
+        android:enabled="true"
+        android:title="@string/item_start_pomodoro"
+        app:showAsAction="ifRoom" />
+
 </menu>

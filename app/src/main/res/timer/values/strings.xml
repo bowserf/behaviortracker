@@ -5,6 +5,7 @@
     <string name="item_timer_reset">Reset</string>
     <string name="item_timer_remove">Remove</string>
     <string name="item_timer_rename">Rename</string>
+    <string name="item_start_pomodoro">Start Pomodoro</string>
 
     <string name="item_timer_remove_message">Are you sure to remove this timer ?</string>
 

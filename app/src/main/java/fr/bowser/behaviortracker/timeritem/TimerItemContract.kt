@@ -47,6 +47,8 @@ interface TimerItemContract {
 
         fun onClickCard()
 
+        fun onClickStartPomodoro()
+
     }
 
 }

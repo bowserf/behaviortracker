@@ -5,6 +5,7 @@
     <string name="item_timer_reset">Remettre à 0</string>
     <string name="item_timer_remove">Supprimer</string>
     <string name="item_timer_rename">Renommer</string>
+    <string name="item_start_pomodoro">Démarrer Pomodoro</string>
 
     <string name="item_timer_remove_message">Êtes vous sûr de vouloir supprimer ce chronomètre ?</string>
 

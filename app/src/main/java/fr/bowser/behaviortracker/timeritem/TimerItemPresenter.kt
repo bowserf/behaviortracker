@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.timeritem
 
+import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
@@ -8,7 +9,8 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val timeManager: TimeManager,
                          private val timerListManager: TimerListManager,
-                         private val settingManager: SettingManager)
+                         private val settingManager: SettingManager,
+                         private val pomodoroManager: PomodoroManager)
     : TimerItemContract.Presenter,
         TimerListManager.TimerCallback,
         SettingManager.TimerModificationListener {
@@ -39,6 +41,10 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
     override fun onClickCard() {
         view.startShowMode(timer.id)
+    }
+
+    override fun onClickStartPomodoro() {
+        pomodoroManager.startPomodoro(timer)
     }
 
     override fun timerStateChange() {

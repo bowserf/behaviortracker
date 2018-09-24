@@ -30,8 +30,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
-        this.actionDuration = if (isDebug) 5L else settingManager.getPomodoroPauseStepDuration()
-        this.pauseDuration = if (isDebug) 10L else settingManager.getPomodoroStepDuration()
+        this.pauseDuration = if (isDebug) 5L else settingManager.getPomodoroPauseStepDuration()
+        this.actionDuration = if (isDebug) 10L else settingManager.getPomodoroStepDuration()
 
         currentTimer = actionTimer
         pomodoroTime = actionDuration

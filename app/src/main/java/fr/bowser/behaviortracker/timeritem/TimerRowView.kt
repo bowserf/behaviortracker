@@ -107,6 +107,9 @@ class TimerRowView(context: Context) :
                 R.id.item_timer_rename -> {
                     presenter.onClickRenameTimer()
                 }
+                R.id.item_timer_start_pomodoro -> {
+                    presenter.onClickStartPomodoro()
+                }
             }
             true
         }
