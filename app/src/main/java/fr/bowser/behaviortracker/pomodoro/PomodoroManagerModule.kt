@@ -4,8 +4,10 @@ import android.content.Context
 import android.os.Vibrator
 import dagger.Module
 import dagger.Provides
+import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.utils.PauseTimer
 import javax.inject.Singleton
 
 
@@ -17,8 +19,14 @@ class PomodoroManagerModule {
     fun providePomodoroManager(context: Context,
                                timeManager: TimeManager,
                                settingManager: SettingManager): PomodoroManager {
+        val pauseTimer = PauseTimer.getTimer(context)
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        return PomodoroManagerImpl(timeManager, settingManager, vibrator)
+        return PomodoroManagerImpl(
+                timeManager,
+                settingManager,
+                pauseTimer,
+                vibrator,
+                BuildConfig.DEBUG)
     }
 
 }

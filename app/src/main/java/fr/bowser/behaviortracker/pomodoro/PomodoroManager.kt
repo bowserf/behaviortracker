@@ -9,10 +9,7 @@ interface PomodoroManager {
     var pomodoroTime: Long
     var currentTimer: Timer?
 
-    fun startPomodoro(actionTimer: Timer,
-                      actionDuration: Long,
-                      restTimer: Timer,
-                      restDuration: Long)
+    fun startPomodoro(actionTimer: Timer)
 
     fun resume()
 

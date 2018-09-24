@@ -7,7 +7,9 @@ import fr.bowser.behaviortracker.timer.Timer
 
 class PomodoroManagerImpl(private val timeManager: TimeManager,
                           private val settingManager: SettingManager,
-                          private val vibrator: Vibrator) : PomodoroManager {
+                          val pauseTimer: Timer,
+                          private val vibrator: Vibrator,
+                          private val isDebug: Boolean) : PomodoroManager {
 
     override var listener: PomodoroManager.Listener? = null
 
@@ -17,8 +19,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     var actionTimer: Timer? = null
         private set
-    var restTimer: Timer? = null
-        private set
 
     var isRunning = false
         private set
@@ -26,16 +26,12 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         private set
 
     private var actionDuration = 0L
-    private var restDuration = 0L
+    private var pauseDuration = 0L
 
-    override fun startPomodoro(actionTimer: Timer,
-                               actionDuration: Long,
-                               restTimer: Timer,
-                               restDuration: Long) {
+    override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
-        this.restTimer = restTimer
-        this.actionDuration = actionDuration
-        this.restDuration = restDuration
+        this.actionDuration = if (isDebug) 5L else settingManager.getPomodoroPauseStepDuration()
+        this.pauseDuration = if (isDebug) 10L else settingManager.getPomodoroStepDuration()
 
         currentTimer = actionTimer
         pomodoroTime = actionDuration
@@ -71,7 +67,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         isStarted = false
         actionTimer = null
-        restTimer = null
         currentTimer = null
         timeManager.unregisterUpdateTimerCallback(timeManagerCallback)
     }
@@ -79,7 +74,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
     private val timeManagerCallback = object : TimeManager.TimerCallback {
 
         override fun onTimerStateChanged(updatedTimer: Timer) {
-            if (actionTimer == updatedTimer || updatedTimer == restTimer) {
+            if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {
                 listener?.onTimerStateChanged(updatedTimer)
             }
         }
@@ -99,12 +94,12 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
             val previousTimer: Timer
             if (currentTimer == actionTimer) {
-                currentTimer = restTimer
+                currentTimer = pauseTimer
                 previousTimer = actionTimer!!
-                pomodoroTime = restDuration
+                pomodoroTime = pauseDuration
             } else {
                 currentTimer = actionTimer
-                previousTimer = restTimer!!
+                previousTimer = pauseTimer
                 pomodoroTime = actionDuration
             }
 

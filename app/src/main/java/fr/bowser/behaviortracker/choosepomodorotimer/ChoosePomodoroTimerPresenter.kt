@@ -5,21 +5,14 @@ import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class ChoosePomodoroTimerPresenter(private val timerListManager: TimerListManager,
-                                   private val pomodoroManager: PomodoroManager,
-                                   private val pomodoroStepDuration: Long,
-                                   private val pomodoroPauseStepDuration: Long,
-                                   private val pauseTimer: Timer) {
+                                   private val pomodoroManager: PomodoroManager) {
 
     fun getTimerList(): List<Timer> {
         return timerListManager.getTimerList()
     }
 
     fun startPomodoro(timer: Timer) {
-        pomodoroManager.startPomodoro(
-                timer,
-                pomodoroStepDuration,
-                pauseTimer,
-                pomodoroPauseStepDuration)
+        pomodoroManager.startPomodoro(timer)
     }
 
 }
