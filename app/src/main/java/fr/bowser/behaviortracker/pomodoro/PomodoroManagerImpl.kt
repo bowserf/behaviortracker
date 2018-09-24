@@ -66,9 +66,13 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
     }
 
     override fun stop() {
+        if(actionTimer != null) {
+            timeManager.stopTimer(actionTimer!!)
+        }
         isStarted = false
         actionTimer = null
         restTimer = null
+        currentTimer = null
         timeManager.unregisterUpdateTimerCallback(timeManagerCallback)
     }
 

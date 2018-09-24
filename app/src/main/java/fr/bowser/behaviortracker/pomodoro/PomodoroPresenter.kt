@@ -24,6 +24,11 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
         screen.displayChoosePomodoroTimer()
     }
 
+    override fun onClickStopPomodoro() {
+        pomodoroManager.stop()
+        screen.displayDefaultView()
+    }
+
     private fun createPomodoroManagerListener(): PomodoroManager.Listener {
         return object : PomodoroManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {

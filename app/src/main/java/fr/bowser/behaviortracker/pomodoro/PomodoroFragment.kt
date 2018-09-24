@@ -1,9 +1,7 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +27,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
         setupGraph()
     }
@@ -59,6 +58,22 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         super.onStop()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_pomodoro, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_stop_pomodoro -> {
+                presenter.onClickStopPomodoro()
+                return true
+            }
+        }
+
+        return false
+    }
+
     override fun updatePomodoroTime(timer: Timer, currentTime: Long) {
         this.currentTime.text = currentTime.toString()
     }
@@ -75,6 +90,13 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     override fun displayChoosePomodoroTimer() {
         ChoosePomodoroTimerDialog.showDialog(activity as AppCompatActivity)
+    }
+
+    override fun displayDefaultView() {
+        defaultImage.visibility = View.VISIBLE
+        description.visibility = View.VISIBLE
+        currentTime.visibility = View.GONE
+        activeTimer.visibility = View.GONE
     }
 
     private fun setupGraph() {

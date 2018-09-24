@@ -3,4 +3,6 @@
 
     <string name="pomodoro_timer_pause">Pause</string>
 
+    <string name="menu_stop_pomodoro">Stop</string>
+
 </resources>
