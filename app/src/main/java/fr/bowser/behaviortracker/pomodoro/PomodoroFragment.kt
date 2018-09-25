@@ -74,7 +74,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         return false
     }
 
-    override fun updatePomodoroTime(timer: Timer, currentTime: Long) {
+    override fun updateTime(timer: Timer, currentTime: Long) {
         this.currentTime.text = currentTime.toString()
     }
 
@@ -92,11 +92,23 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         ChoosePomodoroTimerDialog.showDialog(activity as AppCompatActivity)
     }
 
-    override fun displayDefaultView() {
+    override fun displayEmptyView() {
         defaultImage.visibility = View.VISIBLE
         description.visibility = View.VISIBLE
         currentTime.visibility = View.GONE
         activeTimer.visibility = View.GONE
+    }
+
+    override fun displayPauseIcon() {
+        fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_pause_white))
+    }
+
+    override fun displayPlayIcon() {
+        fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_play_white))
+    }
+
+    override fun displayStartIcon() {
+        fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_add))
     }
 
     private fun setupGraph() {

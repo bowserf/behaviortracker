@@ -17,15 +17,14 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     override var currentTimer: Timer? = null
 
-    var actionTimer: Timer? = null
-        private set
+    override var isRunning = false
 
-    var isRunning = false
-        private set
-    var isStarted = false
-        private set
+    override var isStarted = false
+
+    private var actionTimer: Timer? = null
 
     private var actionDuration = 0L
+
     private var pauseDuration = 0L
 
     override fun startPomodoro(actionTimer: Timer) {
@@ -43,6 +42,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         timeManager.startTimer(currentTimer!!)
 
         listener?.onCountFinished(currentTimer!!, pomodoroTime)
+        listener?.onPomodoroSessionStarted()
     }
 
     override fun resume() {

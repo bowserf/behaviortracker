@@ -33,7 +33,7 @@
             android:layout_width="@dimen/timer_play_pause_size"
             android:layout_height="@dimen/timer_play_pause_size"
             android:layout_marginRight="@dimen/default_space"
-            tools:src="@drawable/ic_play"/>
+            tools:src="@drawable/ic_play_white"/>
 
         <TextView
             android:id="@+id/show_mode_timer_name"

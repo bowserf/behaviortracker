@@ -6,13 +6,19 @@ interface PomodoroContract {
 
     interface Screen {
 
-        fun updatePomodoroTime(timer: Timer, currentTime: Long)
+        fun updateTime(timer: Timer, currentTime: Long)
 
         fun updatePomodoroTimer(timer: Timer, duration: Long)
 
         fun displayChoosePomodoroTimer()
 
-        fun displayDefaultView()
+        fun displayEmptyView()
+
+        fun displayPauseIcon()
+
+        fun displayPlayIcon()
+
+        fun displayStartIcon()
 
     }
 

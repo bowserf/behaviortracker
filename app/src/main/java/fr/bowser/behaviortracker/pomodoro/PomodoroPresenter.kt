@@ -14,6 +14,8 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
         if (pomodoroManager.currentTimer != null) {
             screen.updatePomodoroTimer(pomodoroManager.currentTimer!!, pomodoroManager.pomodoroTime)
         }
+
+        updateFabIcon()
     }
 
     override fun stop() {
@@ -21,22 +23,52 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
     }
 
     override fun onClickFab() {
-        screen.displayChoosePomodoroTimer()
+        if (!pomodoroManager.isStarted) {
+            screen.displayChoosePomodoroTimer()
+            return
+        }
+
+        if (pomodoroManager.isRunning) {
+            pomodoroManager.pause()
+        } else if (!pomodoroManager.isRunning) {
+            pomodoroManager.resume()
+        }
+
+        updateFabIcon()
     }
 
     override fun onClickStopPomodoro() {
         pomodoroManager.stop()
-        screen.displayDefaultView()
+        screen.displayEmptyView()
+        updateFabIcon()
+    }
+
+    private fun updateFabIcon() {
+        if (!pomodoroManager.isStarted) {
+            screen.displayStartIcon()
+            return
+        }
+
+        if (pomodoroManager.isRunning) {
+            screen.displayPauseIcon()
+        } else {
+            screen.displayPlayIcon()
+        }
     }
 
     private fun createPomodoroManagerListener(): PomodoroManager.Listener {
         return object : PomodoroManager.Listener {
+
+            override fun onPomodoroSessionStarted() {
+                screen.displayPauseIcon()
+            }
+
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 // nothing to do
             }
 
             override fun updateTime(timer: Timer, currentTime: Long) {
-                screen.updatePomodoroTime(timer, currentTime)
+                screen.updateTime(timer, currentTime)
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {
