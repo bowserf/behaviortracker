@@ -18,7 +18,7 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
 
     private var pomodoroPauseStep: Long
 
-    private var pomodoroStep: Long
+    private var pomodoroStep: Int
 
     private val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -41,9 +41,9 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
                 context.getString(R.string.pref_key_pomodoro_pause_stage),
                 context.resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage).toLong())
 
-        pomodoroStep = sharedPreferences.getLong(
+        pomodoroStep = sharedPreferences.getInt(
                 context.getString(R.string.pref_key_pomodoro_stage),
-                context.resources.getInteger(R.integer.settings_default_value_pomodoro_stage).toLong())
+                context.resources.getInteger(R.integer.settings_default_value_pomodoro_stage))
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
@@ -66,8 +66,8 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
                         .getInteger(R.integer.settings_default_value_pomodoro_pause_stage).toLong())
             }
             context.getString(R.string.pref_key_pomodoro_stage) -> {
-                pomodoroStep = sharedPreferences.getLong(key, context.resources
-                        .getInteger(R.integer.settings_default_value_pomodoro_stage).toLong())
+                pomodoroStep = sharedPreferences.getInt(key, context.resources
+                        .getInteger(R.integer.settings_default_value_pomodoro_stage))
             }
         }
     }
@@ -97,6 +97,6 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
     }
 
     override fun getPomodoroStepDuration(): Long {
-        return pomodoroStep
+        return pomodoroStep.toLong()
     }
 }
