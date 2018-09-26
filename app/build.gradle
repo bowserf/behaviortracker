@@ -98,6 +98,10 @@ android {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     kotlin {
         experimental {
             coroutines 'enable'
@@ -149,6 +153,16 @@ dependencies {
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 
+}
+
+def build_param = "${build}"
+
+if (build_param == "CI") {
+    android.variantFilter { variant ->
+        if (variant.buildType.name.equals('release')) {
+            variant.setIgnore(true)
+        }
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
