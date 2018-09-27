@@ -1,7 +1,5 @@
 package fr.bowser.behaviortracker.inapp
 
-import fr.bowser.behaviortracker.inapp.InAppConfigurationImpl
-import fr.bowser.behaviortracker.inapp.InAppConfigurationParser
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,38 +17,43 @@ class InAppConfigurationImplTest {
     @Test
     fun parse(){
         // Giving
-        val inAppConfigurationImpl = InAppConfigurationImpl(inAppConfigurationParser)
         val fakeJson = fakeJson()
         Mockito.`when`(inAppConfigurationParser.getInAppConfigFile(Mockito.anyString())).thenReturn(fakeJson)
 
         // When
-        val output = inAppConfigurationImpl.parse(fakeJson)
+        val inAppConfigurationImpl = InAppConfigurationImpl(inAppConfigurationParser)
+        val output = inAppConfigurationImpl.getInApps()
 
         // Then
         Assert.assertEquals(2, output.size)
         Assert.assertEquals("Marshmallow", output[0].name)
         Assert.assertEquals("0.59 €", output[0].price)
         Assert.assertEquals("fr.bowser.behaviortrack.product.marshmallow", output[0].sku)
+        Assert.assertEquals("marshmallow", output[0].feature)
+        Assert.assertEquals("Description in-app marshmallow", output[0].description)
         Assert.assertEquals("Nougat", output[1].name)
         Assert.assertEquals("0.99 €", output[1].price)
         Assert.assertEquals("fr.bowser.behaviortrack.product.nougat", output[1].sku)
+        Assert.assertEquals("nougat", output[1].feature)
+        Assert.assertEquals("Description in-app nougat", output[1].description)
     }
 
     @Test
     fun getInApp(){
         // Giving
-        val inAppConfigurationImpl = InAppConfigurationImpl(inAppConfigurationParser)
         val fakeJson = fakeJson()
         Mockito.`when`(inAppConfigurationParser.getInAppConfigFile(Mockito.anyString())).thenReturn(fakeJson)
-        inAppConfigurationImpl.parse(Mockito.anyString())
 
         // When
+        val inAppConfigurationImpl = InAppConfigurationImpl(inAppConfigurationParser)
         val inApp = inAppConfigurationImpl.getInApp("fr.bowser.behaviortrack.product.marshmallow")
 
         // Then
         Assert.assertEquals("fr.bowser.behaviortrack.product.marshmallow", inApp.sku)
         Assert.assertEquals("Marshmallow", inApp.name)
         Assert.assertEquals("0.59 €", inApp.price)
+        Assert.assertEquals("marshmallow", inApp.feature)
+        Assert.assertEquals("Description in-app marshmallow", inApp.description)
     }
 
     private fun fakeJson(): String{
@@ -59,13 +62,17 @@ class InAppConfigurationImplTest {
                 "  \"in-apps\": [\n" +
                 "    {\n" +
                 "      \"identifier\": \"fr.bowser.behaviortrack.product.marshmallow\",\n" +
+                "      \"default_description\": \"Description in-app marshmallow\",\n" +
                 "      \"default_name\": \"Marshmallow\",\n" +
-                "      \"default_price\": 0.59 €\n" +
+                "      \"default_price\": 0.59 €,\n" +
+                "      \"feature\": \"marshmallow\"\n" +
                 "    },\n" +
                 "    {\n" +
                 "      \"identifier\": \"fr.bowser.behaviortrack.product.nougat\",\n" +
+                "      \"default_description\": \"Description in-app nougat\",\n" +
                 "      \"default_name\": \"Nougat\",\n" +
-                "      \"default_price\": 0.99 €\n" +
+                "      \"default_price\": 0.99 €,\n" +
+                "      \"feature\": \"nougat\"\n" +
                 "    }\n" +
                 "  ]\n" +
                 "}"
