@@ -23,7 +23,7 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
         return inAppList.toList()
     }
 
-    override fun parse(fileName: String): List<InApp> {
+    private fun parse(fileName: String): List<InApp> {
         val inAppConfigFile = inAppConfigurationParser.getInAppConfigFile(fileName)
         inAppList.clear()
         inAppList.addAll(parseJson(inAppConfigFile))

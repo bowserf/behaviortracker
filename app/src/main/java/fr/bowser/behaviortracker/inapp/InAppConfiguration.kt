@@ -6,6 +6,4 @@ interface InAppConfiguration {
 
     fun getInApps(): List<InApp>
 
-    fun parse(fileName: String): List<InApp>
-
 }
