@@ -2,5 +2,7 @@
 <resources>
 
     <dimen name="pomodoro_icon_size">128dp</dimen>
+    <dimen name="pomodoro_progress_size">250dp</dimen>
+    <dimen name="pomodoro_progress_thickness">20dp</dimen>
 
 </resources>
