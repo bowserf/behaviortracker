@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.choosepomodorotimer.ChoosePomodoroTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
@@ -85,6 +86,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
             R.id.menu_stop_pomodoro -> {
                 presenter.onClickStopPomodoro()
                 return true
+            }
+            R.id.menu_settings -> {
+                SettingActivity.startActivity(context!!)
             }
         }
 
