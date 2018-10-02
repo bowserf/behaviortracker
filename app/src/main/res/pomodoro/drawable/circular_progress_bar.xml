@@ -11,8 +11,8 @@
 
         <gradient
             android:angle="0"
-            android:endColor="@color/pomodoro_progress_bar_color"
-            android:startColor="@color/pomodoro_progress_bar_color"
+            android:endColor="#ffffff"
+            android:startColor="#ffffff"
             android:type="sweep"
             android:useLevel="false" />
     </shape>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="pomodoro_progress_bar_color">#ff0000</color>
+    <color name="pomodoro_pause_session">#ff6d00</color>
+    <color name="pomodoro_resume_session">#64dd17</color>
+    <color name="pomodoro_start_session">#304ffe</color>
 
 </resources>

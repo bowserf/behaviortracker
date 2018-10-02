@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.bowser.behaviortracker.R
@@ -138,14 +140,17 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     }
 
     override fun displayPauseIcon() {
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_pause_session))
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_pause_white))
     }
 
     override fun displayPlayIcon() {
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_resume_session))
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_play_white))
     }
 
     override fun displayStartIcon() {
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_start_session))
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_add))
     }
 
