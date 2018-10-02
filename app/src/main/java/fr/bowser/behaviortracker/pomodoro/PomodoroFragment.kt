@@ -17,6 +17,7 @@ import fr.bowser.behaviortracker.choosepomodorotimer.ChoosePomodoroTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
+import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
 
@@ -91,7 +92,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     }
 
     override fun updateTime(timer: Timer, currentTime: Long) {
-        currentTimeTv.text = currentTime.toString()
+        currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(currentTime, false)
         progresssBar.progress = currentTime.toInt()
     }
 
@@ -100,7 +101,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         pomodoroSessionContent.visibility = View.VISIBLE
 
         activeTimerTv.text = timer.name
-        currentTimeTv.text = duration.toString()
+        currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(duration, false)
 
         progresssBar.max = duration.toInt()
         progresssBar.progress = duration.toInt()
