@@ -14,6 +14,8 @@ interface PomodoroManager {
 
     var isStarted: Boolean
 
+    var currentSessionDuration: Long
+
     fun startPomodoro(actionTimer: Timer)
 
     fun resume()

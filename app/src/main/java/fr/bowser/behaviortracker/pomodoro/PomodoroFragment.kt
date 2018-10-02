@@ -96,27 +96,30 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         progresssBar.progress = currentTime.toInt()
     }
 
-    override fun updatePomodoroTimer(timer: Timer, duration: Long) {
+    override fun updatePomodoroTimer(timer: Timer, currentTime: Long, duration: Long) {
         emptyContent.visibility = View.GONE
         pomodoroSessionContent.visibility = View.VISIBLE
 
         activeTimerTv.text = timer.name
-        currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(duration, false)
+        currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(currentTime, false)
 
         progresssBar.max = duration.toInt()
-        progresssBar.progress = duration.toInt()
+        progresssBar.progress = currentTime.toInt()
 
         val progressDrawable = progresssBar.progressDrawable
-        if(progressDrawable is RotateDrawable){
+        if (progressDrawable is RotateDrawable) {
             progressDrawable.drawable!!.setColorFilter(
                     ColorUtils.getColor(context!!, timer.color),
                     PorterDuff.Mode.SRC_ATOP)
         }
         val backgroundDrawable = progresssBar.background
-        if(backgroundDrawable is GradientDrawable){
+        if (backgroundDrawable is GradientDrawable) {
             val rgb = ColorUtils.getColor(context!!, timer.color)
             backgroundDrawable.setColorFilter(
-                    Color.argb(100, Color.red(rgb), Color.green(rgb), Color.blue(rgb)),
+                    Color.argb(PROGRESS_BAR_BACKGROUND_ALPHA,
+                            Color.red(rgb),
+                            Color.green(rgb),
+                            Color.blue(rgb)),
                     PorterDuff.Mode.SRC_ATOP)
         }
     }
@@ -152,6 +155,8 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     companion object {
         const val TAG = "PomodoroFragment"
+
+        const val PROGRESS_BAR_BACKGROUND_ALPHA = 100
     }
 
 }

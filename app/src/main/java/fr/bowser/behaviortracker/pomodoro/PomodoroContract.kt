@@ -8,7 +8,7 @@ interface PomodoroContract {
 
         fun updateTime(timer: Timer, currentTime: Long)
 
-        fun updatePomodoroTimer(timer: Timer, duration: Long)
+        fun updatePomodoroTimer(timer: Timer, currentTime: Long, duration: Long)
 
         fun displayChoosePomodoroTimer()
 

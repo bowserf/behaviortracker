@@ -12,7 +12,10 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
         pomodoroManager.listener = pomodoroListener
 
         if (pomodoroManager.currentTimer != null) {
-            screen.updatePomodoroTimer(pomodoroManager.currentTimer!!, pomodoroManager.pomodoroTime)
+            screen.updatePomodoroTimer(
+                    pomodoroManager.currentTimer!!,
+                    pomodoroManager.pomodoroTime,
+                    pomodoroManager.currentSessionDuration)
         }
 
         updateFabIcon()
@@ -72,7 +75,7 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {
-                screen.updatePomodoroTimer(newTimer, duration)
+                screen.updatePomodoroTimer(newTimer, duration, duration)
             }
 
         }

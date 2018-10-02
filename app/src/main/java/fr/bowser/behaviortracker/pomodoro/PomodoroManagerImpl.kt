@@ -21,6 +21,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     override var isStarted = false
 
+    override var currentSessionDuration = 0L
+
     private var actionTimer: Timer? = null
 
     private var actionDuration = 0L
@@ -34,6 +36,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
         currentTimer = actionTimer
         pomodoroTime = actionDuration
+        currentSessionDuration = actionDuration
 
         isStarted = true
         isRunning = true
@@ -97,10 +100,12 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
                 currentTimer = pauseTimer
                 previousTimer = actionTimer!!
                 pomodoroTime = pauseDuration
+                currentSessionDuration = pauseDuration
             } else {
                 currentTimer = actionTimer
                 previousTimer = pauseTimer
                 pomodoroTime = actionDuration
+                currentSessionDuration = actionDuration
             }
 
             if(settingManager.isPomodoroVibrationEnable()) {

@@ -29,7 +29,7 @@ class PomodoroPresenterTest {
         presenter.start()
 
         // Then
-        Mockito.verify(screen).updatePomodoroTimer(any(), Mockito.anyLong())
+        Mockito.verify(screen).updatePomodoroTimer(any(), Mockito.anyLong(), Mockito.anyLong())
     }
 
     @Test
