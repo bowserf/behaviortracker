@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/create_timer_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ToolbarStyle"/>
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,9 +27,9 @@
                 android:id="@+id/creation_timer_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/default_space_1_5"
                 android:layout_marginStart="@dimen/default_space_1_5"
-                android:layout_marginTop="@dimen/default_space_1_5">
+                android:layout_marginTop="@dimen/default_space_1_5"
+                android:layout_marginEnd="@dimen/default_space_1_5">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/creation_timer_name"
@@ -37,7 +38,7 @@
                     android:hint="@string/timer_name"
                     android:imeOptions="flagNoExtractUi|actionDone"
                     android:inputType="textCapSentences"
-                    android:singleLine="true"/>
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,27 +46,27 @@
                 android:id="@+id/create_timer_title_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/default_space_1_5"
                 android:layout_marginStart="@dimen/default_space_1_5"
                 android:layout_marginTop="@dimen/default_space"
-                android:text="@string/create_timer_title_color"/>
+                android:layout_marginEnd="@dimen/default_space_1_5"
+                android:text="@string/create_timer_title_color" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_colors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_space"
-                android:overScrollMode="never"/>
+                android:overScrollMode="never" />
 
             <CheckBox
                 android:id="@+id/start_after_creation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_space_1_5"
-                android:layout_marginEnd="@dimen/default_space_1_5"
                 android:layout_marginStart="@dimen/default_space_1_5"
                 android:layout_marginTop="@dimen/default_space"
-                android:text="@string/start_timer_after_creation"/>
+                android:layout_marginEnd="@dimen/default_space_1_5"
+                android:layout_marginBottom="@dimen/default_space_1_5"
+                android:text="@string/start_timer_after_creation" />
 
         </LinearLayout>
 
@@ -75,6 +76,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_shadow_height"
         android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/background_shadow_bottom"/>
+        android:background="@drawable/background_shadow_bottom" />
 
 </FrameLayout>

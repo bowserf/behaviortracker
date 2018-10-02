@@ -8,13 +8,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
         android:elevation="@dimen/default_shadow_height"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintBottom_toTopOf="@id/fragment_container"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/ToolbarStyle" />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_rewards"

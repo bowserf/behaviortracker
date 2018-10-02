@@ -8,8 +8,9 @@
         android:id="@+id/timers_list_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ToolbarStyle" />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/timers_list"
