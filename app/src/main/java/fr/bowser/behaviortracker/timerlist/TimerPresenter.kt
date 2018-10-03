@@ -5,7 +5,7 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 
 class TimerPresenter(private val screen: TimerContract.Screen,
                      private val timerListManager: TimerListManager)
-    : TimerContract.Presenter, TimerListManager.TimerCallback {
+    : TimerContract.Presenter, TimerListManager.Listener {
 
     private var ongoingDeletionTimer: Timer? = null
 
@@ -21,11 +21,11 @@ class TimerPresenter(private val screen: TimerContract.Screen,
     }
 
     override fun start() {
-        timerListManager.registerTimerCallback(this)
+        timerListManager.addListener(this)
     }
 
     override fun stop() {
-        timerListManager.unregisterTimerCallback(this)
+        timerListManager.removeListener(this)
     }
 
     override fun onClickAddTimer() {

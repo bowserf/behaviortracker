@@ -31,9 +31,9 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     private var pauseDuration = 0L
 
-    private val timeManagerCallback = createTimeManagerCallback()
+    private val timeManagerListener = createTimeManagerListener()
 
-    private val timerCallback = createTimerCallback()
+    private val timerListManagerListener = createTimerListManagerListener()
 
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
@@ -47,8 +47,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         isStarted = true
         isRunning = true
 
-        timeManager.registerUpdateTimerCallback(timeManagerCallback)
-        timerListManager.registerTimerCallback(timerCallback)
+        timeManager.addListener(timeManagerListener)
+        timerListManager.addListener(timerListManagerListener)
         timeManager.startTimer(currentTimer!!)
 
         listener?.onCountFinished(currentTimer!!, pomodoroTime)
@@ -61,7 +61,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         isRunning = true
         timeManager.startTimer(currentTimer!!)
-        timerListManager.registerTimerCallback(timerCallback)
+        timerListManager.addListener(timerListManagerListener)
     }
 
     override fun pause() {
@@ -70,7 +70,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         isRunning = false
         timeManager.stopTimer(currentTimer!!)
-        timerListManager.unregisterTimerCallback(timerCallback)
+        timerListManager.removeListener(timerListManagerListener)
     }
 
     override fun stop() {
@@ -80,11 +80,11 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         isStarted = false
         actionTimer = null
         currentTimer = null
-        timeManager.unregisterUpdateTimerCallback(timeManagerCallback)
+        timeManager.removeListener(timeManagerListener)
     }
 
-    private fun createTimeManagerCallback(): TimeManager.TimerCallback {
-        return object : TimeManager.TimerCallback {
+    private fun createTimeManagerListener(): TimeManager.Listener {
+        return object : TimeManager.Listener {
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {
@@ -131,8 +131,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
     }
 
-    private fun createTimerCallback(): TimerListManager.TimerCallback {
-        return object : TimerListManager.TimerCallback {
+    private fun createTimerListManagerListener(): TimerListManager.Listener {
+        return object : TimerListManager.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 if (actionTimer == removedTimer) {
                     stop()

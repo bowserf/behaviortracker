@@ -12,15 +12,15 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
                          private val settingManager: SettingManager,
                          private val pomodoroManager: PomodoroManager)
     : TimerItemContract.Presenter,
-        TimerListManager.TimerCallback,
+        TimerListManager.Listener,
         SettingManager.TimerModificationListener {
 
 
     private lateinit var timer: Timer
 
     override fun start() {
-        timerListManager.registerTimerCallback(this)
-        timeManager.registerUpdateTimerCallback(updateTimerCallback)
+        timerListManager.addListener(this)
+        timeManager.addListener(timeManagerListener)
 
         settingManager.registerTimerModificationListener(this)
 
@@ -31,8 +31,8 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
     override fun stop() {
         settingManager.unregisterTimerModificationListener(this)
-        timerListManager.unregisterTimerCallback(this)
-        timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+        timerListManager.removeListener(this)
+        timeManager.removeListener(timeManagerListener)
     }
 
     override fun setTimer(timer: Timer) {
@@ -89,7 +89,7 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
 
     override fun onTimerRemoved(removedTimer: Timer) {
         if (timer == removedTimer) {
-            timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+            timeManager.removeListener(timeManagerListener)
         }
     }
 
@@ -111,8 +111,8 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
         }
     }
 
-    private val updateTimerCallback =
-            object : TimeManager.TimerCallback {
+    private val timeManagerListener =
+            object : TimeManager.Listener {
 
                 override fun onTimerStateChanged(updatedTimer: Timer) {
                     if (timer == updatedTimer) {

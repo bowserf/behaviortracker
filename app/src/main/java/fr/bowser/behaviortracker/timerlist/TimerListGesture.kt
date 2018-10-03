@@ -4,11 +4,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.core.content.ContextCompat
-import fr.bowser.behaviortracker.R
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import fr.bowser.behaviortracker.R
 
-class TimerListGesture(context: Context, private val callback: GestureCallback) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+class TimerListGesture(context: Context, private val callback: Listener) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
 
     private var isMoving = false
 
@@ -75,7 +75,7 @@ class TimerListGesture(context: Context, private val callback: GestureCallback) 
         return bitmap
     }
 
-    interface GestureCallback {
+    interface Listener {
         fun onItemMove(fromPosition: Int, toPosition: Int)
         fun onSelectedChangedUp()
         fun onSwiped(position: Int)

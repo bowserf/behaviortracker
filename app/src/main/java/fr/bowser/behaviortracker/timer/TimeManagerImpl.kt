@@ -11,7 +11,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
 
     internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
 
-    private val listeners = ArrayList<TimeManager.TimerCallback>()
+    private val listeners = ArrayList<TimeManager.Listener>()
 
     private val lastUpdatedTime = HashMap<Timer, Long>()
 
@@ -31,8 +31,8 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
         lastUpdatedTime[timer] = getCurrentTimeSeconds()
 
         timer.isActivate = true
-        for (callback in listeners) {
-            callback.onTimerStateChanged(timer)
+        for (listener in listeners) {
+            listener.onTimerStateChanged(timer)
         }
 
         if (!timerList.contains(timer)) {
@@ -51,8 +51,8 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
         lastUpdatedTime.remove(timer)
 
         timer.isActivate = false
-        for (callback in listeners) {
-            callback.onTimerStateChanged(timer)
+        for (listener in listeners) {
+            listener.onTimerStateChanged(timer)
         }
 
         timerList.remove(timer)
@@ -76,27 +76,27 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
             }
         }
 
-        for (callback in listeners) {
-            callback.onTimerTimeChanged(timer)
+        for (listener in listeners) {
+            listener.onTimerTimeChanged(timer)
         }
     }
 
-    override fun registerUpdateTimerCallback(callback: TimeManager.TimerCallback): Boolean {
-        if (!listeners.contains(callback)) {
-            return listeners.add(callback)
+    override fun addListener(listener: TimeManager.Listener): Boolean {
+        if (!listeners.contains(listener)) {
+            return listeners.add(listener)
         }
         return false
     }
 
-    override fun unregisterUpdateTimerCallback(callback: TimeManager.TimerCallback) {
-        listeners.remove(callback)
+    override fun removeListener(listener: TimeManager.Listener) {
+        listeners.remove(listener)
     }
 
     private fun stopAllRunningTimers() {
         for (timerToStop in timerList) {
             timerToStop.isActivate = false
-            for (callback in listeners) {
-                callback.onTimerStateChanged(timerToStop)
+            for (listener in listeners) {
+                listener.onTimerStateChanged(timerToStop)
             }
         }
         timerList.clear()

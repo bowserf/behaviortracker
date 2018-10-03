@@ -11,7 +11,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
 
     private val timers = ArrayList<Timer>()
 
-    private val callbacks = ArrayList<TimerListManager.TimerCallback>()
+    private val listeners = ArrayList<TimerListManager.Listener>()
 
     init {
         launch(background) {
@@ -24,8 +24,8 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
 
         timers.add(timer)
 
-        for (callback in callbacks) {
-            callback.onTimerAdded(timer)
+        for (listener in listeners) {
+            listener.onTimerAdded(timer)
         }
 
         launch(background) {
@@ -37,8 +37,8 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
         timeManager.stopTimer(oldTimer)
 
         timers.remove(oldTimer)
-        for (callback in callbacks) {
-            callback.onTimerRemoved(oldTimer)
+        for (listener in listeners) {
+            listener.onTimerRemoved(oldTimer)
         }
 
         launch(background) {
@@ -72,20 +72,20 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
             timerDAO.renameTimer(timer.id, newName)
         }
 
-        for (callback in callbacks) {
-            callback.onTimerRenamed(timer)
+        for (listener in listeners) {
+            listener.onTimerRenamed(timer)
         }
     }
 
-    override fun registerTimerCallback(timerCallback: TimerListManager.TimerCallback): Boolean {
-        if (callbacks.contains(timerCallback)) {
+    override fun addListener(listener: TimerListManager.Listener): Boolean {
+        if (listeners.contains(listener)) {
             return false
         }
-        return callbacks.add(timerCallback)
+        return listeners.add(listener)
     }
 
-    override fun unregisterTimerCallback(timerCallback: TimerListManager.TimerCallback): Boolean {
-        return callbacks.remove(timerCallback)
+    override fun removeListener(listener: TimerListManager.Listener): Boolean {
+        return listeners.remove(listener)
     }
 
 }

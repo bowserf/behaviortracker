@@ -10,11 +10,11 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
     private lateinit var timer: Timer
 
     override fun start() {
-        timeManager.registerUpdateTimerCallback(updateTimerCallback)
+        timeManager.addListener(timeManagerListener)
     }
 
     override fun stop() {
-        timeManager.unregisterUpdateTimerCallback(updateTimerCallback)
+        timeManager.removeListener(timeManagerListener)
     }
 
     override fun setTimer(timer: Timer) {
@@ -32,7 +32,7 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
         view.statusUpdated(timer.isActivate)
     }
 
-    private val updateTimerCallback = object : TimeManager.TimerCallback {
+    private val timeManagerListener = object : TimeManager.Listener {
         override fun onTimerStateChanged(updatedTimer: Timer) {
             if (timer == updatedTimer) {
                 view.statusUpdated(updatedTimer.isActivate)

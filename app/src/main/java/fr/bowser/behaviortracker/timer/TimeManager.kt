@@ -8,11 +8,11 @@ interface TimeManager {
 
     fun updateTime(timer: Timer, newTime: Float, fakeTimer:Boolean = false)
 
-    fun registerUpdateTimerCallback(callback: TimerCallback): Boolean
+    fun addListener(listener: Listener): Boolean
 
-    fun unregisterUpdateTimerCallback(callback: TimerCallback)
+    fun removeListener(listener: Listener)
 
-    interface TimerCallback {
+    interface Listener {
         fun onTimerStateChanged(updatedTimer: Timer)
         fun onTimerTimeChanged(updatedTimer: Timer)
     }

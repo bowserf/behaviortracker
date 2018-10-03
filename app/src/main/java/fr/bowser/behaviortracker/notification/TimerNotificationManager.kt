@@ -21,7 +21,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 class TimerNotificationManager(private val context: Context,
                                timeManager: TimeManager,
                                timerListManager: TimerListManager)
-    : TimeManager.TimerCallback, TimerListManager.TimerCallback {
+    : TimeManager.Listener, TimerListManager.Listener {
 
     private val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -39,8 +39,8 @@ class TimerNotificationManager(private val context: Context,
             generateNotificationChannel(context.resources)
         }
 
-        timeManager.registerUpdateTimerCallback(this)
-        timerListManager.registerTimerCallback(this)
+        timeManager.addListener(this)
+        timerListManager.addListener(this)
     }
 
     fun changeNotifOngoing(isAppInBackground: Boolean) {

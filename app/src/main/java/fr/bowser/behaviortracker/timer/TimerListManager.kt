@@ -13,11 +13,11 @@ interface TimerListManager {
 
     fun reorderTimerList(timerList: List<Timer>)
 
-    fun registerTimerCallback(timerCallback: TimerCallback): Boolean
+    fun addListener(listener: Listener): Boolean
 
-    fun unregisterTimerCallback(timerCallback: TimerCallback): Boolean
+    fun removeListener(listener: Listener): Boolean
 
-    interface TimerCallback {
+    interface Listener {
         fun onTimerRemoved(removedTimer: Timer)
         fun onTimerAdded(updatedTimer: Timer)
         fun onTimerRenamed(updatedTimer: Timer)

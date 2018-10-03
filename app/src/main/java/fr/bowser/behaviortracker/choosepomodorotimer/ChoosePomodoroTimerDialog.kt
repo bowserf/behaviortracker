@@ -80,7 +80,7 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
                 RecyclerView.VERTICAL,
                 false)
         timers.setHasFixedSize(true)
-        timers.adapter = ChoosePomodoroTimerAdapter(context!!, presenter.getTimerList(), object : ChoosePomodoroTimerAdapter.Callback {
+        timers.adapter = ChoosePomodoroTimerAdapter(context!!, presenter.getTimerList(), object : ChoosePomodoroTimerAdapter.Listener {
             override fun onTimerChose(timer: Timer) {
                 presenter.startPomodoro(timer)
                 dismiss()

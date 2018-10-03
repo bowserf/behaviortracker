@@ -30,14 +30,14 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun receiveAddTimerCallback() {
+    fun receiveAddTimerListener() {
         val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer("MyTimer", Color.RED)
 
         var result = false
 
-        val timerListManagerCallback = object : TimerListManager.TimerCallback {
+        val timerListManagerListener = object : TimerListManager.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 Assert.assertTrue(false)
             }
@@ -51,7 +51,7 @@ class TimerListManagerTest {
             }
         }
 
-        timerListManager.registerTimerCallback(timerListManagerCallback)
+        timerListManager.addListener(timerListManagerListener)
 
         timerListManager.addTimer(timer)
 
@@ -71,14 +71,14 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun receiveRemoveTimerCallback() {
+    fun receiveRemoveTimerListener() {
         val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer("MyTimer", Color.RED)
 
         var result = false
 
-        val timerListManagerCallback = object : TimerListManager.TimerCallback {
+        val timerListManagerListener = object : TimerListManager.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 result = timer == removedTimer
             }
@@ -94,8 +94,8 @@ class TimerListManagerTest {
 
         timerListManager.addTimer(timer)
 
-        // only listen for remove timer callback
-        timerListManager.registerTimerCallback(timerListManagerCallback)
+        // only listen for remove timer listener
+        timerListManager.addListener(timerListManagerListener)
 
         timerListManager.removeTimer(timer)
 
@@ -118,7 +118,7 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun receiveRenameTimerCallback() {
+    fun receiveRenameTimerListener() {
         val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer = Timer("MyTimer", Color.RED)
@@ -127,7 +127,7 @@ class TimerListManagerTest {
 
         var result = false
 
-        val timerListManagerCallback = object : TimerListManager.TimerCallback {
+        val timerListManagerListener = object : TimerListManager.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 Assert.assertTrue(false)
             }
@@ -143,8 +143,8 @@ class TimerListManagerTest {
 
         timerListManager.addTimer(timer)
 
-        // only listen for remove timer callback
-        timerListManager.registerTimerCallback(timerListManagerCallback)
+        // only listen for remove timer listener
+        timerListManager.addListener(timerListManagerListener)
 
         timerListManager.renameTimer(timer, newName)
 

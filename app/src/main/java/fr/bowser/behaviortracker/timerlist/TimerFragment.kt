@@ -156,7 +156,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         timerAdapter = TimerAdapter()
         list.adapter = timerAdapter
 
-        val swipeHandler = TimerListGesture(context!!, TimerListGestureCallback())
+        val swipeHandler = TimerListGesture(context!!, TimerListGestureListener())
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(list)
 
@@ -204,7 +204,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         fab.scaleY = scale
     }
 
-    inner class TimerListGestureCallback : TimerListGesture.GestureCallback {
+    inner class TimerListGestureListener : TimerListGesture.Listener {
         override fun onItemMove(fromPosition: Int, toPosition: Int) {
             timerAdapter.onItemMove(fromPosition, toPosition)
         }

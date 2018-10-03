@@ -10,7 +10,7 @@ import fr.bowser.behaviortracker.timer.Timer
 
 class ChoosePomodoroTimerAdapter(private val context: Context,
                                  private val timerList: List<Timer>,
-                                 private val callback: Callback)
+                                 private val listener: Listener)
     : RecyclerView.Adapter<ChoosePomodoroTimerAdapter.ChooseTimerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChooseTimerHolder {
@@ -26,13 +26,13 @@ class ChoosePomodoroTimerAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ChooseTimerHolder, position: Int) {
         holder.view.text = timerList[position].name
         holder.view.setOnClickListener {
-            callback.onTimerChose(timerList[position])
+            listener.onTimerChose(timerList[position])
         }
     }
 
     inner class ChooseTimerHolder(val view: TextView) : RecyclerView.ViewHolder(view)
 
-    interface Callback {
+    interface Listener {
         fun onTimerChose(timer: Timer)
     }
 

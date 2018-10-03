@@ -36,14 +36,14 @@ class TimeManagerTest {
     }
 
     @Test
-    fun startTimerCallback() {
+    fun startTimerListener() {
         val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         val timerState = Timer("MyTimer", Color.RED)
 
         var result = false
 
-        val timerManagerCallback = object : TimeManager.TimerCallback {
+        val timerManagerListener = object : TimeManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 result = updatedTimer.isActivate
             }
@@ -53,7 +53,7 @@ class TimeManagerTest {
             }
         }
 
-        timeManager.registerUpdateTimerCallback(timerManagerCallback)
+        timeManager.addListener(timerManagerListener)
 
         timeManager.startTimer(timerState)
 
@@ -72,14 +72,14 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopTimerCallback() {
+    fun stopTimerListener() {
         val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         val timerState = Timer("MyTimer", Color.RED, true)
 
         var result = false
 
-        val timerManagerCallback = object : TimeManager.TimerCallback {
+        val timerManagerListener = object : TimeManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 result = !updatedTimer.isActivate
             }
@@ -89,7 +89,7 @@ class TimeManagerTest {
             }
         }
 
-        timeManager.registerUpdateTimerCallback(timerManagerCallback)
+        timeManager.addListener(timerManagerListener)
 
         timeManager.stopTimer(timerState)
 
@@ -115,7 +115,7 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopRunningTimerWhenStartANewOneCallback(){
+    fun stopRunningTimerWhenStartANewOneListener(){
         val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(false)
@@ -130,7 +130,7 @@ class TimeManagerTest {
         var timer1IsStopped = false
         var timer2IsActive = false
 
-        val timerManagerCallback = object : TimeManager.TimerCallback {
+        val timerManagerListener = object : TimeManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if(updatedTimer == timer1 && !updatedTimer.isActivate){
                     timer1IsStopped = true
@@ -145,7 +145,7 @@ class TimeManagerTest {
             }
         }
 
-        timeManager.registerUpdateTimerCallback(timerManagerCallback)
+        timeManager.addListener(timerManagerListener)
 
         timeManager.startTimer(timer2)
 
