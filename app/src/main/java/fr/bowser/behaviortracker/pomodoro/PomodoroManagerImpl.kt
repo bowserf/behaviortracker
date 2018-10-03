@@ -4,8 +4,10 @@ import android.os.Vibrator
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerListManager
 
 class PomodoroManagerImpl(private val timeManager: TimeManager,
+                          private val timerListManager: TimerListManager,
                           private val settingManager: SettingManager,
                           val pauseTimer: Timer,
                           private val vibrator: Vibrator,
@@ -29,6 +31,10 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     private var pauseDuration = 0L
 
+    private val timeManagerCallback = createTimeManagerCallback()
+
+    private val timerCallback = createTimerCallback()
+
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
         this.pauseDuration = if (isDebug) 5L else settingManager.getPomodoroPauseStepDuration()
@@ -42,6 +48,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         isRunning = true
 
         timeManager.registerUpdateTimerCallback(timeManagerCallback)
+        timerListManager.registerTimerCallback(timerCallback)
         timeManager.startTimer(currentTimer!!)
 
         listener?.onCountFinished(currentTimer!!, pomodoroTime)
@@ -54,6 +61,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         isRunning = true
         timeManager.startTimer(currentTimer!!)
+        timerListManager.registerTimerCallback(timerCallback)
     }
 
     override fun pause() {
@@ -62,10 +70,11 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         isRunning = false
         timeManager.stopTimer(currentTimer!!)
+        timerListManager.unregisterTimerCallback(timerCallback)
     }
 
     override fun stop() {
-        if(actionTimer != null) {
+        if (actionTimer != null) {
             timeManager.stopTimer(actionTimer!!)
         }
         isStarted = false
@@ -74,50 +83,71 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         timeManager.unregisterUpdateTimerCallback(timeManagerCallback)
     }
 
-    private val timeManagerCallback = object : TimeManager.TimerCallback {
+    private fun createTimeManagerCallback(): TimeManager.TimerCallback {
+        return object : TimeManager.TimerCallback {
 
-        override fun onTimerStateChanged(updatedTimer: Timer) {
-            if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {
-                listener?.onTimerStateChanged(updatedTimer)
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {
+                    listener?.onTimerStateChanged(updatedTimer)
+                }
             }
+
+            override fun onTimerTimeChanged(updatedTimer: Timer) {
+                if (updatedTimer != currentTimer) {
+                    return
+                }
+
+                pomodoroTime--
+
+                listener?.updateTime(currentTimer!!, pomodoroTime)
+
+                if (pomodoroTime > 0L) {
+                    return
+                }
+
+                val previousTimer: Timer
+                if (currentTimer == actionTimer) {
+                    currentTimer = pauseTimer
+                    previousTimer = actionTimer!!
+                    pomodoroTime = pauseDuration
+                    currentSessionDuration = pauseDuration
+                } else {
+                    currentTimer = actionTimer
+                    previousTimer = pauseTimer
+                    pomodoroTime = actionDuration
+                    currentSessionDuration = actionDuration
+                }
+
+                if (settingManager.isPomodoroVibrationEnable()) {
+                    vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
+                }
+
+                timeManager.startTimer(currentTimer!!)
+                timeManager.stopTimer(previousTimer)
+
+                listener?.onCountFinished(currentTimer!!, pomodoroTime)
+            }
+
         }
+    }
 
-        override fun onTimerTimeChanged(updatedTimer: Timer) {
-            if (updatedTimer != currentTimer) {
-                return
+    private fun createTimerCallback(): TimerListManager.TimerCallback {
+        return object : TimerListManager.TimerCallback {
+            override fun onTimerRemoved(removedTimer: Timer) {
+                if (actionTimer == removedTimer) {
+                    stop()
+                }
             }
 
-            pomodoroTime--
-
-            listener?.updateTime(currentTimer!!, pomodoroTime)
-
-            if (pomodoroTime > 0L) {
-                return
+            override fun onTimerAdded(updatedTimer: Timer) {
+                // nothing to do
             }
 
-            val previousTimer: Timer
-            if (currentTimer == actionTimer) {
-                currentTimer = pauseTimer
-                previousTimer = actionTimer!!
-                pomodoroTime = pauseDuration
-                currentSessionDuration = pauseDuration
-            } else {
-                currentTimer = actionTimer
-                previousTimer = pauseTimer
-                pomodoroTime = actionDuration
-                currentSessionDuration = actionDuration
+            override fun onTimerRenamed(updatedTimer: Timer) {
+                // nothing to do
             }
 
-            if(settingManager.isPomodoroVibrationEnable()) {
-                vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
-            }
-
-            timeManager.startTimer(currentTimer!!)
-            timeManager.stopTimer(previousTimer)
-
-            listener?.onCountFinished(currentTimer!!, pomodoroTime)
         }
-
     }
 
     companion object {

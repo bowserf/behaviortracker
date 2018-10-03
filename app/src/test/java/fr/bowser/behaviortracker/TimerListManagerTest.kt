@@ -38,7 +38,7 @@ class TimerListManagerTest {
         var result = false
 
         val timerListManagerCallback = object : TimerListManager.TimerCallback {
-            override fun onTimerRemoved(updatedTimer: Timer) {
+            override fun onTimerRemoved(removedTimer: Timer) {
                 Assert.assertTrue(false)
             }
 
@@ -79,8 +79,8 @@ class TimerListManagerTest {
         var result = false
 
         val timerListManagerCallback = object : TimerListManager.TimerCallback {
-            override fun onTimerRemoved(updatedTimer: Timer) {
-                result = timer == updatedTimer
+            override fun onTimerRemoved(removedTimer: Timer) {
+                result = timer == removedTimer
             }
 
             override fun onTimerRenamed(updatedTimer: Timer) {
@@ -128,7 +128,7 @@ class TimerListManagerTest {
         var result = false
 
         val timerListManagerCallback = object : TimerListManager.TimerCallback {
-            override fun onTimerRemoved(updatedTimer: Timer) {
+            override fun onTimerRemoved(removedTimer: Timer) {
                 Assert.assertTrue(false)
             }
 

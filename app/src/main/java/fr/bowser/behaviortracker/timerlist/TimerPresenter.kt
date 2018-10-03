@@ -60,8 +60,8 @@ class TimerPresenter(private val screen: TimerContract.Screen,
         timerListManager.reorderTimerList(timerList)
     }
 
-    override fun onTimerRemoved(updatedTimer: Timer) {
-        screen.onTimerRemoved(updatedTimer)
+    override fun onTimerRemoved(removedTimer: Timer) {
+        screen.onTimerRemoved(removedTimer)
         if (screen.isTimerListEmpty()) {
             screen.displayEmptyListView()
         }

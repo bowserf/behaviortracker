@@ -89,9 +89,9 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    override fun onTimerRemoved(updatedTimer: Timer) {
-        if (timer == updatedTimer) {
-            destroyNotif(updatedTimer)
+    override fun onTimerRemoved(removedTimer: Timer) {
+        if (timer == removedTimer) {
+            destroyNotif(removedTimer)
         }
     }
 
