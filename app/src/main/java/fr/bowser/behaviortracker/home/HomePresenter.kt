@@ -9,11 +9,16 @@ class HomePresenter(private val view: HomeContract.View,
                     private val timerNotificationManager: TimerNotificationManager,
                     private val timeManager: TimeManager,
                     private val timerListManager: TimerListManager,
+                    private val homeManager: HomeManager,
                     private val eventManager: EventManager)
     : HomeContract.Presenter {
 
     override fun initialize() {
-        view.displayTimerView()
+        if (homeManager.getCurrentView() == HomeManager.SELECTED_HOME_VIEW_TIMERS_LIST) {
+            view.displayTimerView()
+        } else {
+            view.displayPomodoroView()
+        }
     }
 
     override fun start() {
@@ -53,10 +58,12 @@ class HomePresenter(private val view: HomeContract.View,
     }
 
     override fun onClickTimerView() {
+        homeManager.setCurrentView(HomeManager.SELECTED_HOME_VIEW_TIMERS_LIST)
         view.displayTimerView()
     }
 
     override fun onClickPomodoroView() {
+        homeManager.setCurrentView(HomeManager.SELECTED_HOME_VIEW_POMODORO)
         view.displayPomodoroView()
     }
 
