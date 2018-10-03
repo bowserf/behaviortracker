@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pomodoro_content_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/pomodoro_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_default_image"
+            tools:text="Blablablablablabla" />
+
+        <ImageView
+            android:id="@+id/pomodoro_default_image"
+            android:layout_width="@dimen/pomodoro_icon_size"
+            android:layout_height="@dimen/pomodoro_icon_size"
+            android:src="@drawable/ic_pomodoro"
+            android:tint="#8A000000"
+            app:layout_constraintBottom_toTopOf="@id/pomodoro_description"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pomodoro_content_session"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ProgressBar
+            android:id="@+id/pomodoro_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/pomodoro_progress_size"
+            android:layout_height="@dimen/pomodoro_progress_size"
+            android:layout_marginRight="@dimen/default_space_2"
+            android:background="@drawable/circle_shape"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pomodoro_current_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/pomodoro_current_time_size"
+            app:layout_constraintBottom_toBottomOf="@id/pomodoro_progress_bar"
+            app:layout_constraintLeft_toLeftOf="@id/pomodoro_progress_bar"
+            app:layout_constraintRight_toRightOf="@id/pomodoro_progress_bar"
+            app:layout_constraintTop_toTopOf="@id/pomodoro_progress_bar"
+            tools:text="25:00" />
+
+        <TextView
+            android:id="@+id/pomodoro_active_timer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_space_2"
+            android:layout_marginTop="@dimen/default_space"
+            android:layout_marginEnd="@dimen/pomodoro_view_external_margin"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textSize="@dimen/pomodoro_current_timer_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Prepare destination for the next travel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pomodoro_choose_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="@dimen/default_space_2"
+        android:layout_marginBottom="@dimen/default_space_2"
+        android:elevation="@dimen/default_space"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal" />
+
+</FrameLayout>
