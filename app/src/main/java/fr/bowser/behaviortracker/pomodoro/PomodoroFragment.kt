@@ -154,6 +154,12 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_add))
     }
 
+    override fun displayPomodoroDialog() {
+        val fragmentManager = activity!!.supportFragmentManager
+        val pomodoroDialogSession = PomodoroSessionDialog.newInstance()
+        pomodoroDialogSession.show(fragmentManager, PomodoroSessionDialog.TAG)
+    }
+
     private fun setupGraph() {
         val build = DaggerPomodoroComponent.builder()
                 .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))

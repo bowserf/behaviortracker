@@ -25,7 +25,8 @@ interface PomodoroManager {
     fun stop()
 
     interface Listener {
-        fun onPomodoroSessionStarted()
+        fun onPomodoroSessionStarted(newTimer: Timer, duration: Long)
+        fun onPomodoroSessionStop()
         fun onTimerStateChanged(updatedTimer: Timer)
         fun updateTime(timer: Timer, currentTime: Long)
         fun onCountFinished(newTimer: Timer, duration: Long)

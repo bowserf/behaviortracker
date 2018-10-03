@@ -20,6 +20,8 @@ interface PomodoroContract {
 
         fun displayStartIcon()
 
+        fun displayPomodoroDialog()
+
     }
 
     interface Presenter {

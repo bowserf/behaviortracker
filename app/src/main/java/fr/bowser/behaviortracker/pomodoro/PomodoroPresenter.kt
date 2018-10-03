@@ -62,8 +62,14 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
     private fun createPomodoroManagerListener(): PomodoroManager.Listener {
         return object : PomodoroManager.Listener {
 
-            override fun onPomodoroSessionStarted() {
+            override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
                 screen.displayPauseIcon()
+                screen.updatePomodoroTimer(newTimer, duration, duration)
+            }
+
+            override fun onPomodoroSessionStop() {
+                screen.displayEmptyView()
+                screen.displayStartIcon()
             }
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
@@ -75,6 +81,7 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {
+                screen.displayPomodoroDialog()
                 screen.updatePomodoroTimer(newTimer, duration, duration)
             }
 

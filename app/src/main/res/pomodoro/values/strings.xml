@@ -2,6 +2,10 @@
 <resources>
 
     <string name="pomodoro_timer_pause">Pause</string>
+    <string name="pomodoro_dialog_title">Time is up</string>
+    <string name="pomodoro_dialog_content">Do you want to continue the session ?</string>
+    <string name="pomodoro_dialog_continue">Continue</string>
+    <string name="pomodoro_dialog_stop">Stop</string>
 
     <string name="menu_stop_pomodoro">Stop</string>
 

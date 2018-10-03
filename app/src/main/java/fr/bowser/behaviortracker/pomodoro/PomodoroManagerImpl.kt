@@ -51,8 +51,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         timerListManager.addListener(timerListManagerListener)
         timeManager.startTimer(currentTimer!!)
 
-        listener?.onCountFinished(currentTimer!!, pomodoroTime)
-        listener?.onPomodoroSessionStarted()
+        listener?.onPomodoroSessionStarted(currentTimer!!, pomodoroTime)
     }
 
     override fun resume() {
@@ -78,9 +77,12 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
             timeManager.stopTimer(actionTimer!!)
         }
         isStarted = false
+        isRunning = false
         actionTimer = null
         currentTimer = null
         timeManager.removeListener(timeManagerListener)
+        timerListManager.removeListener(timerListManagerListener)
+        listener?.onPomodoroSessionStop()
     }
 
     private fun createTimeManagerListener(): TimeManager.Listener {
@@ -105,15 +107,14 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
                     return
                 }
 
-                val previousTimer: Timer
+                timeManager.stopTimer(currentTimer!!)
+
                 if (currentTimer == actionTimer) {
                     currentTimer = pauseTimer
-                    previousTimer = actionTimer!!
                     pomodoroTime = pauseDuration
                     currentSessionDuration = pauseDuration
                 } else {
                     currentTimer = actionTimer
-                    previousTimer = pauseTimer
                     pomodoroTime = actionDuration
                     currentSessionDuration = actionDuration
                 }
@@ -121,9 +122,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
                 if (settingManager.isPomodoroVibrationEnable()) {
                     vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
                 }
-
-                timeManager.startTimer(currentTimer!!)
-                timeManager.stopTimer(previousTimer)
 
                 listener?.onCountFinished(currentTimer!!, pomodoroTime)
             }

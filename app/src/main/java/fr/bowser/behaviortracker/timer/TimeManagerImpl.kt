@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer
 
 import android.os.Handler
+import android.util.Log
 import fr.bowser.behaviortracker.setting.SettingManager
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
@@ -62,7 +63,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
         }
     }
 
-    override fun updateTime(timer: Timer, newTime: Float, fakeTimer:Boolean) {
+    override fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean) {
         var currentNewTime = newTime
         if (currentNewTime < 0) {
             currentNewTime = 0f
@@ -70,7 +71,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
 
         timer.time = currentNewTime
 
-        if(!fakeTimer) {
+        if (!fakeTimer) {
             launch(background) {
                 timerDAO.updateTimerTime(timer.id, timer.time.toLong())
             }
@@ -109,10 +110,16 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
 
     inner class TimerRunnable : Runnable {
         override fun run() {
+            // protection to stop runnable if list is empty
+            if(timerList.isEmpty()){
+                return
+            }
+
             val currentTime = getCurrentTimeSeconds()
             timerList.forEach {
                 val diff = currentTime - lastUpdatedTime[it]!!
                 updateTime(it, it.time + diff)
+                Log.i(TAG, "${it.name} : ${it.time}")
                 lastUpdatedTime[it] = currentTime
             }
 
@@ -121,6 +128,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
     }
 
     companion object {
+        private const val TAG = "TimeManagerImpl"
         private const val DELAY = 1000L
     }
 
