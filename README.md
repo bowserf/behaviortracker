@@ -1,6 +1,19 @@
-# Timer
+[![Build Status](https://travis-ci.org/bowserf/behaviortracker.svg?branch=dev)](https://travis-ci.org/bowserf/behaviortracker)
 
-![github_repo-01](https://user-images.githubusercontent.com/37731582/39676996-57ad60d6-5174-11e8-91fe-e3c78f57b646.png)
+# Time Tracker ⏲️easily track and optimize your time
+
+<img
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/icon/ic_launcher-web.png"
+    width="256"
+    height="256"
+    title="Time Tracker icon">
+
+<a href='https://play.google.com/store/apps/details?id=fr.bowser.time&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+    <img
+        alt='Get it on Google Play'
+        src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
+        height="80"/>
+</a>
 
 ## Goal
 
@@ -16,13 +29,18 @@ It's also an app which can help me to be more productive by finding when I loose
 and fix this. If I can help other people with this application, to fix their time problems too,
 I would be very happy ! =)
 
-## Play store
+## Screenshot
 
-### Link
-
-https://play.google.com/store/apps/details?id=fr.bowser.time
-
-<img src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/screenshoot/timer_fragment_english.png" width="288" height="512" title="Timers list"> <img src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/screenshoot/create_timer_english.png" width="288" height="512" title="Create a timer">
+<img
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/screenshoot/smartphone/en/timer_fragment_english.png"
+    width="288"
+    height="512"
+    title="Timers list">
+<img
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/screenshoot/smartphone/en//create_timer_english.png"
+    width="288"
+    height="512"
+    title="Create a timer">
 
 ## The future
 
