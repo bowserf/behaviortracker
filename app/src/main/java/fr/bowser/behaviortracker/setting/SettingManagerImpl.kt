@@ -16,7 +16,7 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
 
     private var pomodoroVibrationEnable: Boolean
 
-    private var pomodoroPauseStep: Long
+    private var pomodoroPauseStep: Int
 
     private var pomodoroStep: Int
 
@@ -37,9 +37,9 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
                 context.getString(R.string.pref_key_pomodoro_vibration),
                 true)
 
-        pomodoroPauseStep = sharedPreferences.getLong(
+        pomodoroPauseStep = sharedPreferences.getInt(
                 context.getString(R.string.pref_key_pomodoro_pause_stage),
-                context.resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage).toLong())
+                context.resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage))
 
         pomodoroStep = sharedPreferences.getInt(
                 context.getString(R.string.pref_key_pomodoro_stage),
@@ -62,8 +62,8 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
                 pomodoroVibrationEnable = sharedPreferences.getBoolean(key, true)
             }
             context.getString(R.string.pref_key_pomodoro_pause_stage) -> {
-                pomodoroPauseStep = sharedPreferences.getLong(key, context.resources
-                        .getInteger(R.integer.settings_default_value_pomodoro_pause_stage).toLong())
+                pomodoroPauseStep = sharedPreferences.getInt(key, context.resources
+                        .getInteger(R.integer.settings_default_value_pomodoro_pause_stage))
             }
             context.getString(R.string.pref_key_pomodoro_stage) -> {
                 pomodoroStep = sharedPreferences.getInt(key, context.resources
@@ -93,7 +93,7 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
     }
 
     override fun getPomodoroPauseStepDuration(): Long {
-        return pomodoroPauseStep
+        return pomodoroPauseStep.toLong()
     }
 
     override fun getPomodoroStepDuration(): Long {
