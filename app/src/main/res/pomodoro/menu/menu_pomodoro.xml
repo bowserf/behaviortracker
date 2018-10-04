@@ -5,8 +5,9 @@
     <item
         android:id="@+id/menu_stop_pomodoro"
         android:enabled="true"
+        android:icon="@drawable/ic_stop"
         android:title="@string/menu_stop_pomodoro"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_settings"
