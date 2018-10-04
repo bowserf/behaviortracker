@@ -33,10 +33,26 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
     override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
 
-        val timerModification = getPersistedInt(0) - MIN_VALUE_TIME
+        val timerModification = getPersistedInt(getDefaultValue()) - MIN_VALUE_TIME
 
         slider.progress = timerModification
         timerModificationText.text = convertTime(timerModification).toString()
+    }
+
+    private fun getDefaultValue():Int{
+        val resources = context.resources
+        return when(key){
+            resources.getString(R.string.pref_key_time_modification) -> {
+                resources.getInteger(R.integer.settings_default_value_time_modification)
+            }
+            resources.getString(R.string.pref_key_pomodoro_stage) -> {
+                resources.getInteger(R.integer.settings_default_value_pomodoro_stage)
+            }
+            resources.getString(R.string.pref_key_pomodoro_pause_stage) -> {
+                resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage)
+            }
+            else -> { throw IllegalStateException("Unknown preference key : $key") }
+        }
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
@@ -68,9 +84,7 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
     }
 
     companion object {
-
         private const val MAX_DURATION = 60
-
         private const val MIN_VALUE_TIME = 5
     }
 }
