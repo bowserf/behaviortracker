@@ -18,7 +18,6 @@ import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.TimeConverter
 
-
 class TimerNotificationManagerImpl(private val context: Context,
                                    timeManager: TimeManager,
                                    timerListManager: TimerListManager,

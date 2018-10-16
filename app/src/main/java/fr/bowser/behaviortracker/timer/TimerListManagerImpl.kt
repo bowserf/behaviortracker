@@ -4,7 +4,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
 
-
 class TimerListManagerImpl(private val timerDAO: TimerDAO,
                            private val timeManager: TimeManager) : TimerListManager {
 

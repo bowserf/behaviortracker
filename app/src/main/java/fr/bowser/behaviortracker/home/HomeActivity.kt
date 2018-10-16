@@ -21,7 +21,6 @@ import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timerlist.TimerFragment
 import javax.inject.Inject
 
-
 class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     @Inject

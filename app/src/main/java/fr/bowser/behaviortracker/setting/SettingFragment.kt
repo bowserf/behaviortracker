@@ -11,7 +11,6 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
 
-
 class SettingFragment : PreferenceFragment() {
 
     @Inject

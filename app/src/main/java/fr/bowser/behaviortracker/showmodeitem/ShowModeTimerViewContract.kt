@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.showmodeitem
 
 import fr.bowser.behaviortracker.timer.Timer
 
-
 interface ShowModeTimerViewContract {
 
     interface View {

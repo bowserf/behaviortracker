@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.timeritem
 
 import fr.bowser.behaviortracker.timer.Timer
 
-
 interface TimerItemContract {
 
     interface View {

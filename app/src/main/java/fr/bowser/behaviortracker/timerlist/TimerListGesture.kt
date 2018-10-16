@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.R
 
-class TimerListGesture(context: Context, private val callback: Listener) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+class TimerListGesture(context: Context, private val callback: Listener)
+    : ItemTouchHelper.SimpleCallback(
+        ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+        ItemTouchHelper.LEFT) {
 
     private var isMoving = false
 
@@ -20,7 +23,9 @@ class TimerListGesture(context: Context, private val callback: Listener) : ItemT
         rightMargin = context.resources.getDimensionPixelOffset(R.dimen.timer_list_remove_icon_margin_right)
     }
 
-    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder): Boolean {
         isMoving = true
         callback.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
         return true
@@ -50,7 +55,7 @@ class TimerListGesture(context: Context, private val callback: Listener) : ItemT
             if (dX < 0) {
                 val progress = Math.min(Math.abs(dX) / viewHolder.itemView.width.toFloat(), 1f)
                 val left = itemView.right.toFloat() - rightMargin - icon.width
-                val top = itemView.top.toFloat() + (itemView.bottom.toFloat() - itemView.top.toFloat() - icon.height) / 2
+                val top = itemView.top.toFloat() + (itemView.height - icon.height) / 2
                 c.rotate(360 * progress, left + icon.width / 2, top + icon.height / 2)
                 c.drawBitmap(icon, left, top, null)
             }

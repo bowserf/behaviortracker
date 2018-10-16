@@ -3,7 +3,6 @@ package fr.bowser.behaviortracker.inapp
 import android.util.Log
 import com.android.billingclient.api.*
 
-
 class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
                        private val inAppConfiguration: InAppConfiguration,
                        private val inAppRepository: InAppRepository) : InAppManager {

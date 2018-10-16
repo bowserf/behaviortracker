@@ -10,11 +10,16 @@ class TimerDaoUA(context: Context) : TimerDAO {
     private val timers = ArrayList<Timer>()
 
     init {
-        timers.add(Timer(0, 5304L, context.resources.getString(R.string.release_screenshot_timer_work), ColorUtils.convertPositionToColor(10), 0))
-        timers.add(Timer(1, 1638L, context.resources.getString(R.string.release_screenshot_timer_transport), ColorUtils.convertPositionToColor(7), 1))
-        timers.add(Timer(2, 2700L, context.resources.getString(R.string.release_screenshot_timer_sport), ColorUtils.convertPositionToColor(4), 2))
-        timers.add(Timer(3, 4000L, context.resources.getString(R.string.release_screenshot_timer_cooking), ColorUtils.convertPositionToColor(0), 3))
-        timers.add(Timer(4, 2000L, context.resources.getString(R.string.release_screenshot_timer_watch_series), ColorUtils.convertPositionToColor(18), 4))
+        val color1 = ColorUtils.convertPositionToColor(10)
+        timers.add(Timer(0, 5304L, context.resources.getString(R.string.release_screenshot_timer_work), color1, 0))
+        val color2 = ColorUtils.convertPositionToColor(7)
+        timers.add(Timer(1, 1638L, context.resources.getString(R.string.release_screenshot_timer_transport), color2, 1))
+        val color3 = ColorUtils.convertPositionToColor(4)
+        timers.add(Timer(2, 2700L, context.resources.getString(R.string.release_screenshot_timer_sport), color3, 2))
+        val color4 = ColorUtils.convertPositionToColor(0)
+        timers.add(Timer(3, 4000L, context.resources.getString(R.string.release_screenshot_timer_cooking), color4, 3))
+        val color5 = ColorUtils.convertPositionToColor(18)
+        timers.add(Timer(4, 2000L, context.resources.getString(R.string.release_screenshot_timer_watch_series), color5, 4))
     }
 
     override fun getTimers(): List<Timer> {

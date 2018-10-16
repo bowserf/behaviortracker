@@ -26,7 +26,6 @@ import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
-
 class TimerFragment : Fragment(), TimerContract.Screen {
 
     @Inject

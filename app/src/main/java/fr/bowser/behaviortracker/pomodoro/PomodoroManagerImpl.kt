@@ -43,8 +43,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
-        this.pauseDuration = if (isDebug) 5L else settingManager.getPomodoroPauseStepDuration()
-        this.actionDuration = if (isDebug) 10L else settingManager.getPomodoroStepDuration()
+        this.pauseDuration = if (isDebug) POMODOR_DEBUG_PAUSE_STEP_DURATION else settingManager.getPomodoroPauseStepDuration()
+        this.actionDuration = if (isDebug) POMODOR_DEBUG_STEP_DURATION else settingManager.getPomodoroStepDuration()
 
         currentTimer = actionTimer
         pomodoroTime = actionDuration
@@ -168,6 +168,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     companion object {
         private const val DEFAULT_VIBRATION_DURATION = 500L
+        private const val POMODOR_DEBUG_STEP_DURATION = 10L
+        private const val POMODOR_DEBUG_PAUSE_STEP_DURATION = 5L
     }
 
 }

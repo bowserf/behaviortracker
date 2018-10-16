@@ -2,9 +2,7 @@ package fr.bowser.behaviortracker.pomodoro
 
 interface PomodoroDialogContract {
 
-    interface Screen {
-
-    }
+    interface Screen
 
     interface Presenter {
 

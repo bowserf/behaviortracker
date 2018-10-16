@@ -11,7 +11,6 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.PauseTimer
 import javax.inject.Singleton
 
-
 @Module
 class PomodoroManagerModule {
 

@@ -18,7 +18,6 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
-
 class TimerRowView(context: Context) :
         CardView(context),
         TimerItemContract.View {

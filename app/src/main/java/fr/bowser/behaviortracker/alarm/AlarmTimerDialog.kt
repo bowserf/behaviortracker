@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.alarm
 
-
 import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +13,6 @@ import androidx.fragment.app.DialogFragment
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
-
 
 class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
 

@@ -1,10 +1,8 @@
 package fr.bowser.behaviortracker.utils
 
-
 import android.content.Context
 import androidx.core.content.ContextCompat
 import fr.bowser.behaviortracker.R
-
 
 object ColorUtils {
 

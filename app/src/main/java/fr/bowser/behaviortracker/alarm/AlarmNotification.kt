@@ -20,8 +20,12 @@ object AlarmNotification {
 
     private const val ALARM_NOTIFICATION_ID = 786
 
+    private const val DURATION_LIGHT_ON = 500
+    private const val DURATION_LIGHT_OFF = 3000
+
     fun displayAlarmNotif(context: Context) {
-        val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             generateNotificationChannel(notificationManager, context.resources)
@@ -33,24 +37,28 @@ object AlarmNotification {
         val resultPendingIntent = PendingIntent.getActivity(
                 context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val notifBuilder = NotificationCompat.Builder(context, context.resources.getString(R.string.alarm_timer_notif_channel_id))
+        val notifBuilder = NotificationCompat.Builder(
+                context,
+                context.resources.getString(R.string.alarm_timer_notif_channel_id))
                 .setContentTitle(context.resources.getString(R.string.alarm_timer_title))
                 .setContentText(context.resources.getString(R.string.alarm_timer_content))
                 .setSmallIcon(R.drawable.ic_timer)
                 .setAutoCancel(true)
-                .setLights(Color.YELLOW, 500, 3000)
+                .setLights(Color.YELLOW, DURATION_LIGHT_ON, DURATION_LIGHT_OFF)
                 .setContentIntent(resultPendingIntent)
 
         notificationManager.notify(
                 ALARM_NOTIFICATION_ID,
                 notifBuilder.build())
 
-        val eventManager = BehaviorTrackerApp.getAppComponent(context).provideEventManager()
+        val eventManager = BehaviorTrackerApp
+                .getAppComponent(context)
+                .provideEventManager()
         eventManager.sendDisplayAlarmNotificationEvent()
     }
 
     @TargetApi(Build.VERSION_CODES.O)
-    private fun generateNotificationChannel(notificationManager: NotificationManager, res: Resources) {
+    private fun generateNotificationChannel(notifManager: NotificationManager, res: Resources) {
         val channelId = res.getString(R.string.alarm_timer_notif_channel_id)
         val channelName = res.getString(R.string.alarm_timer_notif_channel_name)
         val channelDescription = res.getString(R.string.alarm_timer_notif_channel_description)
@@ -63,7 +71,7 @@ object AlarmNotification {
         notificationChannel.enableVibration(false)
         notificationChannel.enableLights(true)
         notificationChannel.setShowBadge(false)
-        notificationManager.createNotificationChannel(notificationChannel)
+        notifManager.createNotificationChannel(notificationChannel)
     }
 
 }

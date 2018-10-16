@@ -8,7 +8,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import fr.bowser.behaviortracker.BuildConfig
 import io.fabric.sdk.android.Fabric
 
-
 class BehaviorTrackerApp : Application() {
 
     lateinit var appComponent: BehaviorTrackerAppComponent

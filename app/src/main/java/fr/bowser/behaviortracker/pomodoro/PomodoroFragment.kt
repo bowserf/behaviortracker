@@ -23,11 +23,9 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timerlist.TimerFragment
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
-
 
 class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
@@ -50,7 +48,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         setupGraph()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pomodoro, container, false)
     }
 
@@ -148,19 +148,25 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     }
 
     override fun displayPauseIcon() {
-        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_pause_session))
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
+                context!!,
+                R.color.pomodoro_pause_session))
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_pause_white))
 
         activity!!.invalidateOptionsMenu()
     }
 
     override fun displayPlayIcon() {
-        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_resume_session))
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
+                context!!,
+                R.color.pomodoro_resume_session))
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_play_white))
     }
 
     override fun displayStartIcon() {
-        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_start_session))
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
+                context!!,
+                R.color.pomodoro_start_session))
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_flag))
     }
 
@@ -196,7 +202,10 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     }
 
     private fun startFabAnimation() {
-        val fabAnimator = ObjectAnimator.ofFloat(this, PROPERTY_FAB_ANIMATION, 1f, 1.15f, 1f)
+        val fabAnimator = ObjectAnimator.ofFloat(
+                this,
+                PROPERTY_FAB_ANIMATION,
+                1f, 1.15f, 1f)
         fabAnimator.duration = FAB_ANIMATION_DURATION
         fabAnimator.repeatCount = 1
         fabAnimator.interpolator = AccelerateDecelerateInterpolator()

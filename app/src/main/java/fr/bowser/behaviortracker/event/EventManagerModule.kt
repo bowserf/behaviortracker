@@ -6,7 +6,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class EventManagerModule() {
+class EventManagerModule {
 
     @Singleton
     @Provides

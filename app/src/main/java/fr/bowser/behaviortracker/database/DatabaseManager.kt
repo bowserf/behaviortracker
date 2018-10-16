@@ -1,13 +1,10 @@
 package fr.bowser.behaviortracker.database
 
-
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.Room
 import androidx.room.migration.Migration
 import android.content.Context
 import fr.bowser.behaviortracker.timer.TimerDAO
-
-
 
 class DatabaseManager(context: Context) {
 
