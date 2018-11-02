@@ -81,6 +81,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.menu_pomodoro, menu)
+
+        val stopPomodoro = menu.findItem(R.id.menu_stop_pomodoro)
+        stopPomodoro.isVisible = presenter.isRunning()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -137,11 +140,15 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     override fun displayEmptyView() {
         emptyContent.visibility = View.VISIBLE
         pomodoroSessionContent.visibility = View.GONE
+
+        activity!!.invalidateOptionsMenu()
     }
 
     override fun displayPauseIcon() {
         fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_pause_session))
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_pause_white))
+
+        activity!!.invalidateOptionsMenu()
     }
 
     override fun displayPlayIcon() {

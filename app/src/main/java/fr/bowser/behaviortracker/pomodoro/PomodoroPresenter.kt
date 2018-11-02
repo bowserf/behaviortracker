@@ -25,6 +25,10 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
         pomodoroManager.listener = null
     }
 
+    override fun isRunning(): Boolean {
+        return pomodoroManager.isStarted
+    }
+
     override fun onClickFab() {
         if (!pomodoroManager.isStarted) {
             screen.displayChoosePomodoroTimer()

@@ -32,6 +32,8 @@ interface PomodoroContract {
 
         fun stop()
 
+        fun isRunning(): Boolean
+
         fun onClickFab()
 
         fun onClickStopPomodoro()
