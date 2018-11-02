@@ -37,6 +37,10 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     private val timerListManagerListener = createTimerListManagerListener()
 
+    init {
+        timerListManager.addListener(timerListManagerListener)
+    }
+
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
         this.pauseDuration = if (isDebug) 5L else settingManager.getPomodoroPauseStepDuration()
@@ -50,7 +54,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         isRunning = true
 
         timeManager.addListener(timeManagerListener)
-        timerListManager.addListener(timerListManagerListener)
         timeManager.startTimer(currentTimer!!)
 
         listener?.onPomodoroSessionStarted(currentTimer!!, pomodoroTime)
@@ -62,7 +65,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         isRunning = true
         timeManager.startTimer(currentTimer!!)
-        timerListManager.addListener(timerListManagerListener)
     }
 
     override fun pause() {
@@ -71,7 +73,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         isRunning = false
         timeManager.stopTimer(currentTimer!!)
-        timerListManager.removeListener(timerListManagerListener)
     }
 
     override fun stop() {
@@ -85,7 +86,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         currentTimer = null
         timerNotificationManager.dismissNotification()
         timeManager.removeListener(timeManagerListener)
-        timerListManager.removeListener(timerListManagerListener)
         listener?.onPomodoroSessionStop()
     }
 
