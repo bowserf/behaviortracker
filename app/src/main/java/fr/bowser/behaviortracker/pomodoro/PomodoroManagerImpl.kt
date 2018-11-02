@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.os.Vibrator
+import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
@@ -8,6 +9,7 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 
 class PomodoroManagerImpl(private val timeManager: TimeManager,
                           private val timerListManager: TimerListManager,
+                          private val timerNotificationManager: TimerNotificationManager,
                           private val settingManager: SettingManager,
                           val pauseTimer: Timer,
                           private val vibrator: Vibrator,
@@ -81,6 +83,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         isRunning = false
         actionTimer = null
         currentTimer = null
+        timerNotificationManager.dismissNotification()
         timeManager.removeListener(timeManagerListener)
         timerListManager.removeListener(timerListManagerListener)
         listener?.onPomodoroSessionStop()

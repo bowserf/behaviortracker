@@ -115,7 +115,9 @@ class TimerNotificationManagerImpl(private val context: Context,
             val resultPendingIntent = PendingIntent.getActivity(
                     context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-            timerNotificationBuilder = NotificationCompat.Builder(context, context.resources.getString(R.string.timer_notif_channel_id))
+            timerNotificationBuilder = NotificationCompat.Builder(
+                    context,
+                    context.resources.getString(R.string.timer_notif_channel_id))
                     .setContentTitle(modifiedTimer.name)
                     .setContentText(TimeConverter.convertSecondsToHumanTime(
                             modifiedTimer.time.toLong()))
