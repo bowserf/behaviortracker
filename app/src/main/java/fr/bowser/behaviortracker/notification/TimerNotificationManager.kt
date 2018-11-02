@@ -43,7 +43,7 @@ class TimerNotificationManager(private val context: Context,
         timerListManager.addListener(this)
     }
 
-    fun changeNotifOngoing(isAppInBackground: Boolean) {
+    fun changeOngoingState(isAppInBackground: Boolean) {
         if (!isNotificationDisplayed) {
             return
         }
@@ -56,23 +56,19 @@ class TimerNotificationManager(private val context: Context,
         }
     }
 
-    fun notificationDismiss() {
-        timer = null
-        isNotificationDisplayed = false
-
-        stopKillAppDectectionService()
-    }
-
-    fun removeNotification(killProcess: Boolean) {
+    fun dismissNotification(killProcess: Boolean = true) {
         if (!isNotificationDisplayed) {
             return
         }
 
-        notificationManager.cancel(TIMER_NOTIFICATION_ID)
+        timer = null
+        isNotificationDisplayed = false
 
         if (killProcess) {
             stopKillAppDectectionService()
         }
+
+        notificationManager.cancel(TIMER_NOTIFICATION_ID)
     }
 
     override fun onTimerStateChanged(updatedTimer: Timer) {
@@ -91,7 +87,7 @@ class TimerNotificationManager(private val context: Context,
 
     override fun onTimerRemoved(removedTimer: Timer) {
         if (timer == removedTimer) {
-            destroyNotif(removedTimer)
+            dismissNotification()
         }
     }
 
@@ -138,13 +134,6 @@ class TimerNotificationManager(private val context: Context,
                     timerNotificationBuilder?.build())
 
             startKillAppDectectionService()
-        }
-    }
-
-    private fun destroyNotif(removedTimer: Timer) {
-        if (timer == removedTimer) {
-            notificationManager.cancel(TIMER_NOTIFICATION_ID)
-            notificationDismiss()
         }
     }
 

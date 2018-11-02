@@ -22,11 +22,11 @@ class HomePresenter(private val view: HomeContract.View,
     }
 
     override fun start() {
-        timerNotificationManager.changeNotifOngoing(false)
+        timerNotificationManager.changeOngoingState(false)
     }
 
     override fun stop() {
-        timerNotificationManager.changeNotifOngoing(true)
+        timerNotificationManager.changeOngoingState(true)
     }
 
     override fun onClickResetAll() {

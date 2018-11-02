@@ -15,7 +15,7 @@ class KillAppDetection : Service() {
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
-        notificationManager.removeNotification(false)
+        notificationManager.dismissNotification(false)
     }
 
     override fun onBind(intent: Intent?): IBinder? {

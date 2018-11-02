@@ -25,7 +25,7 @@ class TimerReceiver : BroadcastReceiver() {
 
     private fun notificationDismiss(context: Context) {
         val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
-        notifManager.notificationDismiss()
+        notifManager.dismissNotification()
     }
 
     private fun pauseTimer(context: Context) {
