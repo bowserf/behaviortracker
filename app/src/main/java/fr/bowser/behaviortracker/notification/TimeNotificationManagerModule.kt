@@ -16,7 +16,7 @@ class TimeNotificationManagerModule {
                                         timeManager: TimeManager,
                                         timerListManager: TimerListManager)
             : TimerNotificationManager {
-        return TimerNotificationManager(context, timeManager, timerListManager)
+        return TimerNotificationManagerImpl(context, timeManager, timerListManager)
     }
 
 }
