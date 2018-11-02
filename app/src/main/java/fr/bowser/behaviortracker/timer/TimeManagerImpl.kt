@@ -1,7 +1,6 @@
 package fr.bowser.behaviortracker.timer
 
 import android.os.Handler
-import android.util.Log
 import fr.bowser.behaviortracker.setting.SettingManager
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
@@ -119,7 +118,6 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
             timerList.forEach {
                 val diff = currentTime - lastUpdatedTime[it]!!
                 updateTime(it, it.time + diff)
-                Log.i(TAG, "${it.name} : ${it.time}")
                 lastUpdatedTime[it] = currentTime
             }
 
