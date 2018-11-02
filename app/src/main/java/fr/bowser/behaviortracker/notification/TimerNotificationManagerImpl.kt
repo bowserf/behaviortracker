@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.KillAppDetection
 import fr.bowser.behaviortracker.home.HomeActivity
+import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -20,16 +21,20 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 
 class TimerNotificationManagerImpl(private val context: Context,
                                    timeManager: TimeManager,
-                                   timerListManager: TimerListManager)
+                                   timerListManager: TimerListManager,
+                                   private val pomodoroManager: PomodoroManager)
     : TimerNotificationManager, TimeManager.Listener, TimerListManager.Listener {
 
-    private val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    private val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     private var timerNotificationBuilder: NotificationCompat.Builder? = null
 
     private var isNotificationDisplayed = false
 
     private var isAppInBackground = false
+
+    private val pomodoroListener = createPomodoroListener()
 
     override var timer: Timer? = null
 
@@ -40,6 +45,8 @@ class TimerNotificationManagerImpl(private val context: Context,
 
         timeManager.addListener(this)
         timerListManager.addListener(this)
+
+        pomodoroManager.addListener(pomodoroListener)
     }
 
     override fun changeOngoingState(isAppInBackground: Boolean) {
@@ -118,9 +125,8 @@ class TimerNotificationManagerImpl(private val context: Context,
             timerNotificationBuilder = NotificationCompat.Builder(
                     context,
                     context.resources.getString(R.string.timer_notif_channel_id))
-                    .setContentTitle(modifiedTimer.name)
-                    .setContentText(TimeConverter.convertSecondsToHumanTime(
-                            modifiedTimer.time.toLong()))
+                    .setContentTitle(getNotificationTitle(modifiedTimer))
+                    .setContentText(getNotificationMessage(modifiedTimer))
                     .setSmallIcon(R.drawable.ic_timer)
                     .setContentIntent(resultPendingIntent)
                     .setDeleteIntent(TimerReceiver.getDeletePendingIntent(context))
@@ -182,8 +188,7 @@ class TimerNotificationManagerImpl(private val context: Context,
 
     private fun updateTimeNotif() {
         timerNotificationBuilder!!.let {
-            it.setContentText(
-                    TimeConverter.convertSecondsToHumanTime(timer!!.time.toLong()))
+            it.setContentText(getNotificationMessage(timer!!))
 
             notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
@@ -214,6 +219,47 @@ class TimerNotificationManagerImpl(private val context: Context,
         notificationChannel.enableLights(false)
         notificationChannel.setShowBadge(false)
         notificationManager.createNotificationChannel(notificationChannel)
+    }
+
+    private fun getNotificationTitle(timer: Timer): String {
+        return if (pomodoroManager.isStarted) {
+            context.resources.getString(R.string.pomodoro_title, timer.name)
+        } else {
+            timer.name
+        }
+    }
+
+    private fun getNotificationMessage(timer: Timer): String {
+        return if (pomodoroManager.isStarted) {
+            TimeConverter.convertSecondsToHumanTime(pomodoroManager.pomodoroTime, false)
+        } else {
+            TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
+        }
+    }
+
+    private fun createPomodoroListener(): PomodoroManager.Listener{
+        return object : PomodoroManager.Listener{
+
+            override fun onPomodoroSessionStop() {
+                dismissNotification()
+            }
+
+            override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
+                // nothing to do
+            }
+
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                // nothing to do
+            }
+
+            override fun updateTime(timer: Timer, currentTime: Long) {
+                // nothing to do
+            }
+
+            override fun onCountFinished(newTimer: Timer, duration: Long) {
+                // nothing to do
+            }
+        }
     }
 
     companion object {

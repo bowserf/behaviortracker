@@ -4,7 +4,7 @@ import fr.bowser.behaviortracker.timer.Timer
 
 interface PomodoroManager {
 
-    var listener: Listener?
+    var listeners: MutableList<Listener>
 
     var pomodoroTime: Long
 
@@ -23,6 +23,10 @@ interface PomodoroManager {
     fun pause()
 
     fun stop()
+
+    fun addListener(listener: Listener)
+
+    fun removeListener(listener: Listener)
 
     interface Listener {
         fun onPomodoroSessionStarted(newTimer: Timer, duration: Long)

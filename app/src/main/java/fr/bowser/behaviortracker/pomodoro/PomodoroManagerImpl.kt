@@ -1,21 +1,19 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.os.Vibrator
-import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class PomodoroManagerImpl(private val timeManager: TimeManager,
-                          private val timerListManager: TimerListManager,
-                          private val timerNotificationManager: TimerNotificationManager,
+                          timerListManager: TimerListManager,
                           private val settingManager: SettingManager,
                           val pauseTimer: Timer,
                           private val vibrator: Vibrator,
                           private val isDebug: Boolean) : PomodoroManager {
 
-    override var listener: PomodoroManager.Listener? = null
+    override var listeners: MutableList<PomodoroManager.Listener> = mutableListOf()
 
     override var pomodoroTime = 0L
 
@@ -56,7 +54,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         timeManager.addListener(timeManagerListener)
         timeManager.startTimer(currentTimer!!)
 
-        listener?.onPomodoroSessionStarted(currentTimer!!, pomodoroTime)
+        listeners.forEach { it.onPomodoroSessionStarted(currentTimer!!, pomodoroTime) }
     }
 
     override fun resume() {
@@ -84,9 +82,18 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         isRunning = false
         actionTimer = null
         currentTimer = null
-        timerNotificationManager.dismissNotification()
         timeManager.removeListener(timeManagerListener)
-        listener?.onPomodoroSessionStop()
+        listeners.forEach { it.onPomodoroSessionStop() }
+    }
+
+    override fun addListener(listener: PomodoroManager.Listener) {
+        if (!listeners.contains(listener)) {
+            listeners.add(listener)
+        }
+    }
+
+    override fun removeListener(listener: PomodoroManager.Listener) {
+        listeners.remove(listener)
     }
 
     private fun createTimeManagerListener(): TimeManager.Listener {
@@ -94,7 +101,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {
-                    listener?.onTimerStateChanged(updatedTimer)
+                    listeners.forEach { it.onTimerStateChanged(updatedTimer) }
                 }
             }
 
@@ -105,7 +112,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
                 pomodoroTime--
 
-                listener?.updateTime(currentTimer!!, pomodoroTime)
+                listeners.forEach { it.updateTime(currentTimer!!, pomodoroTime) }
 
                 if (pomodoroTime > 0L) {
                     return
@@ -127,7 +134,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
                     vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
                 }
 
-                listener?.onCountFinished(currentTimer!!, pomodoroTime)
+                listeners.forEach { it.onCountFinished(currentTimer!!, pomodoroTime) }
             }
 
         }

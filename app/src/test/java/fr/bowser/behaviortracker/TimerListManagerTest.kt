@@ -94,7 +94,7 @@ class TimerListManagerTest {
 
         timerListManager.addTimer(timer)
 
-        // only listen for remove timer listener
+        // only listen to remove timer listener
         timerListManager.addListener(timerListManagerListener)
 
         timerListManager.removeTimer(timer)
@@ -143,7 +143,7 @@ class TimerListManagerTest {
 
         timerListManager.addTimer(timer)
 
-        // only listen for remove timer listener
+        // only listen to remove timer listener
         timerListManager.addListener(timerListManagerListener)
 
         timerListManager.renameTimer(timer, newName)

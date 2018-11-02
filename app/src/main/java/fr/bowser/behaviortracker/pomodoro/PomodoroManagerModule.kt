@@ -5,7 +5,6 @@ import android.os.Vibrator
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.BuildConfig
-import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -20,7 +19,6 @@ class PomodoroManagerModule {
     @Provides
     fun providePomodoroManager(context: Context,
                                timeManager: TimeManager,
-                               timerNotificationManager: TimerNotificationManager,
                                timerListManager: TimerListManager,
                                settingManager: SettingManager): PomodoroManager {
         val pauseTimer = PauseTimer.getTimer(context)
@@ -28,7 +26,6 @@ class PomodoroManagerModule {
         return PomodoroManagerImpl(
                 timeManager,
                 timerListManager,
-                timerNotificationManager,
                 settingManager,
                 pauseTimer,
                 vibrator,

@@ -9,7 +9,7 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
     private val pomodoroListener = createPomodoroManagerListener()
 
     override fun start() {
-        pomodoroManager.listener = pomodoroListener
+        pomodoroManager.addListener(pomodoroListener)
 
         if (pomodoroManager.currentTimer != null) {
             screen.updatePomodoroTimer(
@@ -22,7 +22,7 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
     }
 
     override fun stop() {
-        pomodoroManager.listener = null
+        pomodoroManager.removeListener(pomodoroListener)
     }
 
     override fun isRunning(): Boolean {

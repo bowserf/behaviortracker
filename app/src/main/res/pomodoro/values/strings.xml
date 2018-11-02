@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="pomodoro_title" translatable="false">[Pomodoro] %1$s</string>
     <string name="pomodoro_timer_pause">Pause</string>
     <string name="pomodoro_dialog_title">Time is up</string>
     <string name="pomodoro_dialog_content">Do you want to continue the session ?</string>
