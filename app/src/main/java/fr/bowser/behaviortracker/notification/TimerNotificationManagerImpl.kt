@@ -47,11 +47,9 @@ class TimerNotificationManagerImpl(private val context: Context,
             return
         }
         this.isAppInBackground = isAppInBackground
-        timerNotificationBuilder?.setOngoing(isAppInBackground)
-        timerNotificationBuilder?.let {
-            notificationManager.notify(
-                    TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder?.build())
+        timerNotificationBuilder!!.let {
+            it.setOngoing(isAppInBackground)
+            notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
     }
 
@@ -130,7 +128,7 @@ class TimerNotificationManagerImpl(private val context: Context,
 
             notificationManager.notify(
                     TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder?.build())
+                    timerNotificationBuilder!!.build())
 
             startKillAppDectectionService()
         }
@@ -138,11 +136,9 @@ class TimerNotificationManagerImpl(private val context: Context,
 
     private fun renameTimerNotif(updatedTimer: Timer) {
         if (timer == updatedTimer) {
-            timerNotificationBuilder?.setContentTitle(timer!!.name)
-            timerNotificationBuilder?.let {
-                notificationManager.notify(
-                        TIMER_NOTIFICATION_ID,
-                        timerNotificationBuilder?.build())
+            timerNotificationBuilder!!.let {
+                it.setContentTitle(timer!!.name)
+                notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
             }
         }
     }
@@ -152,17 +148,15 @@ class TimerNotificationManagerImpl(private val context: Context,
             return
         }
 
-        timerNotificationBuilder?.setOngoing(isAppInBackground)
+        timerNotificationBuilder!!.let {
+            it.setOngoing(isAppInBackground)
 
-        timerNotificationBuilder?.mActions?.clear()
-        timerNotificationBuilder?.addAction(R.drawable.ic_pause,
-                context.resources.getString(R.string.timer_notif_pause),
-                TimerReceiver.getPausePendingIntent(context))
+            it.mActions?.clear()
+            it.addAction(R.drawable.ic_pause,
+                    context.resources.getString(R.string.timer_notif_pause),
+                    TimerReceiver.getPausePendingIntent(context))
 
-        timerNotificationBuilder?.let {
-            notificationManager.notify(
-                    TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder?.build())
+            notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
     }
 
@@ -171,28 +165,25 @@ class TimerNotificationManagerImpl(private val context: Context,
             return
         }
 
-        // allow to remove notification when timer is not running
-        timerNotificationBuilder?.setOngoing(false)
+        timerNotificationBuilder!!.let {
+            // allow to remove notification when timer is not running
+            it.setOngoing(false)
 
-        timerNotificationBuilder?.mActions?.clear()
-        timerNotificationBuilder?.addAction(R.drawable.ic_play,
-                context.resources.getString(R.string.timer_notif_start),
-                TimerReceiver.getPlayPendingIntent(context))
+            it.mActions?.clear()
+            it.addAction(R.drawable.ic_play,
+                    context.resources.getString(R.string.timer_notif_start),
+                    TimerReceiver.getPlayPendingIntent(context))
 
-        timerNotificationBuilder?.let {
-            notificationManager.notify(
-                    TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder?.build())
+            notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
     }
 
     private fun updateTimeNotif() {
-        timerNotificationBuilder?.setContentText(
-                TimeConverter.convertSecondsToHumanTime(timer!!.time.toLong()))
-        timerNotificationBuilder?.let {
-            notificationManager.notify(
-                    TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder?.build())
+        timerNotificationBuilder!!.let {
+            it.setContentText(
+                    TimeConverter.convertSecondsToHumanTime(timer!!.time.toLong()))
+
+            notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
     }
 
