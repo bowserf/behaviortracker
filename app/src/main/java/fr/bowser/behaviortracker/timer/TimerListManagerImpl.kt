@@ -55,6 +55,8 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
             timer.position = i
         }
 
+        timers.sortBy { timer -> timer.position }
+
         launch(background) {
             for (timer in timerList) {
                 timerDAO.updateTimerPosition(timer.id, timer.position)
