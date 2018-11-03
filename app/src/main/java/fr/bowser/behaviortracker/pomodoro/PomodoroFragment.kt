@@ -158,7 +158,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     override fun displayStartIcon() {
         fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.pomodoro_start_session))
-        fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_add))
+        fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_flag))
     }
 
     override fun displayPomodoroDialog() {
