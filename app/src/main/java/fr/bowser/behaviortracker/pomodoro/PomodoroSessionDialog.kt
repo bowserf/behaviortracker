@@ -30,7 +30,10 @@ class PomodoroSessionDialog : DialogFragment(), PomodoroDialogContract.Screen {
             presenter.onClickNegativeButton()
         }
 
-        return dialogBuilder.create()
+        val dialog = dialogBuilder.create()
+        dialog.setCanceledOnTouchOutside(false)
+
+        return dialog
     }
 
     private fun setupGraph() {
