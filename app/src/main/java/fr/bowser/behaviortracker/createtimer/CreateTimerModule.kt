@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.createtimer
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.event.EventManager
+import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
@@ -14,8 +15,14 @@ class CreateTimerModule(private val view: CreateTimerContract.View) {
     @Provides
     fun provideCreateTimerPresenter(timerListManager: TimerListManager,
                                     timeManager: TimeManager,
+                                    pomodoroManager: PomodoroManager,
                                     eventManager: EventManager): CreateTimerPresenter {
-        return CreateTimerPresenter(view, timerListManager, timeManager, eventManager)
+        return CreateTimerPresenter(
+                view,
+                timerListManager,
+                timeManager,
+                pomodoroManager,
+                eventManager)
     }
 
 }

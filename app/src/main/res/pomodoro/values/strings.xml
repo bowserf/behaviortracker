@@ -7,6 +7,8 @@
     <string name="pomodoro_dialog_content">Do you want to continue the session ?</string>
     <string name="pomodoro_dialog_continue">Continue</string>
     <string name="pomodoro_dialog_stop">Stop</string>
+    <string name="pomodoro_create_timer">Create Timer</string>
+    <string name="pomodoro_no_timer_available">There is no available timer to start a pomodoro session.</string>
 
     <string name="menu_stop_pomodoro">Stop</string>
 

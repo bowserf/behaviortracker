@@ -31,7 +31,11 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
 
     override fun onClickFab() {
         if (!pomodoroManager.isStarted) {
-            screen.displayChoosePomodoroTimer()
+            if (timerList.isEmpty()) {
+                screen.displayNoTimerAvailable()
+            } else {
+                screen.displayChoosePomodoroTimer()
+            }
             return
         }
 
@@ -48,6 +52,10 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
         pomodoroManager.stop()
         screen.displayEmptyView()
         updateFabIcon()
+    }
+
+    override fun onClickCreateTimer() {
+        screen.displayCreateTimer()
     }
 
     private fun updateFabIcon() {

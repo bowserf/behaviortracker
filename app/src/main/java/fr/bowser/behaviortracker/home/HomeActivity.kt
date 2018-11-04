@@ -151,7 +151,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     private fun manageIntent() {
         if (intent.action == CREATE_TIMER_FROM_SHORTCUT) {
-            CreateTimerDialog.showDialog(this, true)
+            CreateTimerDialog.showDialog(this, false)
         }
     }
 

@@ -18,6 +18,8 @@ interface CreateTimerContract {
 
         fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int)
 
+        fun enablePomodoroMode(isPomodoro: Boolean)
+
     }
 
 }

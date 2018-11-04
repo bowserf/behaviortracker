@@ -87,7 +87,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun displayCreateTimerView() {
-        CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
+        CreateTimerDialog.showDialog(activity as AppCompatActivity, false)
     }
 
     override fun displayTimerList(timers: List<Timer>) {

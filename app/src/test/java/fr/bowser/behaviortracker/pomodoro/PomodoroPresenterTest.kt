@@ -35,7 +35,8 @@ class PomodoroPresenterTest {
     @Test
     fun onClickFabDisplayChoosePomodoroTimer(){
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val timer = Timer("name", ColorUtils.COLOR_AMBER, false, 0)
+        val presenter = PomodoroPresenter(screen, manager, listOf(timer))
         Mockito.`when`(manager.isStarted).thenReturn(false)
 
         // When
@@ -43,6 +44,19 @@ class PomodoroPresenterTest {
 
         // Then
         Mockito.verify(screen).displayChoosePomodoroTimer()
+    }
+
+    @Test
+    fun onClickFabDisplayNoTimerAvailable(){
+        // Given
+        val presenter = PomodoroPresenter(screen, manager, listOf())
+        Mockito.`when`(manager.isStarted).thenReturn(false)
+
+        // When
+        presenter.onClickFab()
+
+        // Then
+        Mockito.verify(screen).displayNoTimerAvailable()
     }
 
     @Test

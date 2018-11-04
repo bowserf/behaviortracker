@@ -53,9 +53,14 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val arguments = arguments
+        val isPomodoro = arguments!!.getBoolean(IS_POMODORO)
+        presenter.enablePomodoroMode(isPomodoro)
+
         initToolbar(view)
         initSpinner(view)
-        initUI(view)
+        initUI(view, isPomodoro)
     }
 
     override fun onStart() {
@@ -91,7 +96,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         chooseColor = root.findViewById(R.id.list_colors)
         chooseColor.layoutManager = GridLayoutManager(activity,
                 resources.getInteger(R.integer.create_timer_number_colors_row),
-                GridLayoutManager.VERTICAL,
+                RecyclerView.VERTICAL,
                 false)
         chooseColor.setHasFixedSize(true)
         chooseColor.adapter = ColorAdapter(context!!, presenter)
@@ -121,13 +126,16 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         }
     }
 
-    private fun initUI(root: View) {
+    private fun initUI(root: View, isPomodoro: Boolean) {
         editTimerName = root.findViewById(R.id.creation_timer_name)
 
         // methods to display keyboard and dselect edittext
         displayKeyboard()
 
         startNow = root.findViewById(R.id.start_after_creation)
+        if (isPomodoro) {
+            startNow.visibility = View.GONE
+        }
 
         editTimerNameLayout = root.findViewById(R.id.creation_timer_name_layout)
     }
@@ -158,16 +166,25 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     companion object {
         private const val TAG = "CreateTimerActivity"
 
-        fun showDialog(activity: AppCompatActivity, isLargeScreen: Boolean) {
-            val newFragment = CreateTimerDialog()
+        private const val IS_POMODORO = "create_timer_dialog.extra.is_pomodoro"
+
+        fun showDialog(activity: AppCompatActivity,
+                       isPomodoro: Boolean,
+                       isLargeScreen: Boolean = true) {
+            val createTimerDialog = CreateTimerDialog()
+
+            val bundle = Bundle()
+            bundle.putBoolean(IS_POMODORO, isPomodoro)
+            createTimerDialog.arguments = bundle
+
             if (isLargeScreen) {
                 // The device is using a large layout, so show the fragment as a dialog
-                newFragment.show(activity.supportFragmentManager, TAG)
+                createTimerDialog.show(activity.supportFragmentManager, TAG)
             } else {
                 // The device is smaller, so show the fragment fullscreen
                 activity.supportFragmentManager.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .add(android.R.id.content, newFragment)
+                        .add(android.R.id.content, createTimerDialog)
                         .addToBackStack(null)
                         .commit()
             }

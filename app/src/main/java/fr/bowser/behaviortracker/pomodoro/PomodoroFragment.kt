@@ -14,9 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.choosepomodorotimer.ChoosePomodoroTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
@@ -165,6 +167,21 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         val fragmentManager = activity!!.supportFragmentManager
         val pomodoroDialogSession = PomodoroSessionDialog.newInstance()
         pomodoroDialogSession.show(fragmentManager, PomodoroSessionDialog.TAG)
+    }
+
+    override fun displayNoTimerAvailable() {
+        Snackbar.make(
+                emptyContent,
+                getString(R.string.pomodoro_no_timer_available),
+                Snackbar.LENGTH_SHORT)
+                .setAction(context!!.resources.getString(R.string.pomodoro_create_timer)) {
+                    presenter.onClickCreateTimer()
+                }
+                .show()
+    }
+
+    override fun displayCreateTimer() {
+        CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
     }
 
     private fun setupGraph() {
