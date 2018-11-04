@@ -2,8 +2,8 @@ package fr.bowser.behaviortracker.showmode
 
 import fr.bowser.behaviortracker.timer.TimerListManager
 
-class ShowModePresenter(val view: ShowModeContract.View, val timerListManager: TimerListManager)
-    : ShowModeContract.Presenter {
+class ShowModePresenter(val view: ShowModeContract.View,
+                        val timerListManager: TimerListManager) : ShowModeContract.Presenter {
 
     private var keepScreeOn = false
 
