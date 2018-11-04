@@ -25,6 +25,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     override var currentSessionDuration = 0L
 
+    override var isPendingState = false
+
     private var actionTimer: Timer? = null
 
     private var actionDuration = 0L
@@ -61,6 +63,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         if (!isStarted) {
             return
         }
+        isPendingState = false
         isRunning = true
         timeManager.startTimer(currentTimer!!)
     }
@@ -79,6 +82,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         }
         timeManager.stopTimer(currentTimer!!)
         isStarted = false
+        isPendingState = false
         isRunning = false
         actionTimer = null
         currentTimer = null
@@ -133,6 +137,8 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
                 if (settingManager.isPomodoroVibrationEnable()) {
                     vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
                 }
+
+                isPendingState = true
 
                 listeners.forEach { it.onCountFinished(currentTimer!!, pomodoroTime) }
             }

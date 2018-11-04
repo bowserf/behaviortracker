@@ -33,6 +33,19 @@ class PomodoroPresenterTest {
     }
 
     @Test
+    fun displayPomodoroDialogIfAStepIfFinishedAndUserGoBackToTheView(){
+        // Given
+        val presenter = PomodoroPresenter(screen, manager, listOf())
+        Mockito.`when`(manager.isPendingState).thenReturn(true)
+
+        // When
+        presenter.start()
+
+        // Then
+        Mockito.verify(screen).displayPomodoroDialog()
+    }
+
+    @Test
     fun onClickFabDisplayChoosePomodoroTimer(){
         // Given
         val timer = Timer("name", ColorUtils.COLOR_AMBER, false, 0)

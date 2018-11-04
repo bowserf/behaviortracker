@@ -18,6 +18,10 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
                     pomodoroManager.currentSessionDuration)
         }
 
+        if(pomodoroManager.isPendingState){
+            screen.displayPomodoroDialog()
+        }
+
         updateFabIcon()
     }
 
