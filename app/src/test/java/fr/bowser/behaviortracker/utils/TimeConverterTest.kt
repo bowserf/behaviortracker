@@ -1,6 +1,5 @@
-package fr.bowser.behaviortracker
+package fr.bowser.behaviortracker.utils
 
-import fr.bowser.behaviortracker.utils.TimeConverter
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito.`when`
