@@ -100,4 +100,16 @@ class PomodoroPresenterTest {
         Mockito.verify(screen).displayEmptyView()
     }
 
+    @Test
+    fun onClickCreateTimerDisplayDialog(){
+        // Given
+        val presenter = PomodoroPresenter(screen, manager, listOf())
+
+        // When
+        presenter.onClickCreateTimer()
+
+        // Then
+        Mockito.verify(screen).displayCreateTimer()
+    }
+
 }
