@@ -23,7 +23,7 @@ class TimerNotificationManagerImpl(private val context: Context,
                                    timeManager: TimeManager,
                                    timerListManager: TimerListManager,
                                    private val pomodoroManager: PomodoroManager)
-    : TimerNotificationManager, TimeManager.Listener, TimerListManager.Listener {
+    : TimerNotificationManager {
 
     private val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -36,6 +36,10 @@ class TimerNotificationManagerImpl(private val context: Context,
 
     private val pomodoroListener = createPomodoroListener()
 
+    private val timeManagerListener = createTimeManagerListener()
+
+    private val timerListManagerListener = createTimerListManagerListener()
+
     override var timer: Timer? = null
 
     init {
@@ -43,8 +47,8 @@ class TimerNotificationManagerImpl(private val context: Context,
             generateNotificationChannel(context.resources)
         }
 
-        timeManager.addListener(this)
-        timerListManager.addListener(this)
+        timeManager.addListener(timeManagerListener)
+        timerListManager.addListener(timerListManagerListener)
 
         pomodoroManager.addListener(pomodoroListener)
     }
@@ -73,39 +77,6 @@ class TimerNotificationManagerImpl(private val context: Context,
         }
 
         notificationManager.cancel(TIMER_NOTIFICATION_ID)
-    }
-
-    override fun onTimerStateChanged(updatedTimer: Timer) {
-        if (updatedTimer.isActivate) {
-            displayTimerNotif(updatedTimer)
-        } else {
-            pauseTimerNotif(updatedTimer)
-        }
-    }
-
-    override fun onTimerTimeChanged(updatedTimer: Timer) {
-        if (timer == updatedTimer) {
-            updateTimeNotif()
-        }
-    }
-
-    override fun onTimerRemoved(removedTimer: Timer) {
-        if (timer == removedTimer) {
-            dismissNotification()
-        }
-    }
-
-    override fun onTimerAdded(updatedTimer: Timer) {
-        // if timer is directly activate, display it in the notification
-        if (updatedTimer.isActivate) {
-            displayTimerNotif(updatedTimer)
-        }
-    }
-
-    override fun onTimerRenamed(updatedTimer: Timer) {
-        if (timer == updatedTimer) {
-            renameTimerNotif(updatedTimer)
-        }
     }
 
     private fun displayTimerNotif(modifiedTimer: Timer) {
@@ -237,6 +208,58 @@ class TimerNotificationManagerImpl(private val context: Context,
         }
     }
 
+    private fun createTimerListManagerListener(): TimerListManager.Listener {
+        return object:TimerListManager.Listener{
+            override fun onTimerRemoved(removedTimer: Timer) {
+                if (timer == removedTimer) {
+                    dismissNotification()
+                }
+            }
+
+            override fun onTimerAdded(updatedTimer: Timer) {
+                if(pomodoroManager.isStarted){
+                    return
+                }
+                // if timer is directly activate, display it in the notification
+                if (updatedTimer.isActivate) {
+                    displayTimerNotif(updatedTimer)
+                }
+            }
+
+            override fun onTimerRenamed(updatedTimer: Timer) {
+                if (timer == updatedTimer) {
+                    renameTimerNotif(updatedTimer)
+                }
+            }
+        }
+    }
+
+    private fun createTimeManagerListener(): TimeManager.Listener {
+        return object:TimeManager.Listener{
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                if(pomodoroManager.isStarted){
+                    return
+                }
+
+                if (updatedTimer.isActivate) {
+                    displayTimerNotif(updatedTimer)
+                } else {
+                    pauseTimerNotif(updatedTimer)
+                }
+            }
+
+            override fun onTimerTimeChanged(updatedTimer: Timer) {
+                if(pomodoroManager.isStarted){
+                    return
+                }
+
+                if (timer == updatedTimer) {
+                    updateTimeNotif()
+                }
+            }
+        }
+    }
+
     private fun createPomodoroListener(): PomodoroManager.Listener{
         return object : PomodoroManager.Listener{
 
@@ -245,15 +268,21 @@ class TimerNotificationManagerImpl(private val context: Context,
             }
 
             override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
-                // nothing to do
+                displayTimerNotif(newTimer)
             }
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                // nothing to do
+                if (updatedTimer.isActivate) {
+                    displayTimerNotif(updatedTimer)
+                } else {
+                    pauseTimerNotif(updatedTimer)
+                }
             }
 
-            override fun updateTime(timer: Timer, currentTime: Long) {
-                // nothing to do
+            override fun updateTime(updatedTimer: Timer, currentTime: Long) {
+                if (timer == updatedTimer) {
+                    updateTimeNotif()
+                }
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {
