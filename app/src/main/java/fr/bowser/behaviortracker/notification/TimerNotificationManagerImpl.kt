@@ -129,7 +129,7 @@ class TimerNotificationManagerImpl(private val context: Context,
 
         timerNotificationBuilder!!.let {
             it.setOngoing(isAppInBackground)
-
+            it.setContentTitle(getNotificationTitle(modifiedTimer))
             it.mActions?.clear()
             it.addAction(R.drawable.ic_pause,
                     context.resources.getString(R.string.timer_notif_pause),
