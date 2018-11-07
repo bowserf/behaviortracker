@@ -184,6 +184,16 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
     }
 
+    override fun dismissPomodoroDialog() {
+        val fragmentManager = activity!!.supportFragmentManager
+        val fragment = fragmentManager.findFragmentByTag(PomodoroSessionDialog.TAG)
+        if(fragment != null){
+            val transaction = fragmentManager.beginTransaction()
+            transaction.remove(fragment)
+            transaction.commit()
+        }
+    }
+
     private fun setupGraph() {
         val build = DaggerPomodoroComponent.builder()
                 .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))

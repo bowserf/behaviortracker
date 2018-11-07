@@ -20,7 +20,15 @@ class TimerReceiver : BroadcastReceiver() {
             ACTION_NOTIFICATION_DISMISS -> {
                 notificationDismiss(context!!)
             }
+            ACTION_CONTINUE_POMODORO -> {
+                continuePomodoro(context!!)
+            }
         }
+    }
+
+    private fun continuePomodoro(context: Context) {
+        val pomodoroManager = BehaviorTrackerApp.getAppComponent(context).providePomodoroManager()
+        pomodoroManager.resume()
     }
 
     private fun notificationDismiss(context: Context) {
@@ -50,6 +58,8 @@ class TimerReceiver : BroadcastReceiver() {
 
         private const val ACTION_PAUSE = "timer_receiver.action.pause"
 
+        private const val ACTION_CONTINUE_POMODORO = "timer_receiver.action.continue_pomodoro"
+
         private const val ACTION_NOTIFICATION_DISMISS = "timer_receiver.action.notification_dismiss"
 
         fun getPlayPendingIntent(context: Context): PendingIntent {
@@ -62,6 +72,10 @@ class TimerReceiver : BroadcastReceiver() {
 
         fun getDeletePendingIntent(context: Context): PendingIntent {
             return getPendingIntent(context, ACTION_NOTIFICATION_DISMISS)
+        }
+
+        fun getContinuePomodoroPendingIntent(context: Context): PendingIntent {
+            return getPendingIntent(context, ACTION_CONTINUE_POMODORO)
         }
 
         private fun getPendingIntent(context: Context, action: String): PendingIntent {

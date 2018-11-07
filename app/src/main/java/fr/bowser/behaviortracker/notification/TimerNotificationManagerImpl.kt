@@ -42,6 +42,12 @@ class TimerNotificationManagerImpl(private val context: Context,
 
     override var timer: Timer? = null
 
+    private val pauseAction: NotificationCompat.Action
+
+    private val resumeAction: NotificationCompat.Action
+
+    private val continuePomodoroAction: NotificationCompat.Action
+
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             generateNotificationChannel(context.resources)
@@ -51,6 +57,24 @@ class TimerNotificationManagerImpl(private val context: Context,
         timerListManager.addListener(timerListManagerListener)
 
         pomodoroManager.addListener(pomodoroListener)
+
+        pauseAction = NotificationCompat.Action.Builder(
+                R.drawable.ic_pause,
+                context.resources.getString(R.string.timer_notif_pause),
+                TimerReceiver.getPausePendingIntent(context))
+                .build()
+
+        resumeAction = NotificationCompat.Action.Builder(
+                R.drawable.ic_play,
+                context.resources.getString(R.string.timer_notif_start),
+                TimerReceiver.getPlayPendingIntent(context))
+                .build()
+
+        continuePomodoroAction = NotificationCompat.Action.Builder(
+                R.drawable.ic_pomodoro,
+                context.resources.getString(R.string.timer_notif_continue_pomodoro),
+                TimerReceiver.getContinuePomodoroPendingIntent(context))
+                .build()
     }
 
     override fun changeOngoingState(isAppInBackground: Boolean) {
@@ -101,9 +125,7 @@ class TimerNotificationManagerImpl(private val context: Context,
                     .setSmallIcon(R.drawable.ic_timer)
                     .setContentIntent(resultPendingIntent)
                     .setDeleteIntent(TimerReceiver.getDeletePendingIntent(context))
-                    .addAction(R.drawable.ic_pause,
-                            context.resources.getString(R.string.timer_notif_pause),
-                            TimerReceiver.getPausePendingIntent(context))
+                    .addAction(pauseAction)
 
             notificationManager.notify(
                     TIMER_NOTIFICATION_ID,
@@ -131,9 +153,7 @@ class TimerNotificationManagerImpl(private val context: Context,
             it.setOngoing(isAppInBackground)
             it.setContentTitle(getNotificationTitle(modifiedTimer))
             it.mActions?.clear()
-            it.addAction(R.drawable.ic_pause,
-                    context.resources.getString(R.string.timer_notif_pause),
-                    TimerReceiver.getPausePendingIntent(context))
+            it.addAction(pauseAction)
 
             notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
@@ -149,9 +169,16 @@ class TimerNotificationManagerImpl(private val context: Context,
             it.setOngoing(false)
 
             it.mActions?.clear()
-            it.addAction(R.drawable.ic_play,
-                    context.resources.getString(R.string.timer_notif_start),
-                    TimerReceiver.getPlayPendingIntent(context))
+            it.addAction(resumeAction)
+
+            notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
+        }
+    }
+
+    private fun continuePomodoroNotif(){
+        timerNotificationBuilder!!.let {
+            it.mActions?.clear()
+            it.addAction(continuePomodoroAction)
 
             notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
@@ -286,7 +313,7 @@ class TimerNotificationManagerImpl(private val context: Context,
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {
-                // nothing to do
+                continuePomodoroNotif()
             }
         }
     }
