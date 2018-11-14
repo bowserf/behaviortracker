@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,13 +13,17 @@
 
         <TextView
             android:id="@+id/pomodoro_description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_1_5"
+            android:layout_marginTop="@dimen/default_space_1_5"
+            android:layout_marginRight="@dimen/default_space_1_5"
+            android:text="@string/pomodoro_description"
+            android:textSize="@dimen/text_size_xl"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pomodoro_default_image"
-            tools:text="Blablablablablabla" />
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_default_image" />
 
         <ImageView
             android:id="@+id/pomodoro_default_image"
@@ -55,7 +58,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/pomodoro_current_time"
@@ -76,8 +79,8 @@
             android:layout_marginTop="@dimen/default_space"
             android:layout_marginEnd="@dimen/default_space_1_5"
             android:ellipsize="end"
-            android:maxLines="2"
             android:gravity="center"
+            android:maxLines="2"
             android:textSize="@dimen/pomodoro_current_timer_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Fake Pause timer -->
     <string name="pomodoro_timer_pause">Pause</string>
+
+    <!-- Session dialog -->
     <string name="pomodoro_dialog_title">Le temps est écoulé</string>
     <string name="pomodoro_dialog_content">Voulez vous continuez la session ?</string>
     <string name="pomodoro_dialog_continue">Continuer</string>
     <string name="pomodoro_dialog_stop">Arrêter</string>
 
+    <!-- Snackbar when there is no timer -->
+    <string name="pomodoro_create_timer">Créer un chronomètre</string>
+    <string name="pomodoro_no_timer_available">Pas de chronomètre disponible pour démarrer une session.</string>
+
+    <!-- Empty view -->
+    <string name="pomodoro_description">1) Choisissez une tâche sur laquelle vous voulez vous concentrer.\n2) Démarrez une session.\n3) Prenez une pause quand le temps est écoulé.\n</string>
+
+    <!-- Menu -->
     <string name="menu_stop_pomodoro">Stop</string>
 
 </resources>

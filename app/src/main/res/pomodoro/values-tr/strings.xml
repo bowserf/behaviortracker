@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Fake Pause timer -->
     <string name="pomodoro_timer_pause">Durma</string>
+
+    <!-- Session dialog -->
+    <string name="pomodoro_dialog_title">Zaman doldu</string>
+    <string name="pomodoro_dialog_content">Seansa devam etmek istiyor musun?</string>
+    <string name="pomodoro_dialog_continue">Devam et</string>
+    <string name="pomodoro_dialog_stop">Durdurmak</string>
+
+    <!-- Snackbar when there is no timer -->
+    <string name="pomodoro_create_timer">Zamanlayıcı oluştur</string>
+    <string name="pomodoro_no_timer_available">Bir pomodoro oturumu başlatmak için kullanılabilir bir zamanlayıcı yoktur.</string>
+
+    <!-- Empty view -->
+    <string name="pomodoro_description">1) Odaklanmak istediğiniz görevi seçin.\n2) Bir oturum başlatın.\n3) Süre dolduğunda bir mola verin.</string>
+
+    <!-- Menu -->
+    <string name="menu_stop_pomodoro">Durdurmak</string>
 
 </resources>

@@ -7,7 +7,6 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -32,8 +31,6 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     lateinit var presenter: PomodoroPresenter
 
     private lateinit var emptyContent: View
-    private lateinit var defaultImage: ImageView
-    private lateinit var description: TextView
 
     private lateinit var pomodoroSessionContent: View
     private lateinit var currentTimeTv: TextView
@@ -57,8 +54,6 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         super.onViewCreated(view, savedInstanceState)
 
         emptyContent = view.findViewById(R.id.pomodoro_content_empty)
-        defaultImage = view.findViewById(R.id.pomodoro_default_image)
-        description = view.findViewById(R.id.pomodoro_description)
 
         pomodoroSessionContent = view.findViewById(R.id.pomodoro_content_session)
         progresssBar = view.findViewById(R.id.pomodoro_progress_bar)
