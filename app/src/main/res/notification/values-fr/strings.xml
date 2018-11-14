@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Channel -->
     <string name="timer_notif_channel_name">Chronomètre</string>
     <string name="timer_notif_channel_description">Affiche et contrôle le chronomètre actif.</string>
 
+    <!-- Actions -->
     <string name="timer_notif_start">Démarrer</string>
     <string name="timer_notif_pause">Pause</string>
+    <string name="timer_notif_continue_pomodoro">Continuer Pomodoro</string>
 
 </resources>

@@ -2,9 +2,12 @@
 <resources>
 
     <string name="alarm_timer_notif_channel_id" translatable="false">alarm_timer_notif_channel_id</string>
+
+    <!-- Channel -->
     <string name="alarm_timer_notif_channel_name">Alarm</string>
     <string name="alarm_timer_notif_channel_description">Remind you to start a timer to track your activities</string>
 
+    <!-- Notification -->
     <string name="alarm_timer_title">Track daily activities</string>
     <string name="alarm_timer_content">Start the day by tracking your first activity</string>
 
@@ -13,6 +16,7 @@
     <string name="alarm_timer_dialog_title">Reminder</string>
     <string name="alarm_timer_dialog_content">Remind you to track your activities.</string>
 
+    <!-- Toast -->
     <string name="alarm_timer_alarm_enabled">Alarm is activated</string>
     <string name="alarm_timer_alarm_disabled">Alarm is disabled</string>
 

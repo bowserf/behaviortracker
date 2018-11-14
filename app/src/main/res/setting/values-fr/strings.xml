@@ -17,6 +17,17 @@
     <string name="settings_cell_send_commentary_title">Envoyer une suggestion</string>
     <string name="settings_cell_send_commentary_message">Dites nous comment améliorer Time Tracker.</string>
 
+    <!-- Pomodoro -->
+    <string name="settings_category_pomodoro" translatable="false">Pomodoro</string>
+    <string name="settings_cell_pomodoro_vibration">Activer vibration</string>
+    <string name="settings_cell_pomodoro_vibration_message">L\'appareil vibre quand le temps s\'est écoulé.</string>
+
+    <string name="settings_cell_pomodoro_stage_title">Durée d\'une session</string>
+    <string name="settings_cell_pomodoro_stage_message">Durée du chronomètre durant une session.</string>
+
+    <string name="settings_cell_pomodoro_pause_stage_title">Durée de la pause</string>
+    <string name="settings_cell_pomodoro_pause_stage_message">Durée de la pause durant une session.</string>
+
     <!-- Send email -->
     <string name="settings_send_email_choose_app">Envoyer un mail :</string>
     <string name="settings_send_email_no_application_available">Aucune application disponible pour envoyer un mail.</string>

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Channel -->
+    <string name="alarm_timer_notif_channel_name">Alarm</string>
     <string name="alarm_timer_notif_channel_description">Aktiviteleri izlemek için zamanlayıcı başlatmanızı hatırlatır</string>
+
+    <!-- Notification -->
     <string name="alarm_timer_title">Günlük aktiviteleri izle</string>
     <string name="alarm_timer_content">Güne ilk aktiviteni izleyerek başla</string>
+
+    <!-- Alarm dialog -->
     <string name="alarm_timer_status">Alarm Etkinleştir</string>
     <string name="alarm_timer_dialog_title">Hatırlatıcı</string>
     <string name="alarm_timer_dialog_content">Aktivitelerinizi izlemeniz için hatırlatır.</string>
+
+    <!-- Toast -->
     <string name="alarm_timer_alarm_enabled">Alarm aktive edildi</string>
     <string name="alarm_timer_alarm_disabled">Alarm devredışı bırakıldı</string>
 

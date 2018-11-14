@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Timer row view menu -->
     <string name="item_timer_reset">Sıfırla</string>
     <string name="item_timer_remove">Kaldır</string>
     <string name="item_timer_rename">Yeniden adlandır</string>
+    <string name="item_start_pomodoro">Pomodoro\'yu başlat</string>
+
     <string name="item_timer_remove_message">Bu zamanlayıcıyı kaldırmak istediğinizden emin misiniz ?</string>
+
+    <!-- Rename timer dialog -->
     <string name="timer_row_rename">Zamanlayıcıyı yeniden adlandır</string>
 
 </resources>

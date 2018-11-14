@@ -33,7 +33,7 @@
     <!-- Pomodoro -->
     <string name="settings_category_pomodoro" translatable="false">Pomodoro</string>
     <string name="settings_cell_pomodoro_vibration">Enable vibration</string>
-    <string name="settings_cell_pomodoro_vibration_message">Device vibrates when a pomodoro stage is finished.</string>
+    <string name="settings_cell_pomodoro_vibration_message">Device vibrates when time is up.</string>
 
     <string name="settings_cell_pomodoro_stage_title">Pomodoro stage duration</string>
     <string name="settings_cell_pomodoro_stage_message">Duration of the timer during a pomodoro session.</string>
