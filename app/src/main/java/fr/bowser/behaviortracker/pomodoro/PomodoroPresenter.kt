@@ -92,11 +92,11 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
             }
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                // nothing to do
+                updateFabIcon()
             }
 
             override fun updateTime(timer: Timer, currentTime: Long) {
-                if(isDialogDisplayed){
+                if (isDialogDisplayed) {
                     screen.dismissPomodoroDialog()
                     isDialogDisplayed = false
                 }

@@ -105,6 +105,7 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {
+                    isRunning = updatedTimer.isActivate
                     listeners.forEach { it.onTimerStateChanged(updatedTimer) }
                 }
             }
