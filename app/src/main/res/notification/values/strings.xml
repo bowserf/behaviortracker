@@ -12,4 +12,7 @@
     <string name="timer_notif_pause">Pause</string>
     <string name="timer_notif_continue_pomodoro">Continue pomodoro</string>
 
+    <!-- Pomodoro -->
+    <string name="timer_notif_pomodoro_session_end">Time is up</string>
+
 </resources>

@@ -179,6 +179,7 @@ class TimerNotificationManagerImpl(private val context: Context,
         timerNotificationBuilder!!.let {
             it.mActions?.clear()
             it.addAction(continuePomodoroAction)
+            it.setContentText(context.getString(R.string.timer_notif_pomodoro_session_end))
 
             notificationManager.notify(TIMER_NOTIFICATION_ID, it.build())
         }
