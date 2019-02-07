@@ -1,7 +1,8 @@
 package fr.bowser.behaviortracker.timer
 
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.newFixedThreadPoolContext
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newFixedThreadPoolContext
 
 
 class TimerListManagerImpl(private val timerDAO: TimerDAO,
@@ -14,7 +15,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
     private val listeners = ArrayList<TimerListManager.Listener>()
 
     init {
-        launch(background) {
+        GlobalScope.launch(background) {
             timers.addAll(timerDAO.getTimers())
         }
     }
@@ -28,7 +29,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
             listener.onTimerAdded(timer)
         }
 
-        launch(background) {
+        GlobalScope.launch(background) {
             timer.id = timerDAO.addTimer(timer)
         }
     }
@@ -41,7 +42,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
             listener.onTimerRemoved(oldTimer)
         }
 
-        launch(background) {
+        GlobalScope.launch(background) {
             timerDAO.removeTimer(oldTimer)
 
             timers.sortBy { timer -> timer.position }
@@ -57,7 +58,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
 
         timers.sortBy { timer -> timer.position }
 
-        launch(background) {
+        GlobalScope.launch(background) {
             for (timer in timerList) {
                 timerDAO.updateTimerPosition(timer.id, timer.position)
             }
@@ -70,7 +71,7 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
 
     override fun renameTimer(timer: Timer, newName: String) {
         timer.name = newName
-        launch(background) {
+        GlobalScope.launch(background) {
             timerDAO.renameTimer(timer.id, newName)
         }
 
