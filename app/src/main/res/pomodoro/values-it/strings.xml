@@ -12,7 +12,7 @@
 
     <!-- Snackbar when there is no timer -->
     <string name="pomodoro_create_timer">Crea timer</string>
-    <string name="pomodoro_no_timer_available">Non è disponibile un timer per avviare una sessione.</string>
+    <string name="pomodoro_no_timer_available">Non è disponibile un timer.</string>
 
     <!-- Empty view -->
     <string name="pomodoro_description">1) Scegli un\'attività su cui vuoi focalizzare.\n2) Avvia una sessione.\n3) Fai una pausa quando il tempo è scaduto.</string>

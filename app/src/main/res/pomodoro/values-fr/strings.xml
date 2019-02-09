@@ -12,7 +12,7 @@
 
     <!-- Snackbar when there is no timer -->
     <string name="pomodoro_create_timer">Créer un chronomètre</string>
-    <string name="pomodoro_no_timer_available">Pas de chronomètre disponible pour démarrer une session.</string>
+    <string name="pomodoro_no_timer_available">Pas de chronomètre disponible.</string>
 
     <!-- Empty view -->
     <string name="pomodoro_description">1) Choisissez une tâche sur laquelle vous voulez vous concentrer.\n2) Démarrez une session.\n3) Prenez une pause quand le temps est écoulé.\n</string>

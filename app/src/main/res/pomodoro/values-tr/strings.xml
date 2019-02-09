@@ -12,7 +12,7 @@
 
     <!-- Snackbar when there is no timer -->
     <string name="pomodoro_create_timer">Zamanlayıcı oluştur</string>
-    <string name="pomodoro_no_timer_available">Bir pomodoro oturumu başlatmak için kullanılabilir bir zamanlayıcı yoktur.</string>
+    <string name="pomodoro_no_timer_available">Kullanılabilir bir zamanlayıcı yoktur.</string>
 
     <!-- Empty view -->
     <string name="pomodoro_description">1) Odaklanmak istediğiniz görevi seçin.\n2) Bir oturum başlatın.\n3) Süre dolduğunda bir mola verin.</string>
