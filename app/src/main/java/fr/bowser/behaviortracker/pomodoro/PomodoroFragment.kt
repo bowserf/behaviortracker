@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -7,8 +8,10 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
 import android.view.*
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,6 +23,7 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timerlist.TimerFragment
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
@@ -139,6 +143,8 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         pomodoroSessionContent.visibility = View.GONE
 
         activity!!.invalidateOptionsMenu()
+
+        startFabAnimation()
     }
 
     override fun displayPauseIcon() {
@@ -189,6 +195,25 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         }
     }
 
+    private fun startFabAnimation() {
+        val fabAnimator = ObjectAnimator.ofFloat(this, PROPERTY_FAB_ANIMATION, 1f, 1.15f, 1f)
+        fabAnimator.duration = FAB_ANIMATION_DURATION
+        fabAnimator.repeatCount = 1
+        fabAnimator.interpolator = AccelerateDecelerateInterpolator()
+        fabAnimator.startDelay = FAB_ANIMATION_DELAY
+        fabAnimator.start()
+    }
+
+    /**
+     * Setter used by {@link #fabAnimator}
+     */
+    @Keep
+    @SuppressWarnings("unused")
+    private fun setFabScale(scale: Float) {
+        fab.scaleX = scale
+        fab.scaleY = scale
+    }
+
     private fun setupGraph() {
         val build = DaggerPomodoroComponent.builder()
                 .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
@@ -199,6 +224,11 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     companion object {
         const val TAG = "PomodoroFragment"
+
+        private const val PROPERTY_FAB_ANIMATION = "fabScale"
+
+        private const val FAB_ANIMATION_DURATION = 1000L
+        private const val FAB_ANIMATION_DELAY = 400L
 
         const val PROGRESS_BAR_BACKGROUND_ALPHA = 100
     }
