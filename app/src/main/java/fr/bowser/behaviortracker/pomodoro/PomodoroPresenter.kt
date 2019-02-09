@@ -18,6 +18,8 @@ class PomodoroPresenter(private val screen: PomodoroContract.Screen,
                     pomodoroManager.currentTimer!!,
                     pomodoroManager.pomodoroTime,
                     pomodoroManager.currentSessionDuration)
+        } else {
+            screen.displayEmptyView()
         }
 
         if (pomodoroManager.isPendingState) {

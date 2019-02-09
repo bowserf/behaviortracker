@@ -33,6 +33,18 @@ class PomodoroPresenterTest {
     }
 
     @Test
+    fun displayEmptyViewWhenStartAndNoSessionIsActivte(){
+        // Given
+        val presenter = PomodoroPresenter(screen, manager, listOf())
+
+        // When
+        presenter.start()
+
+        // Then
+        Mockito.verify(screen).displayEmptyView()
+    }
+
+    @Test
     fun displayPomodoroDialogIfAStepIfFinishedAndUserGoBackToTheView(){
         // Given
         val presenter = PomodoroPresenter(screen, manager, listOf())
