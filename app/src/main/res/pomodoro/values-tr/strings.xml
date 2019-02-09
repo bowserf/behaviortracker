@@ -15,7 +15,9 @@
     <string name="pomodoro_no_timer_available">Kullanılabilir bir zamanlayıcı yoktur.</string>
 
     <!-- Empty view -->
-    <string name="pomodoro_description">1) Odaklanmak istediğiniz görevi seçin.\n2) Bir oturum başlatın.\n3) Süre dolduğunda bir mola verin.</string>
+    <string name="pomodoro_choose_task">Odaklanmak istediğiniz görevi seçin.</string>
+    <string name="pomodoro_start_session">Bir oturum başlatın.</string>
+    <string name="pomodoro_take_a_rest">Süre dolduğunda bir mola verin.</string>
 
     <!-- Menu -->
     <string name="menu_stop_pomodoro">Durdurmak</string>

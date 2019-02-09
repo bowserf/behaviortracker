@@ -24,6 +24,7 @@
             android:layout_marginRight="@dimen/default_space_2"
             android:layout_marginTop="@dimen/default_space"
             android:checked="true"
+            android:textColor="#E22C2A"
             android:switchPadding="@dimen/default_space_1_5"
             android:text="@string/alarm_timer_status" />
 

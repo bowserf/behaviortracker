@@ -15,7 +15,9 @@
     <string name="pomodoro_no_timer_available">Non è disponibile un timer.</string>
 
     <!-- Empty view -->
-    <string name="pomodoro_description">1) Scegli un\'attività su cui vuoi focalizzare.\n2) Avvia una sessione.\n3) Fai una pausa quando il tempo è scaduto.</string>
+    <string name="pomodoro_choose_task">Scegli un\'attività su cui vuoi focalizzare.</string>
+    <string name="pomodoro_start_session">Avvia una session.</string>
+    <string name="pomodoro_take_a_rest">Fai una pausa quando il tempo è scaduto.</string>
 
     <!-- Menu -->
     <string name="menu_stop_pomodoro">Stop</string>

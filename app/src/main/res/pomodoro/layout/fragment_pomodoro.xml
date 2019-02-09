@@ -9,33 +9,79 @@
         android:id="@+id/pomodoro_content_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:visibility="gone">
+        android:padding="@dimen/pomodoro_empty_view_padding"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/pomodoro_choose_task"
+            android:layout_width="@dimen/pomodoro_icon_size"
+            android:layout_height="@dimen/pomodoro_icon_size"
+            android:layout_marginBottom="@dimen/default_space_3"
+            android:src="@drawable/ic_pomodoro_choose_timer"
+            app:layout_constraintBottom_toTopOf="@id/pomodoro_start_session"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/pomodoro_desc_choose_task"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/pomodoro_description"
+            android:id="@+id/pomodoro_desc_choose_task"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_1_5"
-            android:layout_marginTop="@dimen/default_space_1_5"
-            android:layout_marginRight="@dimen/default_space_1_5"
-            android:text="@string/pomodoro_description"
+            android:text="@string/pomodoro_choose_task"
             android:textSize="@dimen/text_size_xl"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/pomodoro_choose_task"
+            app:layout_constraintLeft_toRightOf="@id/pomodoro_choose_task"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pomodoro_default_image" />
+            app:layout_constraintTop_toTopOf="@id/pomodoro_choose_task" />
 
         <ImageView
-            android:id="@+id/pomodoro_default_image"
+            android:id="@+id/pomodoro_start_session"
             android:layout_width="@dimen/pomodoro_icon_size"
             android:layout_height="@dimen/pomodoro_icon_size"
-            android:src="@drawable/ic_pomodoro"
-            android:tint="#8A000000"
-            app:layout_constraintBottom_toTopOf="@id/pomodoro_description"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="@dimen/default_space_3"
+            android:src="@drawable/ic_pomodoro_start_session"
+            app:layout_constraintBottom_toTopOf="@id/pomodoro_take_a_rest"
+            app:layout_constraintLeft_toLeftOf="@id/pomodoro_choose_task"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_choose_task" />
+
+        <TextView
+            android:id="@+id/pomodoro_desc_start_session"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_1_5"
+            android:text="@string/pomodoro_start_session"
+            android:textSize="@dimen/text_size_xl"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/pomodoro_start_session"
+            app:layout_constraintLeft_toRightOf="@id/pomodoro_start_session"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toTopOf="@id/pomodoro_start_session" />
+
+        <ImageView
+            android:id="@+id/pomodoro_take_a_rest"
+            android:layout_width="@dimen/pomodoro_icon_size"
+            android:layout_height="@dimen/pomodoro_icon_size"
+            android:src="@drawable/ic_pomodoro_take_a_rest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/pomodoro_choose_task"
+            app:layout_constraintRight_toLeftOf="@id/pomodoro_desc_take_a_rest"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_start_session" />
+
+        <TextView
+            android:id="@+id/pomodoro_desc_take_a_rest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_1_5"
+            android:text="@string/pomodoro_take_a_rest"
+            android:textSize="@dimen/text_size_xl"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/pomodoro_take_a_rest"
+            app:layout_constraintLeft_toRightOf="@id/pomodoro_take_a_rest"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/pomodoro_take_a_rest" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -44,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ProgressBar
             android:id="@+id/pomodoro_progress_bar"
@@ -98,7 +144,7 @@
         android:layout_marginRight="@dimen/default_space_2"
         android:layout_marginBottom="@dimen/default_space_2"
         android:elevation="@dimen/default_space"
-        android:src="@drawable/ic_add"
-        app:fabSize="normal" />
+        app:fabSize="normal"
+        tools:src="@drawable/ic_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

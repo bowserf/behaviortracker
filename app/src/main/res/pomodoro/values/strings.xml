@@ -17,7 +17,9 @@
     <string name="pomodoro_no_timer_available">There is no available timers.</string>
 
     <!-- Empty view -->
-    <string name="pomodoro_description">1) Choose a task on which you want to be focused.\n2) Start a session.\n3) Take a break when time is up.</string>
+    <string name="pomodoro_choose_task">Choose a task on which you want to focus on.</string>
+    <string name="pomodoro_start_session">Start a session.</string>
+    <string name="pomodoro_take_a_rest">Take a break when time is up.</string>
 
     <!-- Menu -->
     <string name="menu_stop_pomodoro">Stop</string>

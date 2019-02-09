@@ -15,7 +15,9 @@
     <string name="pomodoro_no_timer_available">Pas de chronomètre disponible.</string>
 
     <!-- Empty view -->
-    <string name="pomodoro_description">1) Choisissez une tâche sur laquelle vous voulez vous concentrer.\n2) Démarrez une session.\n3) Prenez une pause quand le temps est écoulé.\n</string>
+    <string name="pomodoro_choose_task">Choisissez une tâche sur laquelle vous voulez vous concentrer.</string>
+    <string name="pomodoro_start_session">Démarrez une session.</string>
+    <string name="pomodoro_take_a_rest">Prenez une pause quand le temps est écoulé.</string>
 
     <!-- Menu -->
     <string name="menu_stop_pomodoro">Stop</string>
