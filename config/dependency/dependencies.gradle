@@ -1,15 +1,15 @@
 def dagger2Version = "2.14.1"
-def architectureComponentVersion = "2.0.0-rc01"
-def firebaseVersion = "11.8.0"
+def architectureComponentVersion = "2.1.0-alpha06"
+def firebaseVersion = "16.0.8"
 
 rootProject.ext.dependencies = [
 
         // Support library
-        supportDesign                       : "com.google.android.material:material:1.0.0-rc02",
-        supportConstraint                   : "androidx.constraintlayout:constraintlayout:2.0.0-alpha2",
-        supportCardView                     : "androidx.cardview:cardview:1.0.0-rc02",
-        supportRecyclerView                 : "androidx.recyclerview:recyclerview:1.0.0-rc02",
-        supportAnnotation                   : "androidx.annotation:annotation:1.0.0-rc02",
+        supportDesign                       : "com.google.android.material:material:1.0.0",
+        supportConstraint                   : "androidx.constraintlayout:constraintlayout:2.0.0-alpha4",
+        supportCardView                     : "androidx.cardview:cardview:1.0.0",
+        supportRecyclerView                 : "androidx.recyclerview:recyclerview:1.0.0",
+        supportAnnotation                   : "androidx.annotation:annotation:1.0.2",
 
         // Architecture component
         room                                : "androidx.room:room-runtime:$architectureComponentVersion",
