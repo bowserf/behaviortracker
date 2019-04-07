@@ -14,6 +14,8 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
 
     private lateinit var timerModificationText: TextView
 
+    private var timeUnit: String? = null
+
     init {
         dialogLayoutResource = R.layout.preference_dialog_time_modification
     }
@@ -24,7 +26,7 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
         timerModificationText = view.findViewById(R.id.tv_time_modification)
 
         slider = view.findViewById(R.id.slider_time_modification)
-        slider.setOnSeekBarChangeListener(CustomSeekBarChangeListener())
+        slider.setOnSeekBarChangeListener(createOnSeekBarChangeListener())
         slider.max = MAX_DURATION - MIN_VALUE_TIME
 
         return view
@@ -36,12 +38,16 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
         val timerModification = getPersistedInt(getDefaultValue()) - MIN_VALUE_TIME
 
         slider.progress = timerModification
-        timerModificationText.text = convertTime(timerModification).toString()
+        timerModificationText.text = computeText(timerModification)
     }
 
-    private fun getDefaultValue():Int{
+    fun setTimeUnit(timeUnit: String) {
+        this.timeUnit = timeUnit
+    }
+
+    private fun getDefaultValue(): Int {
         val resources = context.resources
-        return when(key){
+        return when (key) {
             resources.getString(R.string.pref_key_time_modification) -> {
                 resources.getInteger(R.integer.settings_default_value_time_modification)
             }
@@ -51,7 +57,9 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
             resources.getString(R.string.pref_key_pomodoro_pause_stage) -> {
                 resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage)
             }
-            else -> { throw IllegalStateException("Unknown preference key : $key") }
+            else -> {
+                throw IllegalStateException("Unknown preference key : $key")
+            }
         }
     }
 
@@ -68,18 +76,28 @@ class TimeModificationSettings(context: Context, attrs: AttributeSet) : DialogPr
         return MIN_VALUE_TIME + progress
     }
 
-    private inner class CustomSeekBarChangeListener : SeekBar.OnSeekBarChangeListener {
-
-        override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-            timerModificationText.text = convertTime(progress).toString()
+    private fun computeText(progress: Int): String {
+        val time = convertTime(progress)
+        if (timeUnit != null) {
+            return time.toString() + timeUnit
         }
+        return time.toString()
+    }
 
-        override fun onStartTrackingTouch(seekBar: SeekBar) {
-            // nothing to do
-        }
+    private fun createOnSeekBarChangeListener(): SeekBar.OnSeekBarChangeListener {
+        return object : SeekBar.OnSeekBarChangeListener {
 
-        override fun onStopTrackingTouch(seekBar: SeekBar) {
-            // nothing to do
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                timerModificationText.text = computeText(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // nothing to do
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // nothing to do
+            }
         }
     }
 

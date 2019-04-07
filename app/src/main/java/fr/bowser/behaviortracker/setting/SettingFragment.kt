@@ -5,8 +5,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.preference.Preference
 import android.preference.PreferenceFragment
-import androidx.annotation.StringRes
 import android.widget.Toast
+import androidx.annotation.StringRes
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
@@ -26,6 +26,15 @@ class SettingFragment : PreferenceFragment() {
         setupGraph()
 
         presenter.start()
+
+        val timeModificator = findPreference(R.string.pref_key_time_modification) as TimeModificationSettings
+        timeModificator.setTimeUnit(TIME_MODIFICATION_UNIT)
+
+        val pomodoroStage = findPreference(R.string.pref_key_pomodoro_stage) as TimeModificationSettings
+        pomodoroStage.setTimeUnit(DURATION_STAGE_UNIT)
+
+        val pomodoroPauseStage = findPreference(R.string.pref_key_pomodoro_pause_stage) as TimeModificationSettings
+        pomodoroPauseStage.setTimeUnit(DURATION_STAGE_UNIT)
 
         sendCommentary = findPreference(R.string.pref_key_send_commentary)
         sendCommentary.onPreferenceClickListener = onPreferenceClickListener
@@ -77,6 +86,8 @@ class SettingFragment : PreferenceFragment() {
 
     companion object {
         const val SUPPORT_EMAIL = "torcheux.frederic@gmail.com"
+        const val TIME_MODIFICATION_UNIT = "s"
+        const val DURATION_STAGE_UNIT = "min"
     }
 
 }
