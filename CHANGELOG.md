@@ -1,3 +1,11 @@
+### Time Tracker v0.6.0
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2019-04-09
+* Change log:
+    - Add Pomodoro feature
+
+
+
 ### Op'Time v0.5.1
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2018-09-23
