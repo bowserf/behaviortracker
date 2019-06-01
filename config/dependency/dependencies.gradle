@@ -6,10 +6,12 @@ rootProject.ext.dependencies = [
 
         // Support library
         supportDesign                       : "com.google.android.material:material:1.0.0",
-        supportConstraint                   : "androidx.constraintlayout:constraintlayout:2.0.0-alpha4",
-        supportCardView                     : "androidx.cardview:cardview:1.0.0",
-        supportRecyclerView                 : "androidx.recyclerview:recyclerview:1.0.0",
-        supportAnnotation                   : "androidx.annotation:annotation:1.0.2",
+        androidXConstraint                  : "androidx.constraintlayout:constraintlayout:2.0.0-alpha4",
+        androidXCardView                    : "androidx.cardview:cardview:1.0.0",
+        androidXRecyclerView                : "androidx.recyclerview:recyclerview:1.0.0",
+        androidXAnnotation                  : "androidx.annotation:annotation:1.0.2",
+        androidXViewPager2                  : "androidx.viewpager2:viewpager2:1.0.0-alpha04",
+
 
         // Architecture component
         room                                : "androidx.room:room-runtime:$architectureComponentVersion",

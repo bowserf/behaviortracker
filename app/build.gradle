@@ -116,12 +116,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
 
-    // Support library
+    // AndroidX library
     implementation rootProject.ext.dependencies.supportDesign
-    implementation rootProject.ext.dependencies.supportConstraint
-    implementation rootProject.ext.dependencies.supportCardView
-    implementation rootProject.ext.dependencies.supportRecyclerView
-    implementation rootProject.ext.dependencies.supportAnnotation
+    implementation rootProject.ext.dependencies.androidXConstraint
+    implementation rootProject.ext.dependencies.androidXCardView
+    implementation rootProject.ext.dependencies.androidXRecyclerView
+    implementation rootProject.ext.dependencies.androidXAnnotation
+    implementation rootProject.ext.dependencies.androidXViewPager2
 
     // Billing
     implementation 'com.android.billingclient:billing:1.1'

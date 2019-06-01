@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class ShowModeActivity : AppCompatActivity(), ShowModeContract.View {
 
     private lateinit var adapter: ShowModeAdapter
-    private lateinit var viewPager: ViewPager
+    private lateinit var viewPager: ViewPager2
 
     @Inject
     lateinit var presenter: ShowModePresenter
