@@ -54,7 +54,7 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
         }
 
         val dialogWidth = resources.getDimensionPixelOffset(R.dimen.create_dialog_width)
-        dialog.window.setLayout(dialogWidth, WRAP_CONTENT)
+        dialog!!.window.setLayout(dialogWidth, WRAP_CONTENT)
     }
 
     private fun setupGraph() {
