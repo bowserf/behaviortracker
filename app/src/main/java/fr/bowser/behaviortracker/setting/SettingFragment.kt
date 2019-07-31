@@ -3,39 +3,47 @@ package fr.bowser.behaviortracker.setting
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.preference.Preference
-import android.preference.PreferenceFragment
 import android.widget.Toast
-import androidx.annotation.StringRes
+import androidx.fragment.app.DialogFragment
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
 
-class SettingFragment : PreferenceFragment() {
+
+class SettingFragment : PreferenceFragmentCompat() {
 
     @Inject
     lateinit var presenter: SettingPresenter
 
     private lateinit var sendCommentary: Preference
 
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.preference_list, rootKey)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addPreferencesFromResource(R.xml.preference_list)
 
         setupGraph()
 
         presenter.start()
 
-        val timeModificator = findPreference(R.string.pref_key_time_modification) as TimeModificationSettings
-        timeModificator.setTimeUnit(TIME_MODIFICATION_UNIT)
+        val keyTimeModification = resources.getString(R.string.pref_key_time_modification)
+        val timeModificator = findPreference<TimeModificationDialogPreference>(keyTimeModification)
+        timeModificator!!.setTimeUnit(TIME_MODIFICATION_UNIT)
 
-        val pomodoroStage = findPreference(R.string.pref_key_pomodoro_stage) as TimeModificationSettings
-        pomodoroStage.setTimeUnit(DURATION_STAGE_UNIT)
+        val keyPomodoroStage = resources.getString(R.string.pref_key_pomodoro_stage)
+        val pomodoroStage = findPreference<TimeModificationDialogPreference>(keyPomodoroStage)
+        pomodoroStage!!.setTimeUnit(DURATION_STAGE_UNIT)
 
-        val pomodoroPauseStage = findPreference(R.string.pref_key_pomodoro_pause_stage) as TimeModificationSettings
-        pomodoroPauseStage.setTimeUnit(DURATION_STAGE_UNIT)
+        val keyPomodoroPauseStage = resources.getString(R.string.pref_key_pomodoro_pause_stage)
+        val pomodoroPauseStage = findPreference<TimeModificationDialogPreference>(keyPomodoroPauseStage)
+        pomodoroPauseStage!!.setTimeUnit(DURATION_STAGE_UNIT)
 
-        sendCommentary = findPreference(R.string.pref_key_send_commentary)
+        val key = getString(fr.bowser.behaviortracker.R.string.pref_key_send_commentary)
+        sendCommentary = findPreference(key)!!
         sendCommentary.onPreferenceClickListener = onPreferenceClickListener
     }
 
@@ -56,21 +64,31 @@ class SettingFragment : PreferenceFragment() {
         val intent = Intent(Intent.ACTION_SENDTO)
         intent.data = Uri.parse("mailto:$SUPPORT_EMAIL")
         intent.putExtra(Intent.EXTRA_SUBJECT,
-                resources.getString(R.string.settings_send_email_subject))
+                resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_subject))
         try {
             startActivity(Intent.createChooser(
                     intent,
-                    resources.getString(R.string.settings_send_email_choose_app)))
+                    resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_choose_app)))
         } catch (ex: android.content.ActivityNotFoundException) {
             Toast.makeText(activity!!,
-                    resources.getString(R.string.settings_send_email_no_application_available),
+                    resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_no_application_available),
                     Toast.LENGTH_SHORT)
                     .show()
         }
     }
 
-    private fun findPreference(@StringRes prefKey: Int): Preference {
-        return findPreference(resources.getString(prefKey))
+    override fun onDisplayPreferenceDialog(preference: Preference) {
+        var dialogFragment: DialogFragment? = null
+        if (preference is TimeModificationDialogPreference) {
+            dialogFragment = TimeModificationSettings.newInstance(preference.key)
+        }
+
+        if (dialogFragment != null) {
+            dialogFragment.setTargetFragment(this, 0)
+            dialogFragment.show(fragmentManager!!, TimeModificationSettings.TAG)
+        } else {
+            super.onDisplayPreferenceDialog(preference)
+        }
     }
 
     private val onPreferenceClickListener = Preference.OnPreferenceClickListener { preference ->

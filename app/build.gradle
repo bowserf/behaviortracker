@@ -116,8 +116,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
 
-    // AndroidX library
+    //Design
     implementation rootProject.ext.dependencies.supportDesign
+
+    // AndroidX library
+    implementation rootProject.ext.dependencies.androidXPreference
     implementation rootProject.ext.dependencies.androidXConstraint
     implementation rootProject.ext.dependencies.androidXCardView
     implementation rootProject.ext.dependencies.androidXRecyclerView

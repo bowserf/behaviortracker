@@ -6,6 +6,7 @@ rootProject.ext.dependencies = [
 
         // Support library
         supportDesign                       : "com.google.android.material:material:1.0.0",
+        androidXPreference                  : "androidx.preference:preference-ktx:1.1.0-rc01",
         androidXConstraint                  : "androidx.constraintlayout:constraintlayout:2.0.0-alpha4",
         androidXCardView                    : "androidx.cardview:cardview:1.0.0",
         androidXRecyclerView                : "androidx.recyclerview:recyclerview:1.0.0",

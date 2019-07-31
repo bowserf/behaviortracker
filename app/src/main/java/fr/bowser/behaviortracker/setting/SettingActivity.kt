@@ -30,7 +30,7 @@ SettingActivity : AppCompatActivity() {
     }
 
     private fun initSettingFragment() {
-        fragmentManager.beginTransaction()
+        supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, SettingFragment())
                 .commit()
     }
