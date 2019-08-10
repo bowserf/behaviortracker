@@ -1,3 +1,12 @@
+### Time Tracker v0.7.0
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2019-08-10
+* Change log:
+    - Add night theme
+    - Target min SDK 29
+
+
+
 ### Time Tracker v0.6.0
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2019-04-09
