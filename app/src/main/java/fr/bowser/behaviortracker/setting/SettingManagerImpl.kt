@@ -28,7 +28,7 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
 
         timeModification = sharedPreferences.getInt(
             context.getString(R.string.pref_key_time_modification),
-            context.resources.getInteger(R.integer.settings_default_value_time_modification)
+            context.resources.getInteger(R.integer.settings_default_value_time_modification_seconds)
         )
 
         oneActiveTimerAtATime = sharedPreferences.getBoolean(
@@ -43,13 +43,13 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
 
         pomodoroPauseStep = sharedPreferences.getInt(
             context.getString(R.string.pref_key_pomodoro_pause_stage),
-            context.resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage)
-        )
+            context.resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage_minutes)
+        ) * 60
 
         pomodoroStep = sharedPreferences.getInt(
             context.getString(R.string.pref_key_pomodoro_stage),
-            context.resources.getInteger(R.integer.settings_default_value_pomodoro_stage)
-        )
+            context.resources.getInteger(R.integer.settings_default_value_pomodoro_stage_minutes)
+        ) * 60
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
@@ -58,7 +58,7 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
                 timeModification = sharedPreferences.getInt(
                     key,
                     context.resources.getInteger(
-                        R.integer.settings_default_value_time_modification
+                        R.integer.settings_default_value_time_modification_seconds
                     )
                 )
                 timerModificationListener.forEach { it.onTimerModificationChanged(timeModification) }
@@ -72,14 +72,14 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
             context.getString(R.string.pref_key_pomodoro_pause_stage) -> {
                 pomodoroPauseStep = sharedPreferences.getInt(
                     key, context.resources
-                        .getInteger(R.integer.settings_default_value_pomodoro_pause_stage)
-                )
+                        .getInteger(R.integer.settings_default_value_pomodoro_pause_stage_minutes)
+                ) * 60
             }
             context.getString(R.string.pref_key_pomodoro_stage) -> {
                 pomodoroStep = sharedPreferences.getInt(
                     key, context.resources
-                        .getInteger(R.integer.settings_default_value_pomodoro_stage)
-                )
+                        .getInteger(R.integer.settings_default_value_pomodoro_stage_minutes)
+                ) * 60
             }
         }
     }

@@ -11,7 +11,7 @@
             android:negativeButtonText="@android:string/cancel"
             android:positiveButtonText="@android:string/ok"
             android:summary="@string/settings_cell_time_modification_message"
-            android:defaultValue="@integer/settings_default_value_time_modification"
+            android:defaultValue="@integer/settings_default_value_time_modification_seconds"
             android:title="@string/settings_cell_time_modification_title" />
 
         <SwitchPreferenceCompat
@@ -31,7 +31,7 @@
             android:key="@string/pref_key_pomodoro_stage"
             android:negativeButtonText="@android:string/cancel"
             android:positiveButtonText="@android:string/ok"
-            android:defaultValue="@integer/settings_default_value_pomodoro_stage"
+            android:defaultValue="@integer/settings_default_value_pomodoro_stage_minutes"
             android:summary="@string/settings_cell_pomodoro_stage_message"
             android:title="@string/settings_cell_pomodoro_stage_title" />
 
@@ -40,7 +40,7 @@
             android:key="@string/pref_key_pomodoro_pause_stage"
             android:negativeButtonText="@android:string/cancel"
             android:positiveButtonText="@android:string/ok"
-            android:defaultValue="@integer/settings_default_value_pomodoro_pause_stage"
+            android:defaultValue="@integer/settings_default_value_pomodoro_pause_stage_minutes"
             android:summary="@string/settings_cell_pomodoro_pause_stage_message"
             android:title="@string/settings_cell_pomodoro_pause_stage_title" />
 

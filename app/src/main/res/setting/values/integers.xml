@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <integer name="settings_default_value_time_modification">15</integer>
-    <integer name="settings_default_value_pomodoro_stage">25</integer>
-    <integer name="settings_default_value_pomodoro_pause_stage">5</integer>
+    <integer name="settings_default_value_time_modification_seconds">15</integer>
+    <integer name="settings_default_value_pomodoro_stage_minutes">25</integer>
+    <integer name="settings_default_value_pomodoro_pause_stage_minutes">5</integer>
 
 </resources>
