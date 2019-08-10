@@ -11,7 +11,6 @@ import android.content.res.TypedArray
 import android.os.Bundle
 import fr.bowser.behaviortracker.R
 
-
 class TimeModificationSettings : PreferenceDialogFragmentCompat() {
 
     private lateinit var slider: SeekBar

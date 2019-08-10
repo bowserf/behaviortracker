@@ -5,14 +5,13 @@ def firebaseVersion = "16.0.8"
 rootProject.ext.dependencies = [
 
         // Support library
-        supportDesign                       : "com.google.android.material:material:1.0.0",
+        supportDesign                       : "com.google.android.material:material:1.1.0-alpha09",
         androidXPreference                  : "androidx.preference:preference-ktx:1.1.0-rc01",
         androidXConstraint                  : "androidx.constraintlayout:constraintlayout:2.0.0-alpha4",
         androidXCardView                    : "androidx.cardview:cardview:1.0.0",
         androidXRecyclerView                : "androidx.recyclerview:recyclerview:1.0.0",
         androidXAnnotation                  : "androidx.annotation:annotation:1.0.2",
         androidXViewPager2                  : "androidx.viewpager2:viewpager2:1.0.0-alpha04",
-
 
         // Architecture component
         room                                : "androidx.room:room-runtime:$architectureComponentVersion",
@@ -24,7 +23,6 @@ rootProject.ext.dependencies = [
         // Other
         dagger2                             : "com.google.dagger:dagger:$dagger2Version",
         annotationProcessorDagger2          : "com.google.dagger:dagger-compiler:$dagger2Version",
-
 
 ]
 

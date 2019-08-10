@@ -4,11 +4,13 @@
     <color name="colorPrimary">#455a64</color>
     <color name="colorPrimaryLight">#718792</color>
     <color name="colorPrimaryDark">#1c313a</color>
-    <color name="colorAccent">#FF4081</color>
-
-    <color name="defaultTextColor">#8a000000</color>
 
     <color name="white">#ffffff</color>
+
+    <color name="icon_day_night">#8a000000</color>
+
+    <color name="colorSecondary">#E91E63</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
 
     <color name="deep_orange">#FF5722</color>
     <color name="brown">#795548</color>

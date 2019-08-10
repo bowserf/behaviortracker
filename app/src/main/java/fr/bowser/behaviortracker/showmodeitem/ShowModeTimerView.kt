@@ -29,7 +29,7 @@ class ShowModeTimerView(context: Context) : LinearLayout(context),
 
         inflate(context, R.layout.item_show_mode, this)
 
-        orientation = LinearLayout.VERTICAL
+        orientation = VERTICAL
         gravity = Gravity.CENTER
 
         setOnClickListener { presenter.onClickView() }

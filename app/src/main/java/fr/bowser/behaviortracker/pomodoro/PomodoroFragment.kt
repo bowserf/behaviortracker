@@ -2,9 +2,7 @@ package fr.bowser.behaviortracker.pomodoro
 
 import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
 import android.view.*
@@ -50,9 +48,8 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_pomodoro, container, false)
-    }
+                              savedInstanceState: Bundle?
+    ) = inflater.inflate(R.layout.fragment_pomodoro, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,7 +94,6 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
                 SettingActivity.startActivity(context!!)
             }
         }
-
         return false
     }
 
@@ -120,16 +116,6 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         if (progressDrawable is RotateDrawable) {
             progressDrawable.drawable!!.setColorFilter(
                     ColorUtils.getColor(context!!, timer.color),
-                    PorterDuff.Mode.SRC_ATOP)
-        }
-        val backgroundDrawable = progresssBar.background
-        if (backgroundDrawable is GradientDrawable) {
-            val rgb = ColorUtils.getColor(context!!, timer.color)
-            backgroundDrawable.setColorFilter(
-                    Color.argb(PROGRESS_BAR_BACKGROUND_ALPHA,
-                            Color.red(rgb),
-                            Color.green(rgb),
-                            Color.blue(rgb)),
                     PorterDuff.Mode.SRC_ATOP)
         }
     }
@@ -194,7 +180,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     override fun dismissPomodoroDialog() {
         val fragmentManager = activity!!.supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(PomodoroSessionDialog.TAG)
-        if(fragment != null){
+        if (fragment != null) {
             val transaction = fragmentManager.beginTransaction()
             transaction.remove(fragment)
             transaction.commit()
@@ -238,8 +224,5 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
         private const val FAB_ANIMATION_DURATION = 1000L
         private const val FAB_ANIMATION_DELAY = 400L
-
-        const val PROGRESS_BAR_BACKGROUND_ALPHA = 100
     }
-
 }

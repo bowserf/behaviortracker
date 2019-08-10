@@ -5,6 +5,6 @@
     android:thickness="@dimen/pomodoro_progress_thickness"
     android:useLevel="false">
 
-    <solid android:color="#CCC" />
+    <solid android:color="@color/pomodoro_bg_circle" />
 
 </shape>

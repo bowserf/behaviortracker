@@ -11,7 +11,6 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
 
-
 class SettingFragment : PreferenceFragmentCompat() {
 
     @Inject
@@ -39,7 +38,8 @@ class SettingFragment : PreferenceFragmentCompat() {
         pomodoroStage!!.setTimeUnit(DURATION_STAGE_UNIT)
 
         val keyPomodoroPauseStage = resources.getString(R.string.pref_key_pomodoro_pause_stage)
-        val pomodoroPauseStage = findPreference<TimeModificationDialogPreference>(keyPomodoroPauseStage)
+        val pomodoroPauseStage = findPreference<TimeModificationDialogPreference>(
+            keyPomodoroPauseStage)
         pomodoroPauseStage!!.setTimeUnit(DURATION_STAGE_UNIT)
 
         val key = getString(fr.bowser.behaviortracker.R.string.pref_key_send_commentary)

@@ -145,6 +145,6 @@
         android:layout_marginBottom="@dimen/default_space_2"
         android:elevation="@dimen/default_space"
         app:fabSize="normal"
-        tools:src="@drawable/ic_add" />
+        tools:src="@drawable/ic_flag" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
