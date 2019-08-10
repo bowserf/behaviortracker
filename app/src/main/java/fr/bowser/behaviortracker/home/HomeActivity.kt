@@ -162,7 +162,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
             return
         }
         val isAlarmNotifClicked =
-            intent.extras.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
+            intent.extras!!.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
         if (isAlarmNotifClicked) {
             presenter.onAlarmNotificationClicked()
         }

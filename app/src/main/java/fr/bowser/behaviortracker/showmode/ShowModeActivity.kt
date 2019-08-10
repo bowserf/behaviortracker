@@ -30,7 +30,7 @@ class ShowModeActivity : AppCompatActivity(), ShowModeContract.View {
 
         initUI()
 
-        val extras = intent.extras
+        val extras = intent.extras!!
         val selectedTimerID = extras.getLong(EXTRA_SELECTED_TIMER_ID)
         presenter.start(selectedTimerID)
     }

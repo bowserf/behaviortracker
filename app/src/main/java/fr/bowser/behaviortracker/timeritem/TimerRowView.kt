@@ -140,15 +140,15 @@ class TimerRowView(context: Context) :
 
         alertDialog.setView(rootView)
 
-        alertDialog.setPositiveButton(android.R.string.yes, { dialog, which ->
+        alertDialog.setPositiveButton(android.R.string.yes) { dialog, which ->
             val newName = input.text.toString()
             presenter.onTimerNameUpdated(newName)
-        })
+        }
 
         alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })
 
         val dialog = alertDialog.create()
-        dialog.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         dialog.show()
     }
 
@@ -168,12 +168,12 @@ class TimerRowView(context: Context) :
         val message = resources.getString(R.string.item_timer_remove_message)
         val builder = AlertDialog.Builder(context)
         builder.setMessage(message)
-            .setPositiveButton(android.R.string.yes, { dialog, which ->
+            .setPositiveButton(android.R.string.yes) { dialog, which ->
                 presenter.onClickDeleteTimer()
-            })
-            .setNegativeButton(android.R.string.no, { dialog, which ->
+            }
+            .setNegativeButton(android.R.string.no) { dialog, which ->
                 // do nothing
-            })
+            }
             .show()
     }
 
