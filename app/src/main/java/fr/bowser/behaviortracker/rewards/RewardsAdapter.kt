@@ -13,8 +13,9 @@ class RewardsAdapter : RecyclerView.Adapter<RewardsAdapter.RewardsViewHolder>() 
         val rewardsRowView = RewardsRowView(parent.context)
 
         val layoutParams = RecyclerView.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
         rewardsRowView.layoutParams = layoutParams
 
@@ -37,5 +38,4 @@ class RewardsAdapter : RecyclerView.Adapter<RewardsAdapter.RewardsViewHolder>() 
     }
 
     inner class RewardsViewHolder(val view: RewardsRowView) : RecyclerView.ViewHolder(view)
-
 }

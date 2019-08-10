@@ -16,19 +16,21 @@ class PomodoroManagerModule {
 
     @Singleton
     @Provides
-    fun providePomodoroManager(context: Context,
-                               timeManager: TimeManager,
-                               timerListManager: TimerListManager,
-                               settingManager: SettingManager): PomodoroManager {
+    fun providePomodoroManager(
+        context: Context,
+        timeManager: TimeManager,
+        timerListManager: TimerListManager,
+        settingManager: SettingManager
+    ): PomodoroManager {
         val pauseTimer = PauseTimer.getTimer(context)
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         return PomodoroManagerImpl(
-                timeManager,
-                timerListManager,
-                settingManager,
-                pauseTimer,
-                vibrator,
-                BuildConfig.DEBUG)
+            timeManager,
+            timerListManager,
+            settingManager,
+            pauseTimer,
+            vibrator,
+            BuildConfig.DEBUG
+        )
     }
-
 }

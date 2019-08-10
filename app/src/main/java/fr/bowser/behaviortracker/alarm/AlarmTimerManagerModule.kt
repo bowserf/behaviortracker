@@ -12,17 +12,19 @@ class AlarmTimerManagerModule {
     @Singleton
     @Provides
     fun provideAlarmStorageManager(context: Context): AlarmStorageManager {
-        if(BuildConfig.UA){
+        if (BuildConfig.UA) {
             return AlarmStorageManagerUA()
-        }else {
+        } else {
             return AlarmStorageManagerImpl(context)
         }
     }
 
     @Singleton
     @Provides
-    fun provideAlarmTimerManager(context: Context, alarmStorageManager: AlarmStorageManager): AlarmTimerManager {
+    fun provideAlarmTimerManager(
+        context: Context,
+        alarmStorageManager: AlarmStorageManager
+    ): AlarmTimerManager {
         return AlarmTimerManagerImpl(context, alarmStorageManager)
     }
-
 }

@@ -6,9 +6,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
 
-class TimeManagerImpl(private val timerDAO: TimerDAO,
-                      private val settingManager: SettingManager,
-                      private val handler: Handler?) : TimeManager {
+class TimeManagerImpl(
+    private val timerDAO: TimerDAO,
+    private val settingManager: SettingManager,
+    private val handler: Handler?
+) : TimeManager {
 
     internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
 
@@ -111,7 +113,7 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
     inner class TimerRunnable : Runnable {
         override fun run() {
             // protection to stop runnable if list is empty
-            if(timerList.isEmpty()){
+            if (timerList.isEmpty()) {
                 return
             }
 
@@ -130,5 +132,4 @@ class TimeManagerImpl(private val timerDAO: TimerDAO,
         private const val TAG = "TimeManagerImpl"
         private const val DELAY = 1000L
     }
-
 }

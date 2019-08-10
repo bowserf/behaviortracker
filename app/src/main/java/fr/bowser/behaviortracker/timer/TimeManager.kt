@@ -6,7 +6,7 @@ interface TimeManager {
 
     fun stopTimer(timer: Timer)
 
-    fun updateTime(timer: Timer, newTime: Float, fakeTimer:Boolean = false)
+    fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean = false)
 
     fun addListener(listener: Listener): Boolean
 
@@ -16,5 +16,4 @@ interface TimeManager {
         fun onTimerStateChanged(updatedTimer: Timer)
         fun onTimerTimeChanged(updatedTimer: Timer)
     }
-
 }

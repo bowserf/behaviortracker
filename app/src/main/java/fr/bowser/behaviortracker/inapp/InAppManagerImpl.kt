@@ -3,9 +3,11 @@ package fr.bowser.behaviortracker.inapp
 import android.util.Log
 import com.android.billingclient.api.*
 
-class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
-                       private val inAppConfiguration: InAppConfiguration,
-                       private val inAppRepository: InAppRepository) : InAppManager {
+class InAppManagerImpl(
+    private val playBillingManager: PlayBillingManager,
+    private val inAppConfiguration: InAppConfiguration,
+    private val inAppRepository: InAppRepository
+) : InAppManager {
 
     private val ownedSku = mutableListOf<String>()
 
@@ -21,16 +23,17 @@ class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
     override fun purchase(sku: String, activityContainer: InAppManager.ActivityContainer) {
         val purchaseFlowRequest = Runnable {
             val builder = BillingFlowParams
-                    .newBuilder()
-                    .setSku(sku)
-                    .setType(BillingClient.SkuType.INAPP)
+                .newBuilder()
+                .setSku(sku)
+                .setType(BillingClient.SkuType.INAPP)
             val responseCode = playBillingManager.launchBillingFlow(
-                    activityContainer.get(),
-                    builder.build())
+                activityContainer.get(),
+                builder.build()
+            )
             if (responseCode == BillingClient.BillingResponse.ITEM_ALREADY_OWNED) {
                 Log.e(TAG, "User already owns this in-app : $sku")
                 notifyPurchaseFailed()
-            } else if(responseCode != BillingClient.BillingResponse.OK){
+            } else if (responseCode != BillingClient.BillingResponse.OK) {
                 Log.e(TAG, "An error occurred during purchase, error code : $responseCode")
                 notifyPurchaseFailed()
             }
@@ -42,11 +45,13 @@ class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
         val queryRequest = Runnable {
             val skuList = getListOfAvailableSku()
             val inAppSkuDetailsParams = SkuDetailsParams.newBuilder()
-                    .setSkusList(skuList)
-                    .setType(BillingClient.SkuType.INAPP)
-                    .build()
-            playBillingManager.querySkuDetailsAsync(inAppSkuDetailsParams,
-                    createSkuDetailsResponseListener())
+                .setSkusList(skuList)
+                .setType(BillingClient.SkuType.INAPP)
+                .build()
+            playBillingManager.querySkuDetailsAsync(
+                inAppSkuDetailsParams,
+                createSkuDetailsResponseListener()
+            )
         }
         playBillingManager.executeServiceRequest(queryRequest)
     }
@@ -112,7 +117,7 @@ class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
     private fun createSkuDetailsResponseListener(): SkuDetailsResponseListener {
         return SkuDetailsResponseListener { responseCode, skuDetailsList ->
             if (responseCode == BillingClient.BillingResponse.OK) {
-                if(skuDetailsList.size != 0) {
+                if (skuDetailsList.size != 0) {
                     inAppRepository.set(skuDetailsList)
                 }
                 updatePurchasedInApp()
@@ -123,5 +128,4 @@ class InAppManagerImpl(private val playBillingManager: PlayBillingManager,
     companion object {
         private const val TAG = "InAppManagerImpl"
     }
-
 }

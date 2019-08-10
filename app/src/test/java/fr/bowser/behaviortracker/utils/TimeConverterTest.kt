@@ -52,5 +52,4 @@ class TimeConverterTest {
     fun cantAcceptNegativeTime() {
         `when`(TimeConverter.convertSecondsToHumanTime(-1)).thenThrow(IllegalStateException())
     }
-
 }

@@ -38,9 +38,9 @@ class PomodoroSessionDialog : DialogFragment(), PomodoroDialogContract.Screen {
 
     private fun setupGraph() {
         val component = DaggerPomodoroDialogComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-                .pomodoroDialogModule(PomodoroDialogModule())
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+            .pomodoroDialogModule(PomodoroDialogModule())
+            .build()
         component.inject(this)
     }
 
@@ -51,7 +51,5 @@ class PomodoroSessionDialog : DialogFragment(), PomodoroDialogContract.Screen {
         fun newInstance(): PomodoroSessionDialog {
             return PomodoroSessionDialog()
         }
-
     }
-
 }

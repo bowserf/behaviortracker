@@ -8,14 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.timer.Timer
 
-class ChoosePomodoroTimerAdapter(private val context: Context,
-                                 private val timerList: List<Timer>,
-                                 private val listener: Listener)
-    : RecyclerView.Adapter<ChoosePomodoroTimerAdapter.ChooseTimerHolder>() {
+class ChoosePomodoroTimerAdapter(
+    private val context: Context,
+    private val timerList: List<Timer>,
+    private val listener: Listener
+) : RecyclerView.Adapter<ChoosePomodoroTimerAdapter.ChooseTimerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChooseTimerHolder {
         val view = LayoutInflater.from(context).inflate(
-                R.layout.item_pomodoro_timer, parent, false)
+            R.layout.item_pomodoro_timer, parent, false
+        )
         return ChooseTimerHolder(view as TextView)
     }
 
@@ -35,5 +37,4 @@ class ChoosePomodoroTimerAdapter(private val context: Context,
     interface Listener {
         fun onTimerChose(timer: Timer)
     }
-
 }

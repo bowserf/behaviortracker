@@ -25,7 +25,9 @@ import fr.bowser.behaviortracker.timer.*
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(DatabaseManagerModule::class,
+@Component(
+    modules = arrayOf(
+        DatabaseManagerModule::class,
         TimeManagerModule::class,
         TimeNotificationManagerModule::class,
         SettingManagerModule::class,
@@ -34,7 +36,9 @@ import javax.inject.Singleton
         InAppManagerModule::class,
         PomodoroManagerModule::class,
         HomeManagerModule::class,
-        TimerListManagerModule::class))
+        TimerListManagerModule::class
+    )
+)
 interface BehaviorTrackerAppComponent {
 
     fun provideContext(): Context
@@ -72,5 +76,4 @@ interface BehaviorTrackerAppComponent {
         @BindsInstance
         fun context(context: Context): Builder
     }
-
 }

@@ -10,15 +10,15 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class InAppConfigurationImplTest {
 
-
     @Mock
     private lateinit var inAppConfigurationParser: InAppConfigurationParser
 
     @Test
-    fun parse(){
+    fun parse() {
         // Giving
         val fakeJson = fakeJson()
-        Mockito.`when`(inAppConfigurationParser.getInAppConfigFile(Mockito.anyString())).thenReturn(fakeJson)
+        Mockito.`when`(inAppConfigurationParser.getInAppConfigFile(Mockito.anyString()))
+            .thenReturn(fakeJson)
 
         // When
         val inAppConfigurationImpl = InAppConfigurationImpl(inAppConfigurationParser)
@@ -39,10 +39,11 @@ class InAppConfigurationImplTest {
     }
 
     @Test
-    fun getInApp(){
+    fun getInApp() {
         // Giving
         val fakeJson = fakeJson()
-        Mockito.`when`(inAppConfigurationParser.getInAppConfigFile(Mockito.anyString())).thenReturn(fakeJson)
+        Mockito.`when`(inAppConfigurationParser.getInAppConfigFile(Mockito.anyString()))
+            .thenReturn(fakeJson)
 
         // When
         val inAppConfigurationImpl = InAppConfigurationImpl(inAppConfigurationParser)
@@ -56,7 +57,7 @@ class InAppConfigurationImplTest {
         Assert.assertEquals("Description in-app marshmallow", inApp.description)
     }
 
-    private fun fakeJson(): String{
+    private fun fakeJson(): String {
         return "{\n" +
                 "  \"version\": \"1.0\",\n" +
                 "  \"in-apps\": [\n" +
@@ -77,5 +78,4 @@ class InAppConfigurationImplTest {
                 "  ]\n" +
                 "}"
     }
-
 }

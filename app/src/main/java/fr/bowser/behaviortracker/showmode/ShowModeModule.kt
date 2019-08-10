@@ -13,5 +13,4 @@ class ShowModeModule(private val view: ShowModeContract.View) {
     fun provideShowModePresenter(timerListManager: TimerListManager): ShowModePresenter {
         return ShowModePresenter(view, timerListManager)
     }
-
 }

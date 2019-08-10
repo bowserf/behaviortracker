@@ -25,5 +25,4 @@ interface TimerDAO {
 
     @Query("UPDATE Timer SET position = :position WHERE id = :id")
     fun updateTimerPosition(id: Long, position: Int)
-
 }

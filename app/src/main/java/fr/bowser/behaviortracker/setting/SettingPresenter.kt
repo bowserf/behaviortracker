@@ -6,32 +6,40 @@ import android.preference.PreferenceManager
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.event.EventManager
 
-class SettingPresenter(private val context:Context,
-                       private val eventManager: EventManager) {
+class SettingPresenter(
+    private val context: Context,
+    private val eventManager: EventManager
+) {
 
-    private val sharedPreferences: SharedPreferences
-            = PreferenceManager.getDefaultSharedPreferences(context)
+    private val sharedPreferences: SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun start(){
+    fun start() {
         sharedPreferences.registerOnSharedPreferenceChangeListener(
-                onSharedPreferenceChangerListener)
+            onSharedPreferenceChangerListener
+        )
     }
 
-    fun stop(){
+    fun stop() {
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(
-                onSharedPreferenceChangerListener)
+            onSharedPreferenceChangerListener
+        )
     }
 
-    private val onSharedPreferenceChangerListener
-            = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-        when (key) {
-            context.getString(R.string.pref_key_time_modification) -> {
-                eventManager.sendNewTimeFixTimerDurationEvent(sharedPreferences.getInt(key, -1))
-            }
-            context.getString(R.string.pref_key_one_active_timer) -> {
-                eventManager.sendExclusiveTimerModeEvent(sharedPreferences.getBoolean(key, false))
+    private val onSharedPreferenceChangerListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            when (key) {
+                context.getString(R.string.pref_key_time_modification) -> {
+                    eventManager.sendNewTimeFixTimerDurationEvent(sharedPreferences.getInt(key, -1))
+                }
+                context.getString(R.string.pref_key_one_active_timer) -> {
+                    eventManager.sendExclusiveTimerModeEvent(
+                        sharedPreferences.getBoolean(
+                            key,
+                            false
+                        )
+                    )
+                }
             }
         }
-    }
-
 }

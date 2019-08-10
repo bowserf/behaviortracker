@@ -2,7 +2,8 @@ package fr.bowser.behaviortracker.inapp
 
 import org.json.JSONObject
 
-class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigurationParser) : InAppConfiguration {
+class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigurationParser) :
+    InAppConfiguration {
 
     private val inAppList = mutableListOf<InApp>()
 
@@ -12,7 +13,7 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
 
     override fun getInApp(sku: String): InApp {
         for (inApp in inAppList) {
-            if(inApp.sku == sku){
+            if (inApp.sku == sku) {
                 return inApp
             }
         }
@@ -60,5 +61,4 @@ class InAppConfigurationImpl(private val inAppConfigurationParser: InAppConfigur
         private const val DEFAULT_DESCRIPTION_KEY = "default_description"
         private const val FEATURE = "feature"
     }
-
 }

@@ -5,8 +5,10 @@ import androidx.annotation.VisibleForTesting
 import com.android.billingclient.api.SkuDetails
 import java.util.*
 
-class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
-                          private val inAppsConfig: List<InApp>) : InAppRepository {
+class InAppRepositoryImpl(
+    private val sharedPreferences: SharedPreferences,
+    private val inAppsConfig: List<InApp>
+) : InAppRepository {
 
     private val detailsList: MutableList<InApp> = mutableListOf()
 
@@ -82,5 +84,4 @@ class InAppRepositoryImpl(private val sharedPreferences: SharedPreferences,
         @VisibleForTesting
         const val IN_APP_DETAILS_KEY = "in_app_details_repository.key.details"
     }
-
 }

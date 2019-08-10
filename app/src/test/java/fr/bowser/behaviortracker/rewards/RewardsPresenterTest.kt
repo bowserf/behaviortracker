@@ -22,7 +22,7 @@ class RewardsPresenterTest {
     private lateinit var inAppManager: InAppManager
 
     @Test
-    fun startRegisterToInAppManager(){
+    fun startRegisterToInAppManager() {
         // Given
         val presenter = RewardsPresenter(screen, inAppRepository, inAppManager)
 
@@ -34,7 +34,7 @@ class RewardsPresenterTest {
     }
 
     @Test
-    fun startCallDisplayListInApps(){
+    fun startCallDisplayListInApps() {
         // Given
         val presenter = RewardsPresenter(screen, inAppRepository, inAppManager)
 
@@ -46,7 +46,7 @@ class RewardsPresenterTest {
     }
 
     @Test
-    fun stopUnregisterToInAppManager(){
+    fun stopUnregisterToInAppManager() {
         // Given
         val presenter = RewardsPresenter(screen, inAppRepository, inAppManager)
 
@@ -56,5 +56,4 @@ class RewardsPresenterTest {
         // Then
         Mockito.verify(inAppManager).removeListener(any())
     }
-
 }

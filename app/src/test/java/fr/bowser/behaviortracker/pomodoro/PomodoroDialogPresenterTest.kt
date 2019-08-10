@@ -13,7 +13,7 @@ class PomodoroDialogPresenterTest {
     private lateinit var manager: PomodoroManager
 
     @Test
-    fun clickOnPositionButtonResumeSession(){
+    fun clickOnPositionButtonResumeSession() {
         // Given
         val presenter = PomodoroDialogPresenter(manager)
 
@@ -25,7 +25,7 @@ class PomodoroDialogPresenterTest {
     }
 
     @Test
-    fun clickOnNegativeButtonStopSession(){
+    fun clickOnNegativeButtonStopSession() {
         // Given
         val presenter = PomodoroDialogPresenter(manager)
 
@@ -35,5 +35,4 @@ class PomodoroDialogPresenterTest {
         // Then
         Mockito.verify(manager).stop()
     }
-
 }

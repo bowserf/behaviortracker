@@ -57,7 +57,11 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         mSpanCount = resources.getInteger(R.integer.list_timers_number_spans)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_timer, null)
     }
 
@@ -129,21 +133,22 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         handler.postDelayed(runnable, CANCEL_SUPPRESSION_DISPLAY_TIME.toLong())
 
         Snackbar.make(
-                list,
-                getString(R.string.timer_view_timer_has_been_removed),
-                CANCEL_SUPPRESSION_DISPLAY_TIME)
-                .setAction(android.R.string.cancel) {
-                    handler.removeCallbacks(runnable)
-                    presenter.cancelTimerDeletion()
-                }
-                .show()
+            list,
+            getString(R.string.timer_view_timer_has_been_removed),
+            CANCEL_SUPPRESSION_DISPLAY_TIME
+        )
+            .setAction(android.R.string.cancel) {
+                handler.removeCallbacks(runnable)
+                presenter.cancelTimerDeletion()
+            }
+            .show()
     }
 
     private fun setupGraph() {
         val build = DaggerTimerComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-                .timerModule(TimerModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+            .timerModule(TimerModule(this))
+            .build()
         build.inject(this)
     }
 
@@ -172,7 +177,12 @@ class TimerFragment : Fragment(), TimerContract.Screen {
 
         val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         list.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
                 var currentPosition = parent.getChildAdapterPosition(view)
                 // When an item is removed, getChildAdapterPosition returns NO_POSITION but this
                 // method is call at the animation start so position = -1 and we don't apply the
@@ -189,7 +199,6 @@ class TimerFragment : Fragment(), TimerContract.Screen {
                 outRect.right = margin
                 outRect.bottom = margin
             }
-
         })
     }
 
@@ -229,5 +238,4 @@ class TimerFragment : Fragment(), TimerContract.Screen {
 
         private const val CANCEL_SUPPRESSION_DISPLAY_TIME = 3000
     }
-
 }

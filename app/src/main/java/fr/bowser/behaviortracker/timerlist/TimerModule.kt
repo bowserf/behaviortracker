@@ -11,8 +11,9 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
     @GenericScope(component = TimerComponent::class)
     @Provides
     fun provideTimerPresenter(timerListManager: TimerListManager): TimerPresenter {
-        return TimerPresenter(timerScreen,
-                timerListManager)
+        return TimerPresenter(
+            timerScreen,
+            timerListManager
+        )
     }
-
 }

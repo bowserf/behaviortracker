@@ -3,9 +3,10 @@ package fr.bowser.behaviortracker.timerlist
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
-class TimerPresenter(private val screen: TimerContract.Screen,
-                     private val timerListManager: TimerListManager)
-    : TimerContract.Presenter, TimerListManager.Listener {
+class TimerPresenter(
+    private val screen: TimerContract.Screen,
+    private val timerListManager: TimerListManager
+) : TimerContract.Presenter, TimerListManager.Listener {
 
     private var ongoingDeletionTimer: Timer? = null
 
@@ -33,7 +34,7 @@ class TimerPresenter(private val screen: TimerContract.Screen,
     }
 
     override fun onTimerSwiped(timer: Timer) {
-        if(ongoingDeletionTimer != null){
+        if (ongoingDeletionTimer != null) {
             definitivelyRemoveTimer()
         }
         ongoingDeletionTimer = timer
@@ -43,14 +44,14 @@ class TimerPresenter(private val screen: TimerContract.Screen,
     }
 
     override fun definitivelyRemoveTimer() {
-        if(ongoingDeletionTimer != null) {
+        if (ongoingDeletionTimer != null) {
             timerListManager.removeTimer(ongoingDeletionTimer!!)
             ongoingDeletionTimer = null
         }
     }
 
     override fun cancelTimerDeletion() {
-        if(ongoingDeletionTimer != null) {
+        if (ongoingDeletionTimer != null) {
             onTimerAdded(ongoingDeletionTimer!!)
             ongoingDeletionTimer = null
         }

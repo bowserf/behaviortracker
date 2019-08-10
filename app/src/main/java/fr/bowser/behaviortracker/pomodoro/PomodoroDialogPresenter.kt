@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.pomodoro
 
-class PomodoroDialogPresenter(private val pomodoroManager: PomodoroManager) : PomodoroDialogContract.Presenter {
+class PomodoroDialogPresenter(private val pomodoroManager: PomodoroManager) :
+    PomodoroDialogContract.Presenter {
 
     override fun onClickPositionButton() {
         pomodoroManager.resume()
@@ -9,6 +10,4 @@ class PomodoroDialogPresenter(private val pomodoroManager: PomodoroManager) : Po
     override fun onClickNegativeButton() {
         pomodoroManager.stop()
     }
-
-
 }

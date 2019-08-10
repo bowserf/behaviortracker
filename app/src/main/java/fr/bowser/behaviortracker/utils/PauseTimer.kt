@@ -9,5 +9,4 @@ object PauseTimer {
     fun getTimer(context: Context): Timer {
         return Timer(context.getString(R.string.pomodoro_timer_pause), ColorUtils.COLOR_BLUE_GREY)
     }
-
 }

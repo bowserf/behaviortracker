@@ -9,5 +9,4 @@ import fr.bowser.behaviortracker.timer.TimerDAO
 abstract class DatabaseProvider : RoomDatabase() {
 
     abstract fun timerDAO(): TimerDAO
-
 }

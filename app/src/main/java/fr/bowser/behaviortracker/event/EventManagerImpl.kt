@@ -66,5 +66,4 @@ class EventManagerImpl(context: Context) : EventManager {
         const val EVENT_CLICK_BUY_IN_APP = "click_buy_in_app"
         const val EVENT_EXTRA_CLICK_BUY_IN_APP = "product_id"
     }
-
 }

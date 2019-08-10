@@ -13,16 +13,18 @@ class CreateTimerModule(private val view: CreateTimerContract.View) {
 
     @GenericScope(component = CreateTimerComponent::class)
     @Provides
-    fun provideCreateTimerPresenter(timerListManager: TimerListManager,
-                                    timeManager: TimeManager,
-                                    pomodoroManager: PomodoroManager,
-                                    eventManager: EventManager): CreateTimerPresenter {
+    fun provideCreateTimerPresenter(
+        timerListManager: TimerListManager,
+        timeManager: TimeManager,
+        pomodoroManager: PomodoroManager,
+        eventManager: EventManager
+    ): CreateTimerPresenter {
         return CreateTimerPresenter(
-                view,
-                timerListManager,
-                timeManager,
-                pomodoroManager,
-                eventManager)
+            view,
+            timerListManager,
+            timeManager,
+            pomodoroManager,
+            eventManager
+        )
     }
-
 }

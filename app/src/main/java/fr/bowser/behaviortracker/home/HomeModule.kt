@@ -13,17 +13,20 @@ internal class HomeModule(private val homeView: HomeContract.View) {
 
     @GenericScope(component = HomeComponent::class)
     @Provides
-    fun provideHomePresenter(timerNotificationManager: TimerNotificationManager,
-                             timeManager: TimeManager,
-                             timerListManager: TimerListManager,
-                             homeManager: HomeManager,
-                             eventManager: EventManager): HomePresenter {
-        return HomePresenter(homeView,
-                timerNotificationManager,
-                timeManager,
-                timerListManager,
-                homeManager,
-                eventManager)
+    fun provideHomePresenter(
+        timerNotificationManager: TimerNotificationManager,
+        timeManager: TimeManager,
+        timerListManager: TimerListManager,
+        homeManager: HomeManager,
+        eventManager: EventManager
+    ): HomePresenter {
+        return HomePresenter(
+            homeView,
+            timerNotificationManager,
+            timeManager,
+            timerListManager,
+            homeManager,
+            eventManager
+        )
     }
-
 }

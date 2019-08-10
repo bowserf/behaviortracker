@@ -28,9 +28,11 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
         setupGraph()
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_choose_timer, container, false)
     }
 
@@ -59,9 +61,9 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
 
     private fun setupGraph() {
         val component = DaggerChoosePomodoroTimerComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-                .choosePomodoroTimerModule(ChoosePomodoroTimerModule())
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+            .choosePomodoroTimerModule(ChoosePomodoroTimerModule())
+            .build()
         component.inject(this)
     }
 
@@ -76,19 +78,21 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
 
     private fun initUI(root: View) {
         val timers = root.findViewById<RecyclerView>(R.id.timers_list)
-        timers.layoutManager = LinearLayoutManager(activity,
-                RecyclerView.VERTICAL,
-                false)
+        timers.layoutManager = LinearLayoutManager(
+            activity,
+            RecyclerView.VERTICAL,
+            false
+        )
         timers.setHasFixedSize(true)
         timers.adapter = ChoosePomodoroTimerAdapter(
-                context!!,
-                presenter.getTimerList(),
-                object : ChoosePomodoroTimerAdapter.Listener {
-            override fun onTimerChose(timer: Timer) {
-                presenter.startPomodoro(timer)
-                dismiss()
-            }
-        })
+            context!!,
+            presenter.getTimerList(),
+            object : ChoosePomodoroTimerAdapter.Listener {
+                override fun onTimerChose(timer: Timer) {
+                    presenter.startPomodoro(timer)
+                    dismiss()
+                }
+            })
     }
 
     companion object {
@@ -97,9 +101,6 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
         fun showDialog(activity: AppCompatActivity) {
             val newFragment = ChoosePomodoroTimerDialog()
             newFragment.show(activity.supportFragmentManager, TAG)
-
         }
     }
-
-
 }

@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.timer
 
-
 interface TimerListManager {
 
     fun addTimer(timer: Timer)
@@ -22,5 +21,4 @@ interface TimerListManager {
         fun onTimerAdded(updatedTimer: Timer)
         fun onTimerRenamed(updatedTimer: Timer)
     }
-
 }

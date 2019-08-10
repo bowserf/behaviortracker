@@ -83,5 +83,4 @@ class TimerDAOTest {
 
         Assert.assertTrue(timers.isEmpty())
     }
-
 }

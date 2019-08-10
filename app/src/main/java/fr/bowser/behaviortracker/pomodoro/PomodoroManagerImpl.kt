@@ -6,12 +6,14 @@ import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
-class PomodoroManagerImpl(private val timeManager: TimeManager,
-                          timerListManager: TimerListManager,
-                          private val settingManager: SettingManager,
-                          val pauseTimer: Timer,
-                          private val vibrator: Vibrator,
-                          private val isDebug: Boolean) : PomodoroManager {
+class PomodoroManagerImpl(
+    private val timeManager: TimeManager,
+    timerListManager: TimerListManager,
+    private val settingManager: SettingManager,
+    val pauseTimer: Timer,
+    private val vibrator: Vibrator,
+    private val isDebug: Boolean
+) : PomodoroManager {
 
     override var listeners: MutableList<PomodoroManager.Listener> = mutableListOf()
 
@@ -43,8 +45,10 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
-        this.pauseDuration = if (isDebug) POMODOR_DEBUG_PAUSE_STEP_DURATION else settingManager.getPomodoroPauseStepDuration()
-        this.actionDuration = if (isDebug) POMODOR_DEBUG_STEP_DURATION else settingManager.getPomodoroStepDuration()
+        this.pauseDuration =
+            if (isDebug) POMODOR_DEBUG_PAUSE_STEP_DURATION else settingManager.getPomodoroPauseStepDuration()
+        this.actionDuration =
+            if (isDebug) POMODOR_DEBUG_STEP_DURATION else settingManager.getPomodoroStepDuration()
 
         currentTimer = actionTimer
         pomodoroTime = actionDuration
@@ -143,7 +147,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
 
                 listeners.forEach { it.onCountFinished(currentTimer!!, pomodoroTime) }
             }
-
         }
     }
 
@@ -162,7 +165,6 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
             override fun onTimerRenamed(updatedTimer: Timer) {
                 // nothing to do
             }
-
         }
     }
 
@@ -171,5 +173,4 @@ class PomodoroManagerImpl(private val timeManager: TimeManager,
         private const val POMODOR_DEBUG_STEP_DURATION = 10L
         private const val POMODOR_DEBUG_PAUSE_STEP_DURATION = 5L
     }
-
 }

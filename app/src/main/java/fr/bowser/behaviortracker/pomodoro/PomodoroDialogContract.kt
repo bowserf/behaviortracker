@@ -9,7 +9,5 @@ interface PomodoroDialogContract {
         fun onClickPositionButton()
 
         fun onClickNegativeButton()
-
     }
-
 }

@@ -14,5 +14,4 @@ class TimeManagerModule {
     fun provideTimeManager(timerDAO: TimerDAO, settingManager: SettingManager): TimeManager {
         return TimeManagerImpl(timerDAO, settingManager, Handler())
     }
-
 }

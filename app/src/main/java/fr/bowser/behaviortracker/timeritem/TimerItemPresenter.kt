@@ -6,15 +6,15 @@ import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
-class TimerItemPresenter(private val view: TimerItemContract.View,
-                         private val timeManager: TimeManager,
-                         private val timerListManager: TimerListManager,
-                         private val settingManager: SettingManager,
-                         private val pomodoroManager: PomodoroManager)
-    : TimerItemContract.Presenter,
-        TimerListManager.Listener,
-        SettingManager.TimerModificationListener {
-
+class TimerItemPresenter(
+    private val view: TimerItemContract.View,
+    private val timeManager: TimeManager,
+    private val timerListManager: TimerListManager,
+    private val settingManager: SettingManager,
+    private val pomodoroManager: PomodoroManager
+) : TimerItemContract.Presenter,
+    TimerListManager.Listener,
+    SettingManager.TimerModificationListener {
 
     private lateinit var timer: Timer
 
@@ -112,19 +112,18 @@ class TimerItemPresenter(private val view: TimerItemContract.View,
     }
 
     private val timeManagerListener =
-            object : TimeManager.Listener {
+        object : TimeManager.Listener {
 
-                override fun onTimerStateChanged(updatedTimer: Timer) {
-                    if (timer == updatedTimer) {
-                        view.statusUpdated(updatedTimer.isActivate)
-                    }
-                }
-
-                override fun onTimerTimeChanged(updatedTimer: Timer) {
-                    if (timer == updatedTimer) {
-                        view.timerUpdated(updatedTimer.time.toLong())
-                    }
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                if (timer == updatedTimer) {
+                    view.statusUpdated(updatedTimer.isActivate)
                 }
             }
 
+            override fun onTimerTimeChanged(updatedTimer: Timer) {
+                if (timer == updatedTimer) {
+                    view.timerUpdated(updatedTimer.time.toLong())
+                }
+            }
+        }
 }

@@ -9,7 +9,6 @@ interface CreateTimerContract {
         fun displayNameError()
 
         fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int)
-
     }
 
     interface Presenter {
@@ -19,7 +18,5 @@ interface CreateTimerContract {
         fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int)
 
         fun enablePomodoroMode(isPomodoro: Boolean)
-
     }
-
 }

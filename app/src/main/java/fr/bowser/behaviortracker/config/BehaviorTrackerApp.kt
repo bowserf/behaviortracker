@@ -14,14 +14,18 @@ class BehaviorTrackerApp : Application() {
 
     override fun onCreate() {
         if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+            StrictMode.setThreadPolicy(
+                StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
-                    .build())
-            StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
+                    .build()
+            )
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
-                    .build())
+                    .build()
+            )
         }
 
         super.onCreate()
@@ -46,8 +50,8 @@ class BehaviorTrackerApp : Application() {
 
     private fun setupGraph() {
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-                .context(this)
-                .build()
+            .context(this)
+            .build()
     }
 
     private fun setupFirebaseAnalytics() {
@@ -61,7 +65,5 @@ class BehaviorTrackerApp : Application() {
             val app = context.applicationContext as BehaviorTrackerApp
             return app.appComponent
         }
-
     }
-
 }

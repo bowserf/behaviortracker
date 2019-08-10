@@ -14,16 +14,18 @@ class TimerItemModule(private val view: TimerItemContract.View) {
     @GenericScope(component = TimerItemComponent::class)
     @Provides
 
-    fun provideTimerItemPresenter(timeManager: TimeManager,
-                                  timerListManager: TimerListManager,
-                                  settingManager: SettingManager,
-                                  pomodoroManager: PomodoroManager): TimerItemPresenter {
+    fun provideTimerItemPresenter(
+        timeManager: TimeManager,
+        timerListManager: TimerListManager,
+        settingManager: SettingManager,
+        pomodoroManager: PomodoroManager
+    ): TimerItemPresenter {
         return TimerItemPresenter(
-                view,
-                timeManager,
-                timerListManager,
-                settingManager,
-                pomodoroManager)
+            view,
+            timeManager,
+            timerListManager,
+            settingManager,
+            pomodoroManager
+        )
     }
-
 }

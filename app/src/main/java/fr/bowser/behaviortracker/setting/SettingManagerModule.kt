@@ -13,5 +13,4 @@ class SettingManagerModule {
     fun provideSettingManager(context: Context): SettingManager {
         return SettingManagerImpl(context)
     }
-
 }

@@ -11,9 +11,10 @@ class RewardsPresenterModule(private val screen: RewardsContract.Screen) {
 
     @GenericScope(component = RewardsComponent::class)
     @Provides
-    fun provideRewardsPresenter(inAppRepository: InAppRepository,
-                                inAppManager: InAppManager): RewardsPresenter {
+    fun provideRewardsPresenter(
+        inAppRepository: InAppRepository,
+        inAppManager: InAppManager
+    ): RewardsPresenter {
         return RewardsPresenter(screen, inAppRepository, inAppManager)
     }
-
 }

@@ -61,5 +61,4 @@ class ShowModePresenterTest {
         Mockito.verify(screen).keepScreeOn(true)
         Assert.assertTrue(presenter.keepScreenOn())
     }
-
 }

@@ -1,9 +1,5 @@
 package fr.bowser.behaviortracker.alarm
 
-import fr.bowser.behaviortracker.alarm.AlarmDialogPresenter
-import fr.bowser.behaviortracker.alarm.AlarmTime
-import fr.bowser.behaviortracker.alarm.AlarmTimerContract
-import fr.bowser.behaviortracker.alarm.AlarmTimerManager
 import fr.bowser.behaviortracker.event.EventManager
 import org.junit.Before
 import org.junit.Test
@@ -67,5 +63,4 @@ class AlarmDialogPresenterTest {
         // Then
         Mockito.verify(view, times(1)).displayMessageAlarmDisabled()
     }
-
 }

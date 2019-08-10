@@ -12,5 +12,4 @@ class TimerListManagerModule {
     fun provideTimerListManager(timerDAO: TimerDAO, timeManager: TimeManager): TimerListManager {
         return TimerListManagerImpl(timerDAO, timeManager)
     }
-
 }

@@ -22,8 +22,8 @@ class PlayBillingManager(context: Context) {
 
     fun setUpPlayBilling() {
         billingClient = BillingClient.newBuilder(context)
-                .setListener(purchasesUpdatedListener)
-                .build()
+            .setListener(purchasesUpdatedListener)
+            .build()
     }
 
     fun release() {
@@ -46,8 +46,10 @@ class PlayBillingManager(context: Context) {
         this.listener = listener
     }
 
-    fun querySkuDetailsAsync(build: SkuDetailsParams,
-                             skuDetailsResponseListener: SkuDetailsResponseListener) {
+    fun querySkuDetailsAsync(
+        build: SkuDetailsParams,
+        skuDetailsResponseListener: SkuDetailsResponseListener
+    ) {
         checkBillingClientSetUp()
         billingClient!!.querySkuDetailsAsync(build, skuDetailsResponseListener)
     }
@@ -66,7 +68,8 @@ class PlayBillingManager(context: Context) {
         checkBillingClientSetUp()
         billingClient!!.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(
-                    @BillingClient.BillingResponse billingResponseCode: Int) {
+                @BillingClient.BillingResponse billingResponseCode: Int
+            ) {
                 if (billingResponseCode == BillingClient.BillingResponse.OK) {
                     isServiceConnected = true
                     executeOnSuccess?.run()
@@ -84,7 +87,8 @@ class PlayBillingManager(context: Context) {
     private fun checkBillingClientSetUp() {
         if (billingClient == null) {
             throw IllegalStateException(
-                    "You should set up PlayBillingManager before calling this method.")
+                "You should set up PlayBillingManager before calling this method."
+            )
         }
     }
 
@@ -101,5 +105,4 @@ class PlayBillingManager(context: Context) {
 
         fun connectionToServiceFailed()
     }
-
 }

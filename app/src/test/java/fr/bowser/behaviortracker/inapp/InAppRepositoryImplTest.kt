@@ -5,14 +5,15 @@ import org.json.JSONObject
 import org.junit.Assert
 import org.junit.Test
 
-
 class InAppRepositoryImplTest {
 
     @Test
     fun insertAndGet() {
         // Given
-        val inAppConfig = InApp("sku", "name", "description", "0.99 €",
-                "feature")
+        val inAppConfig = InApp(
+            "sku", "name", "description", "0.99 €",
+            "feature"
+        )
         val sharedPreference = HashMapSharedPreference()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
         val list = mutableListOf<SkuDetails>()
@@ -42,10 +43,18 @@ class InAppRepositoryImplTest {
         // Given
         val sharedPreference = HashMapSharedPreference()
         val set = mutableSetOf<String>()
-        set.add(InApp("sku1", "name1", "description1", "0.99 €",
-                "feature1").toJson())
-        set.add(InApp("sku2", "name2", "description2", "0.59 €",
-                "feature2").toJson())
+        set.add(
+            InApp(
+                "sku1", "name1", "description1", "0.99 €",
+                "feature1"
+            ).toJson()
+        )
+        set.add(
+            InApp(
+                "sku2", "name2", "description2", "0.59 €",
+                "feature2"
+            ).toJson()
+        )
         sharedPreference.edit().putStringSet(InAppRepositoryImpl.IN_APP_DETAILS_KEY, set)
 
         // When
@@ -63,8 +72,10 @@ class InAppRepositoryImplTest {
     @Test
     fun fillWithConfiguration() {
         // Given
-        val inAppConfig = InApp("sku1", "name1", "description1",
-                "0.99 €", "feature")
+        val inAppConfig = InApp(
+            "sku1", "name1", "description1",
+            "0.99 €", "feature"
+        )
         val sharedPreference = HashMapSharedPreference()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
 
@@ -78,5 +89,4 @@ class InAppRepositoryImplTest {
         Assert.assertEquals("0.99 €", inApp.price)
         Assert.assertEquals("feature", inApp.feature)
     }
-
 }

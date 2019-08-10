@@ -13,8 +13,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
-
-
 @RunWith(MockitoJUnitRunner::class)
 class TimeManagerTest {
 
@@ -97,7 +95,7 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopRunningTimerWhenStartANewOne(){
+    fun stopRunningTimerWhenStartANewOne() {
         val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(false)
@@ -115,7 +113,7 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopRunningTimerWhenStartANewOneListener(){
+    fun stopRunningTimerWhenStartANewOneListener() {
         val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
         `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(false)
@@ -132,10 +130,10 @@ class TimeManagerTest {
 
         val timerManagerListener = object : TimeManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                if(updatedTimer == timer1 && !updatedTimer.isActivate){
+                if (updatedTimer == timer1 && !updatedTimer.isActivate) {
                     timer1IsStopped = true
                 }
-                if(updatedTimer == timer2 && updatedTimer.isActivate){
+                if (updatedTimer == timer2 && updatedTimer.isActivate) {
                     timer2IsActive = true
                 }
             }
@@ -151,5 +149,4 @@ class TimeManagerTest {
 
         Assert.assertTrue(timer1IsStopped && timer2IsActive)
     }
-
 }

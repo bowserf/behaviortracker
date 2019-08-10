@@ -87,13 +87,13 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
         val builder = AlertDialog.Builder(this)
         builder.setMessage(message)
-                .setPositiveButton(android.R.string.yes) { dialog, which ->
-                    presenter.onClickResetAllTimers()
-                }
-                .setNegativeButton(android.R.string.no) { dialog, which ->
-                    // do nothing
-                }
-                .show()
+            .setPositiveButton(android.R.string.yes) { dialog, which ->
+                presenter.onClickResetAllTimers()
+            }
+            .setNegativeButton(android.R.string.no) { dialog, which ->
+                // do nothing
+            }
+            .show()
     }
 
     override fun displaySettingsView() {
@@ -105,7 +105,6 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         val alertDialog = AlarmTimerDialog.newInstance()
         alertDialog.show(fragmentManager, AlarmTimerDialog.TAG)
     }
-
 
     override fun displayRewardsView() {
         RewardsActivity.startActivity(this)
@@ -125,9 +124,9 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     private fun setupGraph() {
         val build = DaggerHomeComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-                .homeModule(HomeModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+            .homeModule(HomeModule(this))
+            .build()
         build.inject(this)
     }
 
@@ -141,8 +140,12 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.menu_timer_view -> { presenter.onClickTimerView() }
-                R.id.menu_pomodoro_view -> { presenter.onClickPomodoroView() }
+                R.id.menu_timer_view -> {
+                    presenter.onClickTimerView()
+                }
+                R.id.menu_pomodoro_view -> {
+                    presenter.onClickPomodoroView()
+                }
             }
             true
         }
@@ -154,12 +157,13 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         }
     }
 
-    private fun activityStartedFromAlarmNotif(){
-        if(intent.extras == null) {
+    private fun activityStartedFromAlarmNotif() {
+        if (intent.extras == null) {
             return
         }
-        val isAlarmNotifClicked = intent.extras.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
-        if(isAlarmNotifClicked){
+        val isAlarmNotifClicked =
+            intent.extras.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
+        if (isAlarmNotifClicked) {
             presenter.onAlarmNotificationClicked()
         }
     }
@@ -171,5 +175,4 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     companion object {
         const val CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER"
     }
-
 }

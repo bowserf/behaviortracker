@@ -10,13 +10,10 @@ interface RewardsRowContract {
         fun setInApp(inApp: InApp)
 
         fun getActivity(): Activity
-
     }
 
     interface Presenter {
 
         fun onItemClicked(sku: String)
-
     }
-
 }

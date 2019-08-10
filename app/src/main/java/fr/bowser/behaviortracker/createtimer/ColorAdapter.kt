@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.utils.ColorUtils
 
-class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
+class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) :
+    RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
 
     private var selectedItemPosition = 0
 
@@ -46,7 +47,5 @@ class ColorAdapter(val context: Context, val presenter: CreateTimerPresenter) : 
     inner class ColorViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         val colorView: ImageView = view.findViewById(R.id.item_color)
-
     }
-
 }

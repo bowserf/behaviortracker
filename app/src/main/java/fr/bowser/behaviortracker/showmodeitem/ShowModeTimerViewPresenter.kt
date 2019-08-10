@@ -3,9 +3,10 @@ package fr.bowser.behaviortracker.showmodeitem
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 
-class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
-                                 val timeManager: TimeManager)
-    : ShowModeTimerViewContract.Presenter {
+class ShowModeTimerViewPresenter(
+    val view: ShowModeTimerViewContract.View,
+    val timeManager: TimeManager
+) : ShowModeTimerViewContract.Presenter {
 
     private lateinit var timer: Timer
 
@@ -44,7 +45,5 @@ class ShowModeTimerViewPresenter(val view: ShowModeTimerViewContract.View,
                 view.timerUpdated(timer.time.toLong())
             }
         }
-
     }
-
 }

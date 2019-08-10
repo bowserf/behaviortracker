@@ -13,5 +13,4 @@ class EventManagerModule {
     fun provideEventManager(context: Context): EventManager {
         return EventManagerImpl(context)
     }
-
 }

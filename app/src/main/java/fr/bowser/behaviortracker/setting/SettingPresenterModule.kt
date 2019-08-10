@@ -14,5 +14,4 @@ class SettingPresenterModule {
     fun provideSettingPresenter(context: Context, eventManager: EventManager): SettingPresenter {
         return SettingPresenter(context, eventManager)
     }
-
 }

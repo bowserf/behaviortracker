@@ -4,9 +4,11 @@ import com.android.billingclient.api.Purchase
 import fr.bowser.behaviortracker.inapp.InAppManager
 import fr.bowser.behaviortracker.inapp.InAppRepository
 
-class RewardsPresenter(private val screen: RewardsContract.Screen,
-                       private val inAppRepository: InAppRepository,
-                       private val inAppManager: InAppManager) : RewardsContract.Presenter {
+class RewardsPresenter(
+    private val screen: RewardsContract.Screen,
+    private val inAppRepository: InAppRepository,
+    private val inAppManager: InAppManager
+) : RewardsContract.Presenter {
 
     private val inAppListener: InAppManager.Listener
 
@@ -34,7 +36,6 @@ class RewardsPresenter(private val screen: RewardsContract.Screen,
             override fun onPurchaseFailed() {
                 screen.displayFailPurchaseMessage()
             }
-
         }
     }
 }

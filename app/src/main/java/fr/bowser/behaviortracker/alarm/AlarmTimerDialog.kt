@@ -82,9 +82,9 @@ class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
 
     private fun setupGraph() {
         val component = DaggerAlarmTimerComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-                .alarmTimerModule(AlarmTimerModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+            .alarmTimerModule(AlarmTimerModule(this))
+            .build()
         component.inject(this)
     }
 
@@ -101,7 +101,5 @@ class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
         fun newInstance(): AlarmTimerDialog {
             return AlarmTimerDialog()
         }
-
     }
-
 }

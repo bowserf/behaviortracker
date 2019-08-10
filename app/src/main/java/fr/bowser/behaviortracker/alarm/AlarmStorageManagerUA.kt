@@ -25,5 +25,4 @@ class AlarmStorageManagerUA : AlarmStorageManager {
     override fun getSavedAlarmTime(): AlarmTime? {
         return AlarmTime(hour, minute, isActivated)
     }
-
 }

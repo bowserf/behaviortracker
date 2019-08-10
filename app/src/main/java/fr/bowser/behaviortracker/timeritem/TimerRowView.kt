@@ -19,8 +19,8 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
 class TimerRowView(context: Context) :
-        CardView(context),
-        TimerItemContract.View {
+    CardView(context),
+    TimerItemContract.View {
 
     private val chrono: TextView
     private val tvName: TextView
@@ -168,21 +168,20 @@ class TimerRowView(context: Context) :
         val message = resources.getString(R.string.item_timer_remove_message)
         val builder = AlertDialog.Builder(context)
         builder.setMessage(message)
-                .setPositiveButton(android.R.string.yes, { dialog, which ->
-                    presenter.onClickDeleteTimer()
-                })
-                .setNegativeButton(android.R.string.no, { dialog, which ->
-                    // do nothing
-                })
-                .show()
+            .setPositiveButton(android.R.string.yes, { dialog, which ->
+                presenter.onClickDeleteTimer()
+            })
+            .setNegativeButton(android.R.string.no, { dialog, which ->
+                // do nothing
+            })
+            .show()
     }
 
     private fun setupGraph() {
         val component = DaggerTimerItemComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-                .timerItemModule(TimerItemModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
+            .timerItemModule(TimerItemModule(this))
+            .build()
         component.inject(this)
     }
-
 }

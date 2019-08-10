@@ -39,7 +39,8 @@ class SettingFragment : PreferenceFragmentCompat() {
 
         val keyPomodoroPauseStage = resources.getString(R.string.pref_key_pomodoro_pause_stage)
         val pomodoroPauseStage = findPreference<TimeModificationDialogPreference>(
-            keyPomodoroPauseStage)
+            keyPomodoroPauseStage
+        )
         pomodoroPauseStage!!.setTimeUnit(DURATION_STAGE_UNIT)
 
         val key = getString(fr.bowser.behaviortracker.R.string.pref_key_send_commentary)
@@ -54,26 +55,33 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     private fun setupGraph() {
         val component = DaggerSettingComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(activity!!))
-                .settingPresenterModule(SettingPresenterModule())
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(activity!!))
+            .settingPresenterModule(SettingPresenterModule())
+            .build()
         component.inject(this)
     }
 
     private fun sendCommentary() {
         val intent = Intent(Intent.ACTION_SENDTO)
         intent.data = Uri.parse("mailto:$SUPPORT_EMAIL")
-        intent.putExtra(Intent.EXTRA_SUBJECT,
-                resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_subject))
+        intent.putExtra(
+            Intent.EXTRA_SUBJECT,
+            resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_subject)
+        )
         try {
-            startActivity(Intent.createChooser(
+            startActivity(
+                Intent.createChooser(
                     intent,
-                    resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_choose_app)))
+                    resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_choose_app)
+                )
+            )
         } catch (ex: android.content.ActivityNotFoundException) {
-            Toast.makeText(activity!!,
-                    resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_no_application_available),
-                    Toast.LENGTH_SHORT)
-                    .show()
+            Toast.makeText(
+                activity!!,
+                resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_no_application_available),
+                Toast.LENGTH_SHORT
+            )
+                .show()
         }
     }
 
@@ -106,5 +114,4 @@ class SettingFragment : PreferenceFragmentCompat() {
         const val TIME_MODIFICATION_UNIT = "s"
         const val DURATION_STAGE_UNIT = "min"
     }
-
 }

@@ -31,8 +31,8 @@ SettingActivity : AppCompatActivity() {
 
     private fun initSettingFragment() {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, SettingFragment())
-                .commit()
+            .replace(R.id.fragment_container, SettingFragment())
+            .commit()
     }
 
     companion object {
@@ -41,6 +41,5 @@ SettingActivity : AppCompatActivity() {
             val intent = Intent(context, SettingActivity::class.java)
             context.startActivity(intent)
         }
-
     }
 }

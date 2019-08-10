@@ -1,9 +1,9 @@
 package fr.bowser.behaviortracker.database
 
-import androidx.sqlite.db.SupportSQLiteDatabase
+import android.content.Context
 import androidx.room.Room
 import androidx.room.migration.Migration
-import android.content.Context
+import androidx.sqlite.db.SupportSQLiteDatabase
 import fr.bowser.behaviortracker.timer.TimerDAO
 
 class DatabaseManager(context: Context) {
@@ -11,12 +11,14 @@ class DatabaseManager(context: Context) {
     private val database: DatabaseProvider
 
     init {
-        database = Room.databaseBuilder(context,
-                DatabaseProvider::class.java,
-                DATABASE_NAME)
-                .addMigrations(MIGRATION_1_3)
-                .fallbackToDestructiveMigration()
-                .build()
+        database = Room.databaseBuilder(
+            context,
+            DatabaseProvider::class.java,
+            DATABASE_NAME
+        )
+            .addMigrations(MIGRATION_1_3)
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     fun provideTimerDAO(): TimerDAO {
@@ -32,7 +34,5 @@ class DatabaseManager(context: Context) {
                 database.execSQL("ALTER TABLE Timer ADD COLUMN position INTEGER NOT NULL DEFAULT '0'")
             }
         }
-
     }
-
 }

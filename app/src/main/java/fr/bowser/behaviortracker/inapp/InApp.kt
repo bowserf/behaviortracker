@@ -3,11 +3,13 @@ package fr.bowser.behaviortracker.inapp
 import org.json.JSONException
 import org.json.JSONObject
 
-data class InApp(val sku: String,
-                 val name: String,
-                 val description: String,
-                 val price: String,
-                 val feature: String) {
+data class InApp(
+    val sku: String,
+    val name: String,
+    val description: String,
+    val price: String,
+    val feature: String
+) {
 
     fun toJson(): String {
         try {
@@ -46,10 +48,11 @@ data class InApp(val sku: String,
                 val feature = jsonObject.getString(JSON_FEATURE)
                 return InApp(sku, name, description, price, feature)
             } catch (e: JSONException) {
-                throw IllegalStateException("Error when trying to convert JSON to" +
-                        "InApp : " + e.message)
+                throw IllegalStateException(
+                    "Error when trying to convert JSON to" +
+                            "InApp : " + e.message
+                )
             }
         }
     }
-
 }

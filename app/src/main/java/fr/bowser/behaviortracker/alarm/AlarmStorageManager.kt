@@ -9,5 +9,4 @@ interface AlarmStorageManager {
     fun removeAlarmTime()
 
     fun getSavedAlarmTime(): AlarmTime?
-
 }

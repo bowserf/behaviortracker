@@ -11,9 +11,10 @@ class ChoosePomodoroTimerModule {
 
     @GenericScope(component = ChoosePomodoroTimerComponent::class)
     @Provides
-    fun provideChoosePomodoroTimerPresenter(timerListManager: TimerListManager,
-                                            pomodoroManager: PomodoroManager): ChoosePomodoroTimerPresenter {
+    fun provideChoosePomodoroTimerPresenter(
+        timerListManager: TimerListManager,
+        pomodoroManager: PomodoroManager
+    ): ChoosePomodoroTimerPresenter {
         return ChoosePomodoroTimerPresenter(timerListManager, pomodoroManager)
     }
-
 }

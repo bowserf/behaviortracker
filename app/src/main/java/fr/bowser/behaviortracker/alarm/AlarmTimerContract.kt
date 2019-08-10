@@ -7,7 +7,6 @@ interface AlarmTimerContract {
         fun start()
 
         fun onClickValidate(alarmTime: AlarmTime)
-
     }
 
     interface View {
@@ -17,7 +16,5 @@ interface AlarmTimerContract {
         fun displayMessageAlarmEnabled()
 
         fun displayMessageAlarmDisabled()
-
     }
-
 }

@@ -46,9 +46,10 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         setupGraph()
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_pomodoro, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,8 +116,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         val progressDrawable = progresssBar.progressDrawable
         if (progressDrawable is RotateDrawable) {
             progressDrawable.drawable!!.setColorFilter(
-                    ColorUtils.getColor(context!!, timer.color),
-                    PorterDuff.Mode.SRC_ATOP)
+                ColorUtils.getColor(context!!, timer.color),
+                PorterDuff.Mode.SRC_ATOP
+            )
         }
     }
 
@@ -134,25 +136,34 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     }
 
     override fun displayPauseIcon() {
-        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
+        fab.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
                 context!!,
-                R.color.pomodoro_pause_session))
+                R.color.pomodoro_pause_session
+            )
+        )
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_pause_white))
 
         activity!!.invalidateOptionsMenu()
     }
 
     override fun displayPlayIcon() {
-        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
+        fab.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
                 context!!,
-                R.color.pomodoro_resume_session))
+                R.color.pomodoro_resume_session
+            )
+        )
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_play_white))
     }
 
     override fun displayStartIcon() {
-        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
+        fab.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
                 context!!,
-                R.color.pomodoro_start_session))
+                R.color.pomodoro_start_session
+            )
+        )
         fab.setImageDrawable(context!!.getDrawable(R.drawable.ic_flag))
     }
 
@@ -164,13 +175,14 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     override fun displayNoTimerAvailable() {
         Snackbar.make(
-                emptyContent,
-                getString(R.string.pomodoro_no_timer_available),
-                Snackbar.LENGTH_SHORT)
-                .setAction(context!!.resources.getString(R.string.pomodoro_create_timer)) {
-                    presenter.onClickCreateTimer()
-                }
-                .show()
+            emptyContent,
+            getString(R.string.pomodoro_no_timer_available),
+            Snackbar.LENGTH_SHORT
+        )
+            .setAction(context!!.resources.getString(R.string.pomodoro_create_timer)) {
+                presenter.onClickCreateTimer()
+            }
+            .show()
     }
 
     override fun displayCreateTimer() {
@@ -189,9 +201,10 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     private fun startFabAnimation() {
         val fabAnimator = ObjectAnimator.ofFloat(
-                this,
-                PROPERTY_FAB_ANIMATION,
-                1f, 1.15f, 1f)
+            this,
+            PROPERTY_FAB_ANIMATION,
+            1f, 1.15f, 1f
+        )
         fabAnimator.duration = FAB_ANIMATION_DURATION
         fabAnimator.repeatCount = 1
         fabAnimator.interpolator = AccelerateDecelerateInterpolator()
@@ -211,9 +224,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     private fun setupGraph() {
         val build = DaggerPomodoroComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-                .pomodoroModule(PomodoroModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+            .pomodoroModule(PomodoroModule(this))
+            .build()
         build.inject(this)
     }
 

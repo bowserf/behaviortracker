@@ -44,6 +44,4 @@ class AlarmStorageManagerImpl(context: Context) : AlarmStorageManager {
         const val ALARM_MINUTE = "alarm_storage_manager.pref_key.alarm_minute"
         const val ALARM_IS_ACTIVATED = "alarm_storage_manager.pref_key.alarm_is_activated"
     }
-
-
 }

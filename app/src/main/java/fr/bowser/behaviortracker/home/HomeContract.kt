@@ -15,7 +15,6 @@ interface HomeContract {
         fun displayPomodoroView()
 
         fun displayTimerView()
-
     }
 
     interface Presenter {
@@ -41,7 +40,5 @@ interface HomeContract {
         fun onClickTimerView()
 
         fun onClickPomodoroView()
-
     }
-
 }

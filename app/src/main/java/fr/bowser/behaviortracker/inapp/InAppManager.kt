@@ -18,13 +18,10 @@ interface InAppManager {
         fun onPurchaseSucceed(purchases: List<Purchase>)
 
         fun onPurchaseFailed()
-
     }
 
-    interface ActivityContainer{
+    interface ActivityContainer {
 
         fun get(): Activity
-
     }
-
 }

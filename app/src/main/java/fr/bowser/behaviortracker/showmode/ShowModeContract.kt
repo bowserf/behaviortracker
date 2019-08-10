@@ -9,7 +9,6 @@ interface ShowModeContract {
         fun displayTimerList(timers: List<Timer>, selectedTimerPosition: Int)
 
         fun keepScreeOn(keepScreenOn: Boolean)
-
     }
 
     interface Presenter {
@@ -21,7 +20,5 @@ interface ShowModeContract {
         fun onClickScreeOff()
 
         fun keepScreenOn(): Boolean
-
     }
-
 }

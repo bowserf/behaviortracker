@@ -17,5 +17,4 @@ interface HomeManager {
         const val SELECTED_HOME_VIEW_TIMERS_LIST = 0
         const val SELECTED_HOME_VIEW_POMODORO = 1
     }
-
 }

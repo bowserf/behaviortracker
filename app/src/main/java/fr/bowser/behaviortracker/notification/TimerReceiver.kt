@@ -32,12 +32,14 @@ class TimerReceiver : BroadcastReceiver() {
     }
 
     private fun notificationDismiss(context: Context) {
-        val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
+        val notifManager =
+            BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
         notifManager.dismissNotification()
     }
 
     private fun pauseTimer(context: Context) {
-        val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
+        val notifManager =
+            BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
         val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
         notifManager.timer?.let {
             timeManager.stopTimer(notifManager.timer!!)
@@ -45,7 +47,8 @@ class TimerReceiver : BroadcastReceiver() {
     }
 
     private fun startTimer(context: Context) {
-        val notifManager = BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
+        val notifManager =
+            BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
         val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
         notifManager.timer?.let {
             timeManager.startTimer(notifManager.timer!!)
@@ -82,12 +85,11 @@ class TimerReceiver : BroadcastReceiver() {
             val intent = Intent(context, TimerReceiver::class.java)
             intent.action = action
             return PendingIntent.getBroadcast(
-                    context,
-                    0,
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT)
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
         }
-
     }
-
 }

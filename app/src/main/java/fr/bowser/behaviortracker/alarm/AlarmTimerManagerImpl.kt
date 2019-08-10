@@ -9,9 +9,10 @@ import android.content.pm.PackageManager
 import android.os.Build
 import java.util.*
 
-class AlarmTimerManagerImpl(private val context: Context,
-                            private val alarmStorageManager: AlarmStorageManager)
-    : AlarmTimerManager {
+class AlarmTimerManagerImpl(
+    private val context: Context,
+    private val alarmStorageManager: AlarmStorageManager
+) : AlarmTimerManager {
 
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -30,7 +31,11 @@ class AlarmTimerManagerImpl(private val context: Context,
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmIntent)
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmIntent)
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                alarmIntent
+            )
         }
 
         changeDeviceBootReceiverStatus(context, PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
@@ -54,9 +59,10 @@ class AlarmTimerManagerImpl(private val context: Context,
 
     private fun changeDeviceBootReceiverStatus(context: Context, state: Int) {
         val receiver = ComponentName(context, DeviceBootReceiver::class.java)
-        context.packageManager.setComponentEnabledSetting(receiver,
-                state,
-                PackageManager.DONT_KILL_APP)
+        context.packageManager.setComponentEnabledSetting(
+            receiver,
+            state,
+            PackageManager.DONT_KILL_APP
+        )
     }
-
 }

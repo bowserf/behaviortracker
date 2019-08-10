@@ -1,14 +1,14 @@
 package fr.bowser.behaviortracker.setting
 
 import android.content.Context
+import android.content.res.TypedArray
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.preference.DialogPreference
 import androidx.preference.PreferenceDialogFragmentCompat
-import android.content.res.TypedArray
-import android.os.Bundle
 import fr.bowser.behaviortracker.R
 
 class TimeModificationSettings : PreferenceDialogFragmentCompat() {
@@ -81,7 +81,6 @@ class TimeModificationSettings : PreferenceDialogFragmentCompat() {
             return fragment
         }
     }
-
 }
 
 class TimeModificationDialogPreference : DialogPreference {
@@ -90,7 +89,11 @@ class TimeModificationDialogPreference : DialogPreference {
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     private var timerModification: Int = 0
 
@@ -105,7 +108,7 @@ class TimeModificationDialogPreference : DialogPreference {
     }
 
     override fun onSetInitialValue(defaultValue: Any?) {
-        if(defaultValue != null) {
+        if (defaultValue != null) {
             setTimerModification(defaultValue as Int)
         } else {
             setTimerModification(getPersistedInt(timerModification))
@@ -129,5 +132,4 @@ class TimeModificationDialogPreference : DialogPreference {
     fun getTimeUnit(): String {
         return timeUnit
     }
-
 }

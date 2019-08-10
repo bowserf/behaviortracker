@@ -10,9 +10,10 @@ class AlarmTimerModule(private val view: AlarmTimerContract.View) {
 
     @GenericScope(component = AlarmTimerComponent::class)
     @Provides
-    fun provideAlarmTimerPresenter(alarmTimerManager: AlarmTimerManager,
-                                   eventManager: EventManager): AlarmDialogPresenter {
+    fun provideAlarmTimerPresenter(
+        alarmTimerManager: AlarmTimerManager,
+        eventManager: EventManager
+    ): AlarmDialogPresenter {
         return AlarmDialogPresenter(view, alarmTimerManager, eventManager)
     }
-
 }

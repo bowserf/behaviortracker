@@ -13,12 +13,12 @@ class TimeNotificationManagerModule {
 
     @Singleton
     @Provides
-    fun provideTimerNotificationManager(context: Context,
-                                        timeManager: TimeManager,
-                                        timerListManager: TimerListManager,
-                                        pomodoroManager: PomodoroManager)
-            : TimerNotificationManager {
+    fun provideTimerNotificationManager(
+        context: Context,
+        timeManager: TimeManager,
+        timerListManager: TimerListManager,
+        pomodoroManager: PomodoroManager
+    ): TimerNotificationManager {
         return TimerNotificationManagerImpl(context, timeManager, timerListManager, pomodoroManager)
     }
-
 }

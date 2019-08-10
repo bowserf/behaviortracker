@@ -10,9 +10,10 @@ class PomodoroModule(private val pomodoroScreen: PomodoroContract.Screen) {
 
     @GenericScope(component = PomodoroComponent::class)
     @Provides
-    fun providePomodoroPresenter(pomodoroManager: PomodoroManager,
-                                 timerListManager: TimerListManager): PomodoroPresenter {
+    fun providePomodoroPresenter(
+        pomodoroManager: PomodoroManager,
+        timerListManager: TimerListManager
+    ): PomodoroPresenter {
         return PomodoroPresenter(pomodoroScreen, pomodoroManager, timerListManager.getTimerList())
     }
-
 }

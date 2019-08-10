@@ -11,7 +11,6 @@ interface RewardsContract {
         fun displaySuccessPurchaseMessage()
 
         fun displayFailPurchaseMessage()
-
     }
 
     interface Presenter {
@@ -19,7 +18,5 @@ interface RewardsContract {
         fun start()
 
         fun stop()
-
     }
-
 }

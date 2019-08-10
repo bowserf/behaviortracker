@@ -7,5 +7,4 @@ interface AlarmTimerManager {
     fun removeAlarm()
 
     fun getSavedAlarmTimer(): AlarmTime?
-
 }

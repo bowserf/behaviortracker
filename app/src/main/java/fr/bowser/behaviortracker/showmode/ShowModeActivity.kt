@@ -76,9 +76,9 @@ class ShowModeActivity : AppCompatActivity(), ShowModeContract.View {
 
     private fun setupGraph() {
         val build = DaggerShowModeComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-                .showModeModule(ShowModeModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+            .showModeModule(ShowModeModule(this))
+            .build()
         build.inject(this)
     }
 
@@ -122,7 +122,5 @@ class ShowModeActivity : AppCompatActivity(), ShowModeContract.View {
             intent.putExtra(EXTRA_SELECTED_TIMER_ID, selectedTimerId)
             context.startActivity(intent)
         }
-
     }
-
 }

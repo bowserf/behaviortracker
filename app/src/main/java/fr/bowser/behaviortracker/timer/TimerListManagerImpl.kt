@@ -4,8 +4,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
 
-class TimerListManagerImpl(private val timerDAO: TimerDAO,
-                           private val timeManager: TimeManager) : TimerListManager {
+class TimerListManagerImpl(
+    private val timerDAO: TimerDAO,
+    private val timeManager: TimeManager
+) : TimerListManager {
 
     internal val background = newFixedThreadPoolContext(2, "bg")
 
@@ -89,5 +91,4 @@ class TimerListManagerImpl(private val timerDAO: TimerDAO,
     override fun removeListener(listener: TimerListManager.Listener): Boolean {
         return listeners.remove(listener)
     }
-
 }

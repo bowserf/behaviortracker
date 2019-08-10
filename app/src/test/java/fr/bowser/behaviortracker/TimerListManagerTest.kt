@@ -195,7 +195,7 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun setPositionWhenAddTimer(){
+    fun setPositionWhenAddTimer() {
         val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
         val timer1 = Timer("Timer1", Color.RED, false, -1)
@@ -203,5 +203,4 @@ class TimerListManagerTest {
 
         Assert.assertEquals(0, timer1.position)
     }
-
 }

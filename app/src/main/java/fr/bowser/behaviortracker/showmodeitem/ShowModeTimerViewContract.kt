@@ -9,7 +9,6 @@ interface ShowModeTimerViewContract {
         fun timerUpdated(newTime: Long)
 
         fun statusUpdated(activate: Boolean)
-
     }
 
     interface Presenter {
@@ -21,7 +20,5 @@ interface ShowModeTimerViewContract {
         fun stop()
 
         fun onClickView()
-
     }
-
 }

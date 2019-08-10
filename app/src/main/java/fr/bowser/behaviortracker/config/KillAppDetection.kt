@@ -11,7 +11,8 @@ class KillAppDetection : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        notificationManager = BehaviorTrackerApp.getAppComponent(applicationContext).provideTimerNotificationManager()
+        notificationManager =
+            BehaviorTrackerApp.getAppComponent(applicationContext).provideTimerNotificationManager()
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
@@ -21,5 +22,4 @@ class KillAppDetection : Service() {
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
-
 }

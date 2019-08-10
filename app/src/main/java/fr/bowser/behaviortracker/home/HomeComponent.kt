@@ -6,12 +6,12 @@ import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = HomeComponent::class)
 @Component(
-        modules = [(HomeModule::class)],
-        dependencies = [(BehaviorTrackerAppComponent::class)])
+    modules = [(HomeModule::class)],
+    dependencies = [(BehaviorTrackerAppComponent::class)]
+)
 interface HomeComponent {
 
     fun inject(activity: HomeActivity)
 
     fun provideHomePresenter(): HomePresenter
-
 }

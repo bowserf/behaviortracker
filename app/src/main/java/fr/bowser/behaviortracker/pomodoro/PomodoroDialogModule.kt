@@ -12,5 +12,4 @@ class PomodoroDialogModule {
     fun providePomodoroDialogPresenter(pomodoroManager: PomodoroManager): PomodoroDialogPresenter {
         return PomodoroDialogPresenter(pomodoroManager)
     }
-
 }

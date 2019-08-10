@@ -17,6 +17,4 @@ class HomeManagerImpl : HomeManager {
     override fun getCurrentView(): Int {
         return selectedViewId
     }
-
-
 }

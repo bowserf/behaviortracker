@@ -18,14 +18,15 @@ import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.TimeConverter
 
-class TimerNotificationManagerImpl(private val context: Context,
-                                   timeManager: TimeManager,
-                                   timerListManager: TimerListManager,
-                                   private val pomodoroManager: PomodoroManager)
-    : TimerNotificationManager {
+class TimerNotificationManagerImpl(
+    private val context: Context,
+    timeManager: TimeManager,
+    timerListManager: TimerListManager,
+    private val pomodoroManager: PomodoroManager
+) : TimerNotificationManager {
 
     private val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     private var timerNotificationBuilder: NotificationCompat.Builder? = null
 
@@ -58,22 +59,25 @@ class TimerNotificationManagerImpl(private val context: Context,
         pomodoroManager.addListener(pomodoroListener)
 
         pauseAction = NotificationCompat.Action.Builder(
-                R.drawable.ic_pause,
-                context.resources.getString(R.string.timer_notif_pause),
-                TimerReceiver.getPausePendingIntent(context))
-                .build()
+            R.drawable.ic_pause,
+            context.resources.getString(R.string.timer_notif_pause),
+            TimerReceiver.getPausePendingIntent(context)
+        )
+            .build()
 
         resumeAction = NotificationCompat.Action.Builder(
-                R.drawable.ic_play,
-                context.resources.getString(R.string.timer_notif_start),
-                TimerReceiver.getPlayPendingIntent(context))
-                .build()
+            R.drawable.ic_play,
+            context.resources.getString(R.string.timer_notif_start),
+            TimerReceiver.getPlayPendingIntent(context)
+        )
+            .build()
 
         continuePomodoroAction = NotificationCompat.Action.Builder(
-                R.drawable.ic_pomodoro,
-                context.resources.getString(R.string.timer_notif_continue_pomodoro),
-                TimerReceiver.getContinuePomodoroPendingIntent(context))
-                .build()
+            R.drawable.ic_pomodoro,
+            context.resources.getString(R.string.timer_notif_continue_pomodoro),
+            TimerReceiver.getContinuePomodoroPendingIntent(context)
+        )
+            .build()
     }
 
     override fun changeOngoingState(isAppInBackground: Boolean) {
@@ -114,21 +118,24 @@ class TimerNotificationManagerImpl(private val context: Context,
             val homeIntent = Intent(context, HomeActivity::class.java)
             homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
             val resultPendingIntent = PendingIntent.getActivity(
-                    context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+                context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
             timerNotificationBuilder = NotificationCompat.Builder(
-                    context,
-                    context.resources.getString(R.string.timer_notif_channel_id))
-                    .setContentTitle(getNotificationTitle(modifiedTimer))
-                    .setContentText(getNotificationMessage(modifiedTimer))
-                    .setSmallIcon(R.drawable.ic_timer)
-                    .setContentIntent(resultPendingIntent)
-                    .setDeleteIntent(TimerReceiver.getDeletePendingIntent(context))
-                    .addAction(pauseAction)
+                context,
+                context.resources.getString(R.string.timer_notif_channel_id)
+            )
+                .setContentTitle(getNotificationTitle(modifiedTimer))
+                .setContentText(getNotificationMessage(modifiedTimer))
+                .setSmallIcon(R.drawable.ic_timer)
+                .setContentIntent(resultPendingIntent)
+                .setDeleteIntent(TimerReceiver.getDeletePendingIntent(context))
+                .addAction(pauseAction)
 
             notificationManager.notify(
-                    TIMER_NOTIFICATION_ID,
-                    timerNotificationBuilder!!.build())
+                TIMER_NOTIFICATION_ID,
+                timerNotificationBuilder!!.build()
+            )
 
             startKillAppDectectionService()
         }
@@ -174,7 +181,7 @@ class TimerNotificationManagerImpl(private val context: Context,
         }
     }
 
-    private fun continuePomodoroNotif(){
+    private fun continuePomodoroNotif() {
         timerNotificationBuilder!!.let {
             it.mActions?.clear()
             it.addAction(continuePomodoroAction)
@@ -209,9 +216,10 @@ class TimerNotificationManagerImpl(private val context: Context,
         val channelDescription = res.getString(R.string.timer_notif_channel_description)
         val channelImportance = NotificationManager.IMPORTANCE_LOW
         val notificationChannel = NotificationChannel(
-                channelId,
-                channelName,
-                channelImportance)
+            channelId,
+            channelName,
+            channelImportance
+        )
         notificationChannel.description = channelDescription
         notificationChannel.enableVibration(false)
         notificationChannel.enableLights(false)
@@ -236,7 +244,7 @@ class TimerNotificationManagerImpl(private val context: Context,
     }
 
     private fun createTimerListManagerListener(): TimerListManager.Listener {
-        return object:TimerListManager.Listener{
+        return object : TimerListManager.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 if (timer == removedTimer) {
                     dismissNotification()
@@ -244,7 +252,7 @@ class TimerNotificationManagerImpl(private val context: Context,
             }
 
             override fun onTimerAdded(updatedTimer: Timer) {
-                if(pomodoroManager.isStarted){
+                if (pomodoroManager.isStarted) {
                     return
                 }
                 // if timer is directly activate, display it in the notification
@@ -262,9 +270,9 @@ class TimerNotificationManagerImpl(private val context: Context,
     }
 
     private fun createTimeManagerListener(): TimeManager.Listener {
-        return object:TimeManager.Listener{
+        return object : TimeManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                if(pomodoroManager.isStarted){
+                if (pomodoroManager.isStarted) {
                     return
                 }
 
@@ -276,7 +284,7 @@ class TimerNotificationManagerImpl(private val context: Context,
             }
 
             override fun onTimerTimeChanged(updatedTimer: Timer) {
-                if(pomodoroManager.isStarted){
+                if (pomodoroManager.isStarted) {
                     return
                 }
 
@@ -287,8 +295,8 @@ class TimerNotificationManagerImpl(private val context: Context,
         }
     }
 
-    private fun createPomodoroListener(): PomodoroManager.Listener{
-        return object : PomodoroManager.Listener{
+    private fun createPomodoroListener(): PomodoroManager.Listener {
+        return object : PomodoroManager.Listener {
 
             override fun onPomodoroSessionStop() {
                 dismissNotification()
@@ -321,7 +329,5 @@ class TimerNotificationManagerImpl(private val context: Context,
     companion object {
 
         private const val TIMER_NOTIFICATION_ID = 42
-
     }
-
 }

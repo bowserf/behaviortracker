@@ -20,11 +20,10 @@ class DatabaseManagerModule {
     @Singleton
     @Provides
     fun provideTimerDao(context: Context, database: DatabaseManager): TimerDAO {
-        return if(BuildConfig.UA) {
+        return if (BuildConfig.UA) {
             TimerDaoUA(context)
-        }else{
+        } else {
             database.provideTimerDAO()
         }
     }
-
 }

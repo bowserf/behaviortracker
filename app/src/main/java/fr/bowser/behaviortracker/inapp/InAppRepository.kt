@@ -9,5 +9,4 @@ interface InAppRepository {
     fun getInApp(sku: String): InApp
 
     fun set(skuDetails: List<SkuDetails>)
-
 }

@@ -6,12 +6,12 @@ import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = AlarmTimerComponent::class)
 @Component(
-        modules = [(AlarmTimerModule::class)],
-        dependencies = [(BehaviorTrackerAppComponent::class)])
+    modules = [(AlarmTimerModule::class)],
+    dependencies = [(BehaviorTrackerAppComponent::class)]
+)
 interface AlarmTimerComponent {
 
     fun inject(timerDialog: AlarmTimerDialog)
 
     fun provideAlarmDialogPresenter(): AlarmDialogPresenter
-
 }

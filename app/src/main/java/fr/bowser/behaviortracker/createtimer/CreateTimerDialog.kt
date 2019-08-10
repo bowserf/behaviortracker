@@ -38,9 +38,11 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         setupGraph()
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_create_timer, container, false)
     }
 
@@ -48,7 +50,6 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return dialog
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,19 +95,21 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private fun initSpinner(root: View) {
         chooseColor = root.findViewById(R.id.list_colors)
-        chooseColor.layoutManager = GridLayoutManager(activity,
-                resources.getInteger(R.integer.create_timer_number_colors_row),
-                RecyclerView.VERTICAL,
-                false)
+        chooseColor.layoutManager = GridLayoutManager(
+            activity,
+            resources.getInteger(R.integer.create_timer_number_colors_row),
+            RecyclerView.VERTICAL,
+            false
+        )
         chooseColor.setHasFixedSize(true)
         chooseColor.adapter = ColorAdapter(context!!, presenter)
     }
 
     private fun setupGraph() {
         val component = DaggerCreateTimerComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-                .createTimerModule(CreateTimerModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+            .createTimerModule(CreateTimerModule(this))
+            .build()
         component.inject(this)
     }
 
@@ -153,9 +156,9 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
     private fun exitWithAnimation() {
         activity?.supportFragmentManager?.beginTransaction()
-                ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                ?.remove(this)
-                ?.commit()
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            ?.remove(this)
+            ?.commit()
     }
 
     private fun saveTimer() {
@@ -168,9 +171,11 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
 
         private const val IS_POMODORO = "create_timer_dialog.extra.is_pomodoro"
 
-        fun showDialog(activity: AppCompatActivity,
-                       isPomodoro: Boolean,
-                       isLargeScreen: Boolean = true) {
+        fun showDialog(
+            activity: AppCompatActivity,
+            isPomodoro: Boolean,
+            isLargeScreen: Boolean = true
+        ) {
             val createTimerDialog = CreateTimerDialog()
 
             val bundle = Bundle()
@@ -183,14 +188,11 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
             } else {
                 // The device is smaller, so show the fragment fullscreen
                 activity.supportFragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .add(android.R.id.content, createTimerDialog)
-                        .addToBackStack(null)
-                        .commit()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .add(android.R.id.content, createTimerDialog)
+                    .addToBackStack(null)
+                    .commit()
             }
-
         }
     }
-
-
 }

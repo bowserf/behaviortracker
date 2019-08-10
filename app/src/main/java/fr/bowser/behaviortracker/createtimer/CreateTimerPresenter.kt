@@ -7,11 +7,13 @@ import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.ColorUtils
 
-class CreateTimerPresenter(private val view: CreateTimerContract.View,
-                           private val timerListManager: TimerListManager,
-                           private val timeManager: TimeManager,
-                           private val pomodoroManager: PomodoroManager,
-                           private val eventManager: EventManager) : CreateTimerContract.Presenter {
+class CreateTimerPresenter(
+    private val view: CreateTimerContract.View,
+    private val timerListManager: TimerListManager,
+    private val timeManager: TimeManager,
+    private val pomodoroManager: PomodoroManager,
+    private val eventManager: EventManager
+) : CreateTimerContract.Presenter {
 
     private var colorPosition: Int = 0
 
@@ -37,7 +39,7 @@ class CreateTimerPresenter(private val view: CreateTimerContract.View,
             timeManager.startTimer(timer)
         }
 
-        if(isPomodoroMode){
+        if (isPomodoroMode) {
             pomodoroManager.startPomodoro(timer)
         }
 

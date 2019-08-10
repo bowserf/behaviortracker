@@ -6,12 +6,12 @@ import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = RewardsRowComponent::class)
 @Component(
-        modules = [(RewardsRowModule::class)],
-        dependencies = [(BehaviorTrackerAppComponent::class)])
+    modules = [(RewardsRowModule::class)],
+    dependencies = [(BehaviorTrackerAppComponent::class)]
+)
 interface RewardsRowComponent {
 
     fun inject(view: RewardsRowView)
 
     fun provideRewardsRowPresenter(): RewardsRowPresenter
-
 }

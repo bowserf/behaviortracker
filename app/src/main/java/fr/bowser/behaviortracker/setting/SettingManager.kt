@@ -8,7 +8,7 @@ interface SettingManager {
 
     fun isPomodoroVibrationEnable(): Boolean
 
-    fun getPomodoroPauseStepDuration():Long
+    fun getPomodoroPauseStepDuration(): Long
 
     fun getPomodoroStepDuration(): Long
 
@@ -19,7 +19,5 @@ interface SettingManager {
     interface TimerModificationListener {
 
         fun onTimerModificationChanged(timerModification: Int)
-
     }
-
 }

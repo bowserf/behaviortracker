@@ -15,7 +15,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
 class ShowModeTimerView(context: Context) : LinearLayout(context),
-        ShowModeTimerViewContract.View {
+    ShowModeTimerViewContract.View {
 
     @Inject
     lateinit var presenter: ShowModeTimerViewPresenter
@@ -75,10 +75,9 @@ class ShowModeTimerView(context: Context) : LinearLayout(context),
 
     private fun setupGraph() {
         val component = DaggerShowModeTimerViewComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-                .showModeTimerViewModule(ShowModeTimerViewModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
+            .showModeTimerViewModule(ShowModeTimerViewModule(this))
+            .build()
         component.inject(this)
     }
-
 }

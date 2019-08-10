@@ -51,12 +51,12 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
 
     override fun displaySuccessPurchaseMessage() {
         Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
-                .show()
+            .show()
     }
 
     override fun displayFailPurchaseMessage() {
         Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
-                .show()
+            .show()
     }
 
     private fun initializeToolbar() {
@@ -82,10 +82,12 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
 
         val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         list.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect,
-                                        view: View,
-                                        parent: RecyclerView,
-                                        state: RecyclerView.State) {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
                 val currentPosition = parent.getChildAdapterPosition(view)
                 outRect.top = if (currentPosition == 0) margin else 0
                 outRect.left = margin
@@ -97,9 +99,9 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
 
     private fun setupGraph() {
         val component = DaggerRewardsComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-                .rewardsPresenterModule(RewardsPresenterModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+            .rewardsPresenterModule(RewardsPresenterModule(this))
+            .build()
         component.inject(this)
     }
 
@@ -109,7 +111,5 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
             val intent = Intent(context, RewardsActivity::class.java)
             context.startActivity(intent)
         }
-
     }
-
 }

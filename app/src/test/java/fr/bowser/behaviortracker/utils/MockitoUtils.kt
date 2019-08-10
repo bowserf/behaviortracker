@@ -10,5 +10,4 @@ object MockitoUtils {
     }
 
     private fun <T> uninitialized(): T = null as T
-
 }

@@ -42,5 +42,4 @@ object TimeConverter {
 
         return string
     }
-
 }

@@ -6,12 +6,12 @@ import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = ChoosePomodoroTimerComponent::class)
 @Component(
-        modules = [(ChoosePomodoroTimerModule::class)],
-        dependencies = [(BehaviorTrackerAppComponent::class)])
+    modules = [(ChoosePomodoroTimerModule::class)],
+    dependencies = [(BehaviorTrackerAppComponent::class)]
+)
 interface ChoosePomodoroTimerComponent {
 
     fun inject(dialog: ChoosePomodoroTimerDialog)
 
     fun provideChoosePomodoroTimerPresenter(): ChoosePomodoroTimerPresenter
-
 }

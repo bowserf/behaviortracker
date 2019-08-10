@@ -21,7 +21,6 @@ interface TimerContract {
         fun displayCancelDeletionView()
 
         fun isTimerListEmpty(): Boolean
-
     }
 
     interface Presenter {
@@ -41,7 +40,5 @@ interface TimerContract {
         fun onReorderFinished(timerList: List<Timer>)
 
         fun cancelTimerDeletion()
-
     }
-
 }

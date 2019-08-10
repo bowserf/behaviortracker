@@ -6,11 +6,13 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Timer")
-data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
-                 @ColumnInfo(name = "current_time") val currentTime: Long,
-                 @ColumnInfo(name = "name") var name: String,
-                 @ColumnInfo(name = "color") var color: Int,
-                 @ColumnInfo(name = "position") var position: Int) {
+data class Timer(
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
+    @ColumnInfo(name = "current_time") val currentTime: Long,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "color") var color: Int,
+    @ColumnInfo(name = "position") var position: Int
+) {
 
     @Ignore
     var isActivate: Boolean = false
@@ -19,20 +21,26 @@ data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var i
     var time: Float = 0f
 
     @Ignore
-    constructor(name: String, color: Int, isActivate: Boolean = false, position: Int = 0)
-            : this(0, 0, name, color, position) {
+    constructor(name: String, color: Int, isActivate: Boolean = false, position: Int = 0) : this(
+        0,
+        0,
+        name,
+        color,
+        position
+    ) {
         this.isActivate = isActivate
     }
 
     override fun equals(other: Any?): Boolean {
         if (other is Timer) {
-            if(other.id == id
-                    && other.color == color
-                    && other.isActivate == isActivate
-                    && other.currentTime == currentTime
-                    && other.name == name
-                    && other.time == time
-                    && other.position == position){
+            if (other.id == id
+                && other.color == color
+                && other.isActivate == isActivate
+                && other.currentTime == currentTime
+                && other.name == name
+                && other.time == time
+                && other.position == position
+            ) {
                 return true
             }
         }
@@ -46,5 +54,4 @@ data class Timer(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var i
     init {
         time = currentTime.toFloat()
     }
-
 }

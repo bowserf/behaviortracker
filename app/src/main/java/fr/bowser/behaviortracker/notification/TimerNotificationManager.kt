@@ -9,5 +9,4 @@ interface TimerNotificationManager {
     fun changeOngoingState(isAppInBackground: Boolean)
 
     fun dismissNotification(killProcess: Boolean = true)
-
 }

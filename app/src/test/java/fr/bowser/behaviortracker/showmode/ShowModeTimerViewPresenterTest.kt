@@ -48,7 +48,7 @@ class ShowModeTimerViewPresenterTest {
     }
 
     @Test
-    fun activeTimerSetViewToActiveState(){
+    fun activeTimerSetViewToActiveState() {
         // Given
         val timer = Timer("timer", ColorUtils.COLOR_AMBER)
         timer.isActivate = true
@@ -61,7 +61,7 @@ class ShowModeTimerViewPresenterTest {
     }
 
     @Test
-    fun clickOnViewWhenTimerIsDisableStartIt(){
+    fun clickOnViewWhenTimerIsDisableStartIt() {
         // Given
         val timer = Timer("timer", ColorUtils.COLOR_AMBER)
         timer.isActivate = false
@@ -75,7 +75,7 @@ class ShowModeTimerViewPresenterTest {
     }
 
     @Test
-    fun clickOnViewWhenTimerIsEnableStopIt(){
+    fun clickOnViewWhenTimerIsEnableStopIt() {
         // Given
         val timer = Timer("timer", ColorUtils.COLOR_AMBER)
         timer.isActivate = true
@@ -87,5 +87,4 @@ class ShowModeTimerViewPresenterTest {
         // Then
         Mockito.verify(timeManager).stopTimer(timer)
     }
-
 }

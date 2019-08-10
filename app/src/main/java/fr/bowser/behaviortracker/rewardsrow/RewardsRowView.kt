@@ -51,9 +51,9 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
 
     private fun setupGraph() {
         val component = DaggerRewardsRowComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-                .rewardsRowModule(RewardsRowModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
+            .rewardsRowModule(RewardsRowModule(this))
+            .build()
         component.inject(this)
     }
 
@@ -76,5 +76,4 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
             else -> throw IllegalStateException("Unkown feature : $feature")
         }
     }
-
 }

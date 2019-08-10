@@ -12,5 +12,4 @@ internal class HomeManagerModule {
     fun provideHomeManager(): HomeManager {
         return HomeManagerImpl()
     }
-
 }

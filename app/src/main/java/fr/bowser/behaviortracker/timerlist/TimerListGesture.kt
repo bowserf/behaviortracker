@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.R
 
-class TimerListGesture(context: Context, private val callback: Listener)
-    : ItemTouchHelper.SimpleCallback(
+class TimerListGesture(context: Context, private val callback: Listener) :
+    ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-        ItemTouchHelper.LEFT) {
+        ItemTouchHelper.LEFT
+    ) {
 
     private var isMoving = false
 
@@ -20,12 +21,15 @@ class TimerListGesture(context: Context, private val callback: Listener)
 
     init {
         icon = getBitmapFromVectorDrawable(context, R.drawable.ic_delete)
-        rightMargin = context.resources.getDimensionPixelOffset(R.dimen.timer_list_remove_icon_margin_right)
+        rightMargin =
+            context.resources.getDimensionPixelOffset(R.dimen.timer_list_remove_icon_margin_right)
     }
 
-    override fun onMove(recyclerView: RecyclerView,
-                        viewHolder: RecyclerView.ViewHolder,
-                        target: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
+    ): Boolean {
         isMoving = true
         callback.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
         return true
@@ -43,13 +47,15 @@ class TimerListGesture(context: Context, private val callback: Listener)
         callback.onSwiped(viewHolder.adapterPosition)
     }
 
-    override fun onChildDraw(c: Canvas,
-                             recyclerView: RecyclerView,
-                             viewHolder: RecyclerView.ViewHolder,
-                             dX: Float,
-                             dY: Float,
-                             actionState: Int,
-                             isCurrentlyActive: Boolean) {
+    override fun onChildDraw(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val itemView = viewHolder.itemView
             if (dX < 0) {
@@ -61,7 +67,6 @@ class TimerListGesture(context: Context, private val callback: Listener)
             }
 
             viewHolder.itemView.translationX = dX
-
         } else {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         }
@@ -85,5 +90,4 @@ class TimerListGesture(context: Context, private val callback: Listener)
         fun onSelectedChangedUp()
         fun onSwiped(position: Int)
     }
-
 }

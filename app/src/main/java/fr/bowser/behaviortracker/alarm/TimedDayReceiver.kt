@@ -11,13 +11,14 @@ class TimedDayReceiver : BroadcastReceiver() {
         AlarmNotification.displayAlarmNotif(context)
 
         // set a new timer
-        val alarmStorageManager = BehaviorTrackerApp.getAppComponent(context).provideAlarmStorageManager()
-        val alarmTimerManager = BehaviorTrackerApp.getAppComponent(context).provideAlarmTimerManager()
+        val alarmStorageManager =
+            BehaviorTrackerApp.getAppComponent(context).provideAlarmStorageManager()
+        val alarmTimerManager =
+            BehaviorTrackerApp.getAppComponent(context).provideAlarmTimerManager()
 
         val alarmTime = alarmStorageManager.getSavedAlarmTime()
         if (alarmTime != null) {
             alarmTimerManager.setAlarm(alarmTime.hour, alarmTime.minute, true)
         }
     }
-
 }

@@ -15,5 +15,4 @@ interface EventManager {
     fun sendAlarmNotificationClickedEvent()
 
     fun sendClickBuyInAppEvent(sku: String)
-
 }

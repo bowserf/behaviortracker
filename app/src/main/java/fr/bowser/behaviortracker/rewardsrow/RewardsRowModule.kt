@@ -11,9 +11,10 @@ class RewardsRowModule(private val screen: RewardsRowContract.Screen) {
 
     @GenericScope(component = RewardsRowComponent::class)
     @Provides
-    fun provideRewardsRowPresenter(inAppManager: InAppManager,
-                                   eventManager: EventManager): RewardsRowPresenter {
+    fun provideRewardsRowPresenter(
+        inAppManager: InAppManager,
+        eventManager: EventManager
+    ): RewardsRowPresenter {
         return RewardsRowPresenter(screen, inAppManager, eventManager)
     }
-
 }

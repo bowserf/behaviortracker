@@ -44,6 +44,4 @@ class RewardsRowPresenterTest {
         // Then
         Mockito.verify(eventManager, Mockito.times(1)).sendClickBuyInAppEvent("sku")
     }
-
-
 }

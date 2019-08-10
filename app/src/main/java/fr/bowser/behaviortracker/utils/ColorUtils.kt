@@ -31,25 +31,25 @@ object ColorUtils {
     fun convertPositionToColor(colorPosition: Int): Int {
         val color: Int
         when (colorPosition) {
-                0 -> color = COLOR_DEEP_ORANGE
-                1 -> color = COLOR_BROWN
-                2 -> color = COLOR_GREY
-                3 -> color = COLOR_BLUE_GREY
-                4 -> color = COLOR_YELLOW
-                5 -> color = COLOR_AMBER
-                6 -> color = COLOR_ORANGE
-                7 -> color = COLOR_GREEN
-                8 -> color = COLOR_LIGHT_GREEN
-                9 -> color = COLOR_LIME
-                10 -> color = COLOR_LIGHT_BLUE
-                11-> color = COLOR_CYAN
-                12 -> color = COLOR_TEAL
-                13 -> color = COLOR_DEEP_PURPLE
-                14 -> color = COLOR_INDIGO
-                15 -> color = COLOR_BLUE
-                16 -> color = COLOR_RED
-                17 -> color = COLOR_PINK
-                18 -> color = COLOR_PURPLE
+            0 -> color = COLOR_DEEP_ORANGE
+            1 -> color = COLOR_BROWN
+            2 -> color = COLOR_GREY
+            3 -> color = COLOR_BLUE_GREY
+            4 -> color = COLOR_YELLOW
+            5 -> color = COLOR_AMBER
+            6 -> color = COLOR_ORANGE
+            7 -> color = COLOR_GREEN
+            8 -> color = COLOR_LIGHT_GREEN
+            9 -> color = COLOR_LIME
+            10 -> color = COLOR_LIGHT_BLUE
+            11 -> color = COLOR_CYAN
+            12 -> color = COLOR_TEAL
+            13 -> color = COLOR_DEEP_PURPLE
+            14 -> color = COLOR_INDIGO
+            15 -> color = COLOR_BLUE
+            16 -> color = COLOR_RED
+            17 -> color = COLOR_PINK
+            18 -> color = COLOR_PURPLE
             else -> throw IllegalStateException("This position is not managed : $colorPosition")
         }
         return color
