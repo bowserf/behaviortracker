@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.timeritem
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.showmode.ShowModeActivity
+import fr.bowser.behaviortracker.showmode.ShowModeFragment
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timerlist.TimerFragmentDirections
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
@@ -161,7 +164,9 @@ class TimerRowView(context: Context) :
     }
 
     override fun startShowMode(id: Long) {
-        ShowModeActivity.startActivity(context, id)
+        val action = TimerFragmentDirections.actionTimerListScreenToShowModeScreen(id)
+        val activity = context as Activity
+        activity.findNavController(R.id.home_nav_host_fragment).navigate(action)
     }
 
     private fun displayRemoveConfirmationDialog() {

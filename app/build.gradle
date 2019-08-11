@@ -12,6 +12,8 @@ apply plugin: 'io.fabric'
 
 apply plugin: "io.gitlab.arturbosch.detekt"
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 // If release config detected, install it and use it
 if (project.hasProperty("behaviorTrackerSigningPath")) {
     apply from: "$behaviorTrackerSigningPath"

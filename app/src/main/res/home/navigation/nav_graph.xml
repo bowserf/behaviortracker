@@ -8,10 +8,25 @@
         android:id="@id/timer_list_screen"
         android:name="fr.bowser.behaviortracker.timerlist.TimerFragment"
         android:label="fragment_metronome"
-        tools:layout="@layout/fragment_timer" />
+        tools:layout="@layout/fragment_timer">
+        <action
+            android:id="@+id/action_timer_list_screen_to_show_mode_screen"
+            app:destination="@id/show_mode_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
     <fragment
         android:id="@id/pomodoro_screen"
         android:name="fr.bowser.behaviortracker.pomodoro.PomodoroFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_pomodoro" />
+    <fragment
+        android:id="@+id/show_mode_screen"
+        android:name="fr.bowser.behaviortracker.showmode.ShowModeFragment"
+        android:label="ShowModeActivity"
+        tools:layout="@layout/fragment_show_mode">
+        <argument
+            android:name="selectedTimerId"
+            app:argType="long" />
+    </fragment>
 </navigation>

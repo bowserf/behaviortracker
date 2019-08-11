@@ -11,7 +11,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 )
 interface ShowModeComponent {
 
-    fun inject(view: ShowModeActivity)
+    fun inject(view: ShowModeFragment)
 
     fun provideShowModePresenter(): ShowModePresenter
 }

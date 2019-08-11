@@ -2,9 +2,8 @@ package fr.bowser.behaviortracker.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,6 +17,9 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     @Inject
     lateinit var presenter: HomePresenter
+
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var shadowBbottomNavigationView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,10 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         activityStartedFromAlarmNotif()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return Navigation.findNavController(this, R.id.home_nav_host_fragment).navigateUp()
     }
 
     override fun onStart() {
@@ -56,10 +62,29 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     private fun setupNavigation() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.home_bottom_navigation)
+        bottomNavigationView = findViewById(R.id.home_bottom_navigation)
+        shadowBbottomNavigationView = findViewById(R.id.home_bottom_navigation_shadow)
 
         val navController = Navigation.findNavController(this, R.id.home_nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.timer_list_screen -> showBottomNav()
+                R.id.pomodoro_screen -> showBottomNav()
+                else -> hideBottomNav()
+            }
+        }
+    }
+
+    private fun hideBottomNav() {
+        bottomNavigationView.visibility = View.GONE
+        shadowBbottomNavigationView.visibility = View.GONE
+    }
+
+    private fun showBottomNav() {
+        shadowBbottomNavigationView.visibility = View.VISIBLE
+        bottomNavigationView.visibility = View.VISIBLE
     }
 
     private fun manageIntent() {
@@ -77,10 +102,6 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         if (isAlarmNotifClicked) {
             presenter.onAlarmNotificationClicked()
         }
-    }
-
-    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
-        beginTransaction().func().commit()
     }
 
     companion object {

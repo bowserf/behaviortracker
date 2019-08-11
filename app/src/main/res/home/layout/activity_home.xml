@@ -19,6 +19,7 @@
         app:navGraph="@navigation/nav_graph" />
 
     <View
+        android:id="@+id/home_bottom_navigation_shadow"
         android:layout_width="0dp"
         android:layout_height="@dimen/default_shadow_height"
         android:background="@drawable/background_shadow_top"
