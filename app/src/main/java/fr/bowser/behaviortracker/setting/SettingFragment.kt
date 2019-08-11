@@ -3,7 +3,10 @@ package fr.bowser.behaviortracker.setting
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -48,9 +51,20 @@ class SettingFragment : PreferenceFragmentCompat() {
         sendCommentary.onPreferenceClickListener = onPreferenceClickListener
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initializeToolbar(view)
+    }
+
     override fun onDestroy() {
         presenter.stop()
         super.onDestroy()
+    }
+
+    private fun initializeToolbar(view: View) {
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setupGraph() {

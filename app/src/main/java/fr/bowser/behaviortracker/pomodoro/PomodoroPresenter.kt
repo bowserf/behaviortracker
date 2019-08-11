@@ -65,6 +65,10 @@ class PomodoroPresenter(
         updateFabIcon()
     }
 
+    override fun onClickSettings() {
+        screen.displaySettings()
+    }
+
     override fun onClickCreateTimer() {
         screen.displayCreateTimer()
     }

@@ -18,15 +18,24 @@
             android:id="@+id/action_timer_list_screen_to_rewards_screen"
             app:destination="@id/rewards_screen"
             app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_timer_list_screen_to_settings_screen"
+            app:destination="@id/settings_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
     </fragment>
     <fragment
         android:id="@id/pomodoro_screen"
         android:name="fr.bowser.behaviortracker.pomodoro.PomodoroFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_pomodoro" />
+        tools:layout="@layout/fragment_pomodoro" >
+        <action
+            android:id="@+id/action_pomodoro_screen_to_settings_screen"
+            app:destination="@id/settings_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
     <fragment
         android:id="@+id/show_mode_screen"
         android:name="fr.bowser.behaviortracker.showmode.ShowModeFragment"
@@ -41,4 +50,9 @@
         android:name="fr.bowser.behaviortracker.rewards.RewardsFragment"
         android:label="RewardsFragment"
         tools:layout="@layout/fragment_rewards"/>
+    <fragment
+        android:id="@+id/settings_screen"
+        android:name="fr.bowser.behaviortracker.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting"/>
 </navigation>

@@ -27,6 +27,8 @@ interface PomodoroContract {
         fun displayCreateTimer()
 
         fun dismissPomodoroDialog()
+
+        fun displaySettings()
     }
 
     interface Presenter {
@@ -44,5 +46,7 @@ interface PomodoroContract {
         fun onClickStopPomodoro()
 
         fun onClickCreateTimer()
+
+        fun onClickSettings()
     }
 }

@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.drawable.RotateDrawable
@@ -14,13 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.choosepomodorotimer.ChoosePomodoroTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
-import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
@@ -95,7 +96,8 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
                 return true
             }
             R.id.menu_settings -> {
-                SettingActivity.startActivity(context!!)
+                presenter.onClickSettings()
+                return true
             }
         }
         return false
@@ -200,6 +202,11 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
             transaction.remove(fragment)
             transaction.commit()
         }
+    }
+
+    override fun displaySettings() {
+        val activity = context as Activity
+        activity.findNavController(R.id.home_nav_host_fragment).navigate(R.id.settings_screen)
     }
 
     private fun startFabAnimation() {

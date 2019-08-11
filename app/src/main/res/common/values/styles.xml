@@ -6,6 +6,11 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <item name="android:itemTextAppearance">@style/PopupMenuTextAppearance</item>
+        <item name="preferenceTheme">@style/YourTheme.PreferenceThemeOverlay</item>
+    </style>
+
+    <style name="YourTheme.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
+        <item name="android:layout">@layout/fragment_setting</item>
     </style>
 
     <style name="PopupMenuTextAppearance" parent="TextAppearance.AppCompat.Menu">

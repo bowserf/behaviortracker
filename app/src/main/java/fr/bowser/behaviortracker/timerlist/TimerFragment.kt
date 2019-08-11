@@ -31,8 +31,6 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
-import fr.bowser.behaviortracker.rewards.RewardsFragment
-import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
@@ -139,7 +137,8 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun displaySettingsView() {
-        SettingActivity.startActivity(context!!)
+        val activity = context as Activity
+        activity.findNavController(R.id.home_nav_host_fragment).navigate(R.id.settings_screen)
     }
 
     override fun displayAlarmTimerDialog() {
