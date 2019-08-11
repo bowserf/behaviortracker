@@ -37,8 +37,6 @@
 
         <activity android:name=".showmode.ShowModeFragment" />
 
-        <activity android:name=".rewards.RewardsActivity" />
-
         <receiver
             android:name=".notification.TimerReceiver"
             android:exported="false" />

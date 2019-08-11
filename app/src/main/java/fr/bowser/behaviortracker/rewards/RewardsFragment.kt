@@ -1,12 +1,13 @@
 package fr.bowser.behaviortracker.rewards
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -15,7 +16,7 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.inapp.InApp
 import javax.inject.Inject
 
-class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
+class RewardsFragment : Fragment(), RewardsContract.Screen {
 
     private lateinit var rewardsAdapter: RewardsAdapter
 
@@ -26,13 +27,20 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rewards)
 
         setupGraph()
+    }
 
-        initializeToolbar()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = inflater.inflate(R.layout.fragment_rewards, container, false)!!
 
-        initRewardsList()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initializeToolbar(view)
+
+        initRewardsList(view)
     }
 
     override fun onStart() {
@@ -59,23 +67,16 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
             .show()
     }
 
-    private fun initializeToolbar() {
-        val myToolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(myToolbar)
-        supportActionBar?.let {
-            it.title = resources.getString(R.string.activity_rewards_title)
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setDisplayShowHomeEnabled(true)
-        }
-        myToolbar.setNavigationOnClickListener {
-            finish()
-        }
+    private fun initializeToolbar(view: View) {
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun initRewardsList() {
-        list = findViewById(R.id.list_rewards)
+    private fun initRewardsList(view: View) {
+        list = view.findViewById(R.id.list_rewards)
 
-        list.layoutManager = LinearLayoutManager(this)
+        list.layoutManager = LinearLayoutManager(context!!)
         list.setHasFixedSize(true)
         rewardsAdapter = RewardsAdapter()
         list.adapter = rewardsAdapter
@@ -99,17 +100,9 @@ class RewardsActivity : AppCompatActivity(), RewardsContract.Screen {
 
     private fun setupGraph() {
         val component = DaggerRewardsComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
             .rewardsPresenterModule(RewardsPresenterModule(this))
             .build()
         component.inject(this)
-    }
-
-    companion object {
-
-        fun startActivity(context: Context) {
-            val intent = Intent(context, RewardsActivity::class.java)
-            context.startActivity(intent)
-        }
     }
 }

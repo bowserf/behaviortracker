@@ -11,7 +11,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 )
 interface RewardsComponent {
 
-    fun inject(activity: RewardsActivity)
+    fun inject(activity: RewardsFragment)
 
     fun provideRewardsPresenter(): RewardsPresenter
 }

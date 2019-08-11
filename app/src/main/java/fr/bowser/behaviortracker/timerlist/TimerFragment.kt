@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timerlist
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +31,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
-import fr.bowser.behaviortracker.rewards.RewardsActivity
+import fr.bowser.behaviortracker.rewards.RewardsFragment
 import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
@@ -146,7 +148,8 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun displayRewardsView() {
-        RewardsActivity.startActivity(context!!)
+        val activity = context as Activity
+        activity.findNavController(R.id.home_nav_host_fragment).navigate(R.id.rewards_screen)
     }
 
     override fun displayCreateTimerView() {

@@ -14,6 +14,13 @@
             app:destination="@id/show_mode_screen"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_timer_list_screen_to_rewards_screen"
+            app:destination="@id/rewards_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@id/pomodoro_screen"
@@ -29,4 +36,9 @@
             android:name="selectedTimerId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/rewards_screen"
+        android:name="fr.bowser.behaviortracker.rewards.RewardsFragment"
+        android:label="RewardsFragment"
+        tools:layout="@layout/fragment_rewards"/>
 </navigation>

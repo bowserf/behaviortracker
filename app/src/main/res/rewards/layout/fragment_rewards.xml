@@ -11,11 +11,19 @@
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/default_shadow_height"
         android:minHeight="?attr/actionBarSize"
-        app:layout_constraintBottom_toTopOf="@id/fragment_container"
+        app:layout_constraintBottom_toTopOf="@id/list_rewards"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/default_shadow_height"
+        android:background="@drawable/background_shadow_bottom"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_rewards"
