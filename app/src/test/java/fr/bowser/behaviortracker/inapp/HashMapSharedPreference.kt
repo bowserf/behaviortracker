@@ -52,13 +52,13 @@ class HashMapSharedPreference : SharedPreferences {
 
     class MapEditor(private val map: MutableMap<String, Any>) : SharedPreferences.Editor {
 
-        override fun putString(key: String, value: String): SharedPreferences.Editor {
-            map[key] = value
+        override fun putString(key: String?, value: String?): SharedPreferences.Editor {
+            map[key!!] = value!!
             return this
         }
 
-        override fun putStringSet(key: String, values: Set<String>): SharedPreferences.Editor {
-            map[key] = values
+        override fun putStringSet(key: String?, values: MutableSet<String>?): SharedPreferences.Editor {
+            map[key!!] = values!!
             return this
         }
 
