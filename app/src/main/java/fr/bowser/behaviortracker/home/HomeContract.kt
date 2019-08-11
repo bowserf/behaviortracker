@@ -11,15 +11,9 @@ interface HomeContract {
         fun displayAlarmTimerDialog()
 
         fun displayRewardsView()
-
-        fun displayPomodoroView()
-
-        fun displayTimerView()
     }
 
     interface Presenter {
-
-        fun initialize()
 
         fun start()
 
@@ -36,9 +30,5 @@ interface HomeContract {
         fun onAlarmNotificationClicked()
 
         fun onClickRewards()
-
-        fun onClickTimerView()
-
-        fun onClickPomodoroView()
     }
 }

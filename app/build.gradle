@@ -126,6 +126,8 @@ dependencies {
     implementation rootProject.ext.dependencies.androidXRecyclerView
     implementation rootProject.ext.dependencies.androidXAnnotation
     implementation rootProject.ext.dependencies.androidXViewPager2
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
 
     // Billing
     implementation 'com.android.billingclient:billing:1.1'

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmNotification
@@ -34,9 +36,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
         initializeToolbar()
 
-        initializeBottomNavigationView()
-
-        presenter.initialize()
+        setupNavigation()
 
         manageIntent()
 
@@ -110,18 +110,6 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         RewardsActivity.startActivity(this)
     }
 
-    override fun displayPomodoroView() {
-        supportFragmentManager.inTransaction {
-            replace(R.id.fragment_container, PomodoroFragment(), PomodoroFragment.TAG)
-        }
-    }
-
-    override fun displayTimerView() {
-        supportFragmentManager.inTransaction {
-            replace(R.id.fragment_container, TimerFragment(), TimerFragment.TAG)
-        }
-    }
-
     private fun setupGraph() {
         val build = DaggerHomeComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
@@ -135,20 +123,11 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         setSupportActionBar(myToolbar)
     }
 
-    private fun initializeBottomNavigationView() {
+    private fun setupNavigation() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.home_bottom_navigation)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.menu_timer_view -> {
-                    presenter.onClickTimerView()
-                }
-                R.id.menu_pomodoro_view -> {
-                    presenter.onClickPomodoroView()
-                }
-            }
-            true
-        }
+        val navController = Navigation.findNavController(this, R.id.home_nav_host_fragment)
+        bottomNavigationView.setupWithNavController(navController)
     }
 
     private fun manageIntent() {

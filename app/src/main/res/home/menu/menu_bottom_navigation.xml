@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_timer_view"
+        android:id="@+id/timer_list_screen"
         android:enabled="true"
         android:icon="@drawable/ic_timer_white"
         android:title="@string/bottom_navigation_timer_view"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menu_pomodoro_view"
+        android:id="@+id/pomodoro_screen"
         android:enabled="true"
         android:icon="@drawable/ic_pomodoro"
         android:title="@string/bottom_navigation_pomodoro_view"

@@ -10,8 +10,6 @@ import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
-import fr.bowser.behaviortracker.home.HomeManager
-import fr.bowser.behaviortracker.home.HomeManagerModule
 import fr.bowser.behaviortracker.inapp.InAppManager
 import fr.bowser.behaviortracker.inapp.InAppManagerModule
 import fr.bowser.behaviortracker.inapp.InAppRepository
@@ -35,7 +33,6 @@ import javax.inject.Singleton
         AlarmTimerManagerModule::class,
         InAppManagerModule::class,
         PomodoroManagerModule::class,
-        HomeManagerModule::class,
         TimerListManagerModule::class
     )
 )
@@ -66,8 +63,6 @@ interface BehaviorTrackerAppComponent {
     fun provideInAppRepository(): InAppRepository
 
     fun providePomodoroManager(): PomodoroManager
-
-    fun provideHomeManager(): HomeManager
 
     @Component.Builder
     interface Builder {

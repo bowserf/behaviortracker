@@ -17,7 +17,6 @@ internal class HomeModule(private val homeView: HomeContract.View) {
         timerNotificationManager: TimerNotificationManager,
         timeManager: TimeManager,
         timerListManager: TimerListManager,
-        homeManager: HomeManager,
         eventManager: EventManager
     ): HomePresenter {
         return HomePresenter(
@@ -25,7 +24,6 @@ internal class HomeModule(private val homeView: HomeContract.View) {
             timerNotificationManager,
             timeManager,
             timerListManager,
-            homeManager,
             eventManager
         )
     }
