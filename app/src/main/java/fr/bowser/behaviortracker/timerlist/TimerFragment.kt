@@ -5,6 +5,9 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
@@ -12,7 +15,9 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.Keep
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,8 +26,11 @@ import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
+import fr.bowser.behaviortracker.rewards.RewardsActivity
+import fr.bowser.behaviortracker.setting.SettingActivity
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
@@ -51,7 +59,8 @@ class TimerFragment : Fragment(), TimerContract.Screen {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setHasOptionsMenu(true)
+        
         setupGraph()
 
         mSpanCount = resources.getInteger(R.integer.list_timers_number_spans)
@@ -61,9 +70,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_timer, null)
-    }
+    ) = inflater.inflate(R.layout.fragment_timer, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,6 +83,9 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         emptyListView = view.findViewById(R.id.empty_list_view)
         emptyListText = view.findViewById(R.id.empty_list_text)
 
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)!!
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
         presenter.init()
     }
 
@@ -87,6 +97,56 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     override fun onStop() {
         super.onStop()
         presenter.stop()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_reset_all -> {
+                presenter.onClickResetAll()
+                return true
+            }
+            R.id.menu_settings -> {
+                presenter.onClickSettings()
+                return true
+            }
+            R.id.menu_alarm -> {
+                presenter.onClickAlarm()
+            }
+            R.id.menu_rewards -> {
+                presenter.onClickRewards()
+            }
+        }
+        return false
+    }
+
+    override fun displayResetAllDialog() {
+        val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
+        val builder = AlertDialog.Builder(context!!)
+        builder.setMessage(message)
+            .setPositiveButton(android.R.string.yes) { dialog, which ->
+                presenter.onClickResetAllTimers()
+            }
+            .setNegativeButton(android.R.string.no) { dialog, which ->
+                // do nothing
+            }
+            .show()
+    }
+
+    override fun displaySettingsView() {
+        SettingActivity.startActivity(context!!)
+    }
+
+    override fun displayAlarmTimerDialog() {
+        val alertDialog = AlarmTimerDialog.newInstance()
+        alertDialog.show(fragmentManager!!, AlarmTimerDialog.TAG)
+    }
+
+    override fun displayRewardsView() {
+        RewardsActivity.startActivity(context!!)
     }
 
     override fun displayCreateTimerView() {

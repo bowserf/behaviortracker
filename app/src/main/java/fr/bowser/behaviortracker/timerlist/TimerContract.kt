@@ -21,6 +21,14 @@ interface TimerContract {
         fun displayCancelDeletionView()
 
         fun isTimerListEmpty(): Boolean
+
+        fun displayResetAllDialog()
+
+        fun displaySettingsView()
+
+        fun displayAlarmTimerDialog()
+
+        fun displayRewardsView()
     }
 
     interface Presenter {
@@ -30,6 +38,16 @@ interface TimerContract {
         fun start()
 
         fun stop()
+
+        fun onClickResetAll()
+
+        fun onClickResetAllTimers()
+
+        fun onClickSettings()
+
+        fun onClickAlarm()
+
+        fun onClickRewards()
 
         fun onClickAddTimer()
 

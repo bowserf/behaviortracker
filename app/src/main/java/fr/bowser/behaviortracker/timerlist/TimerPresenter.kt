@@ -1,11 +1,13 @@
 package fr.bowser.behaviortracker.timerlist
 
+import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class TimerPresenter(
     private val screen: TimerContract.Screen,
-    private val timerListManager: TimerListManager
+    private val timerListManager: TimerListManager,
+    private val timeManager: TimeManager
 ) : TimerContract.Presenter, TimerListManager.Listener {
 
     private var ongoingDeletionTimer: Timer? = null
@@ -27,6 +29,30 @@ class TimerPresenter(
 
     override fun stop() {
         timerListManager.removeListener(this)
+    }
+
+    override fun onClickResetAll() {
+        screen.displayResetAllDialog()
+    }
+
+    override fun onClickResetAllTimers() {
+        val timers = timerListManager.getTimerList()
+        timers.forEach { timer ->
+            timeManager.updateTime(timer, 0f)
+            timeManager.stopTimer(timer)
+        }
+    }
+
+    override fun onClickSettings() {
+        screen.displaySettingsView()
+    }
+
+    override fun onClickAlarm() {
+        screen.displayAlarmTimerDialog()
+    }
+
+    override fun onClickRewards() {
+        screen.displayRewardsView()
     }
 
     override fun onClickAddTimer() {

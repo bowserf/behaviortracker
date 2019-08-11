@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -50,7 +51,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_pomodoro, container, false)
+    ) = inflater.inflate(R.layout.fragment_pomodoro, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +66,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
         fab = view.findViewById(R.id.pomodoro_choose_timer)
 
         fab.setOnClickListener { presenter.onClickFab() }
+
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)!!
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
     override fun onStart() {
@@ -78,7 +82,6 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
         inflater.inflate(R.menu.menu_pomodoro, menu)
 
         val stopPomodoro = menu.findItem(R.id.menu_stop_pomodoro)
