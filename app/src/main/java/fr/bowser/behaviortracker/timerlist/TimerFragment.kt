@@ -20,7 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -137,8 +137,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun displaySettingsView() {
-        val activity = context as Activity
-        activity.findNavController(R.id.home_nav_host_fragment).navigate(R.id.settings_screen)
+        findNavController().navigate(R.id.settings_screen)
     }
 
     override fun displayAlarmTimerDialog() {
@@ -147,8 +146,7 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun displayRewardsView() {
-        val activity = context as Activity
-        activity.findNavController(R.id.home_nav_host_fragment).navigate(R.id.rewards_screen)
+        findNavController().navigate(R.id.rewards_screen)
     }
 
     override fun displayCreateTimerView() {

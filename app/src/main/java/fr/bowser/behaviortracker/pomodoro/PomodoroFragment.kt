@@ -1,12 +1,16 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -15,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
@@ -205,8 +209,7 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     }
 
     override fun displaySettings() {
-        val activity = context as Activity
-        activity.findNavController(R.id.home_nav_host_fragment).navigate(R.id.settings_screen)
+        findNavController().navigate(R.id.settings_screen)
     }
 
     private fun startFabAnimation() {

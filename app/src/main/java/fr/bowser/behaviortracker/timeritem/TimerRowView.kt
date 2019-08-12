@@ -165,8 +165,7 @@ class TimerRowView(context: Context) :
 
     override fun startShowMode(id: Long) {
         val action = TimerFragmentDirections.actionTimerListScreenToShowModeScreen(id)
-        val activity = context as Activity
-        activity.findNavController(R.id.home_nav_host_fragment).navigate(action)
+        findNavController().navigate(action)
     }
 
     private fun displayRemoveConfirmationDialog() {
