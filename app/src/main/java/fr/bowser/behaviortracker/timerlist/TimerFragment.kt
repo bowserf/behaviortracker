@@ -10,7 +10,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
+import android.view.View.*
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -170,9 +170,9 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun displayEmptyListView() {
-        list.visibility = GONE
-        emptyListView.visibility = View.VISIBLE
-        emptyListText.visibility = View.VISIBLE
+        list.visibility = INVISIBLE
+        emptyListView.visibility = VISIBLE
+        emptyListText.visibility = VISIBLE
 
         val fabAnimator = ObjectAnimator.ofFloat(this, PROPERTY_FAB_ANIMATION, 1f, 1.15f, 1f)
         fabAnimator.duration = FAB_ANIMATION_DURATION
@@ -183,9 +183,9 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun displayListView() {
-        list.visibility = View.VISIBLE
-        emptyListView.visibility = View.GONE
-        emptyListText.visibility = View.GONE
+        list.visibility = VISIBLE
+        emptyListView.visibility = INVISIBLE
+        emptyListText.visibility = INVISIBLE
     }
 
     override fun displayCancelDeletionView() {
