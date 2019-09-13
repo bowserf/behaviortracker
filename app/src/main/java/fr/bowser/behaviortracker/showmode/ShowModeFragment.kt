@@ -98,7 +98,7 @@ class ShowModeFragment : Fragment(), ShowModeContract.View {
 
     override fun displayTimerList(timers: List<Timer>, selectedTimerPosition: Int) {
         adapter.setData(timers)
-        viewPager.currentItem = selectedTimerPosition
+        viewPager.post { viewPager.setCurrentItem(selectedTimerPosition, false) }
     }
 
     override fun keepScreeOn(keepScreenOn: Boolean) {
