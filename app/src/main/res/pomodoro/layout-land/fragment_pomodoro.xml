@@ -114,8 +114,9 @@
         android:id="@+id/pomodoro_content_session"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="pomodoro_progress_size">200dp</dimen>
-    <dimen name="pomodoro_current_timer_size">26sp</dimen>
-    <dimen name="pomodoro_view_external_margin">64dp</dimen>
+    <dimen name="pomodoro_progress_size">140dp</dimen>
+    <dimen name="pomodoro_current_timer_size">20sp</dimen>
+    <dimen name="pomodoro_view_external_margin">48dp</dimen>
 
 </resources>
