@@ -178,6 +178,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
 
     override fun displayPomodoroDialog() {
         val fragmentManager = activity!!.supportFragmentManager
+        if (fragmentManager.findFragmentByTag(PomodoroSessionDialog.TAG) != null) {
+            return
+        }
         val pomodoroDialogSession = PomodoroSessionDialog.newInstance()
         pomodoroDialogSession.show(fragmentManager, PomodoroSessionDialog.TAG)
     }
