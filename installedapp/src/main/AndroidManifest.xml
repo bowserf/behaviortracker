@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="fr.bowser.bhaviortracker" />
+<manifest package="fr.bowser.behaviortracker"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:name="fr.bowser.behaviortracker.config.BehaviorTrackerInstalledAppManager"/>
+
+</manifest>

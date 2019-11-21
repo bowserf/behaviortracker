@@ -6,6 +6,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("io.fabric")
+    kotlin("kapt")
     id("io.gitlab.arturbosch.detekt")
 }
 
@@ -75,6 +76,10 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
+
+    // Other
+    implementation("com.google.dagger:dagger:2.14.1")
+    kapt("com.google.dagger:dagger-compiler:2.14.1")
 
     // Static analyzer
     ktlint("com.github.shyiko:ktlint:0.31.0")

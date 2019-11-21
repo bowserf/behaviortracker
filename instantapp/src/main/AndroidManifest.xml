@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="fr.bowser.bhaviortracker">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fr.bowser.behaviortracker">
 
     <dist:module dist:instant="true" />
+
+    <application
+        android:name="fr.bowser.behaviortracker.config.BehaviorTrackerInstantAppManager"/>
 
 </manifest>

@@ -6,9 +6,10 @@ import android.os.StrictMode
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import fr.bowser.behaviortracker.BuildConfig
+import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
 import io.fabric.sdk.android.Fabric
 
-class BehaviorTrackerApp : Application() {
+abstract class BehaviorTrackerApp : Application() {
 
     lateinit var appComponent: BehaviorTrackerAppComponent
 
@@ -50,6 +51,7 @@ class BehaviorTrackerApp : Application() {
 
     private fun setupGraph() {
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
+                .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(this))
             .context(this)
             .build()
     }

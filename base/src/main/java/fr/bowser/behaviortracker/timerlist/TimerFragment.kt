@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
+import com.google.android.gms.common.wrappers.InstantApps
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
@@ -60,16 +61,16 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        
+
         setupGraph()
 
         mSpanCount = resources.getInteger(R.integer.list_timers_number_spans)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_timer, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -100,7 +101,9 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_home, menu)
+        /*if (!InstantApps.isInstantApp(context)) {
+            inflater.inflate(R.menu.menu_home, menu)
+        }*/
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -127,13 +130,13 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
         val builder = AlertDialog.Builder(context!!)
         builder.setMessage(message)
-            .setPositiveButton(android.R.string.yes) { dialog, which ->
-                presenter.onClickResetAllTimers()
-            }
-            .setNegativeButton(android.R.string.no) { dialog, which ->
-                // do nothing
-            }
-            .show()
+                .setPositiveButton(android.R.string.yes) { dialog, which ->
+                    presenter.onClickResetAllTimers()
+                }
+                .setNegativeButton(android.R.string.no) { dialog, which ->
+                    // do nothing
+                }
+                .show()
     }
 
     override fun displaySettingsView() {
@@ -193,22 +196,22 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         handler.postDelayed(runnable, CANCEL_SUPPRESSION_DISPLAY_TIME.toLong())
 
         Snackbar.make(
-            list,
-            getString(R.string.timer_view_timer_has_been_removed),
-            CANCEL_SUPPRESSION_DISPLAY_TIME
+                list,
+                getString(R.string.timer_view_timer_has_been_removed),
+                CANCEL_SUPPRESSION_DISPLAY_TIME
         )
-            .setAction(android.R.string.cancel) {
-                handler.removeCallbacks(runnable)
-                presenter.cancelTimerDeletion()
-            }
-            .show()
+                .setAction(android.R.string.cancel) {
+                    handler.removeCallbacks(runnable)
+                    presenter.cancelTimerDeletion()
+                }
+                .show()
     }
 
     private fun setupGraph() {
         val build = DaggerTimerComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-            .timerModule(TimerModule(this))
-            .build()
+                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+                .timerModule(TimerModule(this))
+                .build()
         build.inject(this)
     }
 
@@ -238,10 +241,10 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         list.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
-                outRect: Rect,
-                view: View,
-                parent: RecyclerView,
-                state: RecyclerView.State
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
             ) {
                 var currentPosition = parent.getChildAdapterPosition(view)
                 // When an item is removed, getChildAdapterPosition returns NO_POSITION but this

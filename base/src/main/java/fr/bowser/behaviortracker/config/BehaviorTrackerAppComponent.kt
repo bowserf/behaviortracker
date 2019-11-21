@@ -13,6 +13,8 @@ import fr.bowser.behaviortracker.event.EventManagerModule
 import fr.bowser.behaviortracker.inapp.InAppManager
 import fr.bowser.behaviortracker.inapp.InAppManagerModule
 import fr.bowser.behaviortracker.inapp.InAppRepository
+import fr.bowser.behaviortracker.instantapp.InstantAppComponent
+import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
@@ -34,7 +36,9 @@ import javax.inject.Singleton
         InAppManagerModule::class,
         PomodoroManagerModule::class,
         TimerListManagerModule::class
-    )
+    ), dependencies = [
+        InstantAppComponent::class
+    ]
 )
 interface BehaviorTrackerAppComponent {
 
@@ -64,11 +68,15 @@ interface BehaviorTrackerAppComponent {
 
     fun providePomodoroManager(): PomodoroManager
 
+    fun provideMyInstantApp(): InstantAppManager
+
     @Component.Builder
     interface Builder {
 
         fun build(): BehaviorTrackerAppComponent
         @BindsInstance
         fun context(context: Context): Builder
+
+        fun myInstantApp(instantAppComponent: InstantAppComponent): Builder
     }
 }

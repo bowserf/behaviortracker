@@ -6,6 +6,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("io.fabric")
+    kotlin("kapt")
     id("io.gitlab.arturbosch.detekt")
 }
 
@@ -68,6 +69,16 @@ android {
     lintOptions {
         isAbortOnError = false
     }
+
+    sourceSets {
+        getByName("main") {
+            // Split resources.
+            // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
+            res.srcDirs(
+                    "src/main/res/home"
+            )
+        }
+    }
 }
 
 dependencies {
@@ -75,6 +86,13 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
+
+    // Google
+    implementation("com.google.android.gms:play-services-instantapps:17.0.0")
+
+    // Other
+    implementation("com.google.dagger:dagger:2.14.1")
+    kapt("com.google.dagger:dagger-compiler:2.14.1")
 
     // Static analyzer
     ktlint("com.github.shyiko:ktlint:0.31.0")

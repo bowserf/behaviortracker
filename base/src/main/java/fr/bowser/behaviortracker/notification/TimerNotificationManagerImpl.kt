@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.google.android.gms.common.wrappers.InstantApps
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.KillAppDetection
 import fr.bowser.behaviortracker.home.HomeActivity
@@ -20,9 +21,10 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 
 class TimerNotificationManagerImpl(
     private val context: Context,
-    timeManager: TimeManager,
-    timerListManager: TimerListManager,
-    private val pomodoroManager: PomodoroManager
+    private val timeManager: TimeManager,
+    private val timerListManager: TimerListManager,
+    private val pomodoroManager: PomodoroManager,
+    isInstantApp: Boolean
 ) : TimerNotificationManager {
 
     private val notificationManager =
@@ -42,42 +44,16 @@ class TimerNotificationManagerImpl(
 
     override var timer: Timer? = null
 
-    private val pauseAction: NotificationCompat.Action
+    private lateinit var pauseAction: NotificationCompat.Action
 
-    private val resumeAction: NotificationCompat.Action
+    private lateinit var resumeAction: NotificationCompat.Action
 
-    private val continuePomodoroAction: NotificationCompat.Action
+    private lateinit var continuePomodoroAction: NotificationCompat.Action
 
     init {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            generateNotificationChannel(context.resources)
+        if(!isInstantApp) {
+            initNotInstantApps()
         }
-
-        timeManager.addListener(timeManagerListener)
-        timerListManager.addListener(timerListManagerListener)
-
-        pomodoroManager.addListener(pomodoroListener)
-
-        pauseAction = NotificationCompat.Action.Builder(
-            R.drawable.ic_pause,
-            context.resources.getString(R.string.timer_notif_pause),
-            TimerReceiver.getPausePendingIntent(context)
-        )
-            .build()
-
-        resumeAction = NotificationCompat.Action.Builder(
-            R.drawable.ic_play,
-            context.resources.getString(R.string.timer_notif_start),
-            TimerReceiver.getPlayPendingIntent(context)
-        )
-            .build()
-
-        continuePomodoroAction = NotificationCompat.Action.Builder(
-            R.drawable.ic_pomodoro,
-            context.resources.getString(R.string.timer_notif_continue_pomodoro),
-            TimerReceiver.getContinuePomodoroPendingIntent(context)
-        )
-            .build()
     }
 
     override fun changeOngoingState(isAppInBackground: Boolean) {
@@ -104,6 +80,37 @@ class TimerNotificationManagerImpl(
         }
 
         notificationManager.cancel(TIMER_NOTIFICATION_ID)
+    }
+
+    private fun initNotInstantApps() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            generateNotificationChannel(context.resources)
+        }
+
+        timeManager.addListener(timeManagerListener)
+        timerListManager.addListener(timerListManagerListener)
+        pomodoroManager.addListener(pomodoroListener)
+
+        pauseAction = NotificationCompat.Action.Builder(
+                R.drawable.ic_pause,
+                context.resources.getString(R.string.timer_notif_pause),
+                TimerReceiver.getPausePendingIntent(context)
+        )
+                .build()
+
+        resumeAction = NotificationCompat.Action.Builder(
+                R.drawable.ic_play,
+                context.resources.getString(R.string.timer_notif_start),
+                TimerReceiver.getPlayPendingIntent(context)
+        )
+                .build()
+
+        continuePomodoroAction = NotificationCompat.Action.Builder(
+                R.drawable.ic_pomodoro,
+                context.resources.getString(R.string.timer_notif_continue_pomodoro),
+                TimerReceiver.getContinuePomodoroPendingIntent(context)
+        )
+                .build()
     }
 
     private fun displayTimerNotif(modifiedTimer: Timer) {

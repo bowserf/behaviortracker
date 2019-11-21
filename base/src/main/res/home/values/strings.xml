@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Instant app -->
+    <string name="home_instant_app_install">INSTALL</string>
+
     <!-- Menu -->
     <string name="menu_alarm">Alarm</string>
     <string name="menu_reset_all">Reset all timers</string>

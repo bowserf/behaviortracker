@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="home_instant_app_btn_corner_radius">16dp</dimen>
+
+</resources>

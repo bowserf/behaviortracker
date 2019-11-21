@@ -2,7 +2,10 @@ package fr.bowser.behaviortracker.home
 
 interface HomeContract {
 
-    interface View
+    interface Screen {
+
+        fun setupInstantAppButton()
+    }
 
     interface Presenter {
 
@@ -11,5 +14,7 @@ interface HomeContract {
         fun stop()
 
         fun onAlarmNotificationClicked()
+
+        fun onClickInstallApp()
     }
 }

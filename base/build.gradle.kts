@@ -94,7 +94,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1")
 
-    //Design
+    // Design
     implementation("com.google.android.material:material:1.1.0-alpha09")
 
     // AndroidX library

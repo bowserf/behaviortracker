@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.common.wrappers.InstantApps
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmNotification
@@ -13,7 +14,7 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), HomeContract.View {
+class HomeActivity : AppCompatActivity(), HomeContract.Screen {
 
     @Inject
     lateinit var presenter: HomePresenter
@@ -53,11 +54,19 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         super.onPause()
     }
 
+    override fun setupInstantAppButton() {
+        val installBtn = findViewById<View>(R.id.home_instant_app_install)
+        installBtn.visibility = View.VISIBLE
+        installBtn.setOnClickListener {
+            presenter.onClickInstallApp()
+        }
+    }
+
     private fun setupGraph() {
         val build = DaggerHomeComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-            .homeModule(HomeModule())
-            .build()
+                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+                .homeModule(HomeModule(this))
+                .build()
         build.inject(this)
     }
 
@@ -98,7 +107,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
             return
         }
         val isAlarmNotifClicked =
-            intent.extras!!.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
+                intent.extras!!.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
         if (isAlarmNotifClicked) {
             presenter.onAlarmNotificationClicked()
         }
