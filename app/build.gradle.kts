@@ -63,11 +63,11 @@ android {
             versionNameSuffix = ".dev"
             buildConfigField("boolean", "UA", "false")
         }
-        create("ua") {
+        /*create("ua") {
             initWith(getByName("debug"))
             versionNameSuffix = ".ua"
             buildConfigField("boolean", "UA", "true")
-        }
+        }*/
     }
 
     compileOptions {
@@ -110,6 +110,9 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":event"))
+
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
