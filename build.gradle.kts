@@ -9,7 +9,7 @@ buildscript {
         maven(url = "https://plugins.gradle.org/m2/")
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.0")
+        classpath("com.android.tools.build:gradle:3.5.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50")
         classpath("io.fabric.tools:gradle:1.26.0")
         classpath("com.google.gms:google-services:4.3.0")
