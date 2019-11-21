@@ -1,5 +1,6 @@
 import io.gitlab.arturbosch.detekt.detekt
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
@@ -74,6 +75,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    tasks {
+        withType<KotlinCompile> {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+    }
+
     sourceSets {
         getByName("main") {
             // Split resources.
@@ -112,14 +119,14 @@ dependencies {
     implementation("com.google.android.material:material:1.1.0-alpha09")
 
     // AndroidX library
-    implementation("androidx.preference:preference-ktx:1.1.0-rc01")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-alpha4")
+    implementation("androidx.preference:preference-ktx:1.1.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta3")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.0.0")
-    implementation("androidx.annotation:annotation:1.0.2")
-    implementation("androidx.viewpager2:viewpager2:1.0.0-alpha04")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.0.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.1.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.1.0")
 
     // Billing
     implementation("com.android.billingclient:billing:1.1")
@@ -129,7 +136,7 @@ dependencies {
     kapt("androidx.room:room-compiler:2.1.0-alpha06")
 
     // Firebase
-    implementation("com.google.firebase:firebase-core:16.0.8")
+    implementation("com.google.firebase:firebase-analytics:17.2.1")
 
     // Other
     implementation("com.google.dagger:dagger:2.14.1")
@@ -146,12 +153,12 @@ dependencies {
     // Test
     testImplementation("org.json:json:20180813")
     testImplementation("junit:junit:4.12")
-    testImplementation("org.mockito:mockito-core:2.22.0")
+    testImplementation("org.mockito:mockito-core:2.27.0")
     androidTestImplementation("androidx.room:room-testing:2.1.0-alpha06")
-    androidTestImplementation("androidx.test:runner:1.2.0-alpha03")
-    androidTestImplementation("androidx.test:rules:1.2.0-alpha03")
+    androidTestImplementation("androidx.test:runner:1.2.0")
+    androidTestImplementation("androidx.test:rules:1.2.0")
     androidTestImplementation("org.hamcrest:hamcrest-library:1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0-alpha03")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
 
 
