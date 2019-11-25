@@ -1,27 +1,22 @@
-import io.gitlab.arturbosch.detekt.detekt
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("io.fabric")
     id("io.gitlab.arturbosch.detekt")
     id("androidx.navigation.safeargs.kotlin")
 }
 
 val ktlint by configurations.creating
 
-val buildType: String? by project
-
 android {
     compileSdkVersion(ProjectConfig.SdkVersions.compileSdkVersion)
     buildToolsVersion(ProjectConfig.SdkVersions.buildToolsVersion)
 
     defaultConfig {
-        applicationId = "fr.bowser.time"
         minSdkVersion(ProjectConfig.SdkVersions.minSdkVersion)
         targetSdkVersion(ProjectConfig.SdkVersions.targetSdkVersion)
         versionCode = ProjectConfig.SdkVersions.versionCode
@@ -38,20 +33,8 @@ android {
         }
     }
 
-    signingConfigs {
-        SigningData.of(project.rootProject.properties("signing.properties"))?.let {
-            create("release") {
-                storeFile = file(it.storeFile)
-                storePassword = it.storePassword
-                keyAlias = it.keyAlias
-                keyPassword = it.keyPassword
-            }
-        }
-    }
-
     buildTypes {
         getByName("release") {
-            isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"))
             proguardFiles("proguard-rules.pro")
@@ -102,10 +85,6 @@ android {
                     "src/main/res/choosepomodorotimer"
             )
         }
-    }
-
-    lintOptions {
-        isAbortOnError = false
     }
 }
 
@@ -161,10 +140,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
 
-
 // detect configuration
 detekt {
-    config = files("detekt-config.yml")
+    config = files("../config/quality/detekt-config.yml")
     input = files("src/main/java")
     parallel = true
     disableDefaultRuleSets = false
@@ -185,14 +163,3 @@ tasks.register<JavaExec>("ktlint") {
     main = "com.github.shyiko.ktlint.Main"
     args("--android", "src/**/*.kt")
 }
-
-// skip variant release for CI
-if (buildType == "CI") {
-    android.variantFilter {
-        if (name == "release") {
-            setIgnore(true)
-        }
-    }
-}
-
-apply(mapOf("plugin" to "com.google.gms.google-services"))
