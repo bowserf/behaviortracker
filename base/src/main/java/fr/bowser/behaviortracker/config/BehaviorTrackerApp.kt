@@ -47,11 +47,12 @@ abstract class BehaviorTrackerApp : Application() {
 
     private fun setupCrashlytics() {
         Fabric.with(this, Crashlytics())
+        Crashlytics.setBool(CRASHLYTICS_IS_INSTANT_APP, appComponent.provideMyInstantApp().isInstantApp())
     }
 
     private fun setupGraph() {
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-                .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(this))
+            .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(this))
             .context(this)
             .build()
     }
@@ -61,6 +62,8 @@ abstract class BehaviorTrackerApp : Application() {
     }
 
     companion object {
+
+        private const val CRASHLYTICS_IS_INSTANT_APP = "is_instant_app"
 
         @JvmStatic
         fun getAppComponent(context: Context): BehaviorTrackerAppComponent {
