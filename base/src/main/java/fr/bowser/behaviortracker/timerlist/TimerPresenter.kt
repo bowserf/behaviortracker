@@ -7,7 +7,8 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 class TimerPresenter(
     private val screen: TimerContract.Screen,
     private val timerListManager: TimerListManager,
-    private val timeManager: TimeManager
+    private val timeManager: TimeManager,
+    private val isInstantApp: Boolean
 ) : TimerContract.Presenter, TimerListManager.Listener {
 
     private var ongoingDeletionTimer: Timer? = null
@@ -81,6 +82,10 @@ class TimerPresenter(
             onTimerAdded(ongoingDeletionTimer!!)
             ongoingDeletionTimer = null
         }
+    }
+
+    override fun isInstantApp(): Boolean {
+        return isInstantApp
     }
 
     override fun onReorderFinished(timerList: List<Timer>) {

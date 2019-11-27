@@ -5,7 +5,8 @@ import fr.bowser.behaviortracker.timer.Timer
 class PomodoroPresenter(
     private val screen: PomodoroContract.Screen,
     private val pomodoroManager: PomodoroManager,
-    override val timerList: List<Timer>
+    override val timerList: List<Timer>,
+    private val isInstantApp: Boolean
 ) : PomodoroContract.Presenter {
 
     private val pomodoroListener = createPomodoroManagerListener()
@@ -67,6 +68,10 @@ class PomodoroPresenter(
 
     override fun onClickSettings() {
         screen.displaySettings()
+    }
+
+    override fun isInstantApp(): Boolean {
+        return isInstantApp
     }
 
     override fun onClickCreateTimer() {

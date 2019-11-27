@@ -5,12 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -89,9 +84,9 @@ class PomodoroFragment : Fragment(), PomodoroContract.Screen {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_pomodoro, menu)
 
-        /*if (InstantApps.isInstantApp(context)) {
+        if (presenter.isInstantApp()) {
             menu.removeItem(R.id.menu_settings)
-        }*/
+        }
 
         val stopPomodoro = menu.findItem(R.id.menu_stop_pomodoro)
         stopPomodoro.isVisible = presenter.isRunning()

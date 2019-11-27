@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
+import com.google.android.gms.common.wrappers.InstantApps
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
@@ -99,9 +100,9 @@ class TimerFragment : Fragment(), TimerContract.Screen {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        /*if (!InstantApps.isInstantApp(context)) {
+        if (!presenter.isInstantApp()) {
             inflater.inflate(R.menu.menu_home, menu)
-        }*/
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

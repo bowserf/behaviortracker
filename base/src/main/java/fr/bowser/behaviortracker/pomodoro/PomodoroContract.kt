@@ -48,5 +48,7 @@ interface PomodoroContract {
         fun onClickCreateTimer()
 
         fun onClickSettings()
+
+        fun isInstantApp(): Boolean
     }
 }

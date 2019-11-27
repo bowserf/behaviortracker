@@ -58,5 +58,7 @@ interface TimerContract {
         fun onReorderFinished(timerList: List<Timer>)
 
         fun cancelTimerDeletion()
+
+        fun isInstantApp(): Boolean
     }
 }
