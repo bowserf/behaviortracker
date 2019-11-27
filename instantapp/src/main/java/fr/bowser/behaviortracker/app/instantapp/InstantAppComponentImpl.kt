@@ -1,6 +1,8 @@
-package fr.bowser.behaviortracker.instantapp
+package fr.bowser.behaviortracker.app.instantapp
 
 import dagger.Component
+import fr.bowser.behaviortracker.instantapp.InstantAppComponent
+import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = InstantAppComponentImpl::class)

@@ -1,7 +1,8 @@
-package fr.bowser.behaviortracker.instantapp
+package fr.bowser.behaviortracker.app.instantapp
 
 import dagger.Module
 import dagger.Provides
+import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module

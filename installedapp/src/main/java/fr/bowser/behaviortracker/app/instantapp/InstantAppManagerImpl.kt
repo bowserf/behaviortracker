@@ -1,14 +1,14 @@
-package fr.bowser.behaviortracker.instantapp
+package fr.bowser.behaviortracker.app.instantapp
 
 import android.app.Activity
-import com.google.android.gms.instantapps.InstantApps
+import fr.bowser.behaviortracker.instantapp.InstantAppManager
 
 class InstantAppManagerImpl : InstantAppManager {
     override fun showInstallPrompt(activity: Activity) {
-        InstantApps.showInstallPrompt(activity, null, 0, null)
+        // nothing to do
     }
 
     override fun isInstantApp(): Boolean {
-        return true
+        return false
     }
 }
