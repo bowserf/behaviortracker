@@ -64,6 +64,10 @@ android {
         }
     }
 
+    lintOptions {
+        isAbortOnError = false
+    }
+
     sourceSets {
         getByName("main") {
             // Split resources.

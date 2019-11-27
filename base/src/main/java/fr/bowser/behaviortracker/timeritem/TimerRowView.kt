@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.timeritem
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.showmode.ShowModeFragment
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timerlist.TimerFragmentDirections
 import fr.bowser.behaviortracker.utils.ColorUtils

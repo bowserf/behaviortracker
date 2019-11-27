@@ -6,7 +6,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.common.wrappers.InstantApps
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmNotification

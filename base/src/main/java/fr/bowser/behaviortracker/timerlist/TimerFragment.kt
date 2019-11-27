@@ -1,7 +1,6 @@
 package fr.bowser.behaviortracker.timerlist
 
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
@@ -25,7 +24,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
-import com.google.android.gms.common.wrappers.InstantApps
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
