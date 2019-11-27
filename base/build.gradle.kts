@@ -19,7 +19,7 @@ android {
     defaultConfig {
         minSdkVersion(ProjectConfig.SdkVersions.minSdkVersion)
         targetSdkVersion(ProjectConfig.SdkVersions.targetSdkVersion)
-        versionCode = ProjectConfig.SdkVersions.versionCode
+        versionCode = ProjectConfig.SdkVersions.versionCodeApp
         versionName = ProjectConfig.SdkVersions.versionName
 
         resConfigs("en", "fr", "it", "tr")
