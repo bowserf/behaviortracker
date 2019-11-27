@@ -1,3 +1,11 @@
+### Time Tracker v0.08.00
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2019-11-27
+* Change log:
+    - Logic to have an Instant App version added.
+
+
+
 ### Time Tracker v0.7.0
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2019-08-10
