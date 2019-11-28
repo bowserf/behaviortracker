@@ -21,7 +21,7 @@ class PomodoroPresenterTest {
     @Test
     fun restoreCurrentTimerIfPomodoroIsRunning() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
         val timer = Timer("name", ColorUtils.COLOR_AMBER, false, 0)
         Mockito.`when`(manager.currentTimer).thenReturn(timer)
 
@@ -35,7 +35,7 @@ class PomodoroPresenterTest {
     @Test
     fun displayEmptyViewWhenStartAndNoSessionIsActivte() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
 
         // When
         presenter.start()
@@ -47,7 +47,7 @@ class PomodoroPresenterTest {
     @Test
     fun displayPomodoroDialogIfAStepIfFinishedAndUserGoBackToTheView() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
         Mockito.`when`(manager.isPendingState).thenReturn(true)
 
         // When
@@ -61,7 +61,7 @@ class PomodoroPresenterTest {
     fun onClickFabDisplayChoosePomodoroTimer() {
         // Given
         val timer = Timer("name", ColorUtils.COLOR_AMBER, false, 0)
-        val presenter = PomodoroPresenter(screen, manager, listOf(timer))
+        val presenter = PomodoroPresenter(screen, manager, listOf(timer), false)
         Mockito.`when`(manager.isStarted).thenReturn(false)
 
         // When
@@ -74,7 +74,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickFabDisplayNoTimerAvailable() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
         Mockito.`when`(manager.isStarted).thenReturn(false)
 
         // When
@@ -87,7 +87,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickFabPausePomodoro() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
         Mockito.`when`(manager.isStarted).thenReturn(true)
         Mockito.`when`(manager.isRunning).thenReturn(true)
 
@@ -101,7 +101,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickFabResumePomodoro() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
         Mockito.`when`(manager.isStarted).thenReturn(true)
         Mockito.`when`(manager.isRunning).thenReturn(false)
 
@@ -115,7 +115,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickStopPomodoro() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
 
         // When
         presenter.onClickStopPomodoro()
@@ -128,7 +128,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickCreateTimerDisplayDialog() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, listOf())
+        val presenter = PomodoroPresenter(screen, manager, listOf(), false)
 
         // When
         presenter.onClickCreateTimer()
