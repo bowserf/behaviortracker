@@ -47,15 +47,30 @@ By example, you could want a reminder link to the time you wake up.
 ## Screenshot
 
 <img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/timer_fragment_english.png"
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/timer_list.png"
     width="288"
     height="512"
     title="Timers list">
 <img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/create_timer_english.png"
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/create_timer.png"
     width="288"
     height="512"
     title="Create a timer">
+<img
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/pomodoro.png"
+    width="288"
+    height="512"
+    title="Create a timer">
+<img
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/set_alarm.png"
+    width="288"
+    height="512"
+    title="Timers list">
+<img
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/timer_list_dark.png"
+    width="288"
+    height="512"
+    title="Timers list">
 
 ## Future features
 
