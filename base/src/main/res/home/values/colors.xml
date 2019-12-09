@@ -3,5 +3,7 @@
 
     <color name="home_instant_app_cta">#000000</color>
     <color name="home_instant_app_btn_bg">#D1D959</color>
+    <color name="home_bottom_navigation_item_selected">#FFFFFF</color>
+    <color name="home_bottom_navigation_item_unselected">#999999</color>
 
 </resources>
