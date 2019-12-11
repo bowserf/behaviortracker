@@ -8,7 +8,7 @@ interface PomodoroContract {
 
         val timerList: List<Timer>
 
-        fun onStart()
+        fun onStart(configuration: Configuration)
 
         fun onStop()
 
@@ -59,4 +59,6 @@ interface PomodoroContract {
 
         fun displayAskDndPermission()
     }
+
+    data class Configuration(val displaySelectTimer: Boolean)
 }

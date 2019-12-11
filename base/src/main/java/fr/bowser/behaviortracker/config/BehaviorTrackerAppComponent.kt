@@ -4,6 +4,8 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
+import fr.bowser.behaviortracker.app_initialization.AppInitialization
+import fr.bowser.behaviortracker.app_initialization.AppInitializationComponent
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.do_not_disturbed.DoNotDisturbModule
@@ -47,9 +49,10 @@ import javax.inject.Singleton
         TimeProviderModule::class,
         TimerListManagerModule::class,
         SettingManagerModule::class,
-        StringManagerModule::class
+        StringManagerModule::class,
     ), dependencies = [
-        InstantAppComponent::class
+        InstantAppComponent::class,
+        AppInitializationComponent::class
     ]
 )
 interface BehaviorTrackerAppComponent {
@@ -71,7 +74,7 @@ interface BehaviorTrackerAppComponent {
     fun provideMyInstantApp(): InstantAppManager
 
     fun provideTimeManager(): TimeManager
-    
+
     fun provideTimeProvider(): TimeProvider
 
     fun providePomodoroManager(): PomodoroManager
@@ -86,6 +89,8 @@ interface BehaviorTrackerAppComponent {
 
     fun provideStringManager(): StringManager
 
+    fun provideAppInitialization(): AppInitialization
+
     @Component.Builder
     interface Builder {
 
@@ -95,5 +100,7 @@ interface BehaviorTrackerAppComponent {
         fun context(context: Context): Builder
 
         fun myInstantApp(instantAppComponent: InstantAppComponent): Builder
+
+        fun appInitialization(appInitializationComponent: AppInitializationComponent): Builder
     }
 }

@@ -16,9 +16,13 @@ class PomodoroPresenter(
 
     private var isDialogDisplayed = false
 
-    override fun onStart() {
+    override fun onStart(configuration: PomodoroContract.Configuration) {
         pomodoroManager.addListener(pomodoroListener)
         doNotDisturbManager.addListener(doNotDisturbListener)
+
+        if (configuration.displaySelectTimer) {
+            screen.displayChoosePomodoroTimer()
+        }
 
         if (pomodoroManager.currentTimer != null) {
             screen.updatePomodoroTimer(

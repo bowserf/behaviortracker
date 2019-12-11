@@ -95,7 +95,8 @@ android {
                     "src/main/res/timer",
                     "src/main/res/timerlist",
                     "src/main/res/ua",
-                    "src/main/res/update_timer_time"
+                    "src/main/res/update_timer_time",
+                    "src/main/res/widget"
             )
         }
     }

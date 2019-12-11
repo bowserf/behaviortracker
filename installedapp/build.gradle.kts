@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.dynamic-feature")
@@ -31,6 +30,16 @@ android {
 
     lintOptions {
         isAbortOnError = false
+    }
+
+    sourceSets {
+        getByName("main") {
+            // Split resources.
+            // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
+            res.srcDirs(
+                "src/main/res/widget"
+            )
+        }
     }
 }
 

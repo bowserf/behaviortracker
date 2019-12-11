@@ -11,6 +11,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmNotification
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
+import fr.bowser.behaviortracker.pomodoro.PomodoroFragment
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
@@ -32,14 +33,12 @@ class HomeActivity : AppCompatActivity() {
 
         setupNavigation()
 
-        manageIntent()
-
-        activityStartedFromAlarmNotif()
+        manageIntent(intent)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        activityStartedFromAlarmNotif()
+        manageIntent(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -90,21 +89,19 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.visibility = View.VISIBLE
     }
 
-    private fun manageIntent() {
-        if (intent.action == CREATE_TIMER_FROM_SHORTCUT) {
-            CreateTimerDialog.showDialog(this, false)
+    private fun manageIntent(intent: Intent) {
+        when (intent.action) {
+            ACTION_CREATE_TIMER_FROM_SHORTCUT -> CreateTimerDialog.showDialog(this, false)
+            ACTION_SELECT_POMODORO_TIMER -> displayPomodoroScreen(true)
+            AlarmNotification.ACTION_ALARM_NOTIFICATION_CLICKED -> presenter.onAlarmNotificationClicked()
         }
     }
 
-    private fun activityStartedFromAlarmNotif() {
-        if (intent.extras == null) {
-            return
-        }
-        val isAlarmNotifClicked =
-            intent.extras!!.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
-        if (isAlarmNotifClicked) {
-            presenter.onAlarmNotificationClicked()
-        }
+    private fun displayPomodoroScreen(displaySelectTimer: Boolean) {
+        val navController = Navigation.findNavController(this, R.id.home_nav_host_fragment)
+        val bundle = Bundle()
+        bundle.putBoolean(PomodoroFragment.EXTRA_KEY_DISPLAY_SELECT_TIMER, displaySelectTimer)
+        navController.navigate(R.id.pomodoro_screen, bundle)
     }
 
     private fun createScreen() = object : HomeContract.Screen {
@@ -118,6 +115,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER"
+        const val ACTION_CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER"
+        const val ACTION_SELECT_POMODORO_TIMER = "android.intent.action.select_pomodoro_timer"
     }
 }

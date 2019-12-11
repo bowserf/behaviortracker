@@ -63,6 +63,8 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        extractArgument()
+
         emptyContent = view.findViewById(R.id.pomodoro_content_empty)
         startSession = view.findViewById(R.id.pomodoro_choose_timer)
 
@@ -87,9 +89,19 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
+    private fun extractArgument(): PomodoroContract.Configuration {
+        val bundle = arguments
+        bundle?.let {
+            val displaySelectTimer = it.getBoolean(EXTRA_KEY_DISPLAY_SELECT_TIMER, false)
+            return PomodoroContract.Configuration(displaySelectTimer)
+        }
+        return PomodoroContract.Configuration(false)
+    }
+
     override fun onStart() {
         super.onStart()
-        presenter.onStart()
+        val argument = extractArgument()
+        presenter.onStart(argument)
     }
 
     override fun onStop() {
@@ -269,6 +281,9 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
 
     companion object {
         const val TAG = "PomodoroFragment"
+
+        const val EXTRA_KEY_DISPLAY_SELECT_TIMER =
+            "pomodoro_fragment.extra_key_display_select_timer"
 
         private const val PROPERTY_FAB_ANIMATION = "fabScale"
 

@@ -4,11 +4,11 @@ import android.app.Application
 import android.content.Context
 import android.os.StrictMode
 import com.google.android.gms.common.wrappers.InstantApps
-import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
+import fr.bowser.behaviortracker.app_initialization.AppInitializationProviderHelper
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
 import fr.bowser.feature.alarm.AlarmGraph
 import fr.bowser.feature_do_not_disturb.DoNotDisturbGraph
@@ -20,16 +20,16 @@ class BehaviorTrackerApp : Application() {
     override fun onCreate() {
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(
-                    StrictMode.ThreadPolicy.Builder()
-                            .detectAll()
-                            .penaltyLog()
-                            .build()
+                StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build()
             )
             StrictMode.setVmPolicy(
-                    StrictMode.VmPolicy.Builder()
-                            .detectAll()
-                            .penaltyLog()
-                            .build()
+                StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build()
             )
         }
 
@@ -51,20 +51,27 @@ class BehaviorTrackerApp : Application() {
 
     private fun setupCrashlytics() {
         FirebaseCrashlytics.getInstance().setCustomKey(
-                CRASHLYTICS_IS_INSTANT_APP,
-                appComponent.provideMyInstantApp().isInstantApp()
+            CRASHLYTICS_IS_INSTANT_APP,
+            appComponent.provideMyInstantApp().isInstantApp()
         )
     }
 
     private fun setupGraph() {
         val isInstantApp = InstantApps.isInstantApp(this)
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-                .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp))
-                .context(this)
-                .build()
+            .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp))
+            .appInitialization(
+                AppInitializationProviderHelper.provideAppInitializationComponent(
+                    this,
+                    isInstantApp
+                )
+            )
+            .context(this)
+            .build()
 
         AlarmGraph.init(this)
         DoNotDisturbGraph.init(this)
+        appComponent.provideAppInitialization().initialize()
         if (BuildConfig.UA) {
             AlarmGraph.inject(AlarmStorageManagerModuleUA())
         }

@@ -14,7 +14,7 @@ class PomodoroManagerImpl(
     private val timeManager: TimeManager,
     timerListManager: TimerListManager,
     private val settingManager: SettingManager,
-    val pauseTimer: Timer,
+    private val pauseTimer: Timer,
     private val vibrator: Vibrator,
     private val isDebug: Boolean
 ) : PomodoroManager {
@@ -45,6 +45,10 @@ class PomodoroManagerImpl(
 
     init {
         timerListManager.addListener(timerListManagerListener)
+    }
+
+    override fun isBreakStep(): Boolean {
+        return currentTimer == pauseTimer
     }
 
     override fun startPomodoro(actionTimer: Timer) {

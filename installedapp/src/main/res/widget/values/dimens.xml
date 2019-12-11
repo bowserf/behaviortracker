@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="widget_container_padding_vertical">8dp</dimen>
+    <dimen name="widget_container_padding_horizontal">16dp</dimen>
+    <dimen name="widget_default_button_size">44dp</dimen>
+    <dimen name="widget_pomodoro_small_icon_size">22dp</dimen>
+    <dimen name="widget_pomodoro_timer_margin_left">8dp</dimen>
+
+</resources>
