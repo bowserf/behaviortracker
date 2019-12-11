@@ -16,7 +16,7 @@ import fr.bowser.behaviortracker.home.HomeActivity
 
 object AlarmNotification {
 
-    const val INTENT_EXTRA_ALARM_REQUEST_CODE = "alarm_notification.intent_extra.alarm_clicked"
+    const val ACTION_ALARM_NOTIFICATION_CLICKED = "alarm_notification.action.alarm_clicked"
 
     private const val ALARM_NOTIFICATION_ID = 786
 
@@ -32,7 +32,7 @@ object AlarmNotification {
         }
 
         val homeIntent = Intent(context, HomeActivity::class.java)
-        homeIntent.putExtra(INTENT_EXTRA_ALARM_REQUEST_CODE, true)
+        homeIntent.action = ACTION_ALARM_NOTIFICATION_CLICKED
         homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
         val resultPendingIntent = PendingIntent.getActivity(
             context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT

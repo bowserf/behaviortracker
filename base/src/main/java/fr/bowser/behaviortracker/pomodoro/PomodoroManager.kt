@@ -18,6 +18,8 @@ interface PomodoroManager {
 
     var isPendingState: Boolean
 
+    fun isBreakStep(): Boolean
+
     fun startPomodoro(actionTimer: Timer)
 
     fun resume()
