@@ -35,7 +35,7 @@ interface PomodoroContract {
 
         val timerList: List<Timer>
 
-        fun start()
+        fun start(configuration: Configuration)
 
         fun stop()
 
@@ -51,4 +51,6 @@ interface PomodoroContract {
 
         fun isInstantApp(): Boolean
     }
+
+    data class Configuration(val displaySelectTimer: Boolean)
 }
