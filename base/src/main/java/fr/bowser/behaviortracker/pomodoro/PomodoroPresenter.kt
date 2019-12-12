@@ -146,7 +146,7 @@ class PomodoroPresenter(
                 updatePomodoroState()
             }
 
-            override fun updateTime(timer: Timer, currentTime: Long) {
+            override fun updateTime(updatedTimer: Timer, currentTime: Long) {
                 if (isDialogDisplayed) {
                     screen.hidePomodoroDialog()
                     isDialogDisplayed = false

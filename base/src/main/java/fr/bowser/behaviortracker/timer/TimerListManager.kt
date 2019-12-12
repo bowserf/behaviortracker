@@ -10,6 +10,8 @@ interface TimerListManager {
 
     fun getTimerList(): List<Timer>
 
+    fun getTimer(timerId: Long): Timer
+
     fun renameTimer(timer: Timer, newName: String)
 
     fun reorderTimerList(timerList: List<Timer>)

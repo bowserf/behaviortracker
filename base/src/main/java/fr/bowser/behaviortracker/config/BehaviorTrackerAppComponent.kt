@@ -16,8 +16,6 @@ import fr.bowser.behaviortracker.inapp.InAppManagerModule
 import fr.bowser.behaviortracker.inapp.InAppRepository
 import fr.bowser.behaviortracker.instantapp.InstantAppComponent
 import fr.bowser.behaviortracker.instantapp.InstantAppManager
-import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
-import fr.bowser.behaviortracker.notification.TimerNotificationManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
@@ -45,7 +43,6 @@ import javax.inject.Singleton
         InAppManagerModule::class,
         PomodoroManagerModule::class,
         TimeManagerModule::class,
-        TimeNotificationManagerModule::class,
         TimeProviderModule::class,
         TimerListManagerModule::class,
         SettingManagerModule::class,
@@ -82,8 +79,6 @@ interface BehaviorTrackerAppComponent {
     fun provideTimerDAO(): TimerDAO
 
     fun provideTimerListManager(): TimerListManager
-
-    fun provideTimerNotificationManager(): TimerNotificationManager
 
     fun provideSettingManager(): SettingManager
 

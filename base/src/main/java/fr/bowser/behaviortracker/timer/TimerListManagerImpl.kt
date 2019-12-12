@@ -86,6 +86,10 @@ class TimerListManagerImpl(
         return timers
     }
 
+    override fun getTimer(timerId: Long): Timer {
+        return timers.first { it.id == timerId }
+    }
+
     override fun renameTimer(timer: Timer, newName: String) {
         timer.name = newName
         GlobalScope.launch(background) {

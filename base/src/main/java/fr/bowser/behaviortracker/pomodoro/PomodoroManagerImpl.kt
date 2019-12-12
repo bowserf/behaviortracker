@@ -1,16 +1,19 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
 import fr.bowser.behaviortracker.BuildConfig
+import fr.bowser.behaviortracker.notification.TimeService
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class PomodoroManagerImpl(
+    private val context: Context,
     private val timeManager: TimeManager,
     timerListManager: TimerListManager,
     private val settingManager: SettingManager,
@@ -51,6 +54,10 @@ class PomodoroManagerImpl(
         return currentTimer == pauseTimer
     }
 
+    override fun getBreakTimer(): Timer {
+        return pauseTimer
+    }
+
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
         this.pauseDuration =
@@ -68,7 +75,7 @@ class PomodoroManagerImpl(
         isRunning = true
 
         timeManager.addListener(timeManagerListener)
-        timeManager.startTimer(currentTimer!!)
+        TimeService.startTimer(context, currentTimer!!.id)
 
         listeners.forEach { it.onPomodoroSessionStarted(currentTimer!!, pomodoroTime) }
     }
@@ -79,7 +86,7 @@ class PomodoroManagerImpl(
         }
         isPendingState = false
         isRunning = true
-        timeManager.startTimer(currentTimer!!)
+        TimeService.startTimer(context, currentTimer!!.id)
     }
 
     override fun pause() {
@@ -87,14 +94,14 @@ class PomodoroManagerImpl(
             return
         }
         isRunning = false
-        timeManager.stopTimer(currentTimer!!)
+        TimeService.stopTimer(context, currentTimer!!.id)
     }
 
     override fun stop() {
         if (!isStarted) {
             return
         }
-        timeManager.stopTimer(currentTimer!!)
+        TimeService.stopTimer(context, currentTimer!!.id)
         isStarted = false
         isPendingState = false
         isRunning = false

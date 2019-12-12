@@ -12,6 +12,8 @@ interface TimeManager {
 
     fun removeListener(listener: Listener)
 
+    fun stopAllRunningTimers()
+
     interface Listener {
         fun onTimerStateChanged(updatedTimer: Timer)
         fun onTimerTimeChanged(updatedTimer: Timer)

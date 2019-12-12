@@ -1,0 +1,227 @@
+package fr.bowser.behaviortracker.notification
+
+import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.utils.TimeConverter
+
+class TimeServicePresenter(
+    private val screen: TimeContract.Screen,
+    private val timeManager: TimeManager,
+    private val timerListManager: TimerListManager,
+    private val pomodoroManager: PomodoroManager,
+    private val addOn: AddOn
+) : TimeContract.Presenter {
+
+    private var isNotificationDisplayed = false
+
+    private val pomodoroListener = createPomodoroListener()
+
+    private val timeManagerListener = createTimeManagerListener()
+
+    private val timerListManagerListener = createTimerListManagerListener()
+
+    private var timer: Timer? = null
+
+    override fun attach() {
+        timeManager.addListener(timeManagerListener)
+        timerListManager.addListener(timerListManagerListener)
+        pomodoroManager.addListener(pomodoroListener)
+    }
+
+    override fun detach() {
+        timeManager.removeListener(timeManagerListener)
+        timerListManager.removeListener(timerListManagerListener)
+        pomodoroManager.removeListener(pomodoroListener)
+    }
+
+    override fun startTimer(timerId: Long) {
+        val timer: Timer
+        if (pomodoroManager.getBreakTimer().id == timerId) {
+            timer = pomodoroManager.getBreakTimer()
+        } else {
+            timer = timerListManager.getTimer(timerId)
+        }
+        timeManager.startTimer(timer)
+    }
+
+    override fun stopTimer(timerId: Long) {
+        val timer: Timer
+        if (pomodoroManager.getBreakTimer().id == timerId) {
+            timer = pomodoroManager.getBreakTimer()
+        } else {
+            timer = timerListManager.getTimer(timerId)
+        }
+        timeManager.stopTimer(timer)
+    }
+
+    override fun resumeTimer() {
+        startTimer(timer!!.id)
+    }
+
+    override fun pauseTimer() {
+        stopTimer(timer!!.id)
+    }
+
+    override fun dismissNotification() {
+        if (!isNotificationDisplayed) {
+            return
+        }
+
+        timer = null
+        isNotificationDisplayed = false
+
+        screen.dismissNotification()
+    }
+
+    private fun displayTimerNotification(modifiedTimer: Timer) {
+        if (timer == modifiedTimer) {
+            resumeTimerNotif(modifiedTimer)
+        } else {
+            this.timer = modifiedTimer
+
+            isNotificationDisplayed = true
+
+            screen.displayTimerNotification(
+                getNotificationTitle(modifiedTimer),
+                getNotificationMessage(modifiedTimer)
+            )
+        }
+    }
+
+    private fun resumeTimerNotif(modifiedTimer: Timer) {
+        if (!isNotificationDisplayed || timer != modifiedTimer) {
+            return
+        }
+
+        screen.resumeTimerNotification(getNotificationTitle(modifiedTimer))
+    }
+
+    private fun renameTimerNotif(updatedTimer: Timer) {
+        if (timer != updatedTimer) {
+            return
+        }
+
+        screen.renameTimerNotification(updatedTimer.name)
+    }
+
+    private fun pauseTimerNotif(modifiedTimer: Timer) {
+        if (!isNotificationDisplayed || timer != modifiedTimer) {
+            return
+        }
+
+        screen.pauseTimerNotification()
+    }
+
+    private fun continuePomodoroNotif() {
+        screen.continuePomodoroNotification()
+    }
+
+    private fun updateTimeNotif() {
+        screen.updateTimeNotification(getNotificationMessage(timer!!))
+    }
+
+    private fun getNotificationTitle(timer: Timer): String {
+        return if (pomodoroManager.isStarted) {
+            addOn.getNotificationName(timer.name)
+        } else {
+            timer.name
+        }
+    }
+
+    private fun getNotificationMessage(timer: Timer): String {
+        return if (pomodoroManager.isStarted) {
+            TimeConverter.convertSecondsToHumanTime(pomodoroManager.pomodoroTime, false)
+        } else {
+            TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
+        }
+    }
+
+    private fun createTimerListManagerListener(): TimerListManager.Listener {
+        return object : TimerListManager.Listener {
+            override fun onTimerRemoved(removedTimer: Timer) {
+                if (timer == removedTimer) {
+                    dismissNotification()
+                }
+            }
+
+            override fun onTimerAdded(updatedTimer: Timer) {
+                if (pomodoroManager.isStarted) {
+                    return
+                }
+                // if timer is directly activate, display it in the notification
+                if (updatedTimer.isActivate) {
+                    displayTimerNotification(updatedTimer)
+                }
+            }
+
+            override fun onTimerRenamed(updatedTimer: Timer) {
+                if (timer == updatedTimer) {
+                    renameTimerNotif(updatedTimer)
+                }
+            }
+        }
+    }
+
+    private fun createTimeManagerListener(): TimeManager.Listener {
+        return object : TimeManager.Listener {
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                if (pomodoroManager.isStarted) {
+                    return
+                }
+
+                if (updatedTimer.isActivate) {
+                    displayTimerNotification(updatedTimer)
+                } else {
+                    pauseTimerNotif(updatedTimer)
+                }
+            }
+
+            override fun onTimerTimeChanged(updatedTimer: Timer) {
+                if (pomodoroManager.isStarted) {
+                    return
+                }
+
+                if (timer == updatedTimer) {
+                    updateTimeNotif()
+                }
+            }
+        }
+    }
+
+    private fun createPomodoroListener(): PomodoroManager.Listener {
+        return object : PomodoroManager.Listener {
+
+            override fun onPomodoroSessionStop() {
+                dismissNotification()
+            }
+
+            override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
+                displayTimerNotification(newTimer)
+            }
+
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                if (updatedTimer.isActivate) {
+                    displayTimerNotification(updatedTimer)
+                } else {
+                    pauseTimerNotif(updatedTimer)
+                }
+            }
+
+            override fun updateTime(updatedTimer: Timer, currentTime: Long) {
+                if (timer == updatedTimer) {
+                    updateTimeNotif()
+                }
+            }
+
+            override fun onCountFinished(newTimer: Timer, duration: Long) {
+                continuePomodoroNotif()
+            }
+        }
+    }
+
+    interface AddOn {
+        fun getNotificationName(timerName: String): String
+    }
+}

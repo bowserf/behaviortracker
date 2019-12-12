@@ -101,7 +101,7 @@ class TimeManagerImpl(
         listeners.remove(listener)
     }
 
-    private fun stopAllRunningTimers() {
+    override fun stopAllRunningTimers() {
         for (timerToStop in timerList) {
             timerToStop.isActivate = false
             for (listener in listeners) {

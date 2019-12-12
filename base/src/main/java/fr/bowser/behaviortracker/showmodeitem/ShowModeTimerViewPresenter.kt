@@ -5,7 +5,8 @@ import fr.bowser.behaviortracker.timer.Timer
 
 class ShowModeTimerViewPresenter(
     private val screen: ShowModeTimerViewContract.Screen,
-    private val timeManager: TimeManager
+    private val timeManager: TimeManager,
+    private val addOn: AddOn
 ) : ShowModeTimerViewContract.Presenter {
 
     private lateinit var timer: Timer
@@ -26,9 +27,9 @@ class ShowModeTimerViewPresenter(
 
     override fun onClickView() {
         if (timer.isActivate) {
-            timeManager.stopTimer(timer)
+            addOn.stopTimer(timer)
         } else {
-            timeManager.startTimer(timer)
+            addOn.startTimer(timer)
         }
         screen.statusUpdated(timer.isActivate)
     }
@@ -45,5 +46,10 @@ class ShowModeTimerViewPresenter(
                 screen.timerUpdated(timer.time.toLong())
             }
         }
+    }
+
+    interface AddOn {
+        fun startTimer(timer: Timer)
+        fun stopTimer(timer: Timer)
     }
 }

@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Pomodoro, when timer switched -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Allow to start the TimeService from a background thread -->
+    <uses-permission-sdk-23 android:name="android.permission.FOREGROUND_SERVICE" />
 
     <dist:module dist:instant="true" />
 
@@ -38,7 +40,19 @@
             android:name=".notification.TimerReceiver"
             android:exported="false" />
 
-        <service android:name=".config.KillAppDetection" />
+        <receiver
+            android:name=".alarm.TimedDayReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".alarm.DeviceBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".notification.TimeService" />
 
     </application>
 
