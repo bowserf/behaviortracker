@@ -31,7 +31,7 @@ class BehaviorTrackerInstalledAppManager : BehaviorTrackerApp(), InstantAppManag
                 PomodoroAppWidgetProvider.update(this@BehaviorTrackerInstalledAppManager)
             }
 
-            override fun updateTime(timer: Timer, currentTime: Long) {
+            override fun updateTime(updatedTimer: Timer, currentTime: Long) {
                 PomodoroAppWidgetProvider.update(this@BehaviorTrackerInstalledAppManager)
             }
 

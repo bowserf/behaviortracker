@@ -11,12 +11,15 @@ class TimerItemPresenter(
     private val timeManager: TimeManager,
     private val timerListManager: TimerListManager,
     private val settingManager: SettingManager,
-    private val pomodoroManager: PomodoroManager
+    private val pomodoroManager: PomodoroManager,
+    private val addOn: AddOn
 ) : TimerItemContract.Presenter,
     TimerListManager.Listener,
     SettingManager.TimerModificationListener {
 
     private lateinit var timer: Timer
+
+    private val timeManagerListener = createTimeManagerListener()
 
     override fun start() {
         timerListManager.addListener(this)
@@ -105,15 +108,14 @@ class TimerItemPresenter(
 
     private fun manageTimerUpdate() {
         if (!timer.isActivate) {
-            timeManager.startTimer(timer)
+            addOn.startTimer(timer)
         } else {
-            timeManager.stopTimer(timer)
+            addOn.stopTimer(timer)
         }
     }
 
-    private val timeManagerListener =
-        object : TimeManager.Listener {
-
+    private fun createTimeManagerListener(): TimeManager.Listener {
+        return object : TimeManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (timer == updatedTimer) {
                     view.statusUpdated(updatedTimer.isActivate)
@@ -126,4 +128,10 @@ class TimerItemPresenter(
                 }
             }
         }
+    }
+
+    interface AddOn {
+        fun startTimer(timer: Timer)
+        fun stopTimer(timer: Timer)
+    }
 }

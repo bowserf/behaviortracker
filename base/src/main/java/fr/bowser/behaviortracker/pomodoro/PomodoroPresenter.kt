@@ -113,12 +113,12 @@ class PomodoroPresenter(
                 updateFabIcon()
             }
 
-            override fun updateTime(timer: Timer, currentTime: Long) {
+            override fun updateTime(updatedTimer: Timer, currentTime: Long) {
                 if (isDialogDisplayed) {
                     screen.dismissPomodoroDialog()
                     isDialogDisplayed = false
                 }
-                screen.updateTime(timer, currentTime)
+                screen.updateTime(updatedTimer, currentTime)
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {

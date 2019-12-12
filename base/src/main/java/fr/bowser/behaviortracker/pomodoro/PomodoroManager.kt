@@ -20,6 +20,8 @@ interface PomodoroManager {
 
     fun isBreakStep(): Boolean
 
+    fun getBreakTimer(): Timer
+
     fun startPomodoro(actionTimer: Timer)
 
     fun resume()
@@ -36,7 +38,7 @@ interface PomodoroManager {
         fun onPomodoroSessionStarted(newTimer: Timer, duration: Long)
         fun onPomodoroSessionStop()
         fun onTimerStateChanged(updatedTimer: Timer)
-        fun updateTime(timer: Timer, currentTime: Long)
+        fun updateTime(updatedTimer: Timer, currentTime: Long)
         fun onCountFinished(newTimer: Timer, duration: Long)
     }
 }

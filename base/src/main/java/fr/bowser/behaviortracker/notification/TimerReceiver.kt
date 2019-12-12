@@ -9,8 +9,7 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 class TimerReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        val action = intent?.action
-        when (action) {
+        when (intent?.action) {
             ACTION_PLAY -> {
                 startTimer(context!!)
             }
@@ -32,27 +31,15 @@ class TimerReceiver : BroadcastReceiver() {
     }
 
     private fun notificationDismiss(context: Context) {
-        val notifManager =
-            BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
-        notifManager.dismissNotification()
+        TimeService.dismissNotification(context)
     }
 
     private fun pauseTimer(context: Context) {
-        val notifManager =
-            BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
-        val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
-        notifManager.timer?.let {
-            timeManager.stopTimer(notifManager.timer!!)
-        }
+        TimeService.pauseTimer(context)
     }
 
     private fun startTimer(context: Context) {
-        val notifManager =
-            BehaviorTrackerApp.getAppComponent(context).provideTimerNotificationManager()
-        val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
-        notifManager.timer?.let {
-            timeManager.startTimer(notifManager.timer!!)
-        }
+        TimeService.resumeTimer(context)
     }
 
     companion object {
