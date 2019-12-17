@@ -5,11 +5,11 @@ import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
 
 class HomePresenter(
-        private val screen: HomeContract.Screen,
-        private val timerNotificationManager: TimerNotificationManager,
-        private val eventManager: EventManager,
-        private val instantAppManager: InstantAppManager,
-        private val instantAppAddon: InstantAppAddon
+    private val screen: HomeContract.Screen,
+    private val timerNotificationManager: TimerNotificationManager,
+    private val eventManager: EventManager,
+    private val instantAppManager: InstantAppManager,
+    private val instantAppAddon: InstantAppAddon
 ) : HomeContract.Presenter {
 
     override fun start() {

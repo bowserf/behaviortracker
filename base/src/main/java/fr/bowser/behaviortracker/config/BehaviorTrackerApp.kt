@@ -4,12 +4,13 @@ import android.app.Application
 import android.content.Context
 import android.os.StrictMode
 import com.crashlytics.android.Crashlytics
+import com.google.android.gms.common.wrappers.InstantApps
 import com.google.firebase.analytics.FirebaseAnalytics
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
 import io.fabric.sdk.android.Fabric
 
-abstract class BehaviorTrackerApp : Application() {
+class BehaviorTrackerApp : Application() {
 
     lateinit var appComponent: BehaviorTrackerAppComponent
 
@@ -47,12 +48,16 @@ abstract class BehaviorTrackerApp : Application() {
 
     private fun setupCrashlytics() {
         Fabric.with(this, Crashlytics())
-        Crashlytics.setBool(CRASHLYTICS_IS_INSTANT_APP, appComponent.provideMyInstantApp().isInstantApp())
+        Crashlytics.setBool(
+            CRASHLYTICS_IS_INSTANT_APP,
+            appComponent.provideMyInstantApp().isInstantApp()
+        )
     }
 
     private fun setupGraph() {
+        val isInstantApp = InstantApps.isInstantApp(this)
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-            .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(this))
+            .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp))
             .context(this)
             .build()
     }

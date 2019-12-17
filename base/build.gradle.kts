@@ -1,25 +1,30 @@
+import io.gitlab.arturbosch.detekt.detekt
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("io.fabric")
     id("io.gitlab.arturbosch.detekt")
     id("androidx.navigation.safeargs.kotlin")
 }
 
 val ktlint by configurations.creating
 
+val buildType: String? by project
+
 android {
     compileSdkVersion(ProjectConfig.SdkVersions.compileSdkVersion)
     buildToolsVersion(ProjectConfig.SdkVersions.buildToolsVersion)
 
     defaultConfig {
+        applicationId = "fr.bowser.time"
         minSdkVersion(ProjectConfig.SdkVersions.minSdkVersion)
         targetSdkVersion(ProjectConfig.SdkVersions.targetSdkVersion)
-        versionCode = ProjectConfig.SdkVersions.versionCodeApp
+        versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 
         resConfigs("en", "fr", "it", "tr")
@@ -29,6 +34,17 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = mapOf("room.schemaLocation" to "$projectDir/schemas")
+            }
+        }
+    }
+
+    signingConfigs {
+        SigningData.of(project.rootProject.properties("signing.properties"))?.let {
+            create("release") {
+                storeFile = file(it.storeFile)
+                storePassword = it.storePassword
+                keyAlias = it.keyAlias
+                keyPassword = it.keyPassword
             }
         }
     }
@@ -86,10 +102,13 @@ android {
                     "src/main/res/rewards",
                     "src/main/res/rewardsrow",
                     "src/main/res/pomodoro",
-                    "src/main/res/choosepomodorotimer"
+                    "src/main/res/choosepomodorotimer",
+                    "src/main/res/instantapp"
             )
         }
     }
+
+    dynamicFeatures = mutableSetOf(":installedapp", ":instantapp")
 }
 
 dependencies {
@@ -167,3 +186,14 @@ tasks.register<JavaExec>("ktlint") {
     main = "com.github.shyiko.ktlint.Main"
     args("--android", "src/**/*.kt")
 }
+
+// skip variant release for CI
+if (buildType == "CI") {
+    android.variantFilter {
+        if (name == "release") {
+            setIgnore(true)
+        }
+    }
+}
+
+apply(mapOf("plugin" to "com.google.gms.google-services"))

@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.app.instantapp
+package fr.bowser.behaviortracker.instantapp.instantapp
 
 import android.app.Activity
 import com.google.android.gms.instantapps.InstantApps

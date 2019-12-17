@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:dist="http://schemas.android.com/apk/distribution"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.bowser.behaviortracker.app">
+    package="fr.bowser.behaviortracker.instantapp">
 
-    <dist:module dist:instant="true" />
-
-    <application
-        android:name=".config.BehaviorTrackerInstantAppManager"/>
-
+    <dist:module
+        dist:instant="true"
+        dist:title="@string/dynamic_feature_app_module_name">
+        <dist:delivery>
+            <dist:install-time />
+        </dist:delivery>
+        <dist:fusing dist:include="false" />
+    </dist:module>
 </manifest>

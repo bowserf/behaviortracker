@@ -1,11 +1,9 @@
-package fr.bowser.behaviortracker.app.config
+package fr.bowser.behaviortracker.app.instantapp
 
-import fr.bowser.behaviortracker.app.instantapp.DaggerInstantAppComponentImpl
-import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.instantapp.InstantAppComponent
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProvider
 
-class BehaviorTrackerInstantAppManager : BehaviorTrackerApp(), InstantAppManagerProvider {
+object InstantAppComponentProvider: InstantAppManagerProvider {
     override fun provideMyInstantAppComponent(): InstantAppComponent {
         return DaggerInstantAppComponentImpl.builder().build()
     }

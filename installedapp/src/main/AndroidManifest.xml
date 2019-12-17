@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="fr.bowser.behaviortracker.app"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="fr.bowser.behaviortracker.app">
 
-    <application
-        android:name=".config.BehaviorTrackerInstalledAppManager"/>
-
+    <dist:module dist:title="@string/dynamic_feature_app_module_name">
+        <dist:delivery>
+            <dist:install-time />
+        </dist:delivery>
+        <dist:fusing dist:include="false" />
+    </dist:module>
 </manifest>

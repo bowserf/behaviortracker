@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.app.instantapp
+package fr.bowser.behaviortracker.instantapp.instantapp
 
 import dagger.Component
 import fr.bowser.behaviortracker.instantapp.InstantAppComponent

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="fr.bowser.behaviortracker">
 
     <!-- Crashlytics and Firebase -->
@@ -9,7 +10,10 @@
     <!-- Pomodoro, when timer switched -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <dist:module dist:instant="true" />
+
     <application
+        android:name=".config.BehaviorTrackerApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -40,10 +44,11 @@
             android:name=".alarm.TimedDayReceiver"
             android:exported="false" />
 
-        <receiver android:name=".alarm.DeviceBootReceiver"
+        <receiver
+            android:name=".alarm.DeviceBootReceiver"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
