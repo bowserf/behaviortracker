@@ -1,3 +1,11 @@
+### Time Tracker v0.08.01
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2019-12-17
+* Change log:
+    - New project architecture to manage both installed and instant app. We build only one app bundle to manage both applications.
+
+
+
 ### Time Tracker v0.08.00
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2019-11-27
