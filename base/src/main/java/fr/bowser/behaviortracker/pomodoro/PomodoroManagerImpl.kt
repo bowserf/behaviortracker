@@ -1,6 +1,9 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.content.Context
+import android.media.AudioAttributes
+import android.os.Build
+import android.os.VibrationEffect
 import android.os.Vibrator
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.notification.TimeService
@@ -43,8 +46,24 @@ class PomodoroManagerImpl(
 
     private val timerListManagerListener = createTimerListManagerListener()
 
+    private var audioAttributes: AudioAttributes? = null
+
+    private var vibrationEffect: VibrationEffect? = null
+
     init {
         timerListManager.addListener(timerListManagerListener)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .build()
+
+            vibrationEffect = VibrationEffect.createOneShot(
+                DEFAULT_VIBRATION_DURATION,
+                VibrationEffect.DEFAULT_AMPLITUDE
+            )
+        }
     }
 
     override fun isBreakStep(): Boolean {
@@ -154,13 +173,21 @@ class PomodoroManagerImpl(
                 }
 
                 if (settingManager.isPomodoroVibrationEnable()) {
-                    vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
+                    vibrate()
                 }
 
                 isPendingState = true
 
                 listeners.forEach { it.onCountFinished(currentTimer!!, pomodoroTime) }
             }
+        }
+    }
+
+    private fun vibrate() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(vibrationEffect, audioAttributes)
+        } else {
+            vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
         }
     }
 
