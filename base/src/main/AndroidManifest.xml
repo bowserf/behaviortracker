@@ -34,23 +34,9 @@
 
         </activity>
 
-        <activity android:name=".showmode.ShowModeFragment" />
-
         <receiver
             android:name=".notification.TimerReceiver"
             android:exported="false" />
-
-        <receiver
-            android:name=".alarm.TimedDayReceiver"
-            android:exported="false" />
-
-        <receiver
-            android:name=".alarm.DeviceBootReceiver"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
         <service android:name=".notification.TimeService" />
 

@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.content.Context
+import android.media.AudioAttributes
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.VibrationEffect.DEFAULT_AMPLITUDE
@@ -46,8 +47,24 @@ class PomodoroManagerImpl(
 
     private val timerListManagerListener = createTimerListManagerListener()
 
+    private var audioAttributes: AudioAttributes? = null
+
+    private var vibrationEffect: VibrationEffect? = null
+
     init {
         timerListManager.addListener(timerListManagerListener)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .build()
+
+            vibrationEffect = VibrationEffect.createOneShot(
+                DEFAULT_VIBRATION_DURATION,
+                DEFAULT_AMPLITUDE
+            )
+        }
     }
 
     override fun isBreakStep(): Boolean {
