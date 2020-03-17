@@ -5,9 +5,12 @@ import android.content.Context
 import android.os.StrictMode
 import com.crashlytics.android.Crashlytics
 import com.google.android.gms.common.wrappers.InstantApps
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.firebase.analytics.FirebaseAnalytics
 import fr.bowser.behaviortracker.BuildConfig
+import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
+import fr.bowser.feature.alarm.AlarmGraph
 import io.fabric.sdk.android.Fabric
 
 class BehaviorTrackerApp : Application() {
@@ -17,20 +20,23 @@ class BehaviorTrackerApp : Application() {
     override fun onCreate() {
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(
-                StrictMode.ThreadPolicy.Builder()
-                    .detectAll()
-                    .penaltyLog()
-                    .build()
+                    StrictMode.ThreadPolicy.Builder()
+                            .detectAll()
+                            .penaltyLog()
+                            .build()
             )
             StrictMode.setVmPolicy(
-                StrictMode.VmPolicy.Builder()
-                    .detectAll()
-                    .penaltyLog()
-                    .build()
+                    StrictMode.VmPolicy.Builder()
+                            .detectAll()
+                            .penaltyLog()
+                            .build()
             )
         }
 
         super.onCreate()
+
+        val splitintsallmanager = SplitInstallManagerFactory.create(this)
+        val installedModules: Any = splitintsallmanager.installedModules
 
         setupGraph()
 
@@ -49,17 +55,22 @@ class BehaviorTrackerApp : Application() {
     private fun setupCrashlytics() {
         Fabric.with(this, Crashlytics())
         Crashlytics.setBool(
-            CRASHLYTICS_IS_INSTANT_APP,
-            appComponent.provideMyInstantApp().isInstantApp()
+                CRASHLYTICS_IS_INSTANT_APP,
+                appComponent.provideMyInstantApp().isInstantApp()
         )
     }
 
     private fun setupGraph() {
         val isInstantApp = InstantApps.isInstantApp(this)
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-            .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp))
-            .context(this)
-            .build()
+                .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp))
+                .context(this)
+                .build()
+
+        AlarmGraph.init(this)
+        if (BuildConfig.UA) {
+            AlarmGraph.inject(AlarmStorageManagerModuleUA())
+        }
     }
 
     private fun setupFirebaseAnalytics() {

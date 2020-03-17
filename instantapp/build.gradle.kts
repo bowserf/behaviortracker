@@ -20,9 +20,6 @@ android {
         getByName("release") {
             proguardFiles("proguard-rules-instantapp.pro")
         }
-        create("ua") {
-            initWith(getByName("debug"))
-        }
     }
 
     compileOptions {

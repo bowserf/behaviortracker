@@ -1,20 +1,21 @@
-package fr.bowser.behaviortracker.alarm
+package fr.bowser.feature.alarm.internal
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.feature.alarm.AlarmGraph
 
-class TimedDayReceiver : BroadcastReceiver() {
+internal class TimedDayReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
-        AlarmNotification.displayAlarmNotif(context)
-
         // set a new timer
         val alarmStorageManager =
-            BehaviorTrackerApp.getAppComponent(context).provideAlarmStorageManager()
+                AlarmGraph.getAlarmStorageManager()
         val alarmTimerManager =
-            BehaviorTrackerApp.getAppComponent(context).provideAlarmTimerManager()
+                AlarmGraph.getAlarmTimerManager()
+        val alarmListenerManager = AlarmGraphInternal.getAlarmListenerManager()
+
+        alarmListenerManager.notifyAlarmTriggered()
 
         val alarmTime = alarmStorageManager.getSavedAlarmTime()
         if (alarmTime != null) {

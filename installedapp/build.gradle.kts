@@ -20,9 +20,6 @@ android {
         getByName("release") {
             proguardFiles("proguard-rules-app.pro")
         }
-        create("ua") {
-            initWith(getByName("debug"))
-        }
     }
 
     compileOptions {

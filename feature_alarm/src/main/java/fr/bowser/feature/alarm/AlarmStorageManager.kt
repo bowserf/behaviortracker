@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.alarm
+package fr.bowser.feature.alarm
 
 interface AlarmStorageManager {
 

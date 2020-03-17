@@ -5,8 +5,6 @@
 
     <!-- Crashlytics and Firebase -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Alarm timer -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Pomodoro, when timer switched -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -39,18 +37,6 @@
         <receiver
             android:name=".notification.TimerReceiver"
             android:exported="false" />
-
-        <receiver
-            android:name=".alarm.TimedDayReceiver"
-            android:exported="false" />
-
-        <receiver
-            android:name=".alarm.DeviceBootReceiver"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
         <service android:name=".config.KillAppDetection" />
 

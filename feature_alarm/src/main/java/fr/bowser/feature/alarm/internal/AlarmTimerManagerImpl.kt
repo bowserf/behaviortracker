@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.alarm
+package fr.bowser.feature.alarm.internal
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -7,14 +7,22 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import fr.bowser.feature.alarm.AlarmStorageManager
+import fr.bowser.feature.alarm.AlarmTime
+import fr.bowser.feature.alarm.AlarmTimerManager
 import java.util.*
 
-class AlarmTimerManagerImpl(
-    private val context: Context,
-    private val alarmStorageManager: AlarmStorageManager
+internal class AlarmTimerManagerImpl(
+        private val context: Context,
+        private val alarmStorageManager: AlarmStorageManager,
+        private val alarmListenerManager: AlarmListenerManager
 ) : AlarmTimerManager {
 
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+    private val listeners = mutableListOf<AlarmTimerManager.Listener>()
+
+    private var alarmListener = createAlarmListener()
 
     override fun setAlarm(hour: Int, minute: Int, delayOneDay: Boolean) {
         val intent = Intent(context, TimedDayReceiver::class.java)
@@ -32,9 +40,9 @@ class AlarmTimerManagerImpl(
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmIntent)
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                alarmIntent
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    alarmIntent
             )
         }
 
@@ -57,12 +65,40 @@ class AlarmTimerManagerImpl(
         return alarmStorageManager.getSavedAlarmTime()
     }
 
+    override fun addListener(listener: AlarmTimerManager.Listener) {
+        if (listeners.contains(listener)) {
+            return
+        }
+
+        if (listeners.isEmpty()) {
+            alarmListenerManager.addListener(alarmListener!!)
+        }
+
+        listeners.add(listener)
+    }
+
+    override fun removeListener(listener: AlarmTimerManager.Listener) {
+        listeners.remove(listener)
+    }
+
+    private fun notifyAlarmTriggered() {
+        listeners.forEach { it.onAlarmTriggered() }
+    }
+
     private fun changeDeviceBootReceiverStatus(context: Context, state: Int) {
         val receiver = ComponentName(context, DeviceBootReceiver::class.java)
         context.packageManager.setComponentEnabledSetting(
-            receiver,
-            state,
-            PackageManager.DONT_KILL_APP
+                receiver,
+                state,
+                PackageManager.DONT_KILL_APP
         )
+    }
+
+    private fun createAlarmListener(): AlarmListenerManager.Listener {
+        return object : AlarmListenerManager.Listener {
+            override fun onAlarmTriggered() {
+                notifyAlarmTriggered()
+            }
+        }
     }
 }

@@ -3,8 +3,6 @@ package fr.bowser.behaviortracker.config
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import fr.bowser.behaviortracker.alarm.AlarmStorageManager
-import fr.bowser.behaviortracker.alarm.AlarmTimerManager
 import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
@@ -22,6 +20,7 @@ import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
 import fr.bowser.behaviortracker.timer.*
+import fr.bowser.feature.alarm.AlarmTimerManager
 import javax.inject.Singleton
 
 @Singleton
@@ -59,8 +58,6 @@ interface BehaviorTrackerAppComponent {
     fun provideEventManager(): EventManager
 
     fun provideAlarmTimerManager(): AlarmTimerManager
-
-    fun provideAlarmStorageManager(): AlarmStorageManager
 
     fun provideInAppManager(): InAppManager
 

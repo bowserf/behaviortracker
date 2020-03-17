@@ -1,6 +1,8 @@
 package fr.bowser.behaviortracker.alarm
 
 import fr.bowser.behaviortracker.event.EventManager
+import fr.bowser.feature.alarm.AlarmTime
+import fr.bowser.feature.alarm.AlarmTimerManager
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

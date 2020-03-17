@@ -1,11 +1,13 @@
 package fr.bowser.behaviortracker.alarm
 
 import fr.bowser.behaviortracker.event.EventManager
+import fr.bowser.feature.alarm.AlarmTime
+import fr.bowser.feature.alarm.AlarmTimerManager
 
 class AlarmDialogPresenter(
-    private val view: AlarmTimerContract.View,
-    private val alarmTimerManager: AlarmTimerManager,
-    private val eventManager: EventManager
+        private val view: AlarmTimerContract.View,
+        private val alarmTimerManager: AlarmTimerManager,
+        private val eventManager: EventManager
 ) : AlarmTimerContract.Presenter {
 
     override fun start() {

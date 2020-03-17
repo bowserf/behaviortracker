@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.feature.alarm.AlarmTime
 import javax.inject.Inject
 
 class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {

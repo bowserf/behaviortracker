@@ -66,6 +66,7 @@ android {
             initWith(getByName("debug"))
             versionNameSuffix = ".ua"
             buildConfigField("boolean", "UA", "true")
+            setMatchingFallbacks("ua", "debug")
         }
     }
 
@@ -112,10 +113,16 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":feature_alarm"))
+
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
+    implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1")
+
+    implementation("com.google.android.play:core:1.7.0")
 
     // Design
     implementation("com.google.android.material:material:1.1.0-alpha09")

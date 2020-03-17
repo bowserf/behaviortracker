@@ -1,9 +1,11 @@
-package fr.bowser.behaviortracker.alarm
+package fr.bowser.feature.alarm.internal
 
 import android.content.Context
 import android.preference.PreferenceManager
+import fr.bowser.feature.alarm.AlarmStorageManager
+import fr.bowser.feature.alarm.AlarmTime
 
-class AlarmStorageManagerImpl(context: Context) : AlarmStorageManager {
+internal class AlarmStorageManagerImpl(context: Context) : AlarmStorageManager {
 
     private val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
 

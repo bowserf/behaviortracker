@@ -1,5 +1,8 @@
 package fr.bowser.behaviortracker.alarm
 
+import fr.bowser.feature.alarm.AlarmStorageManager
+import fr.bowser.feature.alarm.AlarmTime
+
 class AlarmStorageManagerUA : AlarmStorageManager {
 
     private var hour = 7

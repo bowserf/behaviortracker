@@ -1,1 +1,1 @@
-include(":base", ":installedapp", ":instantapp")
+include(":base", ":installedapp", ":instantapp", ":feature_alarm")

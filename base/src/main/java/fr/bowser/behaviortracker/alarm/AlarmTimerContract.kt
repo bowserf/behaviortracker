@@ -1,5 +1,7 @@
 package fr.bowser.behaviortracker.alarm
 
+import fr.bowser.feature.alarm.AlarmTime
+
 interface AlarmTimerContract {
 
     interface Presenter {
