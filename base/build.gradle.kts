@@ -7,7 +7,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("io.fabric")
+    id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
     id("androidx.navigation.safeargs.kotlin")
 }
@@ -145,16 +145,12 @@ dependencies {
     kapt("androidx.room:room-compiler:2.1.0-alpha06")
 
     // Firebase
-    implementation("com.google.firebase:firebase-analytics:17.2.1")
+    implementation("com.google.firebase:firebase-analytics:18.0.0")
+    implementation("com.google.firebase:firebase-crashlytics:17.2.2")
 
     // Other
     implementation("com.google.dagger:dagger:2.14.1")
     kapt("com.google.dagger:dagger-compiler:2.14.1")
-
-    // Debug
-    implementation("com.crashlytics.sdk.android:crashlytics:2.9.5@aar") {
-        isTransitive = true
-    }
 
     // Static analyzer
     ktlint("com.github.shyiko:ktlint:0.31.0")

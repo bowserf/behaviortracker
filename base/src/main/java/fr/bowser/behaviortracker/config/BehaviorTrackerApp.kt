@@ -3,15 +3,14 @@ package fr.bowser.behaviortracker.config
 import android.app.Application
 import android.content.Context
 import android.os.StrictMode
-import com.crashlytics.android.Crashlytics
 import com.google.android.gms.common.wrappers.InstantApps
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
 import fr.bowser.feature.alarm.AlarmGraph
-import io.fabric.sdk.android.Fabric
 
 class BehaviorTrackerApp : Application() {
 
@@ -53,8 +52,7 @@ class BehaviorTrackerApp : Application() {
     }
 
     private fun setupCrashlytics() {
-        Fabric.with(this, Crashlytics())
-        Crashlytics.setBool(
+        FirebaseCrashlytics.getInstance().setCustomKey(
                 CRASHLYTICS_IS_INSTANT_APP,
                 appComponent.provideMyInstantApp().isInstantApp()
         )
