@@ -115,8 +115,8 @@ dependencies {
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1")
-
-    implementation("com.google.android.play:core:1.7.0")
+Æ
+    implementation("com.google.android.play:core:1.8.3")
 
     // Design
     implementation("com.google.android.material:material:1.1.0-alpha09")
