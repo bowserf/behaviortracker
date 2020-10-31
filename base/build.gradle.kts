@@ -30,12 +30,6 @@ android {
         resConfigs("en", "fr", "it", "tr")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = mapOf("room.schemaLocation" to "$projectDir/schemas")
-            }
-        }
     }
 
     signingConfigs {
@@ -194,7 +188,7 @@ tasks.register<JavaExec>("ktlint") {
 if (buildType == "CI") {
     android.variantFilter {
         if (name == "release") {
-            setIgnore(true)
+            ignore = true
         }
     }
 }
