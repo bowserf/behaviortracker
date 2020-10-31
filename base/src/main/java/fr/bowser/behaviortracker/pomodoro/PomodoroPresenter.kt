@@ -1,20 +1,24 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 
 class PomodoroPresenter(
     private val screen: PomodoroContract.Screen,
     private val pomodoroManager: PomodoroManager,
+    private val doNotDisturbManager: DoNotDisturbManager,
     override val timerList: List<Timer>,
     private val isInstantApp: Boolean
 ) : PomodoroContract.Presenter {
 
     private val pomodoroListener = createPomodoroManagerListener()
+    private val doNotDisturbListener = createDoNotDisturbManagerListener()
 
     private var isDialogDisplayed = false
 
     override fun start() {
         pomodoroManager.addListener(pomodoroListener)
+        doNotDisturbManager.addListener(doNotDisturbListener)
 
         if (pomodoroManager.currentTimer != null) {
             screen.updatePomodoroTimer(
@@ -30,10 +34,17 @@ class PomodoroPresenter(
         if (pomodoroManager.isPendingState) {
             screen.displayPomodoroDialog()
         }
+
+        if (doNotDisturbManager.isNotificationPolicyAccess() == DoNotDisturbManager.DnDPolicyAccess.NOT_MANAGED) {
+            screen.hideDoNotDisturb()
+        } else {
+            updateDoNotDisturb()
+        }
     }
 
     override fun stop() {
         pomodoroManager.removeListener(pomodoroListener)
+        doNotDisturbManager.removeListener(doNotDisturbListener)
     }
 
     override fun isRunning(): Boolean {
@@ -76,8 +87,37 @@ class PomodoroPresenter(
         screen.displayCreateTimerScreen()
     }
 
+    override fun onClickDoNotDisturb() {
+        if (doNotDisturbManager.isNotificationPolicyAccess() == DoNotDisturbManager.DnDPolicyAccess.DECLINED) {
+            // TODO display dialog to explain how to accept the permission
+            doNotDisturbManager.askPermissionIfNeeded()
+            return
+        }
+
+        if (doNotDisturbManager.getDnDState() == DoNotDisturbManager.DnDState.PRIORITY) {
+            doNotDisturbManager.setDnDState(DoNotDisturbManager.DnDState.ALL)
+            screen.enableDoNotDisturb(false)
+        } else {
+            doNotDisturbManager.setDnDState(DoNotDisturbManager.DnDState.PRIORITY)
+            screen.enableDoNotDisturb(true)
+        }
+    }
+
     private fun updatePomodoroState() {
         screen.displayPomodoroState(pomodoroManager.isRunning)
+    }
+
+    private fun updateDoNotDisturb() {
+        when (doNotDisturbManager.getDnDState()) {
+            DoNotDisturbManager.DnDState.ALL -> screen.enableDoNotDisturb(false)
+            DoNotDisturbManager.DnDState.PRIORITY -> screen.enableDoNotDisturb(true)
+        }
+    }
+
+    private fun createDoNotDisturbManagerListener() = object : DoNotDisturbManager.Listener {
+        override fun onDndStateChanged() {
+            updateDoNotDisturb()
+        }
     }
 
     private fun createPomodoroManagerListener(): PomodoroManager.Listener {

@@ -25,4 +25,6 @@
     <string name="pomodoro_play">Play</string>
     <string name="pomodoro_pause">Pause</string>
 
+    <string name="pomodoro_do_not_disturb">Do not disturb</string>
+
 </resources>

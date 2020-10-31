@@ -84,21 +84,21 @@ android {
             // Split resources.
             // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
             res.srcDirs(
-                    "src/main/res/common",
-                    "src/main/res/home",
-                    "src/main/res/timer",
-                    "src/main/res/createtimer",
-                    "src/main/res/timerlist",
-                    "src/main/res/notification",
-                    "src/main/res/setting",
-                    "src/main/res/showmode",
                     "src/main/res/alarm",
-                    "src/main/res/ua",
+                    "src/main/res/choosepomodorotimer",
+                    "src/main/res/common",
+                    "src/main/res/createtimer",
+                    "src/main/res/home",
+                    "src/main/res/instantapp",
+                    "src/main/res/notification",
+                    "src/main/res/pomodoro",
                     "src/main/res/rewards",
                     "src/main/res/rewardsrow",
-                    "src/main/res/pomodoro",
-                    "src/main/res/choosepomodorotimer",
-                    "src/main/res/instantapp"
+                    "src/main/res/setting",
+                    "src/main/res/showmode",
+                    "src/main/res/timer",
+                    "src/main/res/timerlist",
+                    "src/main/res/ua"
             )
         }
     }
@@ -109,13 +109,14 @@ android {
 dependencies {
 
     implementation(project(":feature_alarm"))
+    implementation(project(":feature_do_not_disturb"))
 
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1")
-Æ
+
     implementation("com.google.android.play:core:1.8.3")
 
     // Design

@@ -6,6 +6,8 @@ import dagger.Component
 import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
+import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
+import fr.bowser.behaviortracker.do_not_disturbed.DoNotDisturbModule
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
 import fr.bowser.behaviortracker.inapp.InAppManager
@@ -34,7 +36,8 @@ import javax.inject.Singleton
         AlarmTimerManagerModule::class,
         InAppManagerModule::class,
         PomodoroManagerModule::class,
-        TimerListManagerModule::class
+        TimerListManagerModule::class,
+        DoNotDisturbModule::class
     ), dependencies = [
         InstantAppComponent::class
     ]
@@ -66,6 +69,8 @@ interface BehaviorTrackerAppComponent {
     fun providePomodoroManager(): PomodoroManager
 
     fun provideMyInstantApp(): InstantAppManager
+
+    fun provideDoNotDisturbModule(): DoNotDisturbManager
 
     @Component.Builder
     interface Builder {

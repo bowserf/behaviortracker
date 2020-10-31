@@ -25,6 +25,10 @@ interface PomodoroContract {
         fun displaySettings()
 
         fun displayPomodoroState(isRunning: Boolean)
+
+        fun hideDoNotDisturb()
+
+        fun enableDoNotDisturb(enable: Boolean)
     }
 
     interface Presenter {
@@ -48,5 +52,7 @@ interface PomodoroContract {
         fun onClickSettings()
 
         fun isInstantApp(): Boolean
+
+        fun onClickDoNotDisturb()
     }
 }

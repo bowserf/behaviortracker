@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import android.animation.ObjectAnimator
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.widget.TextView
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -44,6 +46,9 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.
     private lateinit var playPauseIcon: ImageView
     private lateinit var playPauseTitle: TextView
     private lateinit var stopButton: View
+    private lateinit var doNotDisturb: View
+    private lateinit var doNotDisturbIcon: ImageView
+    private lateinit var doNotDisturbText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +71,14 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.
         playPauseTitle = view.findViewById(R.id.pomodoro_play_pause_title)
         playPauseIcon = view.findViewById(R.id.pomodoro_play_pause_icon)
         stopButton = view.findViewById(R.id.pomodoro_stop)
+        doNotDisturb = view.findViewById(R.id.pomodoro_toggle_dnd)
+        doNotDisturbText = view.findViewById(R.id.pomodoro_toggle_dnd_text)
+        doNotDisturbIcon = view.findViewById(R.id.pomodoro_toggle_dnd_icon)
 
         stopButton.setOnClickListener { presenter.onClickStopPomodoro() }
         playPauseButton.setOnClickListener { presenter.onClickChangePomodoroState() }
         startSession.setOnClickListener { presenter.onClickStartSession() }
+        doNotDisturb.setOnClickListener { presenter.onClickDoNotDisturb() }
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -190,6 +199,23 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.
             playPauseIcon.setImageResource(R.drawable.ic_play)
             playPauseTitle.text = resources.getString(R.string.pomodoro_play)
         }
+    }
+
+    override fun hideDoNotDisturb() {
+        doNotDisturb.visibility = View.GONE
+    }
+
+    override fun enableDoNotDisturb(enable: Boolean) {
+        val color: Int
+        if (enable) {
+            doNotDisturb.setBackgroundResource(R.drawable.pomodoro_do_not_disturb_bg_selected)
+            color = ContextCompat.getColor(requireContext(), R.color.white)
+        } else {
+            doNotDisturb.background = null
+            color = ContextCompat.getColor(requireContext(), R.color.icon_day_night)
+        }
+        doNotDisturbText.setTextColor(color)
+        doNotDisturbIcon.imageTintList = ColorStateList.valueOf(color)
     }
 
     private fun startFabAnimation() {

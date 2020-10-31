@@ -175,7 +175,37 @@
                     android:textSize="@dimen/pomodoro_current_timer_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/pomodoro_toggle_dnd"
                     tools:text="Prepare destination for the next travel" />
+
+                <LinearLayout
+                    android:id="@+id/pomodoro_toggle_dnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/default_space_1_5"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/default_space"
+                    android:paddingVertical="@dimen/default_space_half"
+                    app:layout_constraintBottom_toTopOf="@id/pomodoro_play_pause"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pomodoro_active_timer">
+
+                    <ImageView
+                        android:id="@+id/pomodoro_toggle_dnd_icon"
+                        android:layout_width="@dimen/pomodoro_do_not_disturb_icon_size"
+                        android:layout_height="@dimen/pomodoro_do_not_disturb_icon_size"
+                        android:src="@drawable/pomodoro_do_not_disturb" />
+
+                    <TextView
+                        android:id="@+id/pomodoro_toggle_dnd_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/pomodoro_do_not_disturb"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/pomodoro_play_pause"
@@ -186,7 +216,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/pomodoro_stop"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pomodoro_active_timer">
+                    app:layout_constraintTop_toBottomOf="@id/pomodoro_toggle_dnd">
 
                     <ImageView
                         android:id="@+id/pomodoro_play_pause_icon"
@@ -208,10 +238,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/pomodoro_play_pause"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/pomodoro_play_pause"
-                    app:layout_constraintTop_toBottomOf="@id/pomodoro_active_timer">
+                    app:layout_constraintTop_toTopOf="@id/pomodoro_play_pause">
 
                     <ImageView
                         android:layout_width="wrap_content"

@@ -1,5 +1,8 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
@@ -143,13 +146,26 @@ class PomodoroManagerImpl(
                 }
 
                 if (settingManager.isPomodoroVibrationEnable()) {
-                    vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
+                    vibrate()
                 }
 
                 isPendingState = true
 
                 listeners.forEach { it.onCountFinished(currentTimer!!, pomodoroTime) }
             }
+        }
+    }
+
+    private fun vibrate() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
+            vibrator.vibrate(DEFAULT_VIBRATION_DURATION)
+        } else {
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    DEFAULT_VIBRATION_DURATION,
+                    DEFAULT_AMPLITUDE
+                )
+            )
         }
     }
 

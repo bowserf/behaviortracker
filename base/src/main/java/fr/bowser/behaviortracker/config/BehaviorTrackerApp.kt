@@ -11,6 +11,7 @@ import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
 import fr.bowser.feature.alarm.AlarmGraph
+import fr.bowser.feature_do_not_disturb.DoNotDisturbGraph
 
 class BehaviorTrackerApp : Application() {
 
@@ -33,9 +34,6 @@ class BehaviorTrackerApp : Application() {
         }
 
         super.onCreate()
-
-        val splitintsallmanager = SplitInstallManagerFactory.create(this)
-        val installedModules: Any = splitintsallmanager.installedModules
 
         setupGraph()
 
@@ -66,6 +64,7 @@ class BehaviorTrackerApp : Application() {
                 .build()
 
         AlarmGraph.init(this)
+        DoNotDisturbGraph.init(this)
         if (BuildConfig.UA) {
             AlarmGraph.inject(AlarmStorageManagerModuleUA())
         }
