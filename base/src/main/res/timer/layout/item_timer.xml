@@ -50,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/timer_color"
-            tools:src="@drawable/ic_play_white"/>
+            tools:src="@drawable/ic_play"/>
 
         <TextView
             android:id="@+id/timer_name"

@@ -3,6 +3,5 @@
 
     <dimen name="pomodoro_progress_size">140dp</dimen>
     <dimen name="pomodoro_current_timer_size">20sp</dimen>
-    <dimen name="pomodoro_view_external_margin">48dp</dimen>
 
 </resources>

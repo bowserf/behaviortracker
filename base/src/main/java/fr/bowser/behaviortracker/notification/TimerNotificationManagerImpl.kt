@@ -105,7 +105,7 @@ class TimerNotificationManagerImpl(
                 .build()
 
         continuePomodoroAction = NotificationCompat.Action.Builder(
-                R.drawable.ic_pomodoro,
+                R.drawable.pomodoro_menu_item,
                 context.resources.getString(R.string.timer_notif_continue_pomodoro),
                 TimerReceiver.getContinuePomodoroPendingIntent(context)
         )

@@ -21,7 +21,8 @@
     <string name="pomodoro_start_session">Start a session.</string>
     <string name="pomodoro_take_a_rest">Take a break when time is up.</string>
 
-    <!-- Menu -->
-    <string name="menu_stop_pomodoro">Stop</string>
+    <string name="pomodoro_stop">Stop</string>
+    <string name="pomodoro_play">Play</string>
+    <string name="pomodoro_pause">Pause</string>
 
 </resources>

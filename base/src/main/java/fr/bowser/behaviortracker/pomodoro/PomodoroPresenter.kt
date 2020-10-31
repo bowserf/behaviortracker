@@ -22,6 +22,7 @@ class PomodoroPresenter(
                 pomodoroManager.pomodoroTime,
                 pomodoroManager.currentSessionDuration
             )
+            updatePomodoroState()
         } else {
             screen.displayEmptyView()
         }
@@ -29,8 +30,6 @@ class PomodoroPresenter(
         if (pomodoroManager.isPendingState) {
             screen.displayPomodoroDialog()
         }
-
-        updateFabIcon()
     }
 
     override fun stop() {
@@ -41,29 +40,28 @@ class PomodoroPresenter(
         return pomodoroManager.isStarted
     }
 
-    override fun onClickFab() {
-        if (!pomodoroManager.isStarted) {
-            if (timerList.isEmpty()) {
-                screen.displayNoTimerAvailable()
-            } else {
-                screen.displayChoosePomodoroTimer()
-            }
+    override fun onClickStartSession() {
+        if (pomodoroManager.isStarted) {
             return
         }
 
+        if (timerList.isEmpty()) {
+            screen.displayNoTimerAvailable()
+        } else {
+            screen.displayChoosePomodoroTimer()
+        }
+    }
+
+    override fun onClickChangePomodoroState() {
         if (pomodoroManager.isRunning) {
             pomodoroManager.pause()
-        } else if (!pomodoroManager.isRunning) {
+        } else {
             pomodoroManager.resume()
         }
-
-        updateFabIcon()
     }
 
     override fun onClickStopPomodoro() {
         pomodoroManager.stop()
-        screen.displayEmptyView()
-        updateFabIcon()
     }
 
     override fun onClickSettings() {
@@ -75,46 +73,38 @@ class PomodoroPresenter(
     }
 
     override fun onClickCreateTimer() {
-        screen.displayCreateTimer()
+        screen.displayCreateTimerScreen()
     }
 
-    private fun updateFabIcon() {
-        if (!pomodoroManager.isStarted) {
-            screen.displayStartIcon()
-            return
-        }
-
-        if (pomodoroManager.isRunning) {
-            screen.displayPauseIcon()
-        } else {
-            screen.displayPlayIcon()
-        }
+    private fun updatePomodoroState() {
+        screen.displayPomodoroState(pomodoroManager.isRunning)
     }
 
     private fun createPomodoroManagerListener(): PomodoroManager.Listener {
         return object : PomodoroManager.Listener {
 
             override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
-                screen.displayPauseIcon()
                 screen.updatePomodoroTimer(newTimer, duration, duration)
             }
 
             override fun onPomodoroSessionStop() {
                 isDialogDisplayed = false
                 screen.displayEmptyView()
-                screen.displayStartIcon()
             }
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                updateFabIcon()
+                if (pomodoroManager.currentTimer != updatedTimer) {
+                    return
+                }
+                updatePomodoroState()
             }
 
             override fun updateTime(timer: Timer, currentTime: Long) {
                 if (isDialogDisplayed) {
-                    screen.dismissPomodoroDialog()
+                    screen.hidePomodoroDialog()
                     isDialogDisplayed = false
                 }
-                screen.updateTime(timer, currentTime)
+                screen.updateTime(currentTime)
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {

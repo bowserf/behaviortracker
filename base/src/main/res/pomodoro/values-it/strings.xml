@@ -20,6 +20,8 @@
     <string name="pomodoro_take_a_rest">Fai una pausa quando il tempo è scaduto.</string>
 
     <!-- Menu -->
-    <string name="menu_stop_pomodoro">Stop</string>
+    <string name="pomodoro_stop">Stop</string>
+    <string name="pomodoro_play">Avvio</string>
+    <string name="pomodoro_pause">Fermarsi</string>
 
 </resources>

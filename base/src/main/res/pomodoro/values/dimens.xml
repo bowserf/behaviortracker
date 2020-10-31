@@ -3,9 +3,10 @@
 
     <dimen name="pomodoro_icon_size">40dp</dimen>
     <dimen name="pomodoro_empty_view_padding">40dp</dimen>
-    <dimen name="pomodoro_progress_size">220dp</dimen>
+    <dimen name="pomodoro_progress_size">160dp</dimen>
     <dimen name="pomodoro_progress_thickness">14dp</dimen>
     <dimen name="pomodoro_current_time_size">40sp</dimen>
-    <dimen name="pomodoro_current_timer_size">30sp</dimen>
+    <dimen name="pomodoro_current_timer_size">18sp</dimen>
+    <dimen name="pomodoro_active_timer_button_width">80dp</dimen>
 
 </resources>

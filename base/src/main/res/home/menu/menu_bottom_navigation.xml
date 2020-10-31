@@ -12,7 +12,7 @@
     <item
         android:id="@+id/pomodoro_screen"
         android:enabled="true"
-        android:icon="@drawable/ic_pomodoro"
+        android:icon="@drawable/pomodoro_menu_item"
         android:title="@string/bottom_navigation_pomodoro_view"
         app:showAsAction="ifRoom" />
 

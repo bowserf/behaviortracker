@@ -20,6 +20,8 @@
     <string name="pomodoro_take_a_rest">Süre dolduğunda bir mola verin.</string>
 
     <!-- Menu -->
-    <string name="menu_stop_pomodoro">Durdurmak</string>
+    <string name="pomodoro_stop">Durdurmak</string>
+    <string name="pomodoro_play">Başlat</string>
+    <string name="pomodoro_pause">Duraklat</string>
 
 </resources>

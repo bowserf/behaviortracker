@@ -65,7 +65,7 @@ class PomodoroPresenterTest {
         Mockito.`when`(manager.isStarted).thenReturn(false)
 
         // When
-        presenter.onClickFab()
+        presenter.onClickStartSession()
 
         // Then
         Mockito.verify(screen).displayChoosePomodoroTimer()
@@ -78,7 +78,7 @@ class PomodoroPresenterTest {
         Mockito.`when`(manager.isStarted).thenReturn(false)
 
         // When
-        presenter.onClickFab()
+        presenter.onClickStartSession()
 
         // Then
         Mockito.verify(screen).displayNoTimerAvailable()
@@ -92,7 +92,7 @@ class PomodoroPresenterTest {
         Mockito.`when`(manager.isRunning).thenReturn(true)
 
         // When
-        presenter.onClickFab()
+        presenter.onClickStartSession()
 
         // Then
         Mockito.verify(manager).pause()
@@ -106,7 +106,7 @@ class PomodoroPresenterTest {
         Mockito.`when`(manager.isRunning).thenReturn(false)
 
         // When
-        presenter.onClickFab()
+        presenter.onClickStartSession()
 
         // Then
         Mockito.verify(manager).resume()
@@ -134,6 +134,6 @@ class PomodoroPresenterTest {
         presenter.onClickCreateTimer()
 
         // Then
-        Mockito.verify(screen).displayCreateTimer()
+        Mockito.verify(screen).displayCreateTimerScreen()
     }
 }

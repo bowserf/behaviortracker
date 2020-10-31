@@ -6,7 +6,7 @@ interface PomodoroContract {
 
     interface Screen {
 
-        fun updateTime(timer: Timer, currentTime: Long)
+        fun updateTime(currentTime: Long)
 
         fun updatePomodoroTimer(timer: Timer, currentTime: Long, duration: Long)
 
@@ -14,21 +14,17 @@ interface PomodoroContract {
 
         fun displayEmptyView()
 
-        fun displayPauseIcon()
-
-        fun displayPlayIcon()
-
-        fun displayStartIcon()
-
         fun displayPomodoroDialog()
+
+        fun hidePomodoroDialog()
 
         fun displayNoTimerAvailable()
 
-        fun displayCreateTimer()
-
-        fun dismissPomodoroDialog()
+        fun displayCreateTimerScreen()
 
         fun displaySettings()
+
+        fun displayPomodoroState(isRunning: Boolean)
     }
 
     interface Presenter {
@@ -41,7 +37,9 @@ interface PomodoroContract {
 
         fun isRunning(): Boolean
 
-        fun onClickFab()
+        fun onClickStartSession()
+
+        fun onClickChangePomodoroState()
 
         fun onClickStopPomodoro()
 

@@ -19,7 +19,8 @@
     <string name="pomodoro_start_session">Démarrez une session.</string>
     <string name="pomodoro_take_a_rest">Prenez une pause quand le temps est écoulé.</string>
 
-    <!-- Menu -->
-    <string name="menu_stop_pomodoro">Stop</string>
+    <string name="pomodoro_stop">Stop</string>
+    <string name="pomodoro_play">Démarrer</string>
+    <string name="pomodoro_pause">Pause</string>
 
 </resources>

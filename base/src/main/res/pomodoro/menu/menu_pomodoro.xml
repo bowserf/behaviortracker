@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_stop_pomodoro"
-        android:enabled="true"
-        android:icon="@drawable/ic_stop"
-        android:title="@string/menu_stop_pomodoro"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/menu_settings"
         android:enabled="true"
         android:title="@string/menu_setting"
