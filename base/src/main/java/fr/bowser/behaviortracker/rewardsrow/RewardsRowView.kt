@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
@@ -30,7 +31,7 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
         // card radius
         radius = resources.getDimension(R.dimen.default_space_half)
 
-        setOnClickListener { presenter.onItemClicked(inApp!!.sku) }
+        setOnClickListener { presenter.onItemClicked(inApp!!.skuDetails) }
 
         title = findViewById(R.id.rewards_title)
         price = findViewById(R.id.rewards_price)
@@ -47,6 +48,13 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
             throw IllegalStateException("Context should be a context Activity")
         }
         return context as Activity
+    }
+
+    override fun displayStoreConnectionError() {
+        AlertDialog.Builder(context)
+            .setMessage(R.string.rewards_purchase_fail)
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     private fun setupGraph() {

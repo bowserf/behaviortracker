@@ -1,7 +1,14 @@
 package fr.bowser.behaviortracker.inapp
 
 import android.util.Log
-import com.android.billingclient.api.*
+import com.android.billingclient.api.AcknowledgePurchaseParams
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingFlowParams
+import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.SkuDetails
+import com.android.billingclient.api.SkuDetailsParams
+import com.android.billingclient.api.SkuDetailsResponseListener
 
 class InAppManagerImpl(
     private val playBillingManager: PlayBillingManager,
@@ -20,21 +27,26 @@ class InAppManagerImpl(
         querySkuDetailsAsync()
     }
 
-    override fun purchase(sku: String, activityContainer: InAppManager.ActivityContainer) {
+    override fun purchase(
+        skuDetails: SkuDetails,
+        activityContainer: InAppManager.ActivityContainer
+    ) {
         val purchaseFlowRequest = Runnable {
             val builder = BillingFlowParams
                 .newBuilder()
-                .setSku(sku)
-                .setType(BillingClient.SkuType.INAPP)
-            val responseCode = playBillingManager.launchBillingFlow(
+                .setSkuDetails(skuDetails)
+            val billingResult = playBillingManager.launchBillingFlow(
                 activityContainer.get(),
                 builder.build()
             )
-            if (responseCode == BillingClient.BillingResponse.ITEM_ALREADY_OWNED) {
-                Log.e(TAG, "User already owns this in-app : $sku")
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+                Log.e(TAG, "User already owns this in-app : ${skuDetails.sku}")
                 notifyPurchaseFailed()
-            } else if (responseCode != BillingClient.BillingResponse.OK) {
-                Log.e(TAG, "An error occurred during purchase, error code : $responseCode")
+            } else if (billingResult.responseCode != BillingClient.BillingResponseCode.OK) {
+                Log.e(
+                    TAG,
+                    "An error occurred during purchase, error code : ${billingResult.responseCode}"
+                )
                 notifyPurchaseFailed()
             }
         }
@@ -60,7 +72,7 @@ class InAppManagerImpl(
         val queryBoughtInApp = Runnable {
             // legacy in-apps
             val purchases = playBillingManager.queryPurchases(BillingClient.SkuType.INAPP)
-            val purchasesInAppList = purchases.purchasesList
+            val purchasesInAppList = purchases.purchasesList!!
             for (purchase in purchasesInAppList) {
                 ownedSku.add(purchase.sku)
             }
@@ -75,6 +87,38 @@ class InAppManagerImpl(
             list.add(inApp.sku)
         }
         return list
+    }
+
+    private fun acknowledgeIfNeeded(purchases: List<Purchase>?) {
+        if (purchases == null) {
+            return
+        }
+        for (purchase in purchases) {
+            acknowledgeIfNeeded(purchase)
+        }
+    }
+
+    private fun acknowledgeIfNeeded(purchase: Purchase) {
+        if (purchase.purchaseState != Purchase.PurchaseState.PURCHASED) {
+            return
+        }
+        if (purchase.isAcknowledged) {
+            return
+        }
+        val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
+            .setPurchaseToken(purchase.purchaseToken)
+            .build()
+        val acknowledgePurchaseResponseListener =
+            AcknowledgePurchaseResponseListener { billingResult ->
+                val responseCode = billingResult.responseCode
+                if (responseCode != BillingClient.BillingResponseCode.OK) {
+                    notifyPurchaseFailed()
+                }
+            }
+        playBillingManager.acknowledgePurchase(
+            acknowledgePurchaseParams,
+            acknowledgePurchaseResponseListener
+        )
     }
 
     override fun addListener(listener: InAppManager.Listener) {
@@ -102,6 +146,7 @@ class InAppManagerImpl(
     private fun createPlayBillingManagerListener(): PlayBillingManager.Listener {
         return object : PlayBillingManager.Listener {
             override fun onPurchasesUpdated(purchases: List<Purchase>?) {
+                acknowledgeIfNeeded(purchases)
                 if (purchases != null) {
                     notifyPurchaseSucceed(purchases)
                 }
@@ -115,9 +160,9 @@ class InAppManagerImpl(
     }
 
     private fun createSkuDetailsResponseListener(): SkuDetailsResponseListener {
-        return SkuDetailsResponseListener { responseCode, skuDetailsList ->
-            if (responseCode == BillingClient.BillingResponse.OK) {
-                if (skuDetailsList.size != 0) {
+        return SkuDetailsResponseListener { billingResult, skuDetailsList ->
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                if (skuDetailsList != null && skuDetailsList.size != 0) {
                     inAppRepository.set(skuDetailsList)
                 }
                 updatePurchasedInApp()

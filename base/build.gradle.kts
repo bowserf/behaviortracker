@@ -133,7 +133,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.1.0")
 
     // Billing
-    implementation("com.android.billingclient:billing:1.1")
+    implementation("com.android.billingclient:billing:3.0.1")
 
     // Architecture component
     implementation("androidx.room:room-runtime:2.1.0-alpha06")

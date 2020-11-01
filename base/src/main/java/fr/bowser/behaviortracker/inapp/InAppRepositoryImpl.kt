@@ -37,7 +37,7 @@ class InAppRepositoryImpl(
             val description = skuDetail.description
             val priceAndCurrency = skuDetail.price
             val feature = getFeatureFromSku(sku)
-            list.add(InApp(sku, name, description, priceAndCurrency, feature))
+            list.add(InApp(sku, name, description, priceAndCurrency, feature, skuDetail))
         }
 
         detailsList.clear()

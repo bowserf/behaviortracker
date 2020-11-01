@@ -2,12 +2,13 @@ package fr.bowser.behaviortracker.inapp
 
 import android.app.Activity
 import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.SkuDetails
 
 interface InAppManager {
 
     fun initialize()
 
-    fun purchase(sku: String, activityContainer: InAppManager.ActivityContainer)
+    fun purchase(skuDetails: SkuDetails, activityContainer: ActivityContainer)
 
     fun addListener(listener: Listener)
 

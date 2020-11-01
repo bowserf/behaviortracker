@@ -2,7 +2,16 @@ package fr.bowser.behaviortracker.inapp
 
 import android.app.Activity
 import android.content.Context
-import com.android.billingclient.api.*
+import com.android.billingclient.api.AcknowledgePurchaseParams
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
+import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.PurchasesUpdatedListener
+import com.android.billingclient.api.SkuDetailsParams
+import com.android.billingclient.api.SkuDetailsResponseListener
 
 class PlayBillingManager(context: Context) {
 
@@ -23,6 +32,7 @@ class PlayBillingManager(context: Context) {
     fun setUpPlayBilling() {
         billingClient = BillingClient.newBuilder(context)
             .setListener(purchasesUpdatedListener)
+            .enablePendingPurchases()
             .build()
     }
 
@@ -54,7 +64,7 @@ class PlayBillingManager(context: Context) {
         billingClient!!.querySkuDetailsAsync(build, skuDetailsResponseListener)
     }
 
-    fun launchBillingFlow(activity: Activity, build: BillingFlowParams): Int {
+    fun launchBillingFlow(activity: Activity, build: BillingFlowParams): BillingResult {
         checkBillingClientSetUp()
         return billingClient!!.launchBillingFlow(activity, build)
     }
@@ -64,13 +74,24 @@ class PlayBillingManager(context: Context) {
         return billingClient!!.queryPurchases(sku)
     }
 
+    fun acknowledgePurchase(
+        acknowledgePurchaseParams: AcknowledgePurchaseParams?,
+        acknowledgePurchaseResponseListener: AcknowledgePurchaseResponseListener?
+    ) {
+        checkBillingClientSetUp()
+        billingClient!!.acknowledgePurchase(
+            acknowledgePurchaseParams!!,
+            acknowledgePurchaseResponseListener!!
+        )
+    }
+
     private fun startServiceConnection(executeOnSuccess: Runnable?) {
         checkBillingClientSetUp()
         billingClient!!.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(
-                @BillingClient.BillingResponse billingResponseCode: Int
+                billingResult: BillingResult
             ) {
-                if (billingResponseCode == BillingClient.BillingResponse.OK) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                     isServiceConnected = true
                     executeOnSuccess?.run()
                 } else {
@@ -93,8 +114,8 @@ class PlayBillingManager(context: Context) {
     }
 
     private fun createPurchaseUpdatedListener(): PurchasesUpdatedListener {
-        return PurchasesUpdatedListener { responseCode, purchases ->
-            if (responseCode == BillingClient.BillingResponse.OK) {
+        return PurchasesUpdatedListener { billingResult, purchases ->
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                 listener?.onPurchasesUpdated(purchases)
             }
         }
