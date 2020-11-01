@@ -23,4 +23,9 @@
     <string name="pomodoro_play">Démarrer</string>
     <string name="pomodoro_pause">Pause</string>
 
+    <string name="pomodoro_do_not_disturb">Ne pas déranger</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_title">Permission nécessaire</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker nécessite la permission \"Ne pas déranger\" afin de pouvoir modifier le status du mode \"Ne pas déranger\".\n Vous devez activer la permission manuellement depuis les paramètres.</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Ouvrir les paramètres</string>
+
 </resources>

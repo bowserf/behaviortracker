@@ -26,5 +26,8 @@
     <string name="pomodoro_pause">Pause</string>
 
     <string name="pomodoro_do_not_disturb">Do not disturb</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_title">Permission required</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker needs the permission \"Do not disturb\" mode in order to change the \"Do not disturb\" state.\nYou have to manually enable the permission from settings.</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Open settings</string>
 
 </resources>

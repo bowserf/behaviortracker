@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.Keep
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -216,6 +217,19 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.
         }
         doNotDisturbText.setTextColor(color)
         doNotDisturbIcon.imageTintList = ColorStateList.valueOf(color)
+    }
+
+    override fun displayAskDndPermission() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.pomodoro_do_not_disturb_dialog_permission_title)
+            .setMessage(R.string.pomodoro_do_not_disturb_dialog_permission_message)
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+                // nothing to do
+            }
+            .setPositiveButton(R.string.pomodoro_do_not_disturb_dialog_permission_positive_button) { _, _ ->
+                presenter.onClickDoNotDisturbDialogOpenSettings()
+            }
+            .show()
     }
 
     private fun startFabAnimation() {

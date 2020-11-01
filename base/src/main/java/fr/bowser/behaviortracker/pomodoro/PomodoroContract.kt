@@ -29,6 +29,8 @@ interface PomodoroContract {
         fun hideDoNotDisturb()
 
         fun enableDoNotDisturb(enable: Boolean)
+
+        fun displayAskDndPermission()
     }
 
     interface Presenter {
@@ -54,5 +56,7 @@ interface PomodoroContract {
         fun isInstantApp(): Boolean
 
         fun onClickDoNotDisturb()
+
+        fun onClickDoNotDisturbDialogOpenSettings()
     }
 }

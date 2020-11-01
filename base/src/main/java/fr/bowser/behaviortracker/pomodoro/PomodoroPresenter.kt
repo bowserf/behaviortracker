@@ -89,8 +89,7 @@ class PomodoroPresenter(
 
     override fun onClickDoNotDisturb() {
         if (doNotDisturbManager.isNotificationPolicyAccess() == DoNotDisturbManager.DnDPolicyAccess.DECLINED) {
-            // TODO display dialog to explain how to accept the permission
-            doNotDisturbManager.askPermissionIfNeeded()
+            screen.displayAskDndPermission()
             return
         }
 
@@ -101,6 +100,10 @@ class PomodoroPresenter(
             doNotDisturbManager.setDnDState(DoNotDisturbManager.DnDState.PRIORITY)
             screen.enableDoNotDisturb(true)
         }
+    }
+
+    override fun onClickDoNotDisturbDialogOpenSettings() {
+        doNotDisturbManager.askPermissionIfNeeded()
     }
 
     private fun updatePomodoroState() {

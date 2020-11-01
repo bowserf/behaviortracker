@@ -24,4 +24,9 @@
     <string name="pomodoro_play">Avvio</string>
     <string name="pomodoro_pause">Fermarsi</string>
 
+    <string name="pomodoro_do_not_disturb">Non disturbare</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_title">Autorizzazione richiesta</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker necessita dell\'autorizzazione \"Non disturbare\" per modificare lo stato \"Non disturbare\". Devi abilitare manualmente l\'autorizzazione dalle impostazioni.</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Apri le impostazioni</string>
+
 </resources>

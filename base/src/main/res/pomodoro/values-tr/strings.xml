@@ -24,4 +24,9 @@
     <string name="pomodoro_play">Başlat</string>
     <string name="pomodoro_pause">Duraklat</string>
 
+    <string name="pomodoro_do_not_disturb">Rahatsız etmeyin</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_title">İzin gerekli</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker\'ın "Rahatsız etmeyin" durumunu değiştirmek için "Rahatsız etmeyin" iznine ihtiyacı vardır. İzinleri ayarlardan manuel olarak etkinleştirmeniz gerekir.</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Ayarları aç</string>
+
 </resources>
