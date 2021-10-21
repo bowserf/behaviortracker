@@ -184,10 +184,6 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         timerAdapter.addTimer(timer)
     }
 
-    override fun isTimerListEmpty(): Boolean {
-        return timerAdapter.getTimerList().isEmpty()
-    }
-
     override fun displayEmptyListView() {
         list.visibility = INVISIBLE
         emptyListView.visibility = VISIBLE

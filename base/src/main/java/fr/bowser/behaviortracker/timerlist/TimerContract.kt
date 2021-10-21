@@ -20,8 +20,6 @@ interface TimerContract {
 
         fun displayCancelDeletionView()
 
-        fun isTimerListEmpty(): Boolean
-
         fun displayResetAllDialog()
 
         fun displaySettingsView()

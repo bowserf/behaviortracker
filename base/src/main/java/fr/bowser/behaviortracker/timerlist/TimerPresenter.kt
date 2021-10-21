@@ -102,14 +102,15 @@ class TimerPresenter(
 
     override fun onTimerRemoved(removedTimer: Timer) {
         screen.onTimerRemoved(removedTimer)
-        if (screen.isTimerListEmpty()) {
+        val timerList = timerListManager.getTimerList()
+        if (timerList.isEmpty() || (timerList.size == 1 && timerList.first() == ongoingDeletionTimer)) {
             screen.displayEmptyListView()
         }
     }
 
     override fun onTimerAdded(updatedTimer: Timer) {
         screen.onTimerAdded(updatedTimer)
-        if (!screen.isTimerListEmpty()) {
+        if (timerListManager.getTimerList().isNotEmpty()) {
             screen.displayListView()
         }
     }
