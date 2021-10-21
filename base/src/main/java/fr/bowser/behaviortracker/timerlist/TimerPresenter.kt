@@ -48,6 +48,14 @@ class TimerPresenter(
         screen.displaySettingsView()
     }
 
+    override fun onClickRemoveAllTimers() {
+        screen.displayRemoveAllTimersConfirmationDialog()
+    }
+
+    override fun onClickConfirmRemoveAllTimers() {
+        timerListManager.removeAllTimers()
+    }
+
     override fun onClickAlarm() {
         screen.displayAlarmTimerDialog()
     }

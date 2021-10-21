@@ -1,8 +1,10 @@
 package fr.bowser.behaviortracker.timer
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
+import kotlinx.coroutines.withContext
 
 class TimerListManagerImpl(
     private val timerDAO: TimerDAO,
@@ -48,6 +50,22 @@ class TimerListManagerImpl(
 
             timers.sortBy { timer -> timer.position }
             reorderTimerList(timers)
+        }
+    }
+
+    override fun removeAllTimers() {
+        GlobalScope.launch(background) {
+            timerDAO.removeAllTimers()
+            withContext(Dispatchers.Main) {
+                timers.toList().forEach { oldTimer ->
+                    timeManager.stopTimer(oldTimer)
+
+                    timers.remove(oldTimer)
+                    for (listener in listeners) {
+                        listener.onTimerRemoved(oldTimer)
+                    }
+                }
+            }
         }
     }
 

@@ -29,6 +29,8 @@ interface TimerContract {
         fun displayAlarmTimerDialog()
 
         fun displayRewardsView()
+
+        fun displayRemoveAllTimersConfirmationDialog()
     }
 
     interface Presenter {
@@ -45,6 +47,10 @@ interface TimerContract {
 
         fun onClickSettings()
 
+        fun onClickRemoveAllTimers()
+
+        fun onClickConfirmRemoveAllTimers()
+
         fun onClickAlarm()
 
         fun onClickRewards()
@@ -58,7 +64,6 @@ interface TimerContract {
         fun onReorderFinished(timerList: List<Timer>)
 
         fun cancelTimerDeletion()
-
         fun isInstantApp(): Boolean
     }
 }

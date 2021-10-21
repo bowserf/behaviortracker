@@ -6,6 +6,8 @@ interface TimerListManager {
 
     fun removeTimer(timer: Timer)
 
+    fun removeAllTimers()
+
     fun getTimerList(): List<Timer>
 
     fun renameTimer(timer: Timer, newName: String)

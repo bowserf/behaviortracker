@@ -76,6 +76,10 @@ class TimerDaoUA(context: Context) : TimerDAO {
         timers.remove(timer)
     }
 
+    override fun removeAllTimers() {
+        timers.clear()
+    }
+
     override fun renameTimer(id: Long, name: String) {
         timers[id.toInt()].name = name
     }
