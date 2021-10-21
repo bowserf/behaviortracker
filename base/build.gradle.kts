@@ -5,7 +5,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
@@ -17,13 +16,12 @@ val ktlint by configurations.creating
 val buildType: String? by project
 
 android {
-    compileSdkVersion(ProjectConfig.SdkVersions.compileSdkVersion)
-    buildToolsVersion(ProjectConfig.SdkVersions.buildToolsVersion)
+    compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
 
     defaultConfig {
         applicationId = "fr.bowser.time"
-        minSdkVersion(ProjectConfig.SdkVersions.minSdkVersion)
-        targetSdkVersion(ProjectConfig.SdkVersions.targetSdkVersion)
+        minSdk = ProjectConfig.SdkVersions.minSdkVersion
+        targetSdk = ProjectConfig.SdkVersions.targetSdkVersion
         versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 
@@ -44,7 +42,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"))
             proguardFiles("proguard-rules.pro")
@@ -69,10 +67,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    tasks {
-        withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
-        }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     lintOptions {
@@ -103,7 +99,7 @@ android {
         }
     }
 
-    dynamicFeatures = mutableSetOf(":installedapp", ":instantapp")
+    setDynamicFeatures(setOf(":installedapp", ":instantapp"))
 }
 
 dependencies {
@@ -144,8 +140,8 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics:17.2.2")
 
     // Other
-    implementation("com.google.dagger:dagger:2.14.1")
-    kapt("com.google.dagger:dagger-compiler:2.14.1")
+    implementation("com.google.dagger:dagger:2.39")
+    kapt("com.google.dagger:dagger-compiler:2.39")
 
     // Static analyzer
     ktlint("com.github.shyiko:ktlint:0.31.0")

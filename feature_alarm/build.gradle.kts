@@ -4,14 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(ProjectConfig.SdkVersions.compileSdkVersion)
-    buildToolsVersion(ProjectConfig.SdkVersions.buildToolsVersion)
+    compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion(ProjectConfig.SdkVersions.minSdkVersion)
-        targetSdkVersion(ProjectConfig.SdkVersions.targetSdkVersion)
-        versionCode = ProjectConfig.SdkVersions.versionCode
-        versionName = ProjectConfig.SdkVersions.versionName
+        minSdk = ProjectConfig.SdkVersions.minSdkVersion
+        targetSdk = ProjectConfig.SdkVersions.targetSdkVersion
     }
 }
 

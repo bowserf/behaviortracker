@@ -8,16 +8,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion(ProjectConfig.SdkVersions.compileSdkVersion)
-    buildToolsVersion(ProjectConfig.SdkVersions.buildToolsVersion)
+    compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion(ProjectConfig.SdkVersions.minSdkVersion)
-        targetSdkVersion(ProjectConfig.SdkVersions.targetSdkVersion)
+        minSdk = ProjectConfig.SdkVersions.minSdkVersion
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             proguardFiles("proguard-rules-app.pro")
         }
     }
@@ -27,10 +25,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    tasks {
-        withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
-        }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     lintOptions {
@@ -45,6 +41,6 @@ dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
 
     // Other
-    implementation("com.google.dagger:dagger:2.14.1")
-    kapt("com.google.dagger:dagger-compiler:2.14.1")
+    implementation("com.google.dagger:dagger:2.39")
+    kapt("com.google.dagger:dagger-compiler:2.39")
 }
