@@ -94,7 +94,8 @@ android {
                     "src/main/res/showmode",
                     "src/main/res/timer",
                     "src/main/res/timerlist",
-                    "src/main/res/ua"
+                    "src/main/res/ua",
+                    "src/main/res/update_timer_time"
             )
         }
     }

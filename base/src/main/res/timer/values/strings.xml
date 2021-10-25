@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Timer row view menu -->
+    <string name="item_update_timer_time">Update time</string>
     <string name="item_timer_reset">Reset</string>
     <string name="item_timer_remove">Remove</string>
     <string name="item_timer_rename">Rename</string>

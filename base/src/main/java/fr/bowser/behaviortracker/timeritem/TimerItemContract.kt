@@ -19,6 +19,8 @@ interface TimerItemContract {
         fun updateTimeModification(timeModification: Int)
 
         fun startShowMode(id: Long)
+
+        fun displayUpdateTimerTimeDialog(timerId: Long)
     }
 
     interface Presenter {
@@ -46,5 +48,7 @@ interface TimerItemContract {
         fun onClickCard()
 
         fun onClickStartPomodoro()
+
+        fun onClickAddDuration()
     }
 }

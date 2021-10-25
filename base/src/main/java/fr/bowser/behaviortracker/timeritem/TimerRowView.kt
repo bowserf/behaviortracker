@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
@@ -15,6 +16,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timerlist.TimerFragmentDirections
+import fr.bowser.behaviortracker.update_timer_time.UpdateTimerTimeDialog
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
@@ -98,6 +100,9 @@ class TimerRowView(context: Context) :
 
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
+                R.id.item_timer_update_timer_time -> {
+                    presenter.onClickAddDuration()
+                }
                 R.id.item_timer_reset -> {
                     presenter.onClickResetTimer()
                 }
@@ -164,6 +169,12 @@ class TimerRowView(context: Context) :
     override fun startShowMode(id: Long) {
         val action = TimerFragmentDirections.actionTimerListScreenToShowModeScreen(id)
         findNavController().navigate(action)
+    }
+
+    override fun displayUpdateTimerTimeDialog(timerId: Long) {
+        val updateTimerTimeDialog = UpdateTimerTimeDialog.newInstance(timerId)
+        val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+        updateTimerTimeDialog.show(fragmentManager, UpdateTimerTimeDialog.TAG)
     }
 
     private fun displayRemoveConfirmationDialog() {
