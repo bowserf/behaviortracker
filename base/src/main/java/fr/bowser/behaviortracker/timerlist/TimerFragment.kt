@@ -2,14 +2,12 @@ package fr.bowser.behaviortracker.timerlist
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,10 +26,12 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import javax.inject.Inject
 
-class TimerFragment : Fragment(), TimerContract.Screen {
+class TimerFragment : Fragment(R.layout.fragment_timer) {
 
     @Inject
-    lateinit var presenter: TimerPresenter
+    lateinit var presenter: TimerContract.Presenter
+
+    private val screen = createScreen()
 
     private lateinit var fab: FloatingActionButton
 
@@ -49,12 +49,6 @@ class TimerFragment : Fragment(), TimerContract.Screen {
 
         setupGraph()
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_timer, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,12 +69,12 @@ class TimerFragment : Fragment(), TimerContract.Screen {
 
     override fun onStart() {
         super.onStart()
-        presenter.start()
+        presenter.onStart()
     }
 
     override fun onStop() {
         super.onStop()
-        presenter.stop()
+        presenter.onStop()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -115,74 +109,76 @@ class TimerFragment : Fragment(), TimerContract.Screen {
         return false
     }
 
-    override fun displayResetAllDialog() {
-        val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setMessage(message)
-            .setPositiveButton(android.R.string.yes) { dialog, which ->
-                presenter.onClickResetAllTimers()
-            }
-            .setNegativeButton(android.R.string.no) { dialog, which ->
-                // do nothing
-            }
-            .show()
-    }
+    private fun createScreen() = object : TimerContract.Screen {
+        override fun displayResetAllDialog() {
+            val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage(message)
+                .setPositiveButton(android.R.string.yes) { _, _ ->
+                    presenter.onClickResetAllTimers()
+                }
+                .setNegativeButton(android.R.string.no) { _, _ ->
+                    // do nothing
+                }
+                .show()
+        }
 
-    override fun displaySettingsView() {
-        findNavController().navigate(R.id.settings_screen)
-    }
+        override fun displaySettingsView() {
+            findNavController().navigate(R.id.settings_screen)
+        }
 
-    override fun displayAlarmTimerDialog() {
-        val alertDialog = AlarmTimerDialog.newInstance()
-        alertDialog.show(childFragmentManager, AlarmTimerDialog.TAG)
-    }
+        override fun displayAlarmTimerDialog() {
+            val alertDialog = AlarmTimerDialog.newInstance()
+            alertDialog.show(childFragmentManager, AlarmTimerDialog.TAG)
+        }
 
-    override fun displayRewardsView() {
-        findNavController().navigate(R.id.rewards_screen)
-    }
+        override fun displayRewardsView() {
+            findNavController().navigate(R.id.rewards_screen)
+        }
 
-    override fun displayRemoveAllTimersConfirmationDialog() {
-        val dialogBuilder = AlertDialog.Builder(requireContext())
-            .setTitle(resources.getString(R.string.timer_list_remove_all_timers_title))
-            .setMessage(resources.getString(R.string.timer_list_remove_all_timers_message))
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                presenter.onClickConfirmRemoveAllTimers()
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-        dialogBuilder.show()
-    }
+        override fun displayRemoveAllTimersConfirmationDialog() {
+            val dialogBuilder = AlertDialog.Builder(requireContext())
+                .setTitle(resources.getString(R.string.timer_list_remove_all_timers_title))
+                .setMessage(resources.getString(R.string.timer_list_remove_all_timers_message))
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    presenter.onClickConfirmRemoveAllTimers()
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+            dialogBuilder.show()
+        }
 
-    override fun displayCreateTimerView() {
-        CreateTimerDialog.showDialog(activity as AppCompatActivity, false)
-    }
+        override fun displayCreateTimerView() {
+            CreateTimerDialog.showDialog(activity as AppCompatActivity, false)
+        }
 
-    override fun displayTimerListSections(sections: List<TimerListSection>) {
-        timerListSectionAdapter.populate(sections)
-    }
+        override fun displayTimerListSections(sections: List<TimerListSection>) {
+            timerListSectionAdapter.populate(sections)
+        }
 
-    override fun displayEmptyListView() {
-        timerList.visibility = INVISIBLE
-        emptyListView.visibility = VISIBLE
-        emptyListText.visibility = VISIBLE
+        override fun displayEmptyListView() {
+            timerList.visibility = INVISIBLE
+            emptyListView.visibility = VISIBLE
+            emptyListText.visibility = VISIBLE
 
-        val fabAnimator = ObjectAnimator.ofFloat(this, PROPERTY_FAB_ANIMATION, 1f, 1.15f, 1f)
-        fabAnimator.duration = FAB_ANIMATION_DURATION
-        fabAnimator.repeatCount = 1
-        fabAnimator.interpolator = AccelerateDecelerateInterpolator()
-        fabAnimator.startDelay = FAB_ANIMATION_DELAY
-        fabAnimator.start()
-    }
+            val fabAnimator = ObjectAnimator.ofFloat(this, PROPERTY_FAB_ANIMATION, 1f, 1.15f, 1f)
+            fabAnimator.duration = FAB_ANIMATION_DURATION
+            fabAnimator.repeatCount = 1
+            fabAnimator.interpolator = AccelerateDecelerateInterpolator()
+            fabAnimator.startDelay = FAB_ANIMATION_DELAY
+            fabAnimator.start()
+        }
 
-    override fun displayListView() {
-        timerList.visibility = VISIBLE
-        emptyListView.visibility = INVISIBLE
-        emptyListText.visibility = INVISIBLE
+        override fun displayListView() {
+            timerList.visibility = VISIBLE
+            emptyListView.visibility = INVISIBLE
+            emptyListText.visibility = INVISIBLE
+        }
     }
 
     private fun setupGraph() {
         val build = DaggerTimerComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
-            .timerModule(TimerModule(this))
+            .timerModule(TimerModule(screen))
             .build()
         build.inject(this)
     }

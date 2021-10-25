@@ -5,22 +5,22 @@ import fr.bowser.feature.alarm.AlarmTime
 import fr.bowser.feature.alarm.AlarmTimerManager
 
 class AlarmDialogPresenter(
-        private val view: AlarmTimerContract.View,
-        private val alarmTimerManager: AlarmTimerManager,
-        private val eventManager: EventManager
+    private val screen: AlarmTimerContract.Screen,
+    private val alarmTimerManager: AlarmTimerManager,
+    private val eventManager: EventManager
 ) : AlarmTimerContract.Presenter {
 
-    override fun start() {
+    override fun onStart() {
         val alarmTimer = alarmTimerManager.getSavedAlarmTimer()
-        alarmTimer?.let { view.restoreAlarmStatus(it) }
+        alarmTimer?.let { screen.restoreAlarmStatus(it) }
     }
 
     override fun onClickValidate(alarmTime: AlarmTime) {
         if (alarmTime.isActivated) {
-            view.displayMessageAlarmEnabled()
+            screen.displayMessageAlarmEnabled()
             alarmTimerManager.setAlarm(alarmTime.hour, alarmTime.minute)
         } else {
-            view.displayMessageAlarmDisabled()
+            screen.displayMessageAlarmDisabled()
             alarmTimerManager.removeAlarm()
         }
         eventManager.sendSetAlarmEvent(alarmTime.isActivated)

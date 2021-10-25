@@ -6,12 +6,12 @@ interface AlarmTimerContract {
 
     interface Presenter {
 
-        fun start()
+        fun onStart()
 
         fun onClickValidate(alarmTime: AlarmTime)
     }
 
-    interface View {
+    interface Screen {
 
         fun restoreAlarmStatus(alarmTime: AlarmTime)
 

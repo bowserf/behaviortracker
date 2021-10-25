@@ -18,7 +18,7 @@ class AlarmDialogPresenterTest {
     private lateinit var alarmTimerManager: AlarmTimerManager
 
     @Mock
-    private lateinit var view: AlarmTimerContract.View
+    private lateinit var view: AlarmTimerContract.Screen
 
     @Mock
     private lateinit var eventManager: EventManager
@@ -36,7 +36,7 @@ class AlarmDialogPresenterTest {
         Mockito.`when`(alarmTimerManager.getSavedAlarmTimer()).thenReturn(alarmTime)
 
         // When
-        presenter.start()
+        presenter.onStart()
 
         // Then
         Mockito.verify(view, times(1)).restoreAlarmStatus(alarmTime)

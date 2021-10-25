@@ -90,7 +90,7 @@ android {
                     "src/main/res/pomodoro",
                     "src/main/res/rewards",
                     "src/main/res/rewardsrow",
-                    "src/main/res/setting",
+                    "src/main/res/setting_view",
                     "src/main/res/showmode",
                     "src/main/res/timer",
                     "src/main/res/timerlist",

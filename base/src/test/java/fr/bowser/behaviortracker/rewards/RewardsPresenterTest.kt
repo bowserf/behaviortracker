@@ -27,7 +27,7 @@ class RewardsPresenterTest {
         val presenter = RewardsPresenter(screen, inAppRepository, inAppManager)
 
         // When
-        presenter.start()
+        presenter.onStart()
 
         // Then
         Mockito.verify(inAppManager).addListener(any())
@@ -39,7 +39,7 @@ class RewardsPresenterTest {
         val presenter = RewardsPresenter(screen, inAppRepository, inAppManager)
 
         // When
-        presenter.start()
+        presenter.onStart()
 
         // Then
         Mockito.verify(screen).displayListInApps(any())
@@ -51,7 +51,7 @@ class RewardsPresenterTest {
         val presenter = RewardsPresenter(screen, inAppRepository, inAppManager)
 
         // When
-        presenter.stop()
+        presenter.onStop()
 
         // Then
         Mockito.verify(inAppManager).removeListener(any())

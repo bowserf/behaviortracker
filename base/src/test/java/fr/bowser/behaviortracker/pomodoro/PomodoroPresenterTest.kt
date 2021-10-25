@@ -26,7 +26,7 @@ class PomodoroPresenterTest {
         Mockito.`when`(manager.currentTimer).thenReturn(timer)
 
         // When
-        presenter.start()
+        presenter.onStart()
 
         // Then
         Mockito.verify(screen).updatePomodoroTimer(any(), Mockito.anyLong(), Mockito.anyLong())
@@ -38,7 +38,7 @@ class PomodoroPresenterTest {
         val presenter = PomodoroPresenter(screen, manager, listOf(), false)
 
         // When
-        presenter.start()
+        presenter.onStart()
 
         // Then
         Mockito.verify(screen).displayEmptyView()
@@ -51,7 +51,7 @@ class PomodoroPresenterTest {
         Mockito.`when`(manager.isPendingState).thenReturn(true)
 
         // When
-        presenter.start()
+        presenter.onStart()
 
         // Then
         Mockito.verify(screen).displayPomodoroDialog()

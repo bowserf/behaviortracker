@@ -13,5 +13,5 @@ interface CreateTimerComponent {
 
     fun inject(dialog: CreateTimerDialog)
 
-    fun provideCreateTimerPresenter(): CreateTimerPresenter
+    fun provideCreateTimerPresenter(): CreateTimerContract.Presenter
 }

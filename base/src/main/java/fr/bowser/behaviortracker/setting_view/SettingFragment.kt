@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.setting
+package fr.bowser.behaviortracker.setting_view
 
 import android.content.Intent
 import android.net.Uri
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class SettingFragment : PreferenceFragmentCompat() {
 
     @Inject
-    lateinit var presenter: SettingPresenter
+    lateinit var presenter: SettingContract.Presenter
 
     private lateinit var sendCommentary: Preference
 
@@ -29,8 +29,6 @@ class SettingFragment : PreferenceFragmentCompat() {
         super.onCreate(savedInstanceState)
 
         setupGraph()
-
-        presenter.start()
 
         val keyTimeModification = resources.getString(R.string.pref_key_time_modification)
         val timeModificator = findPreference<TimeModificationDialogPreference>(keyTimeModification)
@@ -56,9 +54,14 @@ class SettingFragment : PreferenceFragmentCompat() {
         initializeToolbar(view)
     }
 
-    override fun onDestroy() {
-        presenter.stop()
-        super.onDestroy()
+    override fun onStart() {
+        super.onStart()
+        presenter.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
     }
 
     private fun initializeToolbar(view: View) {
@@ -69,7 +72,7 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     private fun setupGraph() {
         val component = DaggerSettingComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(activity!!))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
             .settingPresenterModule(SettingPresenterModule())
             .build()
         component.inject(this)
@@ -91,7 +94,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             )
         } catch (ex: android.content.ActivityNotFoundException) {
             Toast.makeText(
-                activity!!,
+                requireContext(),
                 resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_no_application_available),
                 Toast.LENGTH_SHORT
             )
@@ -107,7 +110,7 @@ class SettingFragment : PreferenceFragmentCompat() {
 
         if (dialogFragment != null) {
             dialogFragment.setTargetFragment(this, 0)
-            dialogFragment.show(fragmentManager!!, TimeModificationSettings.TAG)
+            dialogFragment.show(requireFragmentManager(), TimeModificationSettings.TAG)
         } else {
             super.onDisplayPreferenceDialog(preference)
         }
@@ -121,6 +124,10 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
         }
         false
+    }
+
+    private fun createScreen() = object : SettingContract.Screen {
+
     }
 
     companion object {

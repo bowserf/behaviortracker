@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class TimerItemPresenter(
-    private val view: TimerItemContract.View,
+    private val screen: TimerItemContract.Screen,
     private val timeManager: TimeManager,
     private val timerListManager: TimerListManager,
     private val settingManager: SettingManager,
@@ -18,18 +18,18 @@ class TimerItemPresenter(
 
     private lateinit var timer: Timer
 
-    override fun start() {
+    override fun onStart() {
         timerListManager.addListener(this)
         timeManager.addListener(timeManagerListener)
 
         settingManager.registerTimerModificationListener(this)
 
-        view.updateTimeModification(settingManager.getTimerModification())
-        view.timerUpdated(timer.time.toLong())
-        view.statusUpdated(timer.isActivate)
+        screen.updateTimeModification(settingManager.getTimerModification())
+        screen.timerUpdated(timer.time.toLong())
+        screen.statusUpdated(timer.isActivate)
     }
 
-    override fun stop() {
+    override fun onStop() {
         settingManager.unregisterTimerModificationListener(this)
         timerListManager.removeListener(this)
         timeManager.removeListener(timeManagerListener)
@@ -40,7 +40,7 @@ class TimerItemPresenter(
     }
 
     override fun onClickCard() {
-        view.startShowMode(timer.id)
+        screen.startShowMode(timer.id)
     }
 
     override fun onClickStartPomodoro() {
@@ -48,13 +48,13 @@ class TimerItemPresenter(
     }
 
     override fun onClickAddDuration() {
-        view.displayUpdateTimerTimeDialog(timer.id)
+        screen.displayUpdateTimerTimeDialog(timer.id)
     }
 
     override fun timerStateChange() {
         manageTimerUpdate()
 
-        view.statusUpdated(timer.isActivate)
+        screen.statusUpdated(timer.isActivate)
     }
 
     override fun onClickDeleteTimer() {
@@ -64,23 +64,23 @@ class TimerItemPresenter(
     override fun onClickDecreaseTime() {
         timeManager.updateTime(timer, timer.time - settingManager.getTimerModification())
 
-        view.timerUpdated(timer.time.toLong())
+        screen.timerUpdated(timer.time.toLong())
     }
 
     override fun onClickIncreaseTime() {
         timeManager.updateTime(timer, timer.time + settingManager.getTimerModification())
 
-        view.timerUpdated(timer.time.toLong())
+        screen.timerUpdated(timer.time.toLong())
     }
 
     override fun onClickResetTimer() {
         timeManager.updateTime(timer, 0f)
 
-        view.timerUpdated(timer.time.toLong())
+        screen.timerUpdated(timer.time.toLong())
     }
 
     override fun onClickRenameTimer() {
-        view.displayRenameDialog(timer.name)
+        screen.displayRenameDialog(timer.name)
     }
 
     override fun onTimerNameUpdated(newTimerName: String) {
@@ -99,12 +99,12 @@ class TimerItemPresenter(
 
     override fun onTimerRenamed(updatedTimer: Timer) {
         if (timer == updatedTimer) {
-            view.timerRenamed(updatedTimer.name)
+            screen.timerRenamed(updatedTimer.name)
         }
     }
 
     override fun onTimerModificationChanged(timerModification: Int) {
-        view.updateTimeModification(timerModification)
+        screen.updateTimeModification(timerModification)
     }
 
     private fun manageTimerUpdate() {
@@ -120,13 +120,13 @@ class TimerItemPresenter(
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (timer == updatedTimer) {
-                    view.statusUpdated(updatedTimer.isActivate)
+                    screen.statusUpdated(updatedTimer.isActivate)
                 }
             }
 
             override fun onTimerTimeChanged(updatedTimer: Timer) {
                 if (timer == updatedTimer) {
-                    view.timerUpdated(updatedTimer.time.toLong())
+                    screen.timerUpdated(updatedTimer.time.toLong())
                 }
             }
         }

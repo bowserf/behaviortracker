@@ -18,7 +18,7 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
         timeManager: TimeManager,
         stringManager: StringManager,
         instantAppManager: InstantAppManager
-    ): TimerPresenter {
+    ): TimerContract.Presenter {
         return TimerPresenter(
             timerScreen,
             timerListManager,

@@ -16,7 +16,7 @@ class PomodoroPresenter(
 
     private var isDialogDisplayed = false
 
-    override fun start() {
+    override fun onStart() {
         pomodoroManager.addListener(pomodoroListener)
         doNotDisturbManager.addListener(doNotDisturbListener)
 
@@ -42,7 +42,7 @@ class PomodoroPresenter(
         }
     }
 
-    override fun stop() {
+    override fun onStop() {
         pomodoroManager.removeListener(pomodoroListener)
         doNotDisturbManager.removeListener(doNotDisturbListener)
     }

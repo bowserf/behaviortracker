@@ -52,7 +52,7 @@
         tools:layout="@layout/fragment_rewards"/>
     <fragment
         android:id="@+id/settings_screen"
-        android:name="fr.bowser.behaviortracker.setting.SettingFragment"
+        android:name="fr.bowser.behaviortracker.setting_view.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting"/>
 </navigation>

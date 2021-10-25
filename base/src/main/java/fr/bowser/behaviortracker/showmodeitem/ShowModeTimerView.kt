@@ -14,11 +14,12 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
-class ShowModeTimerView(context: Context) : LinearLayout(context),
-    ShowModeTimerViewContract.View {
+class ShowModeTimerView(context: Context) : LinearLayout(context) {
 
     @Inject
-    lateinit var presenter: ShowModeTimerViewPresenter
+    lateinit var presenter: ShowModeTimerViewContract.Presenter
+
+    private val screen = createScreen()
 
     private val chrono: TextView
     private val timerName: TextView
@@ -43,24 +44,12 @@ class ShowModeTimerView(context: Context) : LinearLayout(context),
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        presenter.start()
+        presenter.onStart()
     }
 
     override fun onDetachedFromWindow() {
-        presenter.stop()
+        presenter.onStop()
         super.onDetachedFromWindow()
-    }
-
-    override fun statusUpdated(activate: Boolean) {
-        if (activate) {
-            timerState.setImageResource(R.drawable.ic_pause)
-        } else {
-            timerState.setImageResource(R.drawable.ic_play)
-        }
-    }
-
-    override fun timerUpdated(newTime: Long) {
-        chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
     }
 
     fun setTimer(timer: Timer) {
@@ -73,10 +62,24 @@ class ShowModeTimerView(context: Context) : LinearLayout(context),
         timerName.text = timer.name
     }
 
+    private fun createScreen() = object : ShowModeTimerViewContract.Screen {
+        override fun statusUpdated(activate: Boolean) {
+            if (activate) {
+                timerState.setImageResource(R.drawable.ic_pause)
+            } else {
+                timerState.setImageResource(R.drawable.ic_play)
+            }
+        }
+
+        override fun timerUpdated(newTime: Long) {
+            chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
+        }
+    }
+
     private fun setupGraph() {
         val component = DaggerShowModeTimerViewComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-            .showModeTimerViewModule(ShowModeTimerViewModule(this))
+            .showModeTimerViewModule(ShowModeTimerViewModule(screen))
             .build()
         component.inject(this)
     }

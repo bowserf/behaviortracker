@@ -16,8 +16,8 @@ class PomodoroModule(private val pomodoroScreen: PomodoroContract.Screen) {
         pomodoroManager: PomodoroManager,
         timerListManager: TimerListManager,
         instantAppManager: InstantAppManager,
-        doNotDisturbManager: fr.bowser.feature_do_not_disturb.DoNotDisturbManager
-    ): PomodoroPresenter {
+        doNotDisturbManager: DoNotDisturbManager
+    ): PomodoroContract.Presenter {
         return PomodoroPresenter(
             pomodoroScreen,
             pomodoroManager,

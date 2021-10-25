@@ -13,5 +13,5 @@ interface HomeComponent {
 
     fun inject(activity: HomeActivity)
 
-    fun provideHomePresenter(): HomePresenter
+    fun provideHomePresenter(): HomeContract.Presenter
 }

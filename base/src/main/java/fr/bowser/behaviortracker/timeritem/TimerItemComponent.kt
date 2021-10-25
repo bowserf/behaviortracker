@@ -13,5 +13,5 @@ interface TimerItemComponent {
 
     fun inject(view: TimerRowView)
 
-    fun provideTimerItemPresenter(): TimerItemPresenter
+    fun provideTimerItemPresenter(): TimerItemContract.Presenter
 }

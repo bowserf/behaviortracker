@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class ShowModePresenterTest {
 
     @Mock
-    private lateinit var screen: ShowModeContract.View
+    private lateinit var screen: ShowModeContract.Screen
 
     @Mock
     private lateinit var timerListManager: TimerListManager
@@ -30,7 +30,7 @@ class ShowModePresenterTest {
         Mockito.`when`(timerListManager.getTimerList()).thenReturn(timerList)
 
         // When
-        presenter.start(10)
+        presenter.onStart(10)
 
         // Then
         Mockito.verify(screen).displayTimerList(timerList, 1)

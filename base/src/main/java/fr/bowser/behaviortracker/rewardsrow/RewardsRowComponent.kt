@@ -13,5 +13,5 @@ interface RewardsRowComponent {
 
     fun inject(view: RewardsRowView)
 
-    fun provideRewardsRowPresenter(): RewardsRowPresenter
+    fun provideRewardsRowPresenter(): RewardsRowContract.Presenter
 }

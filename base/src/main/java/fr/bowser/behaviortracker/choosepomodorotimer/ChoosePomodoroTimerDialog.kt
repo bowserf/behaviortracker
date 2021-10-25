@@ -17,23 +17,19 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
-class ChoosePomodoroTimerDialog : DialogFragment() {
+class ChoosePomodoroTimerDialog : DialogFragment(R.layout.fragment_choose_timer) {
 
     @Inject
-    lateinit var presenter: ChoosePomodoroTimerPresenter
+    lateinit var presenter: ChoosePomodoroTimerContract.Presenter
+
+    private val screen = createScreen()
+
+    private val timerList by lazy { requireView().findViewById<RecyclerView>(R.id.timers_list) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupGraph()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_choose_timer, container, false)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -45,7 +41,13 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(view)
-        initUI(view)
+
+        timerList.layoutManager = LinearLayoutManager(
+            activity,
+            RecyclerView.VERTICAL,
+            false
+        )
+        timerList.setHasFixedSize(true)
     }
 
     override fun onStart() {
@@ -57,12 +59,14 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
 
         val dialogWidth = resources.getDimensionPixelOffset(R.dimen.create_dialog_width)
         dialog!!.window!!.setLayout(dialogWidth, WRAP_CONTENT)
+
+        presenter.onStart()
     }
 
     private fun setupGraph() {
         val component = DaggerChoosePomodoroTimerComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-            .choosePomodoroTimerModule(ChoosePomodoroTimerModule())
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
+            .choosePomodoroTimerModule(ChoosePomodoroTimerModule(screen))
             .build()
         component.inject(this)
     }
@@ -76,23 +80,18 @@ class ChoosePomodoroTimerDialog : DialogFragment() {
         }
     }
 
-    private fun initUI(root: View) {
-        val timers = root.findViewById<RecyclerView>(R.id.timers_list)
-        timers.layoutManager = LinearLayoutManager(
-            activity,
-            RecyclerView.VERTICAL,
-            false
-        )
-        timers.setHasFixedSize(true)
-        timers.adapter = ChoosePomodoroTimerAdapter(
-            context!!,
-            presenter.getTimerList(),
-            object : ChoosePomodoroTimerAdapter.Listener {
-                override fun onTimerChose(timer: Timer) {
-                    presenter.startPomodoro(timer)
-                    dismiss()
-                }
-            })
+    private fun createScreen() = object : ChoosePomodoroTimerContract.Screen {
+        override fun displayTimerList(timerList: List<Timer>) {
+            this@ChoosePomodoroTimerDialog.timerList.adapter = ChoosePomodoroTimerAdapter(
+                requireContext(),
+                timerList,
+                object : ChoosePomodoroTimerAdapter.Listener {
+                    override fun onTimerChose(timer: Timer) {
+                        presenter.onTimerChose(timer)
+                        dismiss()
+                    }
+                })
+        }
     }
 
     companion object {

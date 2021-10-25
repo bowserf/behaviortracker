@@ -13,13 +13,16 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), HomeContract.Screen {
+class HomeActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var presenter: HomePresenter
+    lateinit var presenter: HomeContract.Presenter
+
+    private val screen = createScreen()
 
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var shadowBbottomNavigationView: View
+
+    private lateinit var shadowBottomNavigationView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,33 +48,25 @@ class HomeActivity : AppCompatActivity(), HomeContract.Screen {
 
     override fun onStart() {
         super.onStart()
-        presenter.start()
+        presenter.onStart()
     }
 
     override fun onPause() {
-        presenter.stop()
+        presenter.onStop()
         super.onPause()
-    }
-
-    override fun setupInstantAppButton() {
-        val installBtn = findViewById<View>(R.id.home_instant_app_install)
-        installBtn.visibility = View.VISIBLE
-        installBtn.setOnClickListener {
-            presenter.onClickInstallApp()
-        }
     }
 
     private fun setupGraph() {
         val build = DaggerHomeComponent.builder()
-                .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-                .homeModule(HomeModule(this))
-                .build()
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
+            .homeModule(HomeModule(screen))
+            .build()
         build.inject(this)
     }
 
     private fun setupNavigation() {
         bottomNavigationView = findViewById(R.id.home_bottom_navigation)
-        shadowBbottomNavigationView = findViewById(R.id.home_bottom_navigation_shadow)
+        shadowBottomNavigationView = findViewById(R.id.home_bottom_navigation_shadow)
 
         val navController = Navigation.findNavController(this, R.id.home_nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
@@ -87,11 +82,11 @@ class HomeActivity : AppCompatActivity(), HomeContract.Screen {
 
     private fun hideBottomNav() {
         bottomNavigationView.visibility = View.GONE
-        shadowBbottomNavigationView.visibility = View.GONE
+        shadowBottomNavigationView.visibility = View.GONE
     }
 
     private fun showBottomNav() {
-        shadowBbottomNavigationView.visibility = View.VISIBLE
+        shadowBottomNavigationView.visibility = View.VISIBLE
         bottomNavigationView.visibility = View.VISIBLE
     }
 
@@ -106,9 +101,19 @@ class HomeActivity : AppCompatActivity(), HomeContract.Screen {
             return
         }
         val isAlarmNotifClicked =
-                intent.extras!!.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
+            intent.extras!!.getBoolean(AlarmNotification.INTENT_EXTRA_ALARM_REQUEST_CODE)
         if (isAlarmNotifClicked) {
             presenter.onAlarmNotificationClicked()
+        }
+    }
+
+    private fun createScreen() = object : HomeContract.Screen {
+        override fun setupInstantAppButton() {
+            val installBtn = findViewById<View>(R.id.home_instant_app_install)
+            installBtn.visibility = View.VISIBLE
+            installBtn.setOnClickListener {
+                presenter.onClickInstallApp()
+            }
         }
     }
 

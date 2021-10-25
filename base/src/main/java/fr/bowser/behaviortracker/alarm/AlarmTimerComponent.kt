@@ -13,5 +13,5 @@ interface AlarmTimerComponent {
 
     fun inject(timerDialog: AlarmTimerDialog)
 
-    fun provideAlarmDialogPresenter(): AlarmDialogPresenter
+    fun provideAlarmDialogPresenter(): AlarmTimerContract.Presenter
 }

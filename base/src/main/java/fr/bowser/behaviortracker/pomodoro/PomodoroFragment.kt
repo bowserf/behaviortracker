@@ -31,10 +31,12 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
-class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.Screen {
+class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
 
     @Inject
-    lateinit var presenter: PomodoroPresenter
+    lateinit var presenter: PomodoroContract.Presenter
+
+    private val screen = createScreen()
 
     private lateinit var emptyContent: View
     private lateinit var startSession: FloatingActionButton
@@ -87,11 +89,11 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.
 
     override fun onStart() {
         super.onStart()
-        presenter.start()
+        presenter.onStart()
     }
 
     override fun onStop() {
-        presenter.stop()
+        presenter.onStop()
         super.onStop()
     }
 
@@ -113,123 +115,125 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.
         return false
     }
 
-    override fun updateTime(currentTime: Long) {
-        currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(currentTime, false)
-        progresssBar.progress = currentTime.toInt()
-    }
+    private fun createScreen() = object : PomodoroContract.Screen {
+        override fun updateTime(currentTime: Long) {
+            currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(currentTime, false)
+            progresssBar.progress = currentTime.toInt()
+        }
 
-    override fun updatePomodoroTimer(timer: Timer, currentTime: Long, duration: Long) {
-        emptyContent.visibility = View.GONE
-        startSession.visibility = View.GONE
+        override fun updatePomodoroTimer(timer: Timer, currentTime: Long, duration: Long) {
+            emptyContent.visibility = View.GONE
+            startSession.visibility = View.GONE
 
-        pomodoroSessionContent.visibility = View.VISIBLE
+            pomodoroSessionContent.visibility = View.VISIBLE
 
-        activeTimerTv.text = timer.name
-        progresssBar.max = duration.toInt()
+            activeTimerTv.text = timer.name
+            progresssBar.max = duration.toInt()
 
-        updateTime(currentTime)
+            updateTime(currentTime)
 
-        val progressDrawable = progresssBar.progressDrawable
-        if (progressDrawable is RotateDrawable) {
-            progressDrawable.drawable!!.setColorFilter(
-                ColorUtils.getColor(context!!, timer.color),
-                PorterDuff.Mode.SRC_ATOP
+            val progressDrawable = progresssBar.progressDrawable
+            if (progressDrawable is RotateDrawable) {
+                progressDrawable.drawable!!.setColorFilter(
+                    ColorUtils.getColor(context!!, timer.color),
+                    PorterDuff.Mode.SRC_ATOP
+                )
+            }
+        }
+
+        override fun displayChoosePomodoroTimer() {
+            ChoosePomodoroTimerDialog.showDialog(activity as AppCompatActivity)
+        }
+
+        override fun displayEmptyView() {
+            emptyContent.visibility = View.VISIBLE
+            startSession.visibility = View.VISIBLE
+
+            pomodoroSessionContent.visibility = View.GONE
+
+            requireActivity().invalidateOptionsMenu()
+
+            startFabAnimation()
+        }
+
+        override fun displayPomodoroDialog() {
+            val fragmentManager = requireActivity().supportFragmentManager
+            if (fragmentManager.findFragmentByTag(PomodoroDialog.TAG) != null) {
+                return
+            }
+            val pomodoroDialogSession = PomodoroDialog.newInstance()
+            pomodoroDialogSession.show(fragmentManager, PomodoroDialog.TAG)
+        }
+
+        override fun displayNoTimerAvailable() {
+            Snackbar.make(
+                emptyContent,
+                getString(R.string.pomodoro_no_timer_available),
+                Snackbar.LENGTH_SHORT
             )
+                .setAction(resources.getString(R.string.pomodoro_create_timer)) {
+                    presenter.onClickCreateTimer()
+                }
+                .show()
         }
-    }
 
-    override fun displayChoosePomodoroTimer() {
-        ChoosePomodoroTimerDialog.showDialog(activity as AppCompatActivity)
-    }
-
-    override fun displayEmptyView() {
-        emptyContent.visibility = View.VISIBLE
-        startSession.visibility = View.VISIBLE
-
-        pomodoroSessionContent.visibility = View.GONE
-
-        activity!!.invalidateOptionsMenu()
-
-        startFabAnimation()
-    }
-
-    override fun displayPomodoroDialog() {
-        val fragmentManager = activity!!.supportFragmentManager
-        if (fragmentManager.findFragmentByTag(PomodoroSessionDialog.TAG) != null) {
-            return
+        override fun displayCreateTimerScreen() {
+            CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
         }
-        val pomodoroDialogSession = PomodoroSessionDialog.newInstance()
-        pomodoroDialogSession.show(fragmentManager, PomodoroSessionDialog.TAG)
-    }
 
-    override fun displayNoTimerAvailable() {
-        Snackbar.make(
-            emptyContent,
-            getString(R.string.pomodoro_no_timer_available),
-            Snackbar.LENGTH_SHORT
-        )
-            .setAction(context!!.resources.getString(R.string.pomodoro_create_timer)) {
-                presenter.onClickCreateTimer()
+        override fun hidePomodoroDialog() {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragment = fragmentManager.findFragmentByTag(PomodoroDialog.TAG)
+            if (fragment != null) {
+                val transaction = fragmentManager.beginTransaction()
+                transaction.remove(fragment)
+                transaction.commit()
             }
-            .show()
-    }
-
-    override fun displayCreateTimerScreen() {
-        CreateTimerDialog.showDialog(activity as AppCompatActivity, true)
-    }
-
-    override fun hidePomodoroDialog() {
-        val fragmentManager = activity!!.supportFragmentManager
-        val fragment = fragmentManager.findFragmentByTag(PomodoroSessionDialog.TAG)
-        if (fragment != null) {
-            val transaction = fragmentManager.beginTransaction()
-            transaction.remove(fragment)
-            transaction.commit()
         }
-    }
 
-    override fun displaySettings() {
-        findNavController().navigate(R.id.settings_screen)
-    }
-
-    override fun displayPomodoroState(isRunning: Boolean) {
-        if (isRunning) {
-            playPauseIcon.setImageResource(R.drawable.ic_pause)
-            playPauseTitle.text = resources.getString(R.string.pomodoro_pause)
-        } else {
-            playPauseIcon.setImageResource(R.drawable.ic_play)
-            playPauseTitle.text = resources.getString(R.string.pomodoro_play)
+        override fun displaySettings() {
+            findNavController().navigate(R.id.settings_screen)
         }
-    }
 
-    override fun hideDoNotDisturb() {
-        doNotDisturb.visibility = View.GONE
-    }
-
-    override fun enableDoNotDisturb(enable: Boolean) {
-        val color: Int
-        if (enable) {
-            doNotDisturb.setBackgroundResource(R.drawable.pomodoro_do_not_disturb_bg_selected)
-            color = ContextCompat.getColor(requireContext(), R.color.white)
-        } else {
-            doNotDisturb.background = null
-            color = ContextCompat.getColor(requireContext(), R.color.icon_day_night)
-        }
-        doNotDisturbText.setTextColor(color)
-        doNotDisturbIcon.imageTintList = ColorStateList.valueOf(color)
-    }
-
-    override fun displayAskDndPermission() {
-        AlertDialog.Builder(requireContext())
-            .setTitle(R.string.pomodoro_do_not_disturb_dialog_permission_title)
-            .setMessage(R.string.pomodoro_do_not_disturb_dialog_permission_message)
-            .setNegativeButton(android.R.string.cancel) { _, _ ->
-                // nothing to do
+        override fun displayPomodoroState(isRunning: Boolean) {
+            if (isRunning) {
+                playPauseIcon.setImageResource(R.drawable.ic_pause)
+                playPauseTitle.text = resources.getString(R.string.pomodoro_pause)
+            } else {
+                playPauseIcon.setImageResource(R.drawable.ic_play)
+                playPauseTitle.text = resources.getString(R.string.pomodoro_play)
             }
-            .setPositiveButton(R.string.pomodoro_do_not_disturb_dialog_permission_positive_button) { _, _ ->
-                presenter.onClickDoNotDisturbDialogOpenSettings()
+        }
+
+        override fun hideDoNotDisturb() {
+            doNotDisturb.visibility = View.GONE
+        }
+
+        override fun enableDoNotDisturb(enable: Boolean) {
+            val color: Int
+            if (enable) {
+                doNotDisturb.setBackgroundResource(R.drawable.pomodoro_do_not_disturb_bg_selected)
+                color = ContextCompat.getColor(requireContext(), R.color.white)
+            } else {
+                doNotDisturb.background = null
+                color = ContextCompat.getColor(requireContext(), R.color.icon_day_night)
             }
-            .show()
+            doNotDisturbText.setTextColor(color)
+            doNotDisturbIcon.imageTintList = ColorStateList.valueOf(color)
+        }
+
+        override fun displayAskDndPermission() {
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.pomodoro_do_not_disturb_dialog_permission_title)
+                .setMessage(R.string.pomodoro_do_not_disturb_dialog_permission_message)
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                    // nothing to do
+                }
+                .setPositiveButton(R.string.pomodoro_do_not_disturb_dialog_permission_positive_button) { _, _ ->
+                    presenter.onClickDoNotDisturbDialogOpenSettings()
+                }
+                .show()
+        }
     }
 
     private fun startFabAnimation() {
@@ -257,8 +261,8 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro), PomodoroContract.
 
     private fun setupGraph() {
         val build = DaggerPomodoroComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-            .pomodoroModule(PomodoroModule(this))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
+            .pomodoroModule(PomodoroModule(screen))
             .build()
         build.inject(this)
     }

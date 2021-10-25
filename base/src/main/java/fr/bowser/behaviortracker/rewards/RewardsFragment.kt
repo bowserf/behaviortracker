@@ -2,9 +2,7 @@ package fr.bowser.behaviortracker.rewards
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -16,12 +14,14 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.inapp.InApp
 import javax.inject.Inject
 
-class RewardsFragment : Fragment(), RewardsContract.Screen {
-
-    private lateinit var rewardsAdapter: RewardsAdapter
+class RewardsFragment : Fragment(R.layout.fragment_rewards) {
 
     @Inject
-    lateinit var presenter: RewardsPresenter
+    lateinit var presenter: RewardsContract.Presenter
+
+    private val screen = createScreen()
+
+    private lateinit var rewardsAdapter: RewardsAdapter
 
     private lateinit var list: RecyclerView
 
@@ -31,12 +31,6 @@ class RewardsFragment : Fragment(), RewardsContract.Screen {
         setupGraph()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_rewards, container, false)!!
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initializeToolbar(view)
 
@@ -45,26 +39,28 @@ class RewardsFragment : Fragment(), RewardsContract.Screen {
 
     override fun onStart() {
         super.onStart()
-        presenter.start()
+        presenter.onStart()
     }
 
     override fun onStop() {
-        presenter.stop()
+        presenter.onStop()
         super.onStop()
     }
 
-    override fun displayListInApps(inApps: List<InApp>) {
-        rewardsAdapter.setInAppList(inApps)
-    }
+    private fun createScreen() = object : RewardsContract.Screen {
+        override fun displayListInApps(inApps: List<InApp>) {
+            rewardsAdapter.setInAppList(inApps)
+        }
 
-    override fun displaySuccessPurchaseMessage() {
-        Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
-            .show()
-    }
+        override fun displaySuccessPurchaseMessage() {
+            Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
+                .show()
+        }
 
-    override fun displayFailPurchaseMessage() {
-        Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
-            .show()
+        override fun displayFailPurchaseMessage() {
+            Snackbar.make(list, getString(R.string.rewards_purchase_success), Snackbar.LENGTH_SHORT)
+                .show()
+        }
     }
 
     private fun initializeToolbar(view: View) {
@@ -76,7 +72,7 @@ class RewardsFragment : Fragment(), RewardsContract.Screen {
     private fun initRewardsList(view: View) {
         list = view.findViewById(R.id.list_rewards)
 
-        list.layoutManager = LinearLayoutManager(context!!)
+        list.layoutManager = LinearLayoutManager(requireContext())
         list.setHasFixedSize(true)
         rewardsAdapter = RewardsAdapter()
         list.adapter = rewardsAdapter
@@ -100,8 +96,8 @@ class RewardsFragment : Fragment(), RewardsContract.Screen {
 
     private fun setupGraph() {
         val component = DaggerRewardsComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-            .rewardsPresenterModule(RewardsPresenterModule(this))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
+            .rewardsPresenterModule(RewardsPresenterModule(screen))
             .build()
         component.inject(this)
     }

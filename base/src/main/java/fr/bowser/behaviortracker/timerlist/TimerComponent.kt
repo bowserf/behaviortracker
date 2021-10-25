@@ -13,5 +13,5 @@ interface TimerComponent {
 
     fun inject(fragment: TimerFragment)
 
-    fun provideTimerPresenter(): TimerPresenter
+    fun provideTimerPresenter(): TimerContract.Presenter
 }

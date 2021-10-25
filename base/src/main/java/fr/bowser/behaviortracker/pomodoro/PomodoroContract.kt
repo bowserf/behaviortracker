@@ -4,6 +4,33 @@ import fr.bowser.behaviortracker.timer.Timer
 
 interface PomodoroContract {
 
+    interface Presenter {
+
+        val timerList: List<Timer>
+
+        fun onStart()
+
+        fun onStop()
+
+        fun isRunning(): Boolean
+
+        fun onClickStartSession()
+
+        fun onClickChangePomodoroState()
+
+        fun onClickStopPomodoro()
+
+        fun onClickCreateTimer()
+
+        fun onClickSettings()
+
+        fun isInstantApp(): Boolean
+
+        fun onClickDoNotDisturb()
+
+        fun onClickDoNotDisturbDialogOpenSettings()
+    }
+
     interface Screen {
 
         fun updateTime(currentTime: Long)
@@ -31,32 +58,5 @@ interface PomodoroContract {
         fun enableDoNotDisturb(enable: Boolean)
 
         fun displayAskDndPermission()
-    }
-
-    interface Presenter {
-
-        val timerList: List<Timer>
-
-        fun start()
-
-        fun stop()
-
-        fun isRunning(): Boolean
-
-        fun onClickStartSession()
-
-        fun onClickChangePomodoroState()
-
-        fun onClickStopPomodoro()
-
-        fun onClickCreateTimer()
-
-        fun onClickSettings()
-
-        fun isInstantApp(): Boolean
-
-        fun onClickDoNotDisturb()
-
-        fun onClickDoNotDisturbDialogOpenSettings()
     }
 }

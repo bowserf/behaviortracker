@@ -16,14 +16,14 @@ class RewardsPresenter(
         inAppListener = createInAppManagerListener()
     }
 
-    override fun start() {
+    override fun onStart() {
         inAppManager.addListener(inAppListener)
 
         val inApps = inAppRepository.getInApps()
         screen.displayListInApps(inApps)
     }
 
-    override fun stop() {
+    override fun onStop() {
         inAppManager.removeListener(inAppListener)
     }
 

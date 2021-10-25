@@ -12,16 +12,18 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.inapp.InApp
 import javax.inject.Inject
 
-class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.Screen {
+class RewardsRowView(context: Context) : CardView(context) {
+
+    @Inject
+    lateinit var presenter: RewardsRowContract.Presenter
+
+    private val screen = createScreen()
 
     private val title: TextView
     private val price: TextView
     private val background: ImageView
 
     private var inApp: InApp? = null
-
-    @Inject
-    lateinit var presenter: RewardsRowPresenter
 
     init {
         setupGraph()
@@ -38,29 +40,15 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
         background = findViewById(R.id.rewards_background)
     }
 
-    override fun setInApp(inApp: InApp) {
-        this.inApp = inApp
+    fun setInApp(inApp: InApp) {
+        this@RewardsRowView.inApp = inApp
         updateUI()
-    }
-
-    override fun getActivity(): Activity {
-        if (context !is Activity) {
-            throw IllegalStateException("Context should be a context Activity")
-        }
-        return context as Activity
-    }
-
-    override fun displayStoreConnectionError() {
-        AlertDialog.Builder(context)
-            .setMessage(R.string.rewards_purchase_fail)
-            .setNegativeButton(android.R.string.cancel, null)
-            .show()
     }
 
     private fun setupGraph() {
         val component = DaggerRewardsRowComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-            .rewardsRowModule(RewardsRowModule(this))
+            .rewardsRowModule(RewardsRowModule(screen))
             .build()
         component.inject(this)
     }
@@ -75,13 +63,28 @@ class RewardsRowView(context: Context) : CardView(context), RewardsRowContract.S
 
     @DrawableRes
     private fun getDrawableId(): Int {
-        val feature = inApp?.feature
-        return when (feature) {
+        return when (val feature = inApp?.feature) {
             InApp.FEATURE_MARSHMALLOW -> R.drawable.marshmallow
             InApp.FEATURE_NOUGAT -> R.drawable.nougat
             InApp.FEATURE_OREO -> R.drawable.oreo
             InApp.FEATURE_PIE -> R.drawable.pie
             else -> throw IllegalStateException("Unkown feature : $feature")
+        }
+    }
+
+    private fun createScreen() = object : RewardsRowContract.Screen {
+        override fun getActivity(): Activity {
+            if (context !is Activity) {
+                throw IllegalStateException("Context should be a context Activity")
+            }
+            return context as Activity
+        }
+
+        override fun displayStoreConnectionError() {
+            AlertDialog.Builder(context)
+                .setMessage(R.string.rewards_purchase_fail)
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
     }
 }

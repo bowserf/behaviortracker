@@ -13,5 +13,5 @@ interface ShowModeComponent {
 
     fun inject(view: ShowModeFragment)
 
-    fun provideShowModePresenter(): ShowModePresenter
+    fun provideShowModePresenter(): ShowModeContract.Presenter
 }

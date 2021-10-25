@@ -2,19 +2,19 @@ package fr.bowser.behaviortracker.home
 
 interface HomeContract {
 
-    interface Screen {
-
-        fun setupInstantAppButton()
-    }
-
     interface Presenter {
 
-        fun start()
+        fun onStart()
 
-        fun stop()
+        fun onStop()
 
         fun onAlarmNotificationClicked()
 
         fun onClickInstallApp()
+    }
+
+    interface Screen {
+
+        fun setupInstantAppButton()
     }
 }

@@ -8,7 +8,7 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.ColorUtils
 
 class CreateTimerPresenter(
-    private val view: CreateTimerContract.View,
+    private val screen: CreateTimerContract.Screen,
     private val timerListManager: TimerListManager,
     private val timeManager: TimeManager,
     private val pomodoroManager: PomodoroManager,
@@ -21,12 +21,12 @@ class CreateTimerPresenter(
 
     override fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int) {
         colorPosition = selectedPosition
-        view.updateColorList(oldSelectedPosition, selectedPosition)
+        screen.updateColorList(oldSelectedPosition, selectedPosition)
     }
 
     override fun createTimer(name: String, startNow: Boolean) {
         if (name.isEmpty()) {
-            view.displayNameError()
+            screen.displayNameError()
             return
         }
 
@@ -43,7 +43,7 @@ class CreateTimerPresenter(
             pomodoroManager.startPomodoro(timer)
         }
 
-        view.exitViewAfterSucceedTimerCreation()
+        screen.exitViewAfterSucceedTimerCreation()
     }
 
     override fun enablePomodoroMode(isPomodoro: Boolean) {

@@ -10,7 +10,10 @@ class EventManagerImpl(context: Context, instantAppManager: InstantAppManager) :
     private val firebaseAnalytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(context)
 
     init {
-        firebaseAnalytics.setUserProperty(USER_PROPERTY_IS_INSTANT_APP, instantAppManager.isInstantApp().toString())
+        firebaseAnalytics.setUserProperty(
+            USER_PROPERTY_IS_INSTANT_APP,
+            instantAppManager.isInstantApp().toString()
+        )
     }
 
     override fun sendTimerCreateEvent(startNow: Boolean) {

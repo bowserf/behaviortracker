@@ -8,10 +8,10 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
 
-class PomodoroSessionDialog : DialogFragment(), PomodoroDialogContract.Screen {
+class PomodoroDialog : DialogFragment() {
 
     @Inject
-    lateinit var presenter: PomodoroDialogPresenter
+    lateinit var presenter: PomodoroDialogContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class PomodoroSessionDialog : DialogFragment(), PomodoroDialogContract.Screen {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(requireContext())
         dialogBuilder.setTitle(resources.getString(R.string.pomodoro_dialog_title))
         dialogBuilder.setMessage(resources.getString(R.string.pomodoro_dialog_content))
         dialogBuilder.setPositiveButton(R.string.pomodoro_dialog_continue) { dialog, which ->
@@ -38,7 +38,7 @@ class PomodoroSessionDialog : DialogFragment(), PomodoroDialogContract.Screen {
 
     private fun setupGraph() {
         val component = DaggerPomodoroDialogComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
             .pomodoroDialogModule(PomodoroDialogModule())
             .build()
         component.inject(this)
@@ -46,10 +46,10 @@ class PomodoroSessionDialog : DialogFragment(), PomodoroDialogContract.Screen {
 
     companion object {
 
-        const val TAG = "PomodoroDialogSession"
+        const val TAG = "PomodoroDialog"
 
-        fun newInstance(): PomodoroSessionDialog {
-            return PomodoroSessionDialog()
+        fun newInstance(): PomodoroDialog {
+            return PomodoroDialog()
         }
     }
 }

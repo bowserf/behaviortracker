@@ -13,5 +13,5 @@ interface RewardsComponent {
 
     fun inject(activity: RewardsFragment)
 
-    fun provideRewardsPresenter(): RewardsPresenter
+    fun provideRewardsPresenter(): RewardsContract.Presenter
 }

@@ -11,7 +11,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 )
 interface PomodoroDialogComponent {
 
-    fun inject(fragment: PomodoroSessionDialog)
+    fun inject(fragment: PomodoroDialog)
 
-    fun providePomodoroDialogPresenter(): PomodoroDialogPresenter
+    fun providePomodoroDialogPresenter(): PomodoroDialogContract.Presenter
 }

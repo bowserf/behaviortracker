@@ -4,21 +4,21 @@ import fr.bowser.behaviortracker.timer.Timer
 
 interface ShowModeTimerViewContract {
 
-    interface View {
+    interface Presenter {
+
+        fun onStart()
+
+        fun onStop()
+
+        fun setTimer(timer: Timer)
+
+        fun onClickView()
+    }
+
+    interface Screen {
 
         fun timerUpdated(newTime: Long)
 
         fun statusUpdated(activate: Boolean)
-    }
-
-    interface Presenter {
-
-        fun setTimer(timer: Timer)
-
-        fun start()
-
-        fun stop()
-
-        fun onClickView()
     }
 }

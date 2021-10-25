@@ -22,10 +22,12 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
 
-class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
+class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
 
     @Inject
-    lateinit var presenter: CreateTimerPresenter
+    lateinit var presenter: CreateTimerContract.Presenter
+
+    private val screen = createScreen()
 
     private lateinit var editTimerName: EditText
     private lateinit var chooseColor: RecyclerView
@@ -38,14 +40,6 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         setupGraph()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_create_timer, container, false)
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -55,8 +49,7 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val arguments = arguments
-        val isPomodoro = arguments!!.getBoolean(IS_POMODORO)
+        val isPomodoro = requireArguments().getBoolean(IS_POMODORO)
         presenter.enablePomodoroMode(isPomodoro)
 
         initToolbar(view)
@@ -80,19 +73,6 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
         super.onStop()
     }
 
-    override fun exitViewAfterSucceedTimerCreation() {
-        exitWithAnimation()
-    }
-
-    override fun displayNameError() {
-        editTimerNameLayout.error = resources.getString(R.string.create_timer_name_error)
-    }
-
-    override fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int) {
-        chooseColor.adapter?.notifyItemChanged(oldSelectedPosition)
-        chooseColor.adapter?.notifyItemChanged(selectedPosition)
-    }
-
     private fun initSpinner(root: View) {
         chooseColor = root.findViewById(R.id.list_colors)
         chooseColor.layoutManager = GridLayoutManager(
@@ -102,13 +82,22 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
             false
         )
         chooseColor.setHasFixedSize(true)
-        chooseColor.adapter = ColorAdapter(context!!, presenter)
+        chooseColor.adapter = ColorAdapter(
+            requireContext(),
+            object : ColorAdapter.Callback {
+                override fun onChangeSelectedColor(
+                    oldSelectedPosition: Int,
+                    selectedPosition: Int
+                ) {
+                    presenter.changeSelectedColor(oldSelectedPosition, selectedPosition)
+                }
+            })
     }
 
     private fun setupGraph() {
         val component = DaggerCreateTimerComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-            .createTimerModule(CreateTimerModule(this))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
+            .createTimerModule(CreateTimerModule(screen))
             .build()
         component.inject(this)
     }
@@ -164,6 +153,21 @@ class CreateTimerDialog : DialogFragment(), CreateTimerContract.View {
     private fun saveTimer() {
         val timerName = editTimerName.text.toString()
         presenter.createTimer(timerName, startNow.isChecked)
+    }
+
+    private fun createScreen() = object : CreateTimerContract.Screen {
+        override fun exitViewAfterSucceedTimerCreation() {
+            exitWithAnimation()
+        }
+
+        override fun displayNameError() {
+            editTimerNameLayout.error = resources.getString(R.string.create_timer_name_error)
+        }
+
+        override fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int) {
+            chooseColor.adapter?.notifyItemChanged(oldSelectedPosition)
+            chooseColor.adapter?.notifyItemChanged(selectedPosition)
+        }
     }
 
     companion object {

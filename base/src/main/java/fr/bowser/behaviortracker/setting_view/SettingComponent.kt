@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.setting
+package fr.bowser.behaviortracker.setting_view
 
 import dagger.Component
 import fr.bowser.behaviortracker.config.BehaviorTrackerAppComponent
@@ -13,5 +13,5 @@ interface SettingComponent {
 
     fun inject(fragment: SettingFragment)
 
-    fun provideSettingPresenter(): SettingPresenter
+    fun provideSettingPresenter(): SettingContract.Presenter
 }

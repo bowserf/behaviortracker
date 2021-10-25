@@ -4,24 +4,24 @@ import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 
 class ShowModeTimerViewPresenter(
-    val view: ShowModeTimerViewContract.View,
-    val timeManager: TimeManager
+    private val screen: ShowModeTimerViewContract.Screen,
+    private val timeManager: TimeManager
 ) : ShowModeTimerViewContract.Presenter {
 
     private lateinit var timer: Timer
 
-    override fun start() {
+    override fun onStart() {
         timeManager.addListener(timeManagerListener)
     }
 
-    override fun stop() {
+    override fun onStop() {
         timeManager.removeListener(timeManagerListener)
     }
 
     override fun setTimer(timer: Timer) {
         this.timer = timer
 
-        view.statusUpdated(timer.isActivate)
+        screen.statusUpdated(timer.isActivate)
     }
 
     override fun onClickView() {
@@ -30,19 +30,19 @@ class ShowModeTimerViewPresenter(
         } else {
             timeManager.startTimer(timer)
         }
-        view.statusUpdated(timer.isActivate)
+        screen.statusUpdated(timer.isActivate)
     }
 
     private val timeManagerListener = object : TimeManager.Listener {
         override fun onTimerStateChanged(updatedTimer: Timer) {
             if (timer == updatedTimer) {
-                view.statusUpdated(updatedTimer.isActivate)
+                screen.statusUpdated(updatedTimer.isActivate)
             }
         }
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {
             if (timer == updatedTimer) {
-                view.timerUpdated(timer.time.toLong())
+                screen.timerUpdated(timer.time.toLong())
             }
         }
     }

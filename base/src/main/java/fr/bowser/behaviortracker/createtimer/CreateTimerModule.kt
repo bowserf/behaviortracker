@@ -9,7 +9,7 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-class CreateTimerModule(private val view: CreateTimerContract.View) {
+class CreateTimerModule(private val screen: CreateTimerContract.Screen) {
 
     @GenericScope(component = CreateTimerComponent::class)
     @Provides
@@ -18,9 +18,9 @@ class CreateTimerModule(private val view: CreateTimerContract.View) {
         timeManager: TimeManager,
         pomodoroManager: PomodoroManager,
         eventManager: EventManager
-    ): CreateTimerPresenter {
+    ): CreateTimerContract.Presenter {
         return CreateTimerPresenter(
-            view,
+            screen,
             timerListManager,
             timeManager,
             pomodoroManager,

@@ -4,30 +4,11 @@ import fr.bowser.behaviortracker.timer.Timer
 
 interface TimerItemContract {
 
-    interface View {
-
-        fun timerUpdated(newTime: Long)
-
-        fun nameUpdated(newName: String)
-
-        fun displayRenameDialog(oldName: String)
-
-        fun statusUpdated(activate: Boolean)
-
-        fun timerRenamed(name: String)
-
-        fun updateTimeModification(timeModification: Int)
-
-        fun startShowMode(id: Long)
-
-        fun displayUpdateTimerTimeDialog(timerId: Long)
-    }
-
     interface Presenter {
 
-        fun start()
+        fun onStart()
 
-        fun stop()
+        fun onStop()
 
         fun setTimer(timer: Timer)
 
@@ -50,5 +31,24 @@ interface TimerItemContract {
         fun onClickStartPomodoro()
 
         fun onClickAddDuration()
+    }
+
+    interface Screen {
+
+        fun timerUpdated(newTime: Long)
+
+        fun nameUpdated(newName: String)
+
+        fun displayRenameDialog(oldName: String)
+
+        fun statusUpdated(activate: Boolean)
+
+        fun timerRenamed(name: String)
+
+        fun updateTimeModification(timeModification: Int)
+
+        fun startShowMode(id: Long)
+
+        fun displayUpdateTimerTimeDialog(timerId: Long)
     }
 }

@@ -21,9 +21,12 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
-class TimerRowView(context: Context) :
-    CardView(context),
-    TimerItemContract.View {
+class TimerRowView(context: Context) : CardView(context) {
+
+    @Inject
+    lateinit var presenter: TimerItemContract.Presenter
+
+    private val screen = createScreen()
 
     private val chrono: TextView
     private val tvName: TextView
@@ -32,9 +35,6 @@ class TimerRowView(context: Context) :
     private val increaseChrono: TextView
     private val color: View
     private val btnPlayPause: ImageView
-
-    @Inject
-    lateinit var presenter: TimerItemPresenter
 
     init {
         setupGraph()
@@ -62,17 +62,12 @@ class TimerRowView(context: Context) :
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        presenter.start()
+        presenter.onStart()
     }
 
     override fun onDetachedFromWindow() {
-        presenter.stop()
+        presenter.onStop()
         super.onDetachedFromWindow()
-    }
-
-    override fun updateTimeModification(timeModification: Int) {
-        reduceChrono.text = timeModification.toString()
-        increaseChrono.text = timeModification.toString()
     }
 
     fun setTimer(timer: Timer) {
@@ -83,14 +78,6 @@ class TimerRowView(context: Context) :
         color.setBackgroundColor(ColorUtils.getColor(context!!, timer.color))
 
         updateBtnPlayPause(timer.isActivate)
-    }
-
-    override fun timerUpdated(newTime: Long) {
-        chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
-    }
-
-    override fun nameUpdated(newName: String) {
-        tvName.text = newName
     }
 
     private fun displayMenu() {
@@ -134,57 +121,14 @@ class TimerRowView(context: Context) :
         }
     }
 
-    override fun displayRenameDialog(oldName: String) {
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setMessage(resources.getString(R.string.timer_row_rename))
-
-        val rootView = LayoutInflater.from(context).inflate(R.layout.dialog_rename_timer, null)
-        val input = rootView.findViewById<EditText>(R.id.edittext)
-
-        input.setText(oldName)
-        input.setSelection(input.text.length)
-
-        alertDialog.setView(rootView)
-
-        alertDialog.setPositiveButton(android.R.string.yes) { dialog, which ->
-            val newName = input.text.toString()
-            presenter.onTimerNameUpdated(newName)
-        }
-
-        alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })
-
-        val dialog = alertDialog.create()
-        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-        dialog.show()
-    }
-
-    override fun statusUpdated(activate: Boolean) {
-        updateBtnPlayPause(activate)
-    }
-
-    override fun timerRenamed(name: String) {
-        tvName.text = name
-    }
-
-    override fun startShowMode(id: Long) {
-        val action = TimerFragmentDirections.actionTimerListScreenToShowModeScreen(id)
-        findNavController().navigate(action)
-    }
-
-    override fun displayUpdateTimerTimeDialog(timerId: Long) {
-        val updateTimerTimeDialog = UpdateTimerTimeDialog.newInstance(timerId)
-        val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-        updateTimerTimeDialog.show(fragmentManager, UpdateTimerTimeDialog.TAG)
-    }
-
     private fun displayRemoveConfirmationDialog() {
         val message = resources.getString(R.string.item_timer_remove_message)
         val builder = AlertDialog.Builder(context)
         builder.setMessage(message)
-            .setPositiveButton(android.R.string.yes) { dialog, which ->
+            .setPositiveButton(android.R.string.yes) { _, _ ->
                 presenter.onClickDeleteTimer()
             }
-            .setNegativeButton(android.R.string.no) { dialog, which ->
+            .setNegativeButton(android.R.string.no) { _, _ ->
                 // do nothing
             }
             .show()
@@ -193,8 +137,67 @@ class TimerRowView(context: Context) :
     private fun setupGraph() {
         val component = DaggerTimerItemComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-            .timerItemModule(TimerItemModule(this))
+            .timerItemModule(TimerItemModule(screen))
             .build()
         component.inject(this)
+    }
+
+    private fun createScreen() = object : TimerItemContract.Screen {
+
+        override fun updateTimeModification(timeModification: Int) {
+            reduceChrono.text = timeModification.toString()
+            increaseChrono.text = timeModification.toString()
+        }
+
+        override fun timerUpdated(newTime: Long) {
+            chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
+        }
+
+        override fun nameUpdated(newName: String) {
+            tvName.text = newName
+        }
+
+        override fun displayRenameDialog(oldName: String) {
+            val alertDialog = AlertDialog.Builder(context)
+            alertDialog.setMessage(resources.getString(R.string.timer_row_rename))
+
+            val rootView = LayoutInflater.from(context).inflate(R.layout.dialog_rename_timer, null)
+            val input = rootView.findViewById<EditText>(R.id.edittext)
+
+            input.setText(oldName)
+            input.setSelection(input.text.length)
+
+            alertDialog.setView(rootView)
+
+            alertDialog.setPositiveButton(android.R.string.yes) { dialog, which ->
+                val newName = input.text.toString()
+                presenter.onTimerNameUpdated(newName)
+            }
+
+            alertDialog.setNegativeButton(android.R.string.no, { dialog, which -> dialog.cancel() })
+
+            val dialog = alertDialog.create()
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+            dialog.show()
+        }
+
+        override fun statusUpdated(activate: Boolean) {
+            updateBtnPlayPause(activate)
+        }
+
+        override fun timerRenamed(name: String) {
+            tvName.text = name
+        }
+
+        override fun startShowMode(id: Long) {
+            val action = TimerFragmentDirections.actionTimerListScreenToShowModeScreen(id)
+            findNavController().navigate(action)
+        }
+
+        override fun displayUpdateTimerTimeDialog(timerId: Long) {
+            val updateTimerTimeDialog = UpdateTimerTimeDialog.newInstance(timerId)
+            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+            updateTimerTimeDialog.show(fragmentManager, UpdateTimerTimeDialog.TAG)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.setting
+package fr.bowser.behaviortracker.setting_view
 
 import android.content.Context
 import android.content.res.TypedArray

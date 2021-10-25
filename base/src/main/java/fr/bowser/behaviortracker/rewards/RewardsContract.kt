@@ -4,6 +4,13 @@ import fr.bowser.behaviortracker.inapp.InApp
 
 interface RewardsContract {
 
+    interface Presenter {
+
+        fun onStart()
+
+        fun onStop()
+    }
+
     interface Screen {
 
         fun displayListInApps(inApps: List<InApp>)
@@ -11,12 +18,5 @@ interface RewardsContract {
         fun displaySuccessPurchaseMessage()
 
         fun displayFailPurchaseMessage()
-    }
-
-    interface Presenter {
-
-        fun start()
-
-        fun stop()
     }
 }

@@ -1,12 +1,10 @@
 package fr.bowser.behaviortracker.showmode
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -18,15 +16,17 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
 import javax.inject.Inject
 
-class ShowModeFragment : Fragment(), ShowModeContract.View {
+class ShowModeFragment : Fragment(R.layout.fragment_show_mode) {
+
+    @Inject
+    lateinit var presenter: ShowModeContract.Presenter
+
+    private val screen = createScreen()
 
     private lateinit var adapter: ShowModeAdapter
     private lateinit var viewPager: ViewPager2
 
     private val args: ShowModeFragmentArgs by navArgs()
-
-    @Inject
-    lateinit var presenter: ShowModePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +34,6 @@ class ShowModeFragment : Fragment(), ShowModeContract.View {
 
         setupGraph()
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = LayoutInflater.from(context!!).inflate(R.layout.fragment_show_mode, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewPager = view.findViewById(R.id.show_mode_pager)
@@ -54,7 +48,7 @@ class ShowModeFragment : Fragment(), ShowModeContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter.start(args.selectedTimerId)
+        presenter.onStart(args.selectedTimerId)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -90,23 +84,26 @@ class ShowModeFragment : Fragment(), ShowModeContract.View {
 
     private fun setupGraph() {
         val build = DaggerShowModeComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-            .showModeModule(ShowModeModule(this))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
+            .showModeModule(ShowModeModule(screen))
             .build()
         build.inject(this)
     }
 
-    override fun displayTimerList(timers: List<Timer>, selectedTimerPosition: Int) {
-        adapter.setData(timers)
-        viewPager.post { viewPager.setCurrentItem(selectedTimerPosition, false) }
-    }
+    private fun createScreen() = object : ShowModeContract.Screen {
 
-    override fun keepScreeOn(keepScreenOn: Boolean) {
-        if (keepScreenOn) {
-            activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        } else {
-            activity!!.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        override fun displayTimerList(timers: List<Timer>, selectedTimerPosition: Int) {
+            adapter.setData(timers)
+            viewPager.post { viewPager.setCurrentItem(selectedTimerPosition, false) }
         }
-        activity!!.invalidateOptionsMenu()
+
+        override fun keepScreeOn(keepScreenOn: Boolean) {
+            if (keepScreenOn) {
+                requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            } else {
+                requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
+            requireActivity().invalidateOptionsMenu()
+        }
     }
 }

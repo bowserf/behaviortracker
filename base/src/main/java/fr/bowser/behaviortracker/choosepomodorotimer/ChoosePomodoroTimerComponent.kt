@@ -13,5 +13,5 @@ interface ChoosePomodoroTimerComponent {
 
     fun inject(dialog: ChoosePomodoroTimerDialog)
 
-    fun provideChoosePomodoroTimerPresenter(): ChoosePomodoroTimerPresenter
+    fun provideChoosePomodoroTimerPresenter(): ChoosePomodoroTimerContract.Presenter
 }

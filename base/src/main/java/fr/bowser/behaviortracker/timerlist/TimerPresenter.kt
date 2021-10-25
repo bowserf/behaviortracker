@@ -17,7 +17,6 @@ class TimerPresenter(
     private val timerListManagerListener = createTimerListManagerListener()
 
     override fun init() {
-        val timers = timerListManager.getTimerList()
         val sections = listOf(
             TimerListSection(
                 stringManager.getString(R.string.timer_list_section_active_title),
@@ -33,11 +32,11 @@ class TimerPresenter(
         updateListVisibility()
     }
 
-    override fun start() {
+    override fun onStart() {
         timerListManager.addListener(timerListManagerListener)
     }
 
-    override fun stop() {
+    override fun onStop() {
         timerListManager.removeListener(timerListManagerListener)
     }
 

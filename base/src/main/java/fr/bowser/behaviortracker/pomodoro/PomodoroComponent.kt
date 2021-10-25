@@ -13,5 +13,5 @@ interface PomodoroComponent {
 
     fun inject(fragment: PomodoroFragment)
 
-    fun providePomodoroPresenter(): PomodoroPresenter
+    fun providePomodoroPresenter(): PomodoroContract.Presenter
 }

@@ -7,14 +7,20 @@ import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-class ChoosePomodoroTimerModule {
+class ChoosePomodoroTimerModule(
+    private val screen: ChoosePomodoroTimerContract.Screen
+) {
 
     @GenericScope(component = ChoosePomodoroTimerComponent::class)
     @Provides
     fun provideChoosePomodoroTimerPresenter(
         timerListManager: TimerListManager,
         pomodoroManager: PomodoroManager
-    ): ChoosePomodoroTimerPresenter {
-        return ChoosePomodoroTimerPresenter(timerListManager, pomodoroManager)
+    ): ChoosePomodoroTimerContract.Presenter {
+        return ChoosePomodoroTimerPresenter(
+            screen,
+            timerListManager,
+            pomodoroManager
+        )
     }
 }

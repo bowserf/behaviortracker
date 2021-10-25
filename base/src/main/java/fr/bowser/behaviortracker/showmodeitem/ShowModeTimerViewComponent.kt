@@ -13,5 +13,5 @@ interface ShowModeTimerViewComponent {
 
     fun inject(view: ShowModeTimerView)
 
-    fun provideShowModeTimerViewPresenter(): ShowModeTimerViewPresenter
+    fun provideShowModeTimerViewPresenter(): ShowModeTimerViewContract.Presenter
 }

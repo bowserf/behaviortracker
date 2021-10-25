@@ -14,16 +14,16 @@ internal class HomeModule(private val screen: HomeContract.Screen) {
     @GenericScope(component = HomeComponent::class)
     @Provides
     fun provideHomePresenter(
-            timerNotificationManager: TimerNotificationManager,
-            eventManager: EventManager,
-            instantAppManager: InstantAppManager
-    ): HomePresenter {
+        timerNotificationManager: TimerNotificationManager,
+        eventManager: EventManager,
+        instantAppManager: InstantAppManager
+    ): HomeContract.Presenter {
         return HomePresenter(
-                screen,
-                timerNotificationManager,
-                eventManager,
-                instantAppManager,
-                createInstallAppAddon(instantAppManager)
+            screen,
+            timerNotificationManager,
+            eventManager,
+            instantAppManager,
+            createInstallAppAddon(instantAppManager)
         )
     }
 

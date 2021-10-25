@@ -14,7 +14,7 @@ class RewardsRowModule(private val screen: RewardsRowContract.Screen) {
     fun provideRewardsRowPresenter(
         inAppManager: InAppManager,
         eventManager: EventManager
-    ): RewardsRowPresenter {
+    ): RewardsRowContract.Presenter {
         return RewardsRowPresenter(screen, inAppManager, eventManager)
     }
 }

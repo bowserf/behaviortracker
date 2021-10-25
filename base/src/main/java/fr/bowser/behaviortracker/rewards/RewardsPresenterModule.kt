@@ -14,7 +14,7 @@ class RewardsPresenterModule(private val screen: RewardsContract.Screen) {
     fun provideRewardsPresenter(
         inAppRepository: InAppRepository,
         inAppManager: InAppManager
-    ): RewardsPresenter {
+    ): RewardsContract.Presenter {
         return RewardsPresenter(screen, inAppRepository, inAppManager)
     }
 }

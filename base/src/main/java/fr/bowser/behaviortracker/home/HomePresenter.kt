@@ -12,15 +12,15 @@ class HomePresenter(
     private val instantAppAddon: InstantAppAddon
 ) : HomeContract.Presenter {
 
-    override fun start() {
+    override fun onStart() {
         timerNotificationManager.changeOngoingState(false)
 
-        if(instantAppManager.isInstantApp()) {
+        if (instantAppManager.isInstantApp()) {
             screen.setupInstantAppButton()
         }
     }
 
-    override fun stop() {
+    override fun onStop() {
         timerNotificationManager.changeOngoingState(true)
     }
 

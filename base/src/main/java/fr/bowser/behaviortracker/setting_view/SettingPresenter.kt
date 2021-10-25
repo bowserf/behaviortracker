@@ -1,26 +1,23 @@
-package fr.bowser.behaviortracker.setting
+package fr.bowser.behaviortracker.setting_view
 
-import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.event.EventManager
+import fr.bowser.feature_string.StringManager
 
 class SettingPresenter(
-    private val context: Context,
+    private val sharedPreferences: SharedPreferences,
+    private val stringManager: StringManager,
     private val eventManager: EventManager
-) {
+) : SettingContract.Presenter {
 
-    private val sharedPreferences: SharedPreferences =
-        PreferenceManager.getDefaultSharedPreferences(context)
-
-    fun start() {
+    override fun onStart() {
         sharedPreferences.registerOnSharedPreferenceChangeListener(
             onSharedPreferenceChangerListener
         )
     }
 
-    fun stop() {
+    override fun onStop() {
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(
             onSharedPreferenceChangerListener
         )
@@ -29,10 +26,10 @@ class SettingPresenter(
     private val onSharedPreferenceChangerListener =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
             when (key) {
-                context.getString(R.string.pref_key_time_modification) -> {
+                stringManager.getString(R.string.pref_key_time_modification) -> {
                     eventManager.sendNewTimeFixTimerDurationEvent(sharedPreferences.getInt(key, -1))
                 }
-                context.getString(R.string.pref_key_one_active_timer) -> {
+                stringManager.getString(R.string.pref_key_one_active_timer) -> {
                     eventManager.sendExclusiveTimerModeEvent(
                         sharedPreferences.getBoolean(
                             key,

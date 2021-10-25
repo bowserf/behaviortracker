@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class ShowModeTimerViewPresenterTest {
 
     @Mock
-    private lateinit var screen: ShowModeTimerViewContract.View
+    private lateinit var screen: ShowModeTimerViewContract.Screen
 
     @Mock
     private lateinit var timeManager: TimeManager
@@ -32,7 +32,7 @@ class ShowModeTimerViewPresenterTest {
     @Test
     fun startRegisterToTimeManagerListener() {
         // When
-        presenter.start()
+        presenter.onStart()
 
         // Then
         Mockito.verify(timeManager).addListener(any())
@@ -41,7 +41,7 @@ class ShowModeTimerViewPresenterTest {
     @Test
     fun stopUnregisterToTimeManagerListener() {
         // When
-        presenter.stop()
+        presenter.onStop()
 
         // Then
         Mockito.verify(timeManager).removeListener(any())

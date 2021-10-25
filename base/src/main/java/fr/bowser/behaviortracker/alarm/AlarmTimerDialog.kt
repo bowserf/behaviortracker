@@ -15,12 +15,15 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.feature.alarm.AlarmTime
 import javax.inject.Inject
 
-class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
+class AlarmTimerDialog : DialogFragment() {
 
     @Inject
-    lateinit var presenter: AlarmDialogPresenter
+    lateinit var presenter: AlarmTimerContract.Presenter
+
+    private val screen = createScreen()
 
     private lateinit var timerPicker: TimePicker
+
     private lateinit var alarmStatus: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +35,7 @@ class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val root = LayoutInflater.from(context).inflate(R.layout.dialog_alarm_timer, null)
 
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(requireContext())
         dialogBuilder.setTitle(resources.getString(R.string.alarm_timer_dialog_title))
         dialogBuilder.setMessage(resources.getString(R.string.alarm_timer_dialog_content))
         dialogBuilder.setView(root)
@@ -58,33 +61,13 @@ class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter.start()
-    }
-
-    @Suppress("DEPRECATION")
-    override fun restoreAlarmStatus(alarmTime: AlarmTime) {
-        alarmStatus.isChecked = alarmTime.isActivated
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            timerPicker.hour = alarmTime.hour
-            timerPicker.minute = alarmTime.minute
-        } else {
-            timerPicker.currentHour = alarmTime.hour
-            timerPicker.currentMinute = alarmTime.minute
-        }
-    }
-
-    override fun displayMessageAlarmEnabled() {
-        Toast.makeText(context, R.string.alarm_timer_alarm_enabled, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun displayMessageAlarmDisabled() {
-        Toast.makeText(context, R.string.alarm_timer_alarm_disabled, Toast.LENGTH_SHORT).show()
+        presenter.onStart()
     }
 
     private fun setupGraph() {
         val component = DaggerAlarmTimerComponent.builder()
-            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context!!))
-            .alarmTimerModule(AlarmTimerModule(this))
+            .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
+            .alarmTimerModule(AlarmTimerModule(screen))
             .build()
         component.inject(this)
     }
@@ -93,6 +76,28 @@ class AlarmTimerDialog : DialogFragment(), AlarmTimerContract.View {
         alarmStatus = root.findViewById(R.id.alarm_timer_status)
         timerPicker = root.findViewById(R.id.alarm_timer_time_picker)
         timerPicker.setIs24HourView(true)
+    }
+
+    private fun createScreen() = object : AlarmTimerContract.Screen {
+        @Suppress("DEPRECATION")
+        override fun restoreAlarmStatus(alarmTime: AlarmTime) {
+            alarmStatus.isChecked = alarmTime.isActivated
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                timerPicker.hour = alarmTime.hour
+                timerPicker.minute = alarmTime.minute
+            } else {
+                timerPicker.currentHour = alarmTime.hour
+                timerPicker.currentMinute = alarmTime.minute
+            }
+        }
+
+        override fun displayMessageAlarmEnabled() {
+            Toast.makeText(context, R.string.alarm_timer_alarm_enabled, Toast.LENGTH_SHORT).show()
+        }
+
+        override fun displayMessageAlarmDisabled() {
+            Toast.makeText(context, R.string.alarm_timer_alarm_disabled, Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {

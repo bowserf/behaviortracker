@@ -1,8 +1,33 @@
 package fr.bowser.behaviortracker.timerlist
 
-import fr.bowser.behaviortracker.timer.Timer
-
 interface TimerContract {
+
+    interface Presenter {
+
+        fun init()
+
+        fun onStart()
+
+        fun onStop()
+
+        fun onClickResetAll()
+
+        fun onClickResetAllTimers()
+
+        fun onClickSettings()
+
+        fun onClickRemoveAllTimers()
+
+        fun onClickConfirmRemoveAllTimers()
+
+        fun onClickAlarm()
+
+        fun onClickRewards()
+
+        fun onClickAddTimer()
+
+        fun isInstantApp(): Boolean
+    }
 
     interface Screen {
 
@@ -23,32 +48,5 @@ interface TimerContract {
         fun displayRewardsView()
 
         fun displayRemoveAllTimersConfirmationDialog()
-    }
-
-    interface Presenter {
-
-        fun init()
-
-        fun start()
-
-        fun stop()
-
-        fun onClickResetAll()
-
-        fun onClickResetAllTimers()
-
-        fun onClickSettings()
-
-        fun onClickRemoveAllTimers()
-
-        fun onClickConfirmRemoveAllTimers()
-
-        fun onClickAlarm()
-
-        fun onClickRewards()
-
-        fun onClickAddTimer()
-
-        fun isInstantApp(): Boolean
     }
 }

@@ -7,14 +7,14 @@ import fr.bowser.behaviortracker.utils.GenericScope
 import fr.bowser.feature.alarm.AlarmTimerManager
 
 @Module
-class AlarmTimerModule(private val view: AlarmTimerContract.View) {
+class AlarmTimerModule(private val screen: AlarmTimerContract.Screen) {
 
     @GenericScope(component = AlarmTimerComponent::class)
     @Provides
     fun provideAlarmTimerPresenter(
-            alarmTimerManager: AlarmTimerManager,
-            eventManager: EventManager
-    ): AlarmDialogPresenter {
-        return AlarmDialogPresenter(view, alarmTimerManager, eventManager)
+        alarmTimerManager: AlarmTimerManager,
+        eventManager: EventManager
+    ): AlarmTimerContract.Presenter {
+        return AlarmDialogPresenter(screen, alarmTimerManager, eventManager)
     }
 }

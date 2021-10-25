@@ -6,17 +6,15 @@ import fr.bowser.behaviortracker.inapp.InApp
 
 interface RewardsRowContract {
 
-    interface Screen {
+    interface Presenter {
 
-        fun setInApp(inApp: InApp)
+        fun onItemClicked(skuDetails: SkuDetails?)
+    }
+
+    interface Screen {
 
         fun getActivity(): Activity
 
         fun displayStoreConnectionError()
-    }
-
-    interface Presenter {
-
-        fun onItemClicked(skuDetails: SkuDetails?)
     }
 }
