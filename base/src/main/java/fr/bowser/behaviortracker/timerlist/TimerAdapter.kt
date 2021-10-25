@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timeritem.TimerRowView
-import java.util.*
+import java.util.Collections
 
 class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
@@ -50,23 +50,6 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
             timerList.remove(timer)
             notifyItemRemoved(position)
         }
-    }
-
-    fun onItemMove(fromPosition: Int, toPosition: Int) {
-        if (fromPosition < toPosition) {
-            for (i in fromPosition until toPosition) {
-                Collections.swap(timerList, i, i + 1)
-            }
-        } else {
-            for (i in fromPosition downTo toPosition + 1) {
-                Collections.swap(timerList, i, i - 1)
-            }
-        }
-        notifyItemMoved(fromPosition, toPosition)
-    }
-
-    fun getTimer(position: Int): Timer {
-        return timerList[position]
     }
 
     fun getTimerList(): List<Timer> {

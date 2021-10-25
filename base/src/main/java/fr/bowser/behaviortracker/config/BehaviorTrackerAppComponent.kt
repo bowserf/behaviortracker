@@ -21,36 +21,53 @@ import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
+import fr.bowser.behaviortracker.string.StringManagerModule
 import fr.bowser.behaviortracker.timer.*
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature_string.StringManager
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = arrayOf(
-        DatabaseManagerModule::class,
-        TimeManagerModule::class,
-        TimeNotificationManagerModule::class,
-        SettingManagerModule::class,
-        EventManagerModule::class,
         AlarmTimerManagerModule::class,
+        DatabaseManagerModule::class,
+        DoNotDisturbModule::class,
+        EventManagerModule::class,
         InAppManagerModule::class,
         PomodoroManagerModule::class,
+        TimeManagerModule::class,
+        TimeNotificationManagerModule::class,
         TimerListManagerModule::class,
-        DoNotDisturbModule::class
+        SettingManagerModule::class,
+        StringManagerModule::class
     ), dependencies = [
         InstantAppComponent::class
     ]
 )
 interface BehaviorTrackerAppComponent {
 
+    fun provideAlarmTimerManager(): AlarmTimerManager
+
     fun provideContext(): Context
 
     fun provideDatabaseManager(): DatabaseManager
 
-    fun provideTimerDAO(): TimerDAO
+    fun provideDoNotDisturbModule(): DoNotDisturbManager
+
+    fun provideEventManager(): EventManager
+
+    fun provideInAppManager(): InAppManager
+
+    fun provideInAppRepository(): InAppRepository
+
+    fun provideMyInstantApp(): InstantAppManager
 
     fun provideTimeManager(): TimeManager
+
+    fun providePomodoroManager(): PomodoroManager
+
+    fun provideTimerDAO(): TimerDAO
 
     fun provideTimerListManager(): TimerListManager
 
@@ -58,19 +75,7 @@ interface BehaviorTrackerAppComponent {
 
     fun provideSettingManager(): SettingManager
 
-    fun provideEventManager(): EventManager
-
-    fun provideAlarmTimerManager(): AlarmTimerManager
-
-    fun provideInAppManager(): InAppManager
-
-    fun provideInAppRepository(): InAppRepository
-
-    fun providePomodoroManager(): PomodoroManager
-
-    fun provideMyInstantApp(): InstantAppManager
-
-    fun provideDoNotDisturbModule(): DoNotDisturbManager
+    fun provideStringManager(): StringManager
 
     @Component.Builder
     interface Builder {

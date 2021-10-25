@@ -106,6 +106,7 @@ dependencies {
 
     implementation(project(":feature_alarm"))
     implementation(project(":feature_do_not_disturb"))
+    implementation(project(":feature_string"))
 
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
@@ -142,6 +143,9 @@ dependencies {
     // Other
     implementation("com.google.dagger:dagger:2.39")
     kapt("com.google.dagger:dagger-compiler:2.39")
+
+    implementation("com.hannesdorfmann:adapterdelegates4:4.3.0")
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0")
 
     // Static analyzer
     ktlint("com.github.shyiko:ktlint:0.31.0")

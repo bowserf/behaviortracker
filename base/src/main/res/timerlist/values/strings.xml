@@ -5,5 +5,7 @@
     <string name="timer_view_timer_has_been_removed">Timer has been removed</string>
     <string name="timer_list_remove_all_timers_title">Remove all timers</string>
     <string name="timer_list_remove_all_timers_message">Are you sure you want to remove all timers?</string>
+    <string name="timer_list_section_inactive_title">Timers</string>
+    <string name="timer_list_section_active_title">Active timers</string>
 
 </resources>

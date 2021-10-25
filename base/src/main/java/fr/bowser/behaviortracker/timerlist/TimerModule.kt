@@ -6,6 +6,7 @@ import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
+import fr.bowser.feature_string.StringManager
 
 @Module
 class TimerModule(private val timerScreen: TimerContract.Screen) {
@@ -15,13 +16,15 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
     fun provideTimerPresenter(
         timerListManager: TimerListManager,
         timeManager: TimeManager,
+        stringManager: StringManager,
         instantAppManager: InstantAppManager
     ): TimerPresenter {
         return TimerPresenter(
             timerScreen,
             timerListManager,
             timeManager,
-                instantAppManager.isInstantApp()
+            stringManager,
+            instantAppManager.isInstantApp()
         )
     }
 }

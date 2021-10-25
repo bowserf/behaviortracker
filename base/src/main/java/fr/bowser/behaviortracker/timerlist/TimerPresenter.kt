@@ -1,35 +1,44 @@
 package fr.bowser.behaviortracker.timerlist
 
+import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.feature_string.StringManager
 
 class TimerPresenter(
     private val screen: TimerContract.Screen,
     private val timerListManager: TimerListManager,
     private val timeManager: TimeManager,
+    private val stringManager: StringManager,
     private val isInstantApp: Boolean
-) : TimerContract.Presenter, TimerListManager.Listener {
+) : TimerContract.Presenter {
 
-    private var ongoingDeletionTimer: Timer? = null
+    private val timerListManagerListener = createTimerListManagerListener()
 
     override fun init() {
         val timers = timerListManager.getTimerList()
-        screen.displayTimerList(timers)
+        val sections = listOf(
+            TimerListSection(
+                stringManager.getString(R.string.timer_list_section_active_title),
+                true
+            ),
+            TimerListSection(
+                stringManager.getString(R.string.timer_list_section_inactive_title),
+                false
+            )
+        )
+        screen.displayTimerListSections(sections)
 
-        if (timers.isEmpty()) {
-            screen.displayEmptyListView()
-        } else {
-            screen.displayListView()
-        }
+        updateListVisibility()
     }
 
     override fun start() {
-        timerListManager.addListener(this)
+        timerListManager.addListener(timerListManagerListener)
     }
 
     override fun stop() {
-        timerListManager.removeListener(this)
+        timerListManager.removeListener(timerListManagerListener)
     }
 
     override fun onClickResetAll() {
@@ -68,54 +77,30 @@ class TimerPresenter(
         screen.displayCreateTimerView()
     }
 
-    override fun onTimerSwiped(timer: Timer) {
-        if (ongoingDeletionTimer != null) {
-            definitivelyRemoveTimer()
-        }
-        ongoingDeletionTimer = timer
-        // simulation suppression
-        onTimerRemoved(timer)
-        screen.displayCancelDeletionView()
-    }
-
-    override fun definitivelyRemoveTimer() {
-        if (ongoingDeletionTimer != null) {
-            timerListManager.removeTimer(ongoingDeletionTimer!!)
-            ongoingDeletionTimer = null
-        }
-    }
-
-    override fun cancelTimerDeletion() {
-        if (ongoingDeletionTimer != null) {
-            onTimerAdded(ongoingDeletionTimer!!)
-            ongoingDeletionTimer = null
-        }
-    }
-
     override fun isInstantApp(): Boolean {
         return isInstantApp
     }
 
-    override fun onReorderFinished(timerList: List<Timer>) {
-        timerListManager.reorderTimerList(timerList)
-    }
-
-    override fun onTimerRemoved(removedTimer: Timer) {
-        screen.onTimerRemoved(removedTimer)
+    private fun updateListVisibility() {
         val timerList = timerListManager.getTimerList()
-        if (timerList.isEmpty() || (timerList.size == 1 && timerList.first() == ongoingDeletionTimer)) {
+        if (timerList.isEmpty()) {
             screen.displayEmptyListView()
-        }
-    }
-
-    override fun onTimerAdded(updatedTimer: Timer) {
-        screen.onTimerAdded(updatedTimer)
-        if (timerListManager.getTimerList().isNotEmpty()) {
+        } else {
             screen.displayListView()
         }
     }
 
-    override fun onTimerRenamed(updatedTimer: Timer) {
-        // nothing to do
+    private fun createTimerListManagerListener() = object : TimerListManager.Listener {
+        override fun onTimerRemoved(removedTimer: Timer) {
+            updateListVisibility()
+        }
+
+        override fun onTimerAdded(updatedTimer: Timer) {
+            updateListVisibility()
+        }
+
+        override fun onTimerRenamed(updatedTimer: Timer) {
+            // nothing to do
+        }
     }
 }

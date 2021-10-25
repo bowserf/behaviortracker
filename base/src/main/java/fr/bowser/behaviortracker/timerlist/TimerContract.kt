@@ -8,17 +8,11 @@ interface TimerContract {
 
         fun displayCreateTimerView()
 
-        fun displayTimerList(timers: List<Timer>)
-
-        fun onTimerRemoved(timer: Timer)
-
-        fun onTimerAdded(timer: Timer)
+        fun displayTimerListSections(sections: List<TimerListSection>)
 
         fun displayEmptyListView()
 
         fun displayListView()
-
-        fun displayCancelDeletionView()
 
         fun displayResetAllDialog()
 
@@ -55,13 +49,6 @@ interface TimerContract {
 
         fun onClickAddTimer()
 
-        fun onTimerSwiped(timer: Timer)
-
-        fun definitivelyRemoveTimer()
-
-        fun onReorderFinished(timerList: List<Timer>)
-
-        fun cancelTimerDeletion()
         fun isInstantApp(): Boolean
     }
 }
