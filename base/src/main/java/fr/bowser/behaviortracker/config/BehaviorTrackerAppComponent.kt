@@ -6,7 +6,6 @@ import dagger.Component
 import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
-import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 import fr.bowser.behaviortracker.do_not_disturbed.DoNotDisturbModule
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
@@ -22,8 +21,15 @@ import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
 import fr.bowser.behaviortracker.string.StringManagerModule
-import fr.bowser.behaviortracker.timer.*
+import fr.bowser.behaviortracker.time.TimeProvider
+import fr.bowser.behaviortracker.time.TimeProviderModule
+import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer.TimeManagerModule
+import fr.bowser.behaviortracker.timer.TimerDAO
+import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer.TimerListManagerModule
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 import fr.bowser.feature_string.StringManager
 import javax.inject.Singleton
 
@@ -38,6 +44,7 @@ import javax.inject.Singleton
         PomodoroManagerModule::class,
         TimeManagerModule::class,
         TimeNotificationManagerModule::class,
+        TimeProviderModule::class,
         TimerListManagerModule::class,
         SettingManagerModule::class,
         StringManagerModule::class
@@ -64,6 +71,8 @@ interface BehaviorTrackerAppComponent {
     fun provideMyInstantApp(): InstantAppManager
 
     fun provideTimeManager(): TimeManager
+    
+    fun provideTimeProvider(): TimeProvider
 
     fun providePomodoroManager(): PomodoroManager
 
@@ -81,6 +90,7 @@ interface BehaviorTrackerAppComponent {
     interface Builder {
 
         fun build(): BehaviorTrackerAppComponent
+
         @BindsInstance
         fun context(context: Context): Builder
 
