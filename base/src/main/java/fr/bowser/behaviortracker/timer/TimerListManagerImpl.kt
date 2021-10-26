@@ -47,8 +47,6 @@ class TimerListManagerImpl(
 
         GlobalScope.launch(background) {
             timerDAO.removeTimer(oldTimer)
-
-            timers.sortBy { timer -> timer.position }
             reorderTimerList(timers)
         }
     }

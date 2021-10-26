@@ -6,8 +6,10 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
@@ -35,6 +37,11 @@ class TimerSectionView @JvmOverloads constructor(
 
         timerList.layoutManager = LinearLayoutManager(context)
         timerList.adapter = timerAdapter
+
+        val swipeHandler = TimerListGesture(context, TimerListGestureListener())
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(timerList)
+
         val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         timerList.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
@@ -85,6 +92,32 @@ class TimerSectionView @JvmOverloads constructor(
 
         override fun displayTitle(display: Boolean) {
             titleTv.visibility = if (display) View.VISIBLE else View.GONE
+        }
+
+        override fun displayCancelDeletionView(cancelDuration: Int) {
+            Snackbar.make(
+                timerList,
+                resources.getString(R.string.timer_view_timer_has_been_removed),
+                cancelDuration
+            )
+                .setAction(android.R.string.cancel) {
+                    presenter.onClickCancelTimerDeletion()
+                }
+                .show()
+        }
+    }
+
+    inner class TimerListGestureListener : TimerListGesture.Listener {
+        override fun onItemMove(fromPosition: Int, toPosition: Int) {
+            // nothing to do
+        }
+
+        override fun onSelectedChangedUp() {
+            // nothing to do
+        }
+
+        override fun onSwiped(position: Int) {
+            presenter.onTimerSwiped(position)
         }
     }
 
