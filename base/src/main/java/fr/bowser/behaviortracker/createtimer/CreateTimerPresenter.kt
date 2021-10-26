@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.createtimer
 
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.time.TimeProvider
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -12,7 +13,8 @@ class CreateTimerPresenter(
     private val timerListManager: TimerListManager,
     private val timeManager: TimeManager,
     private val pomodoroManager: PomodoroManager,
-    private val eventManager: EventManager
+    private val eventManager: EventManager,
+    private val timeProvider: TimeProvider
 ) : CreateTimerContract.Presenter {
 
     private var colorPosition: Int = 0
@@ -30,7 +32,13 @@ class CreateTimerPresenter(
             return
         }
 
-        val timer = Timer(name, ColorUtils.convertPositionToColor(colorPosition))
+        val currentTime = timeProvider.getCurrentTimeMs()
+        val timer = Timer(
+            name,
+            ColorUtils.convertPositionToColor(colorPosition),
+            currentTime,
+            currentTime
+        )
         timerListManager.addTimer(timer)
 
         eventManager.sendTimerCreateEvent(startNow)

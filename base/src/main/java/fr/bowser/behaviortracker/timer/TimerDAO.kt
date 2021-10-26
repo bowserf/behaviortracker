@@ -26,6 +26,9 @@ interface TimerDAO {
     @Query("UPDATE Timer SET current_time = :currentTime WHERE id = :id")
     fun updateTimerTime(id: Long, currentTime: Long)
 
+    @Query("UPDATE Timer SET last_update_ms = :lastUpdatedTimestamp WHERE id = :id")
+    fun updateLastUpdatedTimestamp(id: Long, lastUpdatedTimestamp: Long)
+
     @Query("UPDATE Timer SET position = :position WHERE id = :id")
     fun updateTimerPosition(id: Long, position: Int)
 }

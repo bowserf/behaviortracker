@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.timer
 
 import android.os.Handler
 import fr.bowser.behaviortracker.setting.SettingManager
+import fr.bowser.behaviortracker.time.TimeProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
@@ -9,6 +10,7 @@ import kotlinx.coroutines.newFixedThreadPoolContext
 class TimeManagerImpl(
     private val timerDAO: TimerDAO,
     private val settingManager: SettingManager,
+    private val timeProvider: TimeProvider,
     private val handler: Handler?
 ) : TimeManager {
 
@@ -22,7 +24,7 @@ class TimeManagerImpl(
 
     private val timerList = ArrayList<Timer>()
 
-    override fun startTimer(timer: Timer) {
+    override fun startTimer(timer: Timer, fakeTimer: Boolean) {
         if (timer.isActivate) {
             return
         }
@@ -44,9 +46,15 @@ class TimeManagerImpl(
             }
             timerList.add(timer)
         }
+
+        if (!fakeTimer) {
+            GlobalScope.launch(background) {
+                timerDAO.updateLastUpdatedTimestamp(timer.id, timeProvider.getCurrentTimeMs())
+            }
+        }
     }
 
-    override fun stopTimer(timer: Timer) {
+    override fun stopTimer(timer: Timer, fakeTimer: Boolean) {
         if (!timer.isActivate) {
             return
         }
@@ -62,6 +70,12 @@ class TimeManagerImpl(
 
         if (timerList.isEmpty()) {
             handler?.removeCallbacks(timerRunnable)
+        }
+
+        if (!fakeTimer) {
+            GlobalScope.launch(background) {
+                timerDAO.updateLastUpdatedTimestamp(timer.id, timeProvider.getCurrentTimeMs())
+            }
         }
     }
 

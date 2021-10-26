@@ -11,6 +11,8 @@ data class Timer(
     @ColumnInfo(name = "current_time") val currentTime: Long,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "color") var color: Int,
+    @ColumnInfo(name = "creation_date_ms") var creationDateTimestamp: Long,
+    @ColumnInfo(name = "last_update_ms") var lastUpdateTimestamp: Long,
     @ColumnInfo(name = "position") var position: Int
 ) {
 
@@ -21,11 +23,20 @@ data class Timer(
     var time: Float = 0f
 
     @Ignore
-    constructor(name: String, color: Int, isActivate: Boolean = false, position: Int = 0) : this(
+    constructor(
+        name: String,
+        color: Int,
+        creationDateTimestamp: Long = 0,
+        lastUpdateTimestamp: Long = 0,
+        position: Int = 0,
+        isActivate: Boolean = false
+    ) : this(
         0,
         0,
         name,
         color,
+        creationDateTimestamp,
+        lastUpdateTimestamp,
         position
     ) {
         this.isActivate = isActivate
@@ -39,6 +50,8 @@ data class Timer(
                 && other.currentTime == currentTime
                 && other.name == name
                 && other.time == time
+                && other.creationDateTimestamp == creationDateTimestamp
+                && other.lastUpdateTimestamp == lastUpdateTimestamp
                 && other.position == position
             ) {
                 return true

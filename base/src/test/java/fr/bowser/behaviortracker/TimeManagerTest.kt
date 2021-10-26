@@ -62,7 +62,7 @@ class TimeManagerTest {
     fun stopTimer() {
         val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
-        val timerState = Timer("MyTimer", Color.RED, true)
+        val timerState = Timer("MyTimer", Color.RED, isActivate = true)
 
         timeManager.stopTimer(timerState)
 
@@ -73,7 +73,7 @@ class TimeManagerTest {
     fun stopTimerListener() {
         val timeManager = TimeManagerImpl(timerDao, settingManager, null)
 
-        val timerState = Timer("MyTimer", Color.RED, true)
+        val timerState = Timer("MyTimer", Color.RED, isActivate = true)
 
         var result = false
 

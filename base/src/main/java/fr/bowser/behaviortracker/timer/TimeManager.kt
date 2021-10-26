@@ -2,9 +2,9 @@ package fr.bowser.behaviortracker.timer
 
 interface TimeManager {
 
-    fun startTimer(timer: Timer)
+    fun startTimer(timer: Timer, fakeTimer: Boolean = false)
 
-    fun stopTimer(timer: Timer)
+    fun stopTimer(timer: Timer, fakeTimer: Boolean = false)
 
     fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean = false)
 

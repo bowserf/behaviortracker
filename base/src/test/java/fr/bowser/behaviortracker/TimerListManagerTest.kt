@@ -1,7 +1,11 @@
 package fr.bowser.behaviortracker
 
 import android.graphics.Color
-import fr.bowser.behaviortracker.timer.*
+import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerDAO
+import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer.TimerListManagerImpl
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -198,7 +202,7 @@ class TimerListManagerTest {
     fun setPositionWhenAddTimer() {
         val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
 
-        val timer1 = Timer("Timer1", Color.RED, false, -1)
+        val timer1 = Timer("Timer1", Color.RED, position = -1)
         timerListManager.addTimer(timer1)
 
         Assert.assertEquals(0, timer1.position)

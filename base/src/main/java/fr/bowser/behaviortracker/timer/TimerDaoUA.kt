@@ -3,7 +3,7 @@ package fr.bowser.behaviortracker.timer
 import android.content.Context
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.utils.ColorUtils
-import java.util.*
+import java.util.ArrayList
 
 class TimerDaoUA(context: Context) : TimerDAO {
 
@@ -17,6 +17,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 5304L,
                 context.resources.getString(R.string.release_screenshot_timer_work),
                 color1,
+                0,
+                0,
                 0
             )
         )
@@ -27,6 +29,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 1638L,
                 context.resources.getString(R.string.release_screenshot_timer_transport),
                 color2,
+                0,
+                0,
                 1
             )
         )
@@ -37,6 +41,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 2700L,
                 context.resources.getString(R.string.release_screenshot_timer_sport),
                 color3,
+                0,
+                0,
                 2
             )
         )
@@ -47,6 +53,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 4000L,
                 context.resources.getString(R.string.release_screenshot_timer_cooking),
                 color4,
+                0,
+                0,
                 3
             )
         )
@@ -57,6 +65,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 2000L,
                 context.resources.getString(R.string.release_screenshot_timer_watch_series),
                 color5,
+                0,
+                0,
                 4
             )
         )
@@ -86,6 +96,10 @@ class TimerDaoUA(context: Context) : TimerDAO {
 
     override fun updateTimerTime(id: Long, currentTime: Long) {
         timers[id.toInt()].time = currentTime.toFloat()
+    }
+
+    override fun updateLastUpdatedTimestamp(id: Long, lastUpdatedTimestamp: Long) {
+        timers[id.toInt()].lastUpdateTimestamp = lastUpdatedTimestamp
     }
 
     override fun updateTimerPosition(id: Long, position: Int) {
