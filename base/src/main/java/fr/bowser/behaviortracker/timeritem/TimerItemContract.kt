@@ -50,5 +50,7 @@ interface TimerItemContract {
         fun startShowMode(id: Long)
 
         fun displayUpdateTimerTimeDialog(timerId: Long)
+
+        fun updateLastUpdatedDate(date: String)
     }
 }

@@ -35,6 +35,8 @@ class TimeManagerImpl(
 
         lastUpdatedTime[timer] = getCurrentTimeSeconds()
 
+        updateLastUpdateTimestamp(timer, fakeTimer)
+
         timer.isActivate = true
         for (listener in listeners) {
             listener.onTimerStateChanged(timer)
@@ -46,12 +48,6 @@ class TimeManagerImpl(
             }
             timerList.add(timer)
         }
-
-        if (!fakeTimer) {
-            GlobalScope.launch(background) {
-                timerDAO.updateLastUpdatedTimestamp(timer.id, timeProvider.getCurrentTimeMs())
-            }
-        }
     }
 
     override fun stopTimer(timer: Timer, fakeTimer: Boolean) {
@@ -60,6 +56,8 @@ class TimeManagerImpl(
         }
 
         lastUpdatedTime.remove(timer)
+
+        updateLastUpdateTimestamp(timer, fakeTimer)
 
         timer.isActivate = false
         for (listener in listeners) {
@@ -70,12 +68,6 @@ class TimeManagerImpl(
 
         if (timerList.isEmpty()) {
             handler?.removeCallbacks(timerRunnable)
-        }
-
-        if (!fakeTimer) {
-            GlobalScope.launch(background) {
-                timerDAO.updateLastUpdatedTimestamp(timer.id, timeProvider.getCurrentTimeMs())
-            }
         }
     }
 
@@ -122,6 +114,19 @@ class TimeManagerImpl(
 
     private fun getCurrentTimeSeconds(): Long {
         return System.currentTimeMillis() / 1000
+    }
+
+    private fun updateLastUpdateTimestamp(
+        timer: Timer,
+        fakeTimer: Boolean
+    ) {
+        val currentTime = timeProvider.getCurrentTimeMs()
+        timer.lastUpdateTimestamp = currentTime
+        if (!fakeTimer) {
+            GlobalScope.launch(background) {
+                timerDAO.updateLastUpdatedTimestamp(timer.id, currentTime)
+            }
+        }
     }
 
     inner class TimerRunnable : Runnable {

@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.timeritem
 
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.setting.SettingManager
+import fr.bowser.behaviortracker.time.TimeProvider
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -11,7 +12,8 @@ class TimerItemPresenter(
     private val timeManager: TimeManager,
     private val timerListManager: TimerListManager,
     private val settingManager: SettingManager,
-    private val pomodoroManager: PomodoroManager
+    private val pomodoroManager: PomodoroManager,
+    private val timeProvider: TimeProvider
 ) : TimerItemContract.Presenter,
     TimerListManager.Listener,
     SettingManager.TimerModificationListener {
@@ -27,6 +29,8 @@ class TimerItemPresenter(
         screen.updateTimeModification(settingManager.getTimerModification())
         screen.timerUpdated(timer.time.toLong())
         screen.statusUpdated(timer.isActivate)
+
+        screen.updateLastUpdatedDate(timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp))
     }
 
     override fun onStop() {
@@ -115,19 +119,19 @@ class TimerItemPresenter(
         }
     }
 
-    private val timeManagerListener =
-        object : TimeManager.Listener {
+    private val timeManagerListener = object : TimeManager.Listener {
 
-            override fun onTimerStateChanged(updatedTimer: Timer) {
-                if (timer == updatedTimer) {
-                    screen.statusUpdated(updatedTimer.isActivate)
-                }
-            }
-
-            override fun onTimerTimeChanged(updatedTimer: Timer) {
-                if (timer == updatedTimer) {
-                    screen.timerUpdated(updatedTimer.time.toLong())
-                }
+        override fun onTimerStateChanged(updatedTimer: Timer) {
+            if (timer == updatedTimer) {
+                screen.statusUpdated(updatedTimer.isActivate)
+                screen.updateLastUpdatedDate(timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp))
             }
         }
+
+        override fun onTimerTimeChanged(updatedTimer: Timer) {
+            if (timer == updatedTimer) {
+                screen.timerUpdated(updatedTimer.time.toLong())
+            }
+        }
+    }
 }

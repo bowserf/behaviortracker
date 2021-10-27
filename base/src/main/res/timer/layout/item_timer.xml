@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:app="http://schemas.android.com/apk/res-auto"
-       xmlns:tools="http://schemas.android.com/tools"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       tools:parentTag="androidx.cardview.widget.CardView">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.cardview.widget.CardView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/colorPrimaryLight"/>
+            tools:background="@color/colorPrimaryLight" />
 
         <TextView
             android:id="@+id/timer_chrono"
@@ -27,10 +27,22 @@
             android:layout_marginLeft="@dimen/default_space"
             android:includeFontPadding="false"
             android:textSize="@dimen/text_timer_chrono"
-            app:layout_constraintBottom_toBottomOf="@id/timer_color"
+            app:layout_constraintBottom_toTopOf="@id/timer_last_update_timestamp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/timer_color"
-            tools:text="1:27:54"/>
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="1:27:54" />
+
+        <TextView
+            android:id="@+id/timer_last_update_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/timer_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timer_chrono"
+            tools:text="12:24 27/10/2021" />
 
         <ImageView
             android:id="@+id/timer_menu"
@@ -40,7 +52,7 @@
             android:padding="@dimen/default_space_half"
             android:src="@drawable/bg_overflow"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/timer_chrono"/>
+            app:layout_constraintTop_toTopOf="@id/timer_chrono" />
 
         <ImageView
             android:id="@+id/timer_play_pause"
@@ -50,15 +62,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/timer_color"
-            tools:src="@drawable/ic_play"/>
+            tools:src="@drawable/ic_play" />
 
         <TextView
             android:id="@+id/timer_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_space"
             android:layout_marginLeft="@dimen/default_space"
             android:layout_marginTop="@dimen/default_space"
+            android:layout_marginBottom="@dimen/default_space"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
@@ -67,7 +79,7 @@
             app:layout_constraintLeft_toRightOf="@id/timer_play_pause"
             app:layout_constraintRight_toLeftOf="@id/timer_reduce_time"
             app:layout_constraintTop_toBottomOf="@id/timer_color"
-            tools:text="Work"/>
+            tools:text="Work" />
 
         <TextView
             android:id="@+id/timer_reduce_time"
@@ -79,7 +91,7 @@
             android:textSize="@dimen/text_size_xs"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/timer_increase_time"
-            app:layout_constraintTop_toBottomOf="@id/timer_color"/>
+            app:layout_constraintTop_toBottomOf="@id/timer_color" />
 
         <TextView
             android:id="@+id/timer_increase_time"
@@ -92,7 +104,7 @@
             android:textSize="@dimen/text_size_xs"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timer_color"/>
+            app:layout_constraintTop_toBottomOf="@id/timer_color" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

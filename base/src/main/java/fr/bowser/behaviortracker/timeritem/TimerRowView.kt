@@ -29,6 +29,7 @@ class TimerRowView(context: Context) : CardView(context) {
     private val screen = createScreen()
 
     private val chrono: TextView
+    private val lastUpdateTimestamp: TextView
     private val tvName: TextView
     private val menu: ImageView
     private val reduceChrono: TextView
@@ -51,6 +52,7 @@ class TimerRowView(context: Context) : CardView(context) {
         color = findViewById(R.id.timer_color)
         color.setOnClickListener { presenter.onClickCard() }
         chrono = findViewById(R.id.timer_chrono)
+        lastUpdateTimestamp = findViewById(R.id.timer_last_update_timestamp)
         tvName = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
         menu.setOnClickListener { displayMenu() }
@@ -198,6 +200,10 @@ class TimerRowView(context: Context) : CardView(context) {
             val updateTimerTimeDialog = UpdateTimerTimeDialog.newInstance(timerId)
             val fragmentManager = (context as AppCompatActivity).supportFragmentManager
             updateTimerTimeDialog.show(fragmentManager, UpdateTimerTimeDialog.TAG)
+        }
+
+        override fun updateLastUpdatedDate(date: String) {
+            lastUpdateTimestamp.text = date
         }
     }
 }
