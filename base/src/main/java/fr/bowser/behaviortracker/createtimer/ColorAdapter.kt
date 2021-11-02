@@ -12,11 +12,12 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.utils.ColorUtils
 
 class ColorAdapter(
-    val context: Context,
-    val callback: Callback
+    private val context: Context,
+    initialSelectedColorPosition: Int,
+    private val callback: Callback
 ) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
 
-    private var selectedItemPosition = 0
+    private var selectedItemPosition = initialSelectedColorPosition
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_color, parent, false)

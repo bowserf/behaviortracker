@@ -21,6 +21,18 @@ class CreateTimerPresenter(
 
     private var isPomodoroMode = false
 
+    init {
+        colorPosition = computeSelectedColorPosition()
+    }
+
+    override fun onStart() {
+        screen.fillColorList(colorPosition)
+    }
+
+    override fun onStop() {
+        // nothing to do
+    }
+
     override fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int) {
         colorPosition = selectedPosition
         screen.updateColorList(oldSelectedPosition, selectedPosition)
@@ -56,5 +68,15 @@ class CreateTimerPresenter(
 
     override fun enablePomodoroMode(isPomodoro: Boolean) {
         isPomodoroMode = isPomodoro
+    }
+
+    private fun computeSelectedColorPosition(): Int {
+        val colors = timerListManager.getTimerList().map { it.color }.sorted()
+        for (i in 0 until ColorUtils.NUMBER_COLORS) {
+            if (!colors.contains(i)) {
+                return i
+            }
+        }
+        return 0
     }
 }

@@ -66,10 +66,13 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
 
         val dialogWidth = resources.getDimensionPixelOffset(R.dimen.create_dialog_width)
         dialog!!.window!!.setLayout(dialogWidth, WRAP_CONTENT)
+
+        presenter.onStart()
     }
 
     override fun onStop() {
         hideKeyboard()
+        presenter.onStop()
         super.onStop()
     }
 
@@ -82,16 +85,6 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
             false
         )
         chooseColor.setHasFixedSize(true)
-        chooseColor.adapter = ColorAdapter(
-            requireContext(),
-            object : ColorAdapter.Callback {
-                override fun onChangeSelectedColor(
-                    oldSelectedPosition: Int,
-                    selectedPosition: Int
-                ) {
-                    presenter.changeSelectedColor(oldSelectedPosition, selectedPosition)
-                }
-            })
     }
 
     private fun setupGraph() {
@@ -167,6 +160,20 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
         override fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int) {
             chooseColor.adapter?.notifyItemChanged(oldSelectedPosition)
             chooseColor.adapter?.notifyItemChanged(selectedPosition)
+        }
+
+        override fun fillColorList(colorPosition: Int) {
+            chooseColor.adapter = ColorAdapter(
+                requireContext(),
+                colorPosition,
+                object : ColorAdapter.Callback {
+                    override fun onChangeSelectedColor(
+                        oldSelectedPosition: Int,
+                        selectedPosition: Int
+                    ) {
+                        presenter.changeSelectedColor(oldSelectedPosition, selectedPosition)
+                    }
+                })
         }
     }
 
