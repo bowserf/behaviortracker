@@ -24,6 +24,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
+import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
 class TimerFragment : Fragment(R.layout.fragment_timer) {
@@ -43,6 +44,10 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
 
     private lateinit var timerList: RecyclerView
 
+    private lateinit var totalTimeTv: TextView
+
+    private lateinit var timerListContainer: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -54,6 +59,9 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         super.onViewCreated(view, savedInstanceState)
 
         initializeList(view)
+
+        timerListContainer = view.findViewById(R.id.timer_list_container_list)
+        totalTimeTv = view.findViewById(R.id.timer_list_total_time)
 
         fab = view.findViewById(R.id.button_add_timer)
         fab.setOnClickListener { presenter.onClickAddTimer() }
@@ -156,7 +164,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         }
 
         override fun displayEmptyListView() {
-            timerList.visibility = INVISIBLE
+            timerListContainer.visibility = INVISIBLE
             emptyListView.visibility = VISIBLE
             emptyListText.visibility = VISIBLE
 
@@ -169,9 +177,14 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         }
 
         override fun displayListView() {
-            timerList.visibility = VISIBLE
+            timerListContainer.visibility = VISIBLE
             emptyListView.visibility = INVISIBLE
             emptyListText.visibility = INVISIBLE
+        }
+
+        override fun updateTotalTime(totalTime: Long) {
+            val totalTimeStr = TimeConverter.convertSecondsToHumanTime(totalTime)
+            totalTimeTv.text = resources.getString(R.string.timer_list_total_time, totalTimeStr)
         }
     }
 

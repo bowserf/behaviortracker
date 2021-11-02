@@ -16,6 +16,8 @@ class TimerPresenter(
 
     private val timerListManagerListener = createTimerListManagerListener()
 
+    private val timeManagerListener = createTimeManagerListener()
+
     override fun init() {
         val sections = listOf(
             TimerListSection(
@@ -34,10 +36,14 @@ class TimerPresenter(
 
     override fun onStart() {
         timerListManager.addListener(timerListManagerListener)
+        timeManager.addListener(timeManagerListener)
+
+        updateTotalTimerTime()
     }
 
     override fun onStop() {
         timerListManager.removeListener(timerListManagerListener)
+        timeManager.removeListener(timeManagerListener)
     }
 
     override fun onClickResetAll() {
@@ -89,9 +95,26 @@ class TimerPresenter(
         }
     }
 
+    private fun updateTotalTimerTime() {
+        var totalTime = 0f
+        timerListManager.getTimerList().forEach { totalTime += it.time }
+        screen.updateTotalTime(totalTime.toLong())
+    }
+
+    private fun createTimeManagerListener() = object : TimeManager.Listener {
+        override fun onTimerStateChanged(updatedTimer: Timer) {
+            // nothing to do
+        }
+
+        override fun onTimerTimeChanged(updatedTimer: Timer) {
+            updateTotalTimerTime()
+        }
+    }
+
     private fun createTimerListManagerListener() = object : TimerListManager.Listener {
         override fun onTimerRemoved(removedTimer: Timer) {
             updateListVisibility()
+            updateTotalTimerTime()
         }
 
         override fun onTimerAdded(updatedTimer: Timer) {

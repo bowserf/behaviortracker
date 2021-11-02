@@ -48,5 +48,7 @@ interface TimerContract {
         fun displayRewardsView()
 
         fun displayRemoveAllTimersConfirmationDialog()
+
+        fun updateTotalTime(totalTime: Long)
     }
 }
