@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -42,14 +43,32 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/create_timer_title_color"
+            <LinearLayout
+                android:id="@+id/create_timer_color_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginStart="@dimen/default_space_1_5"
                 android:layout_marginTop="@dimen/default_space"
                 android:layout_marginEnd="@dimen/default_space_1_5"
-                android:text="@string/create_timer_title_color" />
+                android:background="@drawable/bg_white_ripple"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/create_timer_color_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_timer_title_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/create_timer_color_container_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:src="@drawable/create_timer_content_show" />
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_colors"
@@ -58,6 +77,39 @@
                 android:layout_marginTop="@dimen/default_space"
                 android:layout_marginBottom="@dimen/default_space"
                 android:overScrollMode="never" />
+
+            <LinearLayout
+                android:id="@+id/create_timer_time_container"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/default_space_1_5"
+                android:layout_marginTop="@dimen/default_space"
+                android:layout_marginEnd="@dimen/default_space_1_5"
+                android:background="@drawable/bg_white_ripple"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/create_timer_time_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_timer_title_timer"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/create_timer_time_container_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:src="@drawable/create_timer_content_show" />
+
+            </LinearLayout>
+
+            <TimePicker
+                android:id="@+id/create_timer_time_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner" />
 
             <CheckBox
                 android:id="@+id/start_after_creation"

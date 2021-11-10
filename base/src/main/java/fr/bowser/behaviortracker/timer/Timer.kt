@@ -26,13 +26,14 @@ data class Timer(
     constructor(
         name: String,
         color: Int,
+        currentTime: Long = 0,
         creationDateTimestamp: Long = 0,
         lastUpdateTimestamp: Long = 0,
         position: Int = 0,
         isActivate: Boolean = false
     ) : this(
         0,
-        0,
+        currentTime,
         name,
         color,
         creationDateTimestamp,

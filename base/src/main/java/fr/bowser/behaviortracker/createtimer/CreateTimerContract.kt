@@ -8,11 +8,15 @@ interface CreateTimerContract {
 
         fun onStop()
 
-        fun createTimer(name: String, startNow: Boolean)
+        fun onClickCreateTimer(name: String, hour: Int, minute: Int, startNow: Boolean)
 
-        fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int)
+        fun onClickColor(oldSelectedPosition: Int, selectedPosition: Int)
 
         fun enablePomodoroMode(isPomodoro: Boolean)
+
+        fun onClickChangeColorState()
+
+        fun onClickChangeTimeState()
     }
 
     interface Screen {
@@ -24,5 +28,9 @@ interface CreateTimerContract {
         fun updateColorList(oldSelectedPosition: Int, selectedPosition: Int)
 
         fun fillColorList(colorPosition: Int)
+
+        fun updateContainerTimeState(isDisplay: Boolean)
+
+        fun updateContainerColorState(isDisplay: Boolean)
     }
 }

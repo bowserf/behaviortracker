@@ -2,15 +2,16 @@ package fr.bowser.behaviortracker.createtimer
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
@@ -33,6 +34,10 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
     private lateinit var chooseColor: RecyclerView
     private lateinit var startNow: CheckBox
     private lateinit var editTimerNameLayout: TextInputLayout
+    private lateinit var timerPicker: TimePicker
+
+    private lateinit var timeStateImg: ImageView
+    private lateinit var colorStateImg: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +58,8 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
         presenter.enablePomodoroMode(isPomodoro)
 
         initToolbar(view)
-        initSpinner(view)
+        initColorList(view)
+        initTimePicker(view)
         initUI(view, isPomodoro)
     }
 
@@ -76,7 +82,7 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
         super.onStop()
     }
 
-    private fun initSpinner(root: View) {
+    private fun initColorList(root: View) {
         chooseColor = root.findViewById(R.id.list_colors)
         chooseColor.layoutManager = GridLayoutManager(
             activity,
@@ -85,6 +91,18 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
             false
         )
         chooseColor.setHasFixedSize(true)
+    }
+
+    private fun initTimePicker(root: View) {
+        timerPicker = root.findViewById(R.id.create_timer_time_picker)
+        timerPicker.setIs24HourView(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            timerPicker.hour = 0
+            timerPicker.minute = 0
+        } else {
+            timerPicker.currentHour = 0
+            timerPicker.currentMinute = 0
+        }
     }
 
     private fun setupGraph() {
@@ -114,13 +132,20 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
     private fun initUI(root: View, isPomodoro: Boolean) {
         editTimerName = root.findViewById(R.id.creation_timer_name)
 
-        // methods to display keyboard and dselect edittext
+        // methods to display keyboard and focus edittext
         displayKeyboard()
 
         startNow = root.findViewById(R.id.start_after_creation)
         if (isPomodoro) {
             startNow.visibility = View.GONE
         }
+
+        root.findViewById<View>(R.id.create_timer_color_container)
+            .setOnClickListener { presenter.onClickChangeColorState() }
+        root.findViewById<View>(R.id.create_timer_time_container)
+            .setOnClickListener { presenter.onClickChangeTimeState() }
+        timeStateImg = root.findViewById(R.id.create_timer_time_container_status)
+        colorStateImg = root.findViewById(R.id.create_timer_color_container_status)
 
         editTimerNameLayout = root.findViewById(R.id.creation_timer_name_layout)
     }
@@ -144,8 +169,17 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
     }
 
     private fun saveTimer() {
+        val hour: Int
+        val minute: Int
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            hour = timerPicker.hour
+            minute = timerPicker.minute
+        } else {
+            hour = timerPicker.currentHour
+            minute = timerPicker.currentMinute
+        }
         val timerName = editTimerName.text.toString()
-        presenter.createTimer(timerName, startNow.isChecked)
+        presenter.onClickCreateTimer(timerName, hour, minute, startNow.isChecked)
     }
 
     private fun createScreen() = object : CreateTimerContract.Screen {
@@ -171,9 +205,19 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
                         oldSelectedPosition: Int,
                         selectedPosition: Int
                     ) {
-                        presenter.changeSelectedColor(oldSelectedPosition, selectedPosition)
+                        presenter.onClickColor(oldSelectedPosition, selectedPosition)
                     }
                 })
+        }
+
+        override fun updateContainerTimeState(isDisplay: Boolean) {
+            timerPicker.visibility = if (isDisplay) View.VISIBLE else View.GONE
+            timeStateImg.setImageResource(if (isDisplay) R.drawable.create_timer_content_show else R.drawable.create_timer_content_hidden)
+        }
+
+        override fun updateContainerColorState(isDisplay: Boolean) {
+            chooseColor.visibility = if (isDisplay) View.VISIBLE else View.GONE
+            colorStateImg.setImageResource(if (isDisplay) R.drawable.create_timer_content_show else R.drawable.create_timer_content_hidden)
         }
     }
 

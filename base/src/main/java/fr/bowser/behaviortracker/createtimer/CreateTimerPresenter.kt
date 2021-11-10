@@ -21,35 +21,43 @@ class CreateTimerPresenter(
 
     private var isPomodoroMode = false
 
+    private var isColorDisplayed = false
+
+    private var isTimeDisplayed = false
+
     init {
         colorPosition = computeSelectedColorPosition()
     }
 
     override fun onStart() {
         screen.fillColorList(colorPosition)
+        screen.updateContainerColorState(isColorDisplayed)
+        screen.updateContainerTimeState(isTimeDisplayed)
     }
 
     override fun onStop() {
         // nothing to do
     }
 
-    override fun changeSelectedColor(oldSelectedPosition: Int, selectedPosition: Int) {
+    override fun onClickColor(oldSelectedPosition: Int, selectedPosition: Int) {
         colorPosition = selectedPosition
         screen.updateColorList(oldSelectedPosition, selectedPosition)
     }
 
-    override fun createTimer(name: String, startNow: Boolean) {
+    override fun onClickCreateTimer(name: String, hour: Int, minute: Int, startNow: Boolean) {
         if (name.isEmpty()) {
             screen.displayNameError()
             return
         }
 
-        val currentTime = timeProvider.getCurrentTimeMs()
+        val currentTime = (hour * 3600 + minute * 60).toLong()
+        val createDateTimestamp = timeProvider.getCurrentTimeMs()
         val timer = Timer(
             name,
             ColorUtils.convertPositionToColor(colorPosition),
-            currentTime,
-            currentTime
+            currentTime = currentTime,
+            creationDateTimestamp = createDateTimestamp,
+            lastUpdateTimestamp = createDateTimestamp
         )
         timerListManager.addTimer(timer)
 
@@ -64,6 +72,16 @@ class CreateTimerPresenter(
         }
 
         screen.exitViewAfterSucceedTimerCreation()
+    }
+
+    override fun onClickChangeColorState() {
+        isColorDisplayed = !isColorDisplayed
+        screen.updateContainerColorState(isColorDisplayed)
+    }
+
+    override fun onClickChangeTimeState() {
+        isTimeDisplayed = !isTimeDisplayed
+        screen.updateContainerTimeState(isTimeDisplayed)
     }
 
     override fun enablePomodoroMode(isPomodoro: Boolean) {
