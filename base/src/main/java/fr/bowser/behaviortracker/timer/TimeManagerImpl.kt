@@ -46,7 +46,9 @@ class TimeManagerImpl(
         addOn.onTimerStarted()
     }
 
-    override fun stopTimer(timer: Timer, fakeTimer: Boolean) {
+    override fun stopTimer(fakeTimer: Boolean) {
+        val timer = timer ?: return
+
         if (!timer.isActivate) {
             return
         }
@@ -92,11 +94,8 @@ class TimeManagerImpl(
         listeners.remove(listener)
     }
 
-    override fun stopStartedTimer() {
-        if (timer == null) {
-            return
-        }
-        val startedTimer = timer!!
+    private fun stopStartedTimer() {
+        val startedTimer = timer ?: return
         startedTimer.isActivate = false
         for (listener in listeners) {
             listener.onTimerStateChanged(startedTimer)

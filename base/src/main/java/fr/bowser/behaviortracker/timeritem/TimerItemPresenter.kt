@@ -117,7 +117,7 @@ class TimerItemPresenter(
         if (!timer.isActivate) {
             timeManager.startTimer(timer)
         } else {
-            timeManager.stopTimer(timer)
+            timeManager.stopTimer()
         }
     }
 

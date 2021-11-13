@@ -51,10 +51,10 @@ class TimerPresenter(
     }
 
     override fun onClickResetAllTimers() {
+        timeManager.stopTimer()
         val timers = timerListManager.getTimerList()
         timers.forEach { timer ->
             timeManager.updateTime(timer, 0f)
-            timeManager.stopTimer(timer)
         }
     }
 

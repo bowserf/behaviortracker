@@ -26,7 +26,7 @@ class ShowModeTimerViewPresenter(
 
     override fun onClickView() {
         if (timer.isActivate) {
-            timeManager.stopTimer(timer)
+            timeManager.stopTimer()
         } else {
             timeManager.startTimer(timer)
         }

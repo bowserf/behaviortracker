@@ -38,7 +38,9 @@ class TimerListManagerImpl(
     }
 
     override fun removeTimer(oldTimer: Timer) {
-        timeManager.stopTimer(oldTimer)
+        if (timeManager.getStartedTimer() == oldTimer) {
+            timeManager.stopTimer()
+        }
 
         timers.remove(oldTimer)
         for (listener in listeners) {
@@ -55,9 +57,8 @@ class TimerListManagerImpl(
         GlobalScope.launch(background) {
             timerDAO.removeAllTimers()
             withContext(Dispatchers.Main) {
+                timeManager.stopTimer()
                 timers.toList().forEach { oldTimer ->
-                    timeManager.stopTimer(oldTimer)
-
                     timers.remove(oldTimer)
                     for (listener in listeners) {
                         listener.onTimerRemoved(oldTimer)

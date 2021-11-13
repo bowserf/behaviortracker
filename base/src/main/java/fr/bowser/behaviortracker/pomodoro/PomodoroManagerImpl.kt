@@ -108,14 +108,14 @@ class PomodoroManagerImpl(
             return
         }
         isRunning = false
-        timeManager.stopTimer(currentTimer!!)
+        timeManager.stopTimer()
     }
 
     override fun stop() {
         if (!isStarted) {
             return
         }
-        timeManager.stopTimer(currentTimer!!)
+        timeManager.stopTimer()
         isStarted = false
         isPendingState = false
         isRunning = false
@@ -158,7 +158,7 @@ class PomodoroManagerImpl(
                     return
                 }
 
-                timeManager.stopTimer(currentTimer!!)
+                timeManager.stopTimer()
 
                 if (currentTimer == actionTimer) {
                     currentTimer = pauseTimer
