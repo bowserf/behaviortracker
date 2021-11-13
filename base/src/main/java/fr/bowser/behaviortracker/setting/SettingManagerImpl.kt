@@ -12,8 +12,6 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
 
     private var timeModification: Int
 
-    private var oneActiveTimerAtATime: Boolean
-
     private var pomodoroVibrationEnable: Boolean
 
     private var pomodoroPauseStep: Int
@@ -29,11 +27,6 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
         timeModification = sharedPreferences.getInt(
             context.getString(R.string.pref_key_time_modification),
             context.resources.getInteger(R.integer.settings_default_value_time_modification_seconds)
-        )
-
-        oneActiveTimerAtATime = sharedPreferences.getBoolean(
-            context.getString(R.string.pref_key_one_active_timer),
-            false
         )
 
         pomodoroVibrationEnable = sharedPreferences.getBoolean(
@@ -63,9 +56,6 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
                 )
                 timerModificationListener.forEach { it.onTimerModificationChanged(timeModification) }
             }
-            context.getString(R.string.pref_key_one_active_timer) -> {
-                oneActiveTimerAtATime = sharedPreferences.getBoolean(key, false)
-            }
             context.getString(R.string.pref_key_pomodoro_vibration) -> {
                 pomodoroVibrationEnable = sharedPreferences.getBoolean(key, true)
             }
@@ -94,10 +84,6 @@ class SettingManagerImpl(private val context: Context) : SettingManager,
 
     override fun getTimerModification(): Int {
         return timeModification
-    }
-
-    override fun isOneActiveTimerAtATime(): Boolean {
-        return oneActiveTimerAtATime
     }
 
     override fun isPomodoroVibrationEnable(): Boolean {

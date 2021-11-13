@@ -1,7 +1,6 @@
 package fr.bowser.behaviortracker.timer
 
 import android.os.Handler
-import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.time.TimeProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -9,7 +8,6 @@ import kotlinx.coroutines.newFixedThreadPoolContext
 
 class TimeManagerImpl(
     private val timerDAO: TimerDAO,
-    private val settingManager: SettingManager,
     private val timeProvider: TimeProvider,
     private val handler: Handler?
 ) : TimeManager {
@@ -22,16 +20,14 @@ class TimeManagerImpl(
 
     private val timerRunnable = TimerRunnable()
 
-    private val timerList = ArrayList<Timer>()
+    private var timer: Timer? = null
 
     override fun startTimer(timer: Timer, fakeTimer: Boolean) {
         if (timer.isActivate) {
             return
         }
 
-        if (settingManager.isOneActiveTimerAtATime()) {
-            stopAllRunningTimers()
-        }
+        stopStartedTimer()
 
         lastUpdatedTime[timer] = getCurrentTimeSeconds()
 
@@ -42,12 +38,9 @@ class TimeManagerImpl(
             listener.onTimerStateChanged(timer)
         }
 
-        if (!timerList.contains(timer)) {
-            if (timerList.isEmpty()) { // start runnable
-                handler?.postDelayed(timerRunnable, DELAY)
-            }
-            timerList.add(timer)
-        }
+        handler?.postDelayed(timerRunnable, DELAY)
+
+        this.timer = timer
     }
 
     override fun stopTimer(timer: Timer, fakeTimer: Boolean) {
@@ -59,16 +52,11 @@ class TimeManagerImpl(
 
         updateLastUpdateTimestamp(timer, fakeTimer)
 
-        timer.isActivate = false
-        for (listener in listeners) {
-            listener.onTimerStateChanged(timer)
-        }
+        stopStartedTimer()
+    }
 
-        timerList.remove(timer)
-
-        if (timerList.isEmpty()) {
-            handler?.removeCallbacks(timerRunnable)
-        }
+    override fun getStartedTimer(): Timer? {
+        return timer
     }
 
     override fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean) {
@@ -101,14 +89,18 @@ class TimeManagerImpl(
         listeners.remove(listener)
     }
 
-    override fun stopAllRunningTimers() {
-        for (timerToStop in timerList) {
-            timerToStop.isActivate = false
-            for (listener in listeners) {
-                listener.onTimerStateChanged(timerToStop)
-            }
+    override fun stopStartedTimer() {
+        if (timer == null) {
+            return
         }
-        timerList.clear()
+        val startedTimer = timer!!
+        startedTimer.isActivate = false
+        for (listener in listeners) {
+            listener.onTimerStateChanged(startedTimer)
+        }
+
+        this.timer = null
+
         handler?.removeCallbacks(timerRunnable)
     }
 
@@ -131,17 +123,11 @@ class TimeManagerImpl(
 
     inner class TimerRunnable : Runnable {
         override fun run() {
-            // protection to stop runnable if list is empty
-            if (timerList.isEmpty()) {
-                return
-            }
-
+            val timer = this@TimeManagerImpl.timer ?: return
             val currentTime = getCurrentTimeSeconds()
-            timerList.forEach {
-                val diff = currentTime - lastUpdatedTime[it]!!
-                updateTime(it, it.time + diff)
-                lastUpdatedTime[it] = currentTime
-            }
+            val diff = currentTime - lastUpdatedTime[timer]!!
+            updateTime(timer, timer.time + diff)
+            lastUpdatedTime[timer] = currentTime
 
             handler?.postDelayed(this, DELAY)
         }

@@ -14,12 +14,10 @@ class TimeManagerModule {
     @Provides
     fun provideTimeManager(
         timerDAO: TimerDAO,
-        settingManager: SettingManager,
         timeProvider: TimeProvider
     ): TimeManager {
         return TimeManagerImpl(
             timerDAO,
-            settingManager,
             timeProvider,
             Handler()
         )

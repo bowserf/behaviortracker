@@ -29,14 +29,6 @@ class SettingPresenter(
                 stringManager.getString(R.string.pref_key_time_modification) -> {
                     eventManager.sendNewTimeFixTimerDurationEvent(sharedPreferences.getInt(key, -1))
                 }
-                stringManager.getString(R.string.pref_key_one_active_timer) -> {
-                    eventManager.sendExclusiveTimerModeEvent(
-                        sharedPreferences.getBoolean(
-                            key,
-                            false
-                        )
-                    )
-                }
             }
         }
 }

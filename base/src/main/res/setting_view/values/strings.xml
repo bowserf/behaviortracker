@@ -8,7 +8,6 @@
 
     <!-- SharedPreferences keys -->
     <string name="pref_key_time_modification" translatable="false">pref_key_time_modification</string>
-    <string name="pref_key_one_active_timer" translatable="false">pref_key_one_active_timer</string>
     <string name="pref_key_send_commentary" translatable="false">pref_key_send_commentary</string>
     <string name="pref_key_pomodoro_vibration" translatable="false">pref_key_pomodoro_vibration</string>
     <string name="pref_key_pomodoro_stage" translatable="false">pref_key_pomodoro_stage</string>

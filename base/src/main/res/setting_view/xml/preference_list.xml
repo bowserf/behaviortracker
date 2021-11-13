@@ -14,12 +14,6 @@
             android:defaultValue="@integer/settings_default_value_time_modification_seconds"
             android:title="@string/settings_cell_time_modification_title" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="@string/pref_key_one_active_timer"
-            android:summary="@string/settings_cell_one_active_message"
-            android:title="@string/settings_cell_one_active_timer" />
-
     </PreferenceCategory>
 
     <PreferenceCategory

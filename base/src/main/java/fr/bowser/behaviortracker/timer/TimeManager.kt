@@ -6,13 +6,15 @@ interface TimeManager {
 
     fun stopTimer(timer: Timer, fakeTimer: Boolean = false)
 
+    fun getStartedTimer(): Timer?
+
     fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean = false)
 
     fun addListener(listener: Listener): Boolean
 
     fun removeListener(listener: Listener)
 
-    fun stopAllRunningTimers()
+    fun stopStartedTimer()
 
     interface Listener {
         fun onTimerStateChanged(updatedTimer: Timer)

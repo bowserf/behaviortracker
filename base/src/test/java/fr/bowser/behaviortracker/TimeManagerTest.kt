@@ -19,12 +19,9 @@ class TimeManagerTest {
     @Mock
     private lateinit var timerDao: TimerDAO
 
-    @Mock
-    private lateinit var settingManager: SettingManager
-
     @Test
     fun startTimer() {
-        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
+        val timeManager = TimeManagerImpl(timerDao, null)
 
         val timerState = Timer("MyTimer", Color.RED)
 
@@ -35,7 +32,7 @@ class TimeManagerTest {
 
     @Test
     fun startTimerListener() {
-        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
+        val timeManager = TimeManagerImpl(timerDao, null)
 
         val timerState = Timer("MyTimer", Color.RED)
 
@@ -60,7 +57,7 @@ class TimeManagerTest {
 
     @Test
     fun stopTimer() {
-        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
+        val timeManager = TimeManagerImpl(timerDao, null)
 
         val timerState = Timer("MyTimer", Color.RED, isActivate = true)
 
@@ -71,7 +68,7 @@ class TimeManagerTest {
 
     @Test
     fun stopTimerListener() {
-        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
+        val timeManager = TimeManagerImpl(timerDao, null)
 
         val timerState = Timer("MyTimer", Color.RED, isActivate = true)
 
@@ -96,14 +93,10 @@ class TimeManagerTest {
 
     @Test
     fun stopRunningTimerWhenStartANewOne() {
-        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
-
-        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(false)
+        val timeManager = TimeManagerImpl(timerDao, null)
 
         val timer1 = Timer("MyTimer1", Color.RED)
         timeManager.startTimer(timer1)
-
-        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(true)
 
         val timer2 = Timer("MyTimer2", Color.BLUE)
         timeManager.startTimer(timer2)
@@ -114,14 +107,10 @@ class TimeManagerTest {
 
     @Test
     fun stopRunningTimerWhenStartANewOneListener() {
-        val timeManager = TimeManagerImpl(timerDao, settingManager, null)
-
-        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(false)
+        val timeManager = TimeManagerImpl(timerDao, null)
 
         val timer1 = Timer("MyTimer1", Color.RED)
         timeManager.startTimer(timer1)
-
-        `when`(settingManager.isOneActiveTimerAtATime()).thenReturn(true)
 
         val timer2 = Timer("MyTimer2", Color.BLUE)
 

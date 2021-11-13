@@ -4,8 +4,6 @@ interface SettingManager {
 
     fun getTimerModification(): Int
 
-    fun isOneActiveTimerAtATime(): Boolean
-
     fun isPomodoroVibrationEnable(): Boolean
 
     fun getPomodoroPauseStepDuration(): Long

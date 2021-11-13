@@ -6,7 +6,7 @@
     <string name="timer_list_remove_all_timers_title">Remove all timers</string>
     <string name="timer_list_remove_all_timers_message">Are you sure you want to remove all timers?</string>
     <string name="timer_list_section_inactive_title">Timers</string>
-    <string name="timer_list_section_active_title">Active timers</string>
+    <string name="timer_list_section_active_title">Active timer</string>
     <string name="timer_list_total_time">Total time: %1$s</string>
 
 </resources>
