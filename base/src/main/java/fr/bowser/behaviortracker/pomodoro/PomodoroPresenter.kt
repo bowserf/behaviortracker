@@ -1,13 +1,14 @@
 package fr.bowser.behaviortracker.pomodoro
 
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 
 class PomodoroPresenter(
     private val screen: PomodoroContract.Screen,
     private val pomodoroManager: PomodoroManager,
     private val doNotDisturbManager: DoNotDisturbManager,
-    override val timerList: List<Timer>,
+    private val timerListManager: TimerListManager,
     private val isInstantApp: Boolean
 ) : PomodoroContract.Presenter {
 
@@ -21,7 +22,7 @@ class PomodoroPresenter(
         doNotDisturbManager.addListener(doNotDisturbListener)
 
         if (configuration.displaySelectTimer) {
-            screen.displayChoosePomodoroTimer()
+            displayChoosePomodoroTimerIfPossible()
         }
 
         if (pomodoroManager.currentTimer != null) {
@@ -60,11 +61,7 @@ class PomodoroPresenter(
             return
         }
 
-        if (timerList.isEmpty()) {
-            screen.displayNoTimerAvailable()
-        } else {
-            screen.displayChoosePomodoroTimer()
-        }
+        displayChoosePomodoroTimerIfPossible()
     }
 
     override fun onClickChangePomodoroState() {
@@ -108,6 +105,14 @@ class PomodoroPresenter(
 
     override fun onClickDoNotDisturbDialogOpenSettings() {
         doNotDisturbManager.askPermissionIfNeeded()
+    }
+
+    private fun displayChoosePomodoroTimerIfPossible() {
+        if (timerListManager.getTimerList().isEmpty()) {
+            screen.displayNoTimerAvailable()
+        } else {
+            screen.displayChoosePomodoroTimer()
+        }
     }
 
     private fun updatePomodoroState() {

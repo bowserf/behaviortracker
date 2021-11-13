@@ -22,7 +22,7 @@ class PomodoroModule(private val pomodoroScreen: PomodoroContract.Screen) {
             pomodoroScreen,
             pomodoroManager,
             doNotDisturbManager,
-            timerListManager.getTimerList(),
+            timerListManager,
             instantAppManager.isInstantApp()
         )
     }

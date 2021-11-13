@@ -6,8 +6,6 @@ interface PomodoroContract {
 
     interface Presenter {
 
-        val timerList: List<Timer>
-
         fun onStart(configuration: Configuration)
 
         fun onStop()
