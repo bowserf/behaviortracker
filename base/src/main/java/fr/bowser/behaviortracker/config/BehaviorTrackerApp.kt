@@ -7,10 +7,12 @@ import com.google.android.gms.common.wrappers.InstantApps
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import fr.bowser.behaviortracker.BuildConfig
+import fr.bowser.behaviortracker.alarm.AlarmNotification
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
 import fr.bowser.behaviortracker.app_initialization.AppInitializationProviderHelper
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
 import fr.bowser.feature.alarm.AlarmGraph
+import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbGraph
 
 class BehaviorTrackerApp : Application() {
@@ -42,6 +44,8 @@ class BehaviorTrackerApp : Application() {
         setupFirebaseAnalytics()
 
         setupInAppManager()
+
+        setupAlarmListener()
     }
 
     private fun setupInAppManager() {
@@ -75,6 +79,15 @@ class BehaviorTrackerApp : Application() {
         if (BuildConfig.UA) {
             AlarmGraph.inject(AlarmStorageManagerModuleUA())
         }
+    }
+
+    private fun setupAlarmListener() {
+        val alarmTimerManager = appComponent.provideAlarmTimerManager()
+        alarmTimerManager.addListener(object : AlarmTimerManager.Listener {
+            override fun onAlarmTriggered() {
+                AlarmNotification.displayAlarmNotif(this@BehaviorTrackerApp)
+            }
+        })
     }
 
     private fun setupFirebaseAnalytics() {
