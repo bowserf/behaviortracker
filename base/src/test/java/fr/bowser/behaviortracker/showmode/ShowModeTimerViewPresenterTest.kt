@@ -85,6 +85,6 @@ class ShowModeTimerViewPresenterTest {
         presenter.onClickView()
 
         // Then
-        Mockito.verify(timeManager).stopTimer(timer)
+        Mockito.verify(timeManager).stopTimer()
     }
 }

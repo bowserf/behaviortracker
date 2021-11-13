@@ -1,10 +1,13 @@
 package fr.bowser.behaviortracker.inapp
 
+import androidx.test.runner.AndroidJUnit4
 import com.android.billingclient.api.SkuDetails
 import org.json.JSONObject
 import org.junit.Assert
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class InAppRepositoryImplTest {
 
     @Test
@@ -14,7 +17,7 @@ class InAppRepositoryImplTest {
             "sku", "name", "description", "0.99 €",
             "feature"
         )
-        val sharedPreference = HashMapSharedPreference()
+        val sharedPreference = HashMapSharedPreferenceConnected()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
         val list = mutableListOf<SkuDetails>()
         val jsonObject = JSONObject()
@@ -41,7 +44,7 @@ class InAppRepositoryImplTest {
     @Test
     fun restore() {
         // Given
-        val sharedPreference = HashMapSharedPreference()
+        val sharedPreference = HashMapSharedPreferenceConnected()
         val set = mutableSetOf<String>()
         set.add(
             InApp(
@@ -76,7 +79,7 @@ class InAppRepositoryImplTest {
             "sku1", "name1", "description1",
             "0.99 €", "feature"
         )
-        val sharedPreference = HashMapSharedPreference()
+        val sharedPreference = HashMapSharedPreferenceConnected()
         val inAppRepositoryImpl = InAppRepositoryImpl(sharedPreference, listOf(inAppConfig))
 
         // When

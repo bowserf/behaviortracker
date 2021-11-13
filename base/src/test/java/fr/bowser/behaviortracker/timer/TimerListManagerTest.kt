@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker
+package fr.bowser.behaviortracker.timer
 
 import android.graphics.Color
 import fr.bowser.behaviortracker.timer.TimeManager

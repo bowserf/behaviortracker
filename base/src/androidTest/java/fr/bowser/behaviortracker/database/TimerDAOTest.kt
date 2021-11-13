@@ -1,9 +1,8 @@
-package fr.bowser.behaviortracker
+package fr.bowser.behaviortracker.database
 
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import fr.bowser.behaviortracker.database.DatabaseProvider
 import fr.bowser.behaviortracker.timer.Timer
 import org.junit.After
 import org.junit.Assert

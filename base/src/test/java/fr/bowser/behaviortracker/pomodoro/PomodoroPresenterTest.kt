@@ -1,6 +1,8 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import android.graphics.Color
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.MockitoUtils.any
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
@@ -22,27 +24,48 @@ class PomodoroPresenterTest {
     @Mock
     private lateinit var manager: PomodoroManager
 
+    @Mock
+    private lateinit var timerListManager: TimerListManager
+
     @Test
     fun restoreCurrentTimerIfPomodoroIsRunning() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
+        val presenter = PomodoroPresenter(
+            screen,
+            manager,
+            doNotDisturbManager,
+            timerListManager,
+            false
+        )
         val timer = Timer("name", ColorUtils.COLOR_AMBER)
+        val pomodoroConfiguration = PomodoroContract.Configuration(false)
         Mockito.`when`(manager.currentTimer).thenReturn(timer)
+        Mockito.`when`(doNotDisturbManager.getDnDState())
+            .thenReturn(DoNotDisturbManager.DnDState.ALL)
 
         // When
-        presenter.onStart()
+        presenter.onStart(pomodoroConfiguration)
 
         // Then
         Mockito.verify(screen).updatePomodoroTimer(any(), Mockito.anyLong(), Mockito.anyLong())
     }
 
     @Test
-    fun displayEmptyViewWhenStartAndNoSessionIsActivte() {
+    fun displayEmptyViewWhenStartAndNoSessionIsActive() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
+        val presenter = PomodoroPresenter(
+            screen,
+            manager,
+            doNotDisturbManager,
+            timerListManager,
+            false
+        )
+        val pomodoroConfiguration = PomodoroContract.Configuration(false)
+        Mockito.`when`(doNotDisturbManager.getDnDState())
+            .thenReturn(DoNotDisturbManager.DnDState.ALL)
 
         // When
-        presenter.onStart()
+        presenter.onStart(pomodoroConfiguration)
 
         // Then
         Mockito.verify(screen).displayEmptyView()
@@ -51,11 +74,20 @@ class PomodoroPresenterTest {
     @Test
     fun displayPomodoroDialogIfAStepIfFinishedAndUserGoBackToTheView() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
+        val presenter = PomodoroPresenter(
+            screen,
+            manager,
+            doNotDisturbManager,
+            timerListManager,
+            false
+        )
+        val pomodoroConfiguration = PomodoroContract.Configuration(false)
         Mockito.`when`(manager.isPendingState).thenReturn(true)
+        Mockito.`when`(doNotDisturbManager.getDnDState())
+            .thenReturn(DoNotDisturbManager.DnDState.ALL)
 
         // When
-        presenter.onStart()
+        presenter.onStart(pomodoroConfiguration)
 
         // Then
         Mockito.verify(screen).displayPomodoroDialog()
@@ -65,8 +97,15 @@ class PomodoroPresenterTest {
     fun onClickFabDisplayChoosePomodoroTimer() {
         // Given
         val timer = Timer("name", ColorUtils.COLOR_AMBER)
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(timer), false)
+        val presenter = PomodoroPresenter(
+            screen,
+            manager,
+            doNotDisturbManager,
+            timerListManager,
+            false
+        )
         Mockito.`when`(manager.isStarted).thenReturn(false)
+        Mockito.`when`(timerListManager.getTimerList()).thenReturn(listOf(timer))
 
         // When
         presenter.onClickStartSession()
@@ -78,7 +117,13 @@ class PomodoroPresenterTest {
     @Test
     fun onClickFabDisplayNoTimerAvailable() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
+        val presenter = PomodoroPresenter(
+            screen,
+            manager,
+            doNotDisturbManager,
+            timerListManager,
+            false
+        )
         Mockito.`when`(manager.isStarted).thenReturn(false)
 
         // When
@@ -89,37 +134,19 @@ class PomodoroPresenterTest {
     }
 
     @Test
-    fun onClickFabPausePomodoro() {
-        // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
-        Mockito.`when`(manager.isStarted).thenReturn(true)
-        Mockito.`when`(manager.isRunning).thenReturn(true)
-
-        // When
-        presenter.onClickStartSession()
-
-        // Then
-        Mockito.verify(manager).pause()
-    }
-
-    @Test
-    fun onClickFabResumePomodoro() {
-        // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
-        Mockito.`when`(manager.isStarted).thenReturn(true)
-        Mockito.`when`(manager.isRunning).thenReturn(false)
-
-        // When
-        presenter.onClickStartSession()
-
-        // Then
-        Mockito.verify(manager).resume()
-    }
-
-    @Test
     fun onClickStopPomodoro() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
+        val presenter = PomodoroPresenter(
+            screen,
+            manager,
+            doNotDisturbManager,
+            timerListManager,
+            false
+        )
+        Mockito.`when`(doNotDisturbManager.getDnDState())
+            .thenReturn(DoNotDisturbManager.DnDState.ALL)
+        val pomodoroConfiguration = PomodoroContract.Configuration(false)
+        presenter.onStart(pomodoroConfiguration)
 
         // When
         presenter.onClickStopPomodoro()
@@ -132,7 +159,13 @@ class PomodoroPresenterTest {
     @Test
     fun onClickCreateTimerDisplayDialog() {
         // Given
-        val presenter = PomodoroPresenter(screen, manager, doNotDisturbManager, listOf(), false)
+        val presenter = PomodoroPresenter(
+            screen,
+            manager,
+            doNotDisturbManager,
+            timerListManager,
+            false
+        )
 
         // When
         presenter.onClickCreateTimer()
