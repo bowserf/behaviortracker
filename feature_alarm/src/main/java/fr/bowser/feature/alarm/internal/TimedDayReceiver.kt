@@ -9,10 +9,8 @@ internal class TimedDayReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         // set a new timer
-        val alarmStorageManager =
-                AlarmGraph.getAlarmStorageManager()
-        val alarmTimerManager =
-                AlarmGraph.getAlarmTimerManager()
+        val alarmStorageManager = AlarmGraph.getAlarmStorageManager()
+        val alarmTimerManager = AlarmGraph.getAlarmTimerManager()
         val alarmListenerManager = AlarmGraphInternal.getAlarmListenerManager()
 
         alarmListenerManager.notifyAlarmTriggered()

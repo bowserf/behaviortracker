@@ -10,12 +10,12 @@ import android.os.Build
 import fr.bowser.feature.alarm.AlarmStorageManager
 import fr.bowser.feature.alarm.AlarmTime
 import fr.bowser.feature.alarm.AlarmTimerManager
-import java.util.*
+import java.util.Calendar
 
 internal class AlarmTimerManagerImpl(
-        private val context: Context,
-        private val alarmStorageManager: AlarmStorageManager,
-        private val alarmListenerManager: AlarmListenerManager
+    private val context: Context,
+    private val alarmStorageManager: AlarmStorageManager,
+    private val alarmListenerManager: AlarmListenerManager
 ) : AlarmTimerManager {
 
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -40,9 +40,9 @@ internal class AlarmTimerManagerImpl(
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmIntent)
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.timeInMillis,
-                    alarmIntent
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                alarmIntent
             )
         }
 
@@ -88,9 +88,9 @@ internal class AlarmTimerManagerImpl(
     private fun changeDeviceBootReceiverStatus(context: Context, state: Int) {
         val receiver = ComponentName(context, DeviceBootReceiver::class.java)
         context.packageManager.setComponentEnabledSetting(
-                receiver,
-                state,
-                PackageManager.DONT_KILL_APP
+            receiver,
+            state,
+            PackageManager.DONT_KILL_APP
         )
     }
 

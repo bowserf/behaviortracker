@@ -126,10 +126,6 @@ class SettingFragment : PreferenceFragmentCompat() {
         false
     }
 
-    private fun createScreen() = object : SettingContract.Screen {
-
-    }
-
     companion object {
         const val SUPPORT_EMAIL = "torcheux.frederic@gmail.com"
         const val TIME_MODIFICATION_UNIT = "s"

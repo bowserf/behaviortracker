@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = InstantAppComponentImpl::class)
 @Component(
-        modules = [InstantAppManagerModule::class]
+    modules = [InstantAppManagerModule::class]
 )
 interface InstantAppComponentImpl : InstantAppComponent {
 

@@ -38,7 +38,6 @@ class AppInitializationImpl(
             override fun onCountFinished(newTimer: Timer, duration: Long) {
                 PomodoroAppWidgetProvider.update(context)
             }
-
         }
     }
 }

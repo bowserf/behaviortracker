@@ -5,8 +5,6 @@ import dagger.BindsInstance
 import dagger.Component
 import fr.bowser.behaviortracker.app_initialization.AppInitialization
 import fr.bowser.behaviortracker.app_initialization.AppInitializationComponent
-import fr.bowser.behaviortracker.config.BehaviorTrackerAppComponent
-import fr.bowser.behaviortracker.instantapp.InstantAppComponent
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @GenericScope(component = AppInitializationComponentImpl::class)

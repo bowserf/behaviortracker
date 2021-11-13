@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.instantapp.app_initialization
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.app_initialization.AppInitialization

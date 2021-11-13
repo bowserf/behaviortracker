@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.pomodoro
 
-import android.graphics.Color
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.ColorUtils

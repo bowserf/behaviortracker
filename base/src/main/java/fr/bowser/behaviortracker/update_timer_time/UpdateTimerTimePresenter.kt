@@ -1,7 +1,6 @@
 package fr.bowser.behaviortracker.update_timer_time
 
 import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class UpdateTimerTimePresenter(

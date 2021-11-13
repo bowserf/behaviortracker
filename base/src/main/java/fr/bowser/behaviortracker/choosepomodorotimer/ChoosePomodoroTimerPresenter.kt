@@ -8,7 +8,7 @@ class ChoosePomodoroTimerPresenter(
     private val screen: ChoosePomodoroTimerContract.Screen,
     private val timerListManager: TimerListManager,
     private val pomodoroManager: PomodoroManager
-): ChoosePomodoroTimerContract.Presenter {
+) : ChoosePomodoroTimerContract.Presenter {
 
     override fun onStart() {
         val timerList = timerListManager.getTimerList()

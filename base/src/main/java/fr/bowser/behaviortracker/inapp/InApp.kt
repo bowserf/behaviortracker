@@ -52,7 +52,7 @@ data class InApp(
             } catch (e: JSONException) {
                 throw IllegalStateException(
                     "Error when trying to convert JSON to" +
-                            "InApp : " + e.message
+                        "InApp : " + e.message
                 )
             }
         }

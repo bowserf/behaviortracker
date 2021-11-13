@@ -10,7 +10,6 @@ import android.os.Build
 import android.provider.Settings
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 
-
 internal class DoNotDisturbManagerImpl(
     private val context: Context
 ) : DoNotDisturbListenerManager {
@@ -49,8 +48,8 @@ internal class DoNotDisturbManagerImpl(
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return DoNotDisturbManager.DnDState.NOT_MANAGED
         }
-        return when (val currentInterruptionFilter =
-            notificationManager.currentInterruptionFilter) {
+        val currentInterruptionFilter = notificationManager.currentInterruptionFilter
+        return when (currentInterruptionFilter) {
             NotificationManager.INTERRUPTION_FILTER_NONE -> DoNotDisturbManager.DnDState.NONE
             NotificationManager.INTERRUPTION_FILTER_ALL -> DoNotDisturbManager.DnDState.ALL
             NotificationManager.INTERRUPTION_FILTER_PRIORITY -> DoNotDisturbManager.DnDState.PRIORITY

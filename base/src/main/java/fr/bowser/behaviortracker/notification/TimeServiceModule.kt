@@ -33,9 +33,7 @@ class TimeServiceModule(private val screen: TimeContract.Screen) {
         return object : TimeServicePresenter.AddOn {
             override fun getNotificationName(timerName: String): String {
                 return context.resources.getString(R.string.pomodoro_title, timerName)
-
             }
-
         }
     }
 }

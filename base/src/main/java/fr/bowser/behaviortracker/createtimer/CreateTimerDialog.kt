@@ -207,7 +207,8 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
                     ) {
                         presenter.onClickColor(oldSelectedPosition, selectedPosition)
                     }
-                })
+                }
+            )
         }
 
         override fun updateContainerTimeState(isDisplay: Boolean) {

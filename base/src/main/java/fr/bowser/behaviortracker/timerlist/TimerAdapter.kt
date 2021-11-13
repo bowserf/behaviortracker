@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timeritem.TimerRowView
-import java.util.Collections
 
 class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 

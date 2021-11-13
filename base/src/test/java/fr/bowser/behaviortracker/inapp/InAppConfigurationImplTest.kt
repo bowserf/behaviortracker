@@ -59,23 +59,23 @@ class InAppConfigurationImplTest {
 
     private fun fakeJson(): String {
         return "{\n" +
-                "  \"version\": \"1.0\",\n" +
-                "  \"in-apps\": [\n" +
-                "    {\n" +
-                "      \"identifier\": \"fr.bowser.behaviortrack.product.marshmallow\",\n" +
-                "      \"default_description\": \"Description in-app marshmallow\",\n" +
-                "      \"default_name\": \"Marshmallow\",\n" +
-                "      \"default_price\": 0.59 €,\n" +
-                "      \"feature\": \"marshmallow\"\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"identifier\": \"fr.bowser.behaviortrack.product.nougat\",\n" +
-                "      \"default_description\": \"Description in-app nougat\",\n" +
-                "      \"default_name\": \"Nougat\",\n" +
-                "      \"default_price\": 0.99 €,\n" +
-                "      \"feature\": \"nougat\"\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}"
+            "  \"version\": \"1.0\",\n" +
+            "  \"in-apps\": [\n" +
+            "    {\n" +
+            "      \"identifier\": \"fr.bowser.behaviortrack.product.marshmallow\",\n" +
+            "      \"default_description\": \"Description in-app marshmallow\",\n" +
+            "      \"default_name\": \"Marshmallow\",\n" +
+            "      \"default_price\": 0.59 €,\n" +
+            "      \"feature\": \"marshmallow\"\n" +
+            "    },\n" +
+            "    {\n" +
+            "      \"identifier\": \"fr.bowser.behaviortrack.product.nougat\",\n" +
+            "      \"default_description\": \"Description in-app nougat\",\n" +
+            "      \"default_name\": \"Nougat\",\n" +
+            "      \"default_price\": 0.99 €,\n" +
+            "      \"feature\": \"nougat\"\n" +
+            "    }\n" +
+            "  ]\n" +
+            "}"
     }
 }

@@ -2,9 +2,7 @@ package fr.bowser.behaviortracker.choosepomodorotimer
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -90,7 +88,8 @@ class ChoosePomodoroTimerDialog : DialogFragment(R.layout.fragment_choose_timer)
                         presenter.onTimerChose(timer)
                         dismiss()
                     }
-                })
+                }
+            )
         }
     }
 

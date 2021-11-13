@@ -45,15 +45,15 @@ data class Timer(
 
     override fun equals(other: Any?): Boolean {
         if (other is Timer) {
-            if (other.id == id
-                && other.color == color
-                && other.isActivate == isActivate
-                && other.currentTime == currentTime
-                && other.name == name
-                && other.time == time
-                && other.creationDateTimestamp == creationDateTimestamp
-                && other.lastUpdateTimestamp == lastUpdateTimestamp
-                && other.position == position
+            if (other.id == id &&
+                other.color == color &&
+                other.isActivate == isActivate &&
+                other.currentTime == currentTime &&
+                other.name == name &&
+                other.time == time &&
+                other.creationDateTimestamp == creationDateTimestamp &&
+                other.lastUpdateTimestamp == lastUpdateTimestamp &&
+                other.position == position
             ) {
                 return true
             }

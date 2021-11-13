@@ -11,10 +11,6 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
-val ktlint by configurations.creating
-
-val buildType: String? by project
-
 android {
     compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
 
@@ -150,9 +146,6 @@ dependencies {
     implementation("com.hannesdorfmann:adapterdelegates4:4.3.0")
     implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0")
 
-    // Static analyzer
-    ktlint("com.github.shyiko:ktlint:0.31.0")
-
     // Test
     testImplementation("org.json:json:20180813")
     testImplementation("junit:junit:4.12")
@@ -177,13 +170,4 @@ detekt {
             destination = file("build/reports/detekt.html")
         }
     }
-}
-
-// ktlint configuration
-tasks.register<JavaExec>("ktlint") {
-    group = "verification"
-    description = "Check Kotlin code style."
-    classpath = ktlint
-    main = "com.github.shyiko.ktlint.Main"
-    args("--android", "src/**/*.kt")
 }

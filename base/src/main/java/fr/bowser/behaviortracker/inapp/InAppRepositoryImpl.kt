@@ -3,7 +3,6 @@ package fr.bowser.behaviortracker.inapp
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
 import com.android.billingclient.api.SkuDetails
-import java.util.*
 
 class InAppRepositoryImpl(
     private val sharedPreferences: SharedPreferences,
@@ -81,6 +80,7 @@ class InAppRepositoryImpl(
 
     companion object {
         const val SHARED_PREF_KEY = "in-app-details-storage"
+
         @VisibleForTesting
         const val IN_APP_DETAILS_KEY = "in_app_details_repository.key.details"
     }

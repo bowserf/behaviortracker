@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.rewardsrow
 
 import android.app.Activity
 import com.android.billingclient.api.SkuDetails
-import fr.bowser.behaviortracker.inapp.InApp
 
 interface RewardsRowContract {
 

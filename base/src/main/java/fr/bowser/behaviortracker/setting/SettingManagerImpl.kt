@@ -87,11 +87,15 @@ class SettingManagerImpl(
             }
         }
 
-    override fun registerTimerModificationListener(listener: SettingManager.TimerModificationListener) {
+    override fun registerTimerModificationListener(
+        listener: SettingManager.TimerModificationListener
+    ) {
         timerModificationListener.add(listener)
     }
 
-    override fun unregisterTimerModificationListener(listener: SettingManager.TimerModificationListener) {
+    override fun unregisterTimerModificationListener(
+        listener: SettingManager.TimerModificationListener
+    ) {
         timerModificationListener.remove(listener)
     }
 

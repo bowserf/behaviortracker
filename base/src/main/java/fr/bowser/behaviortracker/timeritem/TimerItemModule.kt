@@ -1,14 +1,11 @@
 package fr.bowser.behaviortracker.timeritem
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.notification.TimeService
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.time.TimeProvider
 import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
 

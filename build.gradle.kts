@@ -26,3 +26,29 @@ allprojects {
         jcenter()
     }
 }
+
+subprojects {
+    // KtLint - Static code analysis
+    // https://github.com/pinterest/ktlint/releases
+    val ktlint by configurations.creating
+
+    dependencies {
+        // KtLint - Static code analysis
+        // https://github.com/pinterest/ktlint/releases
+        ktlint("com.pinterest:ktlint:0.42.1") {
+            attributes {
+                attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+            }
+        }
+    }
+
+    // KtLint - Static code analysis
+    // https://github.com/pinterest/ktlint/releases
+    tasks.register<JavaExec>("ktlint") {
+        group = "verification"
+        description = "Check Kotlin code style."
+        classpath = ktlint
+        main = "com.pinterest.ktlint.Main"
+        args("--android", "src/**/*.kt")
+    }
+}

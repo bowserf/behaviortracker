@@ -47,7 +47,8 @@ import javax.inject.Singleton
         TimerListManagerModule::class,
         SettingManagerModule::class,
         StringManagerModule::class,
-    ), dependencies = [
+    ),
+    dependencies = [
         InstantAppComponent::class,
         AppInitializationComponent::class
     ]

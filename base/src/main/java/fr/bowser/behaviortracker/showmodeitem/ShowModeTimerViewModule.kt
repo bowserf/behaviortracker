@@ -1,11 +1,8 @@
 package fr.bowser.behaviortracker.showmodeitem
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.notification.TimeService
-import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module

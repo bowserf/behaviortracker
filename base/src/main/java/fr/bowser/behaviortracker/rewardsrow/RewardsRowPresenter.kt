@@ -17,11 +17,14 @@ class RewardsRowPresenter(
         } else {
             eventManager.sendClickBuyInAppEvent(skuDetails.sku)
 
-            inAppManager.purchase(skuDetails, object : InAppManager.ActivityContainer {
-                override fun get(): Activity {
-                    return screen.getActivity()
+            inAppManager.purchase(
+                skuDetails,
+                object : InAppManager.ActivityContainer {
+                    override fun get(): Activity {
+                        return screen.getActivity()
+                    }
                 }
-            })
+            )
         }
     }
 }

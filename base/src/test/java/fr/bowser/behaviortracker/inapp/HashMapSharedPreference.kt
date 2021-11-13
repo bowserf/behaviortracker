@@ -42,11 +42,15 @@ class HashMapSharedPreference : SharedPreferences {
         return MapEditor(map)
     }
 
-    override fun registerOnSharedPreferenceChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
+    override fun registerOnSharedPreferenceChangeListener(
+        listener: SharedPreferences.OnSharedPreferenceChangeListener
+    ) {
         // nothing to do
     }
 
-    override fun unregisterOnSharedPreferenceChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
+    override fun unregisterOnSharedPreferenceChangeListener(
+        listener: SharedPreferences.OnSharedPreferenceChangeListener
+    ) {
         // nothing to do
     }
 
@@ -97,7 +101,7 @@ class HashMapSharedPreference : SharedPreferences {
         }
 
         override fun apply() {
-
+            // nothing to do
         }
     }
 
