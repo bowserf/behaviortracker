@@ -113,7 +113,7 @@ class TimeManagerImpl(
     }
 
     private fun getCurrentTimeSeconds(): Long {
-        return System.currentTimeMillis() / 1000
+        return timeProvider.getCurrentTimeMs() / 1000
     }
 
     private fun updateLastUpdateTimestamp(
