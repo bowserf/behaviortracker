@@ -2,9 +2,9 @@ package fr.bowser.behaviortracker.timer
 
 import android.os.Handler
 import fr.bowser.behaviortracker.time.TimeProvider
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.newFixedThreadPoolContext
 
 class TimeManagerImpl(
     private val timerDAO: TimerDAO,
@@ -12,8 +12,6 @@ class TimeManagerImpl(
     private val handler: Handler?,
     private val addOn: AddOn
 ) : TimeManager {
-
-    internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
 
     private val listeners = ArrayList<TimeManager.Listener>()
 
@@ -73,7 +71,7 @@ class TimeManagerImpl(
         timer.time = currentNewTime
 
         if (!fakeTimer) {
-            GlobalScope.launch(background) {
+            GlobalScope.launch(Dispatchers.IO) {
                 timerDAO.updateTimerTime(timer.id, timer.time.toLong())
             }
         }
@@ -117,7 +115,7 @@ class TimeManagerImpl(
         val currentTime = timeProvider.getCurrentTimeMs()
         timer.lastUpdateTimestamp = currentTime
         if (!fakeTimer) {
-            GlobalScope.launch(background) {
+            GlobalScope.launch(Dispatchers.IO) {
                 timerDAO.updateLastUpdatedTimestamp(timer.id, currentTime)
             }
         }

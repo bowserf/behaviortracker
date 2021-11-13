@@ -6,7 +6,6 @@ import fr.bowser.behaviortracker.timer.TimerDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.withContext
 
 class TimerListManagerImpl(
@@ -14,14 +13,12 @@ class TimerListManagerImpl(
     private val timeManager: TimeManager
 ) : TimerListManager {
 
-    internal val background = newFixedThreadPoolContext(2, "bg")
-
     private val timers = ArrayList<Timer>()
 
     private val listeners = ArrayList<TimerListManager.Listener>()
 
     init {
-        GlobalScope.launch(background) {
+        GlobalScope.launch(Dispatchers.IO) {
             timers.addAll(timerDAO.getTimers())
         }
     }
@@ -35,7 +32,7 @@ class TimerListManagerImpl(
             listener.onTimerAdded(timer)
         }
 
-        GlobalScope.launch(background) {
+        GlobalScope.launch(Dispatchers.IO) {
             timer.id = timerDAO.addTimer(timer)
         }
     }
@@ -50,14 +47,14 @@ class TimerListManagerImpl(
             listener.onTimerRemoved(oldTimer)
         }
 
-        GlobalScope.launch(background) {
+        GlobalScope.launch(Dispatchers.IO) {
             timerDAO.removeTimer(oldTimer)
             reorderTimerList(timers)
         }
     }
 
     override fun removeAllTimers() {
-        GlobalScope.launch(background) {
+        GlobalScope.launch(Dispatchers.IO) {
             timerDAO.removeAllTimers()
             withContext(Dispatchers.Main) {
                 timeManager.stopTimer()
@@ -79,7 +76,7 @@ class TimerListManagerImpl(
 
         timers.sortBy { timer -> timer.position }
 
-        GlobalScope.launch(background) {
+        GlobalScope.launch(Dispatchers.IO) {
             for (timer in timerList) {
                 timerDAO.updateTimerPosition(timer.id, timer.position)
             }
@@ -96,7 +93,7 @@ class TimerListManagerImpl(
 
     override fun renameTimer(timer: Timer, newName: String) {
         timer.name = newName
-        GlobalScope.launch(background) {
+        GlobalScope.launch(Dispatchers.IO) {
             timerDAO.renameTimer(timer.id, newName)
         }
 
