@@ -63,8 +63,6 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        extractArgument()
-
         emptyContent = view.findViewById(R.id.pomodoro_content_empty)
         startSession = view.findViewById(R.id.pomodoro_choose_timer)
 
@@ -93,6 +91,7 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
         val bundle = arguments
         bundle?.let {
             val displaySelectTimer = it.getBoolean(EXTRA_KEY_DISPLAY_SELECT_TIMER, false)
+            bundle.clear()
             return PomodoroContract.Configuration(displaySelectTimer)
         }
         return PomodoroContract.Configuration(false)
