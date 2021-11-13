@@ -1,14 +1,14 @@
 import io.gitlab.arturbosch.detekt.detekt
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 val ktlint by configurations.creating
@@ -139,8 +139,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.1.0-alpha06")
 
     // Firebase
-    implementation("com.google.firebase:firebase-analytics:18.0.0")
-    implementation("com.google.firebase:firebase-crashlytics:17.2.2")
+    implementation(platform("com.google.firebase:firebase-bom:29.0.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     // Other
     implementation("com.google.dagger:dagger:2.39")
@@ -195,5 +196,3 @@ if (buildType == "CI") {
         }
     }
 }
-
-apply(mapOf("plugin" to "com.google.gms.google-services"))
