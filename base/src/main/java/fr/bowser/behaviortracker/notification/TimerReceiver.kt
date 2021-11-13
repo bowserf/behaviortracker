@@ -35,11 +35,16 @@ class TimerReceiver : BroadcastReceiver() {
     }
 
     private fun pauseTimer(context: Context) {
-        TimeService.pauseTimer(context)
+        val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
+        val startedTimer = timeManager.getStartedTimer() ?: return
+        timeManager.stopTimer(startedTimer)
     }
 
     private fun startTimer(context: Context) {
-        TimeService.resumeTimer(context)
+        val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
+        val timerListManager = BehaviorTrackerApp.getAppComponent(context).provideTimerListManager()
+        val startedTimer = timerListManager.getTimerList().maxByOrNull { it.lastUpdateTimestamp }!!
+        timeManager.startTimer(startedTimer)
     }
 
     companion object {

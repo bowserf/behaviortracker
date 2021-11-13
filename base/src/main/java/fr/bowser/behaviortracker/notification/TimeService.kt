@@ -35,7 +35,9 @@ class TimeService : Service(), TimeContract.Screen {
     override fun onCreate() {
         super.onCreate()
 
-        notificationManager = baseContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager = baseContext.getSystemService(
+            Context.NOTIFICATION_SERVICE
+        ) as NotificationManager
 
         setupGraph()
 
@@ -73,10 +75,7 @@ class TimeService : Service(), TimeContract.Screen {
 
         presenter.attach()
 
-        startForeground(
-            TIMER_NOTIFICATION_ID,
-            timerNotificationBuilder!!.build()
-        )
+        updateNotification()
     }
 
     override fun onDestroy() {
@@ -90,21 +89,10 @@ class TimeService : Service(), TimeContract.Screen {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val action = intent.action
-        if (action == ACTION_START_TIMER) {
+        if (action == ACTION_START) {
             updateNotification()
-            val timerId = extractTimerIdFromExtra(intent)
-            presenter.startTimer(timerId)
-        } else if (action == ACTION_STOP_TIMER) {
-            updateNotification()
-            val timerId = extractTimerIdFromExtra(intent)
-            presenter.stopTimer(timerId)
-        } else if (action == ACTION_PAUSE_TIMER) {
-            updateNotification()
-            presenter.pauseTimer()
-        } else if (action == ACTION_RESUME_TIMER) {
-            updateNotification()
-            presenter.resumeTimer()
-        }else if (action == ACTION_DISMISS) {
+            presenter.start()
+        } else if (action == ACTION_DISMISS) {
             presenter.dismissNotification()
         }
         return super.onStartCommand(intent, flags, startId)
@@ -196,12 +184,6 @@ class TimeService : Service(), TimeContract.Screen {
         )
     }
 
-    private fun extractTimerIdFromExtra(intent: Intent): Long {
-        val timerId = intent.getLongExtra(EXTRA_TIMER_ID, -1)
-        check(timerId != -1L) { "No timer ID has been send." }
-        return timerId
-    }
-
     @TargetApi(Build.VERSION_CODES.O)
     private fun generateNotificationChannel(res: Resources) {
         val channelId = res.getString(R.string.timer_notif_channel_id)
@@ -223,37 +205,12 @@ class TimeService : Service(), TimeContract.Screen {
     companion object {
         private const val TIMER_NOTIFICATION_ID = 42
 
-        private const val ACTION_START_TIMER = "time_service.action.start_timer"
-        private const val ACTION_STOP_TIMER = "time_service.action.stop_timer"
-        private const val ACTION_RESUME_TIMER = "time_service.action.resume_timer"
-        private const val ACTION_PAUSE_TIMER = "time_service.action.pause_timer"
+        private const val ACTION_START = "time_service.action.start"
         private const val ACTION_DISMISS = "time_service.action.dismiss"
 
-        private const val EXTRA_TIMER_ID = "timer_service_extra_timer_id"
-
-        fun startTimer(context: Context, timerId: Long) {
+        fun start(context: Context) {
             val intent = Intent(context, TimeService::class.java)
-            intent.action = ACTION_START_TIMER
-            intent.putExtra(EXTRA_TIMER_ID, timerId)
-            ContextCompat.startForegroundService(context, intent)
-        }
-
-        fun stopTimer(context: Context, timerId: Long) {
-            val intent = Intent(context, TimeService::class.java)
-            intent.action = ACTION_STOP_TIMER
-            intent.putExtra(EXTRA_TIMER_ID, timerId)
-            ContextCompat.startForegroundService(context, intent)
-        }
-
-        fun resumeTimer(context: Context) {
-            val intent = Intent(context, TimeService::class.java)
-            intent.action = ACTION_RESUME_TIMER
-            ContextCompat.startForegroundService(context, intent)
-        }
-
-        fun pauseTimer(context: Context) {
-            val intent = Intent(context, TimeService::class.java)
-            intent.action = ACTION_PAUSE_TIMER
+            intent.action = ACTION_START
             ContextCompat.startForegroundService(context, intent)
         }
 

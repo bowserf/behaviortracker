@@ -25,7 +25,6 @@ class PomodoroManagerModule {
         val pauseTimer = PauseTimer.getTimer(context)
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         return PomodoroManagerImpl(
-            context,
             timeManager,
             timerListManager,
             settingManager,

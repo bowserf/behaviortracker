@@ -36,34 +36,6 @@ class TimeServicePresenter(
         pomodoroManager.removeListener(pomodoroListener)
     }
 
-    override fun startTimer(timerId: Long) {
-        val timer: Timer
-        if (pomodoroManager.getBreakTimer().id == timerId) {
-            timer = pomodoroManager.getBreakTimer()
-        } else {
-            timer = timerListManager.getTimer(timerId)
-        }
-        timeManager.startTimer(timer)
-    }
-
-    override fun stopTimer(timerId: Long) {
-        val timer: Timer
-        if (pomodoroManager.getBreakTimer().id == timerId) {
-            timer = pomodoroManager.getBreakTimer()
-        } else {
-            timer = timerListManager.getTimer(timerId)
-        }
-        timeManager.stopTimer(timer)
-    }
-
-    override fun resumeTimer() {
-        startTimer(timer!!.id)
-    }
-
-    override fun pauseTimer() {
-        stopTimer(timer!!.id)
-    }
-
     override fun dismissNotification() {
         if (!isNotificationDisplayed) {
             return
@@ -73,6 +45,30 @@ class TimeServicePresenter(
         isNotificationDisplayed = false
 
         screen.dismissNotification()
+    }
+
+    override fun start() {
+        if (pomodoroManager.isStarted) {
+            val timer = if (pomodoroManager.isBreakStep()) {
+                pomodoroManager.getBreakTimer()
+            } else {
+                pomodoroManager.currentTimer!!
+            }
+            if (timer.isActivate) {
+                displayTimerNotification(timer)
+            } else {
+                pauseTimerNotif(timer)
+            }
+            this.timer = timer
+        } else {
+            val timer = timerListManager.getTimerList().maxByOrNull { it.lastUpdateTimestamp }!!
+            if (timer.isActivate) {
+                displayTimerNotification(timer)
+            } else {
+                pauseTimerNotif(timer)
+            }
+            this.timer = timer
+        }
     }
 
     private fun displayTimerNotification(modifiedTimer: Timer) {
@@ -140,12 +136,6 @@ class TimeServicePresenter(
 
     private fun createTimerListManagerListener(): TimerListManager.Listener {
         return object : TimerListManager.Listener {
-            override fun onTimerRemoved(removedTimer: Timer) {
-                if (timer == removedTimer) {
-                    dismissNotification()
-                }
-            }
-
             override fun onTimerAdded(updatedTimer: Timer) {
                 if (pomodoroManager.isStarted) {
                     return
@@ -156,10 +146,18 @@ class TimeServicePresenter(
                 }
             }
 
-            override fun onTimerRenamed(updatedTimer: Timer) {
-                if (timer == updatedTimer) {
-                    renameTimerNotif(updatedTimer)
+            override fun onTimerRemoved(removedTimer: Timer) {
+                if (timer != removedTimer) {
+                    return
                 }
+                dismissNotification()
+            }
+
+            override fun onTimerRenamed(updatedTimer: Timer) {
+                if (timer != updatedTimer) {
+                    return
+                }
+                renameTimerNotif(updatedTimer)
             }
         }
     }
@@ -193,12 +191,12 @@ class TimeServicePresenter(
     private fun createPomodoroListener(): PomodoroManager.Listener {
         return object : PomodoroManager.Listener {
 
-            override fun onPomodoroSessionStop() {
-                dismissNotification()
-            }
-
             override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
                 displayTimerNotification(newTimer)
+            }
+
+            override fun onPomodoroSessionStop() {
+                dismissNotification()
             }
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
@@ -210,9 +208,10 @@ class TimeServicePresenter(
             }
 
             override fun updateTime(updatedTimer: Timer, currentTime: Long) {
-                if (timer == updatedTimer) {
-                    updateTimeNotif()
+                if (timer != updatedTimer) {
+                    return
                 }
+                updateTimeNotif()
             }
 
             override fun onCountFinished(newTimer: Timer, duration: Long) {

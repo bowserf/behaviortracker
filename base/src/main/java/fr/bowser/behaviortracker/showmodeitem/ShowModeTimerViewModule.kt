@@ -14,23 +14,8 @@ class ShowModeTimerViewModule(private val screen: ShowModeTimerViewContract.Scre
     @GenericScope(component = ShowModeTimerViewComponent::class)
     @Provides
     fun provideShowModeTimerViewPresenter(
-        context: Context,
         timeManager: TimeManager
     ): ShowModeTimerViewContract.Presenter {
-        val addOn = createAddOn(context)
-        return ShowModeTimerViewPresenter(screen, timeManager, addOn)
-    }
-
-    private fun createAddOn(context: Context): ShowModeTimerViewPresenter.AddOn {
-        return object : ShowModeTimerViewPresenter.AddOn {
-            override fun startTimer(timer: Timer) {
-                TimeService.startTimer(context, timer.id)
-            }
-
-            override fun stopTimer(timer: Timer) {
-                TimeService.stopTimer(context, timer.id)
-            }
-
-        }
+        return ShowModeTimerViewPresenter(screen, timeManager)
     }
 }

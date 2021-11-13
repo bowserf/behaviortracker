@@ -15,10 +15,7 @@ interface TimeContract {
     interface Presenter {
         fun attach()
         fun detach()
-        fun startTimer(timerId: Long)
-        fun stopTimer(timerId: Long)
-        fun resumeTimer()
-        fun pauseTimer()
+        fun start()
         fun dismissNotification()
     }
 }

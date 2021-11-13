@@ -1,20 +1,17 @@
 package fr.bowser.behaviortracker.pomodoro
 
-import android.content.Context
 import android.media.AudioAttributes
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
 import fr.bowser.behaviortracker.BuildConfig
-import fr.bowser.behaviortracker.notification.TimeService
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerListManager
 
 class PomodoroManagerImpl(
-    private val context: Context,
     private val timeManager: TimeManager,
     timerListManager: TimerListManager,
     private val settingManager: SettingManager,
@@ -78,10 +75,10 @@ class PomodoroManagerImpl(
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
         this.pauseDuration =
-            if (isDebug && !BuildConfig.UA) POMODOR_DEBUG_PAUSE_STEP_DURATION
+            if (isDebug && !BuildConfig.UA) POMODORO_DEBUG_PAUSE_STEP_DURATION
             else settingManager.getPomodoroPauseStepDuration()
         this.actionDuration =
-            if (isDebug && !BuildConfig.UA) POMODOR_DEBUG_STEP_DURATION
+            if (isDebug && !BuildConfig.UA) POMODORO_DEBUG_STEP_DURATION
             else settingManager.getPomodoroStepDuration()
 
         currentTimer = actionTimer
@@ -92,7 +89,7 @@ class PomodoroManagerImpl(
         isRunning = true
 
         timeManager.addListener(timeManagerListener)
-        TimeService.startTimer(context, currentTimer!!.id)
+        timeManager.startTimer(currentTimer!!)
 
         listeners.forEach { it.onPomodoroSessionStarted(currentTimer!!, pomodoroTime) }
     }
@@ -103,7 +100,7 @@ class PomodoroManagerImpl(
         }
         isPendingState = false
         isRunning = true
-        TimeService.startTimer(context, currentTimer!!.id)
+        timeManager.startTimer(currentTimer!!)
     }
 
     override fun pause() {
@@ -111,14 +108,14 @@ class PomodoroManagerImpl(
             return
         }
         isRunning = false
-        TimeService.stopTimer(context, currentTimer!!.id)
+        timeManager.stopTimer(currentTimer!!)
     }
 
     override fun stop() {
         if (!isStarted) {
             return
         }
-        TimeService.stopTimer(context, currentTimer!!.id)
+        timeManager.stopTimer(currentTimer!!)
         isStarted = false
         isPendingState = false
         isRunning = false
@@ -217,7 +214,7 @@ class PomodoroManagerImpl(
 
     companion object {
         private const val DEFAULT_VIBRATION_DURATION = 500L
-        private const val POMODOR_DEBUG_STEP_DURATION = 10L
-        private const val POMODOR_DEBUG_PAUSE_STEP_DURATION = 5L
+        private const val POMODORO_DEBUG_STEP_DURATION = 10L
+        private const val POMODORO_DEBUG_PAUSE_STEP_DURATION = 5L
     }
 }

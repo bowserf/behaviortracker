@@ -13,8 +13,7 @@ class TimerItemPresenter(
     private val timerListManager: TimerListManager,
     private val settingManager: SettingManager,
     private val pomodoroManager: PomodoroManager,
-    private val timeProvider: TimeProvider,
-    private val addOn: AddOn
+    private val timeProvider: TimeProvider
 ) : TimerItemContract.Presenter,
     TimerListManager.Listener,
     SettingManager.TimerModificationListener {
@@ -116,9 +115,9 @@ class TimerItemPresenter(
 
     private fun manageTimerUpdate() {
         if (!timer.isActivate) {
-            addOn.startTimer(timer)
+            timeManager.startTimer(timer)
         } else {
-            addOn.stopTimer(timer)
+            timeManager.stopTimer(timer)
         }
     }
 

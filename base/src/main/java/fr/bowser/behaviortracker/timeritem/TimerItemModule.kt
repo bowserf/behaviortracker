@@ -18,34 +18,19 @@ class TimerItemModule(private val screen: TimerItemContract.Screen) {
     @GenericScope(component = TimerItemComponent::class)
     @Provides
     fun provideTimerItemPresenter(
-        context: Context,
         timeManager: TimeManager,
         timerListManager: TimerListManager,
         settingManager: SettingManager,
         pomodoroManager: PomodoroManager,
         timeProvider: TimeProvider
     ): TimerItemContract.Presenter {
-        val addOn = createAddOn(context)
         return TimerItemPresenter(
             screen,
             timeManager,
             timerListManager,
             settingManager,
             pomodoroManager,
-            timeProvider,
-            addOn
+            timeProvider
         )
-    }
-
-    private fun createAddOn(context: Context): TimerItemPresenter.AddOn {
-        return object : TimerItemPresenter.AddOn {
-            override fun startTimer(timer: Timer) {
-                TimeService.startTimer(context, timer.id)
-            }
-
-            override fun stopTimer(timer: Timer) {
-                TimeService.stopTimer(context, timer.id)
-            }
-        }
     }
 }

@@ -9,7 +9,8 @@ import kotlinx.coroutines.newFixedThreadPoolContext
 class TimeManagerImpl(
     private val timerDAO: TimerDAO,
     private val timeProvider: TimeProvider,
-    private val handler: Handler?
+    private val handler: Handler?,
+    private val addOn: AddOn
 ) : TimeManager {
 
     internal val background = newFixedThreadPoolContext(2, "time_manager_bg")
@@ -41,6 +42,8 @@ class TimeManagerImpl(
         handler?.postDelayed(timerRunnable, DELAY)
 
         this.timer = timer
+
+        addOn.onTimerStarted()
     }
 
     override fun stopTimer(timer: Timer, fakeTimer: Boolean) {
@@ -131,6 +134,10 @@ class TimeManagerImpl(
 
             handler?.postDelayed(this, DELAY)
         }
+    }
+
+    interface AddOn {
+        fun onTimerStarted()
     }
 
     companion object {
