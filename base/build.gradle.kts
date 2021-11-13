@@ -187,12 +187,3 @@ tasks.register<JavaExec>("ktlint") {
     main = "com.github.shyiko.ktlint.Main"
     args("--android", "src/**/*.kt")
 }
-
-// skip variant release for CI
-if (buildType == "CI") {
-    android.variantFilter {
-        if (name == "release") {
-            ignore = true
-        }
-    }
-}
