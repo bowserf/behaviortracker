@@ -1,6 +1,6 @@
 package fr.bowser.feature.alarm.internal
 
-class AlarmListenerManagerImpl : AlarmListenerManager {
+internal class AlarmListenerManagerImpl : AlarmListenerManager {
 
     private val listeners = mutableListOf<AlarmListenerManager.Listener>()
 

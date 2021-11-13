@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.alarm
+package fr.bowser.behaviortracker.alarm_view
 
 import dagger.Component
 import fr.bowser.behaviortracker.config.BehaviorTrackerAppComponent

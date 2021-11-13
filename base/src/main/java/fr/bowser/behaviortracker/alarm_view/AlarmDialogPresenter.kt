@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.alarm
+package fr.bowser.behaviortracker.alarm_view
 
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.feature.alarm.AlarmTime

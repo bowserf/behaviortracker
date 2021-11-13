@@ -71,7 +71,7 @@ internal class AlarmTimerManagerImpl(
         }
 
         if (listeners.isEmpty()) {
-            alarmListenerManager.addListener(alarmListener!!)
+            alarmListenerManager.addListener(alarmListener)
         }
 
         listeners.add(listener)

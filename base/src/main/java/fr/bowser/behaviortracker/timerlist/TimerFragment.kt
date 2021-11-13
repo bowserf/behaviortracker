@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.bowser.behaviortracker.R
-import fr.bowser.behaviortracker.alarm.AlarmTimerDialog
+import fr.bowser.behaviortracker.alarm_view.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
 import fr.bowser.behaviortracker.utils.TimeConverter

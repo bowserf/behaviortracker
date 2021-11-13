@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.alarm
+package fr.bowser.behaviortracker.alarm_view
 
 import android.app.Dialog
 import android.os.Build

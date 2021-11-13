@@ -1,6 +1,6 @@
 package fr.bowser.feature.alarm.internal
 
-interface AlarmListenerManager {
+internal interface AlarmListenerManager {
 
     fun notifyAlarmTriggered()
 

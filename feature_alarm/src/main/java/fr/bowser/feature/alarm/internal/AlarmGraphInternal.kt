@@ -1,6 +1,6 @@
 package fr.bowser.feature.alarm.internal
 
-class AlarmGraphInternal {
+internal class AlarmGraphInternal {
 
     private val alarmListenerManager by lazy { AlarmListenerModule.createAlarmListener() }
 

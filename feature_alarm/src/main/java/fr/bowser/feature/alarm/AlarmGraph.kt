@@ -1,5 +1,6 @@
 package fr.bowser.feature.alarm
 
+import android.annotation.SuppressLint
 import android.content.Context
 import fr.bowser.feature.alarm.internal.AlarmGraphInternal
 import fr.bowser.feature.alarm.internal.AlarmStorageModule
@@ -22,6 +23,7 @@ class AlarmGraph(private val context: Context) {
 
     companion object {
 
+        @SuppressLint("StaticFieldLeak")
         private var graph: AlarmGraph? = null
 
         private var alarmStorageManagerModule: AlarmStorageManagerModule? = null
