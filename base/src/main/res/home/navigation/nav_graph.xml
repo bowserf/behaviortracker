@@ -6,7 +6,7 @@
     app:startDestination="@id/timer_list_screen">
     <fragment
         android:id="@id/timer_list_screen"
-        android:name="fr.bowser.behaviortracker.timerlist.TimerFragment"
+        android:name="fr.bowser.behaviortracker.timer_list_view.TimerFragment"
         android:label="fragment_metronome"
         tools:layout="@layout/fragment_timer">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@id/pomodoro_screen"
-        android:name="fr.bowser.behaviortracker.pomodoro.PomodoroFragment"
+        android:name="fr.bowser.behaviortracker.pomodoro_view.PomodoroFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_pomodoro" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/show_mode_screen"
-        android:name="fr.bowser.behaviortracker.showmode.ShowModeFragment"
+        android:name="fr.bowser.behaviortracker.show_mode_view.ShowModeFragment"
         android:label="ShowModeActivity"
         tools:layout="@layout/fragment_show_mode">
         <argument
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/rewards_screen"
-        android:name="fr.bowser.behaviortracker.rewards.RewardsFragment"
+        android:name="fr.bowser.behaviortracker.rewards_view.RewardsFragment"
         android:label="RewardsFragment"
         tools:layout="@layout/fragment_rewards"/>
     <fragment

@@ -9,7 +9,7 @@ import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer_list.TimerListManager
 
 class PomodoroManagerImpl(
     private val timeManager: TimeManager,

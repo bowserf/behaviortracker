@@ -10,8 +10,8 @@ import android.view.View
 import android.widget.RemoteViews
 import fr.bowser.behaviortracker.app.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.home.HomeActivity
-import fr.bowser.behaviortracker.home.HomeActivity.Companion.ACTION_SELECT_POMODORO_TIMER
+import fr.bowser.behaviortracker.home_view.HomeActivity
+import fr.bowser.behaviortracker.home_view.HomeActivity.Companion.ACTION_SELECT_POMODORO_TIMER
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.utils.TimeConverter
 

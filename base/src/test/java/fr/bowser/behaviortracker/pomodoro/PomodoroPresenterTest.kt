@@ -1,7 +1,9 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import fr.bowser.behaviortracker.pomodoro_view.PomodoroContract
+import fr.bowser.behaviortracker.pomodoro_view.PomodoroPresenter
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.MockitoUtils.any
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager

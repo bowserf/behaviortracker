@@ -6,7 +6,7 @@ import dagger.Provides
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module

@@ -3,7 +3,7 @@ package fr.bowser.behaviortracker.notification
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.TimeConverter
 
 class TimeServicePresenter(

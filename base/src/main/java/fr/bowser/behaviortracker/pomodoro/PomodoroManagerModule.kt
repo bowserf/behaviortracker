@@ -7,7 +7,7 @@ import dagger.Provides
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.timer.TimerListManager
+import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.PauseTimer
 import javax.inject.Singleton
 

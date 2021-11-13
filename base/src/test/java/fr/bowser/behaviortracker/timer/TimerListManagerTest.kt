@@ -1,6 +1,8 @@
 package fr.bowser.behaviortracker.timer
 
 import android.graphics.Color
+import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_list.TimerListManagerImpl
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

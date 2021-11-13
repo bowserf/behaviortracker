@@ -26,8 +26,8 @@ import fr.bowser.behaviortracker.time.TimeProviderModule
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimeManagerModule
 import fr.bowser.behaviortracker.timer.TimerDAO
-import fr.bowser.behaviortracker.timer.TimerListManager
-import fr.bowser.behaviortracker.timer.TimerListManagerModule
+import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_list.TimerListManagerModule
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 import fr.bowser.feature_string.StringManager

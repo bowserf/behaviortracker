@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.pomodoro
 
+import fr.bowser.behaviortracker.pomodoro_view.PomodoroDialogPresenter
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock

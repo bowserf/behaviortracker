@@ -12,7 +12,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.home.HomeActivity
+import fr.bowser.behaviortracker.home_view.HomeActivity
 
 object AlarmNotification {
 
