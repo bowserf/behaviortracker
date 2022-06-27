@@ -1,3 +1,5 @@
+includeBuild("build_src")
+
 include(
     ":base",
     ":installedapp",

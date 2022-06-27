@@ -1,3 +1,5 @@
+import fr.bowser.build_src.ProjectConfig
+import fr.bowser.build_src.getPropertiesFromFile
 import io.gitlab.arturbosch.detekt.detekt
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
@@ -21,13 +23,15 @@ android {
         versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 
-        resConfigs("en", "fr", "it", "tr")
+        resourceConfigurations.addAll(listOf("en", "fr", "it", "tr"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
-        SigningData.of(project.rootProject.properties("signing.properties"))?.let {
+        ProjectConfig.SigningData.of(
+            project.rootProject.getPropertiesFromFile("signing.properties")
+        ).let {
             create("release") {
                 storeFile = file(it.storeFile)
                 storePassword = it.storePassword
@@ -76,23 +80,23 @@ android {
             // Split resources.
             // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
             res.srcDirs(
-                    "src/main/res/alarm",
-                    "src/main/res/choosepomodorotimer",
-                    "src/main/res/common",
-                    "src/main/res/createtimer",
-                    "src/main/res/home",
-                    "src/main/res/instantapp",
-                    "src/main/res/notification",
-                    "src/main/res/pomodoro",
-                    "src/main/res/rewards",
-                    "src/main/res/rewardsrow",
-                    "src/main/res/setting_view",
-                    "src/main/res/showmode",
-                    "src/main/res/timer",
-                    "src/main/res/timerlist",
-                    "src/main/res/ua",
-                    "src/main/res/update_timer_time",
-                    "src/main/res/widget"
+                "src/main/res/alarm",
+                "src/main/res/choosepomodorotimer",
+                "src/main/res/common",
+                "src/main/res/createtimer",
+                "src/main/res/home",
+                "src/main/res/instantapp",
+                "src/main/res/notification",
+                "src/main/res/pomodoro",
+                "src/main/res/rewards",
+                "src/main/res/rewardsrow",
+                "src/main/res/setting_view",
+                "src/main/res/showmode",
+                "src/main/res/timer",
+                "src/main/res/timerlist",
+                "src/main/res/ua",
+                "src/main/res/update_timer_time",
+                "src/main/res/widget"
             )
         }
     }

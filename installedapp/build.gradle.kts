@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import fr.bowser.build_src.ProjectConfig
 
 plugins {
     id("com.android.dynamic-feature")

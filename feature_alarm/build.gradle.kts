@@ -1,3 +1,5 @@
+import fr.bowser.build_src.ProjectConfig
+
 plugins {
     id("com.android.library")
     kotlin("android")

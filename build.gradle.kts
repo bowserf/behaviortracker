@@ -26,6 +26,11 @@ allprojects {
     }
 }
 
+plugins {
+    // https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3
+    id("fr.bowser.build_src.projectconfig")
+}
+
 subprojects {
     // KtLint - Static code analysis
     // https://github.com/pinterest/ktlint/releases
