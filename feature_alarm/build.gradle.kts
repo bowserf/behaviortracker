@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import fr.bowser.build_src.ProjectConfig
 
 plugins {
@@ -15,5 +16,5 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+    implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
 }

@@ -41,7 +41,7 @@ dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
 
     // Google
-    implementation("com.google.android.gms:play-services-instantapps:17.0.0")
+    implementation("com.google.android.gms:play-services-instantapps:18.0.1")
 
     // Other
     implementation("com.google.dagger:dagger:2.42")

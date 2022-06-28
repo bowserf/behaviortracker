@@ -113,20 +113,20 @@ dependencies {
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
-    implementation("com.google.android.play:core:1.8.3")
+    implementation("com.google.android.play:core:1.10.3")
 
     // Design
     implementation("com.google.android.material:material:1.1.0-alpha09")
 
     // AndroidX library
     implementation("androidx.preference:preference-ktx:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta3")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.annotation:annotation:1.4.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.1.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.1.0")
@@ -147,18 +147,18 @@ dependencies {
     implementation("com.google.dagger:dagger:2.42")
     kapt("com.google.dagger:dagger-compiler:2.42")
 
-    implementation("com.hannesdorfmann:adapterdelegates4:4.3.0")
+    implementation("com.hannesdorfmann:adapterdelegates4:4.3.2")
     implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0")
 
     // Test
-    testImplementation("org.json:json:20180813")
-    testImplementation("junit:junit:4.12")
-    testImplementation("org.mockito:mockito-core:2.27.0")
+    testImplementation("org.json:json:20220320")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:4.6.1")
     androidTestImplementation("androidx.room:room-testing:2.1.0-alpha06")
-    androidTestImplementation("androidx.test:runner:1.2.0")
-    androidTestImplementation("androidx.test:rules:1.2.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    androidTestImplementation("androidx.test:rules:1.4.0")
     androidTestImplementation("org.hamcrest:hamcrest-library:1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
 
 // detect configuration
