@@ -44,7 +44,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-instantapps:17.0.0")
 
     // Other
-    implementation("com.google.dagger:dagger:2.39")
-    kapt("com.google.dagger:dagger-compiler:2.39")
+    implementation("com.google.dagger:dagger:2.42")
+    kapt("com.google.dagger:dagger-compiler:2.42")
 }
 

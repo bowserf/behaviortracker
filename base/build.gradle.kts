@@ -144,8 +144,8 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     // Other
-    implementation("com.google.dagger:dagger:2.39")
-    kapt("com.google.dagger:dagger-compiler:2.39")
+    implementation("com.google.dagger:dagger:2.42")
+    kapt("com.google.dagger:dagger-compiler:2.42")
 
     implementation("com.hannesdorfmann:adapterdelegates4:4.3.0")
     implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0")

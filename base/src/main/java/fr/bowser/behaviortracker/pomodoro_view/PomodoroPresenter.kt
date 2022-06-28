@@ -124,6 +124,7 @@ class PomodoroPresenter(
         when (doNotDisturbManager.getDnDState()) {
             DoNotDisturbManager.DnDState.ALL -> screen.enableDoNotDisturb(false)
             DoNotDisturbManager.DnDState.PRIORITY -> screen.enableDoNotDisturb(true)
+            else -> {}
         }
     }
 
