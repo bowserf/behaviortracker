@@ -103,8 +103,8 @@ class TimeModificationDialogPreference : DialogPreference {
         return R.layout.preference_dialog_time_modification
     }
 
-    override fun onGetDefaultValue(a: TypedArray?, index: Int): Any {
-        return a!!.getInt(index, timerModification)
+    override fun onGetDefaultValue(a: TypedArray, index: Int): Any {
+        return a.getInt(index, timerModification)
     }
 
     override fun onSetInitialValue(defaultValue: Any?) {

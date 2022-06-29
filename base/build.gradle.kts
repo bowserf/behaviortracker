@@ -120,10 +120,10 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
 
     // Design
-    implementation("com.google.android.material:material:1.1.0-alpha09")
+    implementation("com.google.android.material:material:1.6.1")
 
     // AndroidX library
-    implementation("androidx.preference:preference-ktx:1.1.0")
+    implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
