@@ -7,6 +7,7 @@ plugins {
 
 android {
     compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
+    namespace = "fr.bowser.feature_string"
 
     defaultConfig {
         minSdk = ProjectConfig.SdkVersions.minSdkVersion
