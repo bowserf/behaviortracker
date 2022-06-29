@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Timer")
 data class Timer(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Long,
     @ColumnInfo(name = "current_time") val currentTime: Long,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "color") var color: Int,

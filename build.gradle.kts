@@ -38,7 +38,7 @@ subprojects {
     dependencies {
         // KtLint - Static code analysis
         // https://github.com/pinterest/ktlint/releases
-        ktlint("com.pinterest:ktlint:0.42.1") {
+        ktlint("com.pinterest:ktlint:0.46.1") {
             attributes {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
             }

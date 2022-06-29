@@ -16,3 +16,4 @@ insert_final_newline=true
 # Note that rules in any ruleset other than the standard ruleset will need to be prefixed
 # by the ruleset identifier.
 disabled_rules=max-line-length
+disabled_rules=package-name

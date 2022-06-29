@@ -251,7 +251,9 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
         val fabAnimator = ObjectAnimator.ofFloat(
             this,
             PROPERTY_FAB_ANIMATION,
-            1f, 1.15f, 1f
+            1f,
+            1.15f,
+            1f
         )
         fabAnimator.duration = FAB_ANIMATION_DURATION
         fabAnimator.repeatCount = 1

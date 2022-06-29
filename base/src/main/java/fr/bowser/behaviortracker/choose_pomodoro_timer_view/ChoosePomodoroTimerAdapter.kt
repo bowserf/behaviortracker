@@ -16,7 +16,9 @@ class ChoosePomodoroTimerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChooseTimerHolder {
         val view = LayoutInflater.from(context).inflate(
-            R.layout.item_pomodoro_timer, parent, false
+            R.layout.item_pomodoro_timer,
+            parent,
+            false
         )
         return ChooseTimerHolder(view as TextView)
     }

@@ -1,7 +1,6 @@
 package fr.bowser.feature.billing
 
 import android.app.Activity
-import com.android.billingclient.api.Purchase
 
 interface InAppManager {
 

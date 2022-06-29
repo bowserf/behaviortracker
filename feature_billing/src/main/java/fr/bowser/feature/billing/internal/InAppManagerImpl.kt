@@ -14,7 +14,7 @@ import com.android.billingclient.api.QueryPurchasesParams
 import fr.bowser.feature.billing.InAppManager
 
 internal class InAppManagerImpl(
-    private val playBillingManager: PlayBillingManager,
+    private val playBillingManager: PlayBillingManager
 ) : InAppManager {
 
     private val storePurchases = mutableListOf<InAppManager.StorePurchase>()

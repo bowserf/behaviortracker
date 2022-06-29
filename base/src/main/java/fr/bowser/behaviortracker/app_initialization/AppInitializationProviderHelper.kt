@@ -14,7 +14,6 @@ object AppInitializationProviderHelper {
         val providerClass =
             if (isInstantApp) PROVIDER_CLASS_INSTANT_APP else PROVIDER_CLASS_INSTALLED_APP
         try {
-
             val clz: Class<*> = Class.forName(providerClass)
             val field = clz.getDeclaredField("INSTANCE")
             val instance = field.get(null)

@@ -5,7 +5,7 @@ import fr.bowser.behaviortracker.timer.Timer
 
 class ShowModeTimerViewPresenter(
     private val screen: ShowModeTimerViewContract.Screen,
-    private val timeManager: TimeManager,
+    private val timeManager: TimeManager
 ) : ShowModeTimerViewContract.Presenter {
 
     private lateinit var timer: Timer
