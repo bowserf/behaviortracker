@@ -11,9 +11,8 @@ import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.do_not_disturbed.DoNotDisturbModule
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
-import fr.bowser.behaviortracker.inapp.InAppManager
+import fr.bowser.behaviortracker.inapp.InAppConfiguration
 import fr.bowser.behaviortracker.inapp.InAppManagerModule
-import fr.bowser.behaviortracker.inapp.InAppRepository
 import fr.bowser.behaviortracker.instantapp.InstantAppComponent
 import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
@@ -29,6 +28,7 @@ import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.timer_list.TimerListManagerModule
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature.billing.InAppManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 import fr.bowser.feature_string.StringManager
 import javax.inject.Singleton
@@ -65,9 +65,9 @@ interface BehaviorTrackerAppComponent {
 
     fun provideEventManager(): EventManager
 
-    fun provideInAppManager(): InAppManager
+    fun provideInAppConfiguration(): InAppConfiguration
 
-    fun provideInAppRepository(): InAppRepository
+    fun provideInAppManager(): InAppManager
 
     fun provideMyInstantApp(): InstantAppManager
 

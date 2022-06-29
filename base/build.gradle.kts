@@ -107,6 +107,7 @@ android {
 dependencies {
 
     implementation(project(":feature_alarm"))
+    implementation(project(":feature_billing"))
     implementation(project(":feature_do_not_disturb"))
     implementation(project(":feature_string"))
 
@@ -130,9 +131,6 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.1.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.1.0")
-
-    // Billing
-    implementation("com.android.billingclient:billing:3.0.1")
 
     // Architecture component
     implementation("androidx.room:room-runtime:2.1.0-alpha06")

@@ -1,6 +1,5 @@
 package fr.bowser.behaviortracker.inapp
 
-import com.android.billingclient.api.SkuDetails
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -9,8 +8,7 @@ data class InApp(
     val name: String,
     val description: String,
     val price: String,
-    val feature: String,
-    var skuDetails: SkuDetails? = null
+    val feature: String
 ) {
 
     fun toJson(): String {

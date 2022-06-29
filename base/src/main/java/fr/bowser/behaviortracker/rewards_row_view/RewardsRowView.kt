@@ -33,7 +33,7 @@ class RewardsRowView(context: Context) : CardView(context) {
         // card radius
         radius = resources.getDimension(R.dimen.default_space_half)
 
-        setOnClickListener { presenter.onItemClicked(inApp!!.skuDetails) }
+        setOnClickListener { presenter.onItemClicked(inApp!!.sku) }
 
         title = findViewById(R.id.rewards_title)
         price = findViewById(R.id.rewards_price)

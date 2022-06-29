@@ -1,12 +1,11 @@
 package fr.bowser.behaviortracker.rewards_view
 
-import com.android.billingclient.api.Purchase
-import fr.bowser.behaviortracker.inapp.InAppManager
-import fr.bowser.behaviortracker.inapp.InAppRepository
+import fr.bowser.behaviortracker.inapp.InAppConfiguration
+import fr.bowser.feature.billing.InAppManager
 
 class RewardsPresenter(
     private val screen: RewardsContract.Screen,
-    private val inAppRepository: InAppRepository,
+    private val inAppConfiguration: InAppConfiguration,
     private val inAppManager: InAppManager
 ) : RewardsContract.Presenter {
 
@@ -19,7 +18,7 @@ class RewardsPresenter(
     override fun onStart() {
         inAppManager.addListener(inAppListener)
 
-        val inApps = inAppRepository.getInApps()
+        val inApps = inAppConfiguration.getInApps()
         screen.displayListInApps(inApps)
     }
 
@@ -29,7 +28,7 @@ class RewardsPresenter(
 
     private fun createInAppManagerListener(): InAppManager.Listener {
         return object : InAppManager.Listener {
-            override fun onPurchaseSucceed(purchases: List<Purchase>) {
+            override fun onPurchaseSucceed(purchases: List<InAppManager.StorePurchase>) {
                 screen.displaySuccessPurchaseMessage()
             }
 

@@ -1,9 +1,8 @@
 package fr.bowser.behaviortracker.rewards_row_view
 
 import android.app.Activity
-import com.android.billingclient.api.SkuDetails
 import fr.bowser.behaviortracker.event.EventManager
-import fr.bowser.behaviortracker.inapp.InAppManager
+import fr.bowser.feature.billing.InAppManager
 
 class RewardsRowPresenter(
     private val screen: RewardsRowContract.Screen,
@@ -11,20 +10,15 @@ class RewardsRowPresenter(
     private val eventManager: EventManager
 ) : RewardsRowContract.Presenter {
 
-    override fun onItemClicked(skuDetails: SkuDetails?) {
-        if (skuDetails == null) {
-            screen.displayStoreConnectionError()
-        } else {
-            eventManager.sendClickBuyInAppEvent(skuDetails.sku)
-
-            inAppManager.purchase(
-                skuDetails,
-                object : InAppManager.ActivityContainer {
-                    override fun get(): Activity {
-                        return screen.getActivity()
-                    }
+    override fun onItemClicked(sku: String) {
+        eventManager.sendClickBuyInAppEvent(sku)
+        inAppManager.purchase(
+            sku,
+            object : InAppManager.ActivityContainer {
+                override fun get(): Activity {
+                    return screen.getActivity()
                 }
-            )
-        }
+            }
+        )
     }
 }

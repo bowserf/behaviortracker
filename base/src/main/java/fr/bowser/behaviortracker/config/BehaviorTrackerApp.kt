@@ -50,7 +50,9 @@ class BehaviorTrackerApp : Application() {
 
     private fun setupInAppManager() {
         val inAppManager = appComponent.provideInAppManager()
-        inAppManager.initialize()
+        val inApps = appComponent.provideInAppConfiguration().getInApps()
+        val skus = inApps.map { it.sku }
+        inAppManager.initialize(skus)
     }
 
     private fun setupCrashlytics() {
