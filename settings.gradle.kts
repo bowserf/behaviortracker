@@ -5,6 +5,7 @@ include(
     ":installedapp",
     ":instantapp",
     ":feature_alarm",
+    ":feature_billing",
     ":feature_do_not_disturb",
     ":feature_string"
 )
