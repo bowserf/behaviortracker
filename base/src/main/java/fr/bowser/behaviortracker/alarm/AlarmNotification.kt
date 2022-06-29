@@ -35,7 +35,14 @@ object AlarmNotification {
         homeIntent.action = ACTION_ALARM_NOTIFICATION_CLICKED
         homeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
         val resultPendingIntent = PendingIntent.getActivity(
-            context, 0, homeIntent, PendingIntent.FLAG_UPDATE_CURRENT
+            context,
+            0,
+            homeIntent,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
         )
 
         val notifBuilder = NotificationCompat.Builder(
