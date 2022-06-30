@@ -9,5 +9,7 @@
 
     <!-- Bottom navigation view -->
     <string name="bottom_navigation_timer_view">Timer</string>
+    <string name="menu_remove_all">Elimina tutti i cronometri</string>
+    <string name="home_instant_app_install">INSTALLARE</string>
 
 </resources>

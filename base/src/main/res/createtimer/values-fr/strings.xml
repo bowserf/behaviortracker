@@ -9,5 +9,6 @@
 
     <!-- Menu -->
     <string name="item_create_timer_save">SAUVEGARDER</string>
+    <string name="create_timer_title_timer">Sélectionner un temps de départ</string>
 
 </resources>

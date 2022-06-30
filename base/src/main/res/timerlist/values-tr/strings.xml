@@ -3,5 +3,10 @@
 
     <string name="empty_list_view_text">Bugün neyi zamanlamak istiyorsunuz?</string>
     <string name="timer_view_timer_has_been_removed">Zmanlayıcı kaldırıldı</string>
+    <string name="timer_list_remove_all_timers_title">Tüm kronometreleri sil</string>
+    <string name="timer_list_remove_all_timers_message">Tüm kronometreleri silmek istediğinizden emin misiniz?</string>
+    <string name="timer_list_section_inactive_title">Kronometreler</string>
+    <string name="timer_list_section_active_title">Kronometre aktif</string>
+    <string name="timer_list_total_time">Toplam zaman: %1$s</string>
 
 </resources>

@@ -10,5 +10,7 @@
 
     <!-- Bottom navigation view -->
     <string name="bottom_navigation_timer_view">Chronomètre</string>
+    <string name="menu_remove_all">Supprimer tous les chronomètres</string>
+    <string name="home_instant_app_install">INSTALLER</string>
 
 </resources>

@@ -3,5 +3,10 @@
 
     <string name="empty_list_view_text">Qu\'allez vous chronométrer aujourd\'hui ?</string>
     <string name="timer_view_timer_has_been_removed">Un chronomètre a été supprimé</string>
+    <string name="timer_list_remove_all_timers_title">Supprimer tous les chronomètres</string>
+    <string name="timer_list_remove_all_timers_message">Etes vous sûr de vouloir supprimer tous les chronomètres</string>
+    <string name="timer_list_section_inactive_title">Chronomètres</string>
+    <string name="timer_list_section_active_title">Chronomètre actif</string>
+    <string name="timer_list_total_time">Temps total: %1$s</string>
 
 </resources>

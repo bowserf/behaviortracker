@@ -3,6 +3,11 @@
 
     <string name="empty_list_view_text">Che cosa hai intenzione di tempo oggi?</string>
     <string name="timer_view_timer_has_been_removed">Il timer è stato rimosso</string>
+    <string name="timer_list_remove_all_timers_title">Rimuovi tutti i Cronometros</string>
+    <string name="timer_list_remove_all_timers_message">Sei sicuro di voler rimuovere tutti i timer?</string>
+    <string name="timer_list_section_inactive_title">Cronometros</string>
+    <string name="timer_list_section_active_title">Cronometro attivo</string>
+    <string name="timer_list_total_time">Tempo totale: %1$s</string>
 
 
 </resources>

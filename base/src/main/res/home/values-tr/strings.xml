@@ -9,5 +9,7 @@
 
     <!-- Bottom navigation view -->
     <string name="bottom_navigation_timer_view">Kronometre</string>
+    <string name="home_instant_app_install">YÜKLEMEK</string>
+    <string name="menu_remove_all">Tüm kronometreleri sil</string>
 
 </resources>

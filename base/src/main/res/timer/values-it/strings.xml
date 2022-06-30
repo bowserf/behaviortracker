@@ -11,6 +11,7 @@
 
     <!-- Rename timer dialog -->
     <string name="timer_row_rename">Rinomina timer</string>
+    <string name="item_update_timer_time">Tempo di aggiornamento</string>
 
 
 </resources>
