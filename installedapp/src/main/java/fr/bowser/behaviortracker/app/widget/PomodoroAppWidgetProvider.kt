@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.RemoteViews
 import fr.bowser.behaviortracker.app.R
@@ -55,8 +56,16 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
     ) {
         val intentToggleStartStopTimer = Intent(context, PomodoroAppWidgetProvider::class.java)
         intentToggleStartStopTimer.action = ACTION_TOGGLE_START_STOP_POMODORO
-        val pendingIntentToggleStartStopTime =
-            PendingIntent.getBroadcast(context, 0, intentToggleStartStopTimer, 0)
+        val pendingIntentToggleStartStopTime = PendingIntent.getBroadcast(
+            context,
+            0,
+            intentToggleStartStopTimer,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+        )
 
         val views = RemoteViews(context.packageName, R.layout.widget_pomodoro)
         views.setOnClickPendingIntent(
@@ -99,8 +108,16 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
     ) {
         val intentSelectPomodoroTimer = Intent(context, HomeActivity::class.java)
         intentSelectPomodoroTimer.action = ACTION_SELECT_POMODORO_TIMER
-        val pendingIntentSelectPomodoroTimer =
-            PendingIntent.getActivity(context, 0, intentSelectPomodoroTimer, 0)
+        val pendingIntentSelectPomodoroTimer = PendingIntent.getActivity(
+            context,
+            0,
+            intentSelectPomodoroTimer,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+        )
 
         val views = RemoteViews(context.packageName, R.layout.widget_pomodoro)
         views.setOnClickPendingIntent(

@@ -25,8 +25,7 @@ internal class AlarmTimerManagerImpl(
     private var alarmListener = createAlarmListener()
 
     override fun setAlarm(hour: Int, minute: Int, delayOneDay: Boolean) {
-        val intent = Intent(context, TimedDayReceiver::class.java)
-        val alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        val alarmIntent = createAlarmIntent()
 
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
@@ -52,8 +51,7 @@ internal class AlarmTimerManagerImpl(
     }
 
     override fun removeAlarm() {
-        val intent = Intent(context, TimedDayReceiver::class.java)
-        val alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        val alarmIntent = createAlarmIntent()
         alarmManager.cancel(alarmIntent)
 
         changeDeviceBootReceiverStatus(context, PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
@@ -91,6 +89,20 @@ internal class AlarmTimerManagerImpl(
             receiver,
             state,
             PackageManager.DONT_KILL_APP
+        )
+    }
+
+    private fun createAlarmIntent(): PendingIntent {
+        val intent = Intent(context, TimedDayReceiver::class.java)
+        return PendingIntent.getBroadcast(
+            context,
+            0,
+            intent,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
         )
     }
 
