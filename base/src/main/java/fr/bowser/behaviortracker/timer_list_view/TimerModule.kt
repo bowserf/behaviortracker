@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.timer_list_view
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.instantapp.InstantAppManager
+import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
@@ -17,6 +18,7 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
     fun provideTimerPresenter(
         alarmTimerManager: AlarmTimerManager,
         instantAppManager: InstantAppManager,
+        notificationManager: NotificationManager,
         timerListManager: TimerListManager,
         timeManager: TimeManager,
         stringManager: StringManager
@@ -24,6 +26,7 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
         return TimerPresenter(
             timerScreen,
             alarmTimerManager,
+            notificationManager,
             timerListManager,
             timeManager,
             stringManager,

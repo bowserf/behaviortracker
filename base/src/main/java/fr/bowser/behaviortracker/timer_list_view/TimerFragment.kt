@@ -199,6 +199,19 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                 }
                 .show()
         }
+
+        override fun displayAskNotificationDisplay() {
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.timer_list_ask_notification_display_title)
+                .setMessage(R.string.timer_list_ask_notification_display_message)
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                    // nothing to do
+                }
+                .setPositiveButton(R.string.timer_list_ask_notification_display_positive_button) { _, _ ->
+                    presenter.onClickAskNotificationDisplaySettings()
+                }
+                .show()
+        }
     }
 
     private fun setupGraph() {

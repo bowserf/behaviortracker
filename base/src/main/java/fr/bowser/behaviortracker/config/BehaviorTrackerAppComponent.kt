@@ -15,6 +15,8 @@ import fr.bowser.behaviortracker.inapp.InAppConfiguration
 import fr.bowser.behaviortracker.inapp.InAppManagerModule
 import fr.bowser.behaviortracker.instantapp.InstantAppComponent
 import fr.bowser.behaviortracker.instantapp.InstantAppManager
+import fr.bowser.behaviortracker.notification_manager.NotificationManager
+import fr.bowser.behaviortracker.notification_manager.NotificationManagerModule
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
@@ -41,6 +43,7 @@ import javax.inject.Singleton
         DoNotDisturbModule::class,
         EventManagerModule::class,
         InAppManagerModule::class,
+        NotificationManagerModule::class,
         PomodoroManagerModule::class,
         TimeManagerModule::class,
         TimeProviderModule::class,
@@ -70,6 +73,8 @@ interface BehaviorTrackerAppComponent {
     fun provideInAppManager(): InAppManager
 
     fun provideMyInstantApp(): InstantAppManager
+
+    fun provideNotificationManager(): NotificationManager
 
     fun provideTimeManager(): TimeManager
 

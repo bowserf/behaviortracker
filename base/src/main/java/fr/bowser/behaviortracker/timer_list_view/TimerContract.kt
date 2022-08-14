@@ -29,6 +29,8 @@ interface TimerContract {
         fun isInstantApp(): Boolean
 
         fun onClickAskScheduleAlarmSettings()
+
+        fun onClickAskNotificationDisplaySettings()
     }
 
     interface Screen {
@@ -54,5 +56,7 @@ interface TimerContract {
         fun updateTotalTime(totalTime: Long)
 
         fun displayAskScheduleAlarmPermission()
+
+        fun displayAskNotificationDisplay()
     }
 }

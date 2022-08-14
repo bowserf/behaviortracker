@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer_list_view
 
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer_list.TimerListManager
@@ -10,6 +11,7 @@ import fr.bowser.feature_string.StringManager
 class TimerPresenter(
     private val screen: TimerContract.Screen,
     private val alarmTimerManager: AlarmTimerManager,
+    private val notificationManager: NotificationManager,
     private val timerListManager: TimerListManager,
     private val timeManager: TimeManager,
     private val stringManager: StringManager,
@@ -74,10 +76,18 @@ class TimerPresenter(
 
     override fun onClickAlarm() {
         if (alarmTimerManager.canScheduleAlarm()) {
-            screen.displayAlarmTimerDialog()
+            if (notificationManager.areNotificationsEnabled()) {
+                screen.displayAlarmTimerDialog()
+            } else {
+                screen.displayAskNotificationDisplay()
+            }
         } else {
             screen.displayAskScheduleAlarmPermission()
         }
+    }
+
+    override fun onClickAskNotificationDisplaySettings() {
+        notificationManager.displayNotificationSettings()
     }
 
     override fun onClickAskScheduleAlarmSettings() {
