@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.provider.Settings
 import fr.bowser.feature.alarm.AlarmStorageManager
 import fr.bowser.feature.alarm.AlarmTime
 import fr.bowser.feature.alarm.AlarmTimerManager
@@ -23,6 +24,23 @@ internal class AlarmTimerManagerImpl(
     private val listeners = mutableListOf<AlarmTimerManager.Listener>()
 
     private var alarmListener = createAlarmListener()
+
+    override fun canScheduleAlarm(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            alarmManager.canScheduleExactAlarms()
+        } else {
+            true
+        }
+    }
+
+    override fun askScheduleAlarmPermissionIfNeeded() {
+        if (canScheduleAlarm()) {
+            return
+        }
+        val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.applicationContext.startActivity(intent)
+    }
 
     override fun setAlarm(hour: Int, minute: Int, delayOneDay: Boolean) {
         val alarmIntent = createAlarmIntent()
@@ -84,7 +102,7 @@ internal class AlarmTimerManagerImpl(
     }
 
     private fun changeDeviceBootReceiverStatus(context: Context, state: Int) {
-        val receiver = ComponentName(context, DeviceBootReceiver::class.java)
+        val receiver = ComponentName(context, AlarmManagerReceiver::class.java)
         context.packageManager.setComponentEnabledSetting(
             receiver,
             state,

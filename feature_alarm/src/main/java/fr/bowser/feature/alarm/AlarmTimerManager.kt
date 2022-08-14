@@ -2,6 +2,10 @@ package fr.bowser.feature.alarm
 
 interface AlarmTimerManager {
 
+    fun canScheduleAlarm(): Boolean
+
+    fun askScheduleAlarmPermissionIfNeeded()
+
     fun setAlarm(hour: Int, minute: Int, delayOneDay: Boolean = false)
 
     fun removeAlarm()
