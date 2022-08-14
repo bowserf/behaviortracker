@@ -186,6 +186,19 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             val totalTimeStr = TimeConverter.convertSecondsToHumanTime(totalTime)
             totalTimeTv.text = resources.getString(R.string.timer_list_total_time, totalTimeStr)
         }
+
+        override fun displayAskScheduleAlarmPermission() {
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.timer_list_schedule_alarm_permission_title)
+                .setMessage(R.string.timer_list_schedule_alarm_permission_message)
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                    // nothing to do
+                }
+                .setPositiveButton(R.string.timer_list_schedule_alarm_permission_positive_button) { _, _ ->
+                    presenter.onClickAskScheduleAlarmSettings()
+                }
+                .show()
+        }
     }
 
     private fun setupGraph() {

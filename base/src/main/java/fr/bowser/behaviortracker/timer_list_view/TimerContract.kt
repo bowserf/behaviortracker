@@ -27,6 +27,8 @@ interface TimerContract {
         fun onClickAddTimer()
 
         fun isInstantApp(): Boolean
+
+        fun onClickAskScheduleAlarmSettings()
     }
 
     interface Screen {
@@ -50,5 +52,7 @@ interface TimerContract {
         fun displayRemoveAllTimersConfirmationDialog()
 
         fun updateTotalTime(totalTime: Long)
+
+        fun displayAskScheduleAlarmPermission()
     }
 }

@@ -9,4 +9,8 @@
     <string name="timer_list_section_active_title">Active timer</string>
     <string name="timer_list_total_time">Total time: %1$s</string>
 
+    <string name="timer_list_schedule_alarm_permission_title">Schedule alarm permission required</string>
+    <string name="timer_list_schedule_alarm_permission_message">Time Tracker needs the permission \"Alarms &amp; reminders\" in order to enable a reminder.\nYou have to manually enable the permission from settings.</string>
+    <string name="timer_list_schedule_alarm_permission_positive_button">Open settings</string>
+
 </resources>
