@@ -17,11 +17,11 @@ class AlarmDialogPresenter(
 
     override fun onClickValidate(alarmTime: AlarmTime) {
         if (alarmTime.isActivated) {
-            screen.displayMessageAlarmEnabled()
             alarmTimerManager.setAlarm(alarmTime.hour, alarmTime.minute)
+            screen.displayMessageAlarmEnabled()
         } else {
-            screen.displayMessageAlarmDisabled()
             alarmTimerManager.removeAlarm()
+            screen.displayMessageAlarmDisabled()
         }
         eventManager.sendSetAlarmEvent(alarmTime.isActivated)
     }
