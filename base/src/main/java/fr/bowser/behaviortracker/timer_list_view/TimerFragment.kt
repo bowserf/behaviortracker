@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer_list_view
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
@@ -17,6 +18,7 @@ import androidx.annotation.Keep
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -27,9 +29,9 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm_view.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerDialog
-import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestFragmentArgs
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
 import fr.bowser.behaviortracker.utils.TimeConverter
+import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
 
 class TimerFragment : Fragment(R.layout.fragment_timer) {
@@ -95,11 +97,17 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         if (!presenter.isInstantApp()) {
             inflater.inflate(R.menu.menu_home, menu)
+            val reviewMenuItem = menu.findItem(R.id.menu_review)
+            reviewMenuItem.isVisible = !presenter.isReviewAlreadyDone()
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.menu_review -> {
+                presenter.onClickRateApp(createReviewActivityContainer())
+                return true
+            }
             R.id.menu_reset_all -> {
                 presenter.onClickResetAll()
                 return true
@@ -194,6 +202,10 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             totalTimeTv.text = resources.getString(R.string.timer_list_total_time, totalTimeStr)
         }
 
+        override fun invalidateMenu() {
+            requireActivity().invalidateOptionsMenu()
+        }
+
         override fun displayAskScheduleAlarmPermission() {
             AlertDialog.Builder(requireContext())
                 .setTitle(R.string.timer_list_schedule_alarm_permission_title)
@@ -245,13 +257,24 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         }
     }
 
-    private fun createActivityResultLauncher() = registerForActivityResult(ActivityResultContracts.RequestPermission()) { success ->
-        if (success) {
-            presenter.onNotificationPermissionGranted()
-        } else {
-            presenter.onNotificationPermissionDeclined()
+    private fun createReviewActivityContainer() = object : ReviewActivityContainer {
+        override fun isActivityAccessible(): Boolean {
+            return !activity!!.isDestroyed
+        }
+
+        override fun getActivity(): Activity {
+            return activity!!
         }
     }
+
+    private fun createActivityResultLauncher() =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { success ->
+            if (success) {
+                presenter.onNotificationPermissionGranted()
+            } else {
+                presenter.onNotificationPermissionDeclined()
+            }
+        }
 
     private fun setupGraph() {
         val build = DaggerTimerComponent.builder()

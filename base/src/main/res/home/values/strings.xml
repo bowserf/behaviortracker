@@ -6,6 +6,7 @@
 
     <!-- Menu -->
     <string name="menu_alarm">Alarm</string>
+    <string name="menu_review">Rate the app</string>
     <string name="menu_reset_all">Reset all timers</string>
     <string name="menu_remove_all">Remove all timers</string>
     <string name="menu_rewards">Support developers</string>

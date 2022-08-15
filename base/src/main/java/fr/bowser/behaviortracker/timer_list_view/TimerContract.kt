@@ -1,6 +1,8 @@
 package fr.bowser.behaviortracker.timer_list_view
 
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
+import fr.bowser.feature_review.ReviewActivityContainer
+import fr.bowser.feature_review.ReviewManager
 
 interface TimerContract {
 
@@ -11,6 +13,8 @@ interface TimerContract {
         fun onStart()
 
         fun onStop()
+
+        fun onClickRateApp(activityContainer: ReviewActivityContainer)
 
         fun onClickResetAll()
 
@@ -29,6 +33,8 @@ interface TimerContract {
         fun onClickAddTimer()
 
         fun isInstantApp(): Boolean
+
+        fun isReviewAlreadyDone(): Boolean
 
         fun onClickAskScheduleAlarmSettings()
 
@@ -72,5 +78,7 @@ interface TimerContract {
         fun checkNotificationPermission(permission: String)
 
         fun updateTotalTime(totalTime: Long)
+
+        fun invalidateMenu()
     }
 }

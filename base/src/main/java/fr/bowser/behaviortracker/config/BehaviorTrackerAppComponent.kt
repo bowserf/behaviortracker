@@ -19,6 +19,8 @@ import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.notification_manager.NotificationManagerModule
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
+import fr.bowser.behaviortracker.review.ReviewModule
+import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
 import fr.bowser.behaviortracker.string.StringManagerModule
@@ -32,6 +34,7 @@ import fr.bowser.behaviortracker.timer_list.TimerListManagerModule
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature.billing.InAppManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
+import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
 import javax.inject.Singleton
 
@@ -45,11 +48,12 @@ import javax.inject.Singleton
         InAppManagerModule::class,
         NotificationManagerModule::class,
         PomodoroManagerModule::class,
-        TimeManagerModule::class,
-        TimeProviderModule::class,
-        TimerListManagerModule::class,
+        ReviewModule::class,
         SettingManagerModule::class,
-        StringManagerModule::class
+        StringManagerModule::class,
+        TimerListManagerModule::class,
+        TimeManagerModule::class,
+        TimeProviderModule::class
     ),
     dependencies = [
         InstantAppComponent::class,
@@ -59,6 +63,8 @@ import javax.inject.Singleton
 interface BehaviorTrackerAppComponent {
 
     fun provideAlarmTimerManager(): AlarmTimerManager
+
+    fun provideAppInitialization(): AppInitialization
 
     fun provideContext(): Context
 
@@ -76,21 +82,23 @@ interface BehaviorTrackerAppComponent {
 
     fun provideNotificationManager(): NotificationManager
 
-    fun provideTimeManager(): TimeManager
-
-    fun provideTimeProvider(): TimeProvider
-
     fun providePomodoroManager(): PomodoroManager
 
-    fun provideTimerDAO(): TimerDAO
+    fun provideReviewManager(): ReviewManager
 
-    fun provideTimerListManager(): TimerListManager
+    fun provideReviewStorage(): ReviewStorage
 
     fun provideSettingManager(): SettingManager
 
     fun provideStringManager(): StringManager
 
-    fun provideAppInitialization(): AppInitialization
+    fun provideTimeManager(): TimeManager
+
+    fun provideTimeProvider(): TimeProvider
+
+    fun provideTimerDAO(): TimerDAO
+
+    fun provideTimerListManager(): TimerListManager
 
     @Component.Builder
     interface Builder {

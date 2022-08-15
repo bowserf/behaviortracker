@@ -5,21 +5,28 @@ import android.os.Build
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
+import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature_review.ReviewActivityContainer
+import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
 
 class TimerPresenter(
     private val screen: TimerContract.Screen,
     private val alarmTimerManager: AlarmTimerManager,
     private val notificationManager: NotificationManager,
+    private val reviewManager: ReviewManager,
+    private val reviewStorage: ReviewStorage,
+    private val stringManager: StringManager,
     private val timerListManager: TimerListManager,
     private val timeManager: TimeManager,
-    private val stringManager: StringManager,
     private val isInstantApp: Boolean
 ) : TimerContract.Presenter {
+
+    private val reviewManagerListener = createReviewManagerListener()
 
     private val timerListManagerListener = createTimerListManagerListener()
 
@@ -42,6 +49,7 @@ class TimerPresenter(
     }
 
     override fun onStart() {
+        reviewManager.addListener(reviewManagerListener)
         timerListManager.addListener(timerListManagerListener)
         timeManager.addListener(timeManagerListener)
 
@@ -49,6 +57,7 @@ class TimerPresenter(
     }
 
     override fun onStop() {
+        reviewManager.removeListener(reviewManagerListener)
         timerListManager.removeListener(timerListManagerListener)
         timeManager.removeListener(timeManagerListener)
     }
@@ -103,6 +112,10 @@ class TimerPresenter(
         screen.displayExplainNotificationPermission(explainPermissionRequestModel)
     }
 
+    override fun onClickRateApp(activityContainer: ReviewActivityContainer) {
+        reviewManager.launchReviewFlow(activityContainer)
+    }
+
     override fun onNotificationPermissionGranted() {
         displayAlarmTimerDialogIfNotificationsAreEnabled()
     }
@@ -152,6 +165,21 @@ class TimerPresenter(
         } else {
             screen.displayAskNotificationDisplay()
         }
+    }
+
+    private fun createReviewManagerListener() = object : ReviewManager.Listener {
+        override fun onSucceeded() {
+            screen.invalidateMenu()
+            reviewStorage.markReview()
+        }
+
+        override fun onFailed(failReason: ReviewManager.FailReason) {
+            // nothing to do
+        }
+    }
+
+    override fun isReviewAlreadyDone(): Boolean {
+        return reviewStorage.isReviewMarked()
     }
 
     private fun createTimeManagerListener() = object : TimeManager.Listener {
