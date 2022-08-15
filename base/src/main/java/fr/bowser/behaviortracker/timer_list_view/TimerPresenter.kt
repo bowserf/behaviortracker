@@ -1,6 +1,9 @@
 package fr.bowser.behaviortracker.timer_list_view
 
+import android.Manifest
+import android.os.Build
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
@@ -76,14 +79,36 @@ class TimerPresenter(
 
     override fun onClickAlarm() {
         if (alarmTimerManager.canScheduleAlarm()) {
-            if (notificationManager.areNotificationsEnabled()) {
-                screen.displayAlarmTimerDialog()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                screen.checkNotificationPermission(Manifest.permission.POST_NOTIFICATIONS)
             } else {
-                screen.displayAskNotificationDisplay()
+                displayAlarmTimerDialogIfNotificationsAreEnabled()
             }
         } else {
             screen.displayAskScheduleAlarmPermission()
         }
+    }
+
+    override fun onNotificationPermissionAlreadyGranted() {
+        displayAlarmTimerDialogIfNotificationsAreEnabled()
+    }
+
+    override fun shouldShowNotificationRequestPermissionRationale(permission: String) {
+        val explainPermissionRequestModel = ExplainPermissionRequestModel(
+            stringManager.getString(R.string.timer_list_explain_notification_permission_title),
+            stringManager.getString(R.string.timer_list_explain_notification_permission_message),
+            R.drawable.timer_list_reminder_notification_permission,
+            listOf(permission)
+        )
+        screen.displayExplainNotificationPermission(explainPermissionRequestModel)
+    }
+
+    override fun onNotificationPermissionGranted() {
+        displayAlarmTimerDialogIfNotificationsAreEnabled()
+    }
+
+    override fun onNotificationPermissionDeclined() {
+        // nothing to do
     }
 
     override fun onClickAskNotificationDisplaySettings() {
@@ -119,6 +144,14 @@ class TimerPresenter(
         var totalTime = 0f
         timerListManager.getTimerList().forEach { totalTime += it.time }
         screen.updateTotalTime(totalTime.toLong())
+    }
+
+    private fun displayAlarmTimerDialogIfNotificationsAreEnabled() {
+        if (notificationManager.areNotificationsEnabled()) {
+            screen.displayAlarmTimerDialog()
+        } else {
+            screen.displayAskNotificationDisplay()
+        }
     }
 
     private fun createTimeManagerListener() = object : TimeManager.Listener {

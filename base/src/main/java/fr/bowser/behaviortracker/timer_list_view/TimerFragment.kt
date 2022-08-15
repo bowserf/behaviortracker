@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer_list_view
 
 import android.animation.ObjectAnimator
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,10 +12,12 @@ import android.view.View.VISIBLE
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.Keep
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +27,8 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm_view.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerDialog
+import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestFragmentArgs
+import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
@@ -33,6 +38,8 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
     lateinit var presenter: TimerContract.Presenter
 
     private val screen = createScreen()
+
+    private val activityResultLauncher = createActivityResultLauncher()
 
     private lateinit var fab: FloatingActionButton
 
@@ -211,6 +218,38 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                     presenter.onClickAskNotificationDisplaySettings()
                 }
                 .show()
+        }
+
+        override fun checkNotificationPermission(permission: String) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    permission
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    presenter.onNotificationPermissionAlreadyGranted()
+                }
+                shouldShowRequestPermissionRationale(permission) -> {
+                    presenter.shouldShowNotificationRequestPermissionRationale(permission)
+                }
+                else -> {
+                    activityResultLauncher.launch(permission)
+                }
+            }
+        }
+
+        override fun displayExplainNotificationPermission(explainPermissionRequestModel: ExplainPermissionRequestModel) {
+            val action = TimerFragmentDirections.actionTimerListScreenToExplainPermissionRequest(
+                explainPermissionRequestModel
+            )
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun createActivityResultLauncher() = registerForActivityResult(ActivityResultContracts.RequestPermission()) { success ->
+        if (success) {
+            presenter.onNotificationPermissionGranted()
+        } else {
+            presenter.onNotificationPermissionDeclined()
         }
     }
 

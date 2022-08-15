@@ -24,12 +24,17 @@
             app:destination="@id/settings_screen"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_timer_list_screen_to_explain_permission_request"
+            app:destination="@id/explain_permission_request"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
     </fragment>
     <fragment
         android:id="@id/pomodoro_screen"
         android:name="fr.bowser.behaviortracker.pomodoro_view.PomodoroFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_pomodoro" >
+        tools:layout="@layout/fragment_pomodoro">
         <action
             android:id="@+id/action_pomodoro_screen_to_settings_screen"
             app:destination="@id/settings_screen"
@@ -39,7 +44,7 @@
     <fragment
         android:id="@+id/show_mode_screen"
         android:name="fr.bowser.behaviortracker.show_mode_view.ShowModeFragment"
-        android:label="ShowModeActivity"
+        android:label="ShowModeFragment"
         tools:layout="@layout/fragment_show_mode">
         <argument
             android:name="selectedTimerId"
@@ -49,10 +54,19 @@
         android:id="@+id/rewards_screen"
         android:name="fr.bowser.behaviortracker.rewards_view.RewardsFragment"
         android:label="RewardsFragment"
-        tools:layout="@layout/fragment_rewards"/>
+        tools:layout="@layout/fragment_rewards" />
     <fragment
         android:id="@+id/settings_screen"
         android:name="fr.bowser.behaviortracker.setting_view.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting"/>
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/explain_permission_request"
+        android:name="fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestFragment"
+        android:label="ExplainPermissionRequestFragment"
+        tools:layout="@layout/fragment_explain_permission_request">
+        <argument
+            android:name="explainPermissionRequestModel"
+            app:argType="fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel" />
+    </fragment>
 </navigation>

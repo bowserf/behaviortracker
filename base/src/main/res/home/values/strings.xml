@@ -16,4 +16,7 @@
     <string name="bottom_navigation_timer_view">Timer</string>
     <string name="bottom_navigation_pomodoro_view" translatable="false">Pomodoro</string>
 
+    <string name="timer_list_explain_notification_permission_title">Get reminder!</string>
+    <string name="timer_list_explain_notification_permission_message">Never forget to time your activities thanks to the reminder you setup.</string>
+
 </resources>

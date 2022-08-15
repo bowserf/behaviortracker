@@ -3,6 +3,9 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="fr.bowser.behaviortracker">
 
+    <!-- Started from API 33, there is a permission to display notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Crashlytics and Firebase -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Pomodoro, when timer switched -->
