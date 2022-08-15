@@ -84,6 +84,7 @@ android {
                 "src/main/res/choosepomodorotimer",
                 "src/main/res/common",
                 "src/main/res/createtimer",
+                "src/main/res/explain_permission_request",
                 "src/main/res/home",
                 "src/main/res/instantapp",
                 "src/main/res/notification",
