@@ -11,5 +11,8 @@
     <string name="bottom_navigation_timer_view">Timer</string>
     <string name="menu_remove_all">Elimina tutti i cronometri</string>
     <string name="home_instant_app_install">INSTALLARE</string>
+    <string name="timer_list_explain_notification_permission_title">Ricevere promemoria</string>
+    <string name="timer_list_explain_notification_permission_message">"Non dimenticare mai di cronometrare le tue attività grazie al promemoria che hai impostato.  "</string>
+    <string name="menu_review">Valuta l\'app</string>
 
 </resources>

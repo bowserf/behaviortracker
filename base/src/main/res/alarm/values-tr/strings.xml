@@ -16,6 +16,6 @@
 
     <!-- Toast -->
     <string name="alarm_timer_alarm_enabled">Alarm aktive edildi</string>
-    <string name="alarm_timer_alarm_disabled">Alarm devredışı bırakıldı</string>
+    <string name="alarm_timer_alarm_disabled">Alarm devre dışı</string>
 
 </resources>
