@@ -23,7 +23,7 @@ android {
         versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 
-        resourceConfigurations.addAll(listOf("en", "fr", "it", "tr"))
+        resourceConfigurations.addAll(listOf("en", "de", "es", "fr", "hi", "it", "ja", "pt", "tr", "zh-rCN", "zh-rTW"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -112,6 +112,7 @@ dependencies {
     implementation(project(":feature_do_not_disturb"))
     implementation(project(":feature_review"))
     implementation(project(":feature_string"))
+    implementation(project(":translations"))
 
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))

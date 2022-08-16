@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="menu_keep_screen_on">Ekranı açık tut</string>
-    <string name="menu_keep_screen_off">Ekranı kapalı tut</string>
-
-</resources>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="activity_rewards_title">Geliştiricileri destekle</string>
-    <string name="rewards_purchase_fail">Satın alma sırasında bir hata oluştu =\'( Daha sonra tekrar deneyin.</string>
-    <string name="rewards_purchase_success">Desteğiniz için teşekkürler! Uygulamamızı geliştirmek için çok çalışmaya devam edeceğiz &lt;3</string>
-
-</resources>

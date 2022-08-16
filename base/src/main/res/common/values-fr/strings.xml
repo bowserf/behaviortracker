@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="create_timer_shortcut_short_label">Nouveau chronomètre</string>
-    <string name="create_timer_shortcut_long_label">Créer un nouveau chronomètre pour suivre vos actions.</string>
-
-</resources>

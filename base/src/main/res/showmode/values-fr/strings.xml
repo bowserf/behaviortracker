@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="menu_keep_screen_on">Garder l\'écran allumé</string>
-    <string name="menu_keep_screen_off">Ne pas garder l\'écran allumé</string>
-
-</resources>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="menu_keep_screen_on">Tieni lo schermo acceso</string>
-    <string name="menu_keep_screen_off">Non tenere lo schermo acceso</string>
-
-
-</resources>

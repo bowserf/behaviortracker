@@ -1,8 +1,0 @@
-<resources>
-
-    <string name="app_name" translatable="false">Time Tracker</string>
-
-    <string name="create_timer_shortcut_short_label">New timer</string>
-    <string name="create_timer_shortcut_long_label">Create a new timer to track an action.</string>
-
-</resources>

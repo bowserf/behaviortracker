@@ -8,5 +8,6 @@ include(
     ":feature_billing",
     ":feature_do_not_disturb",
     ":feature_review",
-    ":feature_string"
+    ":feature_string",
+    ":translations"
 )

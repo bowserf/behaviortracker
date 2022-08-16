@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="activity_rewards_title">Support developers</string>
-    <string name="rewards_purchase_fail">An error occurred during purchase =\'(\nPlease try later.</string>
-    <string name="rewards_purchase_success">Thank you for your support! We will continue to work hard to improve the application &lt;3</string>
-
-</resources>
