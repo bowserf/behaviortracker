@@ -4,6 +4,7 @@ import android.content.Context
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.utils.ColorUtils
 import java.util.ArrayList
+import java.util.concurrent.TimeUnit
 
 class TimerDaoUA(context: Context) : TimerDAO {
 
@@ -18,7 +19,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 context.resources.getString(R.string.release_screenshot_timer_work),
                 color1,
                 0,
-                0,
+                System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3),
                 0
             )
         )
@@ -30,7 +31,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 context.resources.getString(R.string.release_screenshot_timer_transport),
                 color2,
                 0,
-                0,
+                System.currentTimeMillis() - TimeUnit.HOURS.toMillis(2),
                 1
             )
         )
@@ -42,7 +43,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 context.resources.getString(R.string.release_screenshot_timer_sport),
                 color3,
                 0,
-                0,
+                System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1),
                 2
             )
         )
@@ -54,7 +55,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 context.resources.getString(R.string.release_screenshot_timer_cooking),
                 color4,
                 0,
-                0,
+                System.currentTimeMillis() - TimeUnit.HOURS.toMillis(4),
                 3
             )
         )
@@ -66,7 +67,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 context.resources.getString(R.string.release_screenshot_timer_watch_series),
                 color5,
                 0,
-                0,
+                    System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5),
                 4
             )
         )
