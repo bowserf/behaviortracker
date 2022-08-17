@@ -30,6 +30,7 @@ import fr.bowser.behaviortracker.alarm_view.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerDialog
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
+import fr.bowser.behaviortracker.pomodoro_view.PomodoroFragment
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
@@ -183,7 +184,13 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             emptyListView.visibility = VISIBLE
             emptyListText.visibility = VISIBLE
 
-            val fabAnimator = ObjectAnimator.ofFloat(this, PROPERTY_FAB_ANIMATION, 1f, 1.15f, 1f)
+            val fabAnimator = ObjectAnimator.ofFloat(
+                this@TimerFragment,
+                PROPERTY_FAB_ANIMATION,
+                1f,
+                1.15f,
+                1f
+            )
             fabAnimator.duration = FAB_ANIMATION_DURATION
             fabAnimator.repeatCount = 1
             fabAnimator.interpolator = AccelerateDecelerateInterpolator()
