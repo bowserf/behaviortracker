@@ -1,3 +1,15 @@
+### Time Tracker v1.00.00
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2022-108-17
+* Change log:
+  - [Pomodoro] Update design
+  - [Timer] Display active time at the top of the list
+  - [Android] Compatibility to API 33 with support of notification permission and schedule exact alarm
+  - [Timer] Be able to update the time of a timer
+  - [Timer] Display the time of the last interaction on a timer.
+
+
+
 ### Time Tracker v0.08.01
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2019-12-17
