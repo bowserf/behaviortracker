@@ -11,6 +11,7 @@ import android.content.res.Resources
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
@@ -145,7 +146,7 @@ class TimeService : Service(), TimeContract.Screen {
             timerNotificationBuilder!!.build()
         )
 
-        stopForeground(false)
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_DETACH)
     }
 
     override fun continuePomodoroNotification() {
