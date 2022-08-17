@@ -8,7 +8,7 @@ import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-internal class HomeModule(private val screen: HomeContract.Screen) {
+internal class HomeModule(private val screen: HomeContract.Screen, private val activity: Activity) {
 
     @GenericScope(component = HomeComponent::class)
     @Provides
@@ -27,7 +27,6 @@ internal class HomeModule(private val screen: HomeContract.Screen) {
     private fun createInstallAppAddon(instantAppManagerHelper: InstantAppManager): HomePresenter.InstantAppAddon {
         return object : HomePresenter.InstantAppAddon {
             override fun displayInstallAppDialog() {
-                val activity = screen as Activity
                 instantAppManagerHelper.showInstallPrompt(activity)
             }
         }

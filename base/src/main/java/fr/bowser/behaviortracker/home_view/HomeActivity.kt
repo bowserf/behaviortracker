@@ -58,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupGraph() {
         val build = DaggerHomeComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-            .homeModule(HomeModule(screen))
+            .homeModule(HomeModule(screen, this))
             .build()
         build.inject(this)
     }
