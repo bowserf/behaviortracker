@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.notification
 
+import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
@@ -8,6 +9,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 
 class TimeServicePresenter(
     private val screen: TimeContract.Screen,
+    private val instantAppManager: InstantAppManager,
     private val timeManager: TimeManager,
     private val timerListManager: TimerListManager,
     private val pomodoroManager: PomodoroManager,
@@ -103,6 +105,9 @@ class TimeServicePresenter(
     }
 
     private fun pauseTimerNotif(modifiedTimer: Timer) {
+        if (instantAppManager.isInstantApp()) {
+            dismissNotification()
+        }
         if (!isNotificationDisplayed || timer != modifiedTimer) {
             return
         }
