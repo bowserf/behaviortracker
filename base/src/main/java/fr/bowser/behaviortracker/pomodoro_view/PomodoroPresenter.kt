@@ -41,7 +41,7 @@ class PomodoroPresenter(
             screen.displayPomodoroDialog()
         }
 
-        if (doNotDisturbManager.isNotificationPolicyAccess() == DoNotDisturbManager.DnDPolicyAccess.NOT_MANAGED) {
+        if (doNotDisturbManager.isNotificationPolicyAccess() == DoNotDisturbManager.DnDPolicyAccess.NOT_MANAGED || isInstantApp) {
             screen.hideDoNotDisturb()
         } else {
             updateDoNotDisturb()
