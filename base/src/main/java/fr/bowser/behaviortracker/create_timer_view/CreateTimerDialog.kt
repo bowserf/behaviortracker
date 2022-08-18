@@ -90,7 +90,6 @@ class CreateTimerDialog : DialogFragment(R.layout.fragment_create_timer) {
             RecyclerView.VERTICAL,
             false
         )
-        chooseColor.setHasFixedSize(true)
     }
 
     private fun initTimePicker(root: View) {
