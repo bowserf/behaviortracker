@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/widget_background"
+    android:paddingLeft="@dimen/widget_container_padding_horizontal"
+    android:paddingTop="@dimen/widget_container_padding_vertical"
+    android:paddingRight="@dimen/widget_container_padding_horizontal"
+    android:paddingBottom="@dimen/widget_container_padding_vertical">
+
+    <LinearLayout
+        android:id="@+id/widget_pomodoro_container_session_started"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_space"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/widget_pomodoro_chrono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/widget_default_text_color"
+                    android:textSize="32dp"
+                    android:textStyle="bold"
+                    tools:text="21:54" />
+
+                <ImageView
+                    android:layout_width="@dimen/widget_pomodoro_small_icon_size"
+                    android:layout_height="@dimen/widget_pomodoro_small_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/widget_pomodoro_timer_margin_left"
+                    android:src="@drawable/widget_pomodoro" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/widget_pomodoro_timer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:textColor="@color/widget_default_text_color"
+                android:textSize="18dp"
+                tools:text="Work" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/widget_pomodoro_start_stop"
+            android:layout_width="@dimen/widget_default_button_size"
+            android:layout_height="@dimen/widget_default_button_size"
+            android:background="@drawable/widget_select_timer_bg"
+            android:scaleType="center"
+            tools:src="@drawable/widget_play_state" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_pomodoro_container_no_session"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_space"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/widget_pomodoro_no_session_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="@string/widget_pomodoro_no_session_title"
+                android:textColor="@color/widget_default_text_color"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_pomodoro_no_session_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@string/widget_pomodoro_no_session"
+                android:textColor="@color/widget_default_text_color"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/widget_pomodoro_select_timer"
+            android:layout_width="@dimen/widget_default_button_size"
+            android:layout_height="@dimen/widget_default_button_size"
+            android:background="@drawable/widget_select_timer_bg"
+            android:clickable="true"
+            android:scaleType="center"
+            android:src="@drawable/widget_pomodoro" />
+
+    </LinearLayout>
+
+</FrameLayout>

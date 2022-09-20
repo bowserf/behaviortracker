@@ -18,7 +18,6 @@ import androidx.annotation.Keep
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -30,7 +29,6 @@ import fr.bowser.behaviortracker.alarm_view.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerDialog
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
-import fr.bowser.behaviortracker.pomodoro_view.PomodoroFragment
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
@@ -96,11 +94,9 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (!presenter.isInstantApp()) {
-            inflater.inflate(R.menu.menu_home, menu)
-            val reviewMenuItem = menu.findItem(R.id.menu_review)
-            reviewMenuItem.isVisible = !presenter.isReviewAlreadyDone()
-        }
+        inflater.inflate(R.menu.menu_home, menu)
+        val reviewMenuItem = menu.findItem(R.id.menu_review)
+        reviewMenuItem.isVisible = !presenter.isReviewAlreadyDone()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

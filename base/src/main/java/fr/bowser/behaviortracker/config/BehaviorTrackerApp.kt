@@ -3,14 +3,13 @@ package fr.bowser.behaviortracker.config
 import android.app.Application
 import android.content.Context
 import android.os.StrictMode
-import com.google.android.gms.common.wrappers.InstantApps
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.alarm.AlarmNotification
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
-import fr.bowser.behaviortracker.app_initialization.AppInitializationProviderHelper
-import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
+import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.widget.PomodoroAppWidgetProvider
 import fr.bowser.feature.alarm.AlarmGraph
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbGraph
@@ -39,8 +38,6 @@ class BehaviorTrackerApp : Application() {
 
         setupGraph()
 
-        setupCrashlytics()
-
         setupFirebaseAnalytics()
 
         setupInAppManager()
@@ -55,32 +52,12 @@ class BehaviorTrackerApp : Application() {
         inAppManager.initialize(skus)
     }
 
-    private fun setupCrashlytics() {
-        FirebaseCrashlytics.getInstance().setCustomKey(
-            CRASHLYTICS_IS_INSTANT_APP,
-            appComponent.provideMyInstantApp().isInstantApp()
-        )
-    }
-
     private fun setupGraph() {
-        val isInstantApp = InstantApps.isInstantApp(this)
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-            .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp))
-            .appInitialization(
-                AppInitializationProviderHelper.provideAppInitializationComponent(
-                    this,
-                    isInstantApp
-                )
-            )
             .context(this)
             .build()
 
-        AlarmGraph.init(this)
-        DoNotDisturbGraph.init(this)
-        appComponent.provideAppInitialization().initialize()
-        if (BuildConfig.UA) {
-            AlarmGraph.inject(AlarmStorageManagerModuleUA())
-        }
+        appInitialization()
     }
 
     private fun setupAlarmListener() {
@@ -96,9 +73,41 @@ class BehaviorTrackerApp : Application() {
         FirebaseAnalytics.getInstance(this)
     }
 
-    companion object {
+    private fun appInitialization() {
+        val pomodoroManager = appComponent.providePomodoroManager()
+        pomodoroManager.addListener(createPomodoroListener())
+        AlarmGraph.init(this)
+        DoNotDisturbGraph.init(this)
+        if (BuildConfig.UA) {
+            AlarmGraph.inject(AlarmStorageManagerModuleUA())
+        }
+    }
 
-        private const val CRASHLYTICS_IS_INSTANT_APP = "is_instant_app"
+    private fun createPomodoroListener(): PomodoroManager.Listener {
+        return object : PomodoroManager.Listener {
+            override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
+                PomodoroAppWidgetProvider.update(this@BehaviorTrackerApp)
+            }
+
+            override fun onPomodoroSessionStop() {
+                PomodoroAppWidgetProvider.update(this@BehaviorTrackerApp)
+            }
+
+            override fun onTimerStateChanged(updatedTimer: Timer) {
+                PomodoroAppWidgetProvider.update(this@BehaviorTrackerApp)
+            }
+
+            override fun updateTime(updatedTimer: Timer, currentTime: Long) {
+                PomodoroAppWidgetProvider.update(this@BehaviorTrackerApp)
+            }
+
+            override fun onCountFinished(newTimer: Timer, duration: Long) {
+                PomodoroAppWidgetProvider.update(this@BehaviorTrackerApp)
+            }
+        }
+    }
+
+    companion object {
 
         @JvmStatic
         fun getAppComponent(context: Context): BehaviorTrackerAppComponent {

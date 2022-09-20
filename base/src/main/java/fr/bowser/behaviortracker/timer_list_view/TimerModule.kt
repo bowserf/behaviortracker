@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.timer_list_view
 
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.timer.TimeManager
@@ -19,7 +18,6 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
     @Provides
     fun provideTimerPresenter(
         alarmTimerManager: AlarmTimerManager,
-        instantAppManager: InstantAppManager,
         notificationManager: NotificationManager,
         reviewManager: ReviewManager,
         reviewStorage: ReviewStorage,
@@ -35,8 +33,7 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
             reviewStorage,
             stringManager,
             timerListManager,
-            timeManager,
-            instantAppManager.isInstantApp()
+            timeManager
         )
     }
 }

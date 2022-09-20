@@ -3,18 +3,10 @@ package fr.bowser.behaviortracker.event
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 
-class EventManagerImpl(context: Context, instantAppManager: InstantAppManager) : EventManager {
+class EventManagerImpl(context: Context) : EventManager {
 
     private val firebaseAnalytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(context)
-
-    init {
-        firebaseAnalytics.setUserProperty(
-            USER_PROPERTY_IS_INSTANT_APP,
-            instantAppManager.isInstantApp().toString()
-        )
-    }
 
     override fun sendTimerCreateEvent(startNow: Boolean) {
         val bundle = Bundle()
@@ -49,8 +41,6 @@ class EventManagerImpl(context: Context, instantAppManager: InstantAppManager) :
     }
 
     companion object {
-        const val USER_PROPERTY_IS_INSTANT_APP = "is_instant_app"
-
         const val EVENT_ALARM_NOTIF_CLICKED = "click_alarm_notif"
 
         const val EVENT_ALARM_NOTIF_DISPLAYED = "display_alarm_notif"

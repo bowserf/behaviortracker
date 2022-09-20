@@ -105,13 +105,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun createScreen() = object : HomeContract.Screen {
-        override fun setupInstantAppButton() {
-            val installBtn = findViewById<View>(R.id.home_instant_app_install)
-            installBtn.visibility = View.VISIBLE
-            installBtn.setOnClickListener {
-                presenter.onClickInstallApp()
-            }
-        }
     }
 
     companion object {

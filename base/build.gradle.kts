@@ -58,7 +58,7 @@ android {
             initWith(getByName("debug"))
             versionNameSuffix = ".ua"
             buildConfigField("boolean", "UA", "true")
-            setMatchingFallbacks("ua", "debug")
+            matchingFallbacks.addAll(listOf("ua", "debug"))
         }
     }
 
@@ -101,8 +101,6 @@ android {
             )
         }
     }
-
-    setDynamicFeatures(setOf(":installedapp", ":instantapp"))
 }
 
 dependencies {
@@ -119,8 +117,6 @@ dependencies {
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
-
-    implementation("com.google.android.play:core:1.10.3")
 
     // Design
     implementation("com.google.android.material:material:1.6.1")

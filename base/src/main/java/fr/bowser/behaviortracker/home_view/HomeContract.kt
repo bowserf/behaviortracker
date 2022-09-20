@@ -9,12 +9,7 @@ interface HomeContract {
         fun onStop()
 
         fun onAlarmNotificationClicked()
-
-        fun onClickInstallApp()
     }
 
-    interface Screen {
-
-        fun setupInstantAppButton()
-    }
+    interface Screen
 }

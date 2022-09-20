@@ -4,8 +4,6 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
-import fr.bowser.behaviortracker.app_initialization.AppInitialization
-import fr.bowser.behaviortracker.app_initialization.AppInitializationComponent
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.do_not_disturbed.DoNotDisturbModule
@@ -13,8 +11,6 @@ import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
 import fr.bowser.behaviortracker.inapp.InAppConfiguration
 import fr.bowser.behaviortracker.inapp.InAppManagerModule
-import fr.bowser.behaviortracker.instantapp.InstantAppComponent
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.notification_manager.NotificationManagerModule
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
@@ -54,17 +50,11 @@ import javax.inject.Singleton
         TimerListManagerModule::class,
         TimeManagerModule::class,
         TimeProviderModule::class
-    ),
-    dependencies = [
-        InstantAppComponent::class,
-        AppInitializationComponent::class
-    ]
+    )
 )
 interface BehaviorTrackerAppComponent {
 
     fun provideAlarmTimerManager(): AlarmTimerManager
-
-    fun provideAppInitialization(): AppInitialization
 
     fun provideContext(): Context
 
@@ -77,8 +67,6 @@ interface BehaviorTrackerAppComponent {
     fun provideInAppConfiguration(): InAppConfiguration
 
     fun provideInAppManager(): InAppManager
-
-    fun provideMyInstantApp(): InstantAppManager
 
     fun provideNotificationManager(): NotificationManager
 
@@ -107,9 +95,5 @@ interface BehaviorTrackerAppComponent {
 
         @BindsInstance
         fun context(context: Context): Builder
-
-        fun myInstantApp(instantAppComponent: InstantAppComponent): Builder
-
-        fun appInitialization(appInitializationComponent: AppInitializationComponent): Builder
     }
 }

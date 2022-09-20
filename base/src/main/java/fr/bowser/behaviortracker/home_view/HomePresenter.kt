@@ -1,19 +1,14 @@
 package fr.bowser.behaviortracker.home_view
 
 import fr.bowser.behaviortracker.event.EventManager
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 
 class HomePresenter(
     private val screen: HomeContract.Screen,
-    private val eventManager: EventManager,
-    private val instantAppManager: InstantAppManager,
-    private val instantAppAddon: InstantAppAddon
+    private val eventManager: EventManager
 ) : HomeContract.Presenter {
 
     override fun onStart() {
-        if (instantAppManager.isInstantApp()) {
-            screen.setupInstantAppButton()
-        }
+        // nothing to do
     }
 
     override fun onStop() {
@@ -22,14 +17,5 @@ class HomePresenter(
 
     override fun onAlarmNotificationClicked() {
         eventManager.sendAlarmNotificationClickedEvent()
-    }
-
-    override fun onClickInstallApp() {
-        instantAppAddon.displayInstallAppDialog()
-    }
-
-    interface InstantAppAddon {
-
-        fun displayInstallAppDialog()
     }
 }

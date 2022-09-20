@@ -17,11 +17,4 @@
 
     </application>
 
-    <dist:module dist:title="@string/dynamic_feature_app_module_name">
-        <dist:delivery>
-            <dist:install-time />
-        </dist:delivery>
-        <dist:fusing dist:include="false" />
-    </dist:module>
-
 </manifest>

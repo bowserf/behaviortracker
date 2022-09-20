@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import fr.bowser.build_src.ProjectConfig
 
 plugins {
-    id("com.android.dynamic-feature")
+    id("com.android.library")
     kotlin("android")
     kotlin("kapt")
 }
@@ -45,7 +45,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":base"))
 
     // Kotlin
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))

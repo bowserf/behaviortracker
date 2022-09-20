@@ -22,8 +22,7 @@ class TimerPresenter(
     private val reviewStorage: ReviewStorage,
     private val stringManager: StringManager,
     private val timerListManager: TimerListManager,
-    private val timeManager: TimeManager,
-    private val isInstantApp: Boolean
+    private val timeManager: TimeManager
 ) : TimerContract.Presenter {
 
     private val reviewManagerListener = createReviewManagerListener()
@@ -138,10 +137,6 @@ class TimerPresenter(
 
     override fun onClickAddTimer() {
         screen.displayCreateTimerView()
-    }
-
-    override fun isInstantApp(): Boolean {
-        return isInstantApp
     }
 
     private fun updateListVisibility() {

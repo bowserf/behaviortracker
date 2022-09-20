@@ -4,7 +4,6 @@ import android.app.Activity
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.event.EventManager
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
@@ -13,22 +12,11 @@ internal class HomeModule(private val screen: HomeContract.Screen, private val a
     @GenericScope(component = HomeComponent::class)
     @Provides
     fun provideHomePresenter(
-        eventManager: EventManager,
-        instantAppManager: InstantAppManager
+        eventManager: EventManager
     ): HomeContract.Presenter {
         return HomePresenter(
             screen,
-            eventManager,
-            instantAppManager,
-            createInstallAppAddon(instantAppManager)
+            eventManager
         )
-    }
-
-    private fun createInstallAppAddon(instantAppManagerHelper: InstantAppManager): HomePresenter.InstantAppAddon {
-        return object : HomePresenter.InstantAppAddon {
-            override fun displayInstallAppDialog() {
-                instantAppManagerHelper.showInstallPrompt(activity)
-            }
-        }
     }
 }
