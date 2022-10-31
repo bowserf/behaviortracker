@@ -11,8 +11,8 @@ class ProjectConfig : Plugin<Project> {
     }
 
     object SdkVersions {
-        const val versionCode = 70_01_00_00
-        const val versionName = "1.00.00"
+        const val versionCode = 70_01_00_01
+        const val versionName = "1.00.01"
         const val compileSdkVersion = 33
         const val targetSdkVersion = 33
         const val minSdkVersion = 21
