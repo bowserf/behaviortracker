@@ -70,7 +70,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space"
             android:layout_marginTop="@dimen/default_space"
-            android:layout_marginRight="@dimen/default_space"
             android:layout_marginBottom="@dimen/default_space"
             android:ellipsize="end"
             android:gravity="center_vertical"
@@ -78,9 +77,21 @@
             android:textSize="@dimen/text_size_xxl"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/timer_play_pause"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/timer_item_time_update"
             app:layout_constraintTop_toBottomOf="@id/timer_color"
             tools:text="Work" />
+
+        <ImageView
+            android:id="@+id/timer_item_time_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_space"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@drawable/timer_item_time_update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timer_color" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

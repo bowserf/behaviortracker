@@ -45,7 +45,7 @@ class TimerItemPresenter(
         pomodoroManager.startPomodoro(timer)
     }
 
-    override fun onClickAddDuration() {
+    override fun onClickUpdateTimer() {
         screen.displayUpdateTimerTimeDialog(timer.id)
     }
 

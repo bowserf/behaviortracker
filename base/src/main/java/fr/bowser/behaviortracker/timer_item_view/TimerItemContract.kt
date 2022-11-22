@@ -26,7 +26,7 @@ interface TimerItemContract {
 
         fun onClickStartPomodoro()
 
-        fun onClickAddDuration()
+        fun onClickUpdateTimer()
     }
 
     interface Screen {

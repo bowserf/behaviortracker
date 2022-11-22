@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_timer_update_timer_time"
-        android:enabled="true"
-        android:title="@string/item_update_timer_time"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/item_timer_reset"
         android:enabled="true"
         android:title="@string/item_timer_reset"

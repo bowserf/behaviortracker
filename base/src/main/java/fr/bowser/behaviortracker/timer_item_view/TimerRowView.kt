@@ -54,6 +54,7 @@ class TimerRowView(context: Context) : CardView(context) {
         tvName = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
         menu.setOnClickListener { displayMenu() }
+        findViewById<View>(R.id.timer_item_time_update).setOnClickListener { presenter.onClickUpdateTimer() }
     }
 
     override fun onAttachedToWindow() {
@@ -83,9 +84,6 @@ class TimerRowView(context: Context) : CardView(context) {
 
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.item_timer_update_timer_time -> {
-                    presenter.onClickAddDuration()
-                }
                 R.id.item_timer_reset -> {
                     presenter.onClickResetTimer()
                 }
