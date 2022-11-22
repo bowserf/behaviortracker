@@ -32,8 +32,6 @@ class TimerRowView(context: Context) : CardView(context) {
     private val lastUpdateTimestamp: TextView
     private val tvName: TextView
     private val menu: ImageView
-    private val reduceChrono: TextView
-    private val increaseChrono: TextView
     private val color: View
     private val btnPlayPause: ImageView
 
@@ -56,10 +54,6 @@ class TimerRowView(context: Context) : CardView(context) {
         tvName = findViewById(R.id.timer_name)
         menu = findViewById(R.id.timer_menu)
         menu.setOnClickListener { displayMenu() }
-        reduceChrono = findViewById(R.id.timer_reduce_time)
-        reduceChrono.setOnClickListener { presenter.onClickDecreaseTime() }
-        increaseChrono = findViewById(R.id.timer_increase_time)
-        increaseChrono.setOnClickListener { presenter.onClickIncreaseTime() }
     }
 
     override fun onAttachedToWindow() {
@@ -145,11 +139,6 @@ class TimerRowView(context: Context) : CardView(context) {
     }
 
     private fun createScreen() = object : TimerItemContract.Screen {
-
-        override fun updateTimeModification(timeModification: Int) {
-            reduceChrono.text = timeModification.toString()
-            increaseChrono.text = timeModification.toString()
-        }
 
         override fun timerUpdated(newTime: Long) {
             chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)

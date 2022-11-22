@@ -30,10 +30,6 @@ class SettingFragment : PreferenceFragmentCompat() {
 
         setupGraph()
 
-        val keyTimeModification = resources.getString(R.string.pref_key_time_modification)
-        val timeModificator = findPreference<TimeModificationDialogPreference>(keyTimeModification)
-        timeModificator!!.setTimeUnit(TIME_MODIFICATION_UNIT)
-
         val keyPomodoroStage = resources.getString(R.string.pref_key_pomodoro_stage)
         val pomodoroStage = findPreference<TimeModificationDialogPreference>(keyPomodoroStage)
         pomodoroStage!!.setTimeUnit(DURATION_STAGE_UNIT)
@@ -44,7 +40,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         )
         pomodoroPauseStage!!.setTimeUnit(DURATION_STAGE_UNIT)
 
-        val key = getString(fr.bowser.behaviortracker.R.string.pref_key_send_commentary)
+        val key = getString(R.string.pref_key_send_commentary)
         sendCommentary = findPreference(key)!!
         sendCommentary.onPreferenceClickListener = onPreferenceClickListener
     }
@@ -83,19 +79,19 @@ class SettingFragment : PreferenceFragmentCompat() {
         intent.data = Uri.parse("mailto:$SUPPORT_EMAIL")
         intent.putExtra(
             Intent.EXTRA_SUBJECT,
-            resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_subject)
+            resources.getString(R.string.settings_send_email_subject)
         )
         try {
             startActivity(
                 Intent.createChooser(
                     intent,
-                    resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_choose_app)
+                    resources.getString(R.string.settings_send_email_choose_app)
                 )
             )
         } catch (ex: android.content.ActivityNotFoundException) {
             Toast.makeText(
                 requireContext(),
-                resources.getString(fr.bowser.behaviortracker.R.string.settings_send_email_no_application_available),
+                resources.getString(R.string.settings_send_email_no_application_available),
                 Toast.LENGTH_SHORT
             )
                 .show()
@@ -128,7 +124,6 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     companion object {
         const val SUPPORT_EMAIL = "torcheux.frederic@gmail.com"
-        const val TIME_MODIFICATION_UNIT = "s"
         const val DURATION_STAGE_UNIT = "min"
     }
 }

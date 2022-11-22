@@ -14,10 +14,6 @@ interface TimerItemContract {
 
         fun timerStateChange()
 
-        fun onClickDecreaseTime()
-
-        fun onClickIncreaseTime()
-
         fun onClickDeleteTimer()
 
         fun onClickResetTimer()
@@ -44,8 +40,6 @@ interface TimerItemContract {
         fun statusUpdated(activate: Boolean)
 
         fun timerRenamed(name: String)
-
-        fun updateTimeModification(timeModification: Int)
 
         fun startShowMode(id: Long)
 

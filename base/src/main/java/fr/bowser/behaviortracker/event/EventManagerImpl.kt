@@ -22,12 +22,6 @@ class EventManagerImpl(context: Context, instantAppManager: InstantAppManager) :
         firebaseAnalytics.logEvent(EVENT_TIMER_CREATED, bundle)
     }
 
-    override fun sendNewTimeFixTimerDurationEvent(newTimer: Int) {
-        val bundle = Bundle()
-        bundle.putInt(EVENT_EXTRA_NEW_TIMER_FIX_TIMER_DURATION, newTimer)
-        firebaseAnalytics.logEvent(EVENT_NEW_TIMER_FIX_TIMER_DURATION, bundle)
-    }
-
     override fun sendSetAlarmEvent(enable: Boolean) {
         val bundle = Bundle()
         bundle.putBoolean(EVENT_EXTRA_ENABLE_ALARM, enable)
@@ -60,9 +54,6 @@ class EventManagerImpl(context: Context, instantAppManager: InstantAppManager) :
 
         const val EVENT_TIMER_CREATED = "timer_created"
         const val EVENT_EXTRA_TIMER_CREATED = "start_now"
-
-        const val EVENT_NEW_TIMER_FIX_TIMER_DURATION = "new_timer_duration_modificator"
-        const val EVENT_EXTRA_NEW_TIMER_FIX_TIMER_DURATION = "new_time"
 
         const val EVENT_CLICK_BUY_IN_APP = "click_buy_in_app"
         const val EVENT_EXTRA_CLICK_BUY_IN_APP = "product_id"

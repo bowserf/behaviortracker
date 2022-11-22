@@ -1,7 +1,6 @@
 package fr.bowser.behaviortracker.timer_item_view
 
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
-import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.time.TimeProvider
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
@@ -11,12 +10,9 @@ class TimerItemPresenter(
     private val screen: TimerItemContract.Screen,
     private val timeManager: TimeManager,
     private val timerListManager: TimerListManager,
-    private val settingManager: SettingManager,
     private val pomodoroManager: PomodoroManager,
     private val timeProvider: TimeProvider
-) : TimerItemContract.Presenter,
-    TimerListManager.Listener,
-    SettingManager.TimerModificationListener {
+) : TimerItemContract.Presenter, TimerListManager.Listener {
 
     private lateinit var timer: Timer
 
@@ -26,9 +22,6 @@ class TimerItemPresenter(
         timerListManager.addListener(this)
         timeManager.addListener(timeManagerListener)
 
-        settingManager.registerTimerModificationListener(this)
-
-        screen.updateTimeModification(settingManager.getTimerModification())
         screen.timerUpdated(timer.time.toLong())
         screen.statusUpdated(timer.isActivate)
 
@@ -36,7 +29,6 @@ class TimerItemPresenter(
     }
 
     override fun onStop() {
-        settingManager.unregisterTimerModificationListener(this)
         timerListManager.removeListener(this)
         timeManager.removeListener(timeManagerListener)
     }
@@ -65,18 +57,6 @@ class TimerItemPresenter(
 
     override fun onClickDeleteTimer() {
         timerListManager.removeTimer(timer)
-    }
-
-    override fun onClickDecreaseTime() {
-        timeManager.updateTime(timer, timer.time - settingManager.getTimerModification())
-
-        screen.timerUpdated(timer.time.toLong())
-    }
-
-    override fun onClickIncreaseTime() {
-        timeManager.updateTime(timer, timer.time + settingManager.getTimerModification())
-
-        screen.timerUpdated(timer.time.toLong())
     }
 
     override fun onClickResetTimer() {
@@ -109,10 +89,6 @@ class TimerItemPresenter(
         }
     }
 
-    override fun onTimerModificationChanged(timerModification: Int) {
-        screen.updateTimeModification(timerModification)
-    }
-
     private fun manageTimerUpdate() {
         if (!timer.isActivate) {
             timeManager.startTimer(timer)
@@ -135,10 +111,5 @@ class TimerItemPresenter(
                 screen.timerUpdated(updatedTimer.time.toLong())
             }
         }
-    }
-
-    interface AddOn {
-        fun startTimer(timer: Timer)
-        fun stopTimer(timer: Timer)
     }
 }
