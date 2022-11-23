@@ -18,8 +18,8 @@ import androidx.annotation.Keep
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +30,6 @@ import fr.bowser.behaviortracker.alarm_view.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerDialog
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
-import fr.bowser.behaviortracker.pomodoro_view.PomodoroFragment
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
@@ -56,7 +55,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
 
     private lateinit var totalTimeTv: TextView
 
-    private lateinit var timerListContainer: View
+    private lateinit var timerListContainer: NestedScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +70,16 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         initializeList(view)
 
         timerListContainer = view.findViewById(R.id.timer_list_container_list)
+        timerListContainer.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+                if (scrollY > oldScrollY) {
+                    fab.hide()
+                } else {
+                    fab.show()
+                }
+            }
+        )
+
         totalTimeTv = view.findViewById(R.id.timer_list_total_time)
 
         fab = view.findViewById(R.id.button_add_timer)
@@ -109,22 +118,27 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                 presenter.onClickRateApp(createReviewActivityContainer())
                 return true
             }
+
             R.id.menu_reset_all -> {
                 presenter.onClickResetAll()
                 return true
             }
+
             R.id.menu_remove_all -> {
                 presenter.onClickRemoveAllTimers()
                 return true
             }
+
             R.id.menu_settings -> {
                 presenter.onClickSettings()
                 return true
             }
+
             R.id.menu_alarm -> {
                 presenter.onClickAlarm()
                 return true
             }
+
             R.id.menu_rewards -> {
                 presenter.onClickRewards()
                 return true
@@ -247,9 +261,11 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     presenter.onNotificationPermissionAlreadyGranted()
                 }
+
                 shouldShowRequestPermissionRationale(permission) -> {
                     presenter.shouldShowNotificationRequestPermissionRationale(permission)
                 }
+
                 else -> {
                     activityResultLauncher.launch(permission)
                 }
@@ -297,17 +313,6 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         timerListSectionAdapter = TimerListSectionAdapterDelegate()
         timerList.layoutManager = LinearLayoutManager(activity)
         timerList.adapter = timerListSectionAdapter
-
-        timerList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0) {
-                    fab.hide()
-                } else {
-                    fab.show()
-                }
-                super.onScrolled(recyclerView, dx, dy)
-            }
-        })
     }
 
     /**
