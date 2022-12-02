@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/floating_running_view_height"
+    tools:background="@color/colorPrimary"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <ImageView
@@ -11,9 +12,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="8dp"
-        android:background="@drawable/floating_running_timer_play_state"
+        android:background="@drawable/floating_running_btn_bg"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/floating_running_timer_play" />
 
@@ -22,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:textColor="@color/text_light_day_night"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/floating_running_view_timer_name"
@@ -34,7 +37,8 @@
         android:id="@+id/floating_running_view_timer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textColor="@color/text_light_day_night"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/floating_running_view_timer_time"
         app:layout_constraintTop_toBottomOf="@id/floating_running_view_timer_time"
@@ -47,17 +51,6 @@
         android:layout_marginRight="8dp"
         android:padding="8dp"
         android:src="@drawable/floating_running_timer_update_time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/floating_running_view_overflow"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/floating_running_view_overflow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:padding="8dp"
-        android:src="@drawable/floating_running_timer_overflow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

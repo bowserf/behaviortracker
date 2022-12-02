@@ -8,6 +8,9 @@
     <color name="white">#ffffff</color>
 
     <color name="icon_day_night">#8a000000</color>
+    <color name="icon_light_day_night">#8affffff</color>
+
+    <color name="text_light_day_night">#8affffff</color>
 
     <color name="colorSecondary">#E91E63</color>
     <color name="colorOnSecondary">#FFFFFF</color>

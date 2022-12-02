@@ -1,113 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/fragment_timer_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/fragment_timer_floating_running_timer_view"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_constraintBottom_toTopOf="@id/timer_list_container_list"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/default_shadow_height"
-            android:background="@drawable/background_shadow_bottom"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/timer_list_container_list"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_constraintBottom_toTopOf="@id/timer_list_container_list"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_timers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_shadow_height"
+                android:background="@drawable/background_shadow_bottom"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-                <TextView
-                    android:id="@+id/timer_list_total_time"
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/timer_list_container_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    tools:text="Total time: 1:25:36" />
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/list_timers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-        </androidx.core.widget.NestedScrollView>
+                    <TextView
+                        android:id="@+id/timer_list_total_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="Total time: 1:25:36" />
 
-        <ImageView
-            android:id="@+id/empty_list_view"
-            android:layout_width="@dimen/empty_view_size"
-            android:layout_height="@dimen/empty_view_size"
-            android:background="@drawable/timer_list_empty_timer_bg"
-            android:padding="@dimen/timer_list_empty_icon_padding"
-            android:src="@drawable/ic_timer_list_empty_timer"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/empty_list_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:visibility="visible" />
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/empty_list_text"
-            android:layout_width="0dp"
+            </androidx.core.widget.NestedScrollView>
+
+            <ImageView
+                android:id="@+id/empty_list_view"
+                android:layout_width="@dimen/empty_view_size"
+                android:layout_height="@dimen/empty_view_size"
+                android:background="@drawable/timer_list_empty_timer_bg"
+                android:padding="@dimen/timer_list_empty_icon_padding"
+                android:src="@drawable/ic_timer_list_empty_timer"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/empty_list_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/empty_list_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_space_2"
+                android:layout_marginTop="@dimen/default_space_1_5"
+                android:layout_marginEnd="@dimen/default_space_2"
+                android:gravity="center"
+                android:text="@string/empty_list_view_text"
+                android:textSize="@dimen/text_size_xl"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/empty_list_view"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_add_timer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_space_2"
-            android:layout_marginTop="@dimen/default_space_1_5"
-            android:layout_marginEnd="@dimen/default_space_2"
-            android:gravity="center"
-            android:text="@string/empty_list_view_text"
-            android:textSize="@dimen/text_size_xl"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_list_view"
-            tools:visibility="visible" />
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/default_space_2"
+            android:layout_marginBottom="@dimen/default_space_2"
+            android:elevation="@dimen/default_space"
+            android:src="@drawable/ic_add"
+            app:fabSize="normal" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_add_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginRight="@dimen/default_space_2"
-        android:layout_marginBottom="@dimen/default_space_2"
-        android:elevation="@dimen/default_space"
-        android:src="@drawable/ic_add"
-        app:fabSize="normal" />
+    <fr.bowser.behaviortracker.floating_running_timer.FloatingRunningTimerView
+        android:id="@+id/fragment_timer_floating_running_timer_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/floating_running_view_height"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
