@@ -2,25 +2,30 @@ package fr.bowser.behaviortracker.floating_running_timer
 
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.TimeConverter
 
 class FloatingRunningTimerPresenter(
     private val screen: FloatingRunningTimerContract.Screen,
-    private val timeManager: TimeManager
+    private val timeManager: TimeManager,
+    private val timerListManager: TimerListManager,
 ) : FloatingRunningTimerContract.Presenter {
 
     private var currentTimer: Timer? = null
 
     private val timeManagerListener = createTimeManagerListener()
+    private val timerListManagerListener = createTimerListManagerListener()
 
     override fun onStart() {
         currentTimer = timeManager.getStartedTimer()
         updateVisibility()
         timeManager.addListener(timeManagerListener)
+        timerListManager.addListener(timerListManagerListener)
     }
 
     override fun onStop() {
         timeManager.removeListener(timeManagerListener)
+        timerListManager.removeListener(timerListManagerListener)
     }
 
     override fun onClickUpdateTime() {
@@ -47,17 +52,42 @@ class FloatingRunningTimerPresenter(
         screen.updateTime(timeToDisplay)
     }
 
+    private fun updateTimerInfo(timer: Timer) {
+        screen.updateTimer(timer.name)
+        screen.changeState(timer.isActivate)
+    }
+
     private fun createTimeManagerListener() = object : TimeManager.Listener {
         override fun onTimerStateChanged(updatedTimer: Timer) {
             currentTimer = updatedTimer
             updateVisibility()
-            screen.updateTimer(updatedTimer.name)
-            screen.changeState(updatedTimer.isActivate)
+            updateTimerInfo(updatedTimer)
             updateTimerTime(updatedTimer)
         }
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {
             updateTimerTime(updatedTimer)
+        }
+    }
+
+    private fun createTimerListManagerListener() = object : TimerListManager.Listener {
+        override fun onTimerRemoved(removedTimer: Timer) {
+            if (removedTimer != currentTimer) {
+                return
+            }
+            currentTimer = null
+            updateVisibility()
+        }
+
+        override fun onTimerAdded(updatedTimer: Timer) {
+            // nothing to do
+        }
+
+        override fun onTimerRenamed(updatedTimer: Timer) {
+            if (updatedTimer != currentTimer) {
+                return
+            }
+            updateTimerInfo(updatedTimer)
         }
     }
 }

@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.floating_running_timer
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
@@ -10,10 +11,14 @@ class FloatingRunningTimerModule(private val screen: FloatingRunningTimerContrac
 
     @GenericScope(component = FloatingRunningTimerComponent::class)
     @Provides
-    fun provideTimerItemPresenter(timeManager: TimeManager): FloatingRunningTimerContract.Presenter {
+    fun provideTimerItemPresenter(
+        timeManager: TimeManager,
+        timerListManager: TimerListManager
+    ): FloatingRunningTimerContract.Presenter {
         return FloatingRunningTimerPresenter(
             screen,
-            timeManager
+            timeManager,
+            timerListManager
         )
     }
 }
