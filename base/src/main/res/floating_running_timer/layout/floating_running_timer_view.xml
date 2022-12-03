@@ -49,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
+        android:background="@drawable/floating_running_btn_ripple_bg"
         android:padding="8dp"
         android:src="@drawable/floating_running_timer_update_time"
         app:layout_constraintBottom_toBottomOf="parent"

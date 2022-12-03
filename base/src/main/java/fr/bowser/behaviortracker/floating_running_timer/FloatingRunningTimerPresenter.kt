@@ -19,6 +19,8 @@ class FloatingRunningTimerPresenter(
     override fun onStart() {
         currentTimer = timeManager.getStartedTimer()
         updateVisibility()
+        updateTimerInfo()
+        updateTimerTime()
         timeManager.addListener(timeManagerListener)
         timerListManager.addListener(timerListManagerListener)
     }
@@ -46,13 +48,15 @@ class FloatingRunningTimerPresenter(
         screen.displayView(currentTimer != null)
     }
 
-    private fun updateTimerTime(timer: Timer) {
+    private fun updateTimerTime() {
+        val timer = currentTimer ?: return
         val newTime = timer.time.toLong()
         val timeToDisplay = TimeConverter.convertSecondsToHumanTime(newTime)
         screen.updateTime(timeToDisplay)
     }
 
-    private fun updateTimerInfo(timer: Timer) {
+    private fun updateTimerInfo() {
+        val timer = currentTimer ?: return
         screen.updateTimer(timer.name)
         screen.changeState(timer.isActivate)
     }
@@ -61,12 +65,12 @@ class FloatingRunningTimerPresenter(
         override fun onTimerStateChanged(updatedTimer: Timer) {
             currentTimer = updatedTimer
             updateVisibility()
-            updateTimerInfo(updatedTimer)
-            updateTimerTime(updatedTimer)
+            updateTimerInfo()
+            updateTimerTime()
         }
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {
-            updateTimerTime(updatedTimer)
+            updateTimerTime()
         }
     }
 
@@ -87,7 +91,7 @@ class FloatingRunningTimerPresenter(
             if (updatedTimer != currentTimer) {
                 return
             }
-            updateTimerInfo(updatedTimer)
+            updateTimerInfo()
         }
     }
 }
