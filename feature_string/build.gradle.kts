@@ -33,5 +33,5 @@ android {
 dependencies {
 
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.annotation:annotation:1.5.0")
 }

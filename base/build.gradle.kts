@@ -117,8 +117,8 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     implementation("com.google.android.play:core:1.10.3")
 
@@ -130,7 +130,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.annotation:annotation:1.4.0")
+    implementation("androidx.annotation:annotation:1.5.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.1.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.1.0")
