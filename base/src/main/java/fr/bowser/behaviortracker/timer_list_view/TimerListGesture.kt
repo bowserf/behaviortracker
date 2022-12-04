@@ -20,9 +20,9 @@ class TimerListGesture(context: Context, private val callback: Listener) :
     private val rightMargin: Int
 
     init {
-        icon = getBitmapFromVectorDrawable(context, R.drawable.ic_delete)
+        icon = getBitmapFromVectorDrawable(context, R.drawable.timer_list_view_delete)
         rightMargin =
-            context.resources.getDimensionPixelOffset(R.dimen.timer_list_remove_icon_margin_right)
+            context.resources.getDimensionPixelOffset(R.dimen.timer_list_view_remove_icon_margin_right)
     }
 
     override fun onMove(

@@ -50,7 +50,7 @@ class ShowModeTimerViewPresenterTest {
     @Test
     fun activeTimerSetViewToActiveState() {
         // Given
-        val timer = Timer("timer", ColorUtils.COLOR_AMBER)
+        val timer = Timer("", ColorUtils.COLOR_AMBER)
         timer.isActivate = true
 
         // When
@@ -63,7 +63,7 @@ class ShowModeTimerViewPresenterTest {
     @Test
     fun clickOnViewWhenTimerIsDisableStartIt() {
         // Given
-        val timer = Timer("timer", ColorUtils.COLOR_AMBER)
+        val timer = Timer("", ColorUtils.COLOR_AMBER)
         timer.isActivate = false
         presenter.setTimer(timer)
 
@@ -77,7 +77,7 @@ class ShowModeTimerViewPresenterTest {
     @Test
     fun clickOnViewWhenTimerIsEnableStopIt() {
         // Given
-        val timer = Timer("timer", ColorUtils.COLOR_AMBER)
+        val timer = Timer("", ColorUtils.COLOR_AMBER)
         timer.isActivate = true
         presenter.setTimer(timer)
 

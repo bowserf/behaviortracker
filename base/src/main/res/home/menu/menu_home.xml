@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_review"
         android:enabled="true"
-        android:icon="@drawable/timer_list_rate_app"
+        android:icon="@drawable/timer_list_view_rate_app"
         android:title="@string/menu_review"
         app:showAsAction="always" />
 

@@ -10,7 +10,7 @@
 
     <item
         android:bottom="@dimen/default_space_half"
-        android:drawable="@drawable/ic_more_vert_white"
+        android:drawable="@drawable/timer_item_view_overflow"
         android:left="@dimen/default_space_half"
         android:right="@dimen/default_space_half"
         android:top="@dimen/default_space_half" />

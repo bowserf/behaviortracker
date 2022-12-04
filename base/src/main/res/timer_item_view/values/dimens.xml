@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Item chrono -->
+    <dimen name="timer_item_view_modify_chrono_size">38dp</dimen>
+    <dimen name="timer_item_view_text_timer_chrono">56sp</dimen>
+    <dimen name="timer_item_view_timer_play_pause_size">28dp</dimen>
+
+</resources>

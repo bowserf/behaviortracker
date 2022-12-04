@@ -94,8 +94,8 @@ android {
                 "src/main/res/rewardsrow",
                 "src/main/res/setting_view",
                 "src/main/res/showmode",
-                "src/main/res/timer",
-                "src/main/res/timerlist",
+                "src/main/res/timer_item_view",
+                "src/main/res/timer_list_view",
                 "src/main/res/ua",
                 "src/main/res/update_timer_time",
                 "src/main/res/widget"

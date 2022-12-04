@@ -12,7 +12,7 @@
         android:background="@drawable/bg_white_ripple">
 
         <View
-            android:id="@+id/timer_color"
+            android:id="@+id/timer_item_view_color"
             android:layout_width="0dp"
             android:layout_height="90dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -21,51 +21,51 @@
             tools:background="@color/colorPrimaryLight" />
 
         <TextView
-            android:id="@+id/timer_chrono"
+            android:id="@+id/timer_item_view_timer_chrono"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space"
             android:includeFontPadding="false"
-            android:textSize="@dimen/text_timer_chrono"
-            app:layout_constraintBottom_toTopOf="@id/timer_last_update_timestamp"
+            android:textSize="@dimen/timer_item_view_text_timer_chrono"
+            app:layout_constraintBottom_toTopOf="@id/timer_item_view_timer_last_update_timestamp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/timer_color"
+            app:layout_constraintTop_toTopOf="@id/timer_item_view_color"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="1:27:54" />
 
         <TextView
-            android:id="@+id/timer_last_update_timestamp"
+            android:id="@+id/timer_item_view_timer_last_update_timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space"
             android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@id/timer_color"
+            app:layout_constraintBottom_toBottomOf="@id/timer_item_view_color"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timer_chrono"
+            app:layout_constraintTop_toBottomOf="@id/timer_item_view_timer_chrono"
             tools:text="12:24 27/10/2021" />
 
         <ImageView
-            android:id="@+id/timer_menu"
+            android:id="@+id/timer_item_view_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_space"
             android:padding="@dimen/default_space_half"
-            android:src="@drawable/bg_overflow"
+            android:src="@drawable/timer_item_view_overflow_bg"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/timer_chrono" />
+            app:layout_constraintTop_toTopOf="@id/timer_item_view_timer_chrono" />
 
         <ImageView
-            android:id="@+id/timer_play_pause"
-            android:layout_width="@dimen/timer_play_pause_size"
-            android:layout_height="@dimen/timer_play_pause_size"
+            android:id="@+id/timer_item_view_play_pause"
+            android:layout_width="@dimen/timer_item_view_timer_play_pause_size"
+            android:layout_height="@dimen/timer_item_view_timer_play_pause_size"
             android:layout_marginLeft="@dimen/default_space_half"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timer_color"
+            app:layout_constraintTop_toBottomOf="@id/timer_item_view_color"
             tools:src="@drawable/ic_play" />
 
         <TextView
-            android:id="@+id/timer_name"
+            android:id="@+id/timer_item_view_timer_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space"
@@ -76,22 +76,22 @@
             android:maxLines="2"
             android:textSize="@dimen/text_size_xxl"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/timer_play_pause"
-            app:layout_constraintRight_toLeftOf="@id/timer_item_time_update"
-            app:layout_constraintTop_toBottomOf="@id/timer_color"
+            app:layout_constraintLeft_toRightOf="@id/timer_item_view_play_pause"
+            app:layout_constraintRight_toLeftOf="@id/timer_item_view_time_update"
+            app:layout_constraintTop_toBottomOf="@id/timer_item_view_color"
             tools:text="Work" />
 
         <ImageView
-            android:id="@+id/timer_item_time_update"
+            android:id="@+id/timer_item_view_time_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_space"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
-            android:src="@drawable/timer_item_time_update"
+            android:src="@drawable/timer_item_view_time_update"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timer_color" />
+            app:layout_constraintTop_toBottomOf="@id/timer_item_view_color" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

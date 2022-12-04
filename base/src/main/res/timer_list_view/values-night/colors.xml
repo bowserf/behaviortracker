@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="timer_list_delete_icon">#cccccc</color>
+    <color name="timer_list_view_delete_icon">#cccccc</color>
 
 </resources>

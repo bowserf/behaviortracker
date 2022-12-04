@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
-                app:layout_constraintBottom_toTopOf="@id/timer_list_container_list"
+                app:layout_constraintBottom_toTopOf="@id/timer_list_view_container_list"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
             <androidx.core.widget.NestedScrollView
-                android:id="@+id/timer_list_container_list"
+                android:id="@+id/timer_list_view_container_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
@@ -53,12 +53,12 @@
                     android:orientation="vertical">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/list_timers"
+                        android:id="@+id/timer_list_view_list_timers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:id="@+id/timer_list_total_time"
+                        android:id="@+id/timer_list_view_total_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
@@ -72,14 +72,14 @@
             </androidx.core.widget.NestedScrollView>
 
             <ImageView
-                android:id="@+id/empty_list_view"
-                android:layout_width="@dimen/empty_view_size"
-                android:layout_height="@dimen/empty_view_size"
-                android:background="@drawable/timer_list_empty_timer_bg"
-                android:padding="@dimen/timer_list_empty_icon_padding"
-                android:src="@drawable/ic_timer_list_empty_timer"
+                android:id="@+id/timer_list_view_empty_list_view"
+                android:layout_width="@dimen/timer_list_view_empty_view_size"
+                android:layout_height="@dimen/timer_list_view_empty_view_size"
+                android:background="@drawable/timer_list_view_empty_timer_bg"
+                android:padding="@dimen/timer_list_view_empty_icon_padding"
+                android:src="@drawable/timer_list_view_empty_timer"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@id/empty_list_text"
+                app:layout_constraintBottom_toTopOf="@id/timer_list_view_empty_list_text"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -87,7 +87,7 @@
                 tools:visibility="visible" />
 
             <TextView
-                android:id="@+id/empty_list_text"
+                android:id="@+id/timer_list_view_empty_list_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_space_2"
@@ -101,13 +101,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/empty_list_view"
+                app:layout_constraintTop_toBottomOf="@id/timer_list_view_empty_list_view"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_add_timer"
+            android:id="@+id/timer_list_view_add_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

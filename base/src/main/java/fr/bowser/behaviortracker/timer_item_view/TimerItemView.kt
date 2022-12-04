@@ -19,6 +19,7 @@ import fr.bowser.behaviortracker.timer_list_view.TimerFragmentDirections
 import fr.bowser.behaviortracker.update_timer_time_view.UpdateTimerTimeDialog
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
+import fr.bowser.behaviortracker.utils.ViewExtension.bind
 import javax.inject.Inject
 
 class TimerItemView(context: Context) : CardView(context) {
@@ -28,33 +29,26 @@ class TimerItemView(context: Context) : CardView(context) {
 
     private val screen = createScreen()
 
-    private val chrono: TextView
-    private val lastUpdateTimestamp: TextView
-    private val tvName: TextView
-    private val menu: ImageView
-    private val color: View
-    private val btnPlayPause: ImageView
+    private val chrono: TextView by bind(R.id.timer_item_view_timer_chrono)
+    private val lastUpdateTimestamp: TextView by bind(R.id.timer_item_view_timer_last_update_timestamp)
+    private val tvName: TextView by bind(R.id.timer_item_view_timer_name)
+    private val menu: ImageView by bind(R.id.timer_item_view_menu)
+    private val color: View by bind(R.id.timer_item_view_color)
+    private val btnPlayPause: ImageView by bind(R.id.timer_item_view_play_pause)
 
     init {
         setupGraph()
 
-        inflate(context, R.layout.item_timer, this)
+        inflate(context, R.layout.timer_item_view, this)
 
         // card radius
         radius = resources.getDimension(R.dimen.default_space_half)
 
         setOnClickListener { manageClickPlayPauseButton() }
 
-        btnPlayPause = findViewById(R.id.timer_play_pause)
-
-        color = findViewById(R.id.timer_color)
         color.setOnClickListener { presenter.onClickCard() }
-        chrono = findViewById(R.id.timer_chrono)
-        lastUpdateTimestamp = findViewById(R.id.timer_last_update_timestamp)
-        tvName = findViewById(R.id.timer_name)
-        menu = findViewById(R.id.timer_menu)
         menu.setOnClickListener { displayMenu() }
-        findViewById<View>(R.id.timer_item_time_update).setOnClickListener { presenter.onClickUpdateTimer() }
+        findViewById<View>(R.id.timer_item_view_time_update).setOnClickListener { presenter.onClickUpdateTimer() }
     }
 
     override fun onAttachedToWindow() {
@@ -80,7 +74,7 @@ class TimerItemView(context: Context) : CardView(context) {
     private fun displayMenu() {
         val popup = PopupMenu(context, menu)
 
-        popup.menuInflater.inflate(R.menu.menu_item_timer, popup.menu)
+        popup.menuInflater.inflate(R.menu.timer_item_view_menu, popup.menu)
 
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
@@ -153,7 +147,7 @@ class TimerItemView(context: Context) : CardView(context) {
             val alertDialog = AlertDialog.Builder(context)
             alertDialog.setMessage(resources.getString(R.string.timer_row_rename))
 
-            val rootView = LayoutInflater.from(context).inflate(R.layout.dialog_rename_timer, null)
+            val rootView = LayoutInflater.from(context).inflate(R.layout.timer_item_view_rename_timer, null)
             val input = rootView.findViewById<EditText>(R.id.edittext)
 
             input.setText(oldName)

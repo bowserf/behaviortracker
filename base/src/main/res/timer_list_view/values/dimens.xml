@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="timer_list_view_empty_view_size">100dp</dimen>
+    <dimen name="timer_list_view_empty_icon_padding">20dp</dimen>
+    <dimen name="timer_list_view_remove_icon_margin_right">32dp</dimen>
+
+</resources>

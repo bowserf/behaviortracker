@@ -34,11 +34,12 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerDialog
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.utils.FragmentExtension.bind
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
 
-class TimerFragment : Fragment(R.layout.fragment_timer) {
+class TimerFragment : Fragment(R.layout.timer_list_view) {
 
     @Inject
     lateinit var presenter: TimerContract.Presenter
@@ -47,33 +48,26 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
 
     private val activityResultLauncher = createActivityResultLauncher()
 
-    private lateinit var timerAdapter: TimerAdapter
+    private val timerAdapter = TimerAdapter()
 
-    private lateinit var fab: FloatingActionButton
-
-    private lateinit var emptyListView: ImageView
-
-    private lateinit var emptyListText: TextView
-
-    private lateinit var timerList: RecyclerView
-
-    private lateinit var totalTimeTv: TextView
-
-    private lateinit var timerListContainer: NestedScrollView
+    private val fab: FloatingActionButton by bind(R.id.timer_list_view_add_timer)
+    private val emptyListView: ImageView by bind(R.id.timer_list_view_empty_list_view)
+    private val emptyListText: TextView by bind(R.id.timer_list_view_empty_list_text)
+    private val timerList: RecyclerView by bind(R.id.timer_list_view_list_timers)
+    private val totalTimeTv: TextView by bind(R.id.timer_list_view_total_time)
+    private val timerListContainer: NestedScrollView by bind(R.id.timer_list_view_container_list)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
         setupGraph()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initializeList(view)
+        initializeList()
 
-        timerListContainer = view.findViewById(R.id.timer_list_container_list)
         timerListContainer.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
                 if (scrollY > oldScrollY) {
@@ -84,13 +78,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             }
         )
 
-        totalTimeTv = view.findViewById(R.id.timer_list_total_time)
-
-        fab = view.findViewById(R.id.button_add_timer)
         fab.setOnClickListener { presenter.onClickAddTimer() }
-
-        emptyListView = view.findViewById(R.id.empty_list_view)
-        emptyListText = view.findViewById(R.id.empty_list_text)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -157,10 +145,10 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage(message)
-                .setPositiveButton(android.R.string.yes) { _, _ ->
+                .setPositiveButton(android.R.string.ok) { _, _ ->
                     presenter.onClickResetAllTimers()
                 }
-                .setNegativeButton(android.R.string.no) { _, _ ->
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
                     // do nothing
                 }
                 .show()
@@ -324,10 +312,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         build.inject(this)
     }
 
-    private fun initializeList(view: View) {
-        timerList = view.findViewById(R.id.list_timers)
-
-        timerAdapter = TimerAdapter()
+    private fun initializeList() {
         timerList.layoutManager = LinearLayoutManager(activity)
         timerList.adapter = timerAdapter
 
