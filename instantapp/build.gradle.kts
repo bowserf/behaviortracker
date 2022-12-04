@@ -37,9 +37,6 @@ android {
 dependencies {
     implementation(project(":base"))
 
-    // Kotlin
-    implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-
     // Google
     implementation("com.google.android.gms:play-services-instantapps:18.0.1")
 

@@ -17,7 +17,5 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-
     implementation("com.android.billingclient:billing:5.0.0")
 }

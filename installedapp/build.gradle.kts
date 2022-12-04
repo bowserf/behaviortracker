@@ -47,9 +47,6 @@ android {
 dependencies {
     implementation(project(":base"))
 
-    // Kotlin
-    implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-
     // Other
     implementation("com.google.dagger:dagger:2.42")
     kapt("com.google.dagger:dagger-compiler:2.42")

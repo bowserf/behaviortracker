@@ -14,7 +14,3 @@ android {
         targetSdk = ProjectConfig.SdkVersions.targetSdkVersion
     }
 }
-
-dependencies {
-    implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-}
