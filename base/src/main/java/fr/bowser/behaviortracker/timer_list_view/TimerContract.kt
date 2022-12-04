@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer_list_view
 
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.feature_review.ReviewActivityContainer
 import fr.bowser.feature_review.ReviewManager
 
@@ -24,6 +25,8 @@ interface TimerContract {
 
         fun onClickRemoveAllTimers()
 
+        fun onClickCancelTimerDeletion()
+
         fun onClickConfirmRemoveAllTimers()
 
         fun onClickAlarm()
@@ -46,6 +49,8 @@ interface TimerContract {
 
         fun onNotificationPermissionDeclined()
 
+        fun onTimerSwiped(timerPosition: Int)
+
         fun shouldShowNotificationRequestPermissionRationale(permission: String)
     }
 
@@ -53,7 +58,7 @@ interface TimerContract {
 
         fun displayCreateTimerView()
 
-        fun displayTimerListSections(sections: List<TimerListSection>)
+        fun displayTimers(timers: List<Timer>)
 
         fun displayEmptyListView()
 
@@ -74,6 +79,8 @@ interface TimerContract {
         fun displayAskScheduleAlarmPermission()
 
         fun displayAskNotificationDisplay()
+
+        fun displayCancelDeletionView(cancelDuration: Int)
 
         fun checkNotificationPermission(permission: String)
 

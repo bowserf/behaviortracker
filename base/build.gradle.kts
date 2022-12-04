@@ -149,9 +149,6 @@ dependencies {
     implementation("com.google.dagger:dagger:2.42")
     kapt("com.google.dagger:dagger-compiler:2.42")
 
-    implementation("com.hannesdorfmann:adapterdelegates4:4.3.2")
-    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0")
-
     // Test
     testImplementation("org.json:json:20220320")
     testImplementation("junit:junit:4.13.2")

@@ -21,10 +21,12 @@ class TimerPresenter(
     private val reviewManager: ReviewManager,
     private val reviewStorage: ReviewStorage,
     private val stringManager: StringManager,
-    private val timerListManager: TimerListManager,
     private val timeManager: TimeManager,
+    private val timerListManager: TimerListManager,
     private val isInstantApp: Boolean
 ) : TimerContract.Presenter {
+
+    private var ongoingDeletionTimer: Timer? = null
 
     private val reviewManagerListener = createReviewManagerListener()
 
@@ -33,18 +35,7 @@ class TimerPresenter(
     private val timeManagerListener = createTimeManagerListener()
 
     override fun init() {
-        val sections = listOf(
-            TimerListSection(
-                stringManager.getString(R.string.timer_list_section_active_title),
-                true
-            ),
-            TimerListSection(
-                stringManager.getString(R.string.timer_list_section_inactive_title),
-                false
-            )
-        )
-        screen.displayTimerListSections(sections)
-
+        updateTimerList()
         updateListVisibility()
     }
 
@@ -144,6 +135,28 @@ class TimerPresenter(
         return isInstantApp
     }
 
+    override fun isReviewAlreadyDone(): Boolean {
+        return reviewStorage.isReviewMarked()
+    }
+
+    override fun onTimerSwiped(timerPosition: Int) {
+        ongoingDeletionTimer = timerListManager.getTimerList().first {
+            it.position == timerPosition
+        }
+        timerListManager.removeTimer(ongoingDeletionTimer!!)
+        screen.displayCancelDeletionView(CANCEL_TIMER_REMOVAL_DURATION)
+        updateTimerList()
+    }
+
+    override fun onClickCancelTimerDeletion() {
+        if (ongoingDeletionTimer == null) {
+            return
+        }
+        timerListManager.addTimer(ongoingDeletionTimer!!)
+        ongoingDeletionTimer = null
+        updateTimerList()
+    }
+
     private fun updateListVisibility() {
         val timerList = timerListManager.getTimerList()
         if (timerList.isEmpty()) {
@@ -178,8 +191,11 @@ class TimerPresenter(
         }
     }
 
-    override fun isReviewAlreadyDone(): Boolean {
-        return reviewStorage.isReviewMarked()
+    private fun updateTimerList() {
+        val timers = timerListManager.getTimerList().filter {
+            it != ongoingDeletionTimer
+        }
+        screen.displayTimers(timers)
     }
 
     private fun createTimeManagerListener() = object : TimeManager.Listener {
@@ -199,11 +215,16 @@ class TimerPresenter(
         }
 
         override fun onTimerAdded(updatedTimer: Timer) {
+            updateTimerList()
             updateListVisibility()
         }
 
         override fun onTimerRenamed(updatedTimer: Timer) {
             // nothing to do
         }
+    }
+
+    companion object {
+        private const val CANCEL_TIMER_REMOVAL_DURATION = 3_000
     }
 }

@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.timer_list_view
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -22,14 +23,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm_view.AlarmTimerDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerDialog
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
+import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
@@ -43,13 +47,13 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
 
     private val activityResultLauncher = createActivityResultLauncher()
 
+    private lateinit var timerAdapter: TimerAdapter
+
     private lateinit var fab: FloatingActionButton
 
     private lateinit var emptyListView: ImageView
 
     private lateinit var emptyListText: TextView
-
-    private lateinit var timerListSectionAdapter: TimerListSectionAdapterDelegate
 
     private lateinit var timerList: RecyclerView
 
@@ -105,11 +109,12 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (!presenter.isInstantApp()) {
-            inflater.inflate(R.menu.menu_home, menu)
-            val reviewMenuItem = menu.findItem(R.id.menu_review)
-            reviewMenuItem.isVisible = !presenter.isReviewAlreadyDone()
+        if (presenter.isInstantApp()) {
+            return
         }
+        inflater.inflate(R.menu.menu_home, menu)
+        val reviewMenuItem = menu.findItem(R.id.menu_review)
+        reviewMenuItem.isVisible = !presenter.isReviewAlreadyDone()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -189,8 +194,8 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             CreateTimerDialog.showDialog(activity as AppCompatActivity, false)
         }
 
-        override fun displayTimerListSections(sections: List<TimerListSection>) {
-            timerListSectionAdapter.populate(sections)
+        override fun displayTimers(timers: List<Timer>) {
+            timerAdapter.populate(timers)
         }
 
         override fun displayEmptyListView() {
@@ -278,6 +283,18 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             )
             findNavController().navigate(action)
         }
+
+        override fun displayCancelDeletionView(cancelDuration: Int) {
+            Snackbar.make(
+                timerList,
+                resources.getString(R.string.timer_view_timer_has_been_removed),
+                cancelDuration
+            )
+                .setAction(android.R.string.cancel) {
+                    presenter.onClickCancelTimerDeletion()
+                }
+                .show()
+        }
     }
 
     private fun createReviewActivityContainer() = object : ReviewActivityContainer {
@@ -310,9 +327,51 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
     private fun initializeList(view: View) {
         timerList = view.findViewById(R.id.list_timers)
 
-        timerListSectionAdapter = TimerListSectionAdapterDelegate()
+        timerAdapter = TimerAdapter()
         timerList.layoutManager = LinearLayoutManager(activity)
-        timerList.adapter = timerListSectionAdapter
+        timerList.adapter = timerAdapter
+
+        val swipeHandler = TimerListGesture(requireContext(), TimerListGestureListener())
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(timerList)
+
+        val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
+        timerList.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                var currentPosition = parent.getChildAdapterPosition(view)
+                // When an item is removed, getChildAdapterPosition returns NO_POSITION but this
+                // method is call at the animation start so position = -1 and we don't apply the
+                // good top margin. By calling getChildLayoutPosition, we get the view position
+                // and we fix the temporary animation issue.
+                if (currentPosition == RecyclerView.NO_POSITION) {
+                    currentPosition = parent.getChildLayoutPosition(view)
+                }
+                if (currentPosition < 1) {
+                    outRect.top = margin
+                }
+
+                outRect.bottom = margin
+            }
+        })
+    }
+
+    inner class TimerListGestureListener : TimerListGesture.Listener {
+        override fun onItemMove(fromPosition: Int, toPosition: Int) {
+            // nothing to do
+        }
+
+        override fun onSelectedChangedUp() {
+            // nothing to do
+        }
+
+        override fun onSwiped(position: Int) {
+            presenter.onTimerSwiped(position)
+        }
     }
 
     /**

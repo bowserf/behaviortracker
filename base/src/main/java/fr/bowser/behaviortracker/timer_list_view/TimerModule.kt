@@ -34,8 +34,8 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
             reviewManager,
             reviewStorage,
             stringManager,
-            timerListManager,
             timeManager,
+            timerListManager,
             instantAppManager.isInstantApp()
         )
     }

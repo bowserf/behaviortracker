@@ -11,9 +11,8 @@ object ActivityExtension {
     }
 
     fun <T : View> Activity.bind(@IdRes res: Int): Lazy<T> {
-        @Suppress("UNCHECKED_CAST")
         return lazyNotThreadSafe {
-            this.findViewById<T>(res)
+            this.findViewById(res)
         }
     }
 }

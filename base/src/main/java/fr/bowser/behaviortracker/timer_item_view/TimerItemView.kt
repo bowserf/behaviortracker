@@ -21,7 +21,7 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
-class TimerRowView(context: Context) : CardView(context) {
+class TimerItemView(context: Context) : CardView(context) {
 
     @Inject
     lateinit var presenter: TimerItemContract.Presenter
@@ -87,12 +87,15 @@ class TimerRowView(context: Context) : CardView(context) {
                 R.id.item_timer_reset -> {
                     presenter.onClickResetTimer()
                 }
+
                 R.id.item_timer_delete -> {
                     displayRemoveConfirmationDialog()
                 }
+
                 R.id.item_timer_rename -> {
                     presenter.onClickRenameTimer()
                 }
+
                 R.id.item_timer_start_pomodoro -> {
                     presenter.onClickStartPomodoro()
                 }

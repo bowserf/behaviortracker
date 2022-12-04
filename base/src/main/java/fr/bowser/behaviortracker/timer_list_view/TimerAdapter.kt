@@ -2,21 +2,23 @@ package fr.bowser.behaviortracker.timer_list_view
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer_item_view.TimerRowView
+import fr.bowser.behaviortracker.timer_item_view.TimerItemView
 
 class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
     private val timerList = mutableListOf<Timer>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimerViewHolder {
-        val timerRowView = TimerRowView(parent.context)
+        val timerRowView = TimerItemView(parent.context)
 
         val layoutParams = RecyclerView.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-
+        val horizontalMargin = parent.resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
+        layoutParams.setMargins(horizontalMargin, 0, horizontalMargin, 0)
         timerRowView.layoutParams = layoutParams
 
         return TimerViewHolder(timerRowView)
@@ -31,7 +33,7 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         return timerList.size
     }
 
-    fun setTimersList(timers: List<Timer>) {
+    fun populate(timers: List<Timer>) {
         timerList.clear()
         timerList.addAll(timers)
         notifyDataSetChanged()
@@ -55,5 +57,5 @@ class TimerAdapter : RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
         return timerList.toList()
     }
 
-    inner class TimerViewHolder(val view: TimerRowView) : RecyclerView.ViewHolder(view)
+    inner class TimerViewHolder(val view: TimerItemView) : RecyclerView.ViewHolder(view)
 }
