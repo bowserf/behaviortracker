@@ -3,14 +3,13 @@ package fr.bowser.behaviortracker.explain_permission_request
 class ExplainPermissionRequestPresenter(
     private val screen: ExplainPermissionRequestContract.Screen,
     private val explainPermissionRequestModel: ExplainPermissionRequestModel
-): ExplainPermissionRequestContract.Presenter {
+) : ExplainPermissionRequestContract.Presenter {
 
     override fun onAttach() {
         updateScreen()
     }
 
     override fun onDetach() {
-
     }
 
     override fun onClickNoThanks() {

@@ -5,7 +5,7 @@ import fr.bowser.feature_review.ReviewManager
 
 // https://developer.android.com/guide/playcore/in-app-review/kotlin-java
 internal class ReviewManagerImpl(
-    private val reviewManager: com.google.android.play.core.review.ReviewManager,
+    private val reviewManager: com.google.android.play.core.review.ReviewManager
 ) : ReviewManager {
 
     private val listeners = ArrayList<ReviewManager.Listener>()

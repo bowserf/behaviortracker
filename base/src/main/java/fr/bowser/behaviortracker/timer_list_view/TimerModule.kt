@@ -25,7 +25,7 @@ class TimerModule(private val timerScreen: TimerContract.Screen) {
         reviewStorage: ReviewStorage,
         stringManager: StringManager,
         timerListManager: TimerListManager,
-        timeManager: TimeManager,
+        timeManager: TimeManager
     ): TimerContract.Presenter {
         return TimerPresenter(
             timerScreen,

@@ -4,8 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import fr.bowser.feature.alarm.AlarmGraph
-import fr.bowser.feature.alarm.AlarmStorageManager
-import fr.bowser.feature.alarm.AlarmTimerManager
 
 internal class TimedDayReceiver : BroadcastReceiver() {
 

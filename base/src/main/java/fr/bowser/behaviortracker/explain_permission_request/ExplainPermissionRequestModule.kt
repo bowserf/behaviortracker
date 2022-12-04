@@ -12,8 +12,7 @@ class ExplainPermissionRequestModule(
 
     @GenericScope(component = ExplainPermissionRequestComponent::class)
     @Provides
-    fun provideExplainPermissionRequestPresenter(
-    ): ExplainPermissionRequestContract.Presenter {
+    fun provideExplainPermissionRequestPresenter(): ExplainPermissionRequestContract.Presenter {
         return ExplainPermissionRequestPresenter(screen, explainPermissionRequestModel)
     }
 }

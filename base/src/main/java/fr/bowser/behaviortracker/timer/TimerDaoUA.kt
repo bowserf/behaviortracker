@@ -3,7 +3,6 @@ package fr.bowser.behaviortracker.timer
 import android.content.Context
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.utils.ColorUtils
-import java.util.ArrayList
 import java.util.concurrent.TimeUnit
 
 class TimerDaoUA(context: Context) : TimerDAO {
@@ -67,7 +66,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 context.resources.getString(R.string.release_screenshot_timer_watch_series),
                 color5,
                 0,
-                    System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5),
+                System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5),
                 4
             )
         )

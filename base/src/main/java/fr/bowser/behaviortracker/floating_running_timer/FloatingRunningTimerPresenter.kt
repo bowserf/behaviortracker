@@ -8,7 +8,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 class FloatingRunningTimerPresenter(
     private val screen: FloatingRunningTimerContract.Screen,
     private val timeManager: TimeManager,
-    private val timerListManager: TimerListManager,
+    private val timerListManager: TimerListManager
 ) : FloatingRunningTimerContract.Presenter {
 
     private var currentTimer: Timer? = null

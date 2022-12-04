@@ -10,7 +10,6 @@ class SettingPresenterModule {
     @GenericScope(component = SettingComponent::class)
     @Provides
     fun provideSettingPresenter(): SettingContract.Presenter {
-        return SettingPresenter(
-        )
+        return SettingPresenter()
     }
 }

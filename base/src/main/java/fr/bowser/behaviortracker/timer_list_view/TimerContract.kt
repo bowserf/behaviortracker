@@ -3,7 +3,6 @@ package fr.bowser.behaviortracker.timer_list_view
 import fr.bowser.behaviortracker.explain_permission_request.ExplainPermissionRequestModel
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.feature_review.ReviewActivityContainer
-import fr.bowser.feature_review.ReviewManager
 
 interface TimerContract {
 
