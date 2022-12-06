@@ -7,8 +7,8 @@ import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 
 class PomodoroManagerImpl(

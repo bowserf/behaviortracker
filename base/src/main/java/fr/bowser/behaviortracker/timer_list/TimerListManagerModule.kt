@@ -2,8 +2,8 @@ package fr.bowser.behaviortracker.timer_list
 
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.TimerDAO
+import fr.bowser.behaviortracker.timer.TimerManager
 import javax.inject.Singleton
 
 @Module

@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.floating_running_timer_view
 
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.TimeConverter
 

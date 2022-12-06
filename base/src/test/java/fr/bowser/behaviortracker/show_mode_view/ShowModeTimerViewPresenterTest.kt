@@ -2,8 +2,8 @@ package fr.bowser.behaviortracker.show_mode_view
 
 import fr.bowser.behaviortracker.show_mode_item_view.ShowModeItemViewContract
 import fr.bowser.behaviortracker.show_mode_item_view.ShowModeItemViewPresenter
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.MockitoUtils.any
 import org.junit.Before

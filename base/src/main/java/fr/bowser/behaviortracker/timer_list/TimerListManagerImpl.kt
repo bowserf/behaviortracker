@@ -1,8 +1,8 @@
 package fr.bowser.behaviortracker.timer_list
 
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerDAO
+import fr.bowser.behaviortracker.timer.TimerManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

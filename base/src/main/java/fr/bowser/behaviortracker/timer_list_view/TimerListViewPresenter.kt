@@ -6,8 +6,8 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_review.ReviewActivityContainer

@@ -3,8 +3,8 @@ package fr.bowser.behaviortracker.create_timer_view
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.ColorUtils
 

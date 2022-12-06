@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.show_mode_item_view
 
-import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerManager
 
 class ShowModeItemViewPresenter(
     private val screen: ShowModeItemViewContract.Screen,
