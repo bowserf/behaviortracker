@@ -7,12 +7,12 @@ import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
-import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 
 class PomodoroManagerImpl(
-    private val timeManager: TimeManager,
+    private val timeManager: TimerManager,
     timerListManager: TimerListManager,
     private val settingManager: SettingManager,
     private val pauseTimer: Timer,
@@ -135,8 +135,8 @@ class PomodoroManagerImpl(
         listeners.remove(listener)
     }
 
-    private fun createTimeManagerListener(): TimeManager.Listener {
-        return object : TimeManager.Listener {
+    private fun createTimeManagerListener(): TimerManager.Listener {
+        return object : TimerManager.Listener {
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {

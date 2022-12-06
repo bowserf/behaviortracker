@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.pomodoro
 
-import fr.bowser.behaviortracker.pomodoro_view.PomodoroContract
-import fr.bowser.behaviortracker.pomodoro_view.PomodoroPresenter
+import fr.bowser.behaviortracker.pomodoro_view.PomodoroViewContract
+import fr.bowser.behaviortracker.pomodoro_view.PomodoroViewPresenter
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.ColorUtils
@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class PomodoroPresenterTest {
 
     @Mock
-    private lateinit var screen: PomodoroContract.Screen
+    private lateinit var screen: PomodoroViewContract.Screen
 
     @Mock
     private lateinit var doNotDisturbManager: DoNotDisturbManager
@@ -31,7 +31,7 @@ class PomodoroPresenterTest {
     @Test
     fun restoreCurrentTimerIfPomodoroIsRunning() {
         // Given
-        val presenter = PomodoroPresenter(
+        val presenter = PomodoroViewPresenter(
             screen,
             manager,
             doNotDisturbManager,
@@ -39,7 +39,7 @@ class PomodoroPresenterTest {
             false
         )
         val timer = Timer("name", ColorUtils.COLOR_AMBER)
-        val pomodoroConfiguration = PomodoroContract.Configuration(false)
+        val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
         Mockito.`when`(manager.currentTimer).thenReturn(timer)
         Mockito.`when`(doNotDisturbManager.getDnDState())
             .thenReturn(DoNotDisturbManager.DnDState.ALL)
@@ -54,14 +54,14 @@ class PomodoroPresenterTest {
     @Test
     fun displayEmptyViewWhenStartAndNoSessionIsActive() {
         // Given
-        val presenter = PomodoroPresenter(
+        val presenter = PomodoroViewPresenter(
             screen,
             manager,
             doNotDisturbManager,
             timerListManager,
             false
         )
-        val pomodoroConfiguration = PomodoroContract.Configuration(false)
+        val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
         Mockito.`when`(doNotDisturbManager.getDnDState())
             .thenReturn(DoNotDisturbManager.DnDState.ALL)
 
@@ -75,14 +75,14 @@ class PomodoroPresenterTest {
     @Test
     fun displayPomodoroDialogIfAStepIfFinishedAndUserGoBackToTheView() {
         // Given
-        val presenter = PomodoroPresenter(
+        val presenter = PomodoroViewPresenter(
             screen,
             manager,
             doNotDisturbManager,
             timerListManager,
             false
         )
-        val pomodoroConfiguration = PomodoroContract.Configuration(false)
+        val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
         Mockito.`when`(manager.isPendingState).thenReturn(true)
         Mockito.`when`(doNotDisturbManager.getDnDState())
             .thenReturn(DoNotDisturbManager.DnDState.ALL)
@@ -98,7 +98,7 @@ class PomodoroPresenterTest {
     fun onClickFabDisplayChoosePomodoroTimer() {
         // Given
         val timer = Timer("name", ColorUtils.COLOR_AMBER)
-        val presenter = PomodoroPresenter(
+        val presenter = PomodoroViewPresenter(
             screen,
             manager,
             doNotDisturbManager,
@@ -118,7 +118,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickFabDisplayNoTimerAvailable() {
         // Given
-        val presenter = PomodoroPresenter(
+        val presenter = PomodoroViewPresenter(
             screen,
             manager,
             doNotDisturbManager,
@@ -137,7 +137,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickStopPomodoro() {
         // Given
-        val presenter = PomodoroPresenter(
+        val presenter = PomodoroViewPresenter(
             screen,
             manager,
             doNotDisturbManager,
@@ -146,7 +146,7 @@ class PomodoroPresenterTest {
         )
         Mockito.`when`(doNotDisturbManager.getDnDState())
             .thenReturn(DoNotDisturbManager.DnDState.ALL)
-        val pomodoroConfiguration = PomodoroContract.Configuration(false)
+        val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
         presenter.onStart(pomodoroConfiguration)
 
         // When
@@ -160,7 +160,7 @@ class PomodoroPresenterTest {
     @Test
     fun onClickCreateTimerDisplayDialog() {
         // Given
-        val presenter = PomodoroPresenter(
+        val presenter = PomodoroViewPresenter(
             screen,
             manager,
             doNotDisturbManager,

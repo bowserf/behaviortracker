@@ -21,7 +21,7 @@
     <string name="menu_rewards">Supporter les développeurs</string>
     <string name="menu_setting">Paramètres</string>
     <string name="home_dialog_confirm_reset_all_timers">Voulez vous vraiment remettre tous les chronomètres à 0 ?</string>
-    <string name="bottom_navigation_timer_view">Chronomètre</string>
+    <string name="home_activity_bottom_navigation_timer">Chronomètre</string>
     <string name="menu_remove_all">Supprimer tous les chronomètres</string>
     <string name="home_instant_app_install">INSTALLER</string>
     <string name="menu_review">Noter l\'application</string>
@@ -29,7 +29,7 @@
     <string name="timer_list_explain_notification_permission_title">Obtenir un rappel</string>
     <string name="item_create_timer_save">SAUVEGARDER</string>
     <string name="create_timer_title_timer">Sélectionner un temps de départ</string>
-    <string name="pomodoro_choose_timer_title">Choisissez un chronomètre</string>
+    <string name="choose_pomodoro_timer_view_title">Choisissez un chronomètre</string>
     <string name="timer_notif_channel_name">Chronomètre</string>
     <string name="timer_notif_channel_description">Affiche et contrôle le chronomètre actif.</string>
     <string name="timer_notif_start">Démarrer</string>
@@ -75,12 +75,12 @@
     <string name="settings_send_email_choose_app">Envoyer un mail :</string>
     <string name="settings_send_email_no_application_available">Aucune application disponible pour envoyer un mail.</string>
     <string name="settings_send_email_subject">Comment améliorer Time Tracker</string>
-    <string name="menu_keep_screen_on">Garder l\'écran allumé</string>
-    <string name="menu_keep_screen_off">Ne pas garder l\'écran allumé</string>
-    <string name="item_timer_reset">Remettre à 0</string>
-    <string name="item_timer_remove">Supprimer</string>
-    <string name="item_timer_rename">Renommer</string>
-    <string name="item_start_pomodoro">Démarrer Pomodoro</string>
+    <string name="show_mode_view_menu_keep_screen_on">Garder l\'écran allumé</string>
+    <string name="show_mode_view_menu_keep_screen_off">Ne pas garder l\'écran allumé</string>
+    <string name="timer_item_view_reset">Remettre à 0</string>
+    <string name="timer_item_view_remove">Supprimer</string>
+    <string name="timer_item_view_rename">Renommer</string>
+    <string name="timer_item_view_start_pomodoro">Démarrer Pomodoro</string>
     <string name="item_timer_remove_message">Êtes vous sûr de vouloir supprimer ce chronomètre ?</string>
     <string name="timer_row_rename">Renommer chronomètre</string>
     <string name="item_update_timer_time">Mettre le temps à jour</string>

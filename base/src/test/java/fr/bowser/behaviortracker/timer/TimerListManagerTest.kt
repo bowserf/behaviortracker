@@ -16,7 +16,7 @@ class TimerListManagerTest {
     private lateinit var timerDAO: TimerDAO
 
     @Mock
-    private lateinit var timeManager: TimeManager
+    private lateinit var timeManager: TimerManager
 
     @Test
     fun addTimer() {

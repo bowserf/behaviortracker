@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home_activity_timer_list_screen">
+    <fragment
+        android:id="@id/home_activity_timer_list_screen"
+        android:name="fr.bowser.behaviortracker.timer_list_view.TimerListFragment"
+        android:label="TimerListFragment"
+        tools:layout="@layout/timer_list_view">
+        <action
+            android:id="@+id/action_timer_list_screen_to_show_mode_screen"
+            app:destination="@id/show_mode_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_timer_list_screen_to_rewards_screen"
+            app:destination="@id/rewards_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_timer_list_screen_to_settings_screen"
+            app:destination="@id/settings_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_timer_list_screen_to_explain_permission_request"
+            app:destination="@id/explain_permission_request"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@id/home_activity_pomodoro_screen"
+        android:name="fr.bowser.behaviortracker.pomodoro_view.PomodoroViewFragment"
+        android:label="PomodoroFragment"
+        tools:layout="@layout/pomodoro_view">
+        <action
+            android:id="@+id/action_pomodoro_screen_to_settings_screen"
+            app:destination="@id/settings_screen"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/show_mode_screen"
+        android:name="fr.bowser.behaviortracker.show_mode_view.ShowModeViewFragment"
+        android:label="ShowModeFragment"
+        tools:layout="@layout/show_mode_view_fragment">
+        <argument
+            android:name="selectedTimerId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/rewards_screen"
+        android:name="fr.bowser.behaviortracker.rewards_view.RewardsViewFragment"
+        android:label="RewardsFragment"
+        tools:layout="@layout/rewards_view_fragment" />
+    <fragment
+        android:id="@+id/settings_screen"
+        android:name="fr.bowser.behaviortracker.setting_view.SettingViewFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/settings_view_fragment" />
+    <fragment
+        android:id="@+id/explain_permission_request"
+        android:name="fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewFragment"
+        android:label="ExplainPermissionRequestFragment"
+        tools:layout="@layout/explain_permission_request_view_fragment">
+        <argument
+            android:name="explainPermissionRequestModel"
+            app:argType="fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel" />
+    </fragment>
+</navigation>

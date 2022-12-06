@@ -4,6 +4,8 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
+import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationManager
+import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationModule
 import fr.bowser.behaviortracker.app_initialization.AppInitialization
 import fr.bowser.behaviortracker.app_initialization.AppInitializationComponent
 import fr.bowser.behaviortracker.database.DatabaseManager
@@ -24,10 +26,10 @@ import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
 import fr.bowser.behaviortracker.string.StringManagerModule
-import fr.bowser.behaviortracker.time.TimeProvider
-import fr.bowser.behaviortracker.time.TimeProviderModule
-import fr.bowser.behaviortracker.timer.TimeManager
-import fr.bowser.behaviortracker.timer.TimeManagerModule
+import fr.bowser.behaviortracker.time_provider.TimeProvider
+import fr.bowser.behaviortracker.time_provider.TimeProviderModule
+import fr.bowser.behaviortracker.timer.TimerManager
+import fr.bowser.behaviortracker.timer.TimerManagerModule
 import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.timer_list.TimerListManagerModule
@@ -41,6 +43,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = arrayOf(
+        AlarmNotificationModule::class,
         AlarmTimerManagerModule::class,
         DatabaseManagerModule::class,
         DoNotDisturbModule::class,
@@ -52,7 +55,7 @@ import javax.inject.Singleton
         SettingManagerModule::class,
         StringManagerModule::class,
         TimerListManagerModule::class,
-        TimeManagerModule::class,
+        TimerManagerModule::class,
         TimeProviderModule::class
     ),
     dependencies = [
@@ -61,6 +64,8 @@ import javax.inject.Singleton
     ]
 )
 interface BehaviorTrackerAppComponent {
+
+    fun provideAlarmNotificationManager(): AlarmNotificationManager
 
     fun provideAlarmTimerManager(): AlarmTimerManager
 
@@ -92,7 +97,7 @@ interface BehaviorTrackerAppComponent {
 
     fun provideStringManager(): StringManager
 
-    fun provideTimeManager(): TimeManager
+    fun provideTimeManager(): TimerManager
 
     fun provideTimeProvider(): TimeProvider
 

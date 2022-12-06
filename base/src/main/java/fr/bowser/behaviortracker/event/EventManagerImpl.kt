@@ -43,19 +43,19 @@ class EventManagerImpl(context: Context, instantAppManager: InstantAppManager) :
     }
 
     companion object {
-        const val USER_PROPERTY_IS_INSTANT_APP = "is_instant_app"
+        private const val USER_PROPERTY_IS_INSTANT_APP = "is_instant_app"
 
-        const val EVENT_ALARM_NOTIF_CLICKED = "click_alarm_notif"
+        private const val EVENT_ALARM_NOTIF_CLICKED = "click_alarm_notif"
 
-        const val EVENT_ALARM_NOTIF_DISPLAYED = "display_alarm_notif"
+        private const val EVENT_ALARM_NOTIF_DISPLAYED = "display_alarm_notif"
 
-        const val EVENT_SET_ALARM = "set_alarm"
-        const val EVENT_EXTRA_ENABLE_ALARM = "is_enable"
+        private const val EVENT_SET_ALARM = "set_alarm"
+        private const val EVENT_EXTRA_ENABLE_ALARM = "is_enable"
 
-        const val EVENT_TIMER_CREATED = "timer_created"
-        const val EVENT_EXTRA_TIMER_CREATED = "start_now"
+        private const val EVENT_TIMER_CREATED = "timer_created"
+        private const val EVENT_EXTRA_TIMER_CREATED = "start_now"
 
-        const val EVENT_CLICK_BUY_IN_APP = "click_buy_in_app"
-        const val EVENT_EXTRA_CLICK_BUY_IN_APP = "product_id"
+        private const val EVENT_CLICK_BUY_IN_APP = "click_buy_in_app"
+        private const val EVENT_EXTRA_CLICK_BUY_IN_APP = "product_id"
     }
 }

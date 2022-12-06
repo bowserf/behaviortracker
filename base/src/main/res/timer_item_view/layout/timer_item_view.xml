@@ -62,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/timer_item_view_color"
-            tools:src="@drawable/ic_play" />
+            tools:src="@drawable/pomodoro_view_play" />
 
         <TextView
             android:id="@+id/timer_item_view_timer_name"

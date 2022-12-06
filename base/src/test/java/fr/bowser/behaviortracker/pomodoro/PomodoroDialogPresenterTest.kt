@@ -1,6 +1,6 @@
 package fr.bowser.behaviortracker.pomodoro
 
-import fr.bowser.behaviortracker.pomodoro_view.PomodoroDialogPresenter
+import fr.bowser.behaviortracker.pomodoro_view_dialog.PomodoroViewDialogPresenter
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -16,7 +16,7 @@ class PomodoroDialogPresenterTest {
     @Test
     fun clickOnPositionButtonResumeSession() {
         // Given
-        val presenter = PomodoroDialogPresenter(manager)
+        val presenter = PomodoroViewDialogPresenter(manager)
 
         // When
         presenter.onClickPositionButton()
@@ -28,7 +28,7 @@ class PomodoroDialogPresenterTest {
     @Test
     fun clickOnNegativeButtonStopSession() {
         // Given
-        val presenter = PomodoroDialogPresenter(manager)
+        val presenter = PomodoroViewDialogPresenter(manager)
 
         // When
         presenter.onClickNegativeButton()

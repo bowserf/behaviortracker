@@ -9,7 +9,7 @@
   <string name="alarm_timer_dialog_content">Recordarle que realice un seguimiento de sus actividades.</string>
   <string name="alarm_timer_alarm_enabled">La alarma está activada</string>
   <string name="alarm_timer_alarm_disabled">La alarma está deshabilitada</string>
-  <string name="pomodoro_choose_timer_title">Elige un temporizador</string>
+  <string name="choose_pomodoro_timer_view_title">Elige un temporizador</string>
   <string name="create_timer_shortcut_short_label">Nuevo temporizador</string>
   <string name="create_timer_shortcut_long_label">Cree un nuevo temporizador para realizar un seguimiento de una acción.</string>
   <string name="timer_name">Nombre</string>
@@ -27,7 +27,7 @@
   <string name="menu_rewards">Apoyar a los desarrolladores</string>
   <string name="menu_setting">Ajustes</string>
   <string name="home_dialog_confirm_reset_all_timers">¿Está seguro de que desea restablecer todos los temporizadores?</string>
-  <string name="bottom_navigation_timer_view">Temporizador</string>
+  <string name="home_activity_bottom_navigation_timer">Temporizador</string>
   <string name="timer_list_explain_notification_permission_title">¡Recibe un recordatorio!</string>
   <string name="timer_list_explain_notification_permission_message">Nunca olvides cronometrar tus actividades gracias al recordatorio que configuraste.</string>
   <string name="timer_notif_channel_name">Temporizador</string>
@@ -76,13 +76,13 @@
   <string name="settings_send_email_choose_app">Enviar correo electrónico :</string>
   <string name="settings_send_email_no_application_available">No hay clientes de correo electrónico instalados.</string>
   <string name="settings_send_email_subject">Cómo mejorar el rastreador de tiempo</string>
-  <string name="menu_keep_screen_on">Mantener la pantalla encendida</string>
-  <string name="menu_keep_screen_off">No mantengas la pantalla encendida</string>
+  <string name="show_mode_view_menu_keep_screen_on">Mantener la pantalla encendida</string>
+  <string name="show_mode_view_menu_keep_screen_off">No mantengas la pantalla encendida</string>
   <string name="item_update_timer_time">Tiempo de actualizacion</string>
-  <string name="item_timer_reset">Reiniciar</string>
-  <string name="item_timer_remove">Remover</string>
-  <string name="item_timer_rename">Rebautizar</string>
-  <string name="item_start_pomodoro">Inicio Pomodoro</string>
+  <string name="timer_item_view_reset">Reiniciar</string>
+  <string name="timer_item_view_remove">Remover</string>
+  <string name="timer_item_view_rename">Rebautizar</string>
+  <string name="timer_item_view_start_pomodoro">Inicio Pomodoro</string>
   <string name="item_timer_remove_message">¿Estás seguro de eliminar este temporizador?</string>
   <string name="timer_row_rename">Cambiar el nombre del temporizador</string>
   <string name="empty_list_view_text">¿Qué vas a cronometrar hoy?</string>

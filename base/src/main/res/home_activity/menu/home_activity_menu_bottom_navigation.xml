@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home_activity_timer_list_screen"
+        android:enabled="true"
+        android:icon="@drawable/home_activity_menu_timer"
+        android:title="@string/home_activity_bottom_navigation_timer"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/home_activity_pomodoro_screen"
+        android:enabled="true"
+        android:icon="@drawable/home_activity_menu_pomodoro"
+        android:title="@string/home_activity_bottom_navigation_pomodoro"
+        app:showAsAction="ifRoom" />
+
+</menu>

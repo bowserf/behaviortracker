@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="pomodoro_view_progress_size">270dp</dimen>
+    <dimen name="pomodoro_view_current_time_size">50sp</dimen>
+    <dimen name="pomodoro_view_icon_size">60dp</dimen>
+    <dimen name="pomodoro_view_progress_thickness">18dp</dimen>
+
+</resources>

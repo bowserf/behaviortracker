@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="pomodoro_view_pause_session">#ff6d00</color>
+    <color name="pomodoro_view_resume_session">#64dd17</color>
+    <color name="pomodoro_view_start_session">#304ffe</color>
+
+    <color name="pomodoro_view_bg_circle">#cccccc</color>
+
+</resources>

@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.alarm
 
-import fr.bowser.behaviortracker.alarm_view.AlarmDialogPresenter
-import fr.bowser.behaviortracker.alarm_view.AlarmTimerContract
+import fr.bowser.behaviortracker.alarm_view.AlarmViewContract
+import fr.bowser.behaviortracker.alarm_view.AlarmViewPresenter
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.feature.alarm.AlarmTime
 import fr.bowser.feature.alarm.AlarmTimerManager
@@ -20,16 +20,16 @@ class AlarmDialogPresenterTest {
     private lateinit var alarmTimerManager: AlarmTimerManager
 
     @Mock
-    private lateinit var view: AlarmTimerContract.Screen
+    private lateinit var view: AlarmViewContract.Screen
 
     @Mock
     private lateinit var eventManager: EventManager
 
-    private lateinit var presenter: AlarmDialogPresenter
+    private lateinit var presenter: AlarmViewPresenter
 
     @Before
     fun initPresenter() {
-        presenter = AlarmDialogPresenter(view, alarmTimerManager, eventManager)
+        presenter = AlarmViewPresenter(view, alarmTimerManager, eventManager)
     }
 
     @Test

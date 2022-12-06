@@ -9,7 +9,7 @@
   <string name="alarm_timer_dialog_content">Lembre-o de acompanhar suas atividades.</string>
   <string name="alarm_timer_alarm_enabled">O alarme está ativado</string>
   <string name="alarm_timer_alarm_disabled">O alarme está desativado</string>
-  <string name="pomodoro_choose_timer_title">Escolha um temporizador</string>
+  <string name="choose_pomodoro_timer_view_title">Escolha um temporizador</string>
   <string name="create_timer_shortcut_short_label">Novo temporizador</string>
   <string name="create_timer_shortcut_long_label">Crie um novo cronômetro para rastrear uma ação.</string>
   <string name="timer_name">Nome</string>
@@ -27,7 +27,7 @@
   <string name="menu_rewards">Desenvolvedores de suporte</string>
   <string name="menu_setting">Definições</string>
   <string name="home_dialog_confirm_reset_all_timers">Tem certeza de que deseja redefinir todos os temporizadores?</string>
-  <string name="bottom_navigation_timer_view">Cronômetro</string>
+  <string name="home_activity_bottom_navigation_timer">Cronômetro</string>
   <string name="timer_list_explain_notification_permission_title">Obter lembrete!</string>
   <string name="timer_list_explain_notification_permission_message">Nunca se esqueça de cronometrar suas atividades graças ao lembrete que você configurou.</string>
   <string name="timer_notif_channel_name">Cronômetro</string>
@@ -76,13 +76,13 @@
   <string name="settings_send_email_choose_app">Enviar email :</string>
   <string name="settings_send_email_no_application_available">Não há clientes de e-mail instalados.</string>
   <string name="settings_send_email_subject">Como melhorar o rastreador de tempo</string>
-  <string name="menu_keep_screen_on">Mantenha a tela ligada</string>
-  <string name="menu_keep_screen_off">Não mantenha a tela LIGADA</string>
+  <string name="show_mode_view_menu_keep_screen_on">Mantenha a tela ligada</string>
+  <string name="show_mode_view_menu_keep_screen_off">Não mantenha a tela LIGADA</string>
   <string name="item_update_timer_time">Tempo de atualização</string>
-  <string name="item_timer_reset">Redefinir</string>
-  <string name="item_timer_remove">Remover</string>
-  <string name="item_timer_rename">Renomear</string>
-  <string name="item_start_pomodoro">Iniciar Pomodoro</string>
+  <string name="timer_item_view_reset">Redefinir</string>
+  <string name="timer_item_view_remove">Remover</string>
+  <string name="timer_item_view_rename">Renomear</string>
+  <string name="timer_item_view_start_pomodoro">Iniciar Pomodoro</string>
   <string name="item_timer_remove_message">Tem a certeza de remover este temporizador?</string>
   <string name="timer_row_rename">Renomear temporizador</string>
   <string name="empty_list_view_text">O que você vai tempo hoje?</string>

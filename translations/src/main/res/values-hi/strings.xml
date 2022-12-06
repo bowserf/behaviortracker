@@ -9,7 +9,7 @@
   <string name="alarm_timer_dialog_content">अपनी गतिविधियों को ट्रैक करने के लिए आपको याद दिलाएं।</string>
   <string name="alarm_timer_alarm_enabled">अलार्म सक्रिय है</string>
   <string name="alarm_timer_alarm_disabled">अलार्म अक्षम है</string>
-  <string name="pomodoro_choose_timer_title">एक टाइमर चुनें</string>
+  <string name="choose_pomodoro_timer_view_title">एक टाइमर चुनें</string>
   <string name="create_timer_shortcut_short_label">नया टाइमर</string>
   <string name="create_timer_shortcut_long_label">किसी क्रिया को ट्रैक करने के लिए एक नया टाइमर बनाएं।</string>
   <string name="timer_name">नाम</string>
@@ -27,7 +27,7 @@
   <string name="menu_rewards">समर्थन डेवलपर्स</string>
   <string name="menu_setting">समायोजन</string>
   <string name="home_dialog_confirm_reset_all_timers">क्या आप वाकई सभी टाइमर रीसेट करना चाहते हैं?</string>
-  <string name="bottom_navigation_timer_view">घड़ी</string>
+  <string name="home_activity_bottom_navigation_timer">घड़ी</string>
   <string name="timer_list_explain_notification_permission_title">अनुस्मारक प्राप्त करें!</string>
   <string name="timer_list_explain_notification_permission_message">अपने द्वारा सेटअप किए गए रिमाइंडर की बदौलत अपनी गतिविधियों को समय देना कभी न भूलें।</string>
   <string name="timer_notif_channel_name">घड़ी</string>
@@ -76,13 +76,13 @@
   <string name="settings_send_email_choose_app">ईमेल भेजें :</string>
   <string name="settings_send_email_no_application_available">कोई ईमेल क्लाइंट स्थापित नहीं है।</string>
   <string name="settings_send_email_subject">टाइम ट्रैकर में सुधार कैसे करें</string>
-  <string name="menu_keep_screen_on">स्क्रीन को चालू रखें</string>
-  <string name="menu_keep_screen_off">स्क्रीन को ऑन न रखें</string>
+  <string name="show_mode_view_menu_keep_screen_on">स्क्रीन को चालू रखें</string>
+  <string name="show_mode_view_menu_keep_screen_off">स्क्रीन को ऑन न रखें</string>
   <string name="item_update_timer_time">समय सुधारें</string>
-  <string name="item_timer_reset">रीसेट</string>
-  <string name="item_timer_remove">हटाना</string>
-  <string name="item_timer_rename">नाम बदलें</string>
-  <string name="item_start_pomodoro">पोमोडोरो शुरू करें</string>
+  <string name="timer_item_view_reset">रीसेट</string>
+  <string name="timer_item_view_remove">हटाना</string>
+  <string name="timer_item_view_rename">नाम बदलें</string>
+  <string name="timer_item_view_start_pomodoro">पोमोडोरो शुरू करें</string>
   <string name="item_timer_remove_message">क्या आप वाकई इस टाइमर को निकालना चाहते हैं?</string>
   <string name="timer_row_rename">टाइमर का नाम बदलें</string>
   <string name="empty_list_view_text">आज आप किस समय पर जा रहे हैं?</string>

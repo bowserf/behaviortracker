@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/fragment_timer_container"
+        android:id="@+id/timer_list_view_timer_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/fragment_timer_floating_running_timer_view"
+        app:layout_constraintBottom_toTopOf="@id/timer_list_view_floating_running_timer_view"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/timer_list_view_toolbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
@@ -35,7 +35,7 @@
                 android:background="@drawable/background_shadow_bottom"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+                app:layout_constraintTop_toBottomOf="@id/timer_list_view_toolbar" />
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/timer_list_view_container_list"
@@ -45,7 +45,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar">
+                app:layout_constraintTop_toBottomOf="@id/timer_list_view_toolbar">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/timer_list_view_list_timers"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/timer_list_view_total_time"
@@ -114,15 +114,15 @@
             android:layout_marginRight="@dimen/default_space_2"
             android:layout_marginBottom="@dimen/default_space_2"
             android:elevation="@dimen/default_space"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/timer_list_view_add"
             app:fabSize="normal" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <fr.bowser.behaviortracker.floating_running_timer.FloatingRunningTimerView
-        android:id="@+id/fragment_timer_floating_running_timer_view"
+    <fr.bowser.behaviortracker.floating_running_timer_view.FloatingRunningTimerView
+        android:id="@+id/timer_list_view_floating_running_timer_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/floating_running_view_height"
+        android:layout_height="@dimen/floating_running_timer_view_height"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class RewardsPresenterTest {
 
     @Mock
-    private lateinit var screen: RewardsContract.Screen
+    private lateinit var screen: RewardsViewContract.Screen
 
     @Mock
     private lateinit var inAppConfiguration: InAppConfiguration
@@ -24,7 +24,7 @@ class RewardsPresenterTest {
     @Test
     fun startRegisterToInAppManager() {
         // Given
-        val presenter = RewardsPresenter(screen, inAppConfiguration, inAppManager)
+        val presenter = RewardsViewPresenter(screen, inAppConfiguration, inAppManager)
 
         // When
         presenter.onStart()
@@ -36,7 +36,7 @@ class RewardsPresenterTest {
     @Test
     fun startCallDisplayListInApps() {
         // Given
-        val presenter = RewardsPresenter(screen, inAppConfiguration, inAppManager)
+        val presenter = RewardsViewPresenter(screen, inAppConfiguration, inAppManager)
 
         // When
         presenter.onStart()
@@ -48,7 +48,7 @@ class RewardsPresenterTest {
     @Test
     fun stopUnregisterToInAppManager() {
         // Given
-        val presenter = RewardsPresenter(screen, inAppConfiguration, inAppManager)
+        val presenter = RewardsViewPresenter(screen, inAppConfiguration, inAppManager)
 
         // When
         presenter.onStop()

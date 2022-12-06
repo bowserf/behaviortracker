@@ -48,8 +48,7 @@ internal class DoNotDisturbManagerImpl(
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return DoNotDisturbManager.DnDState.NOT_MANAGED
         }
-        val currentInterruptionFilter = notificationManager.currentInterruptionFilter
-        return when (currentInterruptionFilter) {
+        return when (val currentInterruptionFilter = notificationManager.currentInterruptionFilter) {
             NotificationManager.INTERRUPTION_FILTER_NONE -> DoNotDisturbManager.DnDState.NONE
             NotificationManager.INTERRUPTION_FILTER_ALL -> DoNotDisturbManager.DnDState.ALL
             NotificationManager.INTERRUPTION_FILTER_PRIORITY -> DoNotDisturbManager.DnDState.PRIORITY

@@ -9,7 +9,7 @@
   <string name="alarm_timer_dialog_content">Erinnern Sie daran, Ihre Aktivitäten zu verfolgen.</string>
   <string name="alarm_timer_alarm_enabled">Alarm ist aktiviert</string>
   <string name="alarm_timer_alarm_disabled">Alarm ist deaktiviert</string>
-  <string name="pomodoro_choose_timer_title">Wähle einen Timer</string>
+  <string name="choose_pomodoro_timer_view_title">Wähle einen Timer</string>
   <string name="create_timer_shortcut_short_label">Neuer Timer</string>
   <string name="create_timer_shortcut_long_label">Erstellen Sie einen neuen Timer, um eine Aktion zu verfolgen.</string>
   <string name="timer_name">Name</string>
@@ -27,7 +27,7 @@
   <string name="menu_rewards">Entwickler unterstützen</string>
   <string name="menu_setting">Einstellungen</string>
   <string name="home_dialog_confirm_reset_all_timers">Sind Sie sicher, dass Sie alle Timer zurücksetzen möchten?</string>
-  <string name="bottom_navigation_timer_view">Timer</string>
+  <string name="home_activity_bottom_navigation_timer">Timer</string>
   <string name="timer_list_explain_notification_permission_title">Erinnerung erhalten!</string>
   <string name="timer_list_explain_notification_permission_message">Vergessen Sie dank der von Ihnen eingerichteten Erinnerung nie, Ihre Aktivitäten zu planen.</string>
   <string name="timer_notif_channel_name">Timer</string>
@@ -76,13 +76,13 @@
   <string name="settings_send_email_choose_app">E-Mail senden :</string>
   <string name="settings_send_email_no_application_available">Es sind keine E-Mail-Clients installiert.</string>
   <string name="settings_send_email_subject">So verbessern Sie die Zeiterfassung</string>
-  <string name="menu_keep_screen_on">Lassen Sie den Bildschirm eingeschaltet</string>
-  <string name="menu_keep_screen_off">Lassen Sie den Bildschirm nicht eingeschaltet</string>
+  <string name="show_mode_view_menu_keep_screen_on">Lassen Sie den Bildschirm eingeschaltet</string>
+  <string name="show_mode_view_menu_keep_screen_off">Lassen Sie den Bildschirm nicht eingeschaltet</string>
   <string name="item_update_timer_time">Updatezeit</string>
-  <string name="item_timer_reset">Zurücksetzen</string>
-  <string name="item_timer_remove">Entfernen</string>
-  <string name="item_timer_rename">Umbenennen</string>
-  <string name="item_start_pomodoro">Starten Sie Pomodoro</string>
+  <string name="timer_item_view_reset">Zurücksetzen</string>
+  <string name="timer_item_view_remove">Entfernen</string>
+  <string name="timer_item_view_rename">Umbenennen</string>
+  <string name="timer_item_view_start_pomodoro">Starten Sie Pomodoro</string>
   <string name="item_timer_remove_message">Möchten Sie diesen Timer wirklich entfernen?</string>
   <string name="timer_row_rename">Timer umbenennen</string>
   <string name="empty_list_view_text">Was machst du heute?</string>

@@ -14,7 +14,7 @@ import javax.inject.Inject
 class UpdateTimerTimeDialog : DialogFragment() {
 
     @Inject
-    lateinit var presenter: UpdateTimerTimeContract.Presenter
+    lateinit var presenter: UpdateTimerTimeViewContract.Presenter
 
     private val screen = createScreen()
 
@@ -28,7 +28,7 @@ class UpdateTimerTimeDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val root = LayoutInflater.from(context).inflate(R.layout.update_timer_time_dialog, null)
+        val root = LayoutInflater.from(context).inflate(R.layout.update_timer_time_view_dialog, null)
 
         val dialogBuilder = AlertDialog.Builder(requireContext())
         dialogBuilder.setTitle(resources.getString(R.string.update_timer_time_dialog_title))
@@ -59,14 +59,14 @@ class UpdateTimerTimeDialog : DialogFragment() {
     }
 
     private fun setupGraph(timerId: Long) {
-        val component = DaggerUpdateTimerTimeComponent.builder()
+        val component = DaggerUpdateTimerTimeViewComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
-            .updateTimerTimeModule(UpdateTimerTimeModule(screen, timerId))
+            .updateTimerTimeViewModule(UpdateTimerTimeViewModule(screen, timerId))
             .build()
         component.inject(this)
     }
 
-    private fun createScreen() = object : UpdateTimerTimeContract.Screen {
+    private fun createScreen() = object : UpdateTimerTimeViewContract.Screen {
         override fun displayTimerInformation(currentHour: Int, currentMinute: Int) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 timerPicker.hour = currentHour

@@ -10,7 +10,7 @@
   <string name="alarm_timer_dialog_content">Remind you to track your activities.</string>
   <string name="alarm_timer_alarm_enabled">Alarm is activated</string>
   <string name="alarm_timer_alarm_disabled">Alarm is disabled</string>
-  <string name="pomodoro_choose_timer_title">Choose a timer</string>
+  <string name="choose_pomodoro_timer_view_title">Choose a timer</string>
   <string name="app_name" translatable="false">Time Tracker</string>
   <string name="create_timer_shortcut_short_label">New timer</string>
   <string name="create_timer_shortcut_long_label">Create a new timer to track an action.</string>
@@ -29,8 +29,8 @@
   <string name="menu_rewards">Support developers</string>
   <string name="menu_setting">Settings</string>
   <string name="home_dialog_confirm_reset_all_timers">Are you sur you want to reset all timers ?</string>
-  <string name="bottom_navigation_timer_view">Timer</string>
-  <string name="bottom_navigation_pomodoro_view" translatable="false">Pomodoro</string>
+  <string name="home_activity_bottom_navigation_timer">Timer</string>
+  <string name="home_activity_bottom_navigation_pomodoro" translatable="false">Pomodoro</string>
   <string name="timer_list_explain_notification_permission_title">Get reminder!</string>
   <string name="timer_list_explain_notification_permission_message">Never forget to time your activities thanks to the reminder you setup.</string>
   <string name="timer_notif_channel_id" translatable="false">timer_notif_channel_id</string>
@@ -40,7 +40,7 @@
   <string name="timer_notif_pause">Pause</string>
   <string name="timer_notif_continue_pomodoro">Continue pomodoro</string>
   <string name="timer_notif_pomodoro_session_end">Time is up</string>
-  <string name="pomodoro_title" translatable="false">[Pomodoro] %1$s</string>
+  <string name="timer_service_pomodoro_title" translatable="false">[Pomodoro] %1$s</string>
   <string name="pomodoro_timer_pause">Pause</string>
   <string name="pomodoro_dialog_title">Time is up</string>
   <string name="pomodoro_dialog_content">Do you want to continue the session ?</string>
@@ -89,13 +89,13 @@ Please try later.</string>
   <string name="settings_send_email_choose_app">Send email :</string>
   <string name="settings_send_email_no_application_available">There are no email clients installed.</string>
   <string name="settings_send_email_subject">How to improve Time Tracker</string>
-  <string name="menu_keep_screen_on">Keep screen ON</string>
-  <string name="menu_keep_screen_off">Don\'t keep screen ON</string>
+  <string name="show_mode_view_menu_keep_screen_on">Keep screen ON</string>
+  <string name="show_mode_view_menu_keep_screen_off">Don\'t keep screen ON</string>
   <string name="item_update_timer_time">Update time</string>
-  <string name="item_timer_reset">Reset</string>
-  <string name="item_timer_remove">Remove</string>
-  <string name="item_timer_rename">Rename</string>
-  <string name="item_start_pomodoro">Start Pomodoro</string>
+  <string name="timer_item_view_reset">Reset</string>
+  <string name="timer_item_view_remove">Remove</string>
+  <string name="timer_item_view_rename">Rename</string>
+  <string name="timer_item_view_start_pomodoro">Start Pomodoro</string>
   <string name="item_timer_remove_message">Are you sure to remove this timer ?</string>
   <string name="timer_row_rename">Rename timer</string>
   <string name="empty_list_view_text">What are you going to time today?</string>

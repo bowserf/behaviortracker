@@ -15,7 +15,7 @@ import androidx.navigation.findNavController
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer_list_view.TimerFragmentDirections
+import fr.bowser.behaviortracker.timer_list_view.TimerListFragmentDirections
 import fr.bowser.behaviortracker.update_timer_time_view.UpdateTimerTimeDialog
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
@@ -25,7 +25,7 @@ import javax.inject.Inject
 class TimerItemView(context: Context) : CardView(context) {
 
     @Inject
-    lateinit var presenter: TimerItemContract.Presenter
+    lateinit var presenter: TimerItemViewContract.Presenter
 
     private val screen = createScreen()
 
@@ -78,19 +78,19 @@ class TimerItemView(context: Context) : CardView(context) {
 
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.item_timer_reset -> {
+                R.id.timer_item_view_reset -> {
                     presenter.onClickResetTimer()
                 }
 
-                R.id.item_timer_delete -> {
+                R.id.timer_item_view_delete -> {
                     displayRemoveConfirmationDialog()
                 }
 
-                R.id.item_timer_rename -> {
+                R.id.timer_item_view_rename -> {
                     presenter.onClickRenameTimer()
                 }
 
-                R.id.item_timer_start_pomodoro -> {
+                R.id.timer_item_view_start_pomodoro -> {
                     presenter.onClickStartPomodoro()
                 }
             }
@@ -106,9 +106,9 @@ class TimerItemView(context: Context) : CardView(context) {
 
     private fun updateBtnPlayPause(isActivate: Boolean) {
         if (isActivate) {
-            btnPlayPause.setImageResource(R.drawable.ic_pause)
+            btnPlayPause.setImageResource(R.drawable.timer_item_view_pause)
         } else {
-            btnPlayPause.setImageResource(R.drawable.ic_play)
+            btnPlayPause.setImageResource(R.drawable.timer_item_view_play)
         }
     }
 
@@ -126,14 +126,14 @@ class TimerItemView(context: Context) : CardView(context) {
     }
 
     private fun setupGraph() {
-        val component = DaggerTimerItemComponent.builder()
+        val component = DaggerTimerItemViewComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
-            .timerItemModule(TimerItemModule(screen))
+            .timerItemViewModule(TimerItemViewModule(screen))
             .build()
         component.inject(this)
     }
 
-    private fun createScreen() = object : TimerItemContract.Screen {
+    private fun createScreen() = object : TimerItemViewContract.Screen {
 
         override fun timerUpdated(newTime: Long) {
             chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
@@ -176,7 +176,7 @@ class TimerItemView(context: Context) : CardView(context) {
         }
 
         override fun startShowMode(id: Long) {
-            val action = TimerFragmentDirections.actionTimerListScreenToShowModeScreen(id)
+            val action = TimerListFragmentDirections.actionTimerListScreenToShowModeScreen(id)
             findNavController().navigate(action)
         }
 

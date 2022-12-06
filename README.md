@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/bowserf/behaviortracker.svg?branch=dev)](https://travis-ci.org/bowserf/behaviortracker)
-
 # Time Tracker ⏲️easily track and optimize your time
 
 <img
@@ -34,16 +32,6 @@ By example, you could want a reminder link to the time you wake up.
         height="80"/>
 </a>
 
-## Technologies used
-
-- Kotlin
-- Room
-- Coroutine
-- Firebase Analytics
-- Constraint layout
-- Dagger 2
-- Play Billing
-
 ## Screenshot
 
 <img
@@ -71,14 +59,3 @@ By example, you could want a reminder link to the time you wake up.
     width="288"
     height="512"
     title="Timers list">
-
-## Future features
-
-This is a list of future features which will come in the application :
-
-- Possibility to manually add an action already done.
-- List of order activities in the day.
-- Curves to track your behavior during a day.
-- Add widget to the home screen to manage timers more easily.
-- Android Wear support to use this application more easily.
-- Several animations to improve user experience.

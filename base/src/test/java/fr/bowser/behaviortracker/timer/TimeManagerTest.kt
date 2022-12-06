@@ -1,7 +1,7 @@
 package fr.bowser.behaviortracker.timer
 
 import android.graphics.Color
-import fr.bowser.behaviortracker.time.TimeProvider
+import fr.bowser.behaviortracker.time_provider.TimeProvider
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,12 +18,12 @@ class TimeManagerTest {
     private lateinit var timeProvider: TimeProvider
 
     @Mock
-    private lateinit var addOn: TimeManagerImpl.AddOn
+    private lateinit var addOn: TimerManagerImpl.AddOn
 
     @Test
     fun startTimer() {
         // Given
-        val timeManager = TimeManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
         val timerState = Timer("MyTimer", Color.RED)
 
         // When
@@ -36,13 +36,13 @@ class TimeManagerTest {
     @Test
     fun startTimerListener() {
         // Given
-        val timeManager = TimeManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
 
         val timerState = Timer("MyTimer", Color.RED)
 
         var result = false
 
-        val timerManagerListener = object : TimeManager.Listener {
+        val timerManagerListener = object : TimerManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 result = updatedTimer.isActivate
             }
@@ -64,7 +64,7 @@ class TimeManagerTest {
     @Test
     fun stopTimer() {
         // Given
-        val timeManager = TimeManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
         val timer = Timer("MyTimer", Color.RED)
         timeManager.startTimer(timer)
 
@@ -78,7 +78,7 @@ class TimeManagerTest {
     @Test
     fun stopTimerListener() {
         // Given
-        val timeManager = TimeManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -86,7 +86,7 @@ class TimeManagerTest {
 
         timeManager.startTimer(timer)
 
-        val timerManagerListener = object : TimeManager.Listener {
+        val timerManagerListener = object : TimerManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 result = !updatedTimer.isActivate
             }
@@ -108,7 +108,7 @@ class TimeManagerTest {
     @Test
     fun stopRunningTimerWhenStartANewOne() {
         // Given
-        val timeManager = TimeManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
         val timer1 = Timer("MyTimer1", Color.RED)
         val timer2 = Timer("MyTimer2", Color.BLUE)
         timeManager.startTimer(timer1)
@@ -124,7 +124,7 @@ class TimeManagerTest {
     @Test
     fun stopRunningTimerWhenStartANewOneListener() {
         // Given
-        val timeManager = TimeManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
         val timer1 = Timer("MyTimer1", Color.RED)
         val timer2 = Timer("MyTimer2", Color.BLUE)
 
@@ -133,7 +133,7 @@ class TimeManagerTest {
         var timer1IsStopped = false
         var timer2IsActive = false
 
-        val timerManagerListener = object : TimeManager.Listener {
+        val timerManagerListener = object : TimerManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (updatedTimer == timer1 && !updatedTimer.isActivate) {
                     timer1IsStopped = true

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fr.bowser.behaviortracker.home_activity.HomeActivity">
+
+    <fragment
+        android:id="@+id/home_activity_nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/home_activity_bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />
+
+    <View
+        android:id="@+id/home_activity_bottom_navigation_shadow"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/default_shadow_height"
+        android:background="@drawable/background_shadow_top"
+        app:layout_constraintBottom_toTopOf="@id/home_activity_bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/home_activity_instant_app_install"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_space_2"
+        android:background="@drawable/home_activity_instant_app_button_bg_ripple"
+        android:drawableLeft="@drawable/home_activity_get_app"
+        android:paddingLeft="@dimen/default_space_1_5"
+        android:paddingTop="@dimen/default_space"
+        android:paddingBottom="@dimen/default_space"
+        android:paddingRight="@dimen/default_space_1_5"
+        android:elevation="8dp"
+        android:text="@string/home_instant_app_install"
+        android:textColor="@color/home_activity_instant_app_cta"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/home_activity_bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:visibility="visible" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/home_activity_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@drawable/home_activity_bottom_navigation_item_states"
+        app:itemTextColor="@drawable/home_activity_bottom_navigation_item_states"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/home_activity_menu_bottom_navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

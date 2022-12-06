@@ -9,7 +9,7 @@
   <string name="alarm_timer_dialog_content">Ricordati di tenere traccia delle tue attività.</string>
   <string name="alarm_timer_alarm_enabled">L\'allarme è attivato</string>
   <string name="alarm_timer_alarm_disabled">L\'allarme è disabilitato</string>
-  <string name="pomodoro_choose_timer_title">Scegli un timer</string>
+  <string name="choose_pomodoro_timer_view_title">Scegli un timer</string>
   <string name="create_timer_shortcut_short_label">Nuovo timer</string>
   <string name="create_timer_shortcut_long_label">Crea un nuovo timer per tenere traccia di un\'azione.</string>
   <string name="timer_name">Nome</string>
@@ -27,7 +27,7 @@
   <string name="menu_rewards">Supporta gli sviluppatori</string>
   <string name="menu_setting">Impostazioni</string>
   <string name="home_dialog_confirm_reset_all_timers">Sei sicuro di voler azzerare tutti i timer?</string>
-  <string name="bottom_navigation_timer_view">Timer</string>
+  <string name="home_activity_bottom_navigation_timer">Timer</string>
   <string name="timer_list_explain_notification_permission_title">Ricevi promemoria!</string>
   <string name="timer_list_explain_notification_permission_message">Non dimenticare mai di cronometrare le tue attività grazie al promemoria che hai impostato.</string>
   <string name="timer_notif_channel_name">Timer</string>
@@ -76,13 +76,13 @@
   <string name="settings_send_email_choose_app">Invia una email :</string>
   <string name="settings_send_email_no_application_available">Non sono installati client di posta elettronica.</string>
   <string name="settings_send_email_subject">Come migliorare Time Tracker</string>
-  <string name="menu_keep_screen_on">Tieni lo schermo acceso</string>
-  <string name="menu_keep_screen_off">Non tenere lo schermo acceso</string>
+  <string name="show_mode_view_menu_keep_screen_on">Tieni lo schermo acceso</string>
+  <string name="show_mode_view_menu_keep_screen_off">Non tenere lo schermo acceso</string>
   <string name="item_update_timer_time">Tempo di aggiornamento</string>
-  <string name="item_timer_reset">Ripristina</string>
-  <string name="item_timer_remove">Rimuovere</string>
-  <string name="item_timer_rename">Rinominare</string>
-  <string name="item_start_pomodoro">Inizia Pomodoro</string>
+  <string name="timer_item_view_reset">Ripristina</string>
+  <string name="timer_item_view_remove">Rimuovere</string>
+  <string name="timer_item_view_rename">Rinominare</string>
+  <string name="timer_item_view_start_pomodoro">Inizia Pomodoro</string>
   <string name="item_timer_remove_message">Sei sicuro di rimuovere questo timer?</string>
   <string name="timer_row_rename">Rinomina timer</string>
   <string name="empty_list_view_text">Cosa andrai a vedere oggi?</string>

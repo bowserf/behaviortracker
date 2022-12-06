@@ -9,7 +9,7 @@
   <string name="alarm_timer_dialog_content">提醒您跟踪您的活動。</string>
   <string name="alarm_timer_alarm_enabled">警報已啟動</string>
   <string name="alarm_timer_alarm_disabled">警報被禁用</string>
-  <string name="pomodoro_choose_timer_title">選擇計時器</string>
+  <string name="choose_pomodoro_timer_view_title">選擇計時器</string>
   <string name="create_timer_shortcut_short_label">新計時器</string>
   <string name="create_timer_shortcut_long_label">創建一個新的計時器來跟踪一個動作。</string>
   <string name="timer_name">姓名</string>
@@ -27,7 +27,7 @@
   <string name="menu_rewards">支持開發者</string>
   <string name="menu_setting">設置</string>
   <string name="home_dialog_confirm_reset_all_timers">您確定要重置所有計時器嗎？</string>
-  <string name="bottom_navigation_timer_view">定時器</string>
+  <string name="home_activity_bottom_navigation_timer">定時器</string>
   <string name="timer_list_explain_notification_permission_title">得到提醒！</string>
   <string name="timer_list_explain_notification_permission_message">由於您設置的提醒，永遠不要忘記為您的活動計時。</string>
   <string name="timer_notif_channel_name">定時器</string>
@@ -76,13 +76,13 @@
   <string name="settings_send_email_choose_app">發送電子郵件 ：</string>
   <string name="settings_send_email_no_application_available">沒有安裝電子郵件客戶端。</string>
   <string name="settings_send_email_subject">如何改進時間跟踪器</string>
-  <string name="menu_keep_screen_on">保持屏幕開啟</string>
-  <string name="menu_keep_screen_off">不要保持屏幕開啟</string>
+  <string name="show_mode_view_menu_keep_screen_on">保持屏幕開啟</string>
+  <string name="show_mode_view_menu_keep_screen_off">不要保持屏幕開啟</string>
   <string name="item_update_timer_time">更新時間</string>
-  <string name="item_timer_reset">重置</string>
-  <string name="item_timer_remove">消除</string>
-  <string name="item_timer_rename">改名</string>
-  <string name="item_start_pomodoro">開始番茄鐘</string>
+  <string name="timer_item_view_reset">重置</string>
+  <string name="timer_item_view_remove">消除</string>
+  <string name="timer_item_view_rename">改名</string>
+  <string name="timer_item_view_start_pomodoro">開始番茄鐘</string>
   <string name="item_timer_remove_message">您確定要刪除此計時器嗎？</string>
   <string name="timer_row_rename">重命名計時器</string>
   <string name="empty_list_view_text">你今天要安排什麼時間？</string>

@@ -1,5 +1,6 @@
 package fr.bowser.feature_do_not_disturb.internal
 
+import android.annotation.SuppressLint
 import android.content.Context
 
 internal class DoNotDisturbGraphInternal(private val context: Context) {
@@ -8,6 +9,7 @@ internal class DoNotDisturbGraphInternal(private val context: Context) {
 
     companion object {
 
+        @SuppressLint("StaticFieldLeak")
         private var graph: DoNotDisturbGraphInternal? = null
 
         fun init(context: Context) {

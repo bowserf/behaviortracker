@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <dimen name="show_mode_timer_time_text">56sp</dimen>
-    <dimen name="show_mode_timer_name_text">28sp</dimen>
-
-</resources>

@@ -100,7 +100,7 @@ class TimeModificationDialogPreference : DialogPreference {
     private lateinit var timeUnit: String
 
     override fun getDialogLayoutResource(): Int {
-        return R.layout.preference_dialog_time_modification
+        return R.layout.settings_view_preference_dialog_time_modification
     }
 
     override fun onGetDefaultValue(a: TypedArray, index: Int): Any {

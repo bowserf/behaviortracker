@@ -7,7 +7,6 @@ import com.google.android.gms.common.wrappers.InstantApps
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import fr.bowser.behaviortracker.BuildConfig
-import fr.bowser.behaviortracker.alarm.AlarmNotification
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
 import fr.bowser.behaviortracker.app_initialization.AppInitializationProviderHelper
 import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
@@ -85,9 +84,10 @@ class BehaviorTrackerApp : Application() {
 
     private fun setupAlarmListener() {
         val alarmTimerManager = appComponent.provideAlarmTimerManager()
+        val alarmNotificationManager = appComponent.provideAlarmNotificationManager()
         alarmTimerManager.addListener(object : AlarmTimerManager.Listener {
             override fun onAlarmTriggered() {
-                AlarmNotification.displayAlarmNotif(this@BehaviorTrackerApp)
+                alarmNotificationManager.displayNotification()
             }
         })
     }

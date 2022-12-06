@@ -1,8 +1,8 @@
 package fr.bowser.behaviortracker.show_mode_view
 
-import fr.bowser.behaviortracker.show_mode_item_view.ShowModeTimerViewContract
-import fr.bowser.behaviortracker.show_mode_item_view.ShowModeTimerViewPresenter
-import fr.bowser.behaviortracker.timer.TimeManager
+import fr.bowser.behaviortracker.show_mode_item_view.ShowModeItemViewContract
+import fr.bowser.behaviortracker.show_mode_item_view.ShowModeItemViewPresenter
+import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.MockitoUtils.any
@@ -17,16 +17,16 @@ import org.mockito.junit.MockitoJUnitRunner
 class ShowModeTimerViewPresenterTest {
 
     @Mock
-    private lateinit var screen: ShowModeTimerViewContract.Screen
+    private lateinit var screen: ShowModeItemViewContract.Screen
 
     @Mock
-    private lateinit var timeManager: TimeManager
+    private lateinit var timeManager: TimerManager
 
-    private lateinit var presenter: ShowModeTimerViewPresenter
+    private lateinit var presenter: ShowModeItemViewPresenter
 
     @Before
     fun init() {
-        presenter = ShowModeTimerViewPresenter(screen, timeManager)
+        presenter = ShowModeItemViewPresenter(screen, timeManager)
     }
 
     @Test

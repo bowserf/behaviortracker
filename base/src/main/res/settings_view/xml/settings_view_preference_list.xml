@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="@string/pref_key_pomodoro"
+        android:title="@string/settings_category_pomodoro">
+
+        <fr.bowser.behaviortracker.setting_view.TimeModificationDialogPreference
+            android:dialogMessage="@string/settings_cell_pomodoro_stage_message"
+            android:key="@string/pref_key_pomodoro_stage"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:defaultValue="@integer/settings_view_default_value_pomodoro_stage_minutes"
+            android:summary="@string/settings_cell_pomodoro_stage_message"
+            android:title="@string/settings_cell_pomodoro_stage_title" />
+
+        <fr.bowser.behaviortracker.setting_view.TimeModificationDialogPreference
+            android:dialogMessage="@string/settings_cell_pomodoro_pause_stage_message"
+            android:key="@string/pref_key_pomodoro_pause_stage"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:defaultValue="@integer/settings_view_default_value_pomodoro_pause_stage_minutes"
+            android:summary="@string/settings_cell_pomodoro_pause_stage_message"
+            android:title="@string/settings_cell_pomodoro_pause_stage_title" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="@string/pref_key_pomodoro_vibration"
+            android:summary="@string/settings_cell_pomodoro_vibration_message"
+            android:title="@string/settings_cell_pomodoro_vibration" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_key_timer_other"
+        android:title="@string/settings_category_other">
+
+        <Preference android:key="@string/pref_key_send_commentary"
+            android:title="@string/settings_cell_send_commentary_title"
+            android:summary="@string/settings_cell_send_commentary_message"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

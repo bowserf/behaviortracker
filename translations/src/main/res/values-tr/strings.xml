@@ -9,7 +9,7 @@
   <string name="alarm_timer_dialog_content">Aktivitelerinizi takip etmenizi hatırlatın.</string>
   <string name="alarm_timer_alarm_enabled">Alarm etkinleştirildi</string>
   <string name="alarm_timer_alarm_disabled">Alarm devre dışı</string>
-  <string name="pomodoro_choose_timer_title">Bir zamanlayıcı seçin</string>
+  <string name="choose_pomodoro_timer_view_title">Bir zamanlayıcı seçin</string>
   <string name="create_timer_shortcut_short_label">Yeni zamanlayıcı</string>
   <string name="create_timer_shortcut_long_label">Bir eylemi izlemek için yeni bir zamanlayıcı oluşturun.</string>
   <string name="timer_name">İsim</string>
@@ -27,7 +27,7 @@
   <string name="menu_rewards">Geliştiricileri destekleyin</string>
   <string name="menu_setting">Ayarlar</string>
   <string name="home_dialog_confirm_reset_all_timers">Tüm zamanlayıcıları sıfırlamak istediğinizden emin misiniz?</string>
-  <string name="bottom_navigation_timer_view">zamanlayıcı</string>
+  <string name="home_activity_bottom_navigation_timer">zamanlayıcı</string>
   <string name="timer_list_explain_notification_permission_title">Hatırlatma alın!</string>
   <string name="timer_list_explain_notification_permission_message">Kurduğunuz hatırlatıcı sayesinde etkinliklerinize zaman ayırmayı asla unutmayın.</string>
   <string name="timer_notif_channel_name">zamanlayıcı</string>
@@ -76,13 +76,13 @@
   <string name="settings_send_email_choose_app">Eposta gönder :</string>
   <string name="settings_send_email_no_application_available">Yüklü e-posta istemcisi yok.</string>
   <string name="settings_send_email_subject">Time Tracker nasıl geliştirilir</string>
-  <string name="menu_keep_screen_on">Ekranını açık tut</string>
-  <string name="menu_keep_screen_off">Ekranı AÇIK tutmayın</string>
+  <string name="show_mode_view_menu_keep_screen_on">Ekranını açık tut</string>
+  <string name="show_mode_view_menu_keep_screen_off">Ekranı AÇIK tutmayın</string>
   <string name="item_update_timer_time">Güncelleme zamanı</string>
-  <string name="item_timer_reset">Sıfırla</string>
-  <string name="item_timer_remove">Kaldırmak</string>
-  <string name="item_timer_rename">Yeniden isimlendirmek</string>
-  <string name="item_start_pomodoro">Pomodoro\'yu başlat</string>
+  <string name="timer_item_view_reset">Sıfırla</string>
+  <string name="timer_item_view_remove">Kaldırmak</string>
+  <string name="timer_item_view_rename">Yeniden isimlendirmek</string>
+  <string name="timer_item_view_start_pomodoro">Pomodoro\'yu başlat</string>
   <string name="item_timer_remove_message">Bu zamanlayıcıyı kaldıracağınızdan emin misiniz?</string>
   <string name="timer_row_rename">Zamanlayıcıyı yeniden adlandır</string>
   <string name="empty_list_view_text">Bugün neye zaman ayıracaksın?</string>

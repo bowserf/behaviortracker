@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="show_mode_view_time_text">56sp</dimen>
+    <dimen name="show_mode_view_name_text">28sp</dimen>
+
+</resources>

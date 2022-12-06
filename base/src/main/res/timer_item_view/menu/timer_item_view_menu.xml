@@ -3,27 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_timer_reset"
+        android:id="@+id/timer_item_view_reset"
         android:enabled="true"
-        android:title="@string/item_timer_reset"
+        android:title="@string/timer_item_view_reset"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/item_timer_rename"
+        android:id="@+id/timer_item_view_rename"
         android:enabled="true"
-        android:title="@string/item_timer_rename"
+        android:title="@string/timer_item_view_rename"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/item_timer_delete"
+        android:id="@+id/timer_item_view_delete"
         android:enabled="true"
-        android:title="@string/item_timer_remove"
+        android:title="@string/timer_item_view_remove"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/item_timer_start_pomodoro"
+        android:id="@+id/timer_item_view_start_pomodoro"
         android:enabled="true"
-        android:title="@string/item_start_pomodoro"
+        android:title="@string/timer_item_view_start_pomodoro"
         app:showAsAction="ifRoom" />
 
 </menu>

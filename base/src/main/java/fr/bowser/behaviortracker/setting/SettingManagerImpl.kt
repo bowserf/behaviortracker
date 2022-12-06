@@ -31,12 +31,12 @@ class SettingManagerImpl(
 
         pomodoroPauseStep = sharedPreferences.getInt(
             stringManager.getString(R.string.pref_key_pomodoro_pause_stage),
-            context.resources.getInteger(R.integer.settings_default_value_pomodoro_pause_stage_minutes)
+            context.resources.getInteger(R.integer.settings_view_default_value_pomodoro_pause_stage_minutes)
         ) * 60
 
         pomodoroStep = sharedPreferences.getInt(
             stringManager.getString(R.string.pref_key_pomodoro_stage),
-            context.resources.getInteger(R.integer.settings_default_value_pomodoro_stage_minutes)
+            context.resources.getInteger(R.integer.settings_view_default_value_pomodoro_stage_minutes)
         ) * 60
     }
 
@@ -50,7 +50,7 @@ class SettingManagerImpl(
                     pomodoroPauseStep = sharedPreferences.getInt(
                         key,
                         context.resources.getInteger(
-                            R.integer.settings_default_value_pomodoro_pause_stage_minutes
+                            R.integer.settings_view_default_value_pomodoro_pause_stage_minutes
                         )
                     ) * 60
                 }
@@ -58,7 +58,7 @@ class SettingManagerImpl(
                     pomodoroStep = sharedPreferences.getInt(
                         key,
                         context.resources.getInteger(
-                            R.integer.settings_default_value_pomodoro_stage_minutes
+                            R.integer.settings_view_default_value_pomodoro_stage_minutes
                         )
                     ) * 60
                 }

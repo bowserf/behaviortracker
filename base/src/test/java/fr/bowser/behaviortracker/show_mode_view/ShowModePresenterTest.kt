@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class ShowModePresenterTest {
 
     @Mock
-    private lateinit var screen: ShowModeContract.Screen
+    private lateinit var screen: ShowModeViewContract.Screen
 
     @Mock
     private lateinit var timerListManager: TimerListManager
@@ -22,7 +22,7 @@ class ShowModePresenterTest {
     @Test
     fun startSelectTheGoodTimer() {
         // Given
-        val presenter = ShowModePresenter(screen, timerListManager)
+        val presenter = ShowModeViewPresenter(screen, timerListManager)
         val timerList = mutableListOf<Timer>()
         timerList.add(Timer(9, 0, "timer1", ColorUtils.COLOR_AMBER, 0, 0, 0))
         timerList.add(Timer(10, 0, "timer2", ColorUtils.COLOR_AMBER, 0, 0, 1))
@@ -39,7 +39,7 @@ class ShowModePresenterTest {
     @Test
     fun onClickScreeOff() {
         // Given
-        val presenter = ShowModePresenter(screen, timerListManager)
+        val presenter = ShowModeViewPresenter(screen, timerListManager)
 
         // When
         presenter.onClickScreeOff()
@@ -52,7 +52,7 @@ class ShowModePresenterTest {
     @Test
     fun onClickScreeOn() {
         // Given
-        val presenter = ShowModePresenter(screen, timerListManager)
+        val presenter = ShowModeViewPresenter(screen, timerListManager)
 
         // When
         presenter.onClickScreeOn()
