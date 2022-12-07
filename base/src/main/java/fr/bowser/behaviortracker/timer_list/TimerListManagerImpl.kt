@@ -3,12 +3,13 @@ package fr.bowser.behaviortracker.timer_list
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer.TimerManager
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class TimerListManagerImpl(
+    private val coroutineScope: CoroutineScope,
     private val timerDAO: TimerDAO,
     private val timeManager: TimerManager
 ) : TimerListManager {
@@ -18,7 +19,7 @@ class TimerListManagerImpl(
     private val listeners = ArrayList<TimerListManager.Listener>()
 
     init {
-        GlobalScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             timers.addAll(timerDAO.getTimers())
         }
     }
@@ -32,7 +33,7 @@ class TimerListManagerImpl(
             listener.onTimerAdded(timer)
         }
 
-        GlobalScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             timer.id = timerDAO.addTimer(timer)
         }
     }
@@ -47,14 +48,14 @@ class TimerListManagerImpl(
             listener.onTimerRemoved(timer)
         }
 
-        GlobalScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             timerDAO.removeTimer(timer)
             reorderTimerList(timers)
         }
     }
 
     override fun removeAllTimers() {
-        GlobalScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             timerDAO.removeAllTimers()
             withContext(Dispatchers.Main) {
                 timeManager.stopTimer()
@@ -76,7 +77,7 @@ class TimerListManagerImpl(
 
         timers.sortBy { timer -> timer.position }
 
-        GlobalScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             for (timer in timerList) {
                 timerDAO.updateTimerPosition(timer.id, timer.position)
             }
@@ -93,7 +94,7 @@ class TimerListManagerImpl(
 
     override fun renameTimer(timer: Timer, newName: String) {
         timer.name = newName
-        GlobalScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             timerDAO.renameTimer(timer.id, newName)
         }
 
