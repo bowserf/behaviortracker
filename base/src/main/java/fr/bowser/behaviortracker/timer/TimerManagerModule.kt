@@ -24,7 +24,6 @@ class TimerManagerModule {
             coroutineScope = CoroutineScope(Dispatchers.IO),
             timerDAO = timerDAO,
             timeProvider = timeProvider,
-            handler = Handler(),
             addOn = createAddOn(context)
         )
     }

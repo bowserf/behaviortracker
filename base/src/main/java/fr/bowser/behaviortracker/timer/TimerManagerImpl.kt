@@ -1,15 +1,17 @@
 package fr.bowser.behaviortracker.timer
 
-import android.os.Handler
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TimerManagerImpl(
     private val coroutineScope: CoroutineScope,
     private val timerDAO: TimerDAO,
     private val timeProvider: TimeProvider,
-    private val handler: Handler?,
     private val addOn: AddOn
 ) : TimerManager {
 
@@ -17,7 +19,7 @@ class TimerManagerImpl(
 
     private val lastUpdatedTime = HashMap<Timer, Long>()
 
-    private val timerRunnable = TimerRunnable()
+    private var runningTimerJob: Job? = null
 
     private var timer: Timer? = null
 
@@ -37,7 +39,17 @@ class TimerManagerImpl(
             listener.onTimerStateChanged(timer)
         }
 
-        handler?.postDelayed(timerRunnable, DELAY)
+        runningTimerJob = coroutineScope.launch {
+            while (true) {
+                delay(DELAY)
+                val currentTime = getCurrentTimeSeconds()
+                val diff = currentTime - lastUpdatedTime[timer]!!
+                withContext(Dispatchers.Main) {
+                    updateTime(timer, timer.time + diff)
+                }
+                lastUpdatedTime[timer] = currentTime
+            }
+        }
 
         this.timer = timer
 
@@ -101,7 +113,7 @@ class TimerManagerImpl(
 
         this.timer = null
 
-        handler?.removeCallbacks(timerRunnable)
+        runningTimerJob?.cancel()
     }
 
     private fun getCurrentTimeSeconds(): Long {
@@ -118,18 +130,6 @@ class TimerManagerImpl(
             coroutineScope.launch {
                 timerDAO.updateLastUpdatedTimestamp(timer.id, currentTime)
             }
-        }
-    }
-
-    inner class TimerRunnable : Runnable {
-        override fun run() {
-            val timer = this@TimerManagerImpl.timer ?: return
-            val currentTime = getCurrentTimeSeconds()
-            val diff = currentTime - lastUpdatedTime[timer]!!
-            updateTime(timer, timer.time + diff)
-            lastUpdatedTime[timer] = currentTime
-
-            handler?.postDelayed(this, DELAY)
         }
     }
 
