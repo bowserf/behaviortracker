@@ -34,16 +34,13 @@ class TimerListViewPresenter(
 
     private val timeManagerListener = createTimeManagerListener()
 
-    override fun init() {
-        updateTimerList()
-        updateListVisibility()
-    }
-
     override fun onStart() {
         reviewManager.addListener(reviewManagerListener)
         timerListManager.addListener(timerListManagerListener)
         timeManager.addListener(timeManagerListener)
 
+        updateTimerList()
+        updateListVisibility()
         updateTotalTimerTime()
     }
 

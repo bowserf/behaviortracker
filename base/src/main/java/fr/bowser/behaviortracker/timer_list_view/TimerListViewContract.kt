@@ -8,8 +8,6 @@ interface TimerListViewContract {
 
     interface Presenter {
 
-        fun init()
-
         fun onStart()
 
         fun onStop()

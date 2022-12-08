@@ -82,8 +82,6 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
         val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-
-        presenter.init()
     }
 
     override fun onStart() {
