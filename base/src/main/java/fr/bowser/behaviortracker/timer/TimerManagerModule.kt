@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer_service.TimeService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -19,10 +21,11 @@ class TimerManagerModule {
         timeProvider: TimeProvider
     ): TimerManager {
         return TimerManagerImpl(
-            timerDAO,
-            timeProvider,
-            Handler(),
-            createAddOn(context)
+            coroutineScope = CoroutineScope(Dispatchers.IO),
+            timerDAO = timerDAO,
+            timeProvider = timeProvider,
+            handler = Handler(),
+            addOn = createAddOn(context)
         )
     }
 
