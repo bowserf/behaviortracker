@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "",
     "firebase_url": "",
-    "project_id": "",
+    "project_id": "behaviortracker-1234a",
     "storage_bucket": ""
   },
   "client": [
@@ -33,7 +33,7 @@
       ],
       "api_key": [
         {
-          "current_key": ""
+          "current_key": "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM"
         }
       ],
       "services": {
