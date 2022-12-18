@@ -23,7 +23,21 @@ android {
         versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 
-        resourceConfigurations.addAll(listOf("en", "de", "es", "fr", "hi", "it", "ja", "pt", "tr", "zh-rCN", "zh-rTW"))
+        resourceConfigurations.addAll(
+            listOf(
+                "en",
+                "de",
+                "es",
+                "fr",
+                "hi",
+                "it",
+                "ja",
+                "pt",
+                "tr",
+                "zh-rCN",
+                "zh-rTW"
+            )
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,6 +58,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"))
             proguardFiles("proguard-rules.pro")
             buildConfigField("boolean", "UA", "false")
@@ -58,7 +73,7 @@ android {
             initWith(getByName("debug"))
             versionNameSuffix = ".ua"
             buildConfigField("boolean", "UA", "true")
-            setMatchingFallbacks("ua", "debug")
+            matchingFallbacks.addAll(listOf("ua", "debug"))
         }
     }
 
@@ -79,31 +94,33 @@ android {
         getByName("main") {
             // Split resources.
             // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
-            res.srcDirs(
-                "src/main/res/alarm_notification",
-                "src/main/res/alarm_view",
-                "src/main/res/app_icon",
-                "src/main/res/choose_pomodoro_timer_view",
-                "src/main/res/common",
-                "src/main/res/create_timer_view",
-                "src/main/res/explain_permission_request_view",
-                "src/main/res/floating_running_timer_view",
-                "src/main/res/home_activity",
-                "src/main/res/instantapp",
-                "src/main/res/notification",
-                "src/main/res/pomodoro_view",
-                "src/main/res/rewards_row_view",
-                "src/main/res/rewards_view",
-                "src/main/res/settings_view",
-                "src/main/res/shortcut",
-                "src/main/res/show_mode_item_view",
-                "src/main/res/show_mode_view",
-                "src/main/res/timer_item_view",
-                "src/main/res/timer_list_view",
-                "src/main/res/timer_service",
-                "src/main/res/ua",
-                "src/main/res/update_timer_time_view",
-                "src/main/res/widget"
+            res.setSrcDirs(
+                listOf(
+                    "src/main/res/alarm_notification",
+                    "src/main/res/alarm_view",
+                    "src/main/res/app_icon",
+                    "src/main/res/choose_pomodoro_timer_view",
+                    "src/main/res/common",
+                    "src/main/res/create_timer_view",
+                    "src/main/res/explain_permission_request_view",
+                    "src/main/res/floating_running_timer_view",
+                    "src/main/res/home_activity",
+                    "src/main/res/instantapp",
+                    "src/main/res/notification",
+                    "src/main/res/pomodoro_view",
+                    "src/main/res/rewards_row_view",
+                    "src/main/res/rewards_view",
+                    "src/main/res/settings_view",
+                    "src/main/res/shortcut",
+                    "src/main/res/show_mode_item_view",
+                    "src/main/res/show_mode_view",
+                    "src/main/res/timer_item_view",
+                    "src/main/res/timer_list_view",
+                    "src/main/res/timer_service",
+                    "src/main/res/ua",
+                    "src/main/res/update_timer_time_view",
+                    "src/main/res/widget"
+                )
             )
         }
     }
