@@ -146,12 +146,9 @@ class TimerListViewPresenter(
     }
 
     override fun onClickCancelTimerDeletion() {
-        if (ongoingDeletionTimer == null) {
-            return
-        }
-        timerListManager.addTimer(ongoingDeletionTimer!!)
+        val restoreTimer = ongoingDeletionTimer ?: return
         ongoingDeletionTimer = null
-        updateTimerList()
+        timerListManager.addTimer(restoreTimer)
     }
 
     private fun updateListVisibility() {
@@ -214,6 +211,7 @@ class TimerListViewPresenter(
         override fun onTimerAdded(updatedTimer: Timer) {
             updateTimerList()
             updateListVisibility()
+            updateTotalTimerTime()
         }
 
         override fun onTimerRenamed(updatedTimer: Timer) {
