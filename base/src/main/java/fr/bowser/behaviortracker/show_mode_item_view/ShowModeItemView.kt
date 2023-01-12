@@ -29,7 +29,7 @@ class ShowModeItemView(context: Context) : LinearLayout(context) {
     init {
         setupGraph()
 
-        inflate(context, R.layout.show_mode_view_fragment, this)
+        inflate(context, R.layout.show_mode_view_item, this)
 
         orientation = VERTICAL
         gravity = Gravity.CENTER
