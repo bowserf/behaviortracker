@@ -88,8 +88,8 @@ class TimeService : Service(), TimeServiceContract.Screen {
         return null
     }
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        val action = intent.action
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val action = intent?.action
         if (action == ACTION_START) {
             updateNotification()
             presenter.start()
