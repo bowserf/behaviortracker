@@ -3,12 +3,16 @@ package fr.bowser.behaviortracker.timer
 import android.graphics.Color
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.timer_list.TimerListManagerImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class TimerListManagerTest {
 
@@ -19,8 +23,8 @@ class TimerListManagerTest {
     private lateinit var timeManager: TimerManager
 
     @Test
-    fun addTimer() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun addTimer() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -31,8 +35,8 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun receiveAddTimerListener() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun receiveAddTimerListener() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -60,8 +64,8 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun removeTimer() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun removeTimer() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -72,8 +76,8 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun receiveRemoveTimerListener() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun receiveRemoveTimerListener() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -104,8 +108,8 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun renameTimer() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun renameTimer() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -119,8 +123,8 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun receiveRenameTimerListener() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun receiveRenameTimerListener() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -153,8 +157,8 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun reorderTimerList() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun reorderTimerList() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer1 = Timer("Timer1", Color.RED)
         val timer2 = Timer("Timer2", Color.RED)
@@ -174,8 +178,8 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun reorderTimerListChangeInternalList() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun reorderTimerListChangeInternalList() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer1 = Timer("Timer1", Color.RED)
         val timer2 = Timer("Timer2", Color.RED)
@@ -196,12 +200,16 @@ class TimerListManagerTest {
     }
 
     @Test
-    fun setPositionWhenAddTimer() {
-        val timerListManager = TimerListManagerImpl(timerDAO, timeManager)
+    fun setPositionWhenAddTimer() = runTest {
+        val timerListManager = createTimerListManagerImpl(backgroundScope)
 
         val timer1 = Timer("Timer1", Color.RED, position = -1)
         timerListManager.addTimer(timer1)
 
         Assert.assertEquals(0, timer1.position)
+    }
+
+    private fun createTimerListManagerImpl(backgroundScope: CoroutineScope): TimerListManager {
+        return TimerListManagerImpl(backgroundScope, timerDAO, timeManager)
     }
 }

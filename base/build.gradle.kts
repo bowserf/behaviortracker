@@ -174,6 +174,7 @@ dependencies {
     testImplementation("org.json:json:20220320")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:4.6.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     androidTestImplementation("androidx.room:room-testing:2.4.2")
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")

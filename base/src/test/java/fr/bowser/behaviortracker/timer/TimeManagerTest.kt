@@ -2,12 +2,16 @@ package fr.bowser.behaviortracker.timer
 
 import android.graphics.Color
 import fr.bowser.behaviortracker.time_provider.TimeProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class TimeManagerTest {
 
@@ -21,9 +25,10 @@ class TimeManagerTest {
     private lateinit var addOn: TimerManagerImpl.AddOn
 
     @Test
-    fun startTimer() {
+    fun startTimer() = runTest {
         // Given
-        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = createTimerManager(backgroundScope)
+        //val timeManager = createTimerManager()
         val timerState = Timer("MyTimer", Color.RED)
 
         // When
@@ -34,9 +39,9 @@ class TimeManagerTest {
     }
 
     @Test
-    fun startTimerListener() {
+    fun startTimerListener() = runTest {
         // Given
-        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = createTimerManager(backgroundScope)
 
         val timerState = Timer("MyTimer", Color.RED)
 
@@ -62,9 +67,9 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopTimer() {
+    fun stopTimer() = runTest {
         // Given
-        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = createTimerManager(backgroundScope)
         val timer = Timer("MyTimer", Color.RED)
         timeManager.startTimer(timer)
 
@@ -76,9 +81,9 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopTimerListener() {
+    fun stopTimerListener() = runTest {
         // Given
-        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = createTimerManager(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -106,9 +111,9 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopRunningTimerWhenStartANewOne() {
+    fun stopRunningTimerWhenStartANewOne() = runTest {
         // Given
-        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = createTimerManager(backgroundScope)
         val timer1 = Timer("MyTimer1", Color.RED)
         val timer2 = Timer("MyTimer2", Color.BLUE)
         timeManager.startTimer(timer1)
@@ -122,9 +127,9 @@ class TimeManagerTest {
     }
 
     @Test
-    fun stopRunningTimerWhenStartANewOneListener() {
+    fun stopRunningTimerWhenStartANewOneListener() = runTest {
         // Given
-        val timeManager = TimerManagerImpl(timerDao, timeProvider, null, addOn = addOn)
+        val timeManager = createTimerManager(backgroundScope)
         val timer1 = Timer("MyTimer1", Color.RED)
         val timer2 = Timer("MyTimer2", Color.BLUE)
 
@@ -154,5 +159,14 @@ class TimeManagerTest {
 
         // Then
         Assert.assertTrue(timer1IsStopped && timer2IsActive)
+    }
+
+    private fun createTimerManager(backgroundScope: CoroutineScope): TimerManager {
+        return TimerManagerImpl(
+            backgroundScope,
+            timerDao,
+            timeProvider,
+            addOn = addOn
+        )
     }
 }
