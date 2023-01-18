@@ -107,6 +107,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
     override fun dismissNotification() {
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         stopSelf()
+        notificationManager.cancel(TIMER_NOTIFICATION_ID)
     }
 
     override fun updateTimeNotification(time: String) {
