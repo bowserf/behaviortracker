@@ -82,10 +82,6 @@ class TimerItemView(context: Context) : CardView(context) {
                     presenter.onClickResetTimer()
                 }
 
-                R.id.timer_item_view_delete -> {
-                    displayRemoveConfirmationDialog()
-                }
-
                 R.id.timer_item_view_rename -> {
                     presenter.onClickRenameTimer()
                 }
@@ -112,19 +108,6 @@ class TimerItemView(context: Context) : CardView(context) {
         }
     }
 
-    private fun displayRemoveConfirmationDialog() {
-        val message = resources.getString(R.string.item_timer_remove_message)
-        val builder = AlertDialog.Builder(context)
-        builder.setMessage(message)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                presenter.onClickDeleteTimer()
-            }
-            .setNegativeButton(android.R.string.cancel) { _, _ ->
-                // do nothing
-            }
-            .show()
-    }
-
     private fun setupGraph() {
         val component = DaggerTimerItemViewComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
@@ -147,7 +130,8 @@ class TimerItemView(context: Context) : CardView(context) {
             val alertDialog = AlertDialog.Builder(context)
             alertDialog.setMessage(resources.getString(R.string.timer_row_rename))
 
-            val rootView = LayoutInflater.from(context).inflate(R.layout.timer_item_view_rename_timer, null)
+            val rootView =
+                LayoutInflater.from(context).inflate(R.layout.timer_item_view_rename_timer, null)
             val input = rootView.findViewById<EditText>(R.id.edittext)
 
             input.setText(oldName)

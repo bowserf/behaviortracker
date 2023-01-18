@@ -55,10 +55,6 @@ class TimerItemViewPresenter(
         screen.statusUpdated(timer.isActivate)
     }
 
-    override fun onClickDeleteTimer() {
-        timerListManager.removeTimer(timer)
-    }
-
     override fun onClickResetTimer() {
         timeManager.updateTime(timer, 0f)
 

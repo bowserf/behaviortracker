@@ -96,7 +96,6 @@ Please try later.</string>
   <string name="timer_item_view_remove">Remove</string>
   <string name="timer_item_view_rename">Rename</string>
   <string name="timer_item_view_start_pomodoro">Start Pomodoro</string>
-  <string name="item_timer_remove_message">Are you sure to remove this timer ?</string>
   <string name="timer_row_rename">Rename timer</string>
   <string name="empty_list_view_text">What are you going to time today?</string>
   <string name="timer_view_timer_has_been_removed">Timer has been removed</string>

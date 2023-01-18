@@ -83,7 +83,6 @@
   <string name="timer_item_view_remove">हटाना</string>
   <string name="timer_item_view_rename">नाम बदलें</string>
   <string name="timer_item_view_start_pomodoro">पोमोडोरो शुरू करें</string>
-  <string name="item_timer_remove_message">क्या आप वाकई इस टाइमर को निकालना चाहते हैं?</string>
   <string name="timer_row_rename">टाइमर का नाम बदलें</string>
   <string name="empty_list_view_text">आज आप किस समय पर जा रहे हैं?</string>
   <string name="timer_view_timer_has_been_removed">टाइमर हटा दिया गया है</string>

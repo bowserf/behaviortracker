@@ -81,7 +81,6 @@
     <string name="timer_item_view_remove">Supprimer</string>
     <string name="timer_item_view_rename">Renommer</string>
     <string name="timer_item_view_start_pomodoro">Démarrer Pomodoro</string>
-    <string name="item_timer_remove_message">Êtes vous sûr de vouloir supprimer ce chronomètre ?</string>
     <string name="timer_row_rename">Renommer chronomètre</string>
     <string name="item_update_timer_time">Mettre le temps à jour</string>
     <string name="empty_list_view_text">Qu\'allez vous chronométrer aujourd\'hui ?</string>

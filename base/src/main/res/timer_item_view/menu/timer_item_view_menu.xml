@@ -15,12 +15,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/timer_item_view_delete"
-        android:enabled="true"
-        android:title="@string/timer_item_view_remove"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/timer_item_view_start_pomodoro"
         android:enabled="true"
         android:title="@string/timer_item_view_start_pomodoro"

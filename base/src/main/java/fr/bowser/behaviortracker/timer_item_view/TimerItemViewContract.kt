@@ -14,8 +14,6 @@ interface TimerItemViewContract {
 
         fun timerStateChange()
 
-        fun onClickDeleteTimer()
-
         fun onClickResetTimer()
 
         fun onClickRenameTimer()

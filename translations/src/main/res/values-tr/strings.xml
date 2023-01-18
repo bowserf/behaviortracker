@@ -83,7 +83,6 @@
   <string name="timer_item_view_remove">Kaldırmak</string>
   <string name="timer_item_view_rename">Yeniden isimlendirmek</string>
   <string name="timer_item_view_start_pomodoro">Pomodoro\'yu başlat</string>
-  <string name="item_timer_remove_message">Bu zamanlayıcıyı kaldıracağınızdan emin misiniz?</string>
   <string name="timer_row_rename">Zamanlayıcıyı yeniden adlandır</string>
   <string name="empty_list_view_text">Bugün neye zaman ayıracaksın?</string>
   <string name="timer_view_timer_has_been_removed">Zamanlayıcı kaldırıldı</string>

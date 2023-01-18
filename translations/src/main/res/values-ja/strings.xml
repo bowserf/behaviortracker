@@ -83,7 +83,6 @@
   <string name="timer_item_view_remove">削除する</string>
   <string name="timer_item_view_rename">名前を変更</string>
   <string name="timer_item_view_start_pomodoro">ポモドーロを開始</string>
-  <string name="item_timer_remove_message">このタイマーを削除してもよろしいですか?</string>
   <string name="timer_row_rename">タイマーの名前を変更</string>
   <string name="empty_list_view_text">今日は何時間に行きますか？</string>
   <string name="timer_view_timer_has_been_removed">タイマーが削除されました</string>

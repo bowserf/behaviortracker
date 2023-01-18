@@ -83,7 +83,6 @@
   <string name="timer_item_view_remove">消除</string>
   <string name="timer_item_view_rename">改名</string>
   <string name="timer_item_view_start_pomodoro">开始番茄钟</string>
-  <string name="item_timer_remove_message">您确定要删除此计时器吗？</string>
   <string name="timer_row_rename">重命名计时器</string>
   <string name="empty_list_view_text">你今天要安排什么时间？</string>
   <string name="timer_view_timer_has_been_removed">定时器已被移除</string>

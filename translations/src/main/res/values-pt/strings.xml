@@ -83,7 +83,6 @@
   <string name="timer_item_view_remove">Remover</string>
   <string name="timer_item_view_rename">Renomear</string>
   <string name="timer_item_view_start_pomodoro">Iniciar Pomodoro</string>
-  <string name="item_timer_remove_message">Tem a certeza de remover este temporizador?</string>
   <string name="timer_row_rename">Renomear temporizador</string>
   <string name="empty_list_view_text">O que você vai tempo hoje?</string>
   <string name="timer_view_timer_has_been_removed">O temporizador foi removido</string>
