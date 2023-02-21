@@ -10,6 +10,12 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/home_activity_menu_export_timers"
+        android:enabled="true"
+        android:title="@string/menu_export_timers"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/home_activity_menu_reset_all"
         android:enabled="true"
         android:title="@string/menu_reset_all"

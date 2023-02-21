@@ -114,7 +114,10 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
 
     private fun createScreen() = object : PomodoroViewContract.Screen {
         override fun updateTime(currentTime: Long) {
-            currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(currentTime, false)
+            currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(
+                currentTime,
+                TimeConverter.DisplayHoursMode.Never
+            )
             progresssBar.progress = currentTime.toInt()
         }
 
@@ -140,7 +143,10 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
 
         override fun displayChoosePomodoroTimer() {
             val fragment = ChoosePomodoroTimerViewDialog.newInstance()
-            fragment.show(requireActivity().supportFragmentManager, ChoosePomodoroTimerViewDialog.TAG)
+            fragment.show(
+                requireActivity().supportFragmentManager,
+                ChoosePomodoroTimerViewDialog.TAG
+            )
         }
 
         override fun displayEmptyView() {

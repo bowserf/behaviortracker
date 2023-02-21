@@ -110,6 +110,11 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 return true
             }
 
+            R.id.home_activity_menu_export_timers -> {
+                presenter.onClickExportTimers()
+                return true
+            }
+
             R.id.home_activity_menu_reset_all -> {
                 presenter.onClickResetAll()
                 return true

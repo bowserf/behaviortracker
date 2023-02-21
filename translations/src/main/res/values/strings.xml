@@ -25,6 +25,7 @@
   <string name="menu_alarm">Alarm</string>
   <string name="menu_review">Rate the app</string>
   <string name="menu_reset_all">Reset all timers</string>
+  <string name="menu_export_timers">Export Timers</string>
   <string name="menu_remove_all">Remove all timers</string>
   <string name="menu_rewards">Support developers</string>
   <string name="menu_setting">Settings</string>
@@ -122,4 +123,5 @@ You have to manually enable this from settings.</string>
   <string name="widget_pomodoro_no_session">No current session.</string>
   <string name="widget_pomodoro_click_to_start_break_session">Click to start break.</string>
   <string name="widget_pomodoro_click_to_start_pomodoro_session">Click to start Pomodoro session.</string>
+  <string name="export_total_time">Total time</string>
 </resources>

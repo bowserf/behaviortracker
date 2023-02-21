@@ -133,7 +133,10 @@ class TimeServicePresenter(
 
     private fun getNotificationMessage(timer: Timer): String {
         return if (pomodoroManager.isStarted) {
-            TimeConverter.convertSecondsToHumanTime(pomodoroManager.pomodoroTime, false)
+            TimeConverter.convertSecondsToHumanTime(
+                pomodoroManager.pomodoroTime,
+                TimeConverter.DisplayHoursMode.Never
+            )
         } else {
             TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
         }

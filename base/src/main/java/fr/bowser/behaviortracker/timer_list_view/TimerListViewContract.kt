@@ -18,6 +18,8 @@ interface TimerListViewContract {
 
         fun onClickResetAllTimers()
 
+        fun onClickExportTimers()
+
         fun onClickSettings()
 
         fun onClickRemoveAllTimers()

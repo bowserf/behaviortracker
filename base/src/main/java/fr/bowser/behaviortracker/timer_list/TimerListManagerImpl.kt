@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.timer_list
 
+import android.os.Looper
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer.TimerManager

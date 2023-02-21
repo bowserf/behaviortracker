@@ -8,6 +8,7 @@ import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationManager
 import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationModule
 import fr.bowser.behaviortracker.app_initialization.AppInitialization
 import fr.bowser.behaviortracker.app_initialization.AppInitializationComponent
+import fr.bowser.behaviortracker.clipboard.CopyDataToClipboardModule
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.do_not_disturbed.DoNotDisturbModule
@@ -35,6 +36,7 @@ import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.timer_list.TimerListManagerModule
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature.billing.InAppManager
+import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
@@ -45,6 +47,7 @@ import javax.inject.Singleton
     modules = arrayOf(
         AlarmNotificationModule::class,
         AlarmTimerManagerModule::class,
+        CopyDataToClipboardModule::class,
         DatabaseManagerModule::class,
         DoNotDisturbModule::class,
         EventManagerModule::class,
@@ -72,6 +75,8 @@ interface BehaviorTrackerAppComponent {
     fun provideAppInitialization(): AppInitialization
 
     fun provideContext(): Context
+
+    fun provideCopyDataToClipboardManager(): CopyDataToClipboardManager
 
     fun provideDatabaseManager(): DatabaseManager
 

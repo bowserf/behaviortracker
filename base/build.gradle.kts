@@ -132,6 +132,7 @@ dependencies {
 
     implementation(project(":feature_alarm"))
     implementation(project(":feature_billing"))
+    implementation(project(":feature_clipboard"))
     implementation(project(":feature_do_not_disturb"))
     implementation(project(":feature_review"))
     implementation(project(":feature_string"))

@@ -9,6 +9,7 @@ import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_list.TimerListManager
 import fr.bowser.behaviortracker.utils.GenericScope
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
 
@@ -19,6 +20,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
     @Provides
     fun provideTimerPresenter(
         alarmTimerManager: AlarmTimerManager,
+        copyDataToClipboardManager: CopyDataToClipboardManager,
         instantAppManager: InstantAppManager,
         notificationManager: NotificationManager,
         reviewManager: ReviewManager,
@@ -30,6 +32,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
         return TimerListViewPresenter(
             timerScreen,
             alarmTimerManager,
+            copyDataToClipboardManager,
             notificationManager,
             reviewManager,
             reviewStorage,

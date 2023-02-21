@@ -77,7 +77,10 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
             if (pomodoroManager.isRunning) R.drawable.widget_pause_state else R.drawable.widget_play_state
         views.setImageViewResource(R.id.widget_pomodoro_start_stop, startStopResource)
         val currentPomodoroTime =
-            TimeConverter.convertSecondsToHumanTime(pomodoroManager.pomodoroTime, false)
+            TimeConverter.convertSecondsToHumanTime(
+                pomodoroManager.pomodoroTime,
+                TimeConverter.DisplayHoursMode.Never
+            )
         views.setTextViewText(R.id.widget_pomodoro_chrono, currentPomodoroTime)
 
         if (pomodoroManager.isPendingState) {

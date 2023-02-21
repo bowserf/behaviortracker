@@ -38,13 +38,13 @@ class TimeConverterTest {
 
     @Test
     fun convertSecondsToMinutes() {
-        val time1 = TimeConverter.convertSecondsToHumanTime(127, false)
+        val time1 = TimeConverter.convertSecondsToHumanTime(127, TimeConverter.DisplayHoursMode.Never)
         Assert.assertEquals("02:07", time1)
     }
 
     @Test
     fun convertSecondsToHour() {
-        val time1 = TimeConverter.convertSecondsToHumanTime(3601, false)
+        val time1 = TimeConverter.convertSecondsToHumanTime(3601, TimeConverter.DisplayHoursMode.Never)
         Assert.assertEquals("60:01", time1)
     }
 

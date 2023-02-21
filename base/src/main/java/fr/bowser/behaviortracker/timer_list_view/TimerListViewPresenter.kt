@@ -9,7 +9,9 @@ import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_review.ReviewActivityContainer
 import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
@@ -17,6 +19,7 @@ import fr.bowser.feature_string.StringManager
 class TimerListViewPresenter(
     private val screen: TimerListViewContract.Screen,
     private val alarmTimerManager: AlarmTimerManager,
+    private val copyDataToClipboardManager: CopyDataToClipboardManager,
     private val notificationManager: NotificationManager,
     private val reviewManager: ReviewManager,
     private val reviewStorage: ReviewStorage,
@@ -60,6 +63,29 @@ class TimerListViewPresenter(
         timers.forEach { timer ->
             timeManager.updateTime(timer, 0f)
         }
+    }
+
+    override fun onClickExportTimers() {
+        var export = ""
+        var totalTime = 0f
+        timerListManager.getTimerList().forEach {
+            if (it.time > 0) {
+                totalTime += it.time
+                export += "${it.name}: ${
+                    TimeConverter.convertSecondsToHumanTime(
+                        it.time.toLong(),
+                        TimeConverter.DisplayHoursMode.IfPossible
+                    )
+                }\n"
+            }
+        }
+        val totalTimeTitle = stringManager.getString(R.string.export_total_time)
+        val totalTimeStr = TimeConverter.convertSecondsToHumanTime(
+            totalTime.toLong(),
+            TimeConverter.DisplayHoursMode.IfPossible
+        )
+        export += "$totalTimeTitle: $totalTimeStr"
+        copyDataToClipboardManager.copy(export)
     }
 
     override fun onClickSettings() {
