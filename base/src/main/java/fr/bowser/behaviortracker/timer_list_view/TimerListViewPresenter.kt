@@ -86,6 +86,7 @@ class TimerListViewPresenter(
         )
         export += "$totalTimeTitle: $totalTimeStr"
         copyDataToClipboardManager.copy(export)
+        screen.displayExportSucceeded()
     }
 
     override fun onClickSettings() {

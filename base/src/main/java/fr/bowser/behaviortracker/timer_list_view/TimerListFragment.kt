@@ -14,6 +14,7 @@ import android.view.View.VISIBLE
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.Keep
 import androidx.appcompat.app.AlertDialog
@@ -219,6 +220,14 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             totalTimeTv.text = resources.getString(R.string.timer_list_total_time, totalTimeStr)
         }
 
+        override fun displayExportSucceeded() {
+            Toast.makeText(
+                requireContext(),
+                R.string.timer_list_export_succeeded,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
         override fun invalidateMenu() {
             requireActivity().invalidateOptionsMenu()
         }
@@ -269,9 +278,10 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displayExplainNotificationPermission(explainPermissionRequestModel: ExplainPermissionRequestViewModel) {
-            val action = TimerListFragmentDirections.actionTimerListScreenToExplainPermissionRequest(
-                explainPermissionRequestModel
-            )
+            val action =
+                TimerListFragmentDirections.actionTimerListScreenToExplainPermissionRequest(
+                    explainPermissionRequestModel
+                )
             findNavController().navigate(action)
         }
 

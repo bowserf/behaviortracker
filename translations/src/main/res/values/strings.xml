@@ -124,4 +124,5 @@ You have to manually enable this from settings.</string>
   <string name="widget_pomodoro_click_to_start_break_session">Click to start break.</string>
   <string name="widget_pomodoro_click_to_start_pomodoro_session">Click to start Pomodoro session.</string>
   <string name="export_total_time">Total time</string>
+  <string name="timer_list_export_succeeded">Timers data copied to clipboard</string>
 </resources>

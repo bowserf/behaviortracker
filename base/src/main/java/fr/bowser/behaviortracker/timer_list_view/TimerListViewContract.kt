@@ -86,5 +86,7 @@ interface TimerListViewContract {
         fun updateTotalTime(totalTime: Long)
 
         fun invalidateMenu()
+
+        fun displayExportSucceeded()
     }
 }
