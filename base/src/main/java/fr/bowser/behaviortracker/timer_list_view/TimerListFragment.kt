@@ -35,7 +35,6 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.utils.FragmentExtension.bind
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
@@ -51,12 +50,12 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
     private val timerAdapter = TimerListViewAdapter()
 
-    private val fab: FloatingActionButton by bind(R.id.timer_list_view_add_timer)
-    private val emptyListView: ImageView by bind(R.id.timer_list_view_empty_list_view)
-    private val emptyListText: TextView by bind(R.id.timer_list_view_empty_list_text)
-    private val timerList: RecyclerView by bind(R.id.timer_list_view_list_timers)
-    private val totalTimeTv: TextView by bind(R.id.timer_list_view_total_time)
-    private val timerListContainer: NestedScrollView by bind(R.id.timer_list_view_container_list)
+    private lateinit var fab: FloatingActionButton
+    private lateinit var emptyListView: ImageView
+    private lateinit var emptyListText: TextView
+    private lateinit var timerList: RecyclerView
+    private lateinit var totalTimeTv: TextView
+    private lateinit var timerListContainer: NestedScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +65,8 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        findViewByIds(view)
 
         initializeList()
 
@@ -326,7 +327,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     }
 
     private fun initializeList() {
-        timerList.layoutManager = LinearLayoutManager(activity)
+        timerList.layoutManager = LinearLayoutManager(context)
         timerList.adapter = timerAdapter
 
         val swipeHandler = TimerListViewGesture(requireContext(), TimerListGestureListener())
@@ -380,6 +381,15 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     private fun setFabScale(scale: Float) {
         fab.scaleX = scale
         fab.scaleY = scale
+    }
+
+    private fun findViewByIds(view: View) {
+        fab = view.findViewById(R.id.timer_list_view_add_timer)
+        emptyListView = view.findViewById(R.id.timer_list_view_empty_list_view)
+        emptyListText = view.findViewById(R.id.timer_list_view_empty_list_text)
+        timerList = view.findViewById(R.id.timer_list_view_list_timers)
+        totalTimeTv = view.findViewById(R.id.timer_list_view_total_time)
+        timerListContainer = view.findViewById(R.id.timer_list_view_container_list)
     }
 
     companion object {

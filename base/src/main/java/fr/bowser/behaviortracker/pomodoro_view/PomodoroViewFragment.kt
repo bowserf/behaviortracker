@@ -40,19 +40,19 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
 
     private val screen = createScreen()
 
-    private val emptyContent: View by bind(R.id.pomodoro_view_content_empty)
-    private val startSession: FloatingActionButton by bind(R.id.pomodoro_view_choose_timer)
-    private val pomodoroSessionContent: View by bind(R.id.pomodoro_view_content_session)
-    private val currentTimeTv: TextView by bind(R.id.pomodoro_view_current_time)
-    private val activeTimerTv: TextView by bind(R.id.pomodoro_view_active_timer)
-    private val progresssBar: ProgressBar by bind(R.id.pomodoro_view_progress_bar)
-    private val playPauseButton: View by bind(R.id.pomodoro_view_play_pause)
-    private val playPauseIcon: ImageView by bind(R.id.pomodoro_view_play_pause_icon)
-    private val playPauseTitle: TextView by bind(R.id.pomodoro_view_play_pause_title)
-    private val stopButton: View by bind(R.id.pomodoro_view_stop)
-    private val doNotDisturb: View by bind(R.id.pomodoro_view_toggle_dnd)
-    private val doNotDisturbIcon: ImageView by bind(R.id.pomodoro_view_toggle_dnd_icon)
-    private val doNotDisturbText: TextView by bind(R.id.pomodoro_view_toggle_dnd_text)
+    private lateinit var emptyContent: View
+    private lateinit var startSession: FloatingActionButton
+    private lateinit var pomodoroSessionContent: View
+    private lateinit var currentTimeTv: TextView
+    private lateinit var activeTimerTv: TextView
+    private lateinit var progresssBar: ProgressBar
+    private lateinit var playPauseButton: View
+    private lateinit var playPauseIcon: ImageView
+    private lateinit var playPauseTitle: TextView
+    private lateinit var stopButton: View
+    private lateinit var doNotDisturb: View
+    private lateinit var doNotDisturbIcon: ImageView
+    private lateinit var doNotDisturbText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +63,8 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        findViewByIds(view)
 
         stopButton.setOnClickListener { presenter.onClickStopPomodoro() }
         playPauseButton.setOnClickListener { presenter.onClickChangePomodoroState() }
@@ -271,6 +273,22 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             .pomodoroViewModule(PomodoroViewModule(screen))
             .build()
         build.inject(this)
+    }
+
+    private fun findViewByIds(view: View) {
+        emptyContent = view.findViewById(R.id.pomodoro_view_content_empty)
+        startSession = view.findViewById(R.id.pomodoro_view_choose_timer)
+        pomodoroSessionContent = view.findViewById(R.id.pomodoro_view_content_session)
+        currentTimeTv = view.findViewById(R.id.pomodoro_view_current_time)
+        activeTimerTv = view.findViewById(R.id.pomodoro_view_active_timer)
+        progresssBar = view.findViewById(R.id.pomodoro_view_progress_bar)
+        playPauseButton = view.findViewById(R.id.pomodoro_view_play_pause)
+        playPauseIcon = view.findViewById(R.id.pomodoro_view_play_pause_icon)
+        playPauseTitle = view.findViewById(R.id.pomodoro_view_play_pause_title)
+        stopButton = view.findViewById(R.id.pomodoro_view_stop)
+        doNotDisturb = view.findViewById(R.id.pomodoro_view_toggle_dnd)
+        doNotDisturbIcon = view.findViewById(R.id.pomodoro_view_toggle_dnd_icon)
+        doNotDisturbText = view.findViewById(R.id.pomodoro_view_toggle_dnd_text)
     }
 
     companion object {
