@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
@@ -19,14 +19,14 @@ class TimeServiceModule(private val screen: TimeServiceContract.Screen) {
         context: Context,
         instantAppManager: InstantAppManager,
         timeManager: TimerManager,
-        timerListManager: TimerListManager,
+        timerRepository: TimerRepository,
         pomodoroManager: PomodoroManager
     ): TimeServiceContract.Presenter {
         return TimeServicePresenter(
             screen,
             instantAppManager,
             timeManager,
-            timerListManager,
+            timerRepository,
             pomodoroManager,
             createAddOn(context)
         )

@@ -1,16 +1,16 @@
 package fr.bowser.behaviortracker.update_timer_time_view
 
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class UpdateTimerTimeViewPresenter(
     private val screen: UpdateTimerTimeViewContract.Screen,
-    timerListManager: TimerListManager,
+    timerRepository: TimerRepository,
     private val timeManager: TimerManager,
     timerId: Long
 ) : UpdateTimerTimeViewContract.Presenter {
 
-    private var timer = timerListManager.getTimerList().first { it.id == timerId }
+    private var timer = timerRepository.getTimerList().first { it.id == timerId }
 
     override fun start() {
         val hour = (timer.time / 3600).toInt()

@@ -3,7 +3,7 @@ package fr.bowser.behaviortracker.pomodoro
 import fr.bowser.behaviortracker.pomodoro_view.PomodoroViewContract
 import fr.bowser.behaviortracker.pomodoro_view.PomodoroViewPresenter
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.MockitoUtils.any
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
@@ -26,7 +26,7 @@ class PomodoroPresenterTest {
     private lateinit var manager: PomodoroManager
 
     @Mock
-    private lateinit var timerListManager: TimerListManager
+    private lateinit var timerRepository: TimerRepository
 
     @Test
     fun restoreCurrentTimerIfPomodoroIsRunning() {
@@ -35,7 +35,7 @@ class PomodoroPresenterTest {
             screen,
             manager,
             doNotDisturbManager,
-            timerListManager,
+            timerRepository,
             false
         )
         val timer = Timer("name", ColorUtils.COLOR_AMBER)
@@ -58,7 +58,7 @@ class PomodoroPresenterTest {
             screen,
             manager,
             doNotDisturbManager,
-            timerListManager,
+            timerRepository,
             false
         )
         val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
@@ -79,7 +79,7 @@ class PomodoroPresenterTest {
             screen,
             manager,
             doNotDisturbManager,
-            timerListManager,
+            timerRepository,
             false
         )
         val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
@@ -102,11 +102,11 @@ class PomodoroPresenterTest {
             screen,
             manager,
             doNotDisturbManager,
-            timerListManager,
+            timerRepository,
             false
         )
         Mockito.`when`(manager.isStarted).thenReturn(false)
-        Mockito.`when`(timerListManager.getTimerList()).thenReturn(listOf(timer))
+        Mockito.`when`(timerRepository.getTimerList()).thenReturn(listOf(timer))
 
         // When
         presenter.onClickStartSession()
@@ -122,7 +122,7 @@ class PomodoroPresenterTest {
             screen,
             manager,
             doNotDisturbManager,
-            timerListManager,
+            timerRepository,
             false
         )
         Mockito.`when`(manager.isStarted).thenReturn(false)
@@ -141,7 +141,7 @@ class PomodoroPresenterTest {
             screen,
             manager,
             doNotDisturbManager,
-            timerListManager,
+            timerRepository,
             false
         )
         Mockito.`when`(doNotDisturbManager.getDnDState())
@@ -164,7 +164,7 @@ class PomodoroPresenterTest {
             screen,
             manager,
             doNotDisturbManager,
-            timerListManager,
+            timerRepository,
             false
         )
 

@@ -32,8 +32,8 @@ import fr.bowser.behaviortracker.time_provider.TimeProviderModule
 import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.TimerManagerModule
-import fr.bowser.behaviortracker.timer_list.TimerListManager
-import fr.bowser.behaviortracker.timer_list.TimerListManagerModule
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
+import fr.bowser.behaviortracker.timer_repository.TimerRepositoryModule
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature.billing.InAppManager
 import fr.bowser.feature_clipboard.CopyDataToClipboardManager
@@ -57,7 +57,7 @@ import javax.inject.Singleton
         ReviewModule::class,
         SettingManagerModule::class,
         StringManagerModule::class,
-        TimerListManagerModule::class,
+        TimerRepositoryModule::class,
         TimerManagerModule::class,
         TimeProviderModule::class
     ),
@@ -108,7 +108,7 @@ interface BehaviorTrackerAppComponent {
 
     fun provideTimerDAO(): TimerDAO
 
-    fun provideTimerListManager(): TimerListManager
+    fun provideTimerRepositoryManager(): TimerRepository
 
     @Component.Builder
     interface Builder {

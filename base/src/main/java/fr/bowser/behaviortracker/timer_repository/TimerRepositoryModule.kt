@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.timer_list
+package fr.bowser.behaviortracker.timer_repository
 
 import dagger.Module
 import dagger.Provides
@@ -9,12 +9,12 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-class TimerListManagerModule {
+class TimerRepositoryModule {
 
     @Singleton
     @Provides
-    fun provideTimerListManager(timerDAO: TimerDAO, timeManager: TimerManager): TimerListManager {
-        return TimerListManagerImpl(
+    fun provideTimerRepository(timerDAO: TimerDAO, timeManager: TimerManager): TimerRepository {
+        return TimerRepositoryImpl(
             coroutineScope = CoroutineScope(Dispatchers.IO),
             timerDAO = timerDAO,
             timeManager = timeManager

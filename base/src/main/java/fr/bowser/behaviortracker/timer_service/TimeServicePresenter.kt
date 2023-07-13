@@ -4,14 +4,14 @@ import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.TimeConverter
 
 class TimeServicePresenter(
     private val screen: TimeServiceContract.Screen,
     private val instantAppManager: InstantAppManager,
     private val timeManager: TimerManager,
-    private val timerListManager: TimerListManager,
+    private val timerRepository: TimerRepository,
     private val pomodoroManager: PomodoroManager,
     private val addOn: AddOn
 ) : TimeServiceContract.Presenter {
@@ -22,19 +22,19 @@ class TimeServicePresenter(
 
     private val timeManagerListener = createTimeManagerListener()
 
-    private val timerListManagerListener = createTimerListManagerListener()
+    private val timerRepositoryListener = createTimerRepositoryListener()
 
     private var timer: Timer? = null
 
     override fun attach() {
         timeManager.addListener(timeManagerListener)
-        timerListManager.addListener(timerListManagerListener)
+        timerRepository.addListener(timerRepositoryListener)
         pomodoroManager.addListener(pomodoroListener)
     }
 
     override fun detach() {
         timeManager.removeListener(timeManagerListener)
-        timerListManager.removeListener(timerListManagerListener)
+        timerRepository.removeListener(timerRepositoryListener)
         pomodoroManager.removeListener(pomodoroListener)
     }
 
@@ -63,7 +63,7 @@ class TimeServicePresenter(
             }
             this.timer = timer
         } else {
-            val timer = timerListManager.getTimerList().maxByOrNull { it.lastUpdateTimestamp }!!
+            val timer = timerRepository.getTimerList().maxByOrNull { it.lastUpdateTimestamp }!!
             if (timer.isActivate) {
                 displayTimerNotification(timer)
             } else {
@@ -142,8 +142,8 @@ class TimeServicePresenter(
         }
     }
 
-    private fun createTimerListManagerListener(): TimerListManager.Listener {
-        return object : TimerListManager.Listener {
+    private fun createTimerRepositoryListener(): TimerRepository.Listener {
+        return object : TimerRepository.Listener {
             override fun onTimerAdded(updatedTimer: Timer) {
                 if (pomodoroManager.isStarted) {
                     return

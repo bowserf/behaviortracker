@@ -5,12 +5,12 @@ import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.ColorUtils
 
 class CreateTimerViewPresenter(
     private val screen: CreateTimerViewContract.Screen,
-    private val timerListManager: TimerListManager,
+    private val timerRepository: TimerRepository,
     private val pomodoroManager: PomodoroManager,
     private val eventManager: EventManager,
     private val timeProvider: TimeProvider,
@@ -59,7 +59,7 @@ class CreateTimerViewPresenter(
             creationDateTimestamp = createDateTimestamp,
             lastUpdateTimestamp = createDateTimestamp
         )
-        timerListManager.addTimer(timer)
+        timerRepository.addTimer(timer)
 
         eventManager.sendTimerCreateEvent(startNow)
 
@@ -89,7 +89,7 @@ class CreateTimerViewPresenter(
     }
 
     private fun computeSelectedColorPosition(): Int {
-        val colors = timerListManager.getTimerList().map { it.color }.sorted()
+        val colors = timerRepository.getTimerList().map { it.color }.sorted()
         for (i in 0 until ColorUtils.NUMBER_COLORS) {
             if (!colors.contains(i)) {
                 return i

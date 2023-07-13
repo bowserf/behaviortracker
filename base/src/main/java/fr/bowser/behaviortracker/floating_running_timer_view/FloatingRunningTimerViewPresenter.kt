@@ -2,19 +2,19 @@ package fr.bowser.behaviortracker.floating_running_timer_view
 
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.TimeConverter
 
 class FloatingRunningTimerViewPresenter(
     private val screen: FloatingRunningTimerViewContract.Screen,
     private val timeManager: TimerManager,
-    private val timerListManager: TimerListManager
+    private val timerRepository: TimerRepository
 ) : FloatingRunningTimerViewContract.Presenter {
 
     private var currentTimer: Timer? = null
 
     private val timeManagerListener = createTimeManagerListener()
-    private val timerListManagerListener = createTimerListManagerListener()
+    private val timerRepositoryListener = createTimerRepositoryListener()
 
     override fun onStart() {
         currentTimer = timeManager.getStartedTimer()
@@ -22,12 +22,12 @@ class FloatingRunningTimerViewPresenter(
         updateTimerInfo()
         updateTimerTime()
         timeManager.addListener(timeManagerListener)
-        timerListManager.addListener(timerListManagerListener)
+        timerRepository.addListener(timerRepositoryListener)
     }
 
     override fun onStop() {
         timeManager.removeListener(timeManagerListener)
-        timerListManager.removeListener(timerListManagerListener)
+        timerRepository.removeListener(timerRepositoryListener)
     }
 
     override fun onClickUpdateTime() {
@@ -74,7 +74,7 @@ class FloatingRunningTimerViewPresenter(
         }
     }
 
-    private fun createTimerListManagerListener() = object : TimerListManager.Listener {
+    private fun createTimerRepositoryListener() = object : TimerRepository.Listener {
         override fun onTimerRemoved(removedTimer: Timer) {
             if (removedTimer != currentTimer) {
                 return

@@ -1,16 +1,16 @@
 package fr.bowser.behaviortracker.show_mode_view
 
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class ShowModeViewPresenter(
     private val screen: ShowModeViewContract.Screen,
-    private val timerListManager: TimerListManager
+    private val timerRepository: TimerRepository
 ) : ShowModeViewContract.Presenter {
 
     private var keepScreeOn = false
 
     override fun onStart(selectedTimerId: Long) {
-        val timers = timerListManager.getTimerList()
+        val timers = timerRepository.getTimerList()
 
         var selectedTimerPosition = 0
         for (i in timers.indices) {

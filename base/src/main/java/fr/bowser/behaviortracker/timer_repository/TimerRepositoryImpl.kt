@@ -1,6 +1,5 @@
-package fr.bowser.behaviortracker.timer_list
+package fr.bowser.behaviortracker.timer_repository
 
-import android.os.Looper
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer.TimerManager
@@ -9,15 +8,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TimerListManagerImpl(
+class TimerRepositoryImpl(
     private val coroutineScope: CoroutineScope,
     private val timerDAO: TimerDAO,
     private val timeManager: TimerManager
-) : TimerListManager {
+) : TimerRepository {
 
     private val timers = ArrayList<Timer>()
 
-    private val listeners = ArrayList<TimerListManager.Listener>()
+    private val listeners = ArrayList<TimerRepository.Listener>()
 
     init {
         coroutineScope.launch {
@@ -104,14 +103,14 @@ class TimerListManagerImpl(
         }
     }
 
-    override fun addListener(listener: TimerListManager.Listener): Boolean {
+    override fun addListener(listener: TimerRepository.Listener): Boolean {
         if (listeners.contains(listener)) {
             return false
         }
         return listeners.add(listener)
     }
 
-    override fun removeListener(listener: TimerListManager.Listener): Boolean {
+    override fun removeListener(listener: TimerRepository.Listener): Boolean {
         return listeners.remove(listener)
     }
 }

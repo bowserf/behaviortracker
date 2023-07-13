@@ -1,8 +1,8 @@
-package fr.bowser.behaviortracker.timer_list
+package fr.bowser.behaviortracker.timer_repository
 
 import fr.bowser.behaviortracker.timer.Timer
 
-interface TimerListManager {
+interface TimerRepository {
 
     fun addTimer(timer: Timer)
 

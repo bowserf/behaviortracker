@@ -1,8 +1,8 @@
 package fr.bowser.behaviortracker.timer
 
 import android.graphics.Color
-import fr.bowser.behaviortracker.timer_list.TimerListManager
-import fr.bowser.behaviortracker.timer_list.TimerListManagerImpl
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
+import fr.bowser.behaviortracker.timer_repository.TimerRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class TimerListManagerTest {
+class timerRepositoryTest {
 
     @Mock
     private lateinit var timerDAO: TimerDAO
@@ -24,25 +24,25 @@ class TimerListManagerTest {
 
     @Test
     fun addTimer() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
-        timerListManager.addTimer(timer)
+        timerRepository.addTimer(timer)
 
-        Assert.assertEquals(1, timerListManager.getTimerList().size)
-        Assert.assertEquals(timer, timerListManager.getTimerList()[0])
+        Assert.assertEquals(1, timerRepository.getTimerList().size)
+        Assert.assertEquals(timer, timerRepository.getTimerList()[0])
     }
 
     @Test
     fun receiveAddTimerListener() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
         var result = false
 
-        val timerListManagerListener = object : TimerListManager.Listener {
+        val timerRepositoryListener = object : TimerRepository.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 Assert.assertTrue(false)
             }
@@ -56,34 +56,34 @@ class TimerListManagerTest {
             }
         }
 
-        timerListManager.addListener(timerListManagerListener)
+        timerRepository.addListener(timerRepositoryListener)
 
-        timerListManager.addTimer(timer)
+        timerRepository.addTimer(timer)
 
         Assert.assertTrue(result)
     }
 
     @Test
     fun removeTimer() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
-        timerListManager.addTimer(timer)
-        timerListManager.removeTimer(timer)
+        timerRepository.addTimer(timer)
+        timerRepository.removeTimer(timer)
 
-        Assert.assertEquals(0, timerListManager.getTimerList().size)
+        Assert.assertEquals(0, timerRepository.getTimerList().size)
     }
 
     @Test
     fun receiveRemoveTimerListener() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
         var result = false
 
-        val timerListManagerListener = object : TimerListManager.Listener {
+        val timerRepositoryListener = object : TimerRepository.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 result = timer == removedTimer
             }
@@ -97,34 +97,34 @@ class TimerListManagerTest {
             }
         }
 
-        timerListManager.addTimer(timer)
+        timerRepository.addTimer(timer)
 
         // only listen to remove timer listener
-        timerListManager.addListener(timerListManagerListener)
+        timerRepository.addListener(timerRepositoryListener)
 
-        timerListManager.removeTimer(timer)
+        timerRepository.removeTimer(timer)
 
         Assert.assertTrue(result)
     }
 
     @Test
     fun renameTimer() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
         val newName = "MyTimer2"
 
-        timerListManager.addTimer(timer)
-        timerListManager.renameTimer(timer, newName)
+        timerRepository.addTimer(timer)
+        timerRepository.renameTimer(timer, newName)
 
         Assert.assertEquals(newName, timer.name)
-        Assert.assertEquals(newName, timerListManager.getTimerList()[0].name)
+        Assert.assertEquals(newName, timerRepository.getTimerList()[0].name)
     }
 
     @Test
     fun receiveRenameTimerListener() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer = Timer("MyTimer", Color.RED)
 
@@ -132,7 +132,7 @@ class TimerListManagerTest {
 
         var result = false
 
-        val timerListManagerListener = object : TimerListManager.Listener {
+        val timerRepositoryListener = object : TimerRepository.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 Assert.assertTrue(false)
             }
@@ -146,31 +146,31 @@ class TimerListManagerTest {
             }
         }
 
-        timerListManager.addTimer(timer)
+        timerRepository.addTimer(timer)
 
         // only listen to remove timer listener
-        timerListManager.addListener(timerListManagerListener)
+        timerRepository.addListener(timerRepositoryListener)
 
-        timerListManager.renameTimer(timer, newName)
+        timerRepository.renameTimer(timer, newName)
 
         Assert.assertTrue(result)
     }
 
     @Test
     fun reorderTimerList() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer1 = Timer("Timer1", Color.RED)
         val timer2 = Timer("Timer2", Color.RED)
         val timer3 = Timer("Timer3", Color.RED)
 
-        timerListManager.addTimer(timer1)
-        timerListManager.addTimer(timer2)
-        timerListManager.addTimer(timer3)
+        timerRepository.addTimer(timer1)
+        timerRepository.addTimer(timer2)
+        timerRepository.addTimer(timer3)
 
         val reorderList = mutableListOf(timer3, timer2, timer1)
 
-        timerListManager.reorderTimerList(reorderList)
+        timerRepository.reorderTimerList(reorderList)
 
         Assert.assertEquals(0, timer3.position)
         Assert.assertEquals(1, timer2.position)
@@ -179,21 +179,21 @@ class TimerListManagerTest {
 
     @Test
     fun reorderTimerListChangeInternalList() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer1 = Timer("Timer1", Color.RED)
         val timer2 = Timer("Timer2", Color.RED)
         val timer3 = Timer("Timer3", Color.RED)
 
-        timerListManager.addTimer(timer1)
-        timerListManager.addTimer(timer2)
-        timerListManager.addTimer(timer3)
+        timerRepository.addTimer(timer1)
+        timerRepository.addTimer(timer2)
+        timerRepository.addTimer(timer3)
 
         val reorderList = mutableListOf(timer3, timer2, timer1)
 
-        timerListManager.reorderTimerList(reorderList)
+        timerRepository.reorderTimerList(reorderList)
 
-        val timerList = timerListManager.getTimerList()
+        val timerList = timerRepository.getTimerList()
         Assert.assertEquals(timer3, timerList[0])
         Assert.assertEquals(timer2, timerList[1])
         Assert.assertEquals(timer1, timerList[2])
@@ -201,15 +201,15 @@ class TimerListManagerTest {
 
     @Test
     fun setPositionWhenAddTimer() = runTest {
-        val timerListManager = createTimerListManagerImpl(backgroundScope)
+        val timerRepository = createTimerRepositoryImpl(backgroundScope)
 
         val timer1 = Timer("Timer1", Color.RED, position = -1)
-        timerListManager.addTimer(timer1)
+        timerRepository.addTimer(timer1)
 
         Assert.assertEquals(0, timer1.position)
     }
 
-    private fun createTimerListManagerImpl(backgroundScope: CoroutineScope): TimerListManager {
-        return TimerListManagerImpl(backgroundScope, timerDAO, timeManager)
+    private fun createTimerRepositoryImpl(backgroundScope: CoroutineScope): TimerRepository {
+        return TimerRepositoryImpl(backgroundScope, timerDAO, timeManager)
     }
 }

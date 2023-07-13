@@ -2,14 +2,14 @@ package fr.bowser.behaviortracker.pomodoro_view
 
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 
 class PomodoroViewPresenter(
     private val screen: PomodoroViewContract.Screen,
     private val pomodoroManager: PomodoroManager,
     private val doNotDisturbManager: DoNotDisturbManager,
-    private val timerListManager: TimerListManager,
+    private val timerRepository: TimerRepository,
     private val isInstantApp: Boolean
 ) : PomodoroViewContract.Presenter {
 
@@ -109,7 +109,7 @@ class PomodoroViewPresenter(
     }
 
     private fun displayChoosePomodoroTimerIfPossible() {
-        if (timerListManager.getTimerList().isEmpty()) {
+        if (timerRepository.getTimerList().isEmpty()) {
             screen.displayNoTimerAvailable()
         } else {
             screen.displayChoosePomodoroTimer()

@@ -4,22 +4,22 @@ import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class TimerItemViewPresenter(
     private val screen: TimerItemViewContract.Screen,
     private val timeManager: TimerManager,
-    private val timerListManager: TimerListManager,
+    private val timerRepository: TimerRepository,
     private val pomodoroManager: PomodoroManager,
     private val timeProvider: TimeProvider
-) : TimerItemViewContract.Presenter, TimerListManager.Listener {
+) : TimerItemViewContract.Presenter, TimerRepository.Listener {
 
     private lateinit var timer: Timer
 
     private val timeManagerListener = createTimeManagerListener()
 
     override fun onStart() {
-        timerListManager.addListener(this)
+        timerRepository.addListener(this)
         timeManager.addListener(timeManagerListener)
 
         screen.timerUpdated(timer.time.toLong())
@@ -29,7 +29,7 @@ class TimerItemViewPresenter(
     }
 
     override fun onStop() {
-        timerListManager.removeListener(this)
+        timerRepository.removeListener(this)
         timeManager.removeListener(timeManagerListener)
     }
 
@@ -66,7 +66,7 @@ class TimerItemViewPresenter(
     }
 
     override fun onTimerNameUpdated(newTimerName: String) {
-        timerListManager.renameTimer(timer, newTimerName)
+        timerRepository.renameTimer(timer, newTimerName)
     }
 
     override fun onTimerAdded(updatedTimer: Timer) {

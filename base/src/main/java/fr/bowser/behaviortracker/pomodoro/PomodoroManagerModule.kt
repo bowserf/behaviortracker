@@ -7,7 +7,7 @@ import dagger.Provides
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.PauseTimer
 import javax.inject.Singleton
 
@@ -19,14 +19,14 @@ class PomodoroManagerModule {
     fun providePomodoroManager(
         context: Context,
         timeManager: TimerManager,
-        timerListManager: TimerListManager,
+        timerRepository: TimerRepository,
         settingManager: SettingManager
     ): PomodoroManager {
         val pauseTimer = PauseTimer.getTimer(context)
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         return PomodoroManagerImpl(
             timeManager,
-            timerListManager,
+            timerRepository,
             settingManager,
             pauseTimer,
             vibrator,

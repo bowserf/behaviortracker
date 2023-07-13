@@ -9,11 +9,11 @@ import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class PomodoroManagerImpl(
     private val timeManager: TimerManager,
-    timerListManager: TimerListManager,
+    timerRepository: TimerRepository,
     private val settingManager: SettingManager,
     private val pauseTimer: Timer,
     private val vibrator: Vibrator,
@@ -42,14 +42,14 @@ class PomodoroManagerImpl(
 
     private val timeManagerListener = createTimeManagerListener()
 
-    private val timerListManagerListener = createTimerListManagerListener()
+    private val timerRepositoryListener = createTimerRepositoryListener()
 
     private var audioAttributes: AudioAttributes? = null
 
     private var vibrationEffect: VibrationEffect? = null
 
     init {
-        timerListManager.addListener(timerListManagerListener)
+        timerRepository.addListener(timerRepositoryListener)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             audioAttributes = AudioAttributes.Builder()
@@ -194,8 +194,8 @@ class PomodoroManagerImpl(
         }
     }
 
-    private fun createTimerListManagerListener(): TimerListManager.Listener {
-        return object : TimerListManager.Listener {
+    private fun createTimerRepositoryListener(): TimerRepository.Listener {
+        return object : TimerRepository.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
                 if (actionTimer == removedTimer) {
                     stop()

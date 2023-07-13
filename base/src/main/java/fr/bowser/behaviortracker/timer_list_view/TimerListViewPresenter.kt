@@ -8,7 +8,7 @@ import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
-import fr.bowser.behaviortracker.timer_list.TimerListManager
+import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_clipboard.CopyDataToClipboardManager
@@ -25,7 +25,7 @@ class TimerListViewPresenter(
     private val reviewStorage: ReviewStorage,
     private val stringManager: StringManager,
     private val timeManager: TimerManager,
-    private val timerListManager: TimerListManager,
+    private val timerRepository: TimerRepository,
     private val isInstantApp: Boolean
 ) : TimerListViewContract.Presenter {
 
@@ -33,13 +33,13 @@ class TimerListViewPresenter(
 
     private val reviewManagerListener = createReviewManagerListener()
 
-    private val timerListManagerListener = createTimerListManagerListener()
+    private val timerRepositoryListener = createTimerRepositoryListener()
 
     private val timeManagerListener = createTimeManagerListener()
 
     override fun onStart() {
         reviewManager.addListener(reviewManagerListener)
-        timerListManager.addListener(timerListManagerListener)
+        timerRepository.addListener(timerRepositoryListener)
         timeManager.addListener(timeManagerListener)
 
         updateTimerList()
@@ -49,7 +49,7 @@ class TimerListViewPresenter(
 
     override fun onStop() {
         reviewManager.removeListener(reviewManagerListener)
-        timerListManager.removeListener(timerListManagerListener)
+        timerRepository.removeListener(timerRepositoryListener)
         timeManager.removeListener(timeManagerListener)
     }
 
@@ -59,7 +59,7 @@ class TimerListViewPresenter(
 
     override fun onClickResetAllTimers() {
         timeManager.stopTimer()
-        val timers = timerListManager.getTimerList()
+        val timers = timerRepository.getTimerList()
         timers.forEach { timer ->
             timeManager.updateTime(timer, 0f)
         }
@@ -68,7 +68,7 @@ class TimerListViewPresenter(
     override fun onClickExportTimers() {
         var export = ""
         var totalTime = 0f
-        timerListManager.getTimerList().forEach {
+        timerRepository.getTimerList().forEach {
             if (it.time > 0) {
                 totalTime += it.time
                 export += "${it.name}: ${
@@ -98,7 +98,7 @@ class TimerListViewPresenter(
     }
 
     override fun onClickConfirmRemoveAllTimers() {
-        timerListManager.removeAllTimers()
+        timerRepository.removeAllTimers()
     }
 
     override fun onClickAlarm() {
@@ -164,10 +164,10 @@ class TimerListViewPresenter(
     }
 
     override fun onTimerSwiped(timerPosition: Int) {
-        ongoingDeletionTimer = timerListManager.getTimerList().first {
+        ongoingDeletionTimer = timerRepository.getTimerList().first {
             it.position == timerPosition
         }
-        timerListManager.removeTimer(ongoingDeletionTimer!!)
+        timerRepository.removeTimer(ongoingDeletionTimer!!)
         screen.displayCancelDeletionView(CANCEL_TIMER_REMOVAL_DURATION)
         updateTimerList()
     }
@@ -175,11 +175,11 @@ class TimerListViewPresenter(
     override fun onClickCancelTimerDeletion() {
         val restoreTimer = ongoingDeletionTimer ?: return
         ongoingDeletionTimer = null
-        timerListManager.addTimer(restoreTimer)
+        timerRepository.addTimer(restoreTimer)
     }
 
     private fun updateListVisibility() {
-        val timerList = timerListManager.getTimerList()
+        val timerList = timerRepository.getTimerList()
         if (timerList.isEmpty()) {
             screen.displayEmptyListView()
         } else {
@@ -189,7 +189,7 @@ class TimerListViewPresenter(
 
     private fun updateTotalTimerTime() {
         var totalTime = 0f
-        timerListManager.getTimerList().forEach { totalTime += it.time }
+        timerRepository.getTimerList().forEach { totalTime += it.time }
         screen.updateTotalTime(totalTime.toLong())
     }
 
@@ -213,7 +213,7 @@ class TimerListViewPresenter(
     }
 
     private fun updateTimerList() {
-        val timers = timerListManager.getTimerList().filter {
+        val timers = timerRepository.getTimerList().filter {
             it != ongoingDeletionTimer
         }
         screen.displayTimers(timers)
@@ -229,7 +229,7 @@ class TimerListViewPresenter(
         }
     }
 
-    private fun createTimerListManagerListener() = object : TimerListManager.Listener {
+    private fun createTimerRepositoryListener() = object : TimerRepository.Listener {
         override fun onTimerRemoved(removedTimer: Timer) {
             updateListVisibility()
             updateTotalTimerTime()
