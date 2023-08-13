@@ -36,8 +36,10 @@ android {
         getByName("main") {
             // Split resources.
             // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
-            res.srcDirs(
-                "src/main/res/widget"
+            res.setSrcDirs(
+                listOf(
+                    "src/main/res/widget"
+                )
             )
         }
     }
