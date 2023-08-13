@@ -28,7 +28,8 @@ class UpdateTimerTimeDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val root = LayoutInflater.from(context).inflate(R.layout.update_timer_time_view_dialog, null)
+        val root =
+            LayoutInflater.from(context).inflate(R.layout.update_timer_time_view_dialog, null)
 
         val dialogBuilder = AlertDialog.Builder(requireContext())
         dialogBuilder.setTitle(resources.getString(R.string.update_timer_time_dialog_title))
@@ -82,7 +83,8 @@ class UpdateTimerTimeDialog : DialogFragment() {
 
         const val TAG = "UpdateTimerTimeDialog"
 
-        private const val UPDATE_TIMER_TIME_DIALOG_EXTRA_TIMER_ID = "update_timer_time_dialog.extra.timer_id"
+        private const val UPDATE_TIMER_TIME_DIALOG_EXTRA_TIMER_ID =
+            "update_timer_time_dialog.extra.timer_id"
 
         fun newInstance(timerId: Long): UpdateTimerTimeDialog {
             val bundle = Bundle()

@@ -31,7 +31,9 @@ class DatabaseManager(context: Context) {
 
         val MIGRATION_1_3: Migration = object : Migration(1, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE Timer ADD COLUMN position INTEGER NOT NULL DEFAULT '0'")
+                database.execSQL(
+                    "ALTER TABLE Timer ADD COLUMN position INTEGER NOT NULL DEFAULT '0'"
+                )
             }
         }
     }

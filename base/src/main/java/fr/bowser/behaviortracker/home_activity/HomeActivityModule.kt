@@ -8,7 +8,10 @@ import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-internal class HomeActivityModule(private val screen: HomeActivityContract.Screen, private val activity: Activity) {
+internal class HomeActivityModule(
+    private val screen: HomeActivityContract.Screen,
+    private val activity: Activity
+) {
 
     @GenericScope(component = HomeActivityComponent::class)
     @Provides

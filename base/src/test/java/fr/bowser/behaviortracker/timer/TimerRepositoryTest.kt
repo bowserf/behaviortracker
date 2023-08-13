@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class timerRepositoryTest {
+class TimerRepositoryTest {
 
     @Mock
     private lateinit var timerDAO: TimerDAO

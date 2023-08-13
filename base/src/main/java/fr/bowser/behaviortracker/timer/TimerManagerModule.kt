@@ -1,14 +1,13 @@
 package fr.bowser.behaviortracker.timer
 
 import android.content.Context
-import android.os.Handler
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer_service.TimeService
+import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Singleton
 
 @Module
 class TimerManagerModule {

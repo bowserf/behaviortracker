@@ -85,8 +85,11 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
 
         if (pomodoroManager.isPendingState) {
             val stringRes =
-                if (pomodoroManager.isBreakStep()) R.string.widget_pomodoro_click_to_start_break_session
-                else R.string.widget_pomodoro_click_to_start_pomodoro_session
+                if (pomodoroManager.isBreakStep()) {
+                    R.string.widget_pomodoro_click_to_start_break_session
+                } else {
+                    R.string.widget_pomodoro_click_to_start_pomodoro_session
+                }
             views.setTextViewText(
                 R.id.widget_pomodoro_timer_name,
                 context.getString(stringRes)

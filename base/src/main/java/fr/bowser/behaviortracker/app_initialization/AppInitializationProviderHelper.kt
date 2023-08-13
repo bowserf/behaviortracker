@@ -20,7 +20,9 @@ object AppInitializationProviderHelper {
             val provider = instance as AppInitializationProvider
             return provider.provideAppInitializationComponent(context)
         } catch (e: ClassNotFoundException) {
-            throw IllegalStateException("AppInitializationComponent provider class not found: ${e.message}")
+            throw IllegalStateException(
+                "AppInitializationComponent provider class not found: ${e.message}"
+            )
         }
     }
 }

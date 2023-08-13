@@ -25,7 +25,9 @@ class TimerItemViewPresenter(
         screen.timerUpdated(timer.time.toLong())
         screen.statusUpdated(timer.isActivate)
 
-        screen.updateLastUpdatedDate(timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp))
+        screen.updateLastUpdatedDate(
+            timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp)
+        )
     }
 
     override fun onStop() {
@@ -98,7 +100,9 @@ class TimerItemViewPresenter(
         override fun onTimerStateChanged(updatedTimer: Timer) {
             if (timer == updatedTimer) {
                 screen.statusUpdated(updatedTimer.isActivate)
-                screen.updateLastUpdatedDate(timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp))
+                screen.updateLastUpdatedDate(
+                    timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp)
+                )
             }
         }
 

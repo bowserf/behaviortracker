@@ -20,7 +20,11 @@ class CreateTimerViewColorAdapter(
     private var selectedItemPosition = initialSelectedColorPosition
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.create_timer_view_color, parent, false)
+        val view = LayoutInflater.from(context).inflate(
+            R.layout.create_timer_view_color,
+            parent,
+            false
+        )
         return ColorViewHolder(view)
     }
 

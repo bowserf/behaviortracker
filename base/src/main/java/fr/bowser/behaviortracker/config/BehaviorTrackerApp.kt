@@ -64,7 +64,9 @@ class BehaviorTrackerApp : Application() {
     private fun setupGraph() {
         val isInstantApp = InstantApps.isInstantApp(this)
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-            .myInstantApp(InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp))
+            .myInstantApp(
+                InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp)
+            )
             .appInitialization(
                 AppInitializationProviderHelper.provideAppInitializationComponent(
                     this,

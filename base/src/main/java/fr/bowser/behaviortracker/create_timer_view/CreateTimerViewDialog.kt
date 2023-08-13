@@ -212,12 +212,28 @@ class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
 
         override fun updateContainerTimeState(isDisplay: Boolean) {
             timerPicker.visibility = if (isDisplay) View.VISIBLE else View.GONE
-            timeStateImg.setImageResource(if (isDisplay) R.drawable.create_timer_view_content_show else R.drawable.create_timer_view_content_hidden)
+            timeStateImg.setImageResource(
+                if (isDisplay) {
+                    R.drawable.create_timer_view_content_show
+                } else {
+                    R.drawable.create_timer_view_content_hidden
+                }
+            )
         }
 
         override fun updateContainerColorState(isDisplay: Boolean) {
-            chooseColor.visibility = if (isDisplay) View.VISIBLE else View.GONE
-            colorStateImg.setImageResource(if (isDisplay) R.drawable.create_timer_view_content_show else R.drawable.create_timer_view_content_hidden)
+            chooseColor.visibility = if (isDisplay) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            colorStateImg.setImageResource(
+                if (isDisplay) {
+                    R.drawable.create_timer_view_content_show
+                } else {
+                    R.drawable.create_timer_view_content_hidden
+                }
+            )
         }
     }
 

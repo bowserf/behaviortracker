@@ -278,7 +278,9 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             }
         }
 
-        override fun displayExplainNotificationPermission(explainPermissionRequestModel: ExplainPermissionRequestViewModel) {
+        override fun displayExplainNotificationPermission(
+            explainPermissionRequestModel: ExplainPermissionRequestViewModel
+        ) {
             val action =
                 TimerListFragmentDirections.actionTimerListScreenToExplainPermissionRequest(
                     explainPermissionRequestModel

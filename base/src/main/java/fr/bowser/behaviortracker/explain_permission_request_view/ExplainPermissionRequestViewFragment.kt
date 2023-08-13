@@ -14,7 +14,8 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.utils.FragmentExtension.bind
 import javax.inject.Inject
 
-class ExplainPermissionRequestViewFragment : Fragment(R.layout.explain_permission_request_view_fragment) {
+class ExplainPermissionRequestViewFragment :
+    Fragment(R.layout.explain_permission_request_view_fragment) {
 
     @Inject
     lateinit var presenter: ExplainPermissionRequestViewContract.Presenter

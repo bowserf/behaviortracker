@@ -73,7 +73,9 @@ interface TimerListViewContract {
 
         fun displayRemoveAllTimersConfirmationDialog()
 
-        fun displayExplainNotificationPermission(explainPermissionRequestModel: ExplainPermissionRequestViewModel)
+        fun displayExplainNotificationPermission(
+            explainPermissionRequestModel: ExplainPermissionRequestViewModel
+        )
 
         fun displayAskScheduleAlarmPermission()
 

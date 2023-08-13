@@ -36,7 +36,9 @@ class FloatingRunningTimerView @JvmOverloads constructor(
         setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
 
         playPauseBtn.setOnClickListener { presenter.onClickPlayPause() }
-        findViewById<View>(R.id.floating_running_view_update_time).setOnClickListener { presenter.onClickUpdateTime() }
+        findViewById<View>(R.id.floating_running_view_update_time).setOnClickListener {
+            presenter.onClickUpdateTime()
+        }
     }
 
     override fun onAttachedToWindow() {
@@ -74,7 +76,13 @@ class FloatingRunningTimerView @JvmOverloads constructor(
         }
 
         override fun changeState(isPlaying: Boolean) {
-            playPauseBtn.setImageResource(if (isPlaying) R.drawable.floating_running_timer_view_pause else R.drawable.floating_running_timer_view_play)
+            playPauseBtn.setImageResource(
+                if (isPlaying) {
+                    R.drawable.floating_running_timer_view_pause
+                } else {
+                    R.drawable.floating_running_timer_view_play
+                }
+            )
         }
 
         override fun updateTime(time: String) {

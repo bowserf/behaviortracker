@@ -30,7 +30,9 @@ class TimerItemView(context: Context) : CardView(context) {
     private val screen = createScreen()
 
     private val chrono: TextView by bind(R.id.timer_item_view_timer_chrono)
-    private val lastUpdateTimestamp: TextView by bind(R.id.timer_item_view_timer_last_update_timestamp)
+    private val lastUpdateTimestamp: TextView by bind(
+        R.id.timer_item_view_timer_last_update_timestamp
+    )
     private val tvName: TextView by bind(R.id.timer_item_view_timer_name)
     private val menu: ImageView by bind(R.id.timer_item_view_menu)
     private val color: View by bind(R.id.timer_item_view_color)
@@ -48,7 +50,9 @@ class TimerItemView(context: Context) : CardView(context) {
 
         color.setOnClickListener { presenter.onClickCard() }
         menu.setOnClickListener { displayMenu() }
-        findViewById<View>(R.id.timer_item_view_time_update).setOnClickListener { presenter.onClickUpdateTimer() }
+        findViewById<View>(R.id.timer_item_view_time_update).setOnClickListener {
+            presenter.onClickUpdateTimer()
+        }
     }
 
     override fun onAttachedToWindow() {

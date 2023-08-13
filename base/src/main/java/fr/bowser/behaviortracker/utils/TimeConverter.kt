@@ -21,7 +21,6 @@ object TimeConverter {
         val hours = remainingTime / SECONDS_IN_AN_HOUR
 
         if (mode == DisplayHoursMode.Always || (mode == DisplayHoursMode.IfPossible && hours > 0)) {
-
             if (hours < LIMIT_BETWEEN_ONE_AND_TWO_DIGIT) {
                 string = "0"
             }

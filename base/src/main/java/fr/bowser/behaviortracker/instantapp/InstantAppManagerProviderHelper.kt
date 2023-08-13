@@ -21,7 +21,9 @@ object InstantAppManagerProviderHelper {
             val provider = instance as InstantAppManagerProvider
             return provider.provideMyInstantAppComponent()
         } catch (e: ClassNotFoundException) {
-            throw IllegalStateException("InstantAppComponent provider class not found: ${e.message}")
+            throw IllegalStateException(
+                "InstantAppComponent provider class not found: ${e.message}"
+            )
         }
     }
 }

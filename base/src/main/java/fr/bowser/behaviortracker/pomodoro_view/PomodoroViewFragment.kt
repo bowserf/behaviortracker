@@ -29,7 +29,6 @@ import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
 import fr.bowser.behaviortracker.pomodoro_view_dialog.PomodoroViewDialog
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
-import fr.bowser.behaviortracker.utils.FragmentExtension.bind
 import fr.bowser.behaviortracker.utils.TimeConverter
 import javax.inject.Inject
 
@@ -218,7 +217,9 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
         override fun enableDoNotDisturb(enable: Boolean) {
             val color: Int
             if (enable) {
-                doNotDisturb.setBackgroundResource(R.drawable.pomodoro_view_do_not_disturb_bg_selected)
+                doNotDisturb.setBackgroundResource(
+                    R.drawable.pomodoro_view_do_not_disturb_bg_selected
+                )
                 color = ContextCompat.getColor(requireContext(), R.color.white)
             } else {
                 doNotDisturb.background = null
@@ -235,7 +236,9 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
                 .setNegativeButton(android.R.string.cancel) { _, _ ->
                     // nothing to do
                 }
-                .setPositiveButton(R.string.pomodoro_do_not_disturb_dialog_permission_positive_button) { _, _ ->
+                .setPositiveButton(
+                    R.string.pomodoro_do_not_disturb_dialog_permission_positive_button
+                ) { _, _ ->
                     presenter.onClickDoNotDisturbDialogOpenSettings()
                 }
                 .show()

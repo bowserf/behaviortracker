@@ -74,12 +74,16 @@ class PomodoroManagerImpl(
 
     override fun startPomodoro(actionTimer: Timer) {
         this.actionTimer = actionTimer
-        this.pauseDuration =
-            if (isDebug && !BuildConfig.UA) POMODORO_DEBUG_PAUSE_STEP_DURATION
-            else settingManager.getPomodoroPauseStepDuration()
-        this.actionDuration =
-            if (isDebug && !BuildConfig.UA) POMODORO_DEBUG_STEP_DURATION
-            else settingManager.getPomodoroStepDuration()
+        this.pauseDuration = if (isDebug && !BuildConfig.UA) {
+            POMODORO_DEBUG_PAUSE_STEP_DURATION
+        } else {
+            settingManager.getPomodoroPauseStepDuration()
+        }
+        this.actionDuration = if (isDebug && !BuildConfig.UA) {
+            POMODORO_DEBUG_STEP_DURATION
+        } else {
+            settingManager.getPomodoroStepDuration()
+        }
 
         currentTimer = actionTimer
         pomodoroTime = actionDuration

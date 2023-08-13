@@ -38,7 +38,7 @@ subprojects {
     dependencies {
         // KtLint - Static code analysis
         // https://github.com/pinterest/ktlint/releases
-        ktlint("com.pinterest:ktlint:0.46.1") {
+        ktlint("com.pinterest:ktlint:0.49.1") {
             attributes {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
             }
@@ -51,7 +51,17 @@ subprojects {
         group = "verification"
         description = "Check Kotlin code style."
         classpath = ktlint
-        main = "com.pinterest.ktlint.Main"
+        mainClass.set("com.pinterest.ktlint.Main")
         args("--android", "src/**/*.kt")
+    }
+
+    // KtLint - Static code format
+    // https://github.com/pinterest/ktlint/releases
+    tasks.register<JavaExec>("ktformat") {
+        group = "verification"
+        description = "Check Kotlin code style."
+        classpath = ktlint
+        mainClass.set("com.pinterest.ktlint.Main")
+        args("--android", "-F", "src/**/*.kt")
     }
 }

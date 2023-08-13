@@ -28,7 +28,6 @@ class TimeManagerTest {
     fun startTimer() = runTest {
         // Given
         val timeManager = createTimerManager(backgroundScope)
-        //val timeManager = createTimerManager()
         val timerState = Timer("MyTimer", Color.RED)
 
         // When

@@ -4,9 +4,9 @@ import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer.TimerManager
+import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Singleton
 
 @Module
 class TimerRepositoryModule {

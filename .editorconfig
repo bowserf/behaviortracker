@@ -17,3 +17,5 @@ insert_final_newline=true
 # by the ruleset identifier.
 disabled_rules=max-line-length
 disabled_rules=package-name
+ktlint_standard_package-name = disabled
+ktlint_standard_max-line-length = disabled
