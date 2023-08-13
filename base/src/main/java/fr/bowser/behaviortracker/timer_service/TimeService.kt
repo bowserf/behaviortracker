@@ -119,7 +119,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
         timerNotificationBuilder!!.let {
             it.setContentTitle(title)
             it.setContentText(message)
-            it.mActions?.clear()
+            it.clearActions()
             it.addAction(pauseAction)
         }
 
@@ -129,7 +129,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
     override fun resumeTimerNotification(title: String) {
         timerNotificationBuilder!!.let {
             it.setContentTitle(title)
-            it.mActions?.clear()
+            it.clearActions()
             it.addAction(pauseAction)
         }
 
@@ -138,7 +138,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
 
     override fun pauseTimerNotification() {
         timerNotificationBuilder!!.let {
-            it.mActions?.clear()
+            it.clearActions()
             it.addAction(resumeAction)
         }
 
@@ -152,7 +152,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
 
     override fun continuePomodoroNotification() {
         timerNotificationBuilder!!.let {
-            it.mActions?.clear()
+            it.clearActions()
             it.addAction(continuePomodoroAction)
             it.setContentText(baseContext.getString(R.string.timer_notif_pomodoro_session_end))
         }
