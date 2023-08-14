@@ -32,7 +32,7 @@ class TimerServiceReceiver : BroadcastReceiver() {
     }
 
     private fun notificationDismiss(context: Context) {
-        TimeService.dismissNotification(context)
+        TimerService.dismissNotification(context)
     }
 
     private fun pauseTimer(context: Context) {

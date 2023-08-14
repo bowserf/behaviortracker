@@ -11,18 +11,18 @@ import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-class TimeServiceModule(private val screen: TimeServiceContract.Screen) {
+class TimerServiceModule(private val screen: TimerServiceContract.Screen) {
 
-    @GenericScope(component = TimeServiceComponent::class)
+    @GenericScope(component = TimerServiceComponent::class)
     @Provides
-    fun provideTimeServicePresenter(
+    fun provideTimerServicePresenter(
         context: Context,
         instantAppManager: InstantAppManager,
         timeManager: TimerManager,
         timerRepository: TimerRepository,
         pomodoroManager: PomodoroManager
-    ): TimeServiceContract.Presenter {
-        return TimeServicePresenter(
+    ): TimerServiceContract.Presenter {
+        return TimerServicePresenter(
             screen,
             instantAppManager,
             timeManager,
@@ -32,8 +32,8 @@ class TimeServiceModule(private val screen: TimeServiceContract.Screen) {
         )
     }
 
-    private fun createAddOn(context: Context): TimeServicePresenter.AddOn {
-        return object : TimeServicePresenter.AddOn {
+    private fun createAddOn(context: Context): TimerServicePresenter.AddOn {
+        return object : TimerServicePresenter.AddOn {
             override fun getNotificationName(timerName: String): String {
                 return context.resources.getString(R.string.timer_service_pomodoro_title, timerName)
             }

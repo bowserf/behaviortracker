@@ -18,10 +18,10 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import javax.inject.Inject
 
-class TimeService : Service(), TimeServiceContract.Screen {
+class TimerService : Service(), TimerServiceContract.Screen {
 
     @Inject
-    lateinit var presenter: TimeServiceContract.Presenter
+    lateinit var presenter: TimerServiceContract.Presenter
 
     private lateinit var notificationManager: NotificationManager
 
@@ -76,7 +76,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
 
         presenter.attach()
 
-        updateNotification()
+        startForeground()
     }
 
     override fun onDestroy() {
@@ -91,7 +91,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val action = intent?.action
         if (action == ACTION_START) {
-            updateNotification()
+            startForeground()
             presenter.start()
         } else if (action == ACTION_DISMISS) {
             presenter.dismissNotification()
@@ -101,18 +101,17 @@ class TimeService : Service(), TimeServiceContract.Screen {
 
     override fun renameTimerNotification(name: String) {
         timerNotificationBuilder!!.setContentTitle(name)
-        updateNotification()
+        updateNotificationContent()
     }
 
     override fun dismissNotification() {
-        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         stopSelf()
         notificationManager.cancel(TIMER_NOTIFICATION_ID)
     }
 
     override fun updateTimeNotification(time: String) {
         timerNotificationBuilder!!.setContentText(time)
-        updateNotification()
+        updateNotificationContent()
     }
 
     override fun displayTimerNotification(title: String, message: String) {
@@ -123,7 +122,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
             it.addAction(pauseAction)
         }
 
-        updateNotification()
+        updateNotificationContent()
     }
 
     override fun resumeTimerNotification(title: String) {
@@ -133,7 +132,7 @@ class TimeService : Service(), TimeServiceContract.Screen {
             it.addAction(pauseAction)
         }
 
-        updateNotification()
+        updateNotificationContent()
     }
 
     override fun pauseTimerNotification() {
@@ -142,12 +141,9 @@ class TimeService : Service(), TimeServiceContract.Screen {
             it.addAction(resumeAction)
         }
 
-        notificationManager.notify(
-            TIMER_NOTIFICATION_ID,
-            timerNotificationBuilder!!.build()
-        )
+        updateNotificationContent()
 
-        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_DETACH)
+        stopForeground()
     }
 
     override fun continuePomodoroNotification() {
@@ -157,20 +153,36 @@ class TimeService : Service(), TimeServiceContract.Screen {
             it.setContentText(baseContext.getString(R.string.timer_notif_pomodoro_session_end))
         }
 
-        updateNotification()
+        updateNotificationContent()
     }
 
-    private fun updateNotification() {
+    private fun startForeground() {
+        // Check if the app performs background starts
+        // https://developer.android.com/guide/components/foreground-services#background-start-restrictions-check
+        // Enable notification that appear each time the app attempts to launch a foreground service
+        // while running in the background
+        // adb shell device_config put activity_manager default_fgs_starts_restriction_notification_enabled true
         startForeground(
             TIMER_NOTIFICATION_ID,
             timerNotificationBuilder!!.build()
         )
     }
 
+    private fun stopForeground() {
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_DETACH)
+    }
+
+    private fun updateNotificationContent() {
+        notificationManager.notify(
+            TIMER_NOTIFICATION_ID,
+            timerNotificationBuilder!!.build()
+        )
+    }
+
     private fun setupGraph() {
-        val build = DaggerTimeServiceComponent.builder()
+        val build = DaggerTimerServiceComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(baseContext!!))
-            .timeServiceModule(TimeServiceModule(this))
+            .timerServiceModule(TimerServiceModule(this))
             .build()
         build.inject(this)
     }
@@ -215,13 +227,13 @@ class TimeService : Service(), TimeServiceContract.Screen {
         private const val ACTION_DISMISS = "time_service.action.dismiss"
 
         fun start(context: Context) {
-            val intent = Intent(context, TimeService::class.java)
+            val intent = Intent(context, TimerService::class.java)
             intent.action = ACTION_START
             ContextCompat.startForegroundService(context, intent)
         }
 
         fun dismissNotification(context: Context) {
-            val intent = Intent(context, TimeService::class.java)
+            val intent = Intent(context, TimerService::class.java)
             intent.action = ACTION_DISMISS
             context.startService(intent)
         }

@@ -4,14 +4,14 @@ import dagger.Component
 import fr.bowser.behaviortracker.config.BehaviorTrackerAppComponent
 import fr.bowser.behaviortracker.utils.GenericScope
 
-@GenericScope(component = TimeServiceComponent::class)
+@GenericScope(component = TimerServiceComponent::class)
 @Component(
-    modules = [(TimeServiceModule::class)],
+    modules = [(TimerServiceModule::class)],
     dependencies = [(BehaviorTrackerAppComponent::class)]
 )
-interface TimeServiceComponent {
+interface TimerServiceComponent {
 
-    fun inject(service: TimeService)
+    fun inject(service: TimerService)
 
-    fun provideTimePresenter(): TimeServiceContract.Presenter
+    fun provideTimePresenter(): TimerServiceContract.Presenter
 }

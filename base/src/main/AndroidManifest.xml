@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Pomodoro, when timer switched -->
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- Allow to start the TimeService from a background thread -->
+    <!-- Allow to start the TimerService from a background thread -->
     <uses-permission-sdk-23 android:name="android.permission.FOREGROUND_SERVICE" />
 
     <dist:module dist:instant="true" />
@@ -43,7 +43,7 @@
             android:name=".timer_service.TimerServiceReceiver"
             android:exported="false" />
 
-        <service android:name=".timer_service.TimeService" />
+        <service android:name=".timer_service.TimerService" />
 
     </application>
 

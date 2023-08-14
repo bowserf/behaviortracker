@@ -1,6 +1,6 @@
 package fr.bowser.behaviortracker.timer_service
 
-interface TimeServiceContract {
+interface TimerServiceContract {
 
     interface Screen {
         fun renameTimerNotification(name: String)

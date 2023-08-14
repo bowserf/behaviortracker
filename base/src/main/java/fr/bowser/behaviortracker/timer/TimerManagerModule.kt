@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.time_provider.TimeProvider
-import fr.bowser.behaviortracker.timer_service.TimeService
+import fr.bowser.behaviortracker.timer_service.TimerService
 import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +29,7 @@ class TimerManagerModule {
 
     private fun createAddOn(context: Context) = object : TimerManagerImpl.AddOn {
         override fun onTimerStarted() {
-            TimeService.start(context)
+            TimerService.start(context)
         }
     }
 }

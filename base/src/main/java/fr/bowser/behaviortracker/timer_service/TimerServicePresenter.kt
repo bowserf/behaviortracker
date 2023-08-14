@@ -7,14 +7,14 @@ import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.TimeConverter
 
-class TimeServicePresenter(
-    private val screen: TimeServiceContract.Screen,
+class TimerServicePresenter(
+    private val screen: TimerServiceContract.Screen,
     private val instantAppManager: InstantAppManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository,
     private val pomodoroManager: PomodoroManager,
     private val addOn: AddOn
-) : TimeServiceContract.Presenter {
+) : TimerServiceContract.Presenter {
 
     private var isNotificationDisplayed = false
 
