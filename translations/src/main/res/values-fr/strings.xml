@@ -25,7 +25,7 @@
     <string name="menu_remove_all">Supprimer tous les chronomètres</string>
     <string name="home_instant_app_install">INSTALLER</string>
     <string name="menu_review">Noter l\'application</string>
-    <string name="timer_list_explain_notification_permission_message">N\'oubliez jamais de chronomètrer vos activités gra^^e au rappel que vous avez fixé.</string>
+    <string name="timer_list_explain_notification_permission_message">N\'oubliez jamais de chronomètrer vos activités grâce au rappel que vous avez fixé.</string>
     <string name="timer_list_explain_notification_permission_title">Obtenir un rappel</string>
     <string name="item_create_timer_save">SAUVEGARDER</string>
     <string name="create_timer_title_timer">Sélectionner un temps de départ</string>
