@@ -40,8 +40,6 @@ class BehaviorTrackerApp : Application() {
 
         setupCrashlytics()
 
-        setupFirebaseAnalytics()
-
         setupInAppManager()
 
         setupAlarmListener()
@@ -55,7 +53,9 @@ class BehaviorTrackerApp : Application() {
     }
 
     private fun setupCrashlytics() {
-        FirebaseCrashlytics.getInstance().setCustomKey(
+        val crashlytics = FirebaseCrashlytics.getInstance()
+        crashlytics.setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
+        crashlytics.setCustomKey(
             CRASHLYTICS_IS_INSTANT_APP,
             appComponent.provideMyInstantApp().isInstantApp()
         )
