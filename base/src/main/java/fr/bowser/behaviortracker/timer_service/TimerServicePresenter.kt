@@ -43,6 +43,8 @@ class TimerServicePresenter(
             return
         }
 
+        timeManager.stopTimer()
+
         timer = null
         isNotificationDisplayed = false
 
