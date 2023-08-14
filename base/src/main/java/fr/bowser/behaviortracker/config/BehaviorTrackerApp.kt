@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.os.StrictMode
 import com.google.android.gms.common.wrappers.InstantApps
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
@@ -19,20 +18,7 @@ class BehaviorTrackerApp : Application() {
     lateinit var appComponent: BehaviorTrackerAppComponent
 
     override fun onCreate() {
-        if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(
-                StrictMode.ThreadPolicy.Builder()
-                    .detectAll()
-                    .penaltyLog()
-                    .build()
-            )
-            StrictMode.setVmPolicy(
-                StrictMode.VmPolicy.Builder()
-                    .detectAll()
-                    .penaltyLog()
-                    .build()
-            )
-        }
+        setupStrictMode()
 
         super.onCreate()
 
@@ -94,8 +80,23 @@ class BehaviorTrackerApp : Application() {
         })
     }
 
-    private fun setupFirebaseAnalytics() {
-        FirebaseAnalytics.getInstance(this)
+    private fun setupStrictMode() {
+        // disabled for now
+        if (true) {
+            return
+        }
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build()
+        )
+        StrictMode.setVmPolicy(
+            StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build()
+        )
     }
 
     companion object {
