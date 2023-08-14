@@ -136,7 +136,7 @@ class TimerListViewPresenter(
     }
 
     override fun onNotificationPermissionDeclined() {
-        // nothing to do
+        displayAlarmTimerDialogIfNotificationsAreEnabled()
     }
 
     override fun onClickAskNotificationDisplaySettings() {
