@@ -23,7 +23,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
-import fr.bowser.behaviortracker.choose_pomodoro_timer_view.ChoosePomodoroTimerViewDialog
+import fr.bowser.behaviortracker.pomodoro_choose_timer_view.PomodoroChooseTimerViewDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
 import fr.bowser.behaviortracker.pomodoro_view_dialog.PomodoroViewDialog
@@ -142,11 +142,11 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             }
         }
 
-        override fun displayChoosePomodoroTimer() {
-            val fragment = ChoosePomodoroTimerViewDialog.newInstance()
+        override fun displayPomodoroChooseTimer() {
+            val fragment = PomodoroChooseTimerViewDialog.newInstance()
             fragment.show(
                 requireActivity().supportFragmentManager,
-                ChoosePomodoroTimerViewDialog.TAG
+                PomodoroChooseTimerViewDialog.TAG
             )
         }
 

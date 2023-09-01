@@ -35,7 +35,7 @@ interface PomodoroViewContract {
 
         fun updatePomodoroTimer(timer: Timer, currentTime: Long, duration: Long)
 
-        fun displayChoosePomodoroTimer()
+        fun displayPomodoroChooseTimer()
 
         fun displayEmptyView()
 

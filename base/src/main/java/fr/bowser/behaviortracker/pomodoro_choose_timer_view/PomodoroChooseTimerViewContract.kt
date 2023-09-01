@@ -1,8 +1,8 @@
-package fr.bowser.behaviortracker.choose_pomodoro_timer_view
+package fr.bowser.behaviortracker.pomodoro_choose_timer_view
 
 import fr.bowser.behaviortracker.timer.Timer
 
-interface ChoosePomodoroTimerViewContract {
+interface PomodoroChooseTimerViewContract {
 
     interface Presenter {
         fun onStart()

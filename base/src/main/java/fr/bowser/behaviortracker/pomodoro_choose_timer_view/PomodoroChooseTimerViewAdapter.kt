@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.choose_pomodoro_timer_view
+package fr.bowser.behaviortracker.pomodoro_choose_timer_view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.timer.Timer
 
-class ChoosePomodoroTimerViewAdapter(
+class PomodoroChooseTimerViewAdapter(
     private val timerList: List<Timer>,
     private val listener: Listener
-) : RecyclerView.Adapter<ChoosePomodoroTimerViewAdapter.ChooseTimerHolder>() {
+) : RecyclerView.Adapter<PomodoroChooseTimerViewAdapter.ChooseTimerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChooseTimerHolder {
         val view = LayoutInflater.from(parent.context).inflate(

@@ -23,7 +23,7 @@ class PomodoroViewPresenter(
         doNotDisturbManager.addListener(doNotDisturbListener)
 
         if (configuration.displaySelectTimer) {
-            displayChoosePomodoroTimerIfPossible()
+            displayPomodoroChooseTimerIfPossible()
         }
 
         if (pomodoroManager.currentTimer != null) {
@@ -62,7 +62,7 @@ class PomodoroViewPresenter(
             return
         }
 
-        displayChoosePomodoroTimerIfPossible()
+        displayPomodoroChooseTimerIfPossible()
     }
 
     override fun onClickChangePomodoroState() {
@@ -108,11 +108,11 @@ class PomodoroViewPresenter(
         doNotDisturbManager.askPermissionIfNeeded()
     }
 
-    private fun displayChoosePomodoroTimerIfPossible() {
+    private fun displayPomodoroChooseTimerIfPossible() {
         if (timerRepository.getTimerList().isEmpty()) {
             screen.displayNoTimerAvailable()
         } else {
-            screen.displayChoosePomodoroTimer()
+            screen.displayPomodoroChooseTimer()
         }
     }
 

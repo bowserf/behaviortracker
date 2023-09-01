@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.choose_pomodoro_timer_view
+package fr.bowser.behaviortracker.pomodoro_choose_timer_view
 
 import dagger.Module
 import dagger.Provides
@@ -7,17 +7,17 @@ import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
-class ChoosePomodoroTimerViewModule(
-    private val screen: ChoosePomodoroTimerViewContract.Screen
+class PomodoroChooseTimerViewModule(
+    private val screen: PomodoroChooseTimerViewContract.Screen
 ) {
 
-    @GenericScope(component = ChoosePomodoroTimerViewComponent::class)
+    @GenericScope(component = PomodoroChooseTimerViewComponent::class)
     @Provides
-    fun provideChoosePomodoroTimerPresenter(
+    fun providePomodoroChooseTimerPresenter(
         timerRepository: TimerRepository,
         pomodoroManager: PomodoroManager
-    ): ChoosePomodoroTimerViewContract.Presenter {
-        return ChoosePomodoroTimerViewPresenter(
+    ): PomodoroChooseTimerViewContract.Presenter {
+        return PomodoroChooseTimerViewPresenter(
             screen,
             timerRepository,
             pomodoroManager

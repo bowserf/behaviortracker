@@ -1,4 +1,4 @@
-package fr.bowser.behaviortracker.choose_pomodoro_timer_view
+package fr.bowser.behaviortracker.pomodoro_choose_timer_view
 
 import android.app.Dialog
 import android.os.Bundle
@@ -15,10 +15,10 @@ import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.FragmentExtension.bind
 import javax.inject.Inject
 
-class ChoosePomodoroTimerViewDialog : DialogFragment(R.layout.choose_pomodoro_timer_view) {
+class PomodoroChooseTimerViewDialog : DialogFragment(R.layout.choose_pomodoro_timer_view) {
 
     @Inject
-    lateinit var presenter: ChoosePomodoroTimerViewContract.Presenter
+    lateinit var presenter: PomodoroChooseTimerViewContract.Presenter
 
     private val screen = createScreen()
 
@@ -67,9 +67,9 @@ class ChoosePomodoroTimerViewDialog : DialogFragment(R.layout.choose_pomodoro_ti
     }
 
     private fun setupGraph() {
-        val component = DaggerChoosePomodoroTimerViewComponent.builder()
+        val component = DaggerPomodoroChooseTimerViewComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(requireContext()))
-            .choosePomodoroTimerViewModule(ChoosePomodoroTimerViewModule(screen))
+            .pomodoroChooseTimerViewModule(PomodoroChooseTimerViewModule(screen))
             .build()
         component.inject(this)
     }
@@ -83,11 +83,11 @@ class ChoosePomodoroTimerViewDialog : DialogFragment(R.layout.choose_pomodoro_ti
         }
     }
 
-    private fun createScreen() = object : ChoosePomodoroTimerViewContract.Screen {
+    private fun createScreen() = object : PomodoroChooseTimerViewContract.Screen {
         override fun displayTimerList(timerList: List<Timer>) {
-            this@ChoosePomodoroTimerViewDialog.timerList.adapter = ChoosePomodoroTimerViewAdapter(
+            this@PomodoroChooseTimerViewDialog.timerList.adapter = PomodoroChooseTimerViewAdapter(
                 timerList,
-                object : ChoosePomodoroTimerViewAdapter.Listener {
+                object : PomodoroChooseTimerViewAdapter.Listener {
                     override fun onTimerChose(timer: Timer) {
                         presenter.onTimerChose(timer)
                         dismiss()
@@ -100,8 +100,8 @@ class ChoosePomodoroTimerViewDialog : DialogFragment(R.layout.choose_pomodoro_ti
     companion object {
         const val TAG = "CreateTimerActivity"
 
-        fun newInstance(): ChoosePomodoroTimerViewDialog {
-            return ChoosePomodoroTimerViewDialog()
+        fun newInstance(): PomodoroChooseTimerViewDialog {
+            return PomodoroChooseTimerViewDialog()
         }
     }
 }
