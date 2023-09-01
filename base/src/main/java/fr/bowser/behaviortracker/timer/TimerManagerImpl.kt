@@ -17,11 +17,11 @@ class TimerManagerImpl(
 
     private val listeners = ArrayList<TimerManager.Listener>()
 
-    private val lastUpdatedTime = HashMap<Timer, Long>()
-
     private var runningTimerJob: Job? = null
 
-    private var timer: Timer? = null
+    private var lastUpdatedTime = 0L
+
+    private var startedTimer: Timer? = null
 
     override fun startTimer(timer: Timer, fakeTimer: Boolean) {
         if (timer.isActivate) {
@@ -30,40 +30,35 @@ class TimerManagerImpl(
 
         stopStartedTimer()
 
-        lastUpdatedTime[timer] = getCurrentTimeSeconds()
+        lastUpdatedTime = getCurrentTimeSeconds()
 
         updateLastUpdateTimestamp(timer, fakeTimer)
 
-        timer.isActivate = true
-        for (listener in listeners) {
-            listener.onTimerStateChanged(timer)
-        }
+        setTimerActivateState(timer, true)
 
         runningTimerJob = coroutineScope.launch {
             while (true) {
                 delay(DELAY)
                 val currentTime = getCurrentTimeSeconds()
-                val diff = currentTime - lastUpdatedTime[timer]!!
+                val diff = currentTime - lastUpdatedTime
                 withContext(Dispatchers.Main) {
                     updateTime(timer, timer.time + diff)
                 }
-                lastUpdatedTime[timer] = currentTime
+                lastUpdatedTime = currentTime
             }
         }
 
-        this.timer = timer
+        this.startedTimer = timer
 
         addOn.onTimerStarted()
     }
 
     override fun stopTimer(fakeTimer: Boolean) {
-        val timer = timer ?: return
+        val timer = startedTimer ?: return
 
         if (!timer.isActivate) {
             return
         }
-
-        lastUpdatedTime.remove(timer)
 
         updateLastUpdateTimestamp(timer, fakeTimer)
 
@@ -71,7 +66,7 @@ class TimerManagerImpl(
     }
 
     override fun getStartedTimer(): Timer? {
-        return timer
+        return startedTimer
     }
 
     override fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean) {
@@ -105,15 +100,16 @@ class TimerManagerImpl(
     }
 
     private fun stopStartedTimer() {
-        val startedTimer = timer ?: return
-        startedTimer.isActivate = false
-        for (listener in listeners) {
-            listener.onTimerStateChanged(startedTimer)
-        }
+        val startedTimer = startedTimer ?: return
 
-        this.timer = null
+        this.startedTimer = null
 
         runningTimerJob?.cancel()
+
+        // reset value to be consistent
+        lastUpdatedTime = 0L
+
+        setTimerActivateState(startedTimer, false)
     }
 
     private fun getCurrentTimeSeconds(): Long {
@@ -133,12 +129,18 @@ class TimerManagerImpl(
         }
     }
 
+    private fun setTimerActivateState(timer: Timer, isActivated: Boolean) {
+        timer.isActivate = isActivated
+        for (listener in listeners) {
+            listener.onTimerStateChanged(timer)
+        }
+    }
+
     interface AddOn {
         fun onTimerStarted()
     }
 
     companion object {
-        private const val TAG = "TimeManagerImpl"
         private const val DELAY = 1000L
     }
 }
