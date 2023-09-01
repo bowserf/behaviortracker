@@ -139,6 +139,7 @@ class PomodoroViewPresenter(
 
             override fun onPomodoroSessionStarted(newTimer: Timer, duration: Long) {
                 screen.updatePomodoroTimer(newTimer, duration, duration)
+                updatePomodoroState()
             }
 
             override fun onPomodoroSessionStop() {
