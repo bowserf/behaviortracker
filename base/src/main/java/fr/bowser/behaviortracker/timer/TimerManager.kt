@@ -10,6 +10,8 @@ interface TimerManager {
 
     fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean = false)
 
+    fun resetTime(timer: Timer, fakeTimer: Boolean = false)
+
     fun addListener(listener: Listener): Boolean
 
     fun removeListener(listener: Listener)

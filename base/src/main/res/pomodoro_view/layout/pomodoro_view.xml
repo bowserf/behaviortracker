@@ -127,8 +127,8 @@
             app:layout_constraintBottom_toTopOf="@id/pomodoro_active_timer_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/pomodoro_view_current_time"
@@ -147,10 +147,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/default_space_1_5"
+            android:layout_marginBottom="@dimen/pomodoro_view_active_timer_container_bottom_margin"
             app:cardElevation="8dp"
             app:contentPadding="@dimen/default_space"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/pomodoro_view_active_timer_container_bottom_margin">
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

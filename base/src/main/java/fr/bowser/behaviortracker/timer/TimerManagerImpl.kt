@@ -88,6 +88,22 @@ class TimerManagerImpl(
         }
     }
 
+    override fun resetTime(timer: Timer, fakeTimer: Boolean) {
+        timer.time = 0f
+        if (!fakeTimer) {
+            coroutineScope.launch {
+                timerDAO.updateTimerTime(timer.id, timer.time.toLong())
+            }
+        }
+
+        updateLastUpdateTimestamp(timer, fakeTimer)
+
+        for (listener in listeners) {
+            listener.onTimerTimeChanged(timer)
+            listener.onTimerStateChanged(timer)
+        }
+    }
+
     override fun addListener(listener: TimerManager.Listener): Boolean {
         if (!listeners.contains(listener)) {
             return listeners.add(listener)

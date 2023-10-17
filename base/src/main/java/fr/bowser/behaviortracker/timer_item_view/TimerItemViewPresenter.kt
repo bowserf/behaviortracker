@@ -58,7 +58,7 @@ class TimerItemViewPresenter(
     }
 
     override fun onClickResetTimer() {
-        timeManager.updateTime(timer, 0f)
+        timeManager.resetTime(timer)
 
         screen.timerUpdated(timer.time.toLong())
     }

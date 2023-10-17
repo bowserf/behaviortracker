@@ -61,7 +61,7 @@ class TimerListViewPresenter(
         timeManager.stopTimer()
         val timers = timerRepository.getTimerList()
         timers.forEach { timer ->
-            timeManager.updateTime(timer, 0f)
+            timeManager.resetTime(timer)
         }
     }
 
