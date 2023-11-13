@@ -7,7 +7,9 @@
     <color name="icon_day_night">#8affffff</color>
     <color name="icon_light_day_night">#8a000000</color>
 
-    <color name="text_light_day_night">#8a000000</color>
+    <color name="icon_light_day">#8affffff</color>
+
+    <color name="text_light_day_night">#8affffff</color>
 
     <color name="deep_orange">#ffab91</color>
     <color name="brown">#bcaaa4</color>
