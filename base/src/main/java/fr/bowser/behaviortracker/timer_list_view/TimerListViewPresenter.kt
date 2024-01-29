@@ -6,6 +6,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
+import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
@@ -23,6 +24,7 @@ class TimerListViewPresenter(
     private val notificationManager: NotificationManager,
     private val reviewManager: ReviewManager,
     private val reviewStorage: ReviewStorage,
+    private val scrollToTimerManager: ScrollToTimerManager,
     private val stringManager: StringManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository,
@@ -33,6 +35,8 @@ class TimerListViewPresenter(
 
     private val reviewManagerListener = createReviewManagerListener()
 
+    private val scrollToTimerListener = createScrollToTimerListener()
+
     private val timerRepositoryListener = createTimerRepositoryListener()
 
     private val timeManagerListener = createTimeManagerListener()
@@ -41,6 +45,7 @@ class TimerListViewPresenter(
         reviewManager.addListener(reviewManagerListener)
         timerRepository.addListener(timerRepositoryListener)
         timeManager.addListener(timeManagerListener)
+        scrollToTimerManager.addListener(scrollToTimerListener)
 
         updateTimerList()
         updateListVisibility()
@@ -48,6 +53,7 @@ class TimerListViewPresenter(
     }
 
     override fun onStop() {
+        scrollToTimerManager.removeListener(scrollToTimerListener)
         reviewManager.removeListener(reviewManagerListener)
         timerRepository.removeListener(timerRepositoryListener)
         timeManager.removeListener(timeManagerListener)
@@ -217,6 +223,13 @@ class TimerListViewPresenter(
             it != ongoingDeletionTimer
         }
         screen.displayTimers(timers)
+    }
+
+    private fun createScrollToTimerListener() = object : ScrollToTimerManager.Listener {
+        override fun scrollToTimer(timerId: Long) {
+            val index = timerRepository.getTimerList().indexOfFirst { it.id == timerId }
+            screen.scrollToTimer(index)
+        }
     }
 
     private fun createTimeManagerListener() = object : TimerManager.Listener {

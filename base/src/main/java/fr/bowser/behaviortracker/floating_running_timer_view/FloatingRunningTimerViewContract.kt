@@ -11,6 +11,8 @@ interface FloatingRunningTimerViewContract {
         fun onClickUpdateTime()
 
         fun onClickPlayPause()
+
+        fun onClickView()
     }
 
     interface Screen {

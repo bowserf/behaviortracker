@@ -229,6 +229,11 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             ).show()
         }
 
+        override fun scrollToTimer(timerIndex: Int) {
+            val y = timerList.getChildAt(timerIndex).y.toInt()
+            timerListContainer.smoothScrollTo(0, y)
+        }
+
         override fun invalidateMenu() {
             requireActivity().invalidateOptionsMenu()
         }

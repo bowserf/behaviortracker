@@ -24,6 +24,8 @@ import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
 import fr.bowser.behaviortracker.review.ReviewModule
 import fr.bowser.behaviortracker.review.ReviewStorage
+import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
+import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
 import fr.bowser.behaviortracker.string.StringManagerModule
@@ -55,6 +57,7 @@ import javax.inject.Singleton
         NotificationManagerModule::class,
         PomodoroManagerModule::class,
         ReviewModule::class,
+        ScrollToTimerManagerModule::class,
         SettingManagerModule::class,
         StringManagerModule::class,
         TimerRepositoryModule::class,
@@ -97,6 +100,8 @@ interface BehaviorTrackerAppComponent {
     fun provideReviewManager(): ReviewManager
 
     fun provideReviewStorage(): ReviewStorage
+
+    fun provideScrollToTimerManager(): ScrollToTimerManager
 
     fun provideSettingManager(): SettingManager
 

@@ -23,9 +23,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
-import fr.bowser.behaviortracker.pomodoro_choose_timer_view.PomodoroChooseTimerViewDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
+import fr.bowser.behaviortracker.pomodoro_choose_timer_view.PomodoroChooseTimerViewDialog
 import fr.bowser.behaviortracker.pomodoro_view_dialog.PomodoroViewDialog
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils

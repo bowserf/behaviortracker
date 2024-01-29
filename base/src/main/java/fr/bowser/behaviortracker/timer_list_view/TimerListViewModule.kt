@@ -5,6 +5,7 @@ import dagger.Provides
 import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
+import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.GenericScope
@@ -25,6 +26,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
         notificationManager: NotificationManager,
         reviewManager: ReviewManager,
         reviewStorage: ReviewStorage,
+        scrollToTimerManager: ScrollToTimerManager,
         stringManager: StringManager,
         timerRepository: TimerRepository,
         timeManager: TimerManager
@@ -36,6 +38,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
             notificationManager,
             reviewManager,
             reviewStorage,
+            scrollToTimerManager,
             stringManager,
             timeManager,
             timerRepository,

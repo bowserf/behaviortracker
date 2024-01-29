@@ -90,5 +90,7 @@ interface TimerListViewContract {
         fun invalidateMenu()
 
         fun displayExportSucceeded()
+
+        fun scrollToTimer(timerIndex: Int)
     }
 }

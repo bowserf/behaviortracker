@@ -35,6 +35,8 @@ class FloatingRunningTimerView @JvmOverloads constructor(
         inflate(context, R.layout.floating_running_timer_view, this)
         setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
 
+        setOnClickListener { presenter.onClickView() }
+
         playPauseBtn.setOnClickListener { presenter.onClickPlayPause() }
         findViewById<View>(R.id.floating_running_view_update_time).setOnClickListener {
             presenter.onClickUpdateTime()

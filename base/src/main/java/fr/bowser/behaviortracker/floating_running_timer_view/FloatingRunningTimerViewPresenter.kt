@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.floating_running_timer_view
 
+import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
@@ -7,6 +8,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 
 class FloatingRunningTimerViewPresenter(
     private val screen: FloatingRunningTimerViewContract.Screen,
+    private val scrollToTimerManager: ScrollToTimerManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository
 ) : FloatingRunningTimerViewContract.Presenter {
@@ -31,17 +33,22 @@ class FloatingRunningTimerViewPresenter(
     }
 
     override fun onClickUpdateTime() {
-        val currentTimer = currentTimer ?: throw IllegalStateException("No timer is attached.")
+        val currentTimer = getCurrentTimer()
         screen.displayUpdateTimer(currentTimer.id)
     }
 
     override fun onClickPlayPause() {
-        val currentTimer = currentTimer ?: throw IllegalStateException("No timer is attached.")
+        val currentTimer = getCurrentTimer()
         if (currentTimer.isActivate) {
             timeManager.stopTimer()
         } else {
             timeManager.startTimer(currentTimer)
         }
+    }
+
+    override fun onClickView() {
+        val currentTimer = getCurrentTimer()
+        scrollToTimerManager.scrollToTimer(currentTimer.id)
     }
 
     private fun updateVisibility() {
@@ -93,5 +100,9 @@ class FloatingRunningTimerViewPresenter(
             }
             updateTimerInfo()
         }
+    }
+
+    private fun getCurrentTimer(): Timer {
+        return currentTimer ?: throw IllegalStateException("No timer is attached.")
     }
 }
