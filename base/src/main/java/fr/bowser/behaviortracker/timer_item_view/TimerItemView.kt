@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
+import android.view.animation.ScaleAnimation
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,6 +24,7 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.behaviortracker.utils.ViewExtension.bind
 import javax.inject.Inject
+
 
 class TimerItemView(context: Context) : CardView(context) {
 
@@ -112,6 +116,38 @@ class TimerItemView(context: Context) : CardView(context) {
         }
     }
 
+    private fun playAnimation() {
+        val anim = ScaleAnimation(
+            1f, SCALE_VALUE_ANIMATION,
+            1f, SCALE_VALUE_ANIMATION,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
+        anim.duration = ANIMATION_DURATION
+        anim.setAnimationListener(object : AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+                // nothing to do
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                val animReverse = ScaleAnimation(
+                    SCALE_VALUE_ANIMATION, 1f,
+                    SCALE_VALUE_ANIMATION, 1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                animReverse.duration = ANIMATION_DURATION
+                startAnimation(animReverse)
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+                // nothing to do
+            }
+
+        })
+        startAnimation(anim)
+    }
+
     private fun setupGraph() {
         val component = DaggerTimerItemViewComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(context))
@@ -177,5 +213,14 @@ class TimerItemView(context: Context) : CardView(context) {
         override fun updateLastUpdatedDate(date: String) {
             lastUpdateTimestamp.text = date
         }
+
+        override fun playSelectedAnimation() {
+            playAnimation()
+        }
+    }
+
+    companion object {
+        private const val SCALE_VALUE_ANIMATION = 1.05f
+        private const val ANIMATION_DURATION = 400L
     }
 }

@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer_item_view
 
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
@@ -8,6 +9,7 @@ import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class TimerItemViewPresenter(
     private val screen: TimerItemViewContract.Screen,
+    private val scrollToTimerManager: ScrollToTimerManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository,
     private val pomodoroManager: PomodoroManager,
@@ -18,9 +20,12 @@ class TimerItemViewPresenter(
 
     private val timeManagerListener = createTimeManagerListener()
 
+    private val scrollToTimerManagerListener = createScrollToTimerManagerListener()
+
     override fun onStart() {
         timerRepository.addListener(this)
         timeManager.addListener(timeManagerListener)
+        scrollToTimerManager.addListener(scrollToTimerManagerListener)
 
         screen.timerUpdated(timer.time.toLong())
         screen.statusUpdated(timer.isActivate)
@@ -31,6 +36,7 @@ class TimerItemViewPresenter(
     }
 
     override fun onStop() {
+        scrollToTimerManager.removeListener(scrollToTimerManagerListener)
         timerRepository.removeListener(this)
         timeManager.removeListener(timeManagerListener)
     }
@@ -110,6 +116,15 @@ class TimerItemViewPresenter(
             if (timer == updatedTimer) {
                 screen.timerUpdated(updatedTimer.time.toLong())
             }
+        }
+    }
+
+    private fun createScrollToTimerManagerListener() = object: ScrollToTimerManager.Listener {
+        override fun scrollToTimer(timerId: Long) {
+            if(timer.id != timerId) {
+                return
+            }
+            screen.playSelectedAnimation()
         }
     }
 }

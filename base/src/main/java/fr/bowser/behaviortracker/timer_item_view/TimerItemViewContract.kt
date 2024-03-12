@@ -44,5 +44,7 @@ interface TimerItemViewContract {
         fun displayUpdateTimerTimeDialog(timerId: Long)
 
         fun updateLastUpdatedDate(date: String)
+
+        fun playSelectedAnimation()
     }
 }
