@@ -18,6 +18,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,6 +33,7 @@ import fr.bowser.behaviortracker.pomodoro_view_dialog.PomodoroViewDialog
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
+import fr.bowser.behaviortracker.utils.applyStatusBarPadding
 import javax.inject.Inject
 
 class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
@@ -70,18 +74,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
         startSession.setOnClickListener { presenter.onClickStartSession() }
         doNotDisturb.setOnClickListener { presenter.onClickDoNotDisturb() }
 
-        val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)!!
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-    }
-
-    private fun extractArgument(): PomodoroViewContract.Configuration {
-        val bundle = arguments
-        bundle?.let {
-            val displaySelectTimer = it.getBoolean(EXTRA_KEY_DISPLAY_SELECT_TIMER, false)
-            bundle.clear()
-            return PomodoroViewContract.Configuration(displaySelectTimer)
-        }
-        return PomodoroViewContract.Configuration(false)
+        initializeToolbar(view)
     }
 
     override fun onStart() {
@@ -111,6 +104,22 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             }
         }
         return false
+    }
+
+    private fun initializeToolbar(view: View) {
+        val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)!!
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar.applyStatusBarPadding()
+    }
+
+    private fun extractArgument(): PomodoroViewContract.Configuration {
+        val bundle = arguments
+        bundle?.let {
+            val displaySelectTimer = it.getBoolean(EXTRA_KEY_DISPLAY_SELECT_TIMER, false)
+            bundle.clear()
+            return PomodoroViewContract.Configuration(displaySelectTimer)
+        }
+        return PomodoroViewContract.Configuration(false)
     }
 
     private fun createScreen() = object : PomodoroViewContract.Screen {

@@ -3,8 +3,13 @@ package fr.bowser.behaviortracker.rewards_view
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.inapp.InApp
+import fr.bowser.behaviortracker.utils.applyStatusBarPadding
 import javax.inject.Inject
 
 class RewardsViewFragment : Fragment(R.layout.rewards_view_fragment) {
@@ -67,6 +73,7 @@ class RewardsViewFragment : Fragment(R.layout.rewards_view_fragment) {
         val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        toolbar.applyStatusBarPadding()
     }
 
     private fun initRewardsList(view: View) {
@@ -92,6 +99,21 @@ class RewardsViewFragment : Fragment(R.layout.rewards_view_fragment) {
                 outRect.bottom = margin
             }
         })
+
+        ViewCompat.setOnApplyWindowInsetsListener(list) { v, windowInsets ->
+            val insets = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = insets.left
+                rightMargin = insets.right
+            }
+            v.updatePadding(bottom = insets.bottom)
+
+            // Return CONSUMED if you don't want want the window insets to keep passing
+            // down to descendant views.
+            WindowInsetsCompat.CONSUMED
+        }
     }
 
     private fun setupGraph() {

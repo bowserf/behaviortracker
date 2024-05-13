@@ -7,11 +7,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.DialogFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.utils.applyStatusBarPadding
 import javax.inject.Inject
 
 class SettingViewFragment : PreferenceFragmentCompat() {
@@ -64,6 +68,7 @@ class SettingViewFragment : PreferenceFragmentCompat() {
         val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        toolbar.applyStatusBarPadding()
     }
 
     private fun setupGraph() {

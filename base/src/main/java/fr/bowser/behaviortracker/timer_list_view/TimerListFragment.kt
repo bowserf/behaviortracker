@@ -36,6 +36,7 @@ import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.TimeConverter
+import fr.bowser.behaviortracker.utils.applyStatusBarPadding
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
 
@@ -82,8 +83,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
         fab.setOnClickListener { presenter.onClickAddTimer() }
 
-        val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)!!
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        initializeToolbar(view)
     }
 
     override fun onStart() {
@@ -364,6 +364,12 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 outRect.bottom = margin
             }
         })
+    }
+
+    private fun initializeToolbar(view: View) {
+        val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)!!
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar.applyStatusBarPadding()
     }
 
     inner class TimerListGestureListener : TimerListViewGesture.Listener {
