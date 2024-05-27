@@ -173,9 +173,9 @@
                     android:gravity="center"
                     android:maxLines="2"
                     android:textSize="@dimen/pomodoro_view_current_timer_size"
+                    app:layout_constraintBottom_toTopOf="@id/pomodoro_view_toggle_dnd"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/pomodoro_view_toggle_dnd"
                     tools:text="Prepare destination for the next travel" />
 
                 <LinearLayout
@@ -209,8 +209,9 @@
 
                 <LinearLayout
                     android:id="@+id/pomodoro_view_play_pause"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/pomodoro_view_active_timer_button_width"
                     android:layout_height="wrap_content"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -234,8 +235,9 @@
 
                 <LinearLayout
                     android:id="@+id/pomodoro_view_stop"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/pomodoro_view_active_timer_button_width"
                     android:layout_height="wrap_content"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="@id/pomodoro_view_play_pause"
@@ -269,7 +271,8 @@
         android:layout_marginRight="@dimen/default_space_2"
         android:layout_marginBottom="@dimen/default_space_2"
         android:elevation="@dimen/default_space"
-        app:fabSize="normal"
-        tools:src="@drawable/pomodoro_view_add" />
+        android:src="@drawable/pomodoro_view_flag"
+        app:backgroundTint="@color/pomodoro_view_start_session"
+        app:fabSize="normal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

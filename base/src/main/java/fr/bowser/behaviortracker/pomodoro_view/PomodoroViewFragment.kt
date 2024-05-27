@@ -18,9 +18,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,7 +45,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
     private lateinit var pomodoroSessionContent: View
     private lateinit var currentTimeTv: TextView
     private lateinit var activeTimerTv: TextView
-    private lateinit var progresssBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
     private lateinit var playPauseButton: View
     private lateinit var playPauseIcon: ImageView
     private lateinit var playPauseTitle: TextView
@@ -128,7 +125,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
                 currentTime,
                 TimeConverter.DisplayHoursMode.Never
             )
-            progresssBar.progress = currentTime.toInt()
+            progressBar.progress = currentTime.toInt()
         }
 
         override fun updatePomodoroTimer(timer: Timer, currentTime: Long, duration: Long) {
@@ -138,11 +135,11 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             pomodoroSessionContent.visibility = View.VISIBLE
 
             activeTimerTv.text = timer.name
-            progresssBar.max = duration.toInt()
+            progressBar.max = duration.toInt()
 
             updateTime(currentTime)
 
-            val progressDrawable = progresssBar.progressDrawable
+            val progressDrawable = progressBar.progressDrawable
             if (progressDrawable is RotateDrawable) {
                 progressDrawable.drawable!!.setColorFilter(
                     ColorUtils.getColor(context!!, timer.color),
@@ -293,7 +290,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
         pomodoroSessionContent = view.findViewById(R.id.pomodoro_view_content_session)
         currentTimeTv = view.findViewById(R.id.pomodoro_view_current_time)
         activeTimerTv = view.findViewById(R.id.pomodoro_view_active_timer)
-        progresssBar = view.findViewById(R.id.pomodoro_view_progress_bar)
+        progressBar = view.findViewById(R.id.pomodoro_view_progress_bar)
         playPauseButton = view.findViewById(R.id.pomodoro_view_play_pause)
         playPauseIcon = view.findViewById(R.id.pomodoro_view_play_pause_icon)
         playPauseTitle = view.findViewById(R.id.pomodoro_view_play_pause_title)
