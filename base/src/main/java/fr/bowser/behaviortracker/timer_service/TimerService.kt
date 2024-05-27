@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
 import android.content.res.Resources
 import android.os.Build
 import android.os.IBinder
@@ -162,10 +163,18 @@ class TimerService : Service(), TimerServiceContract.Screen {
         // Enable notification that appear each time the app attempts to launch a foreground service
         // while running in the background
         // adb shell device_config put activity_manager default_fgs_starts_restriction_notification_enabled true
-        startForeground(
-            TIMER_NOTIFICATION_ID,
-            timerNotificationBuilder!!.build()
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            startForeground(
+                TIMER_NOTIFICATION_ID,
+                timerNotificationBuilder!!.build(),
+                FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
+            )
+        } else {
+            startForeground(
+                TIMER_NOTIFICATION_ID,
+                timerNotificationBuilder!!.build(),
+            )
+        }
     }
 
     private fun stopForeground() {

@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- Allow to start the TimerService from a background thread -->
     <uses-permission-sdk-23 android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <dist:module dist:instant="true" />
 
@@ -42,7 +43,11 @@
             android:name=".timer_service.TimerServiceReceiver"
             android:exported="false" />
 
-        <service android:name=".timer_service.TimerService" />
+        <service android:name=".timer_service.TimerService"  android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Foreground service uses to update the time displayed in the notification associated to the current running timer"/>
+
+        </service>
 
     </application>
 
