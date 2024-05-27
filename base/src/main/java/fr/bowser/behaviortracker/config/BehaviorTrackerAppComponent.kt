@@ -9,6 +9,8 @@ import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationModule
 import fr.bowser.behaviortracker.app_initialization.AppInitialization
 import fr.bowser.behaviortracker.app_initialization.AppInitializationComponent
 import fr.bowser.behaviortracker.clipboard.CopyDataToClipboardModule
+import fr.bowser.behaviortracker.crash_record.CrashRecordManager
+import fr.bowser.behaviortracker.crash_record.CrashRecordModule
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.do_not_disturbed.DoNotDisturbModule
@@ -50,6 +52,7 @@ import javax.inject.Singleton
         AlarmNotificationModule::class,
         AlarmTimerManagerModule::class,
         CopyDataToClipboardModule::class,
+        CrashRecordModule::class,
         DatabaseManagerModule::class,
         DoNotDisturbModule::class,
         EventManagerModule::class,
@@ -80,6 +83,8 @@ interface BehaviorTrackerAppComponent {
     fun provideContext(): Context
 
     fun provideCopyDataToClipboardManager(): CopyDataToClipboardManager
+
+    fun provideCrashRecordManager(): CrashRecordManager
 
     fun provideDatabaseManager(): DatabaseManager
 

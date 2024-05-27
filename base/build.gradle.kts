@@ -14,13 +14,15 @@ plugins {
 }
 
 android {
-    compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
+    //compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
+    compileSdkPreview = ProjectConfig.SdkVersions.compileSdkPreviewVersion
     namespace = "fr.bowser.behaviortracker"
 
     defaultConfig {
         applicationId = "fr.bowser.time"
         minSdk = ProjectConfig.SdkVersions.minSdkVersion
-        targetSdk = ProjectConfig.SdkVersions.targetSdkVersion
+        //targetSdk = ProjectConfig.SdkVersions.targetSdkVersion
+        targetSdkPreview = ProjectConfig.SdkVersions.targetSdkPreviewVersion
         versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 

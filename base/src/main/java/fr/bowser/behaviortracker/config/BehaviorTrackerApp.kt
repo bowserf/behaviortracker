@@ -29,6 +29,8 @@ class BehaviorTrackerApp : Application() {
         setupInAppManager()
 
         setupAlarmListener()
+
+        setupCrashReport()
     }
 
     private fun setupInAppManager() {
@@ -78,6 +80,11 @@ class BehaviorTrackerApp : Application() {
                 alarmNotificationManager.displayNotification()
             }
         })
+    }
+
+    private fun setupCrashReport() {
+        val crashRecordManager = appComponent.provideCrashRecordManager()
+        crashRecordManager.initialize()
     }
 
     private fun setupStrictMode() {
