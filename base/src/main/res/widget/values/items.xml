@@ -2,4 +2,5 @@
 <resources>
 
     <item name="widget_pomodoro" type="layout" />
+    <item name="widget_image" type="drawable" />
 </resources>

@@ -33,10 +33,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:includeFontPadding="false"
+                    android:text="21:54"
                     android:textColor="@color/widget_default_text_color"
                     android:textSize="32dp"
-                    android:textStyle="bold"
-                    tools:text="21:54" />
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="@dimen/widget_pomodoro_small_icon_size"
@@ -54,9 +54,9 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:lines="1"
+                android:text="Cooking"
                 android:textColor="@color/widget_default_text_color"
-                android:textSize="18dp"
-                tools:text="Work" />
+                android:textSize="18dp" />
 
         </LinearLayout>
 
@@ -66,7 +66,7 @@
             android:layout_height="@dimen/widget_default_button_size"
             android:background="@drawable/widget_select_timer_bg"
             android:scaleType="center"
-            tools:src="@drawable/widget_play_state" />
+            android:src="@drawable/widget_play_state" />
 
     </LinearLayout>
 
