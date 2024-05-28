@@ -104,7 +104,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
     }
 
     private fun initializeToolbar(view: View) {
-        val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)!!
+        val toolbar = view.findViewById<Toolbar>(R.id.pomodoro_view_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         toolbar.applyStatusBarPadding()
     }
