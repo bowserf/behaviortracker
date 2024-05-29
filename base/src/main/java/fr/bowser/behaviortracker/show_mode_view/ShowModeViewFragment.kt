@@ -15,6 +15,7 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.FragmentExtension.bind
+import fr.bowser.behaviortracker.utils.applyStatusBarPadding
 import javax.inject.Inject
 
 class ShowModeViewFragment : Fragment(R.layout.show_mode_view_fragment) {
@@ -44,6 +45,7 @@ class ShowModeViewFragment : Fragment(R.layout.show_mode_view_fragment) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         toolbar.title = ""
+        toolbar.applyStatusBarPadding()
     }
 
     override fun onStart() {
