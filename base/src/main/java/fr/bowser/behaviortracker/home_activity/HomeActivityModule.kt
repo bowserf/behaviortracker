@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.instantapp.InstantAppManager
+import fr.bowser.behaviortracker.navigation.NavigationManager
 import fr.bowser.behaviortracker.utils.GenericScope
 
 @Module
@@ -17,13 +18,15 @@ internal class HomeActivityModule(
     @Provides
     fun provideHomePresenter(
         eventManager: EventManager,
-        instantAppManager: InstantAppManager
+        instantAppManager: InstantAppManager,
+        navigationManager: NavigationManager,
     ): HomeActivityContract.Presenter {
         return HomeActivityPresenter(
             screen,
             eventManager,
             instantAppManager,
-            createInstallAppAddon(instantAppManager)
+            createInstallAppAddon(instantAppManager),
+            navigationManager,
         )
     }
 

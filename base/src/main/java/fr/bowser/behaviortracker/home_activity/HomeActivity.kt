@@ -75,6 +75,9 @@ class HomeActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this, R.id.home_activity_nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
 
+        val navigationManager = BehaviorTrackerApp.getAppComponent(this).provideNavigationManager()
+        navigationManager.setNavigationController(navController)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.home_activity_timer_list_screen -> showBottomNav()
@@ -103,10 +106,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun displayPomodoroScreen(displaySelectTimer: Boolean) {
-        val navController = Navigation.findNavController(this, R.id.home_activity_nav_host_fragment)
-        val bundle = Bundle()
-        bundle.putBoolean(PomodoroViewFragment.EXTRA_KEY_DISPLAY_SELECT_TIMER, displaySelectTimer)
-        navController.navigate(R.id.home_activity_pomodoro_screen, bundle)
+        presenter.navigateToPomodoroScreen(displaySelectTimer)
     }
 
     private fun createScreen() = object : HomeActivityContract.Screen {
