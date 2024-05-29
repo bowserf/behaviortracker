@@ -2,6 +2,7 @@ package fr.bowser.behaviortracker.timer_item_view
 
 import dagger.Module
 import dagger.Provides
+import fr.bowser.behaviortracker.navigation.NavigationManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
@@ -15,19 +16,21 @@ class TimerItemViewModule(private val screen: TimerItemViewContract.Screen) {
     @GenericScope(component = TimerItemViewComponent::class)
     @Provides
     fun provideTimerItemPresenter(
-        timeManager: TimerManager,
-        scrollToTimerManager: ScrollToTimerManager,
-        timerRepository: TimerRepository,
+        navigationManager: NavigationManager,
         pomodoroManager: PomodoroManager,
-        timeProvider: TimeProvider
+        scrollToTimerManager: ScrollToTimerManager,
+        timeManager: TimerManager,
+        timeProvider: TimeProvider,
+        timerRepository: TimerRepository,
     ): TimerItemViewContract.Presenter {
         return TimerItemViewPresenter(
             screen,
+            navigationManager,
+            pomodoroManager,
             scrollToTimerManager,
             timeManager,
+            timeProvider,
             timerRepository,
-            pomodoroManager,
-            timeProvider
         )
     }
 }
