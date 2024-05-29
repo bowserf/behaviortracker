@@ -66,6 +66,7 @@ class SettingViewFragment : PreferenceFragmentCompat() {
 
     private fun initializeToolbar(view: View) {
         val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)
+        toolbar.setTitle(requireContext().getString(R.string.activity_setting_title))
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         toolbar.applyStatusBarPadding()
