@@ -234,6 +234,10 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             timerListContainer.smoothScrollTo(0, y)
         }
 
+        override fun reorderTimer(fromPosition: Int, toPosition: Int) {
+            timerAdapter.reorderTimer(fromPosition, toPosition)
+        }
+
         override fun invalidateMenu() {
             requireActivity().invalidateOptionsMenu()
         }
@@ -374,7 +378,8 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
     inner class TimerListGestureListener : TimerListViewGesture.Listener {
         override fun onItemMove(fromPosition: Int, toPosition: Int) {
-            // nothing to do
+            presenter.onTimerPositionChanged(fromPosition, toPosition)
+
         }
 
         override fun onSelectedChangedUp() {

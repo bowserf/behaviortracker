@@ -51,6 +51,8 @@ interface TimerListViewContract {
         fun onTimerSwiped(timerPosition: Int)
 
         fun shouldShowNotificationRequestPermissionRationale(permission: String)
+
+        fun onTimerPositionChanged(fromPosition: Int, toPosition: Int)
     }
 
     interface Screen {
@@ -92,5 +94,7 @@ interface TimerListViewContract {
         fun displayExportSucceeded()
 
         fun scrollToTimer(timerIndex: Int)
+
+        fun reorderTimer(fromPosition: Int, toPosition: Int)
     }
 }

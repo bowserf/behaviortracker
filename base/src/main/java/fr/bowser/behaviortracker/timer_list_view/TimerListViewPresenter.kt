@@ -16,6 +16,8 @@ import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_review.ReviewActivityContainer
 import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
+import java.util.Collections
+
 
 class TimerListViewPresenter(
     private val screen: TimerListViewContract.Screen,
@@ -92,7 +94,7 @@ class TimerListViewPresenter(
         )
         export += "$totalTimeTitle: $totalTimeStr"
         copyDataToClipboardManager.copy(export)
-        
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             screen.displayExportSucceeded()
         }
@@ -134,6 +136,12 @@ class TimerListViewPresenter(
             listOf(permission)
         )
         screen.displayExplainNotificationPermission(explainPermissionRequestModel)
+    }
+
+    override fun onTimerPositionChanged(fromPosition: Int, toPosition: Int) {
+        updateTimersOrder(fromPosition, toPosition)
+
+        screen.reorderTimer(fromPosition, toPosition)
     }
 
     override fun onClickRateApp(activityContainer: ReviewActivityContainer) {
@@ -226,6 +234,20 @@ class TimerListViewPresenter(
             it != ongoingDeletionTimer
         }
         screen.displayTimers(timers)
+    }
+
+    private fun updateTimersOrder(fromPosition: Int, toPosition: Int) {
+        val timers = timerRepository.getTimerList()
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(timers, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(timers, i, i - 1)
+            }
+        }
+        timerRepository.reorderTimerList(timers)
     }
 
     private fun createScrollToTimerListener() = object : ScrollToTimerManager.Listener {

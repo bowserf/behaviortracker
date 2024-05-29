@@ -57,5 +57,9 @@ class TimerListViewAdapter : RecyclerView.Adapter<TimerListViewAdapter.TimerView
         return timerList.toList()
     }
 
+    fun reorderTimer(fromPosition: Int, toPosition: Int) {
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
     inner class TimerViewHolder(val view: TimerItemView) : RecyclerView.ViewHolder(view)
 }
