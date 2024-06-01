@@ -32,7 +32,7 @@ import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm_view.AlarmViewDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
+import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewBottomSheetFragment
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.TimeConverter
@@ -184,7 +184,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displayCreateTimerView() {
-            CreateTimerViewDialog.showDialog(activity as AppCompatActivity, false)
+            CreateTimerViewBottomSheetFragment.showDialog(activity as AppCompatActivity, false)
         }
 
         override fun displayTimers(timers: List<Timer>) {

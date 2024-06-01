@@ -11,7 +11,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 )
 interface CreateTimerViewComponent {
 
-    fun inject(dialog: CreateTimerViewDialog)
+    fun inject(dialog: CreateTimerViewBottomSheetFragment)
 
     fun provideCreateTimerPresenter(): CreateTimerViewContract.Presenter
 }

@@ -1,34 +1,35 @@
 package fr.bowser.behaviortracker.create_timer_view
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.view.Window
+import android.view.inputmethod.InputMethod.SHOW_FORCED
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
+class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.create_timer_view) {
 
     @Inject
     lateinit var presenter: CreateTimerViewContract.Presenter
 
     private val screen = createScreen()
+
+    private val imm by lazy { activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     private lateinit var editTimerName: EditText
     private lateinit var chooseColor: RecyclerView
@@ -45,19 +46,12 @@ class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
         setupGraph()
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        return dialog
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val isPomodoro = requireArguments().getBoolean(IS_POMODORO)
         presenter.enablePomodoroMode(isPomodoro)
 
-        initToolbar(view)
         initColorList(view)
         initTimePicker(view)
         initUI(view, isPomodoro)
@@ -65,19 +59,10 @@ class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
 
     override fun onStart() {
         super.onStart()
-
-        if (dialog == null) {
-            return
-        }
-
-        val dialogWidth = resources.getDimensionPixelOffset(R.dimen.create_dialog_width)
-        dialog!!.window!!.setLayout(dialogWidth, WRAP_CONTENT)
-
         presenter.onStart()
     }
 
     override fun onStop() {
-        hideKeyboard()
         presenter.onStop()
         super.onStop()
     }
@@ -112,22 +97,6 @@ class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
         component.inject(this)
     }
 
-    private fun initToolbar(root: View) {
-        val myToolbar = root.findViewById<Toolbar>(R.id.create_timer_toolbar)
-        myToolbar.title = resources.getString(R.string.create_timer_title)
-        myToolbar.setNavigationIcon(R.drawable.create_timer_view_close)
-        myToolbar.setNavigationOnClickListener {
-            exitWithAnimation()
-        }
-        myToolbar.inflateMenu(R.menu.create_timer_view_menu)
-        myToolbar.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.create_timer_view_menu_save) {
-                saveTimer()
-            }
-            true
-        }
-    }
-
     private fun initUI(root: View, isPomodoro: Boolean) {
         editTimerName = root.findViewById(R.id.creation_timer_name)
 
@@ -147,24 +116,16 @@ class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
         colorStateImg = root.findViewById(R.id.create_timer_color_container_status)
 
         editTimerNameLayout = root.findViewById(R.id.creation_timer_name_layout)
+
+        root.findViewById<View>(R.id.create_timer_view_create).setOnClickListener { saveTimer() }
     }
 
     private fun displayKeyboard() {
         editTimerName.requestFocus()
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-    }
-
-    private fun hideKeyboard() {
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(editTimerName.windowToken, 0)
-    }
-
-    private fun exitWithAnimation() {
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            ?.remove(this)
-            ?.commit()
+        lifecycleScope.launch {
+            delay(200)
+            imm.showSoftInput(editTimerName, SHOW_FORCED)
+        }
     }
 
     private fun saveTimer() {
@@ -183,7 +144,7 @@ class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
 
     private fun createScreen() = object : CreateTimerViewContract.Screen {
         override fun exitViewAfterSucceedTimerCreation() {
-            exitWithAnimation()
+            dismiss()
         }
 
         override fun displayNameError() {
@@ -245,25 +206,14 @@ class CreateTimerViewDialog : DialogFragment(R.layout.create_timer_view) {
         fun showDialog(
             activity: AppCompatActivity,
             isPomodoro: Boolean,
-            isLargeScreen: Boolean = true
         ) {
-            val createTimerDialog = CreateTimerViewDialog()
+            val createTimerDialog = CreateTimerViewBottomSheetFragment()
 
             val bundle = Bundle()
             bundle.putBoolean(IS_POMODORO, isPomodoro)
             createTimerDialog.arguments = bundle
 
-            if (isLargeScreen) {
-                // The device is using a large layout, so show the fragment as a dialog
-                createTimerDialog.show(activity.supportFragmentManager, TAG)
-            } else {
-                // The device is smaller, so show the fragment fullscreen
-                activity.supportFragmentManager.beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .add(android.R.id.content, createTimerDialog)
-                    .addToBackStack(null)
-                    .commit()
-            }
+            createTimerDialog.show(activity.supportFragmentManager, TAG)
         }
     }
 }

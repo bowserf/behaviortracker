@@ -147,7 +147,7 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
 
     // Design
-    implementation("com.google.android.material:material:1.6.1")
+    implementation("com.google.android.material:material:1.12.0")
 
     // AndroidX library
     implementation("androidx.activity:activity:1.9.0")

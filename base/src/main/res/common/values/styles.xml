@@ -7,6 +7,7 @@
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <item name="android:itemTextAppearance">@style/PopupMenuTextAppearance</item>
         <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
+        <item name="bottomSheetDialogTheme">@style/AlmaTheme.BottomSheetDialog</item>
     </style>
 
     <style name="AppTheme.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
@@ -15,6 +16,23 @@
 
     <style name="PopupMenuTextAppearance" parent="TextAppearance.AppCompat.Menu">
         <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="AlmaTheme.BottomSheetDialog" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AlmaTheme.BottomSheetDialog.Modal</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+    </style>
+
+    <style name="AlmaTheme.BottomSheetDialog.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialComponents.RoundedBottomSheet</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MaterialComponents.RoundedBottomSheet" parent="">
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
     </style>
 
 </resources>

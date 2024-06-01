@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
+import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewBottomSheetFragment
 import fr.bowser.behaviortracker.pomodoro_choose_timer_view.PomodoroChooseTimerViewDialog
 import fr.bowser.behaviortracker.pomodoro_view_dialog.PomodoroViewDialog
 import fr.bowser.behaviortracker.timer.Timer
@@ -189,7 +189,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
         }
 
         override fun displayCreateTimerScreen() {
-            CreateTimerViewDialog.showDialog(activity as AppCompatActivity, true)
+            CreateTimerViewBottomSheetFragment.showDialog(activity as AppCompatActivity, true)
         }
 
         override fun hidePomodoroDialog() {

@@ -6,13 +6,13 @@ import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationManagerImpl
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewDialog
-import fr.bowser.behaviortracker.pomodoro_view.PomodoroViewFragment
+import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewBottomSheetFragment
 import fr.bowser.behaviortracker.utils.ActivityExtension.bind
 import javax.inject.Inject
 
@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        val navController = Navigation.findNavController(this, R.id.home_activity_nav_host_fragment)
+        val navController = findNavController(R.id.home_activity_nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
 
         val navigationManager = BehaviorTrackerApp.getAppComponent(this).provideNavigationManager()
@@ -99,7 +99,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun manageIntent(intent: Intent) {
         when (intent.action) {
-            ACTION_CREATE_TIMER_FROM_SHORTCUT -> CreateTimerViewDialog.showDialog(this, false)
+            ACTION_CREATE_TIMER_FROM_SHORTCUT -> CreateTimerViewBottomSheetFragment.showDialog(this, false)
             ACTION_SELECT_POMODORO_TIMER -> displayPomodoroScreen(true)
             AlarmNotificationManagerImpl.ACTION_ALARM_NOTIFICATION_CLICKED -> presenter.onAlarmNotificationClicked()
         }
