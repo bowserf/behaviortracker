@@ -149,11 +149,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
         }
 
         override fun displayPomodoroChooseTimer() {
-            val fragment = PomodoroChooseTimerViewDialog.newInstance()
-            fragment.show(
-                requireActivity().supportFragmentManager,
-                PomodoroChooseTimerViewDialog.TAG
-            )
+            PomodoroChooseTimerViewDialog.showDialog(requireActivity() as AppCompatActivity)
         }
 
         override fun displayEmptyView() {

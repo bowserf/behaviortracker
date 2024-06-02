@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/choose_pomodoro_timer_view_toolbar"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/choose_pomodoro_timer_view_title"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/choose_pomodoro_timer_view_timers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:layout_marginTop="8dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_shadow_height"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/background_shadow_bottom" />
-
-</FrameLayout>
+</LinearLayout>
