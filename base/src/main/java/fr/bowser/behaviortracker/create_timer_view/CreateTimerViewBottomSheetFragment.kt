@@ -118,6 +118,8 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
         editTimerNameLayout = root.findViewById(R.id.creation_timer_name_layout)
 
         root.findViewById<View>(R.id.create_timer_view_create).setOnClickListener { saveTimer() }
+
+        root.findViewById<View>(R.id.create_timer_close).setOnClickListener { dismiss() }
     }
 
     private fun displayKeyboard() {

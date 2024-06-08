@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
-import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewBottomSheetFragment
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.utils.FragmentExtension.bind
 import javax.inject.Inject
 
-class PomodoroChooseTimerViewDialog : BottomSheetDialogFragment(R.layout.choose_pomodoro_timer_view) {
+class PomodoroChooseTimerViewDialog :
+    BottomSheetDialogFragment(R.layout.choose_pomodoro_timer_view) {
 
     @Inject
     lateinit var presenter: PomodoroChooseTimerViewContract.Presenter
@@ -36,6 +36,9 @@ class PomodoroChooseTimerViewDialog : BottomSheetDialogFragment(R.layout.choose_
             false
         )
         timerList.setHasFixedSize(true)
+
+        view.findViewById<View>(R.id.choose_pomodoro_timer_view_close)
+            .setOnClickListener { dismiss() }
     }
 
     override fun onStart() {
