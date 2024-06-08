@@ -74,7 +74,7 @@ class TimerItemView(context: Context) : CardView(context) {
 
         chrono.text = TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
         tvName.text = timer.name
-        color.setBackgroundColor(ColorUtils.getColor(context!!, timer.color))
+        color.setBackgroundColor(ColorUtils.getColor(context!!, timer.colorId))
 
         updateBtnPlayPause(timer.isActivate)
     }

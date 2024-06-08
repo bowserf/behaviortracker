@@ -12,7 +12,7 @@ data class Timer(
     var id: Long,
     @ColumnInfo(name = "current_time") val currentTime: Long,
     @ColumnInfo(name = "name") var name: String,
-    @ColumnInfo(name = "color") var color: Int,
+    @ColumnInfo(name = "color") var colorId: Int,
     @ColumnInfo(name = "creation_date_ms") var creationDateTimestamp: Long,
     @ColumnInfo(name = "last_update_ms") var lastUpdateTimestamp: Long,
     @ColumnInfo(name = "position") var position: Int
@@ -48,7 +48,7 @@ data class Timer(
     override fun equals(other: Any?): Boolean {
         if (other is Timer) {
             if (other.id == id &&
-                other.color == color &&
+                other.colorId == colorId &&
                 other.isActivate == isActivate &&
                 other.currentTime == currentTime &&
                 other.name == name &&

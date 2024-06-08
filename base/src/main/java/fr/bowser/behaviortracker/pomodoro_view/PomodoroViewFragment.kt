@@ -142,7 +142,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             val progressDrawable = progressBar.progressDrawable
             if (progressDrawable is RotateDrawable) {
                 progressDrawable.drawable!!.setColorFilter(
-                    ColorUtils.getColor(context!!, timer.color),
+                    ColorUtils.getColor(context!!, timer.colorId),
                     PorterDuff.Mode.SRC_ATOP
                 )
             }

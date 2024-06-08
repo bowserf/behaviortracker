@@ -17,7 +17,7 @@ class CreateTimerViewPresenter(
     private val timeManager: TimerManager
 ) : CreateTimerViewContract.Presenter {
 
-    private var colorPosition: Int = 0
+    private var colorId: Int = 0
 
     private var isPomodoroMode = false
 
@@ -26,11 +26,11 @@ class CreateTimerViewPresenter(
     private var isTimeDisplayed = false
 
     init {
-        colorPosition = computeSelectedColorPosition()
+        colorId = computeSelectedColorPosition()
     }
 
     override fun onStart() {
-        screen.fillColorList(colorPosition)
+        screen.fillColorList(colorId)
         screen.updateContainerColorState(isColorDisplayed)
         screen.updateContainerTimeState(isTimeDisplayed)
     }
@@ -40,7 +40,7 @@ class CreateTimerViewPresenter(
     }
 
     override fun onClickColor(oldSelectedPosition: Int, selectedPosition: Int) {
-        colorPosition = selectedPosition
+        colorId = selectedPosition
         screen.updateColorList(oldSelectedPosition, selectedPosition)
     }
 
@@ -54,7 +54,7 @@ class CreateTimerViewPresenter(
         val createDateTimestamp = timeProvider.getCurrentTimeMs()
         val timer = Timer(
             name,
-            ColorUtils.convertPositionToColor(colorPosition),
+            colorId,
             currentTime = currentTime,
             creationDateTimestamp = createDateTimestamp,
             lastUpdateTimestamp = createDateTimestamp
@@ -89,7 +89,7 @@ class CreateTimerViewPresenter(
     }
 
     private fun computeSelectedColorPosition(): Int {
-        val colors = timerRepository.getTimerList().map { it.color }.sorted()
+        val colors = timerRepository.getTimerList().map { it.colorId }.sorted()
         for (i in 0 until ColorUtils.NUMBER_COLORS) {
             if (!colors.contains(i)) {
                 return i

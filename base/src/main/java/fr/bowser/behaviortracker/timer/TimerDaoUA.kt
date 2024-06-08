@@ -10,7 +10,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
     private val timers = ArrayList<Timer>()
 
     init {
-        val color1 = ColorUtils.convertPositionToColor(10)
+        val color1 = 10
         timers.add(
             Timer(
                 0,
@@ -22,7 +22,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 0
             )
         )
-        val color2 = ColorUtils.convertPositionToColor(7)
+        val color2 = 7
         timers.add(
             Timer(
                 1,
@@ -34,7 +34,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 1
             )
         )
-        val color3 = ColorUtils.convertPositionToColor(4)
+        val color3 = 4
         timers.add(
             Timer(
                 2,
@@ -46,7 +46,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 2
             )
         )
-        val color4 = ColorUtils.convertPositionToColor(0)
+        val color4 = 0
         timers.add(
             Timer(
                 3,
@@ -58,7 +58,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 3
             )
         )
-        val color5 = ColorUtils.convertPositionToColor(18)
+        val color5 = 18
         timers.add(
             Timer(
                 4,
