@@ -4,7 +4,6 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.R
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
@@ -17,14 +16,12 @@ class TimerServiceModule(private val screen: TimerServiceContract.Screen) {
     @Provides
     fun provideTimerServicePresenter(
         context: Context,
-        instantAppManager: InstantAppManager,
         timeManager: TimerManager,
         timerRepository: TimerRepository,
         pomodoroManager: PomodoroManager
     ): TimerServiceContract.Presenter {
         return TimerServicePresenter(
             screen,
-            instantAppManager,
             timeManager,
             timerRepository,
             pomodoroManager,

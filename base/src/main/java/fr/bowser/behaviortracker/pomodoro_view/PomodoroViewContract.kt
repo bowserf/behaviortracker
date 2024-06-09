@@ -22,8 +22,6 @@ interface PomodoroViewContract {
 
         fun onClickSettings()
 
-        fun isInstantApp(): Boolean
-
         fun onClickDoNotDisturb()
 
         fun onClickDoNotDisturbDialogOpenSettings()

@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.alarm.AlarmTimerManagerModule
 import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationManager
 import fr.bowser.behaviortracker.alarm_notification.AlarmNotificationModule
 import fr.bowser.behaviortracker.app_initialization.AppInitialization
-import fr.bowser.behaviortracker.app_initialization.AppInitializationComponent
+import fr.bowser.behaviortracker.app_initialization.AppInitializationModule
 import fr.bowser.behaviortracker.clipboard.CopyDataToClipboardModule
 import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
@@ -16,8 +16,6 @@ import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.event.EventManagerModule
 import fr.bowser.behaviortracker.inapp.InAppConfiguration
 import fr.bowser.behaviortracker.inapp.InAppManagerModule
-import fr.bowser.behaviortracker.instantapp.InstantAppComponent
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.navigation.NavigationManager
 import fr.bowser.behaviortracker.navigation.NavigationModule
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
@@ -49,6 +47,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = arrayOf(
+        AppInitializationModule::class,
         AlarmNotificationModule::class,
         AlarmTimerManagerModule::class,
         CopyDataToClipboardModule::class,
@@ -67,10 +66,6 @@ import javax.inject.Singleton
         TimerManagerModule::class,
         TimeProviderModule::class
     ),
-    dependencies = [
-        InstantAppComponent::class,
-        AppInitializationComponent::class
-    ]
 )
 interface BehaviorTrackerAppComponent {
 
@@ -93,8 +88,6 @@ interface BehaviorTrackerAppComponent {
     fun provideInAppConfiguration(): InAppConfiguration
 
     fun provideInAppManager(): InAppManager
-
-    fun provideMyInstantApp(): InstantAppManager
 
     fun provideNavigationManager(): NavigationManager
 
@@ -127,9 +120,5 @@ interface BehaviorTrackerAppComponent {
 
         @BindsInstance
         fun context(context: Context): Builder
-
-        fun myInstantApp(instantAppComponent: InstantAppComponent): Builder
-
-        fun appInitialization(appInitializationComponent: AppInitializationComponent): Builder
     }
 }

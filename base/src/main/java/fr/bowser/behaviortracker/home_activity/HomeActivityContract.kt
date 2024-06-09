@@ -10,13 +10,9 @@ interface HomeActivityContract {
 
         fun onAlarmNotificationClicked()
 
-        fun onClickInstallApp()
-
         fun navigateToPomodoroScreen(displaySelectTimer: Boolean)
     }
 
     interface Screen {
-
-        fun setupInstantAppButton()
     }
 }

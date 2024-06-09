@@ -1,8 +1,7 @@
-package fr.bowser.behaviortracker.app.app_initialization
+package fr.bowser.behaviortracker.app_initialization
 
 import android.content.Context
-import fr.bowser.behaviortracker.app.widget.PomodoroAppWidgetProvider
-import fr.bowser.behaviortracker.app_initialization.AppInitialization
+import fr.bowser.behaviortracker.widget.PomodoroAppWidgetProvider
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.Timer

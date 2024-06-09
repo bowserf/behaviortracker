@@ -2,8 +2,6 @@ includeBuild("build_src")
 
 include(
     ":base",
-    ":installedapp",
-    ":instantapp",
     ":feature_alarm",
     ":feature_billing",
     ":feature_clipboard",

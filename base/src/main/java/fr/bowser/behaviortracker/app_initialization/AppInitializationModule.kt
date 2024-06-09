@@ -1,15 +1,15 @@
-package fr.bowser.behaviortracker.app.app_initialization
+package fr.bowser.behaviortracker.app_initialization
 
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.app_initialization.AppInitialization
 import fr.bowser.behaviortracker.utils.GenericScope
+import javax.inject.Singleton
 
 @Module
 class AppInitializationModule {
 
-    @GenericScope(component = AppInitializationComponentImpl::class)
+    @Singleton
     @Provides
     fun provideAppInitialization(context: Context): AppInitialization {
         return AppInitializationImpl(context)

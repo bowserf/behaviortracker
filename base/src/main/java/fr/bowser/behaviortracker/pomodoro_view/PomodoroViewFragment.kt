@@ -87,10 +87,6 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.pomodoro_view_menu, menu)
-
-        if (presenter.isInstantApp()) {
-            menu.removeItem(R.id.home_activity_menu_settings)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

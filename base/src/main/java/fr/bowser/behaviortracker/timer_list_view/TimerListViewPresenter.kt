@@ -30,7 +30,6 @@ class TimerListViewPresenter(
     private val stringManager: StringManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository,
-    private val isInstantApp: Boolean
 ) : TimerListViewContract.Presenter {
 
     private var ongoingDeletionTimer: Timer? = null
@@ -170,10 +169,6 @@ class TimerListViewPresenter(
 
     override fun onClickAddTimer() {
         screen.displayCreateTimerView()
-    }
-
-    override fun isInstantApp(): Boolean {
-        return isInstantApp
     }
 
     override fun isReviewAlreadyDone(): Boolean {

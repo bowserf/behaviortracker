@@ -34,8 +34,6 @@ interface TimerListViewContract {
 
         fun onClickAddTimer()
 
-        fun isInstantApp(): Boolean
-
         fun isReviewAlreadyDone(): Boolean
 
         fun onClickAskScheduleAlarmSettings()

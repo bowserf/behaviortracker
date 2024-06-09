@@ -19,7 +19,6 @@
   <string name="create_timer_title_color">Selecciona un color</string>
   <string name="create_timer_title_timer">Seleccione una hora de inicio</string>
   <string name="item_create_timer_save">AHORRAR</string>
-  <string name="home_instant_app_install">INSTALAR EN PC</string>
   <string name="menu_alarm">Alarma</string>
   <string name="menu_review">Califica la aplicación</string>
   <string name="menu_reset_all">Restablecer todos los temporizadores</string>

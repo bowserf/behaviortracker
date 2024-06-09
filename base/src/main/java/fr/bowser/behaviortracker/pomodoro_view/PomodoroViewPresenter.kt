@@ -10,7 +10,6 @@ class PomodoroViewPresenter(
     private val pomodoroManager: PomodoroManager,
     private val doNotDisturbManager: DoNotDisturbManager,
     private val timerRepository: TimerRepository,
-    private val isInstantApp: Boolean
 ) : PomodoroViewContract.Presenter {
 
     private val pomodoroListener = createPomodoroManagerListener()
@@ -41,7 +40,7 @@ class PomodoroViewPresenter(
             screen.displayPomodoroDialog()
         }
 
-        if (doNotDisturbManager.isNotificationPolicyAccess() == DoNotDisturbManager.DnDPolicyAccess.NOT_MANAGED || isInstantApp) {
+        if (doNotDisturbManager.isNotificationPolicyAccess() == DoNotDisturbManager.DnDPolicyAccess.NOT_MANAGED) {
             screen.hideDoNotDisturb()
         } else {
             updateDoNotDisturb()
@@ -79,10 +78,6 @@ class PomodoroViewPresenter(
 
     override fun onClickSettings() {
         screen.displaySettings()
-    }
-
-    override fun isInstantApp(): Boolean {
-        return isInstantApp
     }
 
     override fun onClickCreateTimer() {

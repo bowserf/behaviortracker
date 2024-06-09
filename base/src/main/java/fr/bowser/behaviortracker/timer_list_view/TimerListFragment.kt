@@ -97,9 +97,6 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (presenter.isInstantApp()) {
-            return
-        }
         inflater.inflate(R.menu.home_activity_menu, menu)
         val reviewMenuItem = menu.findItem(R.id.home_activity_menu_review)
         reviewMenuItem.isVisible = !presenter.isReviewAlreadyDone()

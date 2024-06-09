@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.pomodoro_view
 
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.instantapp.InstantAppManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.GenericScope
@@ -16,7 +15,6 @@ class PomodoroViewModule(private val pomodoroScreen: PomodoroViewContract.Screen
     fun providePomodoroPresenter(
         pomodoroManager: PomodoroManager,
         timerRepository: TimerRepository,
-        instantAppManager: InstantAppManager,
         doNotDisturbManager: DoNotDisturbManager
     ): PomodoroViewContract.Presenter {
         return PomodoroViewPresenter(
@@ -24,7 +22,6 @@ class PomodoroViewModule(private val pomodoroScreen: PomodoroViewContract.Screen
             pomodoroManager,
             doNotDisturbManager,
             timerRepository,
-            instantAppManager.isInstantApp()
         )
     }
 }

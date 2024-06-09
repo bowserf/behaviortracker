@@ -19,7 +19,6 @@
   <string name="create_timer_title_color">選擇顏色</string>
   <string name="create_timer_title_timer">選擇開始時間</string>
   <string name="item_create_timer_save">節省</string>
-  <string name="home_instant_app_install">安裝</string>
   <string name="menu_alarm">警報</string>
   <string name="menu_review">給應用評分</string>
   <string name="menu_reset_all">重置所有計時器</string>

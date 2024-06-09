@@ -3,12 +3,9 @@ package fr.bowser.behaviortracker.config
 import android.app.Application
 import android.content.Context
 import android.os.StrictMode
-import com.google.android.gms.common.wrappers.InstantApps
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import fr.bowser.behaviortracker.BuildConfig
 import fr.bowser.behaviortracker.alarm.AlarmStorageManagerModuleUA
-import fr.bowser.behaviortracker.app_initialization.AppInitializationProviderHelper
-import fr.bowser.behaviortracker.instantapp.InstantAppManagerProviderHelper
 import fr.bowser.feature.alarm.AlarmGraph
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbGraph
@@ -41,24 +38,10 @@ class BehaviorTrackerApp : Application() {
     private fun setupCrashlytics() {
         val crashlytics = FirebaseCrashlytics.getInstance()
         crashlytics.setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
-        crashlytics.setCustomKey(
-            CRASHLYTICS_IS_INSTANT_APP,
-            appComponent.provideMyInstantApp().isInstantApp()
-        )
     }
 
     private fun setupGraph() {
-        val isInstantApp = InstantApps.isInstantApp(this)
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
-            .myInstantApp(
-                InstantAppManagerProviderHelper.provideMyInstantAppComponent(isInstantApp)
-            )
-            .appInitialization(
-                AppInitializationProviderHelper.provideAppInitializationComponent(
-                    this,
-                    isInstantApp
-                )
-            )
             .context(this)
             .build()
 
@@ -100,8 +83,6 @@ class BehaviorTrackerApp : Application() {
     }
 
     companion object {
-
-        private const val CRASHLYTICS_IS_INSTANT_APP = "is_instant_app"
 
         @JvmStatic
         fun getAppComponent(context: Context): BehaviorTrackerAppComponent {

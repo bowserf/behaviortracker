@@ -66,7 +66,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupGraph() {
         val build = DaggerHomeActivityComponent.builder()
             .behaviorTrackerAppComponent(BehaviorTrackerApp.getAppComponent(this))
-            .homeActivityModule(HomeActivityModule(screen, this))
+            .homeActivityModule(HomeActivityModule(screen))
             .build()
         build.inject(this)
     }
@@ -110,13 +110,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun createScreen() = object : HomeActivityContract.Screen {
-        override fun setupInstantAppButton() {
-            val installBtn = findViewById<View>(R.id.home_activity_instant_app_install)
-            installBtn.visibility = View.VISIBLE
-            installBtn.setOnClickListener {
-                presenter.onClickInstallApp()
-            }
-        }
     }
 
     companion object {

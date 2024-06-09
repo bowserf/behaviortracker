@@ -19,7 +19,6 @@
   <string name="create_timer_title_color">Bir renk seçin</string>
   <string name="create_timer_title_timer">Bir başlangıç zamanı seçin</string>
   <string name="item_create_timer_save">KAYDETMEK</string>
-  <string name="home_instant_app_install">YÜKLEMEK</string>
   <string name="menu_alarm">Alarm</string>
   <string name="menu_review">Uygulamayı oyla</string>
   <string name="menu_reset_all">Tüm zamanlayıcıları sıfırla</string>

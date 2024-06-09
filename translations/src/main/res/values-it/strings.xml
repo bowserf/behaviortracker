@@ -19,7 +19,6 @@
   <string name="create_timer_title_color">Seleziona un colore</string>
   <string name="create_timer_title_timer">Seleziona un orario di inizio</string>
   <string name="item_create_timer_save">SALVA</string>
-  <string name="home_instant_app_install">INSTALLARE</string>
   <string name="menu_alarm">Allarme</string>
   <string name="menu_review">Valuta l\'app</string>
   <string name="menu_reset_all">Reimposta tutti i timer</string>

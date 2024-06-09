@@ -103,7 +103,6 @@ android {
                     "src/main/res/explain_permission_request_view",
                     "src/main/res/floating_running_timer_view",
                     "src/main/res/home_activity",
-                    "src/main/res/instantapp",
                     "src/main/res/notification",
                     "src/main/res/pomodoro_choose_timer_view",
                     "src/main/res/pomodoro_view",
@@ -123,8 +122,6 @@ android {
             )
         }
     }
-
-    setDynamicFeatures(setOf(":installedapp", ":instantapp"))
 }
 
 dependencies {
@@ -177,8 +174,7 @@ dependencies {
     testImplementation("org.mockito:mockito-core:4.6.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     androidTestImplementation("androidx.room:room-testing:2.5.2")
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    androidTestImplementation("org.hamcrest:hamcrest-library:1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
