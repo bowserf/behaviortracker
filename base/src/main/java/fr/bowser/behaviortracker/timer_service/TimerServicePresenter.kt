@@ -10,7 +10,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 class TimerServicePresenter(
     private val screen: TimerServiceContract.Screen,
     private val instantAppManager: InstantAppManager,
-    private val timeManager: TimerManager,
+    private val timerManager: TimerManager,
     private val timerRepository: TimerRepository,
     private val pomodoroManager: PomodoroManager,
     private val addOn: AddOn
@@ -27,13 +27,13 @@ class TimerServicePresenter(
     private var timer: Timer? = null
 
     override fun attach() {
-        timeManager.addListener(timeManagerListener)
+        timerManager.addListener(timeManagerListener)
         timerRepository.addListener(timerRepositoryListener)
         pomodoroManager.addListener(pomodoroListener)
     }
 
     override fun detach() {
-        timeManager.removeListener(timeManagerListener)
+        timerManager.removeListener(timeManagerListener)
         timerRepository.removeListener(timerRepositoryListener)
         pomodoroManager.removeListener(pomodoroListener)
     }
@@ -43,7 +43,7 @@ class TimerServicePresenter(
             return
         }
 
-        timeManager.stopTimer()
+        timerManager.stopTimer()
 
         timer = null
         isNotificationDisplayed = false
@@ -58,7 +58,7 @@ class TimerServicePresenter(
             } else {
                 pomodoroManager.currentTimer!!
             }
-            if (timer.isActivate) {
+            if (timerManager.isRunning(timer)) {
                 displayTimerNotification(timer)
             } else {
                 pauseTimerNotif(timer)
@@ -66,7 +66,7 @@ class TimerServicePresenter(
             this.timer = timer
         } else {
             val timer = timerRepository.getTimerList().maxByOrNull { it.lastUpdateTimestamp }!!
-            if (timer.isActivate) {
+            if (timerManager.isRunning(timer)) {
                 displayTimerNotification(timer)
             } else {
                 pauseTimerNotif(timer)
@@ -151,7 +151,7 @@ class TimerServicePresenter(
                     return
                 }
                 // if timer is directly activate, display it in the notification
-                if (updatedTimer.isActivate) {
+                if (timerManager.isRunning(updatedTimer)) {
                     displayTimerNotification(updatedTimer)
                 }
             }
@@ -179,7 +179,7 @@ class TimerServicePresenter(
                     return
                 }
 
-                if (updatedTimer.isActivate) {
+                if (timerManager.isRunning(updatedTimer)) {
                     displayTimerNotification(updatedTimer)
                 } else {
                     pauseTimerNotif(updatedTimer)
@@ -210,7 +210,7 @@ class TimerServicePresenter(
             }
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                if (updatedTimer.isActivate) {
+                if (timerManager.isRunning(updatedTimer)) {
                     displayTimerNotification(updatedTimer)
                 } else {
                     pauseTimerNotif(updatedTimer)

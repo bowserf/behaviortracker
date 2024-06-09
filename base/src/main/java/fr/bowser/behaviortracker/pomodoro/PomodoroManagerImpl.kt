@@ -12,7 +12,7 @@ import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class PomodoroManagerImpl(
-    private val timeManager: TimerManager,
+    private val timerManager: TimerManager,
     timerRepository: TimerRepository,
     private val settingManager: SettingManager,
     private val pauseTimer: Timer,
@@ -92,8 +92,8 @@ class PomodoroManagerImpl(
         isStarted = true
         isRunning = true
 
-        timeManager.addListener(timeManagerListener)
-        timeManager.startTimer(currentTimer!!)
+        timerManager.addListener(timeManagerListener)
+        timerManager.startTimer(currentTimer!!)
 
         listeners.forEach { it.onPomodoroSessionStarted(currentTimer!!, pomodoroTime) }
     }
@@ -104,7 +104,7 @@ class PomodoroManagerImpl(
         }
         isPendingState = false
         isRunning = true
-        timeManager.startTimer(currentTimer!!)
+        timerManager.startTimer(currentTimer!!)
     }
 
     override fun pause() {
@@ -112,20 +112,20 @@ class PomodoroManagerImpl(
             return
         }
         isRunning = false
-        timeManager.stopTimer()
+        timerManager.stopTimer()
     }
 
     override fun stop() {
         if (!isStarted) {
             return
         }
-        timeManager.stopTimer()
+        timerManager.stopTimer()
         isStarted = false
         isPendingState = false
         isRunning = false
         actionTimer = null
         currentTimer = null
-        timeManager.removeListener(timeManagerListener)
+        timerManager.removeListener(timeManagerListener)
         listeners.forEach { it.onPomodoroSessionStop() }
     }
 
@@ -144,7 +144,7 @@ class PomodoroManagerImpl(
 
             override fun onTimerStateChanged(updatedTimer: Timer) {
                 if (actionTimer == updatedTimer || updatedTimer == pauseTimer) {
-                    isRunning = updatedTimer.isActivate
+                    isRunning = timerManager.isRunning(updatedTimer)
                     listeners.forEach { it.onTimerStateChanged(updatedTimer) }
                 }
             }
@@ -162,7 +162,7 @@ class PomodoroManagerImpl(
                     return
                 }
 
-                timeManager.stopTimer()
+                timerManager.stopTimer()
 
                 if (currentTimer == actionTimer) {
                     currentTimer = pauseTimer

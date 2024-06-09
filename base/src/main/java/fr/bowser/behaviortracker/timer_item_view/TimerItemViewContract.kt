@@ -29,15 +29,13 @@ interface TimerItemViewContract {
 
     interface Screen {
 
-        fun timerUpdated(newTime: Long)
+        fun setTime(time: Long)
 
-        fun nameUpdated(newName: String)
+        fun setName(name: String)
 
         fun displayRenameDialog(oldName: String)
 
         fun statusUpdated(activate: Boolean)
-
-        fun timerRenamed(name: String)
 
         fun startShowMode(id: Long)
 
@@ -46,5 +44,7 @@ interface TimerItemViewContract {
         fun updateLastUpdatedDate(date: String)
 
         fun playSelectedAnimation()
+
+        fun setColorId(colorId: Int)
     }
 }

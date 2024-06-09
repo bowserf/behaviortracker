@@ -9,7 +9,7 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 class FloatingRunningTimerViewPresenter(
     private val screen: FloatingRunningTimerViewContract.Screen,
     private val scrollToTimerManager: ScrollToTimerManager,
-    private val timeManager: TimerManager,
+    private val timerManager: TimerManager,
     private val timerRepository: TimerRepository
 ) : FloatingRunningTimerViewContract.Presenter {
 
@@ -19,16 +19,16 @@ class FloatingRunningTimerViewPresenter(
     private val timerRepositoryListener = createTimerRepositoryListener()
 
     override fun onStart() {
-        currentTimer = timeManager.getStartedTimer()
+        currentTimer = timerManager.getStartedTimer()
         updateVisibility()
         updateTimerInfo()
         updateTimerTime()
-        timeManager.addListener(timeManagerListener)
+        timerManager.addListener(timeManagerListener)
         timerRepository.addListener(timerRepositoryListener)
     }
 
     override fun onStop() {
-        timeManager.removeListener(timeManagerListener)
+        timerManager.removeListener(timeManagerListener)
         timerRepository.removeListener(timerRepositoryListener)
     }
 
@@ -39,10 +39,10 @@ class FloatingRunningTimerViewPresenter(
 
     override fun onClickPlayPause() {
         val currentTimer = getCurrentTimer()
-        if (currentTimer.isActivate) {
-            timeManager.stopTimer()
+        if (timerManager.isRunning(currentTimer)) {
+            timerManager.stopTimer()
         } else {
-            timeManager.startTimer(currentTimer)
+            timerManager.startTimer(currentTimer)
         }
     }
 
@@ -65,7 +65,7 @@ class FloatingRunningTimerViewPresenter(
     private fun updateTimerInfo() {
         val timer = currentTimer ?: return
         screen.updateTimer(timer.name)
-        screen.changeState(timer.isActivate)
+        screen.changeState(timerManager.isRunning(timer))
     }
 
     private fun createTimeManagerListener() = object : TimerManager.Listener {

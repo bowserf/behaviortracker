@@ -23,8 +23,10 @@ class TimerManagerImpl(
 
     private var startedTimer: Timer? = null
 
+    private var isRunning = false
+
     override fun startTimer(timer: Timer, fakeTimer: Boolean) {
-        if (timer.isActivate) {
+        if (isRunning(timer)) {
             return
         }
 
@@ -56,13 +58,17 @@ class TimerManagerImpl(
     override fun stopTimer(fakeTimer: Boolean) {
         val timer = startedTimer ?: return
 
-        if (!timer.isActivate) {
+        if (!isRunning) {
             return
         }
 
         updateLastUpdateTimestamp(timer, fakeTimer)
 
         stopStartedTimer()
+    }
+
+    override fun isRunning(timer: Timer): Boolean {
+        return startedTimer == timer && isRunning
     }
 
     override fun getStartedTimer(): Timer? {
@@ -146,7 +152,7 @@ class TimerManagerImpl(
     }
 
     private fun setTimerActivateState(timer: Timer, isActivated: Boolean) {
-        timer.isActivate = isActivated
+        isRunning = isActivated
         for (listener in listeners) {
             listener.onTimerStateChanged(timer)
         }

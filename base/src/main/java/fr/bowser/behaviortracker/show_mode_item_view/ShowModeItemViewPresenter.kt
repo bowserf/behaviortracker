@@ -5,39 +5,39 @@ import fr.bowser.behaviortracker.timer.TimerManager
 
 class ShowModeItemViewPresenter(
     private val screen: ShowModeItemViewContract.Screen,
-    private val timeManager: TimerManager
+    private val timerManager: TimerManager
 ) : ShowModeItemViewContract.Presenter {
 
     private lateinit var timer: Timer
 
     override fun onStart() {
-        timeManager.addListener(timeManagerListener)
+        timerManager.addListener(timeManagerListener)
     }
 
     override fun onStop() {
-        timeManager.removeListener(timeManagerListener)
+        timerManager.removeListener(timeManagerListener)
     }
 
     override fun setTimer(timer: Timer) {
         this.timer = timer
-
-        screen.statusUpdated(timer.isActivate)
+        updateTimerStatus()
     }
 
     override fun onClickView() {
-        if (timer.isActivate) {
-            timeManager.stopTimer()
+        if (timerManager.isRunning(timer)) {
+            timerManager.stopTimer()
         } else {
-            timeManager.startTimer(timer)
+            timerManager.startTimer(timer)
         }
-        screen.statusUpdated(timer.isActivate)
+        updateTimerStatus()
     }
 
     private val timeManagerListener = object : TimerManager.Listener {
         override fun onTimerStateChanged(updatedTimer: Timer) {
-            if (timer == updatedTimer) {
-                screen.statusUpdated(updatedTimer.isActivate)
+            if (timer != updatedTimer) {
+                return
             }
+            updateTimerStatus()
         }
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {
@@ -47,8 +47,7 @@ class ShowModeItemViewPresenter(
         }
     }
 
-    interface AddOn {
-        fun startTimer(timer: Timer)
-        fun stopTimer(timer: Timer)
+    private fun updateTimerStatus() {
+        screen.statusUpdated(timerManager.isRunning(timer))
     }
 }

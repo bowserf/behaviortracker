@@ -71,12 +71,6 @@ class TimerItemView(context: Context) : CardView(context) {
 
     fun setTimer(timer: Timer) {
         presenter.setTimer(timer)
-
-        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
-        tvName.text = timer.name
-        color.setBackgroundColor(ColorUtils.getColor(context!!, timer.colorId))
-
-        updateBtnPlayPause(timer.isActivate)
     }
 
     private fun displayMenu() {
@@ -158,12 +152,12 @@ class TimerItemView(context: Context) : CardView(context) {
 
     private fun createScreen() = object : TimerItemViewContract.Screen {
 
-        override fun timerUpdated(newTime: Long) {
-            chrono.text = TimeConverter.convertSecondsToHumanTime(newTime)
+        override fun setTime(time: Long) {
+            chrono.text = TimeConverter.convertSecondsToHumanTime(time)
         }
 
-        override fun nameUpdated(newName: String) {
-            tvName.text = newName
+        override fun setName(name: String) {
+            tvName.text = name
         }
 
         override fun displayRenameDialog(oldName: String) {
@@ -195,10 +189,6 @@ class TimerItemView(context: Context) : CardView(context) {
             updateBtnPlayPause(activate)
         }
 
-        override fun timerRenamed(name: String) {
-            tvName.text = name
-        }
-
         override fun startShowMode(id: Long) {
             val action = TimerListFragmentDirections.actionTimerListScreenToShowModeScreen(id)
             findNavController().navigate(action)
@@ -216,6 +206,10 @@ class TimerItemView(context: Context) : CardView(context) {
 
         override fun playSelectedAnimation() {
             playAnimation()
+        }
+
+        override fun setColorId(colorId: Int) {
+            color.setBackgroundColor(ColorUtils.getColor(context!!, colorId))
         }
     }
 

@@ -13,7 +13,7 @@ class TimerItemViewPresenter(
     private val navigationManager: NavigationManager,
     private val pomodoroManager: PomodoroManager,
     private val scrollToTimerManager: ScrollToTimerManager,
-    private val timeManager: TimerManager,
+    private val timerManager: TimerManager,
     private val timeProvider: TimeProvider,
     private val timerRepository: TimerRepository,
 ) : TimerItemViewContract.Presenter, TimerRepository.Listener {
@@ -26,11 +26,11 @@ class TimerItemViewPresenter(
 
     override fun onStart() {
         timerRepository.addListener(this)
-        timeManager.addListener(timeManagerListener)
+        timerManager.addListener(timeManagerListener)
         scrollToTimerManager.addListener(scrollToTimerManagerListener)
 
-        screen.timerUpdated(timer.time.toLong())
-        screen.statusUpdated(timer.isActivate)
+        screen.setTime(timer.time.toLong())
+        updateTimerStatus()
 
         screen.updateLastUpdatedDate(
             timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp)
@@ -40,11 +40,15 @@ class TimerItemViewPresenter(
     override fun onStop() {
         scrollToTimerManager.removeListener(scrollToTimerManagerListener)
         timerRepository.removeListener(this)
-        timeManager.removeListener(timeManagerListener)
+        timerManager.removeListener(timeManagerListener)
     }
 
     override fun setTimer(timer: Timer) {
         this.timer = timer
+        updateTimerStatus()
+        screen.setTime(timer.time.toLong())
+        screen.setColorId(timer.colorId)
+        screen.setName(timer.name)
     }
 
     override fun onClickCard() {
@@ -62,14 +66,13 @@ class TimerItemViewPresenter(
 
     override fun timerStateChange() {
         manageTimerUpdate()
-
-        screen.statusUpdated(timer.isActivate)
+        updateTimerStatus()
     }
 
     override fun onClickResetTimer() {
-        timeManager.resetTime(timer)
+        timerManager.resetTime(timer)
 
-        screen.timerUpdated(timer.time.toLong())
+        screen.setTime(timer.time.toLong())
     }
 
     override fun onClickRenameTimer() {
@@ -86,21 +89,21 @@ class TimerItemViewPresenter(
 
     override fun onTimerRemoved(removedTimer: Timer) {
         if (timer == removedTimer) {
-            timeManager.removeListener(timeManagerListener)
+            timerManager.removeListener(timeManagerListener)
         }
     }
 
     override fun onTimerRenamed(updatedTimer: Timer) {
         if (timer == updatedTimer) {
-            screen.timerRenamed(updatedTimer.name)
+            screen.setName(updatedTimer.name)
         }
     }
 
     private fun manageTimerUpdate() {
-        if (!timer.isActivate) {
-            timeManager.startTimer(timer)
+        if (!timerManager.isRunning(timer)) {
+            timerManager.startTimer(timer)
         } else {
-            timeManager.stopTimer()
+            timerManager.stopTimer()
         }
     }
 
@@ -108,7 +111,7 @@ class TimerItemViewPresenter(
 
         override fun onTimerStateChanged(updatedTimer: Timer) {
             if (timer == updatedTimer) {
-                screen.statusUpdated(updatedTimer.isActivate)
+                updateTimerStatus()
                 screen.updateLastUpdatedDate(
                     timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp)
                 )
@@ -117,14 +120,18 @@ class TimerItemViewPresenter(
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {
             if (timer == updatedTimer) {
-                screen.timerUpdated(updatedTimer.time.toLong())
+                screen.setTime(updatedTimer.time.toLong())
             }
         }
     }
 
-    private fun createScrollToTimerManagerListener() = object: ScrollToTimerManager.Listener {
+    private fun updateTimerStatus() {
+        screen.statusUpdated(timerManager.isRunning(timer))
+    }
+
+    private fun createScrollToTimerManagerListener() = object : ScrollToTimerManager.Listener {
         override fun scrollToTimer(timerId: Long) {
-            if(timer.id != timerId) {
+            if (timer.id != timerId) {
                 return
             }
             screen.playSelectedAnimation()

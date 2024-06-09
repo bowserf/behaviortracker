@@ -19,9 +19,6 @@ data class Timer(
 ) {
 
     @Ignore
-    var isActivate: Boolean = false
-
-    @Ignore
     var time: Float = 0f
 
     @Ignore
@@ -32,7 +29,6 @@ data class Timer(
         creationDateTimestamp: Long = 0,
         lastUpdateTimestamp: Long = 0,
         position: Int = 0,
-        isActivate: Boolean = false
     ) : this(
         0,
         currentTime,
@@ -41,15 +37,12 @@ data class Timer(
         creationDateTimestamp,
         lastUpdateTimestamp,
         position
-    ) {
-        this.isActivate = isActivate
-    }
+    )
 
     override fun equals(other: Any?): Boolean {
         if (other is Timer) {
             if (other.id == id &&
                 other.colorId == colorId &&
-                other.isActivate == isActivate &&
                 other.currentTime == currentTime &&
                 other.name == name &&
                 other.time == time &&

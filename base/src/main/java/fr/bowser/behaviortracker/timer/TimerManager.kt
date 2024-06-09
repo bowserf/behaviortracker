@@ -6,6 +6,8 @@ interface TimerManager {
 
     fun stopTimer(fakeTimer: Boolean = false)
 
+    fun isRunning(timer: Timer): Boolean
+
     fun getStartedTimer(): Timer?
 
     fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean = false)
