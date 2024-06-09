@@ -1,13 +1,11 @@
 import fr.bowser.build_src.ProjectConfig
 import fr.bowser.build_src.getPropertiesFromFile
-import io.gitlab.arturbosch.detekt.detekt
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("io.gitlab.arturbosch.detekt")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
@@ -183,19 +181,4 @@ dependencies {
     androidTestImplementation("androidx.test:rules:1.4.0")
     androidTestImplementation("org.hamcrest:hamcrest-library:1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-}
-
-// detect configuration
-detekt {
-    config = files("../config/quality/detekt-config.yml")
-    input = files("src/main/java")
-    parallel = true
-    disableDefaultRuleSets = false
-    debug = false
-    reports {
-        html {
-            enabled = true
-            destination = file("build/reports/detekt.html")
-        }
-    }
 }
