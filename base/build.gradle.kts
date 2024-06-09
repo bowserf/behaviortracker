@@ -5,10 +5,10 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -156,8 +156,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
     // Architecture component
-    implementation("androidx.room:room-runtime:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:31.1.1"))
@@ -165,8 +165,8 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     // Other
-    implementation("com.google.dagger:dagger:2.46.1")
-    kapt("com.google.dagger:dagger-compiler:2.46.1")
+    implementation("com.google.dagger:dagger:2.48.1")
+    ksp("com.google.dagger:dagger-compiler:2.48.1")
 
     // Test
     testImplementation("org.json:json:20220320")
