@@ -32,6 +32,8 @@ class TimerManagerImpl(
 
         stopStartedTimer()
 
+        this.startedTimer = timer
+
         lastUpdatedTime = getCurrentTimeSeconds()
 
         updateLastUpdateTimestamp(timer, fakeTimer)
@@ -49,8 +51,6 @@ class TimerManagerImpl(
                 lastUpdatedTime = currentTime
             }
         }
-
-        this.startedTimer = timer
 
         addOn.onTimerStarted()
     }

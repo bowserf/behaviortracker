@@ -168,13 +168,25 @@ dependencies {
     implementation("com.google.dagger:dagger:2.48.1")
     ksp("com.google.dagger:dagger-compiler:2.48.1")
 
-    // Test
+    // Unit test
     testImplementation("org.json:json:20220320")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:4.6.1")
+    testImplementation("org.mockito:mockito-core:5.3.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+
+    // Android test
     androidTestImplementation("androidx.room:room-testing:2.6.1")
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5") {
+        because("We need this to define the running Activity with \"ActivityScenarioRule\"")
+    }
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1") {
+        because("We need this to interact with some UI elements not in the OS (Drawer, RecyclerView, ViewPager, etc...")
+    }
+    androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
+    androidTestUtil("androidx.test.services:test-services:1.4.2") {
+        because("We need this dependency to save screenshot on device disk when we call \"writeToTestStorage\"")
+    }
 }

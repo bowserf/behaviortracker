@@ -36,7 +36,6 @@ class PomodoroPresenterTest {
             manager,
             doNotDisturbManager,
             timerRepository,
-            false
         )
         val timer = Timer("name", ColorUtils.COLOR_AMBER)
         val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
@@ -59,7 +58,6 @@ class PomodoroPresenterTest {
             manager,
             doNotDisturbManager,
             timerRepository,
-            false
         )
         val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
         Mockito.`when`(doNotDisturbManager.getDnDState())
@@ -80,7 +78,6 @@ class PomodoroPresenterTest {
             manager,
             doNotDisturbManager,
             timerRepository,
-            false
         )
         val pomodoroConfiguration = PomodoroViewContract.Configuration(false)
         Mockito.`when`(manager.isPendingState).thenReturn(true)
@@ -103,7 +100,6 @@ class PomodoroPresenterTest {
             manager,
             doNotDisturbManager,
             timerRepository,
-            false
         )
         Mockito.`when`(manager.isStarted).thenReturn(false)
         Mockito.`when`(timerRepository.getTimerList()).thenReturn(listOf(timer))
@@ -123,7 +119,6 @@ class PomodoroPresenterTest {
             manager,
             doNotDisturbManager,
             timerRepository,
-            false
         )
         Mockito.`when`(manager.isStarted).thenReturn(false)
 
@@ -142,7 +137,6 @@ class PomodoroPresenterTest {
             manager,
             doNotDisturbManager,
             timerRepository,
-            false
         )
         Mockito.`when`(doNotDisturbManager.getDnDState())
             .thenReturn(DoNotDisturbManager.DnDState.ALL)
@@ -165,7 +159,6 @@ class PomodoroPresenterTest {
             manager,
             doNotDisturbManager,
             timerRepository,
-            false
         )
 
         // When
