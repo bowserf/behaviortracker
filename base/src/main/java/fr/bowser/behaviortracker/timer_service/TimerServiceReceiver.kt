@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.interrupt_timer.CreateInterruptTimerUseCaseImpl
 
 class TimerServiceReceiver : BroadcastReceiver() {
 
@@ -14,16 +15,40 @@ class TimerServiceReceiver : BroadcastReceiver() {
             ACTION_PLAY -> {
                 startTimer(context!!)
             }
+
             ACTION_PAUSE -> {
                 pauseTimer(context!!)
             }
+
             ACTION_NOTIFICATION_DISMISS -> {
                 notificationDismiss(context!!)
             }
+
             ACTION_CONTINUE_POMODORO -> {
                 continuePomodoro(context!!)
             }
+
+            ACTION_INTERRUPT_TIMER -> {
+                startInterruptTimer(context!!)
+            }
         }
+    }
+
+    private fun startInterruptTimer(context: Context) {
+        val appComponent = BehaviorTrackerApp.getAppComponent(context)
+        val timeProvider = appComponent.provideTimeProvider()
+        val timerRepository = appComponent.provideTimerRepositoryManager()
+        val timeManager = appComponent.provideTimeManager()
+        val eventManager = appComponent.provideEventManager()
+        val stringManager = appComponent.provideStringManager()
+        val createInterruptTimerUseCase = CreateInterruptTimerUseCaseImpl(
+            eventManager,
+            timeProvider,
+            timerRepository,
+            timeManager,
+            stringManager,
+        )
+        createInterruptTimerUseCase()
     }
 
     private fun continuePomodoro(context: Context) {
@@ -42,7 +67,8 @@ class TimerServiceReceiver : BroadcastReceiver() {
 
     private fun startTimer(context: Context) {
         val timeManager = BehaviorTrackerApp.getAppComponent(context).provideTimeManager()
-        val timerRepository = BehaviorTrackerApp.getAppComponent(context).provideTimerRepositoryManager()
+        val timerRepository =
+            BehaviorTrackerApp.getAppComponent(context).provideTimerRepositoryManager()
         val startedTimer = timerRepository.getTimerList().maxByOrNull { it.lastUpdateTimestamp }!!
         timeManager.startTimer(startedTimer)
     }
@@ -50,6 +76,8 @@ class TimerServiceReceiver : BroadcastReceiver() {
     companion object {
 
         private const val ACTION_PLAY = "timer_receiver.action.play"
+
+        private const val ACTION_INTERRUPT_TIMER = "timer_receiver.action.interrupt_timer"
 
         private const val ACTION_PAUSE = "timer_receiver.action.pause"
 
@@ -59,6 +87,10 @@ class TimerServiceReceiver : BroadcastReceiver() {
 
         fun getPlayPendingIntent(context: Context): PendingIntent {
             return getPendingIntent(context, ACTION_PLAY)
+        }
+
+        fun getInterruptTimerPendingIntent(context: Context): PendingIntent {
+            return getPendingIntent(context, ACTION_INTERRUPT_TIMER)
         }
 
         fun getPausePendingIntent(context: Context): PendingIntent {

@@ -15,6 +15,7 @@
   <string name="create_timer_shortcut_short_label">New timer</string>
   <string name="create_timer_shortcut_long_label">Create a new timer to track an action.</string>
   <string name="timer_name">Name</string>
+  <string name="timer_interrupt_name">Created at %1$s</string>
   <string name="start_timer_after_creation">Directly start timer</string>
   <string name="create_timer_title">Create timer</string>
   <string name="create_timer_name_error">You must enter a name.</string>
@@ -37,6 +38,7 @@
   <string name="timer_notif_channel_name">Timer</string>
   <string name="timer_notif_channel_description">Display and control current running timer.</string>
   <string name="timer_notif_start">Start</string>
+  <string name="timer_notif_interrupt_timer">Interrupt</string>
   <string name="timer_notif_pause">Pause</string>
   <string name="timer_notif_continue_pomodoro">Continue pomodoro</string>
   <string name="timer_notif_pomodoro_session_end">Time is up</string>

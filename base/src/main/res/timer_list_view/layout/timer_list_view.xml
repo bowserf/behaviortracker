@@ -9,6 +9,8 @@
         android:id="@+id/timer_list_view_timer_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@id/timer_list_view_floating_running_timer_view"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -42,7 +44,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="40dp">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/timer_list_view_list_timers"
@@ -106,16 +109,36 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/timer_list_view_add_timer"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginRight="@dimen/default_space_2"
+            android:layout_marginEnd="@dimen/default_space_2"
             android:layout_marginBottom="@dimen/default_space_2"
-            android:elevation="@dimen/default_space"
-            android:src="@drawable/timer_list_view_add"
-            app:fabSize="normal" />
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/timer_list_view_add_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/default_space"
+                android:src="@drawable/timer_list_view_add"
+                app:fabSize="normal" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/timer_list_view_start_interrupt_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_space_1_5"
+                android:elevation="@dimen/default_space"
+                android:src="@drawable/timer_list_interrupt_timer"
+                android:tint="@color/orange"
+                app:backgroundTint="@color/fab_interrupt_timer"
+                app:fabSize="normal" />
+
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

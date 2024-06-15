@@ -12,6 +12,10 @@ internal class StringManagerImpl(
         return context.resources.getString(stringRes)
     }
 
+    override fun getString(stringRes: Int, value: String): String {
+        return context.resources.getString(stringRes, value)
+    }
+
     override fun getStringArray(arrayRes: Int): Array<String> {
         return context.resources.getStringArray(arrayRes)
     }

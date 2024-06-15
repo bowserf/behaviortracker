@@ -32,6 +32,8 @@ class TimerService : Service(), TimerServiceContract.Screen {
 
     private lateinit var continuePomodoroAction: NotificationCompat.Action
 
+    private lateinit var interruptTimerAction: NotificationCompat.Action
+
     private var timerNotificationBuilder: NotificationCompat.Builder? = null
 
     override fun onCreate() {
@@ -57,6 +59,12 @@ class TimerService : Service(), TimerServiceContract.Screen {
             R.drawable.timer_service_play,
             baseContext.resources.getString(R.string.timer_notif_start),
             TimerServiceReceiver.getPlayPendingIntent(baseContext)
+        ).build()
+
+        interruptTimerAction = NotificationCompat.Action.Builder(
+            R.drawable.timer_service_play,
+            baseContext.resources.getString(R.string.timer_notif_interrupt_timer),
+            TimerServiceReceiver.getInterruptTimerPendingIntent(baseContext)
         ).build()
 
         continuePomodoroAction = NotificationCompat.Action.Builder(
@@ -121,6 +129,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
             it.setContentText(message)
             it.clearActions()
             it.addAction(pauseAction)
+            it.addAction(interruptTimerAction)
         }
 
         updateNotificationContent()
@@ -131,6 +140,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
             it.setContentTitle(title)
             it.clearActions()
             it.addAction(pauseAction)
+            it.addAction(interruptTimerAction)
         }
 
         updateNotificationContent()
@@ -140,6 +150,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
         timerNotificationBuilder!!.let {
             it.clearActions()
             it.addAction(resumeAction)
+            it.addAction(interruptTimerAction)
         }
 
         updateNotificationContent()
@@ -151,6 +162,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
         timerNotificationBuilder!!.let {
             it.clearActions()
             it.addAction(continuePomodoroAction)
+            it.addAction(interruptTimerAction)
             it.setContentText(baseContext.getString(R.string.timer_notif_pomodoro_session_end))
         }
 

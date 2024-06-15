@@ -14,6 +14,11 @@ class EventManagerImpl(context: Context) : EventManager {
         firebaseAnalytics.logEvent(EVENT_TIMER_CREATED, bundle)
     }
 
+    override fun sendInterruptTimerCreateEvent() {
+        val bundle = Bundle()
+        firebaseAnalytics.logEvent(EVENT_INTERRUPT_TIMER_CREATED, bundle)
+    }
+
     override fun sendSetAlarmEvent(enable: Boolean) {
         val bundle = Bundle()
         bundle.putBoolean(EVENT_EXTRA_ENABLE_ALARM, enable)
@@ -41,6 +46,8 @@ class EventManagerImpl(context: Context) : EventManager {
 
         private const val EVENT_SET_ALARM = "set_alarm"
         private const val EVENT_EXTRA_ENABLE_ALARM = "is_enable"
+
+        private const val EVENT_INTERRUPT_TIMER_CREATED = "interrupt_timer_created"
 
         private const val EVENT_TIMER_CREATED = "timer_created"
         private const val EVENT_EXTRA_TIMER_CREATED = "start_now"

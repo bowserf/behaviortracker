@@ -2,9 +2,12 @@ package fr.bowser.behaviortracker.timer_list_view
 
 import dagger.Module
 import dagger.Provides
+import fr.bowser.behaviortracker.event.EventManager
+import fr.bowser.behaviortracker.interrupt_timer.CreateInterruptTimerUseCaseImpl
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
+import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.GenericScope
@@ -21,24 +24,34 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
     fun provideTimerPresenter(
         alarmTimerManager: AlarmTimerManager,
         copyDataToClipboardManager: CopyDataToClipboardManager,
+        eventManager: EventManager,
         notificationManager: NotificationManager,
         reviewManager: ReviewManager,
         reviewStorage: ReviewStorage,
         scrollToTimerManager: ScrollToTimerManager,
         stringManager: StringManager,
+        timeProvider: TimeProvider,
         timerRepository: TimerRepository,
-        timeManager: TimerManager
+        timerManager: TimerManager
     ): TimerListViewContract.Presenter {
+        val createInterruptTimerUseCase = CreateInterruptTimerUseCaseImpl(
+            eventManager,
+            timeProvider,
+            timerRepository,
+            timerManager,
+            stringManager
+        )
         return TimerListViewPresenter(
             timerScreen,
             alarmTimerManager,
+            createInterruptTimerUseCase,
             copyDataToClipboardManager,
             notificationManager,
             reviewManager,
             reviewStorage,
             scrollToTimerManager,
             stringManager,
-            timeManager,
+            timerManager,
             timerRepository,
         )
     }

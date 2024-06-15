@@ -51,6 +51,8 @@ interface TimerListViewContract {
         fun shouldShowNotificationRequestPermissionRationale(permission: String)
 
         fun onTimerPositionChanged(fromPosition: Int, toPosition: Int)
+
+        fun onClickInterruptTimer()
     }
 
     interface Screen {

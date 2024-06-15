@@ -4,6 +4,8 @@ interface EventManager {
 
     fun sendTimerCreateEvent(startNow: Boolean)
 
+    fun sendInterruptTimerCreateEvent()
+
     fun sendSetAlarmEvent(enable: Boolean)
 
     fun sendDisplayAlarmNotificationEvent()

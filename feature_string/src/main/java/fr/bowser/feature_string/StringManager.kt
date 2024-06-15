@@ -7,5 +7,7 @@ interface StringManager {
 
     fun getString(@StringRes stringRes: Int): String
 
+    fun getString(@StringRes stringRes: Int, value: String): String
+
     fun getStringArray(@ArrayRes arrayRes: Int): Array<String>
 }

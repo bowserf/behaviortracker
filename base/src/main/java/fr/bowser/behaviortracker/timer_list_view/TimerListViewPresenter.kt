@@ -3,25 +3,34 @@ package fr.bowser.behaviortracker.timer_list_view
 import android.Manifest
 import android.os.Build
 import fr.bowser.behaviortracker.R
+import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
+import fr.bowser.behaviortracker.interrupt_timer.CreateInterruptTimerUseCase
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
+import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
+import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_review.ReviewActivityContainer
 import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.Collections
-
+import kotlin.coroutines.CoroutineContext
 
 class TimerListViewPresenter(
     private val screen: TimerListViewContract.Screen,
     private val alarmTimerManager: AlarmTimerManager,
+    private val createInterruptTimerUseCase: CreateInterruptTimerUseCase,
     private val copyDataToClipboardManager: CopyDataToClipboardManager,
     private val notificationManager: NotificationManager,
     private val reviewManager: ReviewManager,
@@ -30,7 +39,10 @@ class TimerListViewPresenter(
     private val stringManager: StringManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository,
+    coroutineContext: CoroutineContext = Dispatchers.Main,
 ) : TimerListViewContract.Presenter {
+
+    private var coroutineScope = CoroutineScope(coroutineContext)
 
     private var ongoingDeletionTimer: Timer? = null
 
@@ -143,6 +155,10 @@ class TimerListViewPresenter(
         screen.reorderTimer(fromPosition, toPosition)
     }
 
+    override fun onClickInterruptTimer() {
+        createInterruptTimerUseCase()
+    }
+
     override fun onClickRateApp(activityContainer: ReviewActivityContainer) {
         reviewManager.launchReviewFlow(activityContainer)
     }
@@ -247,9 +263,13 @@ class TimerListViewPresenter(
 
     private fun createScrollToTimerListener() = object : ScrollToTimerManager.Listener {
         override fun scrollToTimer(timerId: Long) {
-            val index = timerRepository.getTimerList().indexOfFirst { it.id == timerId }
-            screen.scrollToTimer(index)
+            scrollToTimerInternal(timerId)
         }
+    }
+
+    private fun scrollToTimerInternal(timerId: Long) {
+        val index = timerRepository.getTimerList().indexOfFirst { it.id == timerId }
+        screen.scrollToTimer(index)
     }
 
     private fun createTimeManagerListener() = object : TimerManager.Listener {
@@ -272,6 +292,10 @@ class TimerListViewPresenter(
             updateTimerList()
             updateListVisibility()
             updateTotalTimerTime()
+            coroutineScope.launch {
+                delay(200)
+                scrollToTimerInternal(updatedTimer.id)
+            }
         }
 
         override fun onTimerRenamed(updatedTimer: Timer) {

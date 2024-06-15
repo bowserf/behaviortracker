@@ -52,6 +52,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     private val timerAdapter = TimerListViewAdapter()
 
     private lateinit var fab: FloatingActionButton
+    private lateinit var interruptTimer: FloatingActionButton
     private lateinit var emptyListView: ImageView
     private lateinit var emptyListText: TextView
     private lateinit var timerList: RecyclerView
@@ -82,6 +83,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         )
 
         fab.setOnClickListener { presenter.onClickAddTimer() }
+        interruptTimer.setOnClickListener { presenter.onClickInterruptTimer() }
 
         initializeToolbar(view)
     }
@@ -296,14 +298,12 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
         override fun displayCancelDeletionView(cancelDuration: Int) {
             Snackbar.make(
-                timerList,
+                timerListContainer,
                 resources.getString(R.string.timer_view_timer_has_been_removed),
                 cancelDuration
-            )
-                .setAction(android.R.string.cancel) {
-                    presenter.onClickCancelTimerDeletion()
-                }
-                .show()
+            ).setAction(android.R.string.cancel) {
+                presenter.onClickCancelTimerDeletion()
+            }.show()
         }
     }
 
@@ -400,6 +400,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
     private fun findViewByIds(view: View) {
         fab = view.findViewById(R.id.timer_list_view_add_timer)
+        interruptTimer = view.findViewById(R.id.timer_list_view_start_interrupt_timer)
         emptyListView = view.findViewById(R.id.timer_list_view_empty_list_view)
         emptyListText = view.findViewById(R.id.timer_list_view_empty_list_text)
         timerList = view.findViewById(R.id.timer_list_view_list_timers)

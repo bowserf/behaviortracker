@@ -19,6 +19,8 @@
     <color name="colorSecondary">#E91E63</color>
     <color name="colorOnSecondary">#FFFFFF</color>
 
+    <color name="fab_interrupt_timer">#FBF29D</color>
+
     <color name="deep_orange">#FF5722</color>
     <color name="brown">#795548</color>
     <color name="grey">#9E9E9E</color>
