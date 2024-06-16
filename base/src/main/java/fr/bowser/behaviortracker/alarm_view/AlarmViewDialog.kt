@@ -9,6 +9,8 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.materialswitch.MaterialSwitch
+import com.google.android.material.switchmaterial.SwitchMaterial
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.feature.alarm.AlarmTime
@@ -23,7 +25,7 @@ class AlarmViewDialog : DialogFragment() {
 
     private lateinit var timerPicker: TimePicker
 
-    private lateinit var alarmStatus: Switch
+    private lateinit var alarmStatus: SwitchMaterial
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,7 @@ class AlarmViewDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val root = LayoutInflater.from(context).inflate(R.layout.alarm_view, null)
+        val root = requireActivity().layoutInflater.inflate(R.layout.alarm_view, null)
 
         val dialogBuilder = AlertDialog.Builder(requireContext())
         dialogBuilder.setTitle(resources.getString(R.string.alarm_timer_dialog_title))
