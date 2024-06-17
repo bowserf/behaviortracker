@@ -99,7 +99,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun manageIntent(intent: Intent) {
         when (intent.action) {
-            ACTION_CREATE_TIMER_FROM_SHORTCUT -> CreateTimerViewBottomSheetFragment.showDialog(this, false)
+            ACTION_CREATE_TIMER_FROM_SHORTCUT -> CreateTimerViewBottomSheetFragment.showDialog(
+                this,
+                false,
+            )
+
             ACTION_SELECT_POMODORO_TIMER -> displayPomodoroScreen(true)
             AlarmNotificationManagerImpl.ACTION_ALARM_NOTIFICATION_CLICKED -> presenter.onAlarmNotificationClicked()
         }

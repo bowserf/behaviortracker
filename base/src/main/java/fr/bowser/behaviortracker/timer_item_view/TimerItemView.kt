@@ -25,7 +25,6 @@ import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.behaviortracker.utils.ViewExtension.bind
 import javax.inject.Inject
 
-
 class TimerItemView(context: Context) : CardView(context) {
 
     @Inject
@@ -112,33 +111,42 @@ class TimerItemView(context: Context) : CardView(context) {
 
     private fun playAnimation() {
         val anim = ScaleAnimation(
-            1f, SCALE_VALUE_ANIMATION,
-            1f, SCALE_VALUE_ANIMATION,
-            Animation.RELATIVE_TO_SELF, 0.5f,
-            Animation.RELATIVE_TO_SELF, 0.5f
+            1f,
+            SCALE_VALUE_ANIMATION,
+            1f,
+            SCALE_VALUE_ANIMATION,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
         )
         anim.duration = ANIMATION_DURATION
-        anim.setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {
-                // nothing to do
-            }
+        anim.setAnimationListener(
+            object : AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    // nothing to do
+                }
 
-            override fun onAnimationEnd(animation: Animation?) {
-                val animReverse = ScaleAnimation(
-                    SCALE_VALUE_ANIMATION, 1f,
-                    SCALE_VALUE_ANIMATION, 1f,
-                    Animation.RELATIVE_TO_SELF, 0.5f,
-                    Animation.RELATIVE_TO_SELF, 0.5f
-                )
-                animReverse.duration = ANIMATION_DURATION
-                startAnimation(animReverse)
-            }
+                override fun onAnimationEnd(animation: Animation?) {
+                    val animReverse = ScaleAnimation(
+                        SCALE_VALUE_ANIMATION,
+                        1f,
+                        SCALE_VALUE_ANIMATION,
+                        1f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    )
+                    animReverse.duration = ANIMATION_DURATION
+                    startAnimation(animReverse)
+                }
 
-            override fun onAnimationRepeat(animation: Animation?) {
-                // nothing to do
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // nothing to do
+                }
             }
-
-        })
+        )
         startAnimation(anim)
     }
 

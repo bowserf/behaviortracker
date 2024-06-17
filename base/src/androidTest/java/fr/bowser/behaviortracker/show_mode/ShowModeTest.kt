@@ -37,7 +37,8 @@ class ShowModeTest {
         onView(withId(R.id.timer_list_view_list_timers))
             .perform(
                 actionOnItem<TimerListViewAdapter.TimerViewHolder>(
-                    hasDescendant(withText("New timer")), click()
+                    hasDescendant(withText("New timer")),
+                    click(),
                 ).atPosition(0)
             )
 

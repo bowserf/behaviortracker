@@ -285,7 +285,9 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 .setTitle(R.string.timer_list_notification_permission_title)
                 .setMessage(R.string.timer_list_notification_permission_description)
                 .setPositiveButton(R.string.timer_list_notification_permission_positive) { _, _ ->
-                    timerNotificationActivityResultLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    timerNotificationActivityResultLauncher.launch(
+                        Manifest.permission.POST_NOTIFICATIONS,
+                    )
                 }
                 .setCancelable(false)
                 .show()
@@ -314,7 +316,9 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
                 else -> {
                     // TODO
-                    alarmNotificationActivityResultLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    alarmNotificationActivityResultLauncher.launch(
+                        Manifest.permission.POST_NOTIFICATIONS,
+                    )
                 }
             }
         }
@@ -414,7 +418,6 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     inner class TimerListGestureListener : TimerListViewGesture.Listener {
         override fun onItemMove(fromPosition: Int, toPosition: Int) {
             presenter.onTimerPositionChanged(fromPosition, toPosition)
-
         }
 
         override fun onSelectedChangedUp() {

@@ -13,6 +13,5 @@ interface HomeActivityContract {
         fun navigateToPomodoroScreen(displaySelectTimer: Boolean)
     }
 
-    interface Screen {
-    }
+    interface Screen
 }

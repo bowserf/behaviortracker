@@ -18,9 +18,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.create_timer_view) {
 
@@ -29,7 +29,9 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
 
     private val screen = createScreen()
 
-    private val imm by lazy { activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
+    private val imm by lazy {
+        activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
 
     private lateinit var editTimerName: EditText
     private lateinit var chooseColor: RecyclerView

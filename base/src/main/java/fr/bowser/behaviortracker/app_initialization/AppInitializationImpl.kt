@@ -1,10 +1,10 @@
 package fr.bowser.behaviortracker.app_initialization
 
 import android.content.Context
-import fr.bowser.behaviortracker.widget.PomodoroAppWidgetProvider
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.widget.PomodoroAppWidgetProvider
 
 class AppInitializationImpl(
     private val context: Context

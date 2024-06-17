@@ -38,7 +38,9 @@ class HomeTest {
                 isDisplayed()
             )
         )
-        onView(withId(R.id.home_activity_pomodoro_screen)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.home_activity_pomodoro_screen)).check(
+            ViewAssertions.matches(isDisplayed())
+        )
 
         takeScreenshot("timer_list")
     }

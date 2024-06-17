@@ -3,13 +3,10 @@ package fr.bowser.behaviortracker.alarm_view
 import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.Switch
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.switchmaterial.SwitchMaterial
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp

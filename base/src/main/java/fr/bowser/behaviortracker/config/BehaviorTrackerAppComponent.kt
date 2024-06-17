@@ -64,8 +64,8 @@ import javax.inject.Singleton
         StringManagerModule::class,
         TimerRepositoryModule::class,
         TimerManagerModule::class,
-        TimeProviderModule::class
-    ),
+        TimeProviderModule::class,
+    )
 )
 interface BehaviorTrackerAppComponent {
 

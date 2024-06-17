@@ -8,5 +8,4 @@ class HomeTabRobot : TestRobot() {
     fun goToPomodoro() {
         clickOnView(R.id.home_activity_pomodoro_screen)
     }
-
 }

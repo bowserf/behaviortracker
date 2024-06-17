@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.timer
 
 import android.content.Context
 import fr.bowser.behaviortracker.R
-import fr.bowser.behaviortracker.utils.ColorUtils
 import java.util.concurrent.TimeUnit
 
 class TimerDaoUA(context: Context) : TimerDAO {

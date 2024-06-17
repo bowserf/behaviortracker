@@ -17,12 +17,12 @@ import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_review.ReviewActivityContainer
 import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
+import java.util.Collections
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.Collections
-import kotlin.coroutines.CoroutineContext
 
 class TimerListViewPresenter(
     private val screen: TimerListViewContract.Screen,
