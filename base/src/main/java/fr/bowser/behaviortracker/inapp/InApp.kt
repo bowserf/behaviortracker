@@ -8,7 +8,7 @@ data class InApp(
     val name: String,
     val description: String,
     val price: String,
-    val feature: String
+    val feature: String,
 ) {
 
     fun toJson(): String {
@@ -50,7 +50,7 @@ data class InApp(
             } catch (e: JSONException) {
                 throw IllegalStateException(
                     "Error when trying to convert JSON to" +
-                        "InApp : " + e.message
+                        "InApp : " + e.message,
                 )
             }
         }

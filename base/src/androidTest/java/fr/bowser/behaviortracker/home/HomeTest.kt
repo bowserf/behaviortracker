@@ -35,11 +35,11 @@ class HomeTest {
 
         onView(withId(R.id.home_activity_timer_list_screen)).check(
             ViewAssertions.matches(
-                isDisplayed()
-            )
+                isDisplayed(),
+            ),
         )
         onView(withId(R.id.home_activity_pomodoro_screen)).check(
-            ViewAssertions.matches(isDisplayed())
+            ViewAssertions.matches(isDisplayed()),
         )
 
         takeScreenshot("timer_list")
@@ -55,37 +55,37 @@ class HomeTest {
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_BLUE,
-                )
+                ),
             )
             timerRepository.addTimer(
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_AMBER,
-                )
+                ),
             )
             timerRepository.addTimer(
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_DEEP_ORANGE,
-                )
+                ),
             )
             timerRepository.addTimer(
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_LIGHT_BLUE,
-                )
+                ),
             )
             timerRepository.addTimer(
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_PURPLE,
-                )
+                ),
             )
             timerRepository.addTimer(
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_YELLOW,
-                )
+                ),
             )
         }
     }

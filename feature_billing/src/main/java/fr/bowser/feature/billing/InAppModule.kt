@@ -5,7 +5,7 @@ import fr.bowser.feature.billing.internal.InAppManagerImpl
 import fr.bowser.feature.billing.internal.PlayBillingManager
 
 class InAppModule(
-    private val context: Context
+    private val context: Context,
 ) {
 
     fun createInAppManager(): InAppManager {

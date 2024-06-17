@@ -14,7 +14,7 @@ class ShowModeViewAdapter : RecyclerView.Adapter<ShowModeViewAdapter.ShowModeTim
 
         val layoutParams = RecyclerView.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.MATCH_PARENT,
         )
 
         showModTimerView.layoutParams = layoutParams

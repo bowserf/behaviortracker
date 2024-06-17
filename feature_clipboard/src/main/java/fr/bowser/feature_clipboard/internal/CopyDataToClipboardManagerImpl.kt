@@ -8,7 +8,7 @@ import fr.bowser.feature_string.StringManager
 
 internal class CopyDataToClipboardManagerImpl(
     private val stringManager: StringManager,
-    private val clipboardManager: ClipboardManager
+    private val clipboardManager: ClipboardManager,
 ) : CopyDataToClipboardManager {
 
     override fun copy(data: String) {

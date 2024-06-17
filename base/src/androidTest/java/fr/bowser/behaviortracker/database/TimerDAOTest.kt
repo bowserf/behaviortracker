@@ -19,7 +19,7 @@ class TimerDAOTest {
     fun initDB() {
         database = Room.inMemoryDatabaseBuilder(
             InstrumentationRegistry.getContext(),
-            DatabaseProvider::class.java
+            DatabaseProvider::class.java,
         ).build()
     }
 

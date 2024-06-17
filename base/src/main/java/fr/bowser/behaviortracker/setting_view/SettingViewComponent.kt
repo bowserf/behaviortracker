@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 @GenericScope(component = SettingViewComponent::class)
 @Component(
     modules = [(SettingViewModule::class)],
-    dependencies = [(BehaviorTrackerAppComponent::class)]
+    dependencies = [(BehaviorTrackerAppComponent::class)],
 )
 interface SettingViewComponent {
 

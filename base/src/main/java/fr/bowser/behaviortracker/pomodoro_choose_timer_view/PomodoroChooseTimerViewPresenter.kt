@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.timer_repository.TimerRepository
 class PomodoroChooseTimerViewPresenter(
     private val screen: PomodoroChooseTimerViewContract.Screen,
     private val timerRepository: TimerRepository,
-    private val pomodoroManager: PomodoroManager
+    private val pomodoroManager: PomodoroManager,
 ) : PomodoroChooseTimerViewContract.Presenter {
 
     override fun onStart() {

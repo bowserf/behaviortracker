@@ -75,7 +75,7 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
             activity,
             resources.getInteger(R.integer.create_timer_number_colors_row),
             RecyclerView.VERTICAL,
-            false
+            false,
         )
     }
 
@@ -167,11 +167,11 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
                 object : CreateTimerViewColorAdapter.Callback {
                     override fun onChangeSelectedColor(
                         oldSelectedPosition: Int,
-                        selectedPosition: Int
+                        selectedPosition: Int,
                     ) {
                         presenter.onClickColor(oldSelectedPosition, selectedPosition)
                     }
-                }
+                },
             )
         }
 
@@ -182,7 +182,7 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
                     R.drawable.create_timer_view_content_show
                 } else {
                     R.drawable.create_timer_view_content_hidden
-                }
+                },
             )
         }
 
@@ -197,7 +197,7 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
                     R.drawable.create_timer_view_content_show
                 } else {
                     R.drawable.create_timer_view_content_hidden
-                }
+                },
             )
         }
     }

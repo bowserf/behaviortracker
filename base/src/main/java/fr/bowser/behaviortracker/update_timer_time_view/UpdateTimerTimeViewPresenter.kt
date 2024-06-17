@@ -7,7 +7,7 @@ class UpdateTimerTimeViewPresenter(
     private val screen: UpdateTimerTimeViewContract.Screen,
     timerRepository: TimerRepository,
     private val timeManager: TimerManager,
-    timerId: Long
+    timerId: Long,
 ) : UpdateTimerTimeViewContract.Presenter {
 
     private var timer = timerRepository.getTimerList().first { it.id == timerId }

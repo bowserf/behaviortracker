@@ -15,7 +15,7 @@ class PomodoroViewModule(private val pomodoroScreen: PomodoroViewContract.Screen
     fun providePomodoroPresenter(
         pomodoroManager: PomodoroManager,
         timerRepository: TimerRepository,
-        doNotDisturbManager: DoNotDisturbManager
+        doNotDisturbManager: DoNotDisturbManager,
     ): PomodoroViewContract.Presenter {
         return PomodoroViewPresenter(
             pomodoroScreen,

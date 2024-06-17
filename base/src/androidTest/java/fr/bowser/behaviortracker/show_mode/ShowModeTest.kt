@@ -39,7 +39,7 @@ class ShowModeTest {
                 actionOnItem<TimerListViewAdapter.TimerViewHolder>(
                     hasDescendant(withText("New timer")),
                     click(),
-                ).atPosition(0)
+                ).atPosition(0),
             )
 
         takeScreenshot("timer_list")
@@ -55,7 +55,7 @@ class ShowModeTest {
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_BLUE,
-                )
+                ),
             )
         }
     }

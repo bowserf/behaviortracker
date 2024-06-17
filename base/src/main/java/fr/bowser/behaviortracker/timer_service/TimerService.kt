@@ -40,7 +40,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
         super.onCreate()
 
         notificationManager = baseContext.getSystemService(
-            Context.NOTIFICATION_SERVICE
+            Context.NOTIFICATION_SERVICE,
         ) as NotificationManager
 
         setupGraph()
@@ -52,32 +52,32 @@ class TimerService : Service(), TimerServiceContract.Screen {
         pauseAction = NotificationCompat.Action.Builder(
             R.drawable.timer_service_pause,
             baseContext.resources.getString(R.string.timer_notif_pause),
-            TimerServiceReceiver.getPausePendingIntent(baseContext)
+            TimerServiceReceiver.getPausePendingIntent(baseContext),
         ).build()
 
         resumeAction = NotificationCompat.Action.Builder(
             R.drawable.timer_service_play,
             baseContext.resources.getString(R.string.timer_notif_start),
-            TimerServiceReceiver.getPlayPendingIntent(baseContext)
+            TimerServiceReceiver.getPlayPendingIntent(baseContext),
         ).build()
 
         interruptTimerAction = NotificationCompat.Action.Builder(
             R.drawable.timer_service_play,
             baseContext.resources.getString(R.string.timer_notif_interrupt_timer),
-            TimerServiceReceiver.getInterruptTimerPendingIntent(baseContext)
+            TimerServiceReceiver.getInterruptTimerPendingIntent(baseContext),
         ).build()
 
         continuePomodoroAction = NotificationCompat.Action.Builder(
             R.drawable.notification_pomodoro,
             baseContext.resources.getString(R.string.timer_notif_continue_pomodoro),
-            TimerServiceReceiver.getContinuePomodoroPendingIntent(baseContext)
+            TimerServiceReceiver.getContinuePomodoroPendingIntent(baseContext),
         ).build()
 
         // action when click on notification
         val pendingHomeIntent = createHomeIntent()
         timerNotificationBuilder = NotificationCompat.Builder(
             baseContext,
-            baseContext.resources.getString(R.string.timer_notif_channel_id)
+            baseContext.resources.getString(R.string.timer_notif_channel_id),
         )
             .setSmallIcon(R.drawable.timer_service_timer)
             .setContentIntent(pendingHomeIntent)
@@ -196,7 +196,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
     private fun updateNotificationContent() {
         notificationManager.notify(
             TIMER_NOTIFICATION_ID,
-            timerNotificationBuilder!!.build()
+            timerNotificationBuilder!!.build(),
         )
     }
 
@@ -219,7 +219,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             } else {
                 PendingIntent.FLAG_UPDATE_CURRENT
-            }
+            },
         )
     }
 
@@ -232,7 +232,7 @@ class TimerService : Service(), TimerServiceContract.Screen {
         val notificationChannel = NotificationChannel(
             channelId,
             channelName,
-            channelImportance
+            channelImportance,
         )
         notificationChannel.description = channelDescription
         notificationChannel.enableVibration(false)

@@ -7,7 +7,7 @@ import fr.bowser.feature.alarm.AlarmTimerManager
 class AlarmViewPresenter(
     private val screen: AlarmViewContract.Screen,
     private val alarmTimerManager: AlarmTimerManager,
-    private val eventManager: EventManager
+    private val eventManager: EventManager,
 ) : AlarmViewContract.Presenter {
 
     override fun onStart() {

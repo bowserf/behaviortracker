@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 @GenericScope(component = ExplainPermissionRequestViewComponent::class)
 @Component(
     modules = [(ExplainPermissionRequestViewModule::class)],
-    dependencies = [(BehaviorTrackerAppComponent::class)]
+    dependencies = [(BehaviorTrackerAppComponent::class)],
 )
 interface ExplainPermissionRequestViewComponent {
 

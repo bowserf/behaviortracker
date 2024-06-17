@@ -11,7 +11,7 @@ import fr.bowser.behaviortracker.R
 class TimerListViewGesture(context: Context, private val callback: Listener) :
     ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-        ItemTouchHelper.LEFT
+        ItemTouchHelper.LEFT,
     ) {
 
     private var isMoving = false
@@ -22,14 +22,14 @@ class TimerListViewGesture(context: Context, private val callback: Listener) :
     init {
         icon = getBitmapFromVectorDrawable(context, R.drawable.timer_list_view_delete)
         rightMargin = context.resources.getDimensionPixelOffset(
-            R.dimen.timer_list_view_remove_icon_margin_right
+            R.dimen.timer_list_view_remove_icon_margin_right,
         )
     }
 
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder
+        target: RecyclerView.ViewHolder,
     ): Boolean {
         isMoving = true
         callback.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
@@ -55,7 +55,7 @@ class TimerListViewGesture(context: Context, private val callback: Listener) :
         dX: Float,
         dY: Float,
         actionState: Int,
-        isCurrentlyActive: Boolean
+        isCurrentlyActive: Boolean,
     ) {
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val itemView = viewHolder.itemView

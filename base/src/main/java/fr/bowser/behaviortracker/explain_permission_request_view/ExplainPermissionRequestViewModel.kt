@@ -8,14 +8,14 @@ data class ExplainPermissionRequestViewModel(
     val title: String,
     val message: String,
     @DrawableRes val icon: Int,
-    val permissions: List<String>
+    val permissions: List<String>,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readInt(),
-        parcel.createStringArrayList()!!
+        parcel.createStringArrayList()!!,
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

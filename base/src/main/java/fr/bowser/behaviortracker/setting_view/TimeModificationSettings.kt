@@ -92,7 +92,7 @@ class TimeModificationDialogPreference : DialogPreference {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
-        defStyleAttr
+        defStyleAttr,
     )
 
     private var timerModification: Int = 0

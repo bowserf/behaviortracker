@@ -90,7 +90,7 @@ class RewardsViewFragment : Fragment(R.layout.rewards_view_fragment) {
                 outRect: Rect,
                 view: View,
                 parent: RecyclerView,
-                state: RecyclerView.State
+                state: RecyclerView.State,
             ) {
                 val currentPosition = parent.getChildAdapterPosition(view)
                 outRect.top = if (currentPosition == 0) margin else 0
@@ -102,7 +102,7 @@ class RewardsViewFragment : Fragment(R.layout.rewards_view_fragment) {
 
         ViewCompat.setOnApplyWindowInsetsListener(list) { v, windowInsets ->
             val insets = windowInsets.getInsets(
-                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout(),
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 leftMargin = insets.left

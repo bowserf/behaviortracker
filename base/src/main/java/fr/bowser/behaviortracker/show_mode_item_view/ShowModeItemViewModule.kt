@@ -11,7 +11,7 @@ class ShowModeItemViewModule(private val screen: ShowModeItemViewContract.Screen
     @GenericScope(component = ShowModeItemViewComponent::class)
     @Provides
     fun provideShowModeTimerViewPresenter(
-        timeManager: TimerManager
+        timeManager: TimerManager,
     ): ShowModeItemViewContract.Presenter {
         return ShowModeItemViewPresenter(screen, timeManager)
     }

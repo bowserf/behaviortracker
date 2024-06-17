@@ -43,13 +43,13 @@ class HashMapSharedPreference : SharedPreferences {
     }
 
     override fun registerOnSharedPreferenceChangeListener(
-        listener: SharedPreferences.OnSharedPreferenceChangeListener
+        listener: SharedPreferences.OnSharedPreferenceChangeListener,
     ) {
         // nothing to do
     }
 
     override fun unregisterOnSharedPreferenceChangeListener(
-        listener: SharedPreferences.OnSharedPreferenceChangeListener
+        listener: SharedPreferences.OnSharedPreferenceChangeListener,
     ) {
         // nothing to do
     }

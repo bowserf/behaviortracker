@@ -4,7 +4,7 @@ import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class ShowModeViewPresenter(
     private val screen: ShowModeViewContract.Screen,
-    private val timerRepository: TimerRepository
+    private val timerRepository: TimerRepository,
 ) : ShowModeViewContract.Presenter {
 
     private var keepScreeOn = false

@@ -20,7 +20,7 @@ class InAppManagerModule {
     @Singleton
     @Provides
     fun provideInAppManager(
-        context: Context
+        context: Context,
     ): InAppManager {
         return InAppModule(context).createInAppManager()
     }

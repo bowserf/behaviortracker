@@ -20,7 +20,7 @@ class PomodoroManagerModule {
         context: Context,
         timeManager: TimerManager,
         timerRepository: TimerRepository,
-        settingManager: SettingManager
+        settingManager: SettingManager,
     ): PomodoroManager {
         val pauseTimer = PauseTimer.getTimer(context)
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -30,7 +30,7 @@ class PomodoroManagerModule {
             settingManager,
             pauseTimer,
             vibrator,
-            BuildConfig.DEBUG
+            BuildConfig.DEBUG,
         )
     }
 }

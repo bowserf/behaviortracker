@@ -19,6 +19,6 @@ interface ReviewManager {
     enum class FailReason {
         ACTIVITY_NOT_READY,
         REQUEST_REVIEW_FLOW_FAILED,
-        REVIEW_FLOW_FAILED
+        REVIEW_FLOW_FAILED,
     }
 }

@@ -33,7 +33,7 @@ class TimerItemViewPresenter(
         updateTimerStatus()
 
         screen.updateLastUpdatedDate(
-            timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp)
+            timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp),
         )
     }
 
@@ -113,7 +113,7 @@ class TimerItemViewPresenter(
             if (timer == updatedTimer) {
                 updateTimerStatus()
                 screen.updateLastUpdatedDate(
-                    timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp)
+                    timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp),
                 )
             }
         }

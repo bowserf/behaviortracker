@@ -17,13 +17,13 @@ class TimerManagerModule {
     fun provideTimeManager(
         context: Context,
         timerDAO: TimerDAO,
-        timeProvider: TimeProvider
+        timeProvider: TimeProvider,
     ): TimerManager {
         return TimerManagerImpl(
             coroutineScope = CoroutineScope(Dispatchers.IO),
             timerDAO = timerDAO,
             timeProvider = timeProvider,
-            addOn = createAddOn(context)
+            addOn = createAddOn(context),
         )
     }
 

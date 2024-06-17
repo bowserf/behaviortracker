@@ -6,7 +6,7 @@ import fr.bowser.feature.billing.InAppManager
 class RewardsViewPresenter(
     private val screen: RewardsViewContract.Screen,
     private val inAppConfiguration: InAppConfiguration,
-    private val inAppManager: InAppManager
+    private val inAppManager: InAppManager,
 ) : RewardsViewContract.Presenter {
 
     private val inAppListener: InAppManager.Listener

@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 @GenericScope(component = FloatingRunningTimerViewComponent::class)
 @Component(
     modules = [(FloatingRunningTimerViewModule::class)],
-    dependencies = [(BehaviorTrackerAppComponent::class)]
+    dependencies = [(BehaviorTrackerAppComponent::class)],
 )
 interface FloatingRunningTimerViewComponent {
 

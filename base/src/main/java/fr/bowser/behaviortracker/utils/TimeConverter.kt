@@ -9,7 +9,7 @@ object TimeConverter {
     @JvmStatic
     fun convertSecondsToHumanTime(
         time: Long,
-        mode: DisplayHoursMode = DisplayHoursMode.Always
+        mode: DisplayHoursMode = DisplayHoursMode.Always,
     ): String {
         if (time < 0) {
             throw IllegalStateException("time can't be negative")
@@ -49,6 +49,6 @@ object TimeConverter {
     enum class DisplayHoursMode {
         Always,
         IfPossible,
-        Never
+        Never,
     }
 }

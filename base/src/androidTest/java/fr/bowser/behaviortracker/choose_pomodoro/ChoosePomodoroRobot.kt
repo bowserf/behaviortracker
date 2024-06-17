@@ -15,8 +15,8 @@ class ChoosePomodoroRobot : TestRobot() {
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<PomodoroChooseTimerViewAdapter.ChooseTimerHolder>(
                     0,
-                    click()
-                )
+                    click(),
+                ),
             )
     }
 }

@@ -11,7 +11,7 @@ class ReviewModule {
 
         fun createReviewManager(
             context: Context,
-            isDebug: Boolean
+            isDebug: Boolean,
         ): ReviewManager {
             val reviewManager = if (isDebug) {
                 /*

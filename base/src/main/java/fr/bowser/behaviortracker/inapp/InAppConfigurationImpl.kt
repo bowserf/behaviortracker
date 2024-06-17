@@ -3,7 +3,7 @@ package fr.bowser.behaviortracker.inapp
 import org.json.JSONObject
 
 class InAppConfigurationImpl(
-    private val inAppConfigurationParser: InAppConfigurationParser
+    private val inAppConfigurationParser: InAppConfigurationParser,
 ) : InAppConfiguration {
 
     private val inAppList = mutableListOf<InApp>()

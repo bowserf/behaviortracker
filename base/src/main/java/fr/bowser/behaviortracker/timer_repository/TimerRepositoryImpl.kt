@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 class TimerRepositoryImpl(
     private val coroutineScope: CoroutineScope,
     private val timerDAO: TimerDAO,
-    private val timeManager: TimerManager
+    private val timeManager: TimerManager,
 ) : TimerRepository {
 
     private val timers = ArrayList<Timer>()

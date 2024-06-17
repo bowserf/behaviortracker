@@ -11,7 +11,7 @@ import android.provider.Settings
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 
 internal class DoNotDisturbManagerImpl(
-    private val context: Context
+    private val context: Context,
 ) : DoNotDisturbListenerManager {
 
     private val notificationManager =
@@ -57,7 +57,7 @@ internal class DoNotDisturbManagerImpl(
             NotificationManager.INTERRUPTION_FILTER_UNKNOWN -> DoNotDisturbManager.DnDState.UNKNOWN
             NotificationManager.INTERRUPTION_FILTER_ALARMS -> DoNotDisturbManager.DnDState.ALARMS
             else -> throw IllegalStateException(
-                "Not manager interruption filter state= $currentInterruptionFilter"
+                "Not manager interruption filter state= $currentInterruptionFilter",
             )
         }
     }

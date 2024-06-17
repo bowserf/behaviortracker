@@ -33,7 +33,7 @@ class PomodoroChooseTimerViewDialog :
         timerList.layoutManager = LinearLayoutManager(
             activity,
             RecyclerView.VERTICAL,
-            false
+            false,
         )
         timerList.setHasFixedSize(true)
 
@@ -68,7 +68,7 @@ class PomodoroChooseTimerViewDialog :
                         presenter.onTimerChose(timer)
                         dismiss()
                     }
-                }
+                },
             )
         }
     }

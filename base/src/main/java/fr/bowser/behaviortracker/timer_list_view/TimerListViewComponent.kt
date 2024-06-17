@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 @GenericScope(component = TimerListViewComponent::class)
 @Component(
     modules = [(TimerListViewModule::class)],
-    dependencies = [(BehaviorTrackerAppComponent::class)]
+    dependencies = [(BehaviorTrackerAppComponent::class)],
 )
 interface TimerListViewComponent {
 

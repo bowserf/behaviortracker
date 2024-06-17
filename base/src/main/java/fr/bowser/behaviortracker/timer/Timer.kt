@@ -15,7 +15,7 @@ data class Timer(
     @ColumnInfo(name = "color") var colorId: Int,
     @ColumnInfo(name = "creation_date_ms") var creationDateTimestamp: Long,
     @ColumnInfo(name = "last_update_ms") var lastUpdateTimestamp: Long,
-    @ColumnInfo(name = "position") var position: Int
+    @ColumnInfo(name = "position") var position: Int,
 ) {
 
     @Ignore
@@ -36,7 +36,7 @@ data class Timer(
         color,
         creationDateTimestamp,
         lastUpdateTimestamp,
-        position
+        position,
     )
 
     override fun equals(other: Any?): Boolean {

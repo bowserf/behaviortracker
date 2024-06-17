@@ -10,7 +10,7 @@ class FloatingRunningTimerViewPresenter(
     private val screen: FloatingRunningTimerViewContract.Screen,
     private val scrollToTimerManager: ScrollToTimerManager,
     private val timerManager: TimerManager,
-    private val timerRepository: TimerRepository
+    private val timerRepository: TimerRepository,
 ) : FloatingRunningTimerViewContract.Presenter {
 
     private var currentTimer: Timer? = null

@@ -8,7 +8,7 @@ import fr.bowser.feature_string.StringManager
 
 class SettingManagerImpl(
     private val context: Context,
-    private val stringManager: StringManager
+    private val stringManager: StringManager,
 ) : SettingManager {
 
     private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -26,21 +26,21 @@ class SettingManagerImpl(
 
         pomodoroVibrationEnable = sharedPreferences.getBoolean(
             stringManager.getString(R.string.pref_key_pomodoro_vibration),
-            true
+            true,
         )
 
         pomodoroPauseStep = sharedPreferences.getInt(
             stringManager.getString(R.string.pref_key_pomodoro_pause_stage),
             context.resources.getInteger(
-                R.integer.settings_view_default_value_pomodoro_pause_stage_minutes
-            )
+                R.integer.settings_view_default_value_pomodoro_pause_stage_minutes,
+            ),
         ) * 60
 
         pomodoroStep = sharedPreferences.getInt(
             stringManager.getString(R.string.pref_key_pomodoro_stage),
             context.resources.getInteger(
-                R.integer.settings_view_default_value_pomodoro_stage_minutes
-            )
+                R.integer.settings_view_default_value_pomodoro_stage_minutes,
+            ),
         ) * 60
     }
 
@@ -54,16 +54,16 @@ class SettingManagerImpl(
                     pomodoroPauseStep = sharedPreferences.getInt(
                         key,
                         context.resources.getInteger(
-                            R.integer.settings_view_default_value_pomodoro_pause_stage_minutes
-                        )
+                            R.integer.settings_view_default_value_pomodoro_pause_stage_minutes,
+                        ),
                     ) * 60
                 }
                 stringManager.getString(R.string.pref_key_pomodoro_stage) -> {
                     pomodoroStep = sharedPreferences.getInt(
                         key,
                         context.resources.getInteger(
-                            R.integer.settings_view_default_value_pomodoro_stage_minutes
-                        )
+                            R.integer.settings_view_default_value_pomodoro_stage_minutes,
+                        ),
                     ) * 60
                 }
             }

@@ -16,7 +16,7 @@ import java.util.Calendar
 internal class AlarmTimerManagerImpl(
     private val context: Context,
     private val alarmStorageManager: AlarmStorageManager,
-    private val alarmListenerManager: AlarmListenerManager
+    private val alarmListenerManager: AlarmListenerManager,
 ) : AlarmTimerManager {
 
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -59,7 +59,7 @@ internal class AlarmTimerManagerImpl(
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
-                alarmIntent
+                alarmIntent,
             )
         }
 
@@ -106,7 +106,7 @@ internal class AlarmTimerManagerImpl(
         context.packageManager.setComponentEnabledSetting(
             receiver,
             state,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 
@@ -120,7 +120,7 @@ internal class AlarmTimerManagerImpl(
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             } else {
                 PendingIntent.FLAG_UPDATE_CURRENT
-            }
+            },
         )
     }
 

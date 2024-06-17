@@ -18,14 +18,14 @@ class TimerServiceModule(private val screen: TimerServiceContract.Screen) {
         context: Context,
         timeManager: TimerManager,
         timerRepository: TimerRepository,
-        pomodoroManager: PomodoroManager
+        pomodoroManager: PomodoroManager,
     ): TimerServiceContract.Presenter {
         return TimerServicePresenter(
             screen,
             timeManager,
             timerRepository,
             pomodoroManager,
-            createAddOn(context)
+            createAddOn(context),
         )
     }
 

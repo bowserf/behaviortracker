@@ -17,7 +17,7 @@ class PomodoroManagerImpl(
     private val settingManager: SettingManager,
     private val pauseTimer: Timer,
     private val vibrator: Vibrator,
-    private val isDebug: Boolean
+    private val isDebug: Boolean,
 ) : PomodoroManager {
 
     override var listeners: MutableList<PomodoroManager.Listener> = mutableListOf()
@@ -59,7 +59,7 @@ class PomodoroManagerImpl(
 
             vibrationEffect = VibrationEffect.createOneShot(
                 DEFAULT_VIBRATION_DURATION,
-                DEFAULT_AMPLITUDE
+                DEFAULT_AMPLITUDE,
             )
         }
     }
@@ -192,8 +192,8 @@ class PomodoroManagerImpl(
             vibrator.vibrate(
                 VibrationEffect.createOneShot(
                     DEFAULT_VIBRATION_DURATION,
-                    DEFAULT_AMPLITUDE
-                )
+                    DEFAULT_AMPLITUDE,
+                ),
             )
         }
     }

@@ -64,8 +64,8 @@ class ExplainPermissionRequestViewFragment :
             .explainPermissionRequestViewModule(
                 ExplainPermissionRequestViewModule(
                     screen,
-                    args.explainPermissionRequestModel
-                )
+                    args.explainPermissionRequestModel,
+                ),
             )
             .build()
         build.inject(this)
@@ -79,7 +79,7 @@ class ExplainPermissionRequestViewFragment :
         override fun displayPermissionInformation(
             title: String,
             message: String,
-            @DrawableRes icon: Int
+            @DrawableRes icon: Int,
         ) {
             titleTv.text = title
             messageTv.text = message

@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.utils.GenericScope
 @GenericScope(component = PomodoroChooseTimerViewComponent::class)
 @Component(
     modules = [(PomodoroChooseTimerViewModule::class)],
-    dependencies = [(BehaviorTrackerAppComponent::class)]
+    dependencies = [(BehaviorTrackerAppComponent::class)],
 )
 interface PomodoroChooseTimerViewComponent {
 

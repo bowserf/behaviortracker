@@ -11,7 +11,7 @@ class PomodoroViewDialogModule {
     @GenericScope(component = PomodoroViewDialogComponent::class)
     @Provides
     fun providePomodoroDialogPresenter(
-        pomodoroManager: PomodoroManager
+        pomodoroManager: PomodoroManager,
     ): PomodoroViewDialogContract.Presenter {
         return PomodoroViewDialogPresenter(pomodoroManager)
     }

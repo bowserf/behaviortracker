@@ -5,7 +5,7 @@ internal class DoNotDisturbModule {
     fun createDoNotDisturbManager(): DoNotDisturbListenerManager {
         val context = DoNotDisturbGraphInternal.getContext()
         return DoNotDisturbManagerImpl(
-            context
+            context,
         )
     }
 }

@@ -39,7 +39,7 @@ class CreateInterruptTimerUseCaseImpl(
             name = stringManager.getString(R.string.timer_interrupt_name, date),
             color = ColorUtils.COLOR_GREY,
             creationDateTimestamp = createDateTimestamp,
-            lastUpdateTimestamp = createDateTimestamp
+            lastUpdateTimestamp = createDateTimestamp,
         )
         timerRepository.addTimer(timer)
         timerManager.startTimer(timer)

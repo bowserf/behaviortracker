@@ -37,7 +37,7 @@ class SettingViewFragment : PreferenceFragmentCompat() {
 
         val keyPomodoroPauseStage = resources.getString(R.string.pref_key_pomodoro_pause_stage)
         val pomodoroPauseStage = findPreference<TimeModificationDialogPreference>(
-            keyPomodoroPauseStage
+            keyPomodoroPauseStage,
         )
         pomodoroPauseStage!!.setTimeUnit(DURATION_STAGE_UNIT)
 
@@ -82,20 +82,20 @@ class SettingViewFragment : PreferenceFragmentCompat() {
         intent.data = Uri.parse("mailto:$SUPPORT_EMAIL")
         intent.putExtra(
             Intent.EXTRA_SUBJECT,
-            resources.getString(R.string.settings_send_email_subject)
+            resources.getString(R.string.settings_send_email_subject),
         )
         try {
             startActivity(
                 Intent.createChooser(
                     intent,
-                    resources.getString(R.string.settings_send_email_choose_app)
-                )
+                    resources.getString(R.string.settings_send_email_choose_app),
+                ),
             )
         } catch (ex: android.content.ActivityNotFoundException) {
             Toast.makeText(
                 requireContext(),
                 resources.getString(R.string.settings_send_email_no_application_available),
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_SHORT,
             )
                 .show()
         }

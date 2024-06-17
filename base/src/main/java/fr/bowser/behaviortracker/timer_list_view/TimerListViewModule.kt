@@ -32,14 +32,14 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
         stringManager: StringManager,
         timeProvider: TimeProvider,
         timerRepository: TimerRepository,
-        timerManager: TimerManager
+        timerManager: TimerManager,
     ): TimerListViewContract.Presenter {
         val createInterruptTimerUseCase = CreateInterruptTimerUseCaseImpl(
             eventManager,
             timeProvider,
             timerRepository,
             timerManager,
-            stringManager
+            stringManager,
         )
         return TimerListViewPresenter(
             timerScreen,

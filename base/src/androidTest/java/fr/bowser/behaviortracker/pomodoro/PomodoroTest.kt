@@ -43,7 +43,7 @@ class PomodoroTest {
                 Timer(
                     "New timer",
                     ColorUtils.COLOR_BLUE,
-                )
+                ),
             )
         }
 

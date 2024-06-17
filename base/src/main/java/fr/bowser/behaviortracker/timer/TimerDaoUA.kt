@@ -18,8 +18,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 color1,
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3),
-                0
-            )
+                0,
+            ),
         )
         val color2 = 7
         timers.add(
@@ -30,8 +30,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 color2,
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(2),
-                1
-            )
+                1,
+            ),
         )
         val color3 = 4
         timers.add(
@@ -42,8 +42,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 color3,
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1),
-                2
-            )
+                2,
+            ),
         )
         val color4 = 0
         timers.add(
@@ -54,8 +54,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 color4,
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(4),
-                3
-            )
+                3,
+            ),
         )
         val color5 = 18
         timers.add(
@@ -66,8 +66,8 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 color5,
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5),
-                4
-            )
+                4,
+            ),
         )
     }
 

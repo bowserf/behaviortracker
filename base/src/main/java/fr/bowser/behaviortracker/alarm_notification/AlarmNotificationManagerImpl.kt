@@ -15,12 +15,12 @@ import fr.bowser.behaviortracker.home_activity.HomeActivity
 
 class AlarmNotificationManagerImpl(
     private val context: Context,
-    private val eventManager: EventManager
+    private val eventManager: EventManager,
 ) : AlarmNotificationManager {
 
     override fun displayNotification() {
         val notificationManager = context.getSystemService(
-            Context.NOTIFICATION_SERVICE
+            Context.NOTIFICATION_SERVICE,
         ) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -38,12 +38,12 @@ class AlarmNotificationManagerImpl(
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             } else {
                 PendingIntent.FLAG_UPDATE_CURRENT
-            }
+            },
         )
 
         val notificationBuilder = NotificationCompat.Builder(
             context,
-            context.resources.getString(R.string.alarm_timer_notif_channel_id)
+            context.resources.getString(R.string.alarm_timer_notif_channel_id),
         )
             .setContentTitle(context.resources.getString(R.string.alarm_timer_title))
             .setContentText(context.resources.getString(R.string.alarm_timer_content))
@@ -54,7 +54,7 @@ class AlarmNotificationManagerImpl(
 
         notificationManager.notify(
             ALARM_NOTIFICATION_ID,
-            notificationBuilder.build()
+            notificationBuilder.build(),
         )
 
         eventManager.sendDisplayAlarmNotificationEvent()
@@ -69,7 +69,7 @@ class AlarmNotificationManagerImpl(
         val notificationChannel = NotificationChannel(
             channelId,
             channelName,
-            channelImportance
+            channelImportance,
         )
         notificationChannel.description = channelDescription
         notificationChannel.enableVibration(false)

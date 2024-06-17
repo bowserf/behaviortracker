@@ -34,7 +34,7 @@ class TimerItemView(context: Context) : CardView(context) {
 
     private val chrono: TextView by bind(R.id.timer_item_view_timer_chrono)
     private val lastUpdateTimestamp: TextView by bind(
-        R.id.timer_item_view_timer_last_update_timestamp
+        R.id.timer_item_view_timer_last_update_timestamp,
     )
     private val tvName: TextView by bind(R.id.timer_item_view_timer_name)
     private val menu: ImageView by bind(R.id.timer_item_view_menu)
@@ -118,7 +118,7 @@ class TimerItemView(context: Context) : CardView(context) {
             Animation.RELATIVE_TO_SELF,
             0.5f,
             Animation.RELATIVE_TO_SELF,
-            0.5f
+            0.5f,
         )
         anim.duration = ANIMATION_DURATION
         anim.setAnimationListener(
@@ -136,7 +136,7 @@ class TimerItemView(context: Context) : CardView(context) {
                         Animation.RELATIVE_TO_SELF,
                         0.5f,
                         Animation.RELATIVE_TO_SELF,
-                        0.5f
+                        0.5f,
                     )
                     animReverse.duration = ANIMATION_DURATION
                     startAnimation(animReverse)
@@ -145,7 +145,7 @@ class TimerItemView(context: Context) : CardView(context) {
                 override fun onAnimationRepeat(animation: Animation?) {
                     // nothing to do
                 }
-            }
+            },
         )
         startAnimation(anim)
     }

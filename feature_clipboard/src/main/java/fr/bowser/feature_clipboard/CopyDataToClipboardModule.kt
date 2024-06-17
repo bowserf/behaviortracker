@@ -7,16 +7,16 @@ import fr.bowser.feature_string.StringManager
 
 class CopyDataToClipboardModule(
     private val context: Context,
-    private val stringManager: StringManager
+    private val stringManager: StringManager,
 ) {
 
     fun createCopyDataManager(): CopyDataToClipboardManager {
         val clipboardManager = context.getSystemService(
-            Context.CLIPBOARD_SERVICE
+            Context.CLIPBOARD_SERVICE,
         ) as ClipboardManager
         return CopyDataToClipboardManagerImpl(
             stringManager,
-            clipboardManager
+            clipboardManager,
         )
     }
 }

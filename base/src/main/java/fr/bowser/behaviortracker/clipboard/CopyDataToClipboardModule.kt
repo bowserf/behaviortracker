@@ -14,11 +14,11 @@ class CopyDataToClipboardModule {
     @Provides
     fun provideCopyDataToClipboardManager(
         context: Context,
-        stringManager: StringManager
+        stringManager: StringManager,
     ): CopyDataToClipboardManager {
         return fr.bowser.feature_clipboard.CopyDataToClipboardModule(
             context,
-            stringManager
+            stringManager,
         ).createCopyDataManager()
     }
 }

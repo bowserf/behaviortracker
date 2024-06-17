@@ -14,7 +14,7 @@ class DatabaseManager(context: Context) {
         database = Room.databaseBuilder(
             context,
             DatabaseProvider::class.java,
-            DATABASE_NAME
+            DATABASE_NAME,
         )
             .addMigrations(MIGRATION_1_3)
             .fallbackToDestructiveMigration()
@@ -32,7 +32,7 @@ class DatabaseManager(context: Context) {
         val MIGRATION_1_3: Migration = object : Migration(1, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
-                    "ALTER TABLE Timer ADD COLUMN position INTEGER NOT NULL DEFAULT '0'"
+                    "ALTER TABLE Timer ADD COLUMN position INTEGER NOT NULL DEFAULT '0'",
                 )
             }
         }

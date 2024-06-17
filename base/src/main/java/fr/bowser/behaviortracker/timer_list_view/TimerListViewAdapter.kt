@@ -15,7 +15,7 @@ class TimerListViewAdapter : RecyclerView.Adapter<TimerListViewAdapter.TimerView
 
         val layoutParams = RecyclerView.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.WRAP_CONTENT,
         )
         val horizontalMargin = parent.resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
         layoutParams.setMargins(horizontalMargin, 0, horizontalMargin, 0)

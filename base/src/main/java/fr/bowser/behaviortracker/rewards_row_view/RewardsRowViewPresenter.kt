@@ -7,7 +7,7 @@ import fr.bowser.feature.billing.InAppManager
 class RewardsRowViewPresenter(
     private val screen: RewardsRowViewContract.Screen,
     private val inAppManager: InAppManager,
-    private val eventManager: EventManager
+    private val eventManager: EventManager,
 ) : RewardsRowViewContract.Presenter {
 
     override fun onItemClicked(sku: String) {
@@ -18,7 +18,7 @@ class RewardsRowViewPresenter(
                 override fun get(): Activity {
                     return screen.getActivity()
                 }
-            }
+            },
         )
     }
 }

@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 
 class ReviewStorageImpl(
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences,
 ) : ReviewStorage {
 
     override fun isReviewMarked(): Boolean {

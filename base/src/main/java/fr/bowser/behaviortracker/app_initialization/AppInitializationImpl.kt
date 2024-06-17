@@ -7,7 +7,7 @@ import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.widget.PomodoroAppWidgetProvider
 
 class AppInitializationImpl(
-    private val context: Context
+    private val context: Context,
 ) : AppInitialization {
 
     override fun initialize() {

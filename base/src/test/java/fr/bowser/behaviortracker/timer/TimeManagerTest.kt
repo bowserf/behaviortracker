@@ -165,7 +165,7 @@ class TimeManagerTest {
             backgroundScope,
             timerDao,
             timeProvider,
-            addOn = addOn
+            addOn = addOn,
         )
     }
 }

@@ -9,20 +9,20 @@ import fr.bowser.behaviortracker.utils.GenericScope
 @Module
 class UpdateTimerTimeViewModule(
     private val screen: UpdateTimerTimeViewContract.Screen,
-    private val timerId: Long
+    private val timerId: Long,
 ) {
 
     @GenericScope(component = UpdateTimerTimeViewComponent::class)
     @Provides
     fun provideUpdateTimerTimePresenter(
         timerRepository: TimerRepository,
-        timeManager: TimerManager
+        timeManager: TimerManager,
     ): UpdateTimerTimeViewContract.Presenter {
         return UpdateTimerTimeViewPresenter(
             screen,
             timerRepository,
             timeManager,
-            timerId
+            timerId,
         )
     }
 }

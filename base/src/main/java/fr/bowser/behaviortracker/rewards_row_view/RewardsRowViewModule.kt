@@ -13,7 +13,7 @@ class RewardsRowViewModule(private val screen: RewardsRowViewContract.Screen) {
     @Provides
     fun provideRewardsRowPresenter(
         inAppManager: InAppManager,
-        eventManager: EventManager
+        eventManager: EventManager,
     ): RewardsRowViewContract.Presenter {
         return RewardsRowViewPresenter(screen, inAppManager, eventManager)
     }

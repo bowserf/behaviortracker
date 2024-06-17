@@ -15,13 +15,13 @@ class FloatingRunningTimerViewModule(private val screen: FloatingRunningTimerVie
     fun provideTimerItemPresenter(
         scrollToTimerManager: ScrollToTimerManager,
         timeManager: TimerManager,
-        timerRepository: TimerRepository
+        timerRepository: TimerRepository,
     ): FloatingRunningTimerViewContract.Presenter {
         return FloatingRunningTimerViewPresenter(
             screen,
             scrollToTimerManager,
             timeManager,
-            timerRepository
+            timerRepository,
         )
     }
 }

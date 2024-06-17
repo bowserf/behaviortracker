@@ -14,7 +14,7 @@ import com.android.billingclient.api.QueryPurchasesParams
 import fr.bowser.feature.billing.InAppManager
 
 internal class InAppManagerImpl(
-    private val playBillingManager: PlayBillingManager
+    private val playBillingManager: PlayBillingManager,
 ) : InAppManager {
 
     private val storePurchases = mutableListOf<InAppManager.StorePurchase>()
@@ -34,15 +34,16 @@ internal class InAppManagerImpl(
         val productDetail = productDetails.firstOrNull { it.productId == sku } ?: return
         val purchaseFlowRequest = Runnable {
             val productDetailsParamsList = listOf(
-                BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetail)
-                    .build()
+                BillingFlowParams.ProductDetailsParams.newBuilder()
+                    .setProductDetails(productDetail)
+                    .build(),
             )
             val builder = BillingFlowParams
                 .newBuilder()
                 .setProductDetailsParamsList(productDetailsParamsList)
             val billingResult = playBillingManager.launchBillingFlow(
                 activityContainer.get(),
-                builder.build()
+                builder.build(),
             )
             if (billingResult.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
                 Log.e(TAG, "User already owns this in-app : $sku")
@@ -50,7 +51,7 @@ internal class InAppManagerImpl(
             } else if (billingResult.responseCode != BillingClient.BillingResponseCode.OK) {
                 Log.e(
                     TAG,
-                    "An error occurred during purchase, error code : ${billingResult.responseCode}"
+                    "An error occurred during purchase, error code : ${billingResult.responseCode}",
                 )
                 notifyPurchaseFailed()
             }
@@ -73,7 +74,7 @@ internal class InAppManagerImpl(
             val params = QueryProductDetailsParams.newBuilder().setProductList(productList).build()
             playBillingManager.queryProductDetailsAsync(
                 params,
-                createProductDetailsResponseListener()
+                createProductDetailsResponseListener(),
             )
         }
         playBillingManager.executeServiceRequest(queryRequest)
@@ -121,7 +122,7 @@ internal class InAppManagerImpl(
             }
         playBillingManager.acknowledgePurchase(
             acknowledgePurchaseParams,
-            acknowledgePurchaseResponseListener
+            acknowledgePurchaseResponseListener,
         )
     }
 

@@ -24,10 +24,10 @@ class HomeActivity : AppCompatActivity() {
     private val screen = createScreen()
 
     private val bottomNavigationView: BottomNavigationView by bind(
-        R.id.home_activity_bottom_navigation
+        R.id.home_activity_bottom_navigation,
     )
     private val shadowBottomNavigationView: View by bind(
-        R.id.home_activity_bottom_navigation_shadow
+        R.id.home_activity_bottom_navigation_shadow,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

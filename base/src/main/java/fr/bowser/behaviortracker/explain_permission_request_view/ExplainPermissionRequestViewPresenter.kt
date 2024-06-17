@@ -2,7 +2,7 @@ package fr.bowser.behaviortracker.explain_permission_request_view
 
 class ExplainPermissionRequestViewPresenter(
     private val screen: ExplainPermissionRequestViewContract.Screen,
-    private val explainPermissionRequestModel: ExplainPermissionRequestViewModel
+    private val explainPermissionRequestModel: ExplainPermissionRequestViewModel,
 ) : ExplainPermissionRequestViewContract.Presenter {
 
     override fun onAttach() {
@@ -29,7 +29,7 @@ class ExplainPermissionRequestViewPresenter(
         screen.displayPermissionInformation(
             explainPermissionRequestModel.title,
             explainPermissionRequestModel.message,
-            explainPermissionRequestModel.icon
+            explainPermissionRequestModel.icon,
         )
     }
 }

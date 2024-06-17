@@ -1,21 +1,49 @@
 # https://github.com/JakeWharton/SdkSearch/blob/master/.editorconfig
 
 [*.{kt,kts}]
-indent_size=4
+indent_size = 4
 
 # https://github.com/android/kotlin-guides/issues/37
 # https://github.com/shyiko/ktlint/issues/120
 # https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
 # Default Android Studio seems to be 8 and should be 4
-continuation_indent_size=4
+continuation_indent_size = 4
 
-insert_final_newline=true
+insert_final_newline = true
 
-# https://github.com/pinterest/ktlint#editorconfig
-# Comma-separated list of rules to disable (Since 0.34.0)
-# Note that rules in any ruleset other than the standard ruleset will need to be prefixed
-# by the ruleset identifier.
-disabled_rules=max-line-length
-disabled_rules=package-name
-ktlint_standard_package-name = disabled
+[*.kt]
+# https://pinterest.github.io/ktlint/0.49.1/rules/standard/#annotation-formatting
+ktlint_standard_annotation = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#argument-list-wrapping
+ktlint_standard_argument-list-wrapping = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#blank-line-before-declarations
+ktlint_standard_blank-line-before-declaration = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#discouraged-comment-location
+ktlint_standard_discouraged-comment-location = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#enum-wrapping
+ktlint_standard_enum-wrapping = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#function-naming
+# Should be disabled due to Composable function naming
+ktlint_standard_function-naming = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#function-signature
+ktlint_standard_function-signature = disabled
+# Disabled due to "discouraged-comment-location" rule
+ktlint_standard_if-else-wrapping = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#import-ordering
+# Should be disabled due to Android Studio import order
+ktlint_standard_import-ordering = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#max-line-length
 ktlint_standard_max-line-length = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#multiline-expression-wrapping
+ktlint_standard_multiline-expression-wrapping = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#no-empty-first-line-at-start-in-class-body
+ktlint_standard_no-empty-first-line-in-class-body = disabled
+#https://pinterest.github.io/ktlint/1.0.1/rules/standard/#package-name
+ktlint_standard_package-name = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#parameter-list-wrapping
+ktlint_standard_parameter-list-wrapping = disabled
+# https://pinterest.github.io/ktlint/1.0.1/rules/standard/#property-naming
+# Should be disabled due to "private flow" name starting with an "_"
+ktlint_standard_property-naming = disabled
+# Disabled due to "multiline-expression-wrapping" rule
+ktlint_standard_string-template-indent = disabled

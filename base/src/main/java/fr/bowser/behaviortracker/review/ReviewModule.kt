@@ -21,7 +21,7 @@ class ReviewModule {
     fun provideReviewStorage(context: Context): ReviewStorage {
         val sharedPreferences = context.getSharedPreferences(
             ReviewStorageImpl.PREFERENCES_NAME,
-            Context.MODE_PRIVATE
+            Context.MODE_PRIVATE,
         )
         return ReviewStorageImpl(sharedPreferences)
     }

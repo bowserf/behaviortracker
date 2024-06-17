@@ -72,13 +72,13 @@ class BehaviorTrackerApp : Application() {
             StrictMode.ThreadPolicy.Builder()
                 .detectAll()
                 .penaltyLog()
-                .build()
+                .build(),
         )
         StrictMode.setVmPolicy(
             StrictMode.VmPolicy.Builder()
                 .detectAll()
                 .penaltyLog()
-                .build()
+                .build(),
         )
     }
 

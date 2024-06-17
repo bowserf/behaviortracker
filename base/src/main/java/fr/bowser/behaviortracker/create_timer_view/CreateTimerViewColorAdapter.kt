@@ -14,7 +14,7 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 class CreateTimerViewColorAdapter(
     private val context: Context,
     initialSelectedColorPosition: Int,
-    private val callback: Callback
+    private val callback: Callback,
 ) : RecyclerView.Adapter<CreateTimerViewColorAdapter.ColorViewHolder>() {
 
     private var selectedItemPosition = initialSelectedColorPosition
@@ -23,7 +23,7 @@ class CreateTimerViewColorAdapter(
         val view = LayoutInflater.from(context).inflate(
             R.layout.create_timer_view_color,
             parent,
-            false
+            false,
         )
         return ColorViewHolder(view)
     }

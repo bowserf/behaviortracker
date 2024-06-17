@@ -11,7 +11,7 @@ class TimerServicePresenter(
     private val timerManager: TimerManager,
     private val timerRepository: TimerRepository,
     private val pomodoroManager: PomodoroManager,
-    private val addOn: AddOn
+    private val addOn: AddOn,
 ) : TimerServiceContract.Presenter {
 
     private var isNotificationDisplayed = false
@@ -83,7 +83,7 @@ class TimerServicePresenter(
 
             screen.displayTimerNotification(
                 getNotificationTitle(modifiedTimer),
-                getNotificationMessage(modifiedTimer)
+                getNotificationMessage(modifiedTimer),
             )
         }
     }
@@ -132,7 +132,7 @@ class TimerServicePresenter(
         return if (pomodoroManager.isStarted) {
             TimeConverter.convertSecondsToHumanTime(
                 pomodoroManager.pomodoroTime,
-                TimeConverter.DisplayHoursMode.Never
+                TimeConverter.DisplayHoursMode.Never,
             )
         } else {
             TimeConverter.convertSecondsToHumanTime(timer.time.toLong())

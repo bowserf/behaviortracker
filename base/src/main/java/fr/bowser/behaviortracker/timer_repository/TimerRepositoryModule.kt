@@ -17,7 +17,7 @@ class TimerRepositoryModule {
         return TimerRepositoryImpl(
             coroutineScope = CoroutineScope(Dispatchers.IO),
             timerDAO = timerDAO,
-            timeManager = timeManager
+            timeManager = timeManager,
         )
     }
 }

@@ -13,7 +13,7 @@ class AlarmViewModule(private val screen: AlarmViewContract.Screen) {
     @Provides
     fun provideAlarmTimerPresenter(
         alarmTimerManager: AlarmTimerManager,
-        eventManager: EventManager
+        eventManager: EventManager,
     ): AlarmViewContract.Presenter {
         return AlarmViewPresenter(screen, alarmTimerManager, eventManager)
     }

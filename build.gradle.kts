@@ -38,32 +38,21 @@ subprojects {
     val ktlint by configurations.creating
 
     dependencies {
-        // KtLint - Static code analysis
-        // https://github.com/pinterest/ktlint/releases
-        ktlint("com.pinterest:ktlint:0.49.1") {
-            attributes {
-                attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
-            }
-        }
+        ktlint("com.pinterest.ktlint:ktlint-cli:1.0.1")
     }
 
-    // KtLint - Static code analysis
-    // https://github.com/pinterest/ktlint/releases
     tasks.register<JavaExec>("ktlint") {
         group = "verification"
-        description = "Check Kotlin code style."
+        description = "Check Kotlin code style for project $name."
         classpath = ktlint
         mainClass.set("com.pinterest.ktlint.Main")
-        args("--android", "src/**/*.kt")
+        args("src/**/*.kt")
     }
-
-    // KtLint - Static code format
-    // https://github.com/pinterest/ktlint/releases
     tasks.register<JavaExec>("ktformat") {
         group = "verification"
-        description = "Check Kotlin code style."
+        description = "Format kotlin code for project $name."
         classpath = ktlint
         mainClass.set("com.pinterest.ktlint.Main")
-        args("--android", "-F", "src/**/*.kt")
+        args("-F", "src/**/*.kt")
     }
 }

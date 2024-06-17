@@ -90,7 +90,7 @@ class TimerListViewPresenter(
                 export += "${it.name}: ${
                     TimeConverter.convertSecondsToHumanTime(
                         it.time.toLong(),
-                        TimeConverter.DisplayHoursMode.IfPossible
+                        TimeConverter.DisplayHoursMode.IfPossible,
                     )
                 }\n"
             }
@@ -98,7 +98,7 @@ class TimerListViewPresenter(
         val totalTimeTitle = stringManager.getString(R.string.export_total_time)
         val totalTimeStr = TimeConverter.convertSecondsToHumanTime(
             totalTime.toLong(),
-            TimeConverter.DisplayHoursMode.IfPossible
+            TimeConverter.DisplayHoursMode.IfPossible,
         )
         export += "$totalTimeTitle: $totalTimeStr"
         copyDataToClipboardManager.copy(export)
@@ -141,7 +141,7 @@ class TimerListViewPresenter(
             stringManager.getString(R.string.timer_list_explain_notification_permission_title),
             stringManager.getString(R.string.timer_list_explain_notification_permission_message),
             R.drawable.explain_permission_request_view_notification_permission,
-            listOf(Manifest.permission.POST_NOTIFICATIONS)
+            listOf(Manifest.permission.POST_NOTIFICATIONS),
         )
         screen.displayExplainNotificationPermissionForAlarm(explainPermissionRequestModel)
     }

@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import fr.bowser.feature_string.StringManager
 
 internal class StringManagerImpl(
-    private val context: Context
+    private val context: Context,
 ) : StringManager {
 
     override fun getString(@StringRes stringRes: Int): String {

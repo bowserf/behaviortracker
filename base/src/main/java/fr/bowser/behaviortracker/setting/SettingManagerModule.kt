@@ -13,11 +13,11 @@ class SettingManagerModule {
     @Provides
     fun provideSettingManager(
         context: Context,
-        stringManager: StringManager
+        stringManager: StringManager,
     ): SettingManager {
         return SettingManagerImpl(
             context,
-            stringManager
+            stringManager,
         )
     }
 }

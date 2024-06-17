@@ -28,6 +28,6 @@ interface InAppManager {
 
     data class StorePurchase(
         val sku: String,
-        val productToken: String
+        val productToken: String,
     )
 }

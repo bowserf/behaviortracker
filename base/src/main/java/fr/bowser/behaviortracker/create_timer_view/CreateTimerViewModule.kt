@@ -19,7 +19,7 @@ class CreateTimerViewModule(private val screen: CreateTimerViewContract.Screen) 
         timerRepository: TimerRepository,
         pomodoroManager: PomodoroManager,
         eventManager: EventManager,
-        timeProvider: TimeProvider
+        timeProvider: TimeProvider,
     ): CreateTimerViewContract.Presenter {
         return CreateTimerViewPresenter(
             screen,
@@ -27,7 +27,7 @@ class CreateTimerViewModule(private val screen: CreateTimerViewContract.Screen) 
             pomodoroManager,
             eventManager,
             timeProvider,
-            timeManager
+            timeManager,
         )
     }
 }

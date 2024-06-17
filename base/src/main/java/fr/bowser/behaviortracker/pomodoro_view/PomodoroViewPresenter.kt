@@ -29,7 +29,7 @@ class PomodoroViewPresenter(
             screen.updatePomodoroTimer(
                 pomodoroManager.currentTimer!!,
                 pomodoroManager.pomodoroTime,
-                pomodoroManager.currentSessionDuration
+                pomodoroManager.currentSessionDuration,
             )
             updatePomodoroState()
         } else {

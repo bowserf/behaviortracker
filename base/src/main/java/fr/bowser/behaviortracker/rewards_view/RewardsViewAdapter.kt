@@ -14,7 +14,7 @@ class RewardsViewAdapter : RecyclerView.Adapter<RewardsViewAdapter.RewardsViewHo
 
         val layoutParams = RecyclerView.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.WRAP_CONTENT,
         )
 
         rewardsRowView.layoutParams = layoutParams

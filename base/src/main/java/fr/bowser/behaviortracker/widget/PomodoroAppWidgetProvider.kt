@@ -21,7 +21,7 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
+        appWidgetIds: IntArray,
     ) {
         updateAppWidgets(context, appWidgetManager, appWidgetIds)
     }
@@ -38,7 +38,7 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
     private fun updateAppWidgets(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
+        appWidgetIds: IntArray,
     ) {
         val pomodoroManager = BehaviorTrackerApp.getAppComponent(context).providePomodoroManager()
         if (pomodoroManager.isStarted) {
@@ -52,7 +52,7 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
         pomodoroManager: PomodoroManager,
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
+        appWidgetIds: IntArray,
     ) {
         val intentToggleStartStopTimer = Intent(context, PomodoroAppWidgetProvider::class.java)
         intentToggleStartStopTimer.action = ACTION_TOGGLE_START_STOP_POMODORO
@@ -64,13 +64,13 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             } else {
                 PendingIntent.FLAG_UPDATE_CURRENT
-            }
+            },
         )
 
         val views = RemoteViews(context.packageName, R.layout.widget_pomodoro)
         views.setOnClickPendingIntent(
             R.id.widget_pomodoro_start_stop,
-            pendingIntentToggleStartStopTime
+            pendingIntentToggleStartStopTime,
         )
 
         val startStopResource =
@@ -79,7 +79,7 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
         val currentPomodoroTime =
             TimeConverter.convertSecondsToHumanTime(
                 pomodoroManager.pomodoroTime,
-                TimeConverter.DisplayHoursMode.Never
+                TimeConverter.DisplayHoursMode.Never,
             )
         views.setTextViewText(R.id.widget_pomodoro_chrono, currentPomodoroTime)
 
@@ -92,12 +92,12 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
                 }
             views.setTextViewText(
                 R.id.widget_pomodoro_timer_name,
-                context.getString(stringRes)
+                context.getString(stringRes),
             )
         } else {
             views.setTextViewText(
                 R.id.widget_pomodoro_timer_name,
-                pomodoroManager.currentTimer!!.name
+                pomodoroManager.currentTimer!!.name,
             )
         }
 
@@ -110,7 +110,7 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
     private fun updateWidgetNoSession(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
+        appWidgetIds: IntArray,
     ) {
         val intentSelectPomodoroTimer = Intent(context, HomeActivity::class.java)
         intentSelectPomodoroTimer.action = ACTION_SELECT_POMODORO_TIMER
@@ -122,13 +122,13 @@ class PomodoroAppWidgetProvider : AppWidgetProvider() {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             } else {
                 PendingIntent.FLAG_UPDATE_CURRENT
-            }
+            },
         )
 
         val views = RemoteViews(context.packageName, R.layout.widget_pomodoro)
         views.setOnClickPendingIntent(
             R.id.widget_pomodoro_select_timer,
-            pendingIntentSelectPomodoroTimer
+            pendingIntentSelectPomodoroTimer,
         )
 
         views.setViewVisibility(R.id.widget_pomodoro_container_session_started, View.GONE)

@@ -13,10 +13,10 @@ class StringManagerModule {
     @Singleton
     @Provides
     fun provideStringManager(
-        context: Context
+        context: Context,
     ): StringManager {
         return StringModule(
-            context
+            context,
         ).createStringManger()
     }
 }

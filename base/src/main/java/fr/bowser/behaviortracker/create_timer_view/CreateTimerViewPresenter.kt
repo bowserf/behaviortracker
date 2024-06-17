@@ -14,7 +14,7 @@ class CreateTimerViewPresenter(
     private val pomodoroManager: PomodoroManager,
     private val eventManager: EventManager,
     private val timeProvider: TimeProvider,
-    private val timeManager: TimerManager
+    private val timeManager: TimerManager,
 ) : CreateTimerViewContract.Presenter {
 
     private var colorId: Int = 0
@@ -57,7 +57,7 @@ class CreateTimerViewPresenter(
             colorId,
             currentTime = currentTime,
             creationDateTimestamp = createDateTimestamp,
-            lastUpdateTimestamp = createDateTimestamp
+            lastUpdateTimestamp = createDateTimestamp,
         )
         timerRepository.addTimer(timer)
 

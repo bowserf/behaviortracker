@@ -56,7 +56,7 @@ internal class PlayBillingManager(context: Context) {
 
     fun queryProductDetailsAsync(
         params: QueryProductDetailsParams,
-        listener: ProductDetailsResponseListener
+        listener: ProductDetailsResponseListener,
     ) {
         checkBillingClientSetUp()
         billingClient!!.queryProductDetailsAsync(params, listener)
@@ -74,12 +74,12 @@ internal class PlayBillingManager(context: Context) {
 
     fun acknowledgePurchase(
         acknowledgePurchaseParams: AcknowledgePurchaseParams,
-        listener: AcknowledgePurchaseResponseListener
+        listener: AcknowledgePurchaseResponseListener,
     ) {
         checkBillingClientSetUp()
         billingClient!!.acknowledgePurchase(
             acknowledgePurchaseParams,
-            listener
+            listener,
         )
     }
 
@@ -87,7 +87,7 @@ internal class PlayBillingManager(context: Context) {
         checkBillingClientSetUp()
         billingClient!!.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(
-                billingResult: BillingResult
+                billingResult: BillingResult,
             ) {
                 if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                     isServiceConnected = true
@@ -106,7 +106,7 @@ internal class PlayBillingManager(context: Context) {
     private fun checkBillingClientSetUp() {
         if (billingClient == null) {
             throw IllegalStateException(
-                "You should set up PlayBillingManager before calling this method."
+                "You should set up PlayBillingManager before calling this method.",
             )
         }
     }

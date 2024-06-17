@@ -119,7 +119,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
         override fun updateTime(currentTime: Long) {
             currentTimeTv.text = TimeConverter.convertSecondsToHumanTime(
                 currentTime,
-                TimeConverter.DisplayHoursMode.Never
+                TimeConverter.DisplayHoursMode.Never,
             )
             progressBar.progress = currentTime.toInt()
         }
@@ -139,7 +139,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             if (progressDrawable is RotateDrawable) {
                 progressDrawable.drawable!!.setColorFilter(
                     ColorUtils.getColor(context!!, timer.colorId),
-                    PorterDuff.Mode.SRC_ATOP
+                    PorterDuff.Mode.SRC_ATOP,
                 )
             }
         }
@@ -172,7 +172,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             Snackbar.make(
                 emptyContent,
                 getString(R.string.pomodoro_no_timer_available),
-                Snackbar.LENGTH_SHORT
+                Snackbar.LENGTH_SHORT,
             )
                 .setAction(resources.getString(R.string.pomodoro_create_timer)) {
                     presenter.onClickCreateTimer()
@@ -216,7 +216,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             val color: Int
             if (enable) {
                 doNotDisturb.setBackgroundResource(
-                    R.drawable.pomodoro_view_do_not_disturb_bg_selected
+                    R.drawable.pomodoro_view_do_not_disturb_bg_selected,
                 )
                 color = ContextCompat.getColor(requireContext(), R.color.white)
             } else {
@@ -235,7 +235,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
                     // nothing to do
                 }
                 .setPositiveButton(
-                    R.string.pomodoro_do_not_disturb_dialog_permission_positive_button
+                    R.string.pomodoro_do_not_disturb_dialog_permission_positive_button,
                 ) { _, _ ->
                     presenter.onClickDoNotDisturbDialogOpenSettings()
                 }
@@ -249,7 +249,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
             PROPERTY_FAB_ANIMATION,
             1f,
             1.15f,
-            1f
+            1f,
         )
         fabAnimator.duration = FAB_ANIMATION_DURATION
         fabAnimator.repeatCount = 1

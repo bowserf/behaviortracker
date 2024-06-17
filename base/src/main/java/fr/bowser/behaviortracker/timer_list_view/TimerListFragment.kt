@@ -86,7 +86,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 } else {
                     fab.show()
                 }
-            }
+            },
         )
 
         fab.setOnClickListener { presenter.onClickAddTimer() }
@@ -207,7 +207,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 PROPERTY_FAB_ANIMATION,
                 1f,
                 1.15f,
-                1f
+                1f,
             )
             fabAnimator.duration = FAB_ANIMATION_DURATION
             fabAnimator.repeatCount = 1
@@ -231,7 +231,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             Toast.makeText(
                 requireContext(),
                 R.string.timer_list_export_succeeded,
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_SHORT,
             ).show()
         }
 
@@ -324,11 +324,11 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displayExplainNotificationPermissionForAlarm(
-            explainPermissionRequestModel: ExplainPermissionRequestViewModel
+            explainPermissionRequestModel: ExplainPermissionRequestViewModel,
         ) {
             val action =
                 TimerListFragmentDirections.actionTimerListScreenToExplainPermissionRequest(
-                    explainPermissionRequestModel
+                    explainPermissionRequestModel,
                 )
             findNavController().navigate(action)
         }
@@ -337,7 +337,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             Snackbar.make(
                 timerListContainer,
                 resources.getString(R.string.timer_view_timer_has_been_removed),
-                cancelDuration
+                cancelDuration,
             ).setAction(android.R.string.cancel) {
                 presenter.onClickCancelTimerDeletion()
             }.show()
@@ -390,7 +390,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 outRect: Rect,
                 view: View,
                 parent: RecyclerView,
-                state: RecyclerView.State
+                state: RecyclerView.State,
             ) {
                 var currentPosition = parent.getChildAdapterPosition(view)
                 // When an item is removed, getChildAdapterPosition returns NO_POSITION but this

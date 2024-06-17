@@ -13,7 +13,7 @@ class RewardsViewModule(private val screen: RewardsViewContract.Screen) {
     @Provides
     fun provideRewardsPresenter(
         inAppConfiguration: InAppConfiguration,
-        inAppManager: InAppManager
+        inAppManager: InAppManager,
     ): RewardsViewContract.Presenter {
         return RewardsViewPresenter(screen, inAppConfiguration, inAppManager)
     }

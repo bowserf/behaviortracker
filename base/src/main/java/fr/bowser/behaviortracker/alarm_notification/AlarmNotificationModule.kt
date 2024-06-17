@@ -13,7 +13,7 @@ class AlarmNotificationModule {
     @Provides
     fun provideAlarmNotificationManager(
         context: Context,
-        eventManager: EventManager
+        eventManager: EventManager,
     ): AlarmNotificationManager {
         return AlarmNotificationManagerImpl(context, eventManager)
     }

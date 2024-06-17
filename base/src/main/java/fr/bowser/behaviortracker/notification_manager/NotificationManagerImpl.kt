@@ -7,7 +7,7 @@ import android.os.Build
 import android.provider.Settings
 
 class NotificationManagerImpl(
-    private val context: Context
+    private val context: Context,
 ) : NotificationManager {
 
     private val notificationManager =

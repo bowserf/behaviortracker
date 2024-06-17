@@ -12,7 +12,7 @@ class TimerManagerImpl(
     private val coroutineScope: CoroutineScope,
     private val timerDAO: TimerDAO,
     private val timeProvider: TimeProvider,
-    private val addOn: AddOn
+    private val addOn: AddOn,
 ) : TimerManager {
 
     private val listeners = ArrayList<TimerManager.Listener>()
@@ -140,7 +140,7 @@ class TimerManagerImpl(
 
     private fun updateLastUpdateTimestamp(
         timer: Timer,
-        fakeTimer: Boolean
+        fakeTimer: Boolean,
     ) {
         val currentTime = timeProvider.getCurrentTimeMs()
         timer.lastUpdateTimestamp = currentTime
