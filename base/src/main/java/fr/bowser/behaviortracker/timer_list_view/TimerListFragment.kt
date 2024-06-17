@@ -1,9 +1,11 @@
 package fr.bowser.behaviortracker.timer_list_view
 
+import android.Manifest
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -27,6 +29,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
@@ -47,7 +50,11 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
     private val screen = createScreen()
 
-    private val activityResultLauncher = createActivityResultLauncher()
+    private val alarmNotificationActivityResultLauncher =
+        createAlarmNotificationActivityResultLauncher()
+
+    private val timerNotificationActivityResultLauncher =
+        createTimerNotificationActivityResultLauncher()
 
     private val timerAdapter = TimerListViewAdapter()
 
@@ -255,6 +262,9 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displayAskNotificationDisplay() {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                throw IllegalStateException("You can't call this method on API < 33")
+            }
             AlertDialog.Builder(requireContext())
                 .setTitle(R.string.timer_list_ask_notification_display_title)
                 .setMessage(R.string.timer_list_ask_notification_display_message)
@@ -267,26 +277,49 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 .show()
         }
 
-        override fun checkNotificationPermission(permission: String) {
+        override fun displayAskNotificationPermissionForManagingTimers() {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                throw IllegalStateException("You can't call this method on API < 33")
+            }
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setTitle(R.string.timer_list_notification_permission_title)
+                .setMessage(R.string.timer_list_notification_permission_description)
+                .setPositiveButton(R.string.timer_list_notification_permission_positive) { _, _ ->
+                    timerNotificationActivityResultLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+                .setCancelable(false)
+                .show()
+        }
+
+        override fun shouldShowNotificationPermissionRationale(): Boolean {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                false
+            }
+        }
+
+        override fun checkNotificationPermissionForAlarm() {
             when {
                 ContextCompat.checkSelfPermission(
                     requireContext(),
-                    permission
+                    Manifest.permission.POST_NOTIFICATIONS,
                 ) == PackageManager.PERMISSION_GRANTED -> {
-                    presenter.onNotificationPermissionAlreadyGranted()
+                    presenter.onNotificationPermissionAlreadyGrantedForAlarm()
                 }
 
-                shouldShowRequestPermissionRationale(permission) -> {
-                    presenter.shouldShowNotificationRequestPermissionRationale(permission)
+                shouldShowNotificationPermissionRationale() -> {
+                    presenter.shouldShowNotificationRequestPermissionRationaleForAlarm()
                 }
 
                 else -> {
-                    activityResultLauncher.launch(permission)
+                    // TODO
+                    alarmNotificationActivityResultLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
             }
         }
 
-        override fun displayExplainNotificationPermission(
+        override fun displayExplainNotificationPermissionForAlarm(
             explainPermissionRequestModel: ExplainPermissionRequestViewModel
         ) {
             val action =
@@ -317,13 +350,18 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
     }
 
-    private fun createActivityResultLauncher() =
+    private fun createAlarmNotificationActivityResultLauncher() =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { success ->
             if (success) {
                 presenter.onNotificationPermissionGranted()
             } else {
                 presenter.onNotificationPermissionDeclined()
             }
+        }
+
+    private fun createTimerNotificationActivityResultLauncher() =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { _ ->
+            // nothing to do
         }
 
     private fun setupGraph() {

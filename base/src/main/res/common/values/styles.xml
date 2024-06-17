@@ -38,4 +38,25 @@
         <item name="cornerSizeTopLeft">16dp</item>
     </style>
 
+    <style name="AlertDialogTheme">
+        <item name="buttonBarPositiveButtonStyle">@style/Alert.Button.Bg.Primary</item>
+    </style>
+
+    <style name="Alert.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Alert.Button.Bg" />
+
+    <style name="Alert.Button.Bg.Primary">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="rippleColor">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="Alert.Button.Bg.Transparent">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="rippleColor">@color/colorOnPrimary</item>
+    </style>
+
 </resources>

@@ -40,7 +40,7 @@ interface TimerListViewContract {
 
         fun onClickAskNotificationDisplaySettings()
 
-        fun onNotificationPermissionAlreadyGranted()
+        fun onNotificationPermissionAlreadyGrantedForAlarm()
 
         fun onNotificationPermissionGranted()
 
@@ -48,7 +48,7 @@ interface TimerListViewContract {
 
         fun onTimerSwiped(timerPosition: Int)
 
-        fun shouldShowNotificationRequestPermissionRationale(permission: String)
+        fun shouldShowNotificationRequestPermissionRationaleForAlarm()
 
         fun onTimerPositionChanged(fromPosition: Int, toPosition: Int)
 
@@ -75,8 +75,8 @@ interface TimerListViewContract {
 
         fun displayRemoveAllTimersConfirmationDialog()
 
-        fun displayExplainNotificationPermission(
-            explainPermissionRequestModel: ExplainPermissionRequestViewModel
+        fun displayExplainNotificationPermissionForAlarm(
+            explainPermissionRequestModel: ExplainPermissionRequestViewModel,
         )
 
         fun displayAskScheduleAlarmPermission()
@@ -85,7 +85,9 @@ interface TimerListViewContract {
 
         fun displayCancelDeletionView(cancelDuration: Int)
 
-        fun checkNotificationPermission(permission: String)
+        fun checkNotificationPermissionForAlarm()
+
+        fun shouldShowNotificationPermissionRationale(): Boolean
 
         fun updateTotalTime(totalTime: Long)
 
@@ -96,5 +98,7 @@ interface TimerListViewContract {
         fun scrollToTimer(timerIndex: Int)
 
         fun reorderTimer(fromPosition: Int, toPosition: Int)
+
+        fun displayAskNotificationPermissionForManagingTimers()
     }
 }

@@ -1,129 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <string name="alarm_timer_notif_channel_id" translatable="false">alarm_timer_notif_channel_id</string>
-  <string name="alarm_timer_notif_channel_name">Alarm</string>
-  <string name="alarm_timer_notif_channel_description">Remind you to start a timer to track your activities</string>
-  <string name="alarm_timer_title">Track daily activities</string>
-  <string name="alarm_timer_content">Start the day by tracking your first activity</string>
-  <string name="alarm_timer_status">Enable alarm</string>
-  <string name="alarm_timer_dialog_title">Reminder</string>
-  <string name="alarm_timer_dialog_content">Remind you to track your activities.</string>
-  <string name="alarm_timer_alarm_enabled">Alarm is activated</string>
-  <string name="alarm_timer_alarm_disabled">Alarm is disabled</string>
-  <string name="choose_pomodoro_timer_view_title">Choose a timer</string>
-  <string name="app_name" translatable="false">Time Tracker</string>
-  <string name="create_timer_shortcut_short_label">New timer</string>
-  <string name="create_timer_shortcut_long_label">Create a new timer to track an action.</string>
-  <string name="timer_name">Name</string>
-  <string name="timer_interrupt_name">Created at %1$s</string>
-  <string name="start_timer_after_creation">Directly start timer</string>
-  <string name="create_timer_title">Create timer</string>
-  <string name="create_timer_name_error">You must enter a name.</string>
-  <string name="create_timer_title_color">Select a color</string>
-  <string name="create_timer_title_timer">Select a starting time</string>
-  <string name="item_create_timer_save">SAVE</string>
-  <string name="menu_alarm">Alarm</string>
-  <string name="menu_review">Rate the app</string>
-  <string name="menu_reset_all">Reset all timers</string>
-  <string name="menu_export_timers">Export Timers</string>
-  <string name="menu_remove_all">Remove all timers</string>
-  <string name="menu_rewards">Support developers</string>
-  <string name="menu_setting">Settings</string>
-  <string name="home_dialog_confirm_reset_all_timers">Are you sur you want to reset all timers ?</string>
-  <string name="home_activity_bottom_navigation_timer">Timer</string>
-  <string name="home_activity_bottom_navigation_pomodoro" translatable="false">Pomodoro</string>
-  <string name="timer_list_explain_notification_permission_title">Get reminder!</string>
-  <string name="timer_list_explain_notification_permission_message">Never forget to time your activities thanks to the reminder you setup.</string>
-  <string name="timer_notif_channel_id" translatable="false">timer_notif_channel_id</string>
-  <string name="timer_notif_channel_name">Timer</string>
-  <string name="timer_notif_channel_description">Display and control current running timer.</string>
-  <string name="timer_notif_start">Start</string>
-  <string name="timer_notif_interrupt_timer">Interrupt</string>
-  <string name="timer_notif_pause">Pause</string>
-  <string name="timer_notif_continue_pomodoro">Continue pomodoro</string>
-  <string name="timer_notif_pomodoro_session_end">Time is up</string>
-  <string name="timer_service_pomodoro_title" translatable="false">[Pomodoro] %1$s</string>
-  <string name="pomodoro_timer_pause">Pause</string>
-  <string name="pomodoro_dialog_title">Time is up</string>
-  <string name="pomodoro_dialog_content">Do you want to continue the session ?</string>
-  <string name="pomodoro_dialog_continue">Continue</string>
-  <string name="pomodoro_dialog_stop">Stop</string>
-  <string name="pomodoro_create_timer">Create Timer</string>
-  <string name="pomodoro_no_timer_available">There is no available timers.</string>
-  <string name="pomodoro_choose_task">Choose a task on which you want to focus on.</string>
-  <string name="pomodoro_start_session">Start a session.</string>
-  <string name="pomodoro_take_a_rest">Take a break when time is up.</string>
-  <string name="pomodoro_stop">Stop</string>
-  <string name="pomodoro_play">Play</string>
-  <string name="pomodoro_pause">Pause</string>
-  <string name="pomodoro_do_not_disturb">Do not disturb</string>
-  <string name="pomodoro_do_not_disturb_dialog_permission_title">Permission required</string>
-  <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker needs the permission \"Do not disturb\" mode in order to change the \"Do not disturb\" state.
+    <string name="alarm_timer_notif_channel_id" translatable="false">alarm_timer_notif_channel_id</string>
+    <string name="alarm_timer_notif_channel_name">Alarm</string>
+    <string name="alarm_timer_notif_channel_description">Remind you to start a timer to track your activities</string>
+    <string name="alarm_timer_title">Track daily activities</string>
+    <string name="alarm_timer_content">Start the day by tracking your first activity</string>
+    <string name="alarm_timer_status">Enable alarm</string>
+    <string name="alarm_timer_dialog_title">Reminder</string>
+    <string name="alarm_timer_dialog_content">Remind you to track your activities.</string>
+    <string name="alarm_timer_alarm_enabled">Alarm is activated</string>
+    <string name="alarm_timer_alarm_disabled">Alarm is disabled</string>
+    <string name="choose_pomodoro_timer_view_title">Choose a timer</string>
+    <string name="app_name" translatable="false">Time Tracker</string>
+    <string name="create_timer_shortcut_short_label">New timer</string>
+    <string name="create_timer_shortcut_long_label">Create a new timer to track an action.</string>
+    <string name="timer_name">Name</string>
+    <string name="timer_interrupt_name">Created at %1$s</string>
+    <string name="start_timer_after_creation">Directly start timer</string>
+    <string name="create_timer_title">Create timer</string>
+    <string name="create_timer_name_error">You must enter a name.</string>
+    <string name="create_timer_title_color">Select a color</string>
+    <string name="create_timer_title_timer">Select a starting time</string>
+    <string name="item_create_timer_save">SAVE</string>
+    <string name="menu_alarm">Alarm</string>
+    <string name="menu_review">Rate the app</string>
+    <string name="menu_reset_all">Reset all timers</string>
+    <string name="menu_export_timers">Export Timers</string>
+    <string name="menu_remove_all">Remove all timers</string>
+    <string name="menu_rewards">Support developers</string>
+    <string name="menu_setting">Settings</string>
+    <string name="home_dialog_confirm_reset_all_timers">Are you sur you want to reset all timers ?</string>
+    <string name="home_activity_bottom_navigation_timer">Timer</string>
+    <string name="home_activity_bottom_navigation_pomodoro" translatable="false">Pomodoro</string>
+    <string name="timer_list_explain_notification_permission_title">Get reminder!</string>
+    <string name="timer_list_explain_notification_permission_message">Never forget to time your activities thanks to the reminder you setup.</string>
+    <string name="timer_notif_channel_id" translatable="false">timer_notif_channel_id</string>
+    <string name="timer_notif_channel_name">Timer</string>
+    <string name="timer_notif_channel_description">Display and control current running timer.</string>
+    <string name="timer_notif_start">Start</string>
+    <string name="timer_notif_interrupt_timer">Interrupt</string>
+    <string name="timer_notif_pause">Pause</string>
+    <string name="timer_notif_continue_pomodoro">Continue pomodoro</string>
+    <string name="timer_notif_pomodoro_session_end">Time is up</string>
+    <string name="timer_service_pomodoro_title" translatable="false">[Pomodoro] %1$s</string>
+    <string name="pomodoro_timer_pause">Pause</string>
+    <string name="pomodoro_dialog_title">Time is up</string>
+    <string name="pomodoro_dialog_content">Do you want to continue the session ?</string>
+    <string name="pomodoro_dialog_continue">Continue</string>
+    <string name="pomodoro_dialog_stop">Stop</string>
+    <string name="pomodoro_create_timer">Create Timer</string>
+    <string name="pomodoro_no_timer_available">There is no available timers.</string>
+    <string name="pomodoro_choose_task">Choose a task on which you want to focus on.</string>
+    <string name="pomodoro_start_session">Start a session.</string>
+    <string name="pomodoro_take_a_rest">Take a break when time is up.</string>
+    <string name="pomodoro_stop">Stop</string>
+    <string name="pomodoro_play">Play</string>
+    <string name="pomodoro_pause">Pause</string>
+    <string name="pomodoro_do_not_disturb">Do not disturb</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_title">Permission required</string>
+    <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker needs the permission \"Do not disturb\" mode in order to change the \"Do not disturb\" state.
 You have to manually enable the permission from settings.</string>
-  <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Open settings</string>
-  <string name="activity_rewards_title">Support developers</string>
-  <string name="rewards_purchase_fail">An error occurred during purchase =\'(
+    <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Open settings</string>
+    <string name="activity_rewards_title">Support developers</string>
+    <string name="rewards_purchase_fail">An error occurred during purchase =\'(
 Please try later.</string>
-  <string name="rewards_purchase_success">Thank you for your support! We will continue to work hard to improve the application &lt;3</string>
-  <string name="pref_key_timer_category" translatable="false">pref_key_timer_category</string>
-  <string name="pref_key_timer_other" translatable="false">pref_key_timer_other</string>
-  <string name="pref_key_pomodoro" translatable="false">pref_key_pomodoro</string>
-  <string name="pref_key_send_commentary" translatable="false">pref_key_send_commentary</string>
-  <string name="pref_key_pomodoro_vibration" translatable="false">pref_key_pomodoro_vibration</string>
-  <string name="pref_key_pomodoro_stage" translatable="false">pref_key_pomodoro_stage</string>
-  <string name="pref_key_pomodoro_pause_stage" translatable="false">pref_key_pomodoro_pause_stage</string>
-  <string name="activity_setting_title">Settings</string>
-  <string name="settings_category_timer">Timer</string>
-  <string name="settings_category_other">Other</string>
-  <string name="settings_cell_one_active_timer">One active timer at a time</string>
-  <string name="settings_cell_one_active_message">Stop active timer if a new one is started.</string>
-  <string name="settings_cell_time_modification_title">Time modification</string>
-  <string name="settings_cell_time_modification_message">Adjust time you spend on your actions.</string>
-  <string name="settings_cell_send_commentary_title">Send a suggestion</string>
-  <string name="settings_cell_send_commentary_message">Tell us how to improve Time Tracker.</string>
-  <string name="settings_category_pomodoro" translatable="false">Pomodoro</string>
-  <string name="settings_cell_pomodoro_vibration">Enable vibration</string>
-  <string name="settings_cell_pomodoro_vibration_message">Device vibrates when time is up.</string>
-  <string name="settings_cell_pomodoro_stage_title">Pomodoro stage duration</string>
-  <string name="settings_cell_pomodoro_stage_message">Duration of the timer during a pomodoro session.</string>
-  <string name="settings_cell_pomodoro_pause_stage_title">Pomodoro pause stage duration</string>
-  <string name="settings_cell_pomodoro_pause_stage_message">Duration of the pause during a pomodoro session.</string>
-  <string name="settings_send_email_choose_app">Send email :</string>
-  <string name="settings_send_email_no_application_available">There are no email clients installed.</string>
-  <string name="settings_send_email_subject">How to improve Time Tracker</string>
-  <string name="show_mode_view_menu_keep_screen_on">Keep screen ON</string>
-  <string name="show_mode_view_menu_keep_screen_off">Don\'t keep screen ON</string>
-  <string name="item_update_timer_time">Update time</string>
-  <string name="timer_item_view_reset">Reset</string>
-  <string name="timer_item_view_remove">Remove</string>
-  <string name="timer_item_view_rename">Rename</string>
-  <string name="timer_item_view_start_pomodoro">Start Pomodoro</string>
-  <string name="timer_row_rename">Rename timer</string>
-  <string name="empty_list_view_text">What are you going to time today?</string>
-  <string name="timer_view_timer_has_been_removed">Timer has been removed</string>
-  <string name="timer_list_remove_all_timers_title">Remove all timers</string>
-  <string name="timer_list_remove_all_timers_message">Are you sure you want to remove all timers?</string>
-  <string name="timer_list_section_inactive_title">Timers</string>
-  <string name="timer_list_section_active_title">Active timer</string>
-  <string name="timer_list_total_time">Total time: %1$s</string>
-  <string name="timer_list_schedule_alarm_permission_title">Schedule alarm\'s permission required</string>
-  <string name="timer_list_schedule_alarm_permission_message">Time Tracker needs the permission \"Alarms &amp; reminders\" in order to enable a reminder.
+    <string name="rewards_purchase_success">Thank you for your support! We will continue to work hard to improve the application &lt;3</string>
+    <string name="pref_key_timer_category" translatable="false">pref_key_timer_category</string>
+    <string name="pref_key_timer_other" translatable="false">pref_key_timer_other</string>
+    <string name="pref_key_pomodoro" translatable="false">pref_key_pomodoro</string>
+    <string name="pref_key_send_commentary" translatable="false">pref_key_send_commentary</string>
+    <string name="pref_key_pomodoro_vibration" translatable="false">pref_key_pomodoro_vibration</string>
+    <string name="pref_key_pomodoro_stage" translatable="false">pref_key_pomodoro_stage</string>
+    <string name="pref_key_pomodoro_pause_stage" translatable="false">pref_key_pomodoro_pause_stage</string>
+    <string name="activity_setting_title">Settings</string>
+    <string name="settings_category_timer">Timer</string>
+    <string name="settings_category_other">Other</string>
+    <string name="settings_cell_one_active_timer">One active timer at a time</string>
+    <string name="settings_cell_one_active_message">Stop active timer if a new one is started.</string>
+    <string name="settings_cell_time_modification_title">Time modification</string>
+    <string name="settings_cell_time_modification_message">Adjust time you spend on your actions.</string>
+    <string name="settings_cell_send_commentary_title">Send a suggestion</string>
+    <string name="settings_cell_send_commentary_message">Tell us how to improve Time Tracker.</string>
+    <string name="settings_category_pomodoro" translatable="false">Pomodoro</string>
+    <string name="settings_cell_pomodoro_vibration">Enable vibration</string>
+    <string name="settings_cell_pomodoro_vibration_message">Device vibrates when time is up.</string>
+    <string name="settings_cell_pomodoro_stage_title">Pomodoro stage duration</string>
+    <string name="settings_cell_pomodoro_stage_message">Duration of the timer during a pomodoro session.</string>
+    <string name="settings_cell_pomodoro_pause_stage_title">Pomodoro pause stage duration</string>
+    <string name="settings_cell_pomodoro_pause_stage_message">Duration of the pause during a pomodoro session.</string>
+    <string name="settings_send_email_choose_app">Send email :</string>
+    <string name="settings_send_email_no_application_available">There are no email clients installed.</string>
+    <string name="settings_send_email_subject">How to improve Time Tracker</string>
+    <string name="show_mode_view_menu_keep_screen_on">Keep screen ON</string>
+    <string name="show_mode_view_menu_keep_screen_off">Don\'t keep screen ON</string>
+    <string name="item_update_timer_time">Update time</string>
+    <string name="timer_item_view_reset">Reset</string>
+    <string name="timer_item_view_remove">Remove</string>
+    <string name="timer_item_view_rename">Rename</string>
+    <string name="timer_item_view_start_pomodoro">Start Pomodoro</string>
+    <string name="timer_row_rename">Rename timer</string>
+    <string name="empty_list_view_text">What are you going to time today?</string>
+    <string name="timer_view_timer_has_been_removed">Timer has been removed</string>
+    <string name="timer_list_remove_all_timers_title">Remove all timers</string>
+    <string name="timer_list_remove_all_timers_message">Are you sure you want to remove all timers?</string>
+    <string name="timer_list_section_inactive_title">Timers</string>
+    <string name="timer_list_section_active_title">Active timer</string>
+    <string name="timer_list_total_time">Total time: %1$s</string>
+    <string name="timer_list_schedule_alarm_permission_title">Schedule alarm\'s permission required</string>
+    <string name="timer_list_schedule_alarm_permission_message">Time Tracker needs the permission \"Alarms &amp; reminders\" in order to enable a reminder.
 You have to manually enable the permission from settings.</string>
-  <string name="timer_list_schedule_alarm_permission_positive_button">Open settings</string>
-  <string name="timer_list_ask_notification_display_title">Allow to display notification</string>
-  <string name="timer_list_ask_notification_display_message">Time Tracker needs to be able to display notification in order to enable a reminder.
-You have to manually enable this from settings.</string>
-  <string name="timer_list_ask_notification_display_positive_button">Open settings</string>
-  <string name="update_timer_time_dialog_title">Update timer time</string>
-  <string name="release_screenshot_timer_work">Work</string>
-  <string name="release_screenshot_timer_transport">Transport</string>
-  <string name="release_screenshot_timer_sport">Sport</string>
-  <string name="release_screenshot_timer_cooking">Cooking</string>
-  <string name="release_screenshot_timer_watch_series">Series</string>
-  <string name="widget_pomodoro_no_session_title">Pomodoro</string>
-  <string name="widget_pomodoro_no_session">No current session.</string>
-  <string name="widget_pomodoro_click_to_start_break_session">Click to start break.</string>
-  <string name="widget_pomodoro_click_to_start_pomodoro_session">Click to start Pomodoro session.</string>
-  <string name="export_total_time">Total time</string>
-  <string name="timer_list_export_succeeded">Timers data copied to clipboard</string>
+    <string name="timer_list_schedule_alarm_permission_positive_button">Open settings</string>
+    <string name="timer_list_ask_notification_display_title">Allow to display notification</string>
+    <string name="timer_list_ask_notification_display_message">Time Tracker needs to be able to display notification in order to enable a reminder.</string>
+    <string name="timer_list_notification_permission_positive">OK</string>
+    <string name="timer_list_notification_permission_title">Allow Notifications</string>
+    <string name="timer_list_notification_permission_description">The app needs the Notification permission to display a notification with control buttons to manage the current running timer.</string>
+    <string name="timer_list_ask_notification_display_positive_button">Open settings</string>
+    <string name="update_timer_time_dialog_title">Update timer time</string>
+    <string name="release_screenshot_timer_work">Work</string>
+    <string name="release_screenshot_timer_transport">Transport</string>
+    <string name="release_screenshot_timer_sport">Sport</string>
+    <string name="release_screenshot_timer_cooking">Cooking</string>
+    <string name="release_screenshot_timer_watch_series">Series</string>
+    <string name="widget_pomodoro_no_session_title">Pomodoro</string>
+    <string name="widget_pomodoro_no_session">No current session.</string>
+    <string name="widget_pomodoro_click_to_start_break_session">Click to start break.</string>
+    <string name="widget_pomodoro_click_to_start_pomodoro_session">Click to start Pomodoro session.</string>
+    <string name="export_total_time">Total time</string>
+    <string name="timer_list_export_succeeded">Timers data copied to clipboard</string>
 </resources>

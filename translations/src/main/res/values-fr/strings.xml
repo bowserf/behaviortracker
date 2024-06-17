@@ -91,7 +91,7 @@
     <string name="timer_list_total_time">Temps total: %1$s</string>
     <string name="timer_list_schedule_alarm_permission_title">Permission pour programmer une alarme requise</string>
     <string name="timer_list_schedule_alarm_permission_positive_button">Ouvrir les paramètres</string>
-    <string name="timer_list_ask_notification_display_title">Autoriser d\'afficher une notification</string>
+    <string name="timer_list_ask_notification_display_title">Autoriser l\'affichage de notifications</string>
     <string name="timer_list_schedule_alarm_permission_message">Time Tracker a besoin de la permission \"Alarme et rappels\" afin d\'activer un rappel. Vous devez manuellement activer la permission depuis les paramètres.</string>
     <string name="timer_list_ask_notification_display_message">Time Tracker a besoin de pouvoir afficher une notification afin d\'activer un rappel. Vous devez manuellement activer les notifications depuis les paramètres.</string>
     <string name="timer_list_ask_notification_display_positive_button">Ouvrir les paramètres</string>

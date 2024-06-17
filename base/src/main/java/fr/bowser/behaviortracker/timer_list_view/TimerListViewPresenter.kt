@@ -3,17 +3,14 @@ package fr.bowser.behaviortracker.timer_list_view
 import android.Manifest
 import android.os.Build
 import fr.bowser.behaviortracker.R
-import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
 import fr.bowser.behaviortracker.interrupt_timer.CreateInterruptTimerUseCase
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
-import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
-import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature_clipboard.CopyDataToClipboardManager
@@ -126,7 +123,7 @@ class TimerListViewPresenter(
     override fun onClickAlarm() {
         if (alarmTimerManager.canScheduleAlarm()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                screen.checkNotificationPermission(Manifest.permission.POST_NOTIFICATIONS)
+                screen.checkNotificationPermissionForAlarm()
             } else {
                 displayAlarmTimerDialogIfNotificationsAreEnabled()
             }
@@ -135,18 +132,18 @@ class TimerListViewPresenter(
         }
     }
 
-    override fun onNotificationPermissionAlreadyGranted() {
+    override fun onNotificationPermissionAlreadyGrantedForAlarm() {
         displayAlarmTimerDialogIfNotificationsAreEnabled()
     }
 
-    override fun shouldShowNotificationRequestPermissionRationale(permission: String) {
+    override fun shouldShowNotificationRequestPermissionRationaleForAlarm() {
         val explainPermissionRequestModel = ExplainPermissionRequestViewModel(
             stringManager.getString(R.string.timer_list_explain_notification_permission_title),
             stringManager.getString(R.string.timer_list_explain_notification_permission_message),
             R.drawable.explain_permission_request_view_notification_permission,
-            listOf(permission)
+            listOf(Manifest.permission.POST_NOTIFICATIONS)
         )
-        screen.displayExplainNotificationPermission(explainPermissionRequestModel)
+        screen.displayExplainNotificationPermissionForAlarm(explainPermissionRequestModel)
     }
 
     override fun onTimerPositionChanged(fromPosition: Int, toPosition: Int) {
@@ -229,17 +226,6 @@ class TimerListViewPresenter(
         }
     }
 
-    private fun createReviewManagerListener() = object : ReviewManager.Listener {
-        override fun onSucceeded() {
-            screen.invalidateMenu()
-            reviewStorage.markReview()
-        }
-
-        override fun onFailed(failReason: ReviewManager.FailReason) {
-            // nothing to do
-        }
-    }
-
     private fun updateTimerList() {
         val timers = timerRepository.getTimerList().filter {
             it != ongoingDeletionTimer
@@ -261,15 +247,34 @@ class TimerListViewPresenter(
         timerRepository.reorderTimerList(timers)
     }
 
+    private fun scrollToTimerInternal(timerId: Long) {
+        val index = timerRepository.getTimerList().indexOfFirst { it.id == timerId }
+        screen.scrollToTimer(index)
+    }
+
+    private fun askNotificationPermissionIfNeeded() {
+        if (!notificationManager.areNotificationsEnabled() &&
+            !screen.shouldShowNotificationPermissionRationale()
+        ) {
+            screen.displayAskNotificationPermissionForManagingTimers()
+        }
+    }
+
+    private fun createReviewManagerListener() = object : ReviewManager.Listener {
+        override fun onSucceeded() {
+            screen.invalidateMenu()
+            reviewStorage.markReview()
+        }
+
+        override fun onFailed(failReason: ReviewManager.FailReason) {
+            // nothing to do
+        }
+    }
+
     private fun createScrollToTimerListener() = object : ScrollToTimerManager.Listener {
         override fun scrollToTimer(timerId: Long) {
             scrollToTimerInternal(timerId)
         }
-    }
-
-    private fun scrollToTimerInternal(timerId: Long) {
-        val index = timerRepository.getTimerList().indexOfFirst { it.id == timerId }
-        screen.scrollToTimer(index)
     }
 
     private fun createTimeManagerListener() = object : TimerManager.Listener {
@@ -296,6 +301,8 @@ class TimerListViewPresenter(
                 delay(200)
                 scrollToTimerInternal(updatedTimer.id)
             }
+
+            askNotificationPermissionIfNeeded()
         }
 
         override fun onTimerRenamed(updatedTimer: Timer) {
