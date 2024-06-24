@@ -7,6 +7,7 @@ import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.ScaleAnimation
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,6 +25,7 @@ import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.behaviortracker.utils.ViewExtension.bind
 import javax.inject.Inject
+
 
 class TimerItemView(context: Context) : CardView(context) {
 
@@ -174,15 +176,15 @@ class TimerItemView(context: Context) : CardView(context) {
 
             val rootView =
                 LayoutInflater.from(context).inflate(R.layout.timer_item_view_rename_timer, null)
-            val input = rootView.findViewById<EditText>(R.id.edittext)
+            val newTimerNameEditText = rootView.findViewById<EditText>(R.id.timer_item_view_rename_timer_edit_text)
 
-            input.setText(oldName)
-            input.setSelection(input.text.length)
+            newTimerNameEditText.setText(oldName)
+            newTimerNameEditText.setSelection(newTimerNameEditText.text.length)
 
             alertDialog.setView(rootView)
 
             alertDialog.setPositiveButton(android.R.string.ok) { _, _ ->
-                val newName = input.text.toString()
+                val newName = newTimerNameEditText.text.toString()
                 presenter.onTimerNameUpdated(newName)
             }
 
@@ -191,6 +193,16 @@ class TimerItemView(context: Context) : CardView(context) {
             val dialog = alertDialog.create()
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.show()
+
+            newTimerNameEditText.setOnEditorActionListener { view, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    val newName = newTimerNameEditText.text.toString()
+                    presenter.onTimerNameUpdated(newName)
+                    dialog.dismiss()
+                    return@setOnEditorActionListener true
+                }
+                false
+            }
         }
 
         override fun statusUpdated(activate: Boolean) {
