@@ -24,6 +24,7 @@ import fr.bowser.behaviortracker.update_timer_time_view.UpdateTimerTimeDialog
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.behaviortracker.utils.ViewExtension.bind
+import fr.bowser.behaviortracker.utils.setMultiLineCapSentencesAndDoneAction
 import javax.inject.Inject
 
 
@@ -176,8 +177,9 @@ class TimerItemView(context: Context) : CardView(context) {
 
             val rootView =
                 LayoutInflater.from(context).inflate(R.layout.timer_item_view_rename_timer, null)
-            val newTimerNameEditText = rootView.findViewById<EditText>(R.id.timer_item_view_rename_timer_edit_text)
-
+            val newTimerNameEditText =
+                rootView.findViewById<EditText>(R.id.timer_item_view_rename_timer_edit_text)
+            newTimerNameEditText.setMultiLineCapSentencesAndDoneAction()
             newTimerNameEditText.setText(oldName)
             newTimerNameEditText.setSelection(newTimerNameEditText.text.length)
 

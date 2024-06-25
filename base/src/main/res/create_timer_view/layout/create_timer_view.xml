@@ -46,10 +46,7 @@
             android:id="@+id/creation_timer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/timer_name"
-            android:imeOptions="flagNoExtractUi|actionDone"
-            android:inputType="textCapSentences"
-            android:singleLine="true" />
+            android:hint="@string/timer_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

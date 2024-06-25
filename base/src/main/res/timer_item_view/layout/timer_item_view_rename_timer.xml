@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- IME option and input type are set programmatically because otherwise it's not possible
+     to have a multi line edit text with DONE ime options -->
     <EditText
         android:id="@+id/timer_item_view_rename_timer_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/default_space_1_5"
-        android:inputType="textCapSentences" />
+        android:layout_marginHorizontal="@dimen/default_space_1_5" />
 
 </FrameLayout>

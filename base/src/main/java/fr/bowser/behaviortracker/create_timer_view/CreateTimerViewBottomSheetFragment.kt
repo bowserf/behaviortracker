@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.utils.setMultiLineCapSentencesAndDoneAction
 import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -101,6 +102,7 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
 
     private fun initUI(root: View, isPomodoro: Boolean) {
         editTimerName = root.findViewById(R.id.creation_timer_name)
+        editTimerName.setMultiLineCapSentencesAndDoneAction()
 
         // methods to display keyboard and focus edittext
         displayKeyboard()
