@@ -1,7 +1,10 @@
 package fr.bowser.behaviortracker.create_timer_view
 
+import android.content.Intent
+import androidx.fragment.app.Fragment
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.speech_to_text.SpeechToTextManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
@@ -15,6 +18,7 @@ class CreateTimerViewPresenter(
     private val eventManager: EventManager,
     private val timeProvider: TimeProvider,
     private val timeManager: TimerManager,
+    private val speechToTextManager: SpeechToTextManager,
 ) : CreateTimerViewContract.Presenter {
 
     private var colorId: Int = 0
@@ -33,6 +37,8 @@ class CreateTimerViewPresenter(
         screen.fillColorList(colorId)
         screen.updateContainerColorState(isColorDisplayed)
         screen.updateContainerTimeState(isTimeDisplayed)
+
+        screen.showSpeechIcon(speechToTextManager.isRecognitionAvailable())
     }
 
     override fun onStop() {
@@ -82,6 +88,19 @@ class CreateTimerViewPresenter(
     override fun onClickChangeTimeState() {
         isTimeDisplayed = !isTimeDisplayed
         screen.updateContainerTimeState(isTimeDisplayed)
+    }
+
+    override fun onClickMic(fragment: Fragment) {
+        speechToTextManager.startSpeechToText(fragment)
+    }
+
+    override fun onSpeechToTextDataRetrieved(data: Intent?) {
+        val text = speechToTextManager.getText(data)
+        if (text == null) {
+            screen.showSpeechToTextError()
+        } else {
+            screen.setTimerName(text)
+        }
     }
 
     override fun enablePomodoroMode(isPomodoro: Boolean) {

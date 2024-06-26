@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import fr.bowser.behaviortracker.event.EventManager
 import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.speech_to_text.SpeechToTextManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
@@ -20,6 +21,7 @@ class CreateTimerViewModule(private val screen: CreateTimerViewContract.Screen) 
         pomodoroManager: PomodoroManager,
         eventManager: EventManager,
         timeProvider: TimeProvider,
+        speechToTextManager: SpeechToTextManager,
     ): CreateTimerViewContract.Presenter {
         return CreateTimerViewPresenter(
             screen,
@@ -28,6 +30,7 @@ class CreateTimerViewModule(private val screen: CreateTimerViewContract.Screen) 
             eventManager,
             timeProvider,
             timeManager,
+            speechToTextManager,
         )
     }
 }

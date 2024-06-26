@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,7 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_space"
-        android:paddingBottom="@dimen/default_space">
+        android:paddingBottom="@dimen/default_space"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/create_timer_view_mic">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/creation_timer_name"

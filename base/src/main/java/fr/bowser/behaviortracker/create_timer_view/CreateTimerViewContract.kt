@@ -1,5 +1,8 @@
 package fr.bowser.behaviortracker.create_timer_view
 
+import android.content.Intent
+import androidx.fragment.app.Fragment
+
 interface CreateTimerViewContract {
 
     interface Presenter {
@@ -17,6 +20,10 @@ interface CreateTimerViewContract {
         fun onClickChangeColorState()
 
         fun onClickChangeTimeState()
+
+        fun onClickMic(fragment: Fragment)
+
+        fun onSpeechToTextDataRetrieved(data: Intent?)
     }
 
     interface Screen {
@@ -32,5 +39,11 @@ interface CreateTimerViewContract {
         fun updateContainerTimeState(isDisplay: Boolean)
 
         fun updateContainerColorState(isDisplay: Boolean)
+
+        fun setTimerName(text: String)
+
+        fun showSpeechIcon(isVisible: Boolean)
+
+        fun showSpeechToTextError()
     }
 }

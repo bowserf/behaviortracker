@@ -1,6 +1,8 @@
 package fr.bowser.behaviortracker.create_timer_view
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
+import fr.bowser.behaviortracker.speech_to_text.internal.SpeechToTextManagerImpl
 import fr.bowser.behaviortracker.utils.setMultiLineCapSentencesAndDoneAction
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -120,10 +124,21 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
         colorStateImg = root.findViewById(R.id.create_timer_color_container_status)
 
         editTimerNameLayout = root.findViewById(R.id.creation_timer_name_layout)
+        editTimerNameLayout.setStartIconOnClickListener {
+            presenter.onClickMic(this)
+        }
 
         root.findViewById<View>(R.id.create_timer_view_create).setOnClickListener { saveTimer() }
 
         root.findViewById<View>(R.id.create_timer_close).setOnClickListener { dismiss() }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == SpeechToTextManagerImpl.REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                presenter.onSpeechToTextDataRetrieved(data)
+            }
+        }
     }
 
     private fun displayKeyboard() {
@@ -201,6 +216,23 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
                     R.drawable.create_timer_view_content_hidden
                 },
             )
+        }
+
+        override fun setTimerName(text: String) {
+            editTimerName.setText(text)
+            editTimerName.setSelection(editTimerName.length())
+        }
+
+        override fun showSpeechIcon(isVisible: Boolean) {
+            editTimerNameLayout.isStartIconVisible = isVisible
+        }
+
+        override fun showSpeechToTextError() {
+            Toast.makeText(
+                requireContext(),
+                resources.getString(R.string.create_timer_speech_to_text_error),
+                Toast.LENGTH_SHORT,
+            ).show()
         }
     }
 
