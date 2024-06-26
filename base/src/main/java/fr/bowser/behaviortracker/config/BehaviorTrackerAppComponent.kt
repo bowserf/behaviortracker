@@ -28,6 +28,8 @@ import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
+import fr.bowser.behaviortracker.speech_to_text.SpeechToTextManager
+import fr.bowser.behaviortracker.speech_to_text.SpeechToTextModule
 import fr.bowser.behaviortracker.string.StringManagerModule
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.time_provider.TimeProviderModule
@@ -65,6 +67,7 @@ import javax.inject.Singleton
         TimerRepositoryModule::class,
         TimerManagerModule::class,
         TimeProviderModule::class,
+        SpeechToTextModule::class,
     ),
 )
 interface BehaviorTrackerAppComponent {
@@ -112,6 +115,8 @@ interface BehaviorTrackerAppComponent {
     fun provideTimerDAO(): TimerDAO
 
     fun provideTimerRepositoryManager(): TimerRepository
+
+    fun provideSpeechToTextManager(): SpeechToTextManager
 
     @Component.Builder
     interface Builder {
