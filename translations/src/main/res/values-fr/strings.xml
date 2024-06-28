@@ -105,4 +105,15 @@
     <string name="widget_pomodoro_no_session">Aucune session.</string>
     <string name="widget_pomodoro_click_to_start_break_session">Cliquer pour démarrer la pause.</string>
     <string name="widget_pomodoro_click_to_start_pomodoro_session">Cliquer pour démarrer une session de Pomodoro.</string>
+
+    <string name="timer_interrupt_name">Créé à %1$s</string>
+    <string name="create_timer_speech_to_text_error">Une erreur s\'est produite lors de la reconnaissance vocale. Veuillez réessayer.</string>
+    <string name="menu_export_timers">Exporter les chronomètres</string>
+    <string name="timer_notif_interrupt_timer">Interrompre</string>
+    <string name="timer_list_notification_permission_positive">OK</string>
+    <string name="timer_list_notification_permission_title">Autoriser les notifications</string>
+    <string name="timer_list_notification_permission_description">L\'application a besoin de la permission de Notification pour afficher une notification avec des boutons de contrôle pour gérer le chronomètre en cours.</string>
+    <string name="export_total_time">Temps total</string>
+    <string name="timer_list_export_succeeded">Données des chronomètres copiées dans le presse-papiers</string>
+
 </resources>
