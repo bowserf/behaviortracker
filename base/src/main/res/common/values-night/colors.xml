@@ -6,8 +6,12 @@
     <color name="colorSecondary">#F48FB1</color>
     <color name="colorOnSecondary">#000000</color>
 
+    <color name="colorBackground">#1C1C1C</color>
+
     <color name="icon_day_night">#8affffff</color>
     <color name="icon_light_day_night">#8a000000</color>
+
+    <color name="fab_interrupt_timer">#FBF29D</color>
 
     <color name="icon_light_day">#8affffff</color>
 

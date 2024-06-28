@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:itemTextAppearance">@style/PopupMenuTextAppearance</item>
         <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
         <item name="bottomSheetDialogTheme">@style/AlmaTheme.BottomSheetDialog</item>
