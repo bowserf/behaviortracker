@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import fr.bowser.behaviortracker.R
@@ -228,7 +229,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
         }
 
         override fun displayAskDndPermission() {
-            AlertDialog.Builder(requireContext())
+            MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.pomodoro_do_not_disturb_dialog_permission_title)
                 .setMessage(R.string.pomodoro_do_not_disturb_dialog_permission_message)
                 .setNegativeButton(android.R.string.cancel) { _, _ ->

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.TimePicker
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
@@ -31,7 +32,7 @@ class UpdateTimerTimeDialog : DialogFragment() {
         val root =
             LayoutInflater.from(context).inflate(R.layout.update_timer_time_view_dialog, null)
 
-        val dialogBuilder = AlertDialog.Builder(requireContext())
+        val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
         dialogBuilder.setTitle(resources.getString(R.string.update_timer_time_dialog_title))
         dialogBuilder.setView(root)
         dialogBuilder.setPositiveButton(android.R.string.ok) { _, _ ->

@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.inapp.InApp
@@ -79,7 +80,7 @@ class RewardsRowView(context: Context) : CardView(context) {
         }
 
         override fun displayStoreConnectionError() {
-            AlertDialog.Builder(context)
+            MaterialAlertDialogBuilder(context)
                 .setMessage(R.string.rewards_purchase_fail)
                 .setNegativeButton(android.R.string.cancel, null)
                 .show()

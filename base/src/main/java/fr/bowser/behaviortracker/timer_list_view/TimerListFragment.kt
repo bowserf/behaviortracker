@@ -154,7 +154,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     private fun createScreen() = object : TimerListViewContract.Screen {
         override fun displayResetAllDialog() {
             val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
-            val builder = AlertDialog.Builder(requireContext())
+            val builder = MaterialAlertDialogBuilder(requireContext())
             builder.setMessage(message)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     presenter.onClickResetAllTimers()
@@ -179,14 +179,14 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displayRemoveAllTimersConfirmationDialog() {
-            val dialogBuilder = AlertDialog.Builder(requireContext())
+            MaterialAlertDialogBuilder(requireContext())
                 .setTitle(resources.getString(R.string.timer_list_remove_all_timers_title))
                 .setMessage(resources.getString(R.string.timer_list_remove_all_timers_message))
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     presenter.onClickConfirmRemoveAllTimers()
                 }
                 .setNegativeButton(android.R.string.cancel, null)
-            dialogBuilder.show()
+                .show()
         }
 
         override fun displayCreateTimerView() {
@@ -249,7 +249,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displayAskScheduleAlarmPermission() {
-            AlertDialog.Builder(requireContext())
+            MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.timer_list_schedule_alarm_permission_title)
                 .setMessage(R.string.timer_list_schedule_alarm_permission_message)
                 .setNegativeButton(android.R.string.cancel) { _, _ ->
@@ -265,7 +265,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                 throw IllegalStateException("You can't call this method on API < 33")
             }
-            AlertDialog.Builder(requireContext())
+            MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.timer_list_ask_notification_display_title)
                 .setMessage(R.string.timer_list_ask_notification_display_message)
                 .setNegativeButton(android.R.string.cancel) { _, _ ->

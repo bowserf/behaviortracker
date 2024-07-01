@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import javax.inject.Inject
@@ -20,7 +21,7 @@ class PomodoroViewDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialogBuilder = AlertDialog.Builder(requireContext())
+        val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
         dialogBuilder.setTitle(resources.getString(R.string.pomodoro_dialog_title))
         dialogBuilder.setMessage(resources.getString(R.string.pomodoro_dialog_content))
         dialogBuilder.setPositiveButton(R.string.pomodoro_dialog_continue) { _, _ ->

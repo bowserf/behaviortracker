@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.timer.Timer
@@ -172,7 +173,7 @@ class TimerItemView(context: Context) : CardView(context) {
         }
 
         override fun displayRenameDialog(oldName: String) {
-            val alertDialog = AlertDialog.Builder(context)
+            val alertDialog = MaterialAlertDialogBuilder(context)
             alertDialog.setMessage(resources.getString(R.string.timer_row_rename))
 
             val rootView =

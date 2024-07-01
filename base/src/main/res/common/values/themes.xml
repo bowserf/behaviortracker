@@ -1,0 +1,32 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:itemTextAppearance">@style/PopupMenuTextAppearance</item>
+        <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
+
+    <style name="AppTheme.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
+        <item name="android:layout">@layout/settings_view_fragment</item>
+    </style>
+
+    <style name="PopupMenuTextAppearance" parent="TextAppearance.AppCompat.Menu">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AlmaTheme.BottomSheetDialog.Modal</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+    </style>
+
+</resources>

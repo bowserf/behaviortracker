@@ -1,32 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="android:itemTextAppearance">@style/PopupMenuTextAppearance</item>
-        <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
-        <item name="bottomSheetDialogTheme">@style/AlmaTheme.BottomSheetDialog</item>
-    </style>
-
-    <style name="AppTheme.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
-        <item name="android:layout">@layout/settings_view_fragment</item>
-    </style>
-
-    <style name="PopupMenuTextAppearance" parent="TextAppearance.AppCompat.Menu">
-        <item name="android:textColor">?attr/colorOnBackground</item>
-    </style>
-
-    <style name="AlmaTheme.BottomSheetDialog" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AlmaTheme.BottomSheetDialog.Modal</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorOnSecondary">@color/colorOnSecondary</item>
-    </style>
+    <!-- Bottom sheet style -->
 
     <style name="AlmaTheme.BottomSheetDialog.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
         <item name="shapeAppearanceOverlay">
@@ -38,6 +13,20 @@
         <item name="cornerSizeTopRight">16dp</item>
         <item name="cornerSizeTopLeft">16dp</item>
     </style>
+
+    <!-- Material dialog -->
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Custom Material Dialog with color positive button -->
 
     <style name="AlertDialogTheme">
         <item name="buttonBarPositiveButtonStyle">@style/Alert.Button.Bg.Primary</item>
@@ -55,9 +44,9 @@
         <item name="rippleColor">@color/colorOnPrimary</item>
     </style>
 
-    <style name="Alert.Button.Bg.Transparent">
+    <!--<style name="Alert.Button.Bg.Transparent">
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="rippleColor">@color/colorOnPrimary</item>
-    </style>
+    </style>-->
 
 </resources>
