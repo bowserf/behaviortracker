@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer_item_view
 
 import android.content.Context
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -8,10 +9,11 @@ import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.ScaleAnimation
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethod.SHOW_FORCED
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
@@ -35,6 +37,10 @@ class TimerItemView(context: Context) : CardView(context) {
     lateinit var presenter: TimerItemViewContract.Presenter
 
     private val screen = createScreen()
+
+    private val imm by lazy {
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
 
     private val chrono: TextView by bind(R.id.timer_item_view_timer_chrono)
     private val lastUpdateTimestamp: TextView by bind(
@@ -181,14 +187,22 @@ class TimerItemView(context: Context) : CardView(context) {
             val newTimerNameEditText =
                 rootView.findViewById<EditText>(R.id.timer_item_view_rename_timer_edit_text)
             newTimerNameEditText.setMultiLineCapSentencesAndDoneAction()
-            newTimerNameEditText.setText(oldName)
-            newTimerNameEditText.setSelection(newTimerNameEditText.text.length)
+
+            val defaultInterruptName = resources.getString(R.string.timer_interrupt_name, "")
+            if (oldName.contains(defaultInterruptName)) {
+                newTimerNameEditText.setHint(oldName)
+            } else {
+                newTimerNameEditText.setText(oldName)
+                newTimerNameEditText.setSelection(newTimerNameEditText.text.length)
+            }
 
             alertDialog.setView(rootView)
 
             alertDialog.setPositiveButton(android.R.string.ok) { _, _ ->
                 val newName = newTimerNameEditText.text.toString()
-                presenter.onTimerNameUpdated(newName)
+                if (newName.isNotBlank()) {
+                    presenter.onTimerNameUpdated(newName)
+                }
             }
 
             alertDialog.setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.cancel() }
@@ -200,12 +214,18 @@ class TimerItemView(context: Context) : CardView(context) {
             newTimerNameEditText.setOnEditorActionListener { view, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     val newName = newTimerNameEditText.text.toString()
-                    presenter.onTimerNameUpdated(newName)
-                    dialog.dismiss()
+                    if (newName.isNotBlank()) {
+                        presenter.onTimerNameUpdated(newName)
+                        dialog.dismiss()
+                    }
                     return@setOnEditorActionListener true
                 }
                 false
             }
+
+            newTimerNameEditText.requestFocus()
+
+            displayKeyboard(newTimerNameEditText)
         }
 
         override fun statusUpdated(activate: Boolean) {
@@ -234,6 +254,10 @@ class TimerItemView(context: Context) : CardView(context) {
         override fun setColorId(colorId: Int) {
             color.setBackgroundColor(ColorUtils.getColor(context!!, colorId))
         }
+    }
+
+    private fun displayKeyboard(editText: EditText) {
+        Handler().postDelayed({ imm.showSoftInput(editText, SHOW_FORCED) }, 200)
     }
 
     companion object {
