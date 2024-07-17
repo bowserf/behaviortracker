@@ -136,22 +136,20 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-
-    implementation("com.google.android.play:core:1.10.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Design
     implementation("com.google.android.material:material:1.12.0")
 
     // AndroidX library
     implementation("androidx.activity:activity:1.9.0")
-    implementation("androidx.preference:preference-ktx:1.2.0")
+    implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.annotation:annotation:1.5.0")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.annotation:annotation:1.8.0")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
@@ -160,7 +158,7 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:31.1.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
@@ -176,12 +174,12 @@ dependencies {
 
     // Android test
     androidTestImplementation("androidx.room:room-testing:2.6.1")
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test:runner:1.6.1")
+    androidTestImplementation("androidx.test:rules:1.6.1")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5") {
         because("We need this to define the running Activity with \"ActivityScenarioRule\"")
     }
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1") {
         because("We need this to interact with some UI elements not in the OS (Drawer, RecyclerView, ViewPager, etc...")
     }

@@ -32,5 +32,5 @@ android {
 dependencies {
 
     // AndroidX
-    implementation("androidx.annotation:annotation:1.5.0")
+    implementation("androidx.annotation:annotation:1.8.0")
 }
