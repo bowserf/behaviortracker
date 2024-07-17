@@ -9,6 +9,8 @@ import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.ScaleAnimation
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethod
+import android.view.inputmethod.InputMethod.SHOW_EXPLICIT
 import android.view.inputmethod.InputMethod.SHOW_FORCED
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -257,7 +259,7 @@ class TimerItemView(context: Context) : CardView(context) {
     }
 
     private fun displayKeyboard(editText: EditText) {
-        Handler().postDelayed({ imm.showSoftInput(editText, SHOW_FORCED) }, 200)
+        Handler().postDelayed({ imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT) }, 200)
     }
 
     companion object {

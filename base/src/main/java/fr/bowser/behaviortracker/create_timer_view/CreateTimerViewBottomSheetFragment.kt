@@ -145,7 +145,7 @@ class CreateTimerViewBottomSheetFragment : BottomSheetDialogFragment(R.layout.cr
         editTimerName.requestFocus()
         lifecycleScope.launch {
             delay(200)
-            imm.showSoftInput(editTimerName, SHOW_FORCED)
+            imm.showSoftInput(editTimerName, InputMethodManager.SHOW_IMPLICIT)
         }
     }
 
