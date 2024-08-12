@@ -9,7 +9,6 @@ import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.ColorUtils
 import fr.bowser.feature_string.StringManager
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
@@ -34,6 +33,7 @@ class CreateInterruptTimerUseCaseImpl(
 
     override fun invoke() {
         val createDateTimestamp = timeProvider.getCurrentTimeMs()
+        formatter.timeZone = TimeZone.getDefault()
         val date = getHumanReadableDate(createDateTimestamp)
         val timer = Timer(
             name = stringManager.getString(R.string.timer_interrupt_name, date),
@@ -47,7 +47,6 @@ class CreateInterruptTimerUseCaseImpl(
     }
 
     private fun getHumanReadableDate(timestamp: Long): String {
-        val date = Date(timestamp)
-        return formatter.format(date)
+        return formatter.format(timestamp)
     }
 }

@@ -59,6 +59,15 @@
                 android:resource="@xml/widget_pomodoro_info" />
         </receiver>
 
+        <receiver
+            android:name=".time_zone.TimeZoneReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>
