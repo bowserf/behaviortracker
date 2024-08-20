@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.show_mode
 
+import android.Manifest
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
@@ -8,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
@@ -23,6 +25,9 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ShowModeTest {
+
+    @get:Rule
+    var runtimePermissionRule = GrantPermissionRule.grant(Manifest.permission.POST_NOTIFICATIONS)
 
     @get:Rule
     var nameRule = TestName()
