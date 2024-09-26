@@ -16,8 +16,6 @@ class TimerItemViewModule(private val screen: TimerItemViewContract.Screen) {
     @GenericScope(component = TimerItemViewComponent::class)
     @Provides
     fun provideTimerItemPresenter(
-        navigationManager: NavigationManager,
-        pomodoroManager: PomodoroManager,
         scrollToTimerManager: ScrollToTimerManager,
         timeManager: TimerManager,
         timeProvider: TimeProvider,
@@ -25,8 +23,6 @@ class TimerItemViewModule(private val screen: TimerItemViewContract.Screen) {
     ): TimerItemViewContract.Presenter {
         return TimerItemViewPresenter(
             screen,
-            navigationManager,
-            pomodoroManager,
             scrollToTimerManager,
             timeManager,
             timeProvider,

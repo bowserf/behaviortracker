@@ -1,7 +1,5 @@
 package fr.bowser.behaviortracker.timer_item_view
 
-import fr.bowser.behaviortracker.navigation.NavigationManager
-import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.Timer
@@ -10,8 +8,6 @@ import fr.bowser.behaviortracker.timer_repository.TimerRepository
 
 class TimerItemViewPresenter(
     private val screen: TimerItemViewContract.Screen,
-    private val navigationManager: NavigationManager,
-    private val pomodoroManager: PomodoroManager,
     private val scrollToTimerManager: ScrollToTimerManager,
     private val timerManager: TimerManager,
     private val timeProvider: TimeProvider,
@@ -53,11 +49,6 @@ class TimerItemViewPresenter(
 
     override fun onClickCard() {
         screen.startShowMode(timer.id)
-    }
-
-    override fun onClickStartPomodoro() {
-        pomodoroManager.startPomodoro(timer)
-        navigationManager.navigateToPomodoro(false)
     }
 
     override fun onClickUpdateTimer() {

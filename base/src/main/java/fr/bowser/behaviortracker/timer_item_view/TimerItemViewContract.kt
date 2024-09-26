@@ -22,8 +22,6 @@ interface TimerItemViewContract {
 
         fun onClickCard()
 
-        fun onClickStartPomodoro()
-
         fun onClickUpdateTimer()
     }
 

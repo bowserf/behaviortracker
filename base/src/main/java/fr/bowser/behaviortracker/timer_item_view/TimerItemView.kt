@@ -9,9 +9,6 @@ import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.ScaleAnimation
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethod
-import android.view.inputmethod.InputMethod.SHOW_EXPLICIT
-import android.view.inputmethod.InputMethod.SHOW_FORCED
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -97,10 +94,6 @@ class TimerItemView(context: Context) : CardView(context) {
 
                 R.id.timer_item_view_rename -> {
                     presenter.onClickRenameTimer()
-                }
-
-                R.id.timer_item_view_start_pomodoro -> {
-                    presenter.onClickStartPomodoro()
                 }
             }
             true
@@ -259,7 +252,10 @@ class TimerItemView(context: Context) : CardView(context) {
     }
 
     private fun displayKeyboard(editText: EditText) {
-        Handler().postDelayed({ imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT) }, 200)
+        Handler().postDelayed(
+            { imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT) },
+            200,
+        )
     }
 
     companion object {

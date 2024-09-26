@@ -14,10 +14,4 @@
         android:title="@string/timer_item_view_rename"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/timer_item_view_start_pomodoro"
-        android:enabled="true"
-        android:title="@string/timer_item_view_start_pomodoro"
-        app:showAsAction="ifRoom" />
-
 </menu>
