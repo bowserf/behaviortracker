@@ -28,27 +28,26 @@ class TimeManagerTest {
     fun startTimer() = runTest {
         // Given
         val timeManager = createTimerManager(backgroundScope)
-        val timerState = Timer("MyTimer", Color.RED)
+        val timer = Timer("MyTimer", Color.RED)
 
         // When
-        timeManager.startTimer(timerState)
+        timeManager.startTimer(timer)
 
         // Given
-        Assert.assertTrue(timerState.isActivate)
+        Assert.assertTrue(timeManager.isRunning(timer))
     }
 
     @Test
     fun startTimerListener() = runTest {
         // Given
         val timeManager = createTimerManager(backgroundScope)
-
-        val timerState = Timer("MyTimer", Color.RED)
+        val timer = Timer("MyTimer", Color.RED)
 
         var result = false
 
         val timerManagerListener = object : TimerManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                result = updatedTimer.isActivate
+                result = timeManager.isRunning(timer)
             }
 
             override fun onTimerTimeChanged(updatedTimer: Timer) {
@@ -59,7 +58,7 @@ class TimeManagerTest {
         timeManager.addListener(timerManagerListener)
 
         // When
-        timeManager.startTimer(timerState)
+        timeManager.startTimer(timer)
 
         // Then
         Assert.assertTrue(result)
@@ -76,7 +75,7 @@ class TimeManagerTest {
         timeManager.stopTimer()
 
         // Then
-        Assert.assertFalse(timer.isActivate)
+        Assert.assertFalse(timeManager.isRunning(timer))
     }
 
     @Test
@@ -92,7 +91,7 @@ class TimeManagerTest {
 
         val timerManagerListener = object : TimerManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                result = !updatedTimer.isActivate
+                result = !timeManager.isRunning(timer)
             }
 
             override fun onTimerTimeChanged(updatedTimer: Timer) {
@@ -121,8 +120,8 @@ class TimeManagerTest {
         timeManager.startTimer(timer2)
 
         // Then
-        Assert.assertFalse(timer1.isActivate)
-        Assert.assertTrue(timer2.isActivate)
+        Assert.assertFalse(timeManager.isRunning(timer1))
+        Assert.assertTrue(timeManager.isRunning(timer2))
     }
 
     @Test
@@ -139,10 +138,10 @@ class TimeManagerTest {
 
         val timerManagerListener = object : TimerManager.Listener {
             override fun onTimerStateChanged(updatedTimer: Timer) {
-                if (updatedTimer == timer1 && !updatedTimer.isActivate) {
+                if (updatedTimer == timer1 && !timeManager.isRunning(updatedTimer)) {
                     timer1IsStopped = true
                 }
-                if (updatedTimer == timer2 && updatedTimer.isActivate) {
+                if (updatedTimer == timer2 && timeManager.isRunning(updatedTimer)) {
                     timer2IsActive = true
                 }
             }
