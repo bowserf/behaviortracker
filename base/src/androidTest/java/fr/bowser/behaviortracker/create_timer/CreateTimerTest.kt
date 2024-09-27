@@ -15,8 +15,10 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.common.RecyclerViewMatcher.atPosition
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
+import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.timer_list_view.TimerListViewAdapter
 import fr.bowser.behaviortracker.timer_list_view.TimerListViewRobot
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -44,7 +46,7 @@ class CreateTimerTest {
     fun createTimer() {
         timerListViewRobot.clickShowCreateTimer()
 
-        createTimerRobot.setTimerName("New timer")
+        createTimerRobot.setTimerName("Development")
 
         closeSoftKeyboard()
 
@@ -56,7 +58,12 @@ class CreateTimerTest {
 
         onView(withId(R.id.timer_list_view_list_timers))
             .perform(scrollToPosition<TimerListViewAdapter.TimerViewHolder>(0))
-            .check(matches(atPosition(0, hasDescendant(withText("New timer")))))
+            .check(matches(atPosition(0, hasDescendant(withText("Development")))))
+    }
+
+    @After
+    fun tearDown() {
+        TimerRepositoryClean.removeAllTimers()
     }
 
     private fun takeScreenshot(name: String) {

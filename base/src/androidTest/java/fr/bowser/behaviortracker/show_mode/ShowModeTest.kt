@@ -16,8 +16,10 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.timer_list_view.TimerListViewAdapter
 import fr.bowser.behaviortracker.utils.ColorUtils
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -42,12 +44,17 @@ class ShowModeTest {
         onView(withId(R.id.timer_list_view_list_timers))
             .perform(
                 actionOnItem<TimerListViewAdapter.TimerViewHolder>(
-                    hasDescendant(withText("New timer")),
+                    hasDescendant(withText("Development")),
                     click(),
                 ).atPosition(0),
             )
 
         takeScreenshot("timer_list")
+    }
+
+    @After
+    fun tearDown() {
+        TimerRepositoryClean.removeAllTimers()
     }
 
     private fun setupTimers() {
@@ -58,8 +65,9 @@ class ShowModeTest {
         instrumentation.runOnMainSync {
             timerRepository.addTimer(
                 Timer(
-                    "New timer",
-                    ColorUtils.COLOR_BLUE,
+                    name = "Development",
+                    color = ColorUtils.COLOR_BLUE,
+                    currentTime = 300,
                 ),
             )
         }

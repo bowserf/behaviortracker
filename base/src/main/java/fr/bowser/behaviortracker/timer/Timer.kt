@@ -10,7 +10,7 @@ data class Timer(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Long,
-    @ColumnInfo(name = "current_time") val currentTime: Long,
+    @ColumnInfo(name = "current_time") val currentTimeInSecond: Long,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "color") var colorId: Int,
     @ColumnInfo(name = "creation_date_ms") var creationDateTimestamp: Long,
@@ -43,7 +43,7 @@ data class Timer(
         if (other is Timer) {
             if (other.id == id &&
                 other.colorId == colorId &&
-                other.currentTime == currentTime &&
+                other.currentTimeInSecond == currentTimeInSecond &&
                 other.name == name &&
                 other.time == time &&
                 other.creationDateTimestamp == creationDateTimestamp &&
@@ -61,6 +61,6 @@ data class Timer(
     }
 
     init {
-        time = currentTime.toFloat()
+        time = currentTimeInSecond.toFloat()
     }
 }

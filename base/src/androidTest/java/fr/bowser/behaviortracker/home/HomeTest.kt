@@ -11,8 +11,11 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
+import fr.bowser.behaviortracker.theme.Theme
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.utils.ColorUtils
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -34,9 +37,7 @@ class HomeTest {
         setupTimers()
 
         onView(withId(R.id.home_activity_timer_list_screen)).check(
-            ViewAssertions.matches(
-                isDisplayed(),
-            ),
+            ViewAssertions.matches(isDisplayed()),
         )
         onView(withId(R.id.home_activity_pomodoro_screen)).check(
             ViewAssertions.matches(isDisplayed()),
@@ -45,48 +46,60 @@ class HomeTest {
         takeScreenshot("timer_list")
     }
 
+    @Test
+    fun timerListIsDisplayedDarkMode() {
+        setupTimers()
+
+        Theme.createActivityScenarioRule(activityRule, true)
+
+        takeScreenshot("timer_list_dark_mode")
+    }
+
+    @After
+    fun tearDown() {
+        TimerRepositoryClean.removeAllTimers()
+        Theme.createActivityScenarioRule(activityRule, false)
+    }
+
     private fun setupTimers() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val applicationContext = instrumentation.targetContext
         val appComponent = BehaviorTrackerApp.getAppComponent(applicationContext)
         val timerRepository = appComponent.provideTimerRepositoryManager()
+        val timeManager = appComponent.provideTimeManager()
+        val firstTimer = Timer(
+            name = "Work",
+            color = ColorUtils.COLOR_BLUE,
+            currentTime = 8000,
+            lastUpdateTimestamp = 1727366400000,
+        )
         instrumentation.runOnMainSync {
+            timerRepository.addTimer(firstTimer)
             timerRepository.addTimer(
                 Timer(
-                    "New timer",
-                    ColorUtils.COLOR_BLUE,
+                    name = "Transport",
+                    color = ColorUtils.COLOR_AMBER,
+                    currentTime = 1700,
+                    lastUpdateTimestamp = 1727366400000,
                 ),
             )
             timerRepository.addTimer(
                 Timer(
-                    "New timer",
-                    ColorUtils.COLOR_AMBER,
+                    name = "Sport",
+                    color = ColorUtils.COLOR_DEEP_ORANGE,
+                    currentTime = 3000,
+                    lastUpdateTimestamp = 1727366400000,
                 ),
             )
             timerRepository.addTimer(
                 Timer(
-                    "New timer",
-                    ColorUtils.COLOR_DEEP_ORANGE,
+                    name = "Cooking",
+                    color = ColorUtils.COLOR_BLUE_GREY,
+                    currentTime = 2000,
+                    lastUpdateTimestamp = 1727366400000,
                 ),
             )
-            timerRepository.addTimer(
-                Timer(
-                    "New timer",
-                    ColorUtils.COLOR_LIGHT_BLUE,
-                ),
-            )
-            timerRepository.addTimer(
-                Timer(
-                    "New timer",
-                    ColorUtils.COLOR_PURPLE,
-                ),
-            )
-            timerRepository.addTimer(
-                Timer(
-                    "New timer",
-                    ColorUtils.COLOR_YELLOW,
-                ),
-            )
+            timeManager.startTimer(firstTimer)
         }
     }
 

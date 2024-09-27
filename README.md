@@ -1,4 +1,4 @@
-# Time Tracker ⏲️easily track and optimize your time
+# Time Tracker ⏲️ easily track and optimize your time
 
 <img
     src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/high_res_icon/ic_launcher-web.png"
@@ -36,26 +36,21 @@ By example, you could want a reminder link to the time you wake up.
 
 <img
     src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/timer_list.png"
-    width="288"
+    width="230"
     height="512"
     title="Timers list">
 <img
     src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/create_timer.png"
-    width="288"
+    width="230"
     height="512"
     title="Create a timer">
 <img
     src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/pomodoro.png"
-    width="288"
+    width="230"
     height="512"
-    title="Create a timer">
-<img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/set_alarm.png"
-    width="288"
-    height="512"
-    title="Timers list">
+    title="Pomodoro">
 <img
     src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/timer_list_dark.png"
-    width="288"
+    width="230"
     height="512"
-    title="Timers list">
+    title="Timers list dark mode">

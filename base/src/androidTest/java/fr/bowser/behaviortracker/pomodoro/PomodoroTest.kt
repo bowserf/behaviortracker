@@ -9,7 +9,9 @@ import fr.bowser.behaviortracker.home.HomeTabRobot
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
 import fr.bowser.behaviortracker.timer.Timer
+import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.utils.ColorUtils
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -41,7 +43,7 @@ class PomodoroTest {
         instrumentation.runOnMainSync {
             timerRepository.addTimer(
                 Timer(
-                    "New timer",
+                    "Development",
                     ColorUtils.COLOR_BLUE,
                 ),
             )
@@ -57,6 +59,11 @@ class PomodoroTest {
 
         assert(pomodoroManager.isStarted)
         assert(pomodoroManager.isRunning)
+    }
+
+    @After
+    fun tearDown() {
+        TimerRepositoryClean.removeAllTimers()
     }
 
     private fun takeScreenshot(name: String) {
