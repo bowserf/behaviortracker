@@ -1,9 +1,23 @@
+### Time Tracker v1.01.00
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2024-09-26
+* Change log:
+  - [Android] Compatibility to API 35
+  - [Billing] Update to 7.0.0
+  - [Home] Add a button to create a new timer and immediately starts it
+  - [Timer] Be able to update the time of a timer
+  - [Home] Display the active timer in a bottom floating bar
+  - [Menu] Add option to export current timer list
+  - [CreateTimer] Transform dialog into a more convenient bottom sheet
+
+
+
 ### Time Tracker v1.00.00
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
-* Date :  2022-108-17
+* Date :  2022-10-17
 * Change log:
   - [Pomodoro] Update design
-  - [Timer] Display active time at the top of the list
+  - [Timer] Display active timer at the top of the list
   - [Android] Compatibility to API 33 with support of notification permission and schedule exact alarm
   - [Timer] Be able to update the time of a timer
   - [Timer] Display the time of the last interaction on a timer.
