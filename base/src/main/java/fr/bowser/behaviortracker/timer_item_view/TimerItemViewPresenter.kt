@@ -61,6 +61,10 @@ class TimerItemViewPresenter(
     }
 
     override fun onClickResetTimer() {
+        screen.displayConfirmResetTimer(timer)
+    }
+
+    override fun onConfirmResetTimer(timer: Timer) {
         timerManager.resetTime(timer)
 
         screen.setTime(timer.time.toLong())

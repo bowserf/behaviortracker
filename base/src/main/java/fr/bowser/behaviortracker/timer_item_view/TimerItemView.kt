@@ -249,6 +249,16 @@ class TimerItemView(context: Context) : CardView(context) {
         override fun setColorId(colorId: Int) {
             color.setBackgroundColor(ColorUtils.getColor(context!!, colorId))
         }
+
+        override fun displayConfirmResetTimer(timer: Timer) {
+            MaterialAlertDialogBuilder(context)
+                .setTitle(resources.getString(R.string.home_dialog_confirm_reset_timer))
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    presenter.onConfirmResetTimer(timer)
+                }
+                .setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.cancel() }
+                .show()
+        }
     }
 
     private fun displayKeyboard(editText: EditText) {

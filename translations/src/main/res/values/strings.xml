@@ -31,6 +31,7 @@
     <string name="menu_rewards">Support developers</string>
     <string name="menu_setting">Settings</string>
     <string name="home_dialog_confirm_reset_all_timers">Are you sur you want to reset all timers ?</string>
+    <string name="home_dialog_confirm_reset_timer">Are you sur you want to reset the timer ?</string>
     <string name="home_activity_bottom_navigation_timer">Timer</string>
     <string name="home_activity_bottom_navigation_pomodoro" translatable="false">Pomodoro</string>
     <string name="timer_list_explain_notification_permission_title">Get reminder!</string>

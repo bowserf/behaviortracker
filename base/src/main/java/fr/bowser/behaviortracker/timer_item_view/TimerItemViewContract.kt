@@ -23,6 +23,8 @@ interface TimerItemViewContract {
         fun onClickCard()
 
         fun onClickUpdateTimer()
+
+        fun onConfirmResetTimer(timer: Timer)
     }
 
     interface Screen {
@@ -44,5 +46,7 @@ interface TimerItemViewContract {
         fun playSelectedAnimation()
 
         fun setColorId(colorId: Int)
+
+        fun displayConfirmResetTimer(timer: Timer)
     }
 }
