@@ -29,7 +29,6 @@ import fr.bowser.behaviortracker.utils.ViewExtension.bind
 import fr.bowser.behaviortracker.utils.setMultiLineCapSentencesAndDoneAction
 import javax.inject.Inject
 
-
 class TimerItemView(context: Context) : CardView(context) {
 
     @Inject

@@ -5,7 +5,6 @@ import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

@@ -2,8 +2,6 @@ package fr.bowser.behaviortracker.timer_item_view
 
 import dagger.Module
 import dagger.Provides
-import fr.bowser.behaviortracker.navigation.NavigationManager
-import fr.bowser.behaviortracker.pomodoro.PomodoroManager
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.TimerManager

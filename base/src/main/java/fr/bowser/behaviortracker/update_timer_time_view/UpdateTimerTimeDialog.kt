@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TimePicker
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.bowser.behaviortracker.R

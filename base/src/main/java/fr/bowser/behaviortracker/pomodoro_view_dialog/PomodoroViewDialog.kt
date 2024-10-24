@@ -2,7 +2,6 @@ package fr.bowser.behaviortracker.pomodoro_view_dialog
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.bowser.behaviortracker.R
