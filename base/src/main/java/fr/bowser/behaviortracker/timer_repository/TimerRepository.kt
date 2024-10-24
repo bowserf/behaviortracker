@@ -12,6 +12,8 @@ interface TimerRepository {
 
     fun getTimerList(): List<Timer>
 
+    fun getTimerNotFinished(): List<Timer>
+
     fun getTimer(timerId: Long): Timer
 
     fun renameTimer(timer: Timer, newName: String)

@@ -45,6 +45,10 @@ class ShowModeItemViewPresenter(
                 screen.timerUpdated(timer.time.toLong())
             }
         }
+
+        override fun onTimerFinishStateChanged(timer: Timer) {
+            // nothing to do
+        }
     }
 
     private fun updateTimerStatus() {

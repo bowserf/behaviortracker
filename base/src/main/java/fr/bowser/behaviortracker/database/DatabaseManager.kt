@@ -17,6 +17,7 @@ class DatabaseManager(context: Context) {
             DATABASE_NAME,
         )
             .addMigrations(MIGRATION_1_3)
+            .addMigrations(MIGRATION_3_4)
             .fallbackToDestructiveMigration()
             .build()
     }
@@ -33,6 +34,14 @@ class DatabaseManager(context: Context) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
                     "ALTER TABLE Timer ADD COLUMN position INTEGER NOT NULL DEFAULT '0'",
+                )
+            }
+        }
+
+        val MIGRATION_3_4: Migration = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "ALTER TABLE Timer ADD COLUMN is_finished INTEGER NOT NULL DEFAULT(0)",
                 )
             }
         }

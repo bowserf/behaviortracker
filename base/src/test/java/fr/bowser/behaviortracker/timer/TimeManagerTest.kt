@@ -53,6 +53,10 @@ class TimeManagerTest {
             override fun onTimerTimeChanged(updatedTimer: Timer) {
                 Assert.assertTrue(false)
             }
+
+            override fun onTimerFinishStateChanged(timer: Timer) {
+                Assert.assertTrue(false)
+            }
         }
 
         timeManager.addListener(timerManagerListener)
@@ -95,6 +99,10 @@ class TimeManagerTest {
             }
 
             override fun onTimerTimeChanged(updatedTimer: Timer) {
+                Assert.assertTrue(false)
+            }
+
+            override fun onTimerFinishStateChanged(timer: Timer) {
                 Assert.assertTrue(false)
             }
         }
@@ -147,6 +155,10 @@ class TimeManagerTest {
             }
 
             override fun onTimerTimeChanged(updatedTimer: Timer) {
+                Assert.assertTrue(false)
+            }
+
+            override fun onTimerFinishStateChanged(timer: Timer) {
                 Assert.assertTrue(false)
             }
         }

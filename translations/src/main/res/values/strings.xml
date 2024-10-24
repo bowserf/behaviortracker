@@ -97,6 +97,7 @@ Please try later.</string>
     <string name="show_mode_view_menu_keep_screen_off">Don\'t keep screen ON</string>
     <string name="item_update_timer_time">Update time</string>
     <string name="timer_item_view_reset">Reset</string>
+    <string name="timer_item_view_finish">Finish task</string>
     <string name="timer_item_view_remove">Remove</string>
     <string name="timer_item_view_rename">Rename</string>
     <string name="timer_item_view_start_pomodoro">Start Pomodoro</string>

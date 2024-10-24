@@ -102,7 +102,7 @@ class PomodoroPresenterTest {
             timerRepository,
         )
         Mockito.`when`(manager.isStarted).thenReturn(false)
-        Mockito.`when`(timerRepository.getTimerList()).thenReturn(listOf(timer))
+        Mockito.`when`(timerRepository.getTimerNotFinished()).thenReturn(listOf(timer))
 
         // When
         presenter.onClickStartSession()

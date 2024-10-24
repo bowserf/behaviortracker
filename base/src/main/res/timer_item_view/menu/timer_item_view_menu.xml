@@ -14,4 +14,10 @@
         android:title="@string/timer_item_view_reset"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/timer_item_view_finish"
+        android:enabled="true"
+        android:title="@string/timer_item_view_finish"
+        app:showAsAction="ifRoom" />
+
 </menu>

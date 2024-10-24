@@ -41,14 +41,19 @@ class TimerItemView(context: Context) : CardView(context) {
         context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
-    private val chrono: TextView by bind(R.id.timer_item_view_timer_chrono)
+    private val containerRunning: View by bind(R.id.timer_item_view_container_running)
+    private val timerTimeTv: TextView by bind(R.id.timer_item_view_timer_chrono)
     private val lastUpdateTimestamp: TextView by bind(
         R.id.timer_item_view_timer_last_update_timestamp,
     )
-    private val tvName: TextView by bind(R.id.timer_item_view_timer_name)
+    private val timerName: TextView by bind(R.id.timer_item_view_timer_name)
     private val menu: ImageView by bind(R.id.timer_item_view_menu)
     private val color: View by bind(R.id.timer_item_view_color)
     private val btnPlayPause: ImageView by bind(R.id.timer_item_view_play_pause)
+
+    private val containerFinished: View by bind(R.id.timer_item_view_container_finished)
+    private val timerNameFinished: TextView by bind(R.id.timer_item_view_container_finished_timer_name)
+    private val timerTimeFinishedTv: TextView by bind(R.id.timer_item_view_container_finished_chrono)
 
     init {
         setupGraph()
@@ -58,12 +63,13 @@ class TimerItemView(context: Context) : CardView(context) {
         // card radius
         radius = resources.getDimension(R.dimen.default_space_half)
 
-        setOnClickListener { manageClickPlayPauseButton() }
-
         color.setOnClickListener { presenter.onClickCard() }
         menu.setOnClickListener { displayMenu() }
         findViewById<View>(R.id.timer_item_view_time_update).setOnClickListener {
             presenter.onClickUpdateTimer()
+        }
+        findViewById<View>(R.id.timer_item_view_container_finished_restart).setOnClickListener {
+            presenter.onClickRestartTimer()
         }
     }
 
@@ -94,6 +100,10 @@ class TimerItemView(context: Context) : CardView(context) {
 
                 R.id.timer_item_view_rename -> {
                     presenter.onClickRenameTimer()
+                }
+
+                R.id.timer_item_view_finish -> {
+                    presenter.onClickFinishTimer()
                 }
             }
             true
@@ -166,11 +176,14 @@ class TimerItemView(context: Context) : CardView(context) {
     private fun createScreen() = object : TimerItemViewContract.Screen {
 
         override fun setTime(time: Long) {
-            chrono.text = TimeConverter.convertSecondsToHumanTime(time)
+            val timeStr = TimeConverter.convertSecondsToHumanTime(time)
+            timerTimeTv.text = timeStr
+            timerTimeFinishedTv.text = timeStr
         }
 
         override fun setName(name: String) {
-            tvName.text = name
+            timerName.text = name
+            timerNameFinished.text = name
         }
 
         override fun displayRenameDialog(oldName: String) {
@@ -258,6 +271,18 @@ class TimerItemView(context: Context) : CardView(context) {
                 }
                 .setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.cancel() }
                 .show()
+        }
+
+        override fun setModeFinished(isFinished: Boolean) {
+            if (isFinished) {
+                containerRunning.visibility = View.GONE
+                containerFinished.visibility = View.VISIBLE
+                setOnClickListener(null)
+            } else {
+                containerRunning.visibility = View.VISIBLE
+                containerFinished.visibility = View.GONE
+                setOnClickListener { manageClickPlayPauseButton() }
+            }
         }
     }
 

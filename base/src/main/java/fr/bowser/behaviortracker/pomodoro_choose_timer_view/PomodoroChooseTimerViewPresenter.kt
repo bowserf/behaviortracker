@@ -11,7 +11,7 @@ class PomodoroChooseTimerViewPresenter(
 ) : PomodoroChooseTimerViewContract.Presenter {
 
     override fun onStart() {
-        val timerList = timerRepository.getTimerList()
+        val timerList = timerRepository.getTimerNotFinished()
         screen.displayTimerList(timerList)
     }
 

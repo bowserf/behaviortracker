@@ -16,6 +16,7 @@ data class Timer(
     @ColumnInfo(name = "creation_date_ms") var creationDateTimestamp: Long,
     @ColumnInfo(name = "last_update_ms") var lastUpdateTimestamp: Long,
     @ColumnInfo(name = "position") var position: Int,
+    @ColumnInfo(name = "is_finished") var isFinished: Boolean,
 ) {
 
     @Ignore
@@ -29,6 +30,7 @@ data class Timer(
         creationDateTimestamp: Long = 0,
         lastUpdateTimestamp: Long = 0,
         position: Int = 0,
+        isFinished: Boolean = false,
     ) : this(
         0,
         currentTime,
@@ -37,6 +39,7 @@ data class Timer(
         creationDateTimestamp,
         lastUpdateTimestamp,
         position,
+        isFinished,
     )
 
     override fun equals(other: Any?): Boolean {
@@ -48,7 +51,8 @@ data class Timer(
                 other.time == time &&
                 other.creationDateTimestamp == creationDateTimestamp &&
                 other.lastUpdateTimestamp == lastUpdateTimestamp &&
-                other.position == position
+                other.position == position &&
+                other.isFinished == isFinished
             ) {
                 return true
             }

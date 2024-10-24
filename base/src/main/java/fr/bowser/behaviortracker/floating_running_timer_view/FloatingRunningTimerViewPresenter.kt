@@ -79,6 +79,13 @@ class FloatingRunningTimerViewPresenter(
         override fun onTimerTimeChanged(updatedTimer: Timer) {
             updateTimerTime()
         }
+
+        override fun onTimerFinishStateChanged(timer: Timer) {
+            if (!timer.isFinished) return
+            if (timer != currentTimer) return
+            currentTimer = null
+            updateVisibility()
+        }
     }
 
     private fun createTimerRepositoryListener() = object : TimerRepository.Listener {

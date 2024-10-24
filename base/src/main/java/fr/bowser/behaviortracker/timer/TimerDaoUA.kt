@@ -19,6 +19,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3),
                 0,
+                false,
             ),
         )
         val color2 = 7
@@ -31,6 +32,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(2),
                 1,
+                false,
             ),
         )
         val color3 = 4
@@ -43,6 +45,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1),
                 2,
+                false,
             ),
         )
         val color4 = 0
@@ -55,6 +58,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(4),
                 3,
+                false,
             ),
         )
         val color5 = 18
@@ -67,6 +71,7 @@ class TimerDaoUA(context: Context) : TimerDAO {
                 0,
                 System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5),
                 4,
+                false,
             ),
         )
     }
@@ -103,5 +108,9 @@ class TimerDaoUA(context: Context) : TimerDAO {
 
     override fun updateTimerPosition(id: Long, position: Int) {
         timers[id.toInt()].position = position
+    }
+
+    override fun updateFinishState(id: Long, isFinished: Boolean) {
+        timers[id.toInt()].isFinished = isFinished
     }
 }

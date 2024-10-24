@@ -47,6 +47,10 @@ class TimerItemViewPresenter(
         screen.setName(timer.name)
     }
 
+    override fun onClickRestartTimer() {
+        timerManager.updateFinishState(timer)
+    }
+
     override fun onClickCard() {
         screen.startShowMode(timer.id)
     }
@@ -62,6 +66,10 @@ class TimerItemViewPresenter(
 
     override fun onClickResetTimer() {
         screen.displayConfirmResetTimer(timer)
+    }
+
+    override fun onClickFinishTimer() {
+        timerManager.updateFinishState(timer)
     }
 
     override fun onConfirmResetTimer(timer: Timer) {
@@ -118,10 +126,15 @@ class TimerItemViewPresenter(
                 screen.setTime(updatedTimer.time.toLong())
             }
         }
+
+        override fun onTimerFinishStateChanged(timer: Timer) {
+            updateTimerStatus()
+        }
     }
 
     private fun updateTimerStatus() {
         screen.statusUpdated(timerManager.isRunning(timer))
+        screen.setModeFinished(timer.isFinished)
     }
 
     private fun createScrollToTimerManagerListener() = object : ScrollToTimerManager.Listener {

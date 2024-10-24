@@ -88,6 +88,10 @@ class TimerRepositoryImpl(
         return timers
     }
 
+    override fun getTimerNotFinished(): List<Timer> {
+        return timers.filter { !it.isFinished }
+    }
+
     override fun getTimer(timerId: Long): Timer {
         return timers.first { it.id == timerId }
     }

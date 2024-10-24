@@ -104,7 +104,7 @@ class PomodoroViewPresenter(
     }
 
     private fun displayPomodoroChooseTimerIfPossible() {
-        if (timerRepository.getTimerList().isEmpty()) {
+        if (timerRepository.getTimerNotFinished().isEmpty()) {
             screen.displayNoTimerAvailable()
         } else {
             screen.displayPomodoroChooseTimer()

@@ -24,9 +24,9 @@ class ShowModePresenterTest {
         // Given
         val presenter = ShowModeViewPresenter(screen, timerRepository)
         val timerList = mutableListOf<Timer>()
-        timerList.add(Timer(9, 0, "timer1", ColorUtils.COLOR_AMBER, 0, 0, 0))
-        timerList.add(Timer(10, 0, "timer2", ColorUtils.COLOR_AMBER, 0, 0, 1))
-        timerList.add(Timer(11, 0, "timer3", ColorUtils.COLOR_AMBER, 0, 0, 2))
+        timerList.add(Timer(9, 0, "timer1", ColorUtils.COLOR_AMBER, 0, 0, 0, false))
+        timerList.add(Timer(10, 0, "timer2", ColorUtils.COLOR_AMBER, 0, 0, 1, false))
+        timerList.add(Timer(11, 0, "timer3", ColorUtils.COLOR_AMBER, 0, 0, 2, false))
         Mockito.`when`(timerRepository.getTimerList()).thenReturn(timerList)
 
         // When

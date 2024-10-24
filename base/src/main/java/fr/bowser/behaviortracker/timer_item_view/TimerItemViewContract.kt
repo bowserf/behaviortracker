@@ -25,6 +25,10 @@ interface TimerItemViewContract {
         fun onClickUpdateTimer()
 
         fun onConfirmResetTimer(timer: Timer)
+
+        fun onClickFinishTimer()
+
+        fun onClickRestartTimer()
     }
 
     interface Screen {
@@ -48,5 +52,7 @@ interface TimerItemViewContract {
         fun setColorId(colorId: Int)
 
         fun displayConfirmResetTimer(timer: Timer)
+
+        fun setModeFinished(isFinished: Boolean)
     }
 }

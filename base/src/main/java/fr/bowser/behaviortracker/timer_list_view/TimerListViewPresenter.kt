@@ -285,6 +285,10 @@ class TimerListViewPresenter(
         override fun onTimerTimeChanged(updatedTimer: Timer) {
             updateTotalTimerTime()
         }
+
+        override fun onTimerFinishStateChanged(timer: Timer) {
+            // nothing to do
+        }
     }
 
     private fun createTimerRepositoryListener() = object : TimerRepository.Listener {

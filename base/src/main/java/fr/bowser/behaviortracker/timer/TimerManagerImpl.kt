@@ -110,6 +110,22 @@ class TimerManagerImpl(
         }
     }
 
+    override fun updateFinishState(timer: Timer, fakeTimer: Boolean) {
+        if (isRunning(timer)) {
+            stopTimer()
+        }
+
+        timer.isFinished = !timer.isFinished
+        if (!fakeTimer) {
+            coroutineScope.launch {
+                timerDAO.updateFinishState(timer.id, timer.isFinished)
+            }
+        }
+        for (listener in listeners) {
+            listener.onTimerFinishStateChanged(timer)
+        }
+    }
+
     override fun addListener(listener: TimerManager.Listener): Boolean {
         if (!listeners.contains(listener)) {
             return listeners.add(listener)

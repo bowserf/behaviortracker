@@ -40,7 +40,7 @@ class PomodoroManagerImpl(
 
     private var pauseDuration = 0L
 
-    private val timeManagerListener = createTimeManagerListener()
+    private val timerManagerListener = createTimeManagerListener()
 
     private val timerRepositoryListener = createTimerRepositoryListener()
 
@@ -50,6 +50,7 @@ class PomodoroManagerImpl(
 
     init {
         timerRepository.addListener(timerRepositoryListener)
+        timerManager.addListener(timerManagerListener)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             audioAttributes = AudioAttributes.Builder()
@@ -92,7 +93,6 @@ class PomodoroManagerImpl(
         isStarted = true
         isRunning = true
 
-        timerManager.addListener(timeManagerListener)
         timerManager.startTimer(currentTimer!!)
 
         listeners.forEach { it.onPomodoroSessionStarted(currentTimer!!, pomodoroTime) }
@@ -125,7 +125,6 @@ class PomodoroManagerImpl(
         isRunning = false
         actionTimer = null
         currentTimer = null
-        timerManager.removeListener(timeManagerListener)
         listeners.forEach { it.onPomodoroSessionStop() }
     }
 
@@ -182,6 +181,12 @@ class PomodoroManagerImpl(
 
                 listeners.forEach { it.onCountFinished(currentTimer!!, pomodoroTime) }
             }
+
+            override fun onTimerFinishStateChanged(timer: Timer) {
+                if (!timer.isFinished) return
+                if (timer != actionTimer) return
+                stop()
+            }
         }
     }
 
@@ -201,9 +206,10 @@ class PomodoroManagerImpl(
     private fun createTimerRepositoryListener(): TimerRepository.Listener {
         return object : TimerRepository.Listener {
             override fun onTimerRemoved(removedTimer: Timer) {
-                if (actionTimer == removedTimer) {
-                    stop()
+                if (actionTimer != removedTimer) {
+                    return
                 }
+                stop()
             }
 
             override fun onTimerAdded(updatedTimer: Timer) {

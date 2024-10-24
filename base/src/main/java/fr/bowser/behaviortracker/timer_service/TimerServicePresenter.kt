@@ -190,6 +190,13 @@ class TimerServicePresenter(
                     updateTimeNotif()
                 }
             }
+
+            override fun onTimerFinishStateChanged(timer: Timer) {
+                if (timer != this@TimerServicePresenter.timer) {
+                    return
+                }
+                dismissNotification()
+            }
         }
     }
 

@@ -31,4 +31,7 @@ interface TimerDAO {
 
     @Query("UPDATE Timer SET position = :position WHERE id = :id")
     fun updateTimerPosition(id: Long, position: Int)
+
+    @Query("UPDATE Timer SET is_finished = :isFinished WHERE id = :id")
+    fun updateFinishState(id: Long, isFinished: Boolean)
 }
