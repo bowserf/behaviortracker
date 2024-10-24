@@ -119,4 +119,7 @@
     <string name="export_total_time">Gesamtzeit</string>
     <string name="timer_list_export_succeeded">Timer-Daten in die Zwischenablage kopiert</string>
 
+    <string name="timer_item_view_finish">Aufgabe beenden</string>
+    <string name="home_dialog_confirm_reset_timer">Sind Sie sicher, dass Sie den Timer zurücksetzen möchten?</string>
+
 </resources>

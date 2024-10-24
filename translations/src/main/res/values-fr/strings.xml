@@ -116,4 +116,8 @@
     <string name="export_total_time">Temps total</string>
     <string name="timer_list_export_succeeded">Données des chronomètres copiées dans le presse-papiers</string>
 
+    <string name="timer_item_view_finish">Terminer la tâche</string>
+    <string name="home_dialog_confirm_reset_timer">Voulez vous vraiment remettreà 0 le chronomètre ?</string>
+
+
 </resources>

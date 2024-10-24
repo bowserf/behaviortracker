@@ -119,4 +119,8 @@
     <string name="export_total_time">总时间</string>
     <string name="timer_list_export_succeeded">计时器数据已复制到剪贴板</string>
 
+    <string name="timer_item_view_finish">完成任务</string>
+    <string name="home_dialog_confirm_reset_timer">您确定要重置计时器吗？</string>
+
+
 </resources>

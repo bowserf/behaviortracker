@@ -119,4 +119,8 @@
     <string name="export_total_time">総時間</string>
     <string name="timer_list_export_succeeded">タイマーのデータがクリップボードにコピーされました</string>
 
+    <string name="timer_item_view_finish">タスクを終了する</string>
+    <string name="home_dialog_confirm_reset_timer">タイマーをリセットしてもよろしいですか？</string>
+
+
 </resources>

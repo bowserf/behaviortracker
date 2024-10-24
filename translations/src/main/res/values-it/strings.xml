@@ -119,4 +119,8 @@
     <string name="export_total_time">Tempo totale</string>
     <string name="timer_list_export_succeeded">Dati dei timer copiati negli appunti</string>
 
+    <string name="timer_item_view_finish">Termina attività</string>
+    <string name="home_dialog_confirm_reset_timer">Sei sicuro di voler resettare il timer?</string>
+
+
 </resources>
