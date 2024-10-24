@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Started from API 33, there is a permission to display notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -12,8 +11,6 @@
     <!-- Allow to start the TimerService from a background thread -->
     <uses-permission-sdk-23 android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
-
-    <dist:module dist:instant="true" />
 
     <application
         android:name=".config.BehaviorTrackerApp"
