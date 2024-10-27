@@ -1,5 +1,7 @@
 includeBuild("build_src")
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(
     ":base",
     ":feature_alarm",

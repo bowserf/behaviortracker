@@ -25,5 +25,5 @@ android {
 
 dependencies {
 
-    implementation(project(":feature_string"))
+    implementation(projects.featureString)
 }
