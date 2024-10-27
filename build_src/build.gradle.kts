@@ -6,22 +6,28 @@ plugins {
 
 repositories {
     mavenCentral()
+    google()
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
-    }
+dependencies {
+    compileOnly("com.android.tools.build:gradle:8.4.2")
+    compileOnly("com.android.tools:common:31.7.1")
+    compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
 }
 
 gradlePlugin {
     plugins {
-        create("constPlugin") {
+        register("constPlugin") {
             id = "fr.bowser.build_src.projectconfig"
             implementationClass = "fr.bowser.build_src.ProjectConfig"
+        }
+        register("androidApp") {
+            id = "fr.bowser.android.application"
+            implementationClass = "fr.bowser.build_src.AndroidApplicationConventionPlugin"
+        }
+        register("androidFeature") {
+            id = "fr.bowser.android.feature"
+            implementationClass = "fr.bowser.build_src.AndroidFeatureConventionPlugin"
         }
     }
 }

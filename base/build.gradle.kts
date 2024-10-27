@@ -3,8 +3,7 @@ import fr.bowser.build_src.getPropertiesFromFile
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    id("fr.bowser.android.application")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
@@ -12,13 +11,10 @@ plugins {
 }
 
 android {
-    compileSdk = ProjectConfig.SdkVersions.compileSdkVersion
     namespace = "fr.bowser.behaviortracker"
 
     defaultConfig {
         applicationId = "fr.bowser.time"
-        minSdk = ProjectConfig.SdkVersions.minSdkVersion
-        targetSdk = ProjectConfig.SdkVersions.targetSdkVersion
         versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 
@@ -77,15 +73,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
     lint {
         abortOnError = false
     }
@@ -123,6 +110,7 @@ android {
             )
         }
     }
+
     buildFeatures {
         buildConfig = true
     }
