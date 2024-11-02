@@ -21,6 +21,8 @@ class SettingManagerImpl(
 
     private var pomodoroStep: Int
 
+    private var showEndedTask: Boolean
+
     init {
         sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener)
 
@@ -42,32 +44,12 @@ class SettingManagerImpl(
                 R.integer.settings_view_default_value_pomodoro_stage_minutes,
             ),
         ) * 60
-    }
 
-    private fun createSharedPreferenceChangeListener() =
-        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            when (key) {
-                stringManager.getString(R.string.pref_key_pomodoro_vibration) -> {
-                    pomodoroVibrationEnable = sharedPreferences.getBoolean(key, true)
-                }
-                stringManager.getString(R.string.pref_key_pomodoro_pause_stage) -> {
-                    pomodoroPauseStep = sharedPreferences.getInt(
-                        key,
-                        context.resources.getInteger(
-                            R.integer.settings_view_default_value_pomodoro_pause_stage_minutes,
-                        ),
-                    ) * 60
-                }
-                stringManager.getString(R.string.pref_key_pomodoro_stage) -> {
-                    pomodoroStep = sharedPreferences.getInt(
-                        key,
-                        context.resources.getInteger(
-                            R.integer.settings_view_default_value_pomodoro_stage_minutes,
-                        ),
-                    ) * 60
-                }
-            }
-        }
+        showEndedTask = sharedPreferences.getBoolean(
+            stringManager.getString(R.string.pref_key_show_ended_task),
+            true,
+        )
+    }
 
     override fun isPomodoroVibrationEnable(): Boolean {
         return pomodoroVibrationEnable
@@ -80,4 +62,39 @@ class SettingManagerImpl(
     override fun getPomodoroStepDuration(): Long {
         return pomodoroStep.toLong()
     }
+
+    override fun showEndedTasks(): Boolean {
+        return showEndedTask
+    }
+
+    private fun createSharedPreferenceChangeListener() =
+        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            when (key) {
+                stringManager.getString(R.string.pref_key_pomodoro_vibration) -> {
+                    pomodoroVibrationEnable = sharedPreferences.getBoolean(key, true)
+                }
+
+                stringManager.getString(R.string.pref_key_pomodoro_pause_stage) -> {
+                    pomodoroPauseStep = sharedPreferences.getInt(
+                        key,
+                        context.resources.getInteger(
+                            R.integer.settings_view_default_value_pomodoro_pause_stage_minutes,
+                        ),
+                    ) * 60
+                }
+
+                stringManager.getString(R.string.pref_key_pomodoro_stage) -> {
+                    pomodoroStep = sharedPreferences.getInt(
+                        key,
+                        context.resources.getInteger(
+                            R.integer.settings_view_default_value_pomodoro_stage_minutes,
+                        ),
+                    ) * 60
+                }
+
+                stringManager.getString(R.string.pref_key_show_ended_task) -> {
+                    showEndedTask = sharedPreferences.getBoolean(key, true)
+                }
+            }
+        }
 }

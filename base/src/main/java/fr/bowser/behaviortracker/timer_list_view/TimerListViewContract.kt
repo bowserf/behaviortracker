@@ -46,7 +46,7 @@ interface TimerListViewContract {
 
         fun onNotificationPermissionDeclined()
 
-        fun onTimerSwiped(timerPosition: Int)
+        fun onTimerSwiped(timerId: Long)
 
         fun shouldShowNotificationRequestPermissionRationaleForAlarm()
 
@@ -95,7 +95,7 @@ interface TimerListViewContract {
 
         fun displayExportSucceeded()
 
-        fun scrollToTimer(timerIndex: Int)
+        fun scrollToTimer(timerId: Long)
 
         fun reorderTimer(fromPosition: Int, toPosition: Int)
 

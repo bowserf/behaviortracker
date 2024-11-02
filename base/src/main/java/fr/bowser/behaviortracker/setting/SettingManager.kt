@@ -7,4 +7,6 @@ interface SettingManager {
     fun getPomodoroPauseStepDuration(): Long
 
     fun getPomodoroStepDuration(): Long
+
+    fun showEndedTasks(): Boolean
 }

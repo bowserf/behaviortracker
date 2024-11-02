@@ -8,6 +8,7 @@ import fr.bowser.behaviortracker.interrupt_timer.CreateInterruptTimerUseCase
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
+import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
@@ -33,6 +34,7 @@ class TimerListViewPresenter(
     private val reviewManager: ReviewManager,
     private val reviewStorage: ReviewStorage,
     private val scrollToTimerManager: ScrollToTimerManager,
+    private val settingManager: SettingManager,
     private val stringManager: StringManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository,
@@ -188,11 +190,10 @@ class TimerListViewPresenter(
         return reviewStorage.isReviewMarked()
     }
 
-    override fun onTimerSwiped(timerPosition: Int) {
-        ongoingDeletionTimer = timerRepository.getTimerList().first {
-            it.position == timerPosition
-        }
-        timerRepository.removeTimer(ongoingDeletionTimer!!)
+    override fun onTimerSwiped(timerId: Long) {
+        val timer = timerRepository.getTimerList().first { timerId == it.id }
+        ongoingDeletionTimer = timer
+        timerRepository.removeTimer(timer)
         screen.displayCancelDeletionView(CANCEL_TIMER_REMOVAL_DURATION)
         updateTimerList()
     }
@@ -227,14 +228,12 @@ class TimerListViewPresenter(
     }
 
     private fun updateTimerList() {
-        val timers = timerRepository.getTimerList().filter {
-            it != ongoingDeletionTimer
-        }
+        val timers = getDisplayedTimerList()
         screen.displayTimers(timers)
     }
 
     private fun updateTimersOrder(fromPosition: Int, toPosition: Int) {
-        val timers = timerRepository.getTimerList()
+        val timers = getDisplayedTimerList()
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
                 Collections.swap(timers, i, i + 1)
@@ -248,8 +247,7 @@ class TimerListViewPresenter(
     }
 
     private fun scrollToTimerInternal(timerId: Long) {
-        val index = timerRepository.getTimerList().indexOfFirst { it.id == timerId }
-        screen.scrollToTimer(index)
+        screen.scrollToTimer(timerId)
     }
 
     private fun askNotificationPermissionIfNeeded() {
@@ -257,6 +255,15 @@ class TimerListViewPresenter(
             !screen.shouldShowNotificationPermissionRationale()
         ) {
             screen.displayAskNotificationPermissionForManagingTimers()
+        }
+    }
+
+    private fun getDisplayedTimerList(): List<Timer> {
+        val showEndedTasks = settingManager.showEndedTasks()
+        return timerRepository.getTimerList().filter {
+            it != ongoingDeletionTimer
+        }.filter {
+            showEndedTasks || !it.isFinished
         }
     }
 
@@ -287,7 +294,7 @@ class TimerListViewPresenter(
         }
 
         override fun onTimerFinishStateChanged(timer: Timer) {
-            // nothing to do
+            updateTimerList()
         }
     }
 

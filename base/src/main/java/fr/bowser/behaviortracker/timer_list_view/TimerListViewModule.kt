@@ -7,6 +7,7 @@ import fr.bowser.behaviortracker.interrupt_timer.CreateInterruptTimerUseCaseImpl
 import fr.bowser.behaviortracker.notification_manager.NotificationManager
 import fr.bowser.behaviortracker.review.ReviewStorage
 import fr.bowser.behaviortracker.scroll_to_timer_manager.ScrollToTimerManager
+import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.time_provider.TimeProvider
 import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
@@ -29,6 +30,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
         reviewManager: ReviewManager,
         reviewStorage: ReviewStorage,
         scrollToTimerManager: ScrollToTimerManager,
+        settingManager: SettingManager,
         stringManager: StringManager,
         timeProvider: TimeProvider,
         timerRepository: TimerRepository,
@@ -50,6 +52,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
             reviewManager,
             reviewStorage,
             scrollToTimerManager,
+            settingManager,
             stringManager,
             timerManager,
             timerRepository,

@@ -234,7 +234,8 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             ).show()
         }
 
-        override fun scrollToTimer(timerIndex: Int) {
+        override fun scrollToTimer(timerId: Long) {
+            val timerIndex = timerAdapter.getTimerList().indexOfFirst { timerId == it.id }
             val y = timerList.getChildAt(timerIndex).y.toInt()
             timerListContainer.smoothScrollTo(0, y)
         }
@@ -424,7 +425,8 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun onSwiped(position: Int) {
-            presenter.onTimerSwiped(position)
+            val timer = timerAdapter.getTimerList()[position]
+            presenter.onTimerSwiped(timer.id)
         }
     }
 
