@@ -1,4 +1,6 @@
 import fr.bowser.build_src.ProjectConfig
+import fr.bowser.build_src.ProjectConfig.SdkVersions.versionCode
+import fr.bowser.build_src.ProjectConfig.SdkVersions.versionName
 import fr.bowser.build_src.getPropertiesFromFile
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
@@ -163,6 +165,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:5.3.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+    testImplementation("com.lemonappdev:konsist:0.16.1")
 
     // Android test
     androidTestImplementation("androidx.room:room-testing:2.6.1")
