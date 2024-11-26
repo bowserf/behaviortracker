@@ -1,6 +1,4 @@
 import fr.bowser.build_src.ProjectConfig
-import fr.bowser.build_src.ProjectConfig.SdkVersions.versionCode
-import fr.bowser.build_src.ProjectConfig.SdkVersions.versionName
 import fr.bowser.build_src.getPropertiesFromFile
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
