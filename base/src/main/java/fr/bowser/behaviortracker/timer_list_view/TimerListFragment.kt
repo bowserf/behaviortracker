@@ -14,12 +14,14 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
@@ -31,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.alarm_view.AlarmViewDialog
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewBottomSheetFragment
@@ -42,7 +43,8 @@ import fr.bowser.behaviortracker.utils.applyStatusBarPadding
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
 
-class TimerListFragment : Fragment(R.layout.timer_list_view) {
+
+class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list_view) {
 
     @Inject
     lateinit var presenter: TimerListViewContract.Presenter
@@ -105,44 +107,53 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.home_activity_menu, menu)
-        val reviewMenuItem = menu.findItem(R.id.home_activity_menu_review)
+        inflater.inflate(fr.bowser.behaviortracker.R.menu.timer_list_menu, menu)
+
+        val reviewMenuItem = menu.findItem(fr.bowser.behaviortracker.R.id.timer_list_menu_review)
         reviewMenuItem.isVisible = !presenter.isReviewAlreadyDone()
+
+        val showEndedTimersItem =
+            menu.findItem(fr.bowser.behaviortracker.R.id.timer_list_menu_show_ended_timers)
+        val showEndedTimersSwitch = showEndedTimersItem.actionView as SwitchCompat
+        showEndedTimersSwitch.isChecked = presenter.shouldDisplayEndedTasks()
+        showEndedTimersSwitch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            presenter.onChangeStateShowEndedTimer(isChecked)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.home_activity_menu_review -> {
+            fr.bowser.behaviortracker.R.id.timer_list_menu_review -> {
                 presenter.onClickRateApp(createReviewActivityContainer())
                 return true
             }
 
-            R.id.home_activity_menu_export_timers -> {
+            fr.bowser.behaviortracker.R.id.timer_list_menu_export_timers -> {
                 presenter.onClickExportTimers()
                 return true
             }
 
-            R.id.home_activity_menu_reset_all -> {
+            fr.bowser.behaviortracker.R.id.timer_list_menu_reset_all -> {
                 presenter.onClickResetAll()
                 return true
             }
 
-            R.id.home_activity_menu_remove_all -> {
+            fr.bowser.behaviortracker.R.id.timer_list_menu_remove_all -> {
                 presenter.onClickRemoveAllTimers()
                 return true
             }
 
-            R.id.home_activity_menu_settings -> {
+            fr.bowser.behaviortracker.R.id.timer_list_menu_settings -> {
                 presenter.onClickSettings()
                 return true
             }
 
-            R.id.home_activity_menu_alarm -> {
+            fr.bowser.behaviortracker.R.id.timer_list_menu_alarm -> {
                 presenter.onClickAlarm()
                 return true
             }
 
-            R.id.home_activity_menu_rewards -> {
+            fr.bowser.behaviortracker.R.id.timer_list_menu_rewards -> {
                 presenter.onClickRewards()
                 return true
             }
@@ -152,7 +163,8 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
     private fun createScreen() = object : TimerListViewContract.Screen {
         override fun displayResetAllDialog() {
-            val message = resources.getString(R.string.home_dialog_confirm_reset_all_timers)
+            val message =
+                resources.getString(fr.bowser.behaviortracker.R.string.home_dialog_confirm_reset_all_timers)
             val builder = MaterialAlertDialogBuilder(requireContext())
             builder.setMessage(message)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
@@ -165,7 +177,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displaySettingsView() {
-            findNavController().navigate(R.id.settings_screen)
+            findNavController().navigate(fr.bowser.behaviortracker.R.id.settings_screen)
         }
 
         override fun displayAlarmTimerDialog() {
@@ -174,13 +186,13 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         }
 
         override fun displayRewardsView() {
-            findNavController().navigate(R.id.rewards_screen)
+            findNavController().navigate(fr.bowser.behaviortracker.R.id.rewards_screen)
         }
 
         override fun displayRemoveAllTimersConfirmationDialog() {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(resources.getString(R.string.timer_list_remove_all_timers_title))
-                .setMessage(resources.getString(R.string.timer_list_remove_all_timers_message))
+                .setTitle(resources.getString(fr.bowser.behaviortracker.R.string.timer_list_remove_all_timers_title))
+                .setMessage(resources.getString(fr.bowser.behaviortracker.R.string.timer_list_remove_all_timers_message))
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     presenter.onClickConfirmRemoveAllTimers()
                 }
@@ -223,13 +235,16 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
         override fun updateTotalTime(totalTime: Long) {
             val totalTimeStr = TimeConverter.convertSecondsToHumanTime(totalTime)
-            totalTimeTv.text = resources.getString(R.string.timer_list_total_time, totalTimeStr)
+            totalTimeTv.text = resources.getString(
+                fr.bowser.behaviortracker.R.string.timer_list_total_time,
+                totalTimeStr
+            )
         }
 
         override fun displayExportSucceeded() {
             Toast.makeText(
                 requireContext(),
-                R.string.timer_list_export_succeeded,
+                fr.bowser.behaviortracker.R.string.timer_list_export_succeeded,
                 Toast.LENGTH_SHORT,
             ).show()
         }
@@ -250,12 +265,12 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
 
         override fun displayAskScheduleAlarmPermission() {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.timer_list_schedule_alarm_permission_title)
-                .setMessage(R.string.timer_list_schedule_alarm_permission_message)
+                .setTitle(fr.bowser.behaviortracker.R.string.timer_list_schedule_alarm_permission_title)
+                .setMessage(fr.bowser.behaviortracker.R.string.timer_list_schedule_alarm_permission_message)
                 .setNegativeButton(android.R.string.cancel) { _, _ ->
                     // nothing to do
                 }
-                .setPositiveButton(R.string.timer_list_schedule_alarm_permission_positive_button) { _, _ ->
+                .setPositiveButton(fr.bowser.behaviortracker.R.string.timer_list_schedule_alarm_permission_positive_button) { _, _ ->
                     presenter.onClickAskScheduleAlarmSettings()
                 }
                 .show()
@@ -266,12 +281,12 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
                 throw IllegalStateException("You can't call this method on API < 33")
             }
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.timer_list_ask_notification_display_title)
-                .setMessage(R.string.timer_list_ask_notification_display_message)
+                .setTitle(fr.bowser.behaviortracker.R.string.timer_list_ask_notification_display_title)
+                .setMessage(fr.bowser.behaviortracker.R.string.timer_list_ask_notification_display_message)
                 .setNegativeButton(android.R.string.cancel) { _, _ ->
                     // nothing to do
                 }
-                .setPositiveButton(R.string.timer_list_ask_notification_display_positive_button) { _, _ ->
+                .setPositiveButton(fr.bowser.behaviortracker.R.string.timer_list_ask_notification_display_positive_button) { _, _ ->
                     presenter.onClickAskNotificationDisplaySettings()
                 }
                 .show()
@@ -281,10 +296,13 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                 throw IllegalStateException("You can't call this method on API < 33")
             }
-            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                .setTitle(R.string.timer_list_notification_permission_title)
-                .setMessage(R.string.timer_list_notification_permission_description)
-                .setPositiveButton(R.string.timer_list_notification_permission_positive) { _, _ ->
+            MaterialAlertDialogBuilder(
+                requireContext(),
+                fr.bowser.behaviortracker.R.style.AlertDialogTheme
+            )
+                .setTitle(fr.bowser.behaviortracker.R.string.timer_list_notification_permission_title)
+                .setMessage(fr.bowser.behaviortracker.R.string.timer_list_notification_permission_description)
+                .setPositiveButton(fr.bowser.behaviortracker.R.string.timer_list_notification_permission_positive) { _, _ ->
                     timerNotificationActivityResultLauncher.launch(
                         Manifest.permission.POST_NOTIFICATIONS,
                     )
@@ -336,7 +354,7 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         override fun displayCancelDeletionView(cancelDuration: Int) {
             Snackbar.make(
                 timerListContainer,
-                resources.getString(R.string.timer_view_timer_has_been_removed),
+                resources.getString(fr.bowser.behaviortracker.R.string.timer_view_timer_has_been_removed),
                 cancelDuration,
             ).setAction(android.R.string.cancel) {
                 presenter.onClickCancelTimerDeletion()
@@ -384,7 +402,8 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(timerList)
 
-        val margin = resources.getDimensionPixelOffset(R.dimen.default_space_1_5)
+        val margin =
+            resources.getDimensionPixelOffset(fr.bowser.behaviortracker.R.dimen.default_space_1_5)
         timerList.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
@@ -410,7 +429,8 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     }
 
     private fun initializeToolbar(view: View) {
-        val toolbar = view.findViewById<Toolbar>(R.id.timer_list_view_toolbar)!!
+        val toolbar =
+            view.findViewById<Toolbar>(fr.bowser.behaviortracker.R.id.timer_list_view_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         toolbar.applyStatusBarPadding()
     }
@@ -441,13 +461,17 @@ class TimerListFragment : Fragment(R.layout.timer_list_view) {
     }
 
     private fun findViewByIds(view: View) {
-        fab = view.findViewById(R.id.timer_list_view_add_timer)
-        interruptTimer = view.findViewById(R.id.timer_list_view_start_interrupt_timer)
-        emptyListView = view.findViewById(R.id.timer_list_view_empty_list_view)
-        emptyListText = view.findViewById(R.id.timer_list_view_empty_list_text)
-        timerList = view.findViewById(R.id.timer_list_view_list_timers)
-        totalTimeTv = view.findViewById(R.id.timer_list_view_total_time)
-        timerListContainer = view.findViewById(R.id.timer_list_view_container_list)
+        fab = view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_add_timer)
+        interruptTimer =
+            view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_start_interrupt_timer)
+        emptyListView =
+            view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_empty_list_view)
+        emptyListText =
+            view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_empty_list_text)
+        timerList = view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_list_timers)
+        totalTimeTv = view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_total_time)
+        timerListContainer =
+            view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_container_list)
     }
 
     companion object {

@@ -15,6 +15,9 @@
 
     <color name="icon_light_day">#8affffff</color>
 
+    <color name="switch_checked_not">#666666</color>
+    <color name="switch_checked">#F48FB1</color>
+
     <color name="text_light_day_night">#8affffff</color>
 
     <color name="deep_orange">#ffab91</color>

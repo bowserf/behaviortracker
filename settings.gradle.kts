@@ -39,5 +39,6 @@ include(
     ":feature_do_not_disturb",
     ":feature_review",
     ":feature_string",
+    ":feature_toast",
     ":translations"
 )

@@ -91,7 +91,7 @@ class PomodoroViewFragment : Fragment(R.layout.pomodoro_view) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.home_activity_menu_settings -> {
+            R.id.timer_list_menu_settings -> {
                 presenter.onClickSettings()
                 return true
             }

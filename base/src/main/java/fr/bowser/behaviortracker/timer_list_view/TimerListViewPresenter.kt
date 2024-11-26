@@ -14,6 +14,7 @@ import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature.toast.ToastManager
 import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_review.ReviewActivityContainer
 import fr.bowser.feature_review.ReviewManager
@@ -38,6 +39,7 @@ class TimerListViewPresenter(
     private val stringManager: StringManager,
     private val timeManager: TimerManager,
     private val timerRepository: TimerRepository,
+    private val toastManager: ToastManager,
     coroutineContext: CoroutineContext = Dispatchers.Main,
 ) : TimerListViewContract.Presenter {
 
@@ -53,11 +55,14 @@ class TimerListViewPresenter(
 
     private val timeManagerListener = createTimeManagerListener()
 
+    private val settingsListener = createSettingsManagerListener()
+
     override fun onStart() {
         reviewManager.addListener(reviewManagerListener)
         timerRepository.addListener(timerRepositoryListener)
         timeManager.addListener(timeManagerListener)
         scrollToTimerManager.addListener(scrollToTimerListener)
+        settingManager.addListener(settingsListener)
 
         updateTimerList()
         updateListVisibility()
@@ -69,6 +74,7 @@ class TimerListViewPresenter(
         reviewManager.removeListener(reviewManagerListener)
         timerRepository.removeListener(timerRepositoryListener)
         timeManager.removeListener(timeManagerListener)
+        settingManager.removeListener(settingsListener)
     }
 
     override fun onClickResetAll() {
@@ -158,6 +164,15 @@ class TimerListViewPresenter(
         createInterruptTimerUseCase()
     }
 
+    override fun onChangeStateShowEndedTimer(show: Boolean) {
+        settingManager.setShowEndedTasks(show)
+        if (show) {
+            toastManager.showText(R.string.timer_list_show_ended_task_message)
+        } else {
+            toastManager.showText(R.string.timer_list_hide_ended_task_message)
+        }
+    }
+
     override fun onClickRateApp(activityContainer: ReviewActivityContainer) {
         reviewManager.launchReviewFlow(activityContainer)
     }
@@ -217,6 +232,10 @@ class TimerListViewPresenter(
         var totalTime = 0f
         timerRepository.getTimerList().forEach { totalTime += it.time }
         screen.updateTotalTime(totalTime.toLong())
+    }
+
+    override fun shouldDisplayEndedTasks(): Boolean {
+        return settingManager.showEndedTasks()
     }
 
     private fun displayAlarmTimerDialogIfNotificationsAreEnabled() {
@@ -318,6 +337,12 @@ class TimerListViewPresenter(
 
         override fun onTimerRenamed(updatedTimer: Timer) {
             // nothing to do
+        }
+    }
+
+    private fun createSettingsManagerListener() = object : SettingManager.Listener {
+        override fun onShowEndedTasksChanged() {
+            updateTimerList()
         }
     }
 

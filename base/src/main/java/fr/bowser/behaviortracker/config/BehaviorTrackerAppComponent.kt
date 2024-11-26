@@ -40,8 +40,10 @@ import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer.TimerManagerModule
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.timer_repository.TimerRepositoryModule
+import fr.bowser.behaviortracker.toast.ToastManagerModule
 import fr.bowser.feature.alarm.AlarmTimerManager
 import fr.bowser.feature.billing.InAppManager
+import fr.bowser.feature.toast.ToastManager
 import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_do_not_disturb.DoNotDisturbManager
 import fr.bowser.feature_review.ReviewManager
@@ -70,6 +72,7 @@ import javax.inject.Singleton
         TimerManagerModule::class,
         TimeProviderModule::class,
         TimeZoneModule::class,
+        ToastManagerModule::class,
         SpeechToTextModule::class,
     ),
 )
@@ -120,6 +123,8 @@ interface BehaviorTrackerAppComponent {
     fun provideTimerRepositoryManager(): TimerRepository
 
     fun provideTimezoneManager(): TimeZoneManager
+
+    fun provideToastManager(): ToastManager
 
     fun provideSpeechToTextManager(): SpeechToTextManager
 

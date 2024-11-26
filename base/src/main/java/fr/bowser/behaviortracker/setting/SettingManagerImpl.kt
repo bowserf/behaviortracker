@@ -3,6 +3,7 @@ package fr.bowser.behaviortracker.setting
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import fr.bowser.behaviortracker.R
 import fr.bowser.feature_string.StringManager
 
@@ -10,6 +11,8 @@ class SettingManagerImpl(
     private val context: Context,
     private val stringManager: StringManager,
 ) : SettingManager {
+
+    private val listeners = mutableListOf<SettingManager.Listener>()
 
     private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -67,6 +70,23 @@ class SettingManagerImpl(
         return showEndedTask
     }
 
+    override fun setShowEndedTasks(show: Boolean) {
+        sharedPreferences.edit {
+            putBoolean(stringManager.getString(R.string.pref_key_show_ended_task), show)
+        }
+    }
+
+    override fun addListener(listener: SettingManager.Listener) {
+        if (listeners.contains(listener)) {
+            return
+        }
+        listeners.add(listener)
+    }
+
+    override fun removeListener(listener: SettingManager.Listener) {
+        listeners.remove(listener)
+    }
+
     private fun createSharedPreferenceChangeListener() =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
             when (key) {
@@ -94,6 +114,7 @@ class SettingManagerImpl(
 
                 stringManager.getString(R.string.pref_key_show_ended_task) -> {
                     showEndedTask = sharedPreferences.getBoolean(key, true)
+                    listeners.forEach { it.onShowEndedTasksChanged() }
                 }
             }
         }

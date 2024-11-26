@@ -3,44 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home_activity_menu_review"
+        android:id="@+id/timer_list_menu_review"
         android:enabled="true"
         android:icon="@drawable/timer_list_view_rate_app"
         android:title="@string/menu_review"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/home_activity_menu_export_timers"
+        android:id="@+id/timer_list_menu_show_ended_timers"
+        android:title=""
+        app:actionLayout="@layout/timer_list_menu_show_ended_tasks"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/timer_list_menu_export_timers"
         android:enabled="true"
         android:title="@string/menu_export_timers"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/home_activity_menu_reset_all"
+        android:id="@+id/timer_list_menu_reset_all"
         android:enabled="true"
         android:title="@string/menu_reset_all"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/home_activity_menu_remove_all"
+        android:id="@+id/timer_list_menu_remove_all"
         android:enabled="true"
         android:title="@string/menu_remove_all"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/home_activity_menu_alarm"
+        android:id="@+id/timer_list_menu_alarm"
         android:enabled="true"
         android:title="@string/menu_alarm"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/home_activity_menu_rewards"
+        android:id="@+id/timer_list_menu_rewards"
         android:enabled="true"
         android:title="@string/menu_rewards"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/home_activity_menu_settings"
+        android:id="@+id/timer_list_menu_settings"
         android:enabled="true"
         android:title="@string/menu_setting"
         app:showAsAction="never" />

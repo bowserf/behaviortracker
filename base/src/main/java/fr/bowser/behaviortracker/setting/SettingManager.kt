@@ -9,4 +9,14 @@ interface SettingManager {
     fun getPomodoroStepDuration(): Long
 
     fun showEndedTasks(): Boolean
+
+    fun setShowEndedTasks(show: Boolean)
+    
+    fun addListener(listener: Listener)
+    
+    fun removeListener(listener: Listener)
+    
+    interface Listener {
+        fun onShowEndedTasksChanged()
+    }
 }

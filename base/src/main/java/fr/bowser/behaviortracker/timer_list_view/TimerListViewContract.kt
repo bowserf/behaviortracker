@@ -53,6 +53,10 @@ interface TimerListViewContract {
         fun onTimerPositionChanged(fromPosition: Int, toPosition: Int)
 
         fun onClickInterruptTimer()
+
+        fun onChangeStateShowEndedTimer(show: Boolean)
+
+        fun shouldDisplayEndedTasks(): Boolean
     }
 
     interface Screen {

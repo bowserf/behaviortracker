@@ -124,6 +124,7 @@ dependencies {
     implementation(projects.featureDoNotDisturb)
     implementation(projects.featureReview)
     implementation(projects.featureString)
+    implementation(projects.featureToast)
     implementation(projects.translations)
 
     // Kotlin

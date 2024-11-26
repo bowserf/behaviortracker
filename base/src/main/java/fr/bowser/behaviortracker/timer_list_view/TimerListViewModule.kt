@@ -13,6 +13,7 @@ import fr.bowser.behaviortracker.timer.TimerManager
 import fr.bowser.behaviortracker.timer_repository.TimerRepository
 import fr.bowser.behaviortracker.utils.GenericScope
 import fr.bowser.feature.alarm.AlarmTimerManager
+import fr.bowser.feature.toast.ToastManager
 import fr.bowser.feature_clipboard.CopyDataToClipboardManager
 import fr.bowser.feature_review.ReviewManager
 import fr.bowser.feature_string.StringManager
@@ -35,6 +36,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
         timeProvider: TimeProvider,
         timerRepository: TimerRepository,
         timerManager: TimerManager,
+        toastManager: ToastManager,
     ): TimerListViewContract.Presenter {
         val createInterruptTimerUseCase = CreateInterruptTimerUseCaseImpl(
             eventManager,
@@ -56,6 +58,7 @@ class TimerListViewModule(private val timerScreen: TimerListViewContract.Screen)
             stringManager,
             timerManager,
             timerRepository,
+            toastManager,
         )
     }
 }

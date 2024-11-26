@@ -49,4 +49,14 @@
         <item name="rippleColor">@color/colorOnPrimary</item>
     </style>-->
 
+    <style name="TopBarSwitch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorSurface">@color/switch_checked_not</item>
+        <item name="colorControlActivated">@color/switch_checked</item>
+    </style>
+
+
 </resources>

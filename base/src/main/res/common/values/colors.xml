@@ -16,6 +16,9 @@
 
     <color name="text_light_day_night">#8affffff</color>
 
+    <color name="switch_checked_not">#EEEEEE</color>
+    <color name="switch_checked">#E91E63</color>
+
     <color name="colorSecondary">#E91E63</color>
     <color name="colorOnSecondary">#FFFFFF</color>
     <color name="colorBackground">#FFFFFF</color>
