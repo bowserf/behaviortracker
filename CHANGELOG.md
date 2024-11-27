@@ -1,5 +1,15 @@
 ### Time Tracker v1.01.00
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2024-11-26
+* Change log:
+  - [Timer] Add menu item in timer row to end a timer and change its UI
+  - [Timer] Add a switch in the top bar to show/hide ended timers
+  - [Timer] Add confirmation dialog to reset a timer
+
+
+
+### Time Tracker v1.01.00
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2024-09-26
 * Change log:
   - [Android] Compatibility to API 35
