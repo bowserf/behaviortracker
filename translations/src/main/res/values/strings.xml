@@ -11,7 +11,7 @@
     <string name="alarm_timer_alarm_enabled">Alarm is activated</string>
     <string name="alarm_timer_alarm_disabled">Alarm is disabled</string>
     <string name="choose_pomodoro_timer_view_title">Choose a timer</string>
-    <string name="app_name" translatable="false">Time Tracker</string>
+    <string name="app_name" translatable="false">Tracker</string>
     <string name="create_timer_shortcut_short_label">New timer</string>
     <string name="create_timer_shortcut_long_label">Create a new timer to track an action.</string>
     <string name="timer_name">Name</string>

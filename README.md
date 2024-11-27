@@ -1,7 +1,7 @@
 # Time Tracker ⏲️ easily track and optimize your time
 
 <img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/high_res_icon/ic_launcher-web.png"
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/high_res_icon/ic_launcher-playstore.png"
     align="left"
     width="256"
     height="256"
