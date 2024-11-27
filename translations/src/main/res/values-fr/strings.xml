@@ -64,7 +64,6 @@
     <string name="settings_cell_time_modification_message">Ajustez le temps passé sur vos actions.</string>
     <string name="settings_cell_send_commentary_title">Envoyer une suggestion</string>
     <string name="settings_cell_send_commentary_message">Dites nous comment améliorer Time Tracker.</string>
-    <string name="settings_category_pomodoro" translatable="false">Pomodoro</string>
     <string name="settings_cell_pomodoro_vibration">Activer vibration</string>
     <string name="settings_cell_pomodoro_vibration_message">L\'appareil vibre quand le temps s\'est écoulé.</string>
     <string name="settings_cell_pomodoro_stage_title">Durée d\'une session</string>
@@ -84,6 +83,7 @@
     <string name="item_update_timer_time">Mettre le temps à jour</string>
     <string name="empty_list_view_text">Qu\'allez vous chronométrer aujourd\'hui ?</string>
     <string name="timer_view_timer_has_been_removed">Un chronomètre a été supprimé</string>
+    <string name="timer_list_hide_ended_task_message">Cacher les chronomètres terminés</string>
     <string name="timer_list_remove_all_timers_title">Supprimer tous les chronomètres</string>
     <string name="timer_list_remove_all_timers_message">Etes vous sûr de vouloir supprimer tous les chronomètres</string>
     <string name="timer_list_section_inactive_title">Chronomètres</string>
@@ -118,6 +118,7 @@
 
     <string name="timer_item_view_finish">Terminer la tâche</string>
     <string name="home_dialog_confirm_reset_timer">Voulez vous vraiment remettreà 0 le chronomètre ?</string>
+    <string name="timer_list_show_ended_task_message">Afficher les chronomètres terminés</string>
 
 
 </resources>
