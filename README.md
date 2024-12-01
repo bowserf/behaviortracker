@@ -35,22 +35,27 @@ By example, you could want a reminder link to the time you wake up.
 ## Screenshot
 
 <img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/timer_list.png"
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/app_screenshots/smartphone/en/HomeTest_timerListIsDisplayed_timer_list.png"
     width="230"
     height="512"
     title="Timers list">
 <img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/create_timer.png"
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/app_screenshots/smartphone/en/CreateTimerTest_createTimer_set_timer_name.png"
     width="230"
     height="512"
     title="Create a timer">
 <img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/pomodoro.png"
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/app_screenshots/smartphone/en/ShowModeTest_showModeIsDisplayed_selected_timer.png"
+    width="230"
+    height="512"
+    title="Create a timer">
+<img
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/app_screenshots/smartphone/en/PomodoroTest_startPomodoro_running_timer_pomodoro.png"
     width="230"
     height="512"
     title="Pomodoro">
 <img
-    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/playstore/screenshot/smartphone/en/timer_list_dark.png"
+    src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/resources/app_screenshots/smartphone/en/HomeTest_timerListIsDisplayedDarkMode_timer_list_dark_mode.png"
     width="230"
     height="512"
     title="Timers list dark mode">
