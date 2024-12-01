@@ -51,7 +51,7 @@ class CreateTimerTest {
     fun createTimer() {
         timerListViewRobot.clickShowCreateTimer()
 
-        createTimerRobot.setTimerName("Development")
+        createTimerRobot.setTimerName("Work on project CIR")
 
         closeSoftKeyboard()
 
@@ -63,7 +63,7 @@ class CreateTimerTest {
 
         onView(withId(R.id.timer_list_view_list_timers))
             .perform(scrollToPosition<TimerListViewAdapter.TimerViewHolder>(0))
-            .check(matches(atPosition(0, hasDescendant(withText("Development")))))
+            .check(matches(atPosition(0, hasDescendant(withText("Work on project CIR")))))
     }
 
     private fun takeScreenshot(name: String) {

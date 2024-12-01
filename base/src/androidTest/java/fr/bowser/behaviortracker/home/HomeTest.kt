@@ -9,7 +9,6 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
-import fr.bowser.behaviortracker.MainDispatcherRule
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home_activity.HomeActivity
@@ -17,10 +16,8 @@ import fr.bowser.behaviortracker.screenshot.Screenshot
 import fr.bowser.behaviortracker.theme.Theme
 import fr.bowser.behaviortracker.timer.CleanTimerRepositoryRule
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.utils.ColorUtils
 import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -77,17 +74,18 @@ class HomeTest {
         val appComponent = BehaviorTrackerApp.getAppComponent(applicationContext)
         val timerRepository = appComponent.provideTimerRepositoryManager()
         val timeManager = appComponent.provideTimeManager()
-        val firstTimer = Timer(
-            name = "Work",
-            color = ColorUtils.COLOR_BLUE,
-            currentTime = 8000,
-            lastUpdateTimestamp = 1727366400000,
-        )
         instrumentation.runOnMainSync {
-            timerRepository.addTimer(firstTimer)
             timerRepository.addTimer(
                 Timer(
-                    name = "Transport",
+                    name = "Morning meeting",
+                    color = ColorUtils.COLOR_BLUE,
+                    currentTime = 8000,
+                    lastUpdateTimestamp = 1727366400000,
+                )
+            )
+            timerRepository.addTimer(
+                Timer(
+                    name = "Go to work by transport",
                     color = ColorUtils.COLOR_AMBER,
                     currentTime = 1700,
                     lastUpdateTimestamp = 1727366400000,
@@ -103,13 +101,13 @@ class HomeTest {
             )
             timerRepository.addTimer(
                 Timer(
-                    name = "Cooking",
+                    name = "Get ready before going to work",
                     color = ColorUtils.COLOR_BLUE_GREY,
                     currentTime = 2000,
                     lastUpdateTimestamp = 1727366400000,
                 ),
             )
-            timeManager.startTimer(firstTimer)
+            timeManager.startTimer(timerRepository.getTimerList().first())
         }
     }
 

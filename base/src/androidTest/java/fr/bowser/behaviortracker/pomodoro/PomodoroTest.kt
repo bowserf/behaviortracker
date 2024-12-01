@@ -45,7 +45,7 @@ class PomodoroTest {
         instrumentation.runOnMainSync {
             timerRepository.addTimer(
                 Timer(
-                    "Development",
+                    "Work on project CIR",
                     ColorUtils.COLOR_BLUE,
                 ),
             )

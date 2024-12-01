@@ -46,7 +46,7 @@ class ShowModeTest {
         onView(withId(R.id.timer_list_view_list_timers))
             .perform(
                 actionOnItem<TimerListViewAdapter.TimerViewHolder>(
-                    hasDescendant(withText("Development")),
+                    hasDescendant(withText("Morning meeting")),
                     click(),
                 ).atPosition(0),
             )
@@ -62,9 +62,9 @@ class ShowModeTest {
         instrumentation.runOnMainSync {
             timerRepository.addTimer(
                 Timer(
-                    name = "Development",
+                    name = "Morning meeting",
                     color = ColorUtils.COLOR_BLUE,
-                    currentTime = 300,
+                    currentTime = 8000,
                 ),
             )
         }
