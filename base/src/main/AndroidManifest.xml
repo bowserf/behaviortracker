@@ -17,7 +17,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -40,13 +39,17 @@
             android:name=".timer_service.TimerServiceReceiver"
             android:exported="false" />
 
-        <service android:name=".timer_service.TimerService"  android:foregroundServiceType="specialUse">
-            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="Foreground service uses to update the time displayed in the notification associated to the current running timer"/>
+        <service
+            android:name=".timer_service.TimerService"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Foreground service uses to update the time displayed in the notification associated to the current running timer" />
 
         </service>
 
-        <receiver android:name=".widget.PomodoroAppWidgetProvider"
+        <receiver
+            android:name=".widget.PomodoroAppWidgetProvider"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -60,7 +63,7 @@
             android:name=".time_zone.TimeZoneReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
         </receiver>
 

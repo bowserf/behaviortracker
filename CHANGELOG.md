@@ -1,10 +1,11 @@
-### Time Tracker v1.01.00
+### Time Tracker v1.02.00
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
-* Date :  2024-11-26
+* Date :  2024-11-30
 * Change log:
   - [Timer] Add menu item in timer row to end a timer and change its UI
   - [Timer] Add a switch in the top bar to show/hide ended timers
   - [Timer] Add confirmation dialog to reset a timer
+  - [Icon] Update the icon and make it adaptive
 
 
 
