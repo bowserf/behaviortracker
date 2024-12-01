@@ -53,7 +53,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">「邪魔しない」状態を変更するには、タイム トラッカーに「邪魔しない」モードの許可が必要です。
 設定から権限を手動で有効にする必要があります。</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">設定を開く</string>
-    <string name="activity_rewards_title">サポート開発者</string>
+    <string name="rewards_toolbar_title">サポート開発者</string>
     <string name="rewards_purchase_fail">購入中にエラーが発生しました =\'(
 後でお試しください。</string>
     <string name="rewards_purchase_success">ご支援いただきありがとうございます！アプリケーションを改善するために引き続き努力します&lt; 3</string>

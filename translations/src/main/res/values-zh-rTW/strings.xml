@@ -53,7 +53,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker 需要“請勿打擾”模式的權限才能更改“請勿打擾”狀態。
 您必須從設置中手動啟用權限。</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">打開設置</string>
-    <string name="activity_rewards_title">支持開發者</string>
+    <string name="rewards_toolbar_title">支持開發者</string>
     <string name="rewards_purchase_fail">購買時出錯=\'(
 請稍後再試。</string>
     <string name="rewards_purchase_success">謝謝您的支持！我們將繼續努力改進應用程序&lt; 3</string>

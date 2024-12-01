@@ -53,7 +53,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker necesita el permiso del modo \"No molestar\" para cambiar el estado \"No molestar\".
  Tienes que habilitar manualmente el permiso desde la configuración.</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Configuración abierta</string>
-    <string name="activity_rewards_title">Apoyar a los desarrolladores</string>
+    <string name="rewards_toolbar_title">Apoyar a los desarrolladores</string>
     <string name="rewards_purchase_fail">Ocurrió un error durante la compra =\'(
  Por favor intente mas tarde.</string>
     <string name="rewards_purchase_success">¡Gracias por tu apoyo! Seguiremos trabajando duro para mejorar la aplicación &lt; 3</string>

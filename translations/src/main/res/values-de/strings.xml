@@ -53,7 +53,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker benötigt die Berechtigung „Nicht stören“-Modus, um den „Nicht stören“-Zustand zu ändern.
  Sie müssen die Berechtigung manuell in den Einstellungen aktivieren.</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Einstellungen öffnen</string>
-    <string name="activity_rewards_title">Entwickler unterstützen</string>
+    <string name="rewards_toolbar_title">Entwickler unterstützen</string>
     <string name="rewards_purchase_fail">Beim Kauf ist ein Fehler aufgetreten =\'(
  Bitte versuch es später.</string>
     <string name="rewards_purchase_success">Danke für Ihre Unterstützung! Wir werden weiterhin hart daran arbeiten, die Anwendung zu verbessern &lt; 3</string>

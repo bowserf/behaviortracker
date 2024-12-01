@@ -53,7 +53,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker\'ın \"Rahatsız etmeyin\" durumunu değiştirmek için \"Rahatsız etmeyin\" modu iznine ihtiyacı var.
  İzni ayarlardan manuel olarak etkinleştirmeniz gerekir.</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Ayarları aç</string>
-    <string name="activity_rewards_title">Geliştiricileri destekleyin</string>
+    <string name="rewards_toolbar_title">Geliştiricileri destekleyin</string>
     <string name="rewards_purchase_fail">Satın alma sırasında bir hata oluştu =\'(
  Lütfen daha sonra tekrar deneyin.</string>
     <string name="rewards_purchase_success">Desteğin için teşekkürler! Uygulamayı geliştirmek için çok çalışmaya devam edeceğiz &lt; 3</string>

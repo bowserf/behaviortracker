@@ -53,7 +53,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">O Time Tracker precisa da permissão do modo \"Não perturbe\" para alterar o estado \"Não perturbe\".
  Você precisa habilitar manualmente a permissão nas configurações.</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Abrir configurações</string>
-    <string name="activity_rewards_title">Suporte aos desenvolvedores</string>
+    <string name="rewards_toolbar_title">Suporte aos desenvolvedores</string>
     <string name="rewards_purchase_fail">Ocorreu um erro durante a compra =\'(
  Por favor tente mais tarde.</string>
     <string name="rewards_purchase_success">Obrigado pelo seu apoio! Continuaremos a trabalhar arduamente para melhorar a aplicação &lt; 3</string>

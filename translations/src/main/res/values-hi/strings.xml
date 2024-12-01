@@ -53,7 +53,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">टाइम ट्रैकर को \"परेशान न करें\" स्थिति को बदलने के लिए \"परेशान न करें\" मोड की अनुमति की आवश्यकता है।
  आपको सेटिंग्स से अनुमति को मैन्युअल रूप से सक्षम करना होगा।</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">खुली सेटिंग</string>
-    <string name="activity_rewards_title">समर्थन डेवलपर्स</string>
+    <string name="rewards_toolbar_title">समर्थन डेवलपर्स</string>
     <string name="rewards_purchase_fail">खरीद के दौरान एक त्रुटि हुई =\'(
  बाद में कोशिश करें।</string>
     <string name="rewards_purchase_success">आपके सहयोग के लिए धन्यवाद! हम एप्लिकेशन को बेहतर बनाने के लिए कड़ी मेहनत करना जारी रखेंगे &lt; 3</string>

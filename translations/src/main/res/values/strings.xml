@@ -11,7 +11,10 @@
     <string name="alarm_timer_alarm_enabled">Alarm is activated</string>
     <string name="alarm_timer_alarm_disabled">Alarm is disabled</string>
     <string name="choose_pomodoro_timer_view_title">Choose a timer</string>
-    <string name="app_name" translatable="false">Tracker</string>
+    <string name="app_name_short" translatable="false">Tracker</string>
+    <string name="app_name_long" translatable="false">Time Tracker</string>
+    <string name="timer_list_toolbar_title" translatable="false">@string/app_name_long</string>
+    <string name="pomodoro_toolbar_title" translatable="false">Pomodoro</string>
     <string name="create_timer_shortcut_short_label">New timer</string>
     <string name="create_timer_shortcut_long_label">Create a new timer to track an action.</string>
     <string name="timer_name">Name</string>
@@ -63,7 +66,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker needs the permission \"Do not disturb\" mode in order to change the \"Do not disturb\" state.
 You have to manually enable the permission from settings.</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Open settings</string>
-    <string name="activity_rewards_title">Support developers</string>
+    <string name="rewards_toolbar_title">Support developers</string>
     <string name="rewards_purchase_fail">An error occurred during purchase =\'(
 Please try later.</string>
     <string name="rewards_purchase_success">Thank you for your support! We will continue to work hard to improve the application &lt;3</string>

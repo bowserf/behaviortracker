@@ -52,7 +52,7 @@
     <string name="pomodoro_do_not_disturb_dialog_permission_title">Permission nécessaire</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_message">Time Tracker nécessite la permission \"Ne pas déranger\" afin de pouvoir modifier le status du mode \"Ne pas déranger\".\n Vous devez activer la permission manuellement depuis les paramètres.</string>
     <string name="pomodoro_do_not_disturb_dialog_permission_positive_button">Ouvrir les paramètres</string>
-    <string name="activity_rewards_title">Supporter les développeurs</string>
+    <string name="rewards_toolbar_title">Supporter les développeurs</string>
     <string name="rewards_purchase_fail">Une erreur est survenue lors de l\'achat =\'(\nRéessayez plus tard.</string>
     <string name="rewards_purchase_success">Merci pour votre soutient ! Nous allons continuer à travailler dur pour améliorer l\'application &lt;3</string>
     <string name="activity_setting_title">Paramètres</string>
