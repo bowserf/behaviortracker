@@ -17,11 +17,8 @@ import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
 import fr.bowser.behaviortracker.timer.CleanTimerRepositoryRule
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.timer_list_view.TimerListViewAdapter
 import fr.bowser.behaviortracker.utils.ColorUtils
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -43,7 +40,7 @@ class ShowModeTest {
     val cleanTimerRepositoryRule = CleanTimerRepositoryRule()
 
     @Test
-    fun timerListIsDisplayed() {
+    fun showModeIsDisplayed() {
         setupTimers()
 
         onView(withId(R.id.timer_list_view_list_timers))
@@ -54,7 +51,7 @@ class ShowModeTest {
                 ).atPosition(0),
             )
 
-        takeScreenshot("timer_list")
+        takeScreenshot("selected_timer")
     }
 
     private fun setupTimers() {
