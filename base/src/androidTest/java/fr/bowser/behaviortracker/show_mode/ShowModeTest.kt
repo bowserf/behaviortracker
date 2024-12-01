@@ -15,11 +15,13 @@ import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
+import fr.bowser.behaviortracker.timer.CleanTimerRepositoryRule
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.timer_list_view.TimerListViewAdapter
 import fr.bowser.behaviortracker.utils.ColorUtils
 import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -37,6 +39,9 @@ class ShowModeTest {
     @get:Rule
     val activityRule = activityScenarioRule<HomeActivity>()
 
+    @get:Rule
+    val cleanTimerRepositoryRule = CleanTimerRepositoryRule()
+
     @Test
     fun timerListIsDisplayed() {
         setupTimers()
@@ -50,11 +55,6 @@ class ShowModeTest {
             )
 
         takeScreenshot("timer_list")
-    }
-
-    @After
-    fun tearDown() {
-        TimerRepositoryClean.removeAllTimers()
     }
 
     private fun setupTimers() {

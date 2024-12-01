@@ -8,10 +8,9 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home.HomeTabRobot
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
+import fr.bowser.behaviortracker.timer.CleanTimerRepositoryRule
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.utils.ColorUtils
-import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -25,6 +24,9 @@ class PomodoroTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(HomeActivity::class.java)
+
+    @get:Rule
+    val cleanTimerRepositoryRule = CleanTimerRepositoryRule()
 
     private val homeTabRobot = HomeTabRobot()
 
@@ -59,11 +61,6 @@ class PomodoroTest {
 
         assert(pomodoroManager.isStarted)
         assert(pomodoroManager.isRunning)
-    }
-
-    @After
-    fun tearDown() {
-        TimerRepositoryClean.removeAllTimers()
     }
 
     private fun takeScreenshot(name: String) {

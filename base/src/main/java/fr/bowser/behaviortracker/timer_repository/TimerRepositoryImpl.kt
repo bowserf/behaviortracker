@@ -5,6 +5,7 @@ import fr.bowser.behaviortracker.timer.TimerDAO
 import fr.bowser.behaviortracker.timer.TimerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -54,8 +55,8 @@ class TimerRepositoryImpl(
         }
     }
 
-    override fun removeAllTimers() {
-        coroutineScope.launch {
+    override fun removeAllTimers(): Job {
+        return coroutineScope.launch {
             timerDAO.removeAllTimers()
             withContext(Dispatchers.Main) {
                 timeManager.stopTimer()

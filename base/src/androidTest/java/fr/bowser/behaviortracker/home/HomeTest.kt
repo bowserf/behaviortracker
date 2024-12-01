@@ -1,21 +1,26 @@
 package fr.bowser.behaviortracker.home
 
+import android.Manifest
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
+import fr.bowser.behaviortracker.MainDispatcherRule
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
 import fr.bowser.behaviortracker.theme.Theme
+import fr.bowser.behaviortracker.timer.CleanTimerRepositoryRule
 import fr.bowser.behaviortracker.timer.Timer
 import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.utils.ColorUtils
 import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -25,12 +30,23 @@ import org.junit.runner.RunWith
 class HomeTest {
 
     @get:Rule
+    var runtimePermissionRule = GrantPermissionRule.grant(Manifest.permission.POST_NOTIFICATIONS)
+
+    @get:Rule
     var nameRule = TestName()
 
     // More convenient way of doing
     // val activityRule = ActivityScenarioRule(HomeActivity::class.java)
     @get:Rule
     val activityRule = activityScenarioRule<HomeActivity>()
+
+    @get:Rule
+    val cleanTimerRepositoryRule = CleanTimerRepositoryRule()
+
+    @After
+    fun tearDown() {
+        Theme.createActivityScenarioRule(activityRule, false)
+    }
 
     @Test
     fun timerListIsDisplayed() {
@@ -53,12 +69,6 @@ class HomeTest {
         Theme.createActivityScenarioRule(activityRule, true)
 
         takeScreenshot("timer_list_dark_mode")
-    }
-
-    @After
-    fun tearDown() {
-        TimerRepositoryClean.removeAllTimers()
-        Theme.createActivityScenarioRule(activityRule, false)
     }
 
     private fun setupTimers() {

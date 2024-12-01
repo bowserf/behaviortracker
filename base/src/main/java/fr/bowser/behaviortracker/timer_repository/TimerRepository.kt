@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer_repository
 
 import fr.bowser.behaviortracker.timer.Timer
+import kotlinx.coroutines.Job
 
 interface TimerRepository {
 
@@ -8,7 +9,7 @@ interface TimerRepository {
 
     fun removeTimer(timer: Timer)
 
-    fun removeAllTimers()
+    fun removeAllTimers(): Job
 
     fun getTimerList(): List<Timer>
 
