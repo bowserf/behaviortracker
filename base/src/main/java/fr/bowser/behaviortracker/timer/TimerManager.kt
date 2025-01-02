@@ -2,19 +2,19 @@ package fr.bowser.behaviortracker.timer
 
 interface TimerManager {
 
-    fun startTimer(timer: Timer, fakeTimer: Boolean = false)
+    fun startTimer(timer: Timer)
 
-    fun stopTimer(fakeTimer: Boolean = false)
+    fun stopTimer()
 
     fun isRunning(timer: Timer): Boolean
 
     fun getStartedTimer(): Timer?
 
-    fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean = false)
+    fun updateTime(timer: Timer, newTime: Float)
 
-    fun resetTime(timer: Timer, fakeTimer: Boolean = false)
+    fun resetTime(timer: Timer)
 
-    fun updateFinishState(timer: Timer, fakeTimer: Boolean = false)
+    fun updateFinishState(timer: Timer)
 
     fun addListener(listener: Listener): Boolean
 

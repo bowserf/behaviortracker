@@ -25,7 +25,7 @@ class TimerManagerImpl(
 
     private var isRunning = false
 
-    override fun startTimer(timer: Timer, fakeTimer: Boolean) {
+    override fun startTimer(timer: Timer) {
         if (isRunning(timer)) {
             return
         }
@@ -36,7 +36,7 @@ class TimerManagerImpl(
 
         lastUpdatedTime = getCurrentTimeSeconds()
 
-        updateLastUpdateTimestamp(timer, fakeTimer)
+        updateLastUpdateTimestamp(timer)
 
         setTimerActivateState(timer, true)
 
@@ -55,14 +55,14 @@ class TimerManagerImpl(
         addOn.onTimerStarted()
     }
 
-    override fun stopTimer(fakeTimer: Boolean) {
+    override fun stopTimer() {
         val timer = startedTimer ?: return
 
         if (!isRunning) {
             return
         }
 
-        updateLastUpdateTimestamp(timer, fakeTimer)
+        updateLastUpdateTimestamp(timer)
 
         stopStartedTimer()
     }
@@ -75,7 +75,7 @@ class TimerManagerImpl(
         return startedTimer
     }
 
-    override fun updateTime(timer: Timer, newTime: Float, fakeTimer: Boolean) {
+    override fun updateTime(timer: Timer, newTime: Float) {
         var currentNewTime = newTime
         if (currentNewTime < 0) {
             currentNewTime = 0f
@@ -83,10 +83,8 @@ class TimerManagerImpl(
 
         timer.time = currentNewTime
 
-        if (!fakeTimer) {
-            coroutineScope.launch {
-                timerDAO.updateTimerTime(timer.id, timer.time.toLong())
-            }
+        coroutineScope.launch {
+            timerDAO.updateTimerTime(timer.id, timer.time.toLong())
         }
 
         for (listener in listeners) {
@@ -94,15 +92,14 @@ class TimerManagerImpl(
         }
     }
 
-    override fun resetTime(timer: Timer, fakeTimer: Boolean) {
+    override fun resetTime(timer: Timer) {
         timer.time = 0f
-        if (!fakeTimer) {
-            coroutineScope.launch {
-                timerDAO.updateTimerTime(timer.id, timer.time.toLong())
-            }
+
+        coroutineScope.launch {
+            timerDAO.updateTimerTime(timer.id, timer.time.toLong())
         }
 
-        updateLastUpdateTimestamp(timer, fakeTimer)
+        updateLastUpdateTimestamp(timer)
 
         for (listener in listeners) {
             listener.onTimerTimeChanged(timer)
@@ -110,17 +107,17 @@ class TimerManagerImpl(
         }
     }
 
-    override fun updateFinishState(timer: Timer, fakeTimer: Boolean) {
+    override fun updateFinishState(timer: Timer) {
         if (isRunning(timer)) {
             stopTimer()
         }
 
         timer.isFinished = !timer.isFinished
-        if (!fakeTimer) {
-            coroutineScope.launch {
-                timerDAO.updateFinishState(timer.id, timer.isFinished)
-            }
+
+        coroutineScope.launch {
+            timerDAO.updateFinishState(timer.id, timer.isFinished)
         }
+
         for (listener in listeners) {
             listener.onTimerFinishStateChanged(timer)
         }
@@ -154,16 +151,12 @@ class TimerManagerImpl(
         return timeProvider.getCurrentTimeMs() / 1000
     }
 
-    private fun updateLastUpdateTimestamp(
-        timer: Timer,
-        fakeTimer: Boolean,
-    ) {
+    private fun updateLastUpdateTimestamp(timer: Timer) {
         val currentTime = timeProvider.getCurrentTimeMs()
         timer.lastUpdateTimestamp = currentTime
-        if (!fakeTimer) {
-            coroutineScope.launch {
-                timerDAO.updateLastUpdatedTimestamp(timer.id, currentTime)
-            }
+
+        coroutineScope.launch {
+            timerDAO.updateLastUpdatedTimestamp(timer.id, currentTime)
         }
     }
 
