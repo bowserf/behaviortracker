@@ -1,6 +1,7 @@
 package fr.bowser.behaviortracker.timer
 
 import fr.bowser.behaviortracker.time_provider.TimeProvider
+import java.util.ArrayList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -144,6 +145,7 @@ class TimerManagerImpl(
         // reset value to be consistent
         lastUpdatedTime = 0L
 
+        updateLastUpdateTimestamp(startedTimer)
         setTimerActivateState(startedTimer, false)
     }
 
