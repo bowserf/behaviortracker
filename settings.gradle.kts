@@ -32,7 +32,7 @@ dependencyResolutionManagement {
 includeBuild("build_src")
 
 include(
-    ":base",
+    ":app",
     ":feature_alarm",
     ":feature_billing",
     ":feature_clipboard",
