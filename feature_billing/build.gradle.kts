@@ -7,5 +7,5 @@ android {
 }
 
 dependencies {
-    implementation("com.android.billingclient:billing:7.0.0")
+    implementation(libs.billing)
 }

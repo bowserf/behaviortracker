@@ -5,9 +5,12 @@ plugins {
 }
 
 dependencies {
-    compileOnly("com.android.tools.build:gradle:8.4.2")
-    compileOnly("com.android.tools:common:31.7.1")
-    compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
+    compileOnly(libs.android.gradle) {
+        because("Access to Android gradle plugin DSL to configure the android part")
+    }
+    compileOnly(libs.kotlin.gradle) {
+        because("Access to the Kotlin gradle plugin DSL to configure the kotlin part")
+    }
 }
 
 gradlePlugin {

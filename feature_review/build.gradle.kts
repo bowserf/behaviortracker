@@ -8,5 +8,5 @@ android {
 dependencies {
 
     // AndroidX
-    implementation("com.google.android.play:review-ktx:2.0.1")
+    implementation(libs.play.review)
 }

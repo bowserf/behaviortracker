@@ -4,10 +4,10 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
     id("fr.bowser.android.application")
-    id("androidx.navigation.safeargs.kotlin")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.androidx.navigation.safeargs)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -129,56 +129,56 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation(libs.kotlinx.coroutine)
+    implementation(libs.kotlinx.coroutines.android)
 
     // Design
-    implementation("com.google.android.material:material:1.12.0")
+    implementation(libs.material)
 
     // AndroidX library
-    implementation("androidx.activity:activity:1.9.0")
-    implementation("androidx.preference:preference-ktx:1.2.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.annotation:annotation:1.8.0")
-    implementation("androidx.viewpager2:viewpager2:1.1.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     // Architecture component
-    implementation("androidx.room:room-runtime:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 
     // Other
-    implementation("com.google.dagger:dagger:2.48.1")
-    ksp("com.google.dagger:dagger-compiler:2.48.1")
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 
     // Unit test
-    testImplementation("org.json:json:20220320")
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:5.3.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
-    testImplementation("com.lemonappdev:konsist:0.16.1")
+    testImplementation(libs.json)
+    testImplementation(libs.testing.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.konsist)
 
     // Android test
-    androidTestImplementation("androidx.room:room-testing:2.6.1")
-    androidTestImplementation("androidx.test:runner:1.6.1")
-    androidTestImplementation("androidx.test:rules:1.6.1")
-    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5") {
+    androidTestImplementation(libs.testing.androidx.room)
+    androidTestImplementation(libs.testing.androidx.runner)
+    androidTestImplementation(libs.testing.androidx.rules)
+    androidTestImplementation(libs.testing.androidx.junit) {
         because("We need this to define the running Activity with \"ActivityScenarioRule\"")
     }
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1") {
+    androidTestImplementation(libs.testing.espresso.core)
+    androidTestImplementation(libs.testing.espresso.contrib) {
         because("We need this to interact with some UI elements not in the OS (Drawer, RecyclerView, ViewPager, etc...")
     }
-    androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
-    androidTestUtil("androidx.test.services:test-services:1.4.2") {
+    androidTestImplementation(libs.testing.hamcrest)
+    androidTestUtil(libs.testing.androidx.services) {
         because("We need this dependency to save screenshot on device disk when we call \"writeToTestStorage\"")
     }
 }
