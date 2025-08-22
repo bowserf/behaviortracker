@@ -2,12 +2,12 @@
 plugins {
     // https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3
     id("fr.bowser.build_src.projectconfig")
-    id("com.android.application") version "8.7.2" apply false
-    id("org.jetbrains.kotlin.android") version "2.0.0" apply false
+    id("com.android.application") version "8.12.1" apply false
+    id("org.jetbrains.kotlin.android") version "2.2.10" apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
     id("com.google.firebase.crashlytics") version "3.0.2" apply false
     id("androidx.navigation.safeargs.kotlin") version "2.7.7" apply false
-    id("com.google.devtools.ksp") version "2.0.0-1.0.22" apply false
+    id("com.google.devtools.ksp") version "2.2.10-2.0.2" apply false
 }
 
 subprojects {
