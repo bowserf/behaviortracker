@@ -170,10 +170,10 @@ internal class InAppManagerImpl(
     }
 
     private fun createProductDetailsResponseListener(): ProductDetailsResponseListener {
-        return ProductDetailsResponseListener { result, productDetails ->
+        return ProductDetailsResponseListener { result, queryProductDetailsResult ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 this@InAppManagerImpl.productDetails.clear()
-                this@InAppManagerImpl.productDetails.addAll(productDetails)
+                this@InAppManagerImpl.productDetails.addAll(queryProductDetailsResult.productDetailsList)
                 queryPurchases()
             }
         }

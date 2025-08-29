@@ -8,6 +8,7 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.ProductDetailsResponseListener
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesResponseListener
@@ -28,9 +29,13 @@ internal class PlayBillingManager(context: Context) {
     private var listener: Listener? = null
 
     fun setUpPlayBilling() {
+        val pendingPurchasesParams = PendingPurchasesParams
+            .newBuilder()
+            .enableOneTimeProducts()
+            .build()
         billingClient = BillingClient.newBuilder(context)
             .setListener(purchasesUpdatedListener)
-            .enablePendingPurchases()
+            .enablePendingPurchases(pendingPurchasesParams)
             .build()
     }
 
