@@ -1,3 +1,13 @@
+### Time Tracker v1.02.01
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2025-09-06
+* Change log:
+  - [PlayBilling] Bump to v8
+  - [StatusBar] Fix icons color
+  - [Icon] Fix round icon and monochrome theme
+
+
+
 ### Time Tracker v1.02.00
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2024-11-30
