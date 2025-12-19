@@ -104,5 +104,7 @@ interface TimerListViewContract {
         fun reorderTimer(fromPosition: Int, toPosition: Int)
 
         fun displayAskNotificationPermissionForManagingTimers()
+
+        fun showInterruptTimer(show: Boolean)
     }
 }

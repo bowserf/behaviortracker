@@ -12,6 +12,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.View.INVISIBLE
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.CompoundButton
@@ -79,16 +80,6 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
         findViewByIds(view)
 
         initializeList()
-
-        timerListContainer.setOnScrollChangeListener(
-            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-                if (scrollY > oldScrollY) {
-                    fab.hide()
-                } else {
-                    fab.show()
-                }
-            },
-        )
 
         fab.setOnClickListener { presenter.onClickAddTimer() }
         interruptTimer.setOnClickListener { presenter.onClickInterruptTimer() }
@@ -309,6 +300,14 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
                 }
                 .setCancelable(false)
                 .show()
+        }
+
+        override fun showInterruptTimer(show: Boolean) {
+            if (show) {
+                interruptTimer.show()
+            } else {
+                interruptTimer.hide()
+            }
         }
 
         override fun shouldShowNotificationPermissionRationale(): Boolean {

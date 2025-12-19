@@ -67,6 +67,7 @@ class TimerListViewPresenter(
         updateTimerList()
         updateListVisibility()
         updateTotalTimerTime()
+        updateInterruptTimerVisibility()
     }
 
     override fun onStop() {
@@ -251,6 +252,12 @@ class TimerListViewPresenter(
         screen.displayTimers(timers)
     }
 
+    private fun updateInterruptTimerVisibility() {
+        val startedTimer = timeManager.getStartedTimer()
+        val isRunning = startedTimer?.let { timeManager.isRunning(it) } ?: false
+        screen.showInterruptTimer(isRunning)
+    }
+
     private fun updateTimersOrder(fromPosition: Int, toPosition: Int) {
         val timers = getDisplayedTimerList()
         if (fromPosition < toPosition) {
@@ -305,7 +312,7 @@ class TimerListViewPresenter(
 
     private fun createTimeManagerListener() = object : TimerManager.Listener {
         override fun onTimerStateChanged(updatedTimer: Timer) {
-            // nothing to do
+            updateInterruptTimerVisibility()
         }
 
         override fun onTimerTimeChanged(updatedTimer: Timer) {

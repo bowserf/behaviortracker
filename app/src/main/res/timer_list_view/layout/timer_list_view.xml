@@ -97,26 +97,26 @@
         tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/timer_list_view_add_timer"
+        android:id="@+id/timer_list_view_start_interrupt_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_space_1_5"
         android:elevation="@dimen/default_space"
-        android:src="@drawable/timer_list_view_add"
+        android:src="@drawable/timer_list_interrupt_timer"
+        android:tint="@color/orange"
+        app:backgroundTint="@color/fab_interrupt_timer"
         app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@id/timer_list_view_start_interrupt_timer"
-        app:layout_constraintEnd_toEndOf="@id/timer_list_view_start_interrupt_timer" />
+        app:layout_constraintBottom_toTopOf="@id/timer_list_view_add_timer"
+        app:layout_constraintEnd_toEndOf="@id/timer_list_view_add_timer" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/timer_list_view_start_interrupt_timer"
+        android:id="@+id/timer_list_view_add_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_space_2"
         android:layout_marginBottom="@dimen/default_space_2"
         android:elevation="@dimen/default_space"
-        android:src="@drawable/timer_list_interrupt_timer"
-        android:tint="@color/orange"
-        app:backgroundTint="@color/fab_interrupt_timer"
+        android:src="@drawable/timer_list_view_add"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@id/timer_list_view_floating_running_timer_view"
         app:layout_constraintEnd_toEndOf="parent" />
