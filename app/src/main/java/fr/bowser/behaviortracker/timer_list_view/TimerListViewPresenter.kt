@@ -216,7 +216,7 @@ class TimerListViewPresenter(
     override fun onClickCancelTimerDeletion() {
         val restoreTimer = ongoingDeletionTimer ?: return
         ongoingDeletionTimer = null
-        timerRepository.addTimer(restoreTimer)
+        timerRepository.restoreTimer(restoreTimer)
     }
 
     private fun updateListVisibility() {

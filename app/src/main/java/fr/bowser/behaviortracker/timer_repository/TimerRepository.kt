@@ -9,6 +9,8 @@ interface TimerRepository {
 
     fun removeTimer(timer: Timer)
 
+    fun restoreTimer(restoredTimer: Timer)
+
     fun removeAllTimers(): Job
 
     fun getTimerList(): List<Timer>

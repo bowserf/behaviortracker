@@ -55,6 +55,19 @@ class TimerRepositoryImpl(
         }
     }
 
+    override fun restoreTimer(restoredTimer: Timer) {
+        timers.add(restoredTimer.position, restoredTimer)
+
+        for (listener in listeners) {
+            listener.onTimerAdded(restoredTimer)
+        }
+
+        coroutineScope.launch {
+            timerDAO.addTimer(restoredTimer)
+            reorderTimerList(timers)
+        }
+    }
+
     override fun removeAllTimers(): Job {
         return coroutineScope.launch {
             timerDAO.removeAllTimers()
