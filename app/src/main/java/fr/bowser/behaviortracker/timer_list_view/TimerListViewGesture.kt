@@ -32,7 +32,7 @@ class TimerListViewGesture(context: Context, private val callback: Listener) :
         target: RecyclerView.ViewHolder,
     ): Boolean {
         isMoving = true
-        callback.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        callback.onItemMove(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition)
         return true
     }
 
@@ -45,7 +45,7 @@ class TimerListViewGesture(context: Context, private val callback: Listener) :
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         isMoving = false
-        callback.onSwiped(viewHolder.adapterPosition)
+        callback.onSwiped(viewHolder.bindingAdapterPosition)
     }
 
     override fun onChildDraw(

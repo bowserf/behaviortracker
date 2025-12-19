@@ -101,7 +101,7 @@ interface TimerListViewContract {
 
         fun scrollToTimer(timerId: Long)
 
-        fun reorderTimer(fromPosition: Int, toPosition: Int)
+        fun reorderTimer(timers: List<Timer>, fromPosition: Int, toPosition: Int)
 
         fun displayAskNotificationPermissionForManagingTimers()
 

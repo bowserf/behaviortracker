@@ -196,7 +196,7 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
         }
 
         override fun displayTimers(timers: List<Timer>) {
-            timerAdapter.populate(timers)
+            timerAdapter.populate(timers, true)
         }
 
         override fun displayEmptyListView() {
@@ -246,7 +246,12 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
             timerListContainer.smoothScrollTo(0, y)
         }
 
-        override fun reorderTimer(fromPosition: Int, toPosition: Int) {
+        override fun reorderTimer(
+            timers: List<Timer>,
+            fromPosition: Int,
+            toPosition: Int
+        ) {
+            timerAdapter.populate(timers, false)
             timerAdapter.reorderTimer(fromPosition, toPosition)
         }
 

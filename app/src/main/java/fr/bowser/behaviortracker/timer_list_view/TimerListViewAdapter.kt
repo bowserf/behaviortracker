@@ -33,10 +33,12 @@ class TimerListViewAdapter : RecyclerView.Adapter<TimerListViewAdapter.TimerView
         return timerList.size
     }
 
-    fun populate(timers: List<Timer>) {
+    fun populate(timers: List<Timer>, update: Boolean) {
         timerList.clear()
         timerList.addAll(timers)
-        notifyDataSetChanged()
+        if (update) {
+            notifyDataSetChanged()
+        }
     }
 
     fun addTimer(timer: Timer) {
@@ -45,16 +47,12 @@ class TimerListViewAdapter : RecyclerView.Adapter<TimerListViewAdapter.TimerView
         notifyItemInserted(position)
     }
 
-    fun removeTimer(timer: Timer) {
-        val position = timerList.indexOf(timer)
-        if (position != -1) {
-            timerList.remove(timer)
-            notifyItemRemoved(position)
-        }
-    }
-
     fun getTimerList(): List<Timer> {
         return timerList.toList()
+    }
+
+    fun removeTimer(position: Int) {
+        notifyItemRemoved(position)
     }
 
     fun reorderTimer(fromPosition: Int, toPosition: Int) {

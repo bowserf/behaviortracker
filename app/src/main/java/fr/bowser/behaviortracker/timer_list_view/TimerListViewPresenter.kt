@@ -157,8 +157,7 @@ class TimerListViewPresenter(
 
     override fun onTimerPositionChanged(fromPosition: Int, toPosition: Int) {
         updateTimersOrder(fromPosition, toPosition)
-
-        screen.reorderTimer(fromPosition, toPosition)
+        screen.reorderTimer(timerRepository.getTimerList(), fromPosition, toPosition)
     }
 
     override fun onClickInterruptTimer() {
