@@ -103,6 +103,8 @@ interface TimerListViewContract {
 
         fun reorderTimer(timers: List<Timer>, fromPosition: Int, toPosition: Int)
 
+        fun removeTimer(timers: List<Timer>, position: Int)
+
         fun displayAskNotificationPermissionForManagingTimers()
 
         fun showInterruptTimer(show: Boolean)

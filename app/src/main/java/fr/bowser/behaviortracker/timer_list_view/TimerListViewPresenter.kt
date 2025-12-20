@@ -206,11 +206,16 @@ class TimerListViewPresenter(
     }
 
     override fun onTimerSwiped(timerId: Long) {
-        val timer = timerRepository.getTimerList().first { timerId == it.id }
-        ongoingDeletionTimer = timer
-        timerRepository.removeTimer(timer)
+        val currentTimers = timerRepository.getTimerList()
+        val timerToRemove = currentTimers.first { timerId == it.id }
+        val positionTimerToRemove = currentTimers.indexOf(timerToRemove)
+
+        ongoingDeletionTimer = timerToRemove
+        timerRepository.removeTimer(timerToRemove)
         screen.displayCancelDeletionView(CANCEL_TIMER_REMOVAL_DURATION)
-        updateTimerList()
+
+        val timers = getDisplayedTimerList()
+        screen.removeTimer(timers, positionTimerToRemove)
     }
 
     override fun onClickCancelTimerDeletion() {

@@ -255,6 +255,14 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
             timerAdapter.reorderTimer(fromPosition, toPosition)
         }
 
+        override fun removeTimer(
+            timers: List<Timer>,
+            position: Int
+        ) {
+            timerAdapter.populate(timers, false)
+            timerAdapter.removeTimer(position)
+        }
+
         override fun invalidateMenu() {
             requireActivity().invalidateOptionsMenu()
         }

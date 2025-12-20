@@ -10,6 +10,14 @@ class TimerListViewAdapter : RecyclerView.Adapter<TimerListViewAdapter.TimerView
 
     private val timerList = mutableListOf<Timer>()
 
+    init {
+        setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return timerList[position].id
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimerViewHolder {
         val timerRowView = TimerItemView(parent.context)
 

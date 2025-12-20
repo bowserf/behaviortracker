@@ -99,6 +99,7 @@ class TimerRepositoryImpl(
     }
 
     override fun getTimerList(): List<Timer> {
+        // TODO return a copy
         return timers
     }
 
