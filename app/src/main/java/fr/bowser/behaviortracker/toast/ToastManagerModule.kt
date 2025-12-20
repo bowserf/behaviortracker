@@ -15,7 +15,6 @@ class ToastManagerModule {
     fun provideToastManager(
         context: Context,
     ): ToastManager {
-        return ToastModule(
-        ).createToastManager(context)
+        return ToastModule().createToastManager(context)
     }
 }

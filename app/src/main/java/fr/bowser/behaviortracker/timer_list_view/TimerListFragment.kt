@@ -238,7 +238,7 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
         override fun reorderTimer(
             timers: List<Timer>,
             fromPosition: Int,
-            toPosition: Int
+            toPosition: Int,
         ) {
             timerAdapter.populate(timers, false)
             timerAdapter.reorderTimer(fromPosition, toPosition)
@@ -246,7 +246,7 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
 
         override fun removeTimer(
             timers: List<Timer>,
-            position: Int
+            position: Int,
         ) {
             timerAdapter.populate(timers, false)
             timerAdapter.removeTimer(position)
@@ -291,7 +291,7 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
             }
             MaterialAlertDialogBuilder(
                 requireContext(),
-                fr.bowser.behaviortracker.R.style.AlertDialogTheme
+                fr.bowser.behaviortracker.R.style.AlertDialogTheme,
             )
                 .setTitle(fr.bowser.behaviortracker.R.string.timer_list_notification_permission_title)
                 .setMessage(fr.bowser.behaviortracker.R.string.timer_list_notification_permission_description)

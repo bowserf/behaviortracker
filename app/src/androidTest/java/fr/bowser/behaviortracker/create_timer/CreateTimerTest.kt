@@ -16,11 +16,8 @@ import fr.bowser.behaviortracker.common.RecyclerViewMatcher.atPosition
 import fr.bowser.behaviortracker.home_activity.HomeActivity
 import fr.bowser.behaviortracker.screenshot.Screenshot
 import fr.bowser.behaviortracker.timer.CleanTimerRepositoryRule
-import fr.bowser.behaviortracker.timer.TimerRepositoryClean
 import fr.bowser.behaviortracker.timer_list_view.TimerListViewAdapter
 import fr.bowser.behaviortracker.timer_list_view.TimerListViewRobot
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName

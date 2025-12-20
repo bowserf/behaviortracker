@@ -81,7 +81,7 @@ class HomeTest {
                     color = ColorUtils.COLOR_BLUE,
                     currentTime = 8000,
                     lastUpdateTimestamp = 1727366400000,
-                )
+                ),
             )
             timerRepository.addTimer(
                 Timer(

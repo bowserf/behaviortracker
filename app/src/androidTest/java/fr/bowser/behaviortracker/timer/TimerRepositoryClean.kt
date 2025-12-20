@@ -3,7 +3,6 @@ package fr.bowser.behaviortracker.timer
 import androidx.test.platform.app.InstrumentationRegistry
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runTest
 
 object TimerRepositoryClean {
 
