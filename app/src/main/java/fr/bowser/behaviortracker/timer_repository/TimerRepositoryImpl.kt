@@ -99,8 +99,7 @@ class TimerRepositoryImpl(
     }
 
     override fun getTimerList(): List<Timer> {
-        // TODO return a copy
-        return timers
+        return timers.toList()
     }
 
     override fun getTimerNotFinished(): List<Timer> {
