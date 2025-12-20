@@ -31,6 +31,8 @@ class TimerListViewGesture(context: Context, private val callback: Listener) :
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder,
     ): Boolean {
+        if (viewHolder is TimerListViewAdapter.TotalTimeViewHolder) return false
+        if (target is TimerListViewAdapter.TotalTimeViewHolder) return false
         isMoving = true
         callback.onItemMove(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition)
         return true
@@ -44,6 +46,7 @@ class TimerListViewGesture(context: Context, private val callback: Listener) :
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        if (viewHolder is TimerListViewAdapter.TotalTimeViewHolder) return
         isMoving = false
         callback.onSwiped(viewHolder.bindingAdapterPosition)
     }
@@ -57,6 +60,8 @@ class TimerListViewGesture(context: Context, private val callback: Listener) :
         actionState: Int,
         isCurrentlyActive: Boolean,
     ) {
+        if (viewHolder is TimerListViewAdapter.TotalTimeViewHolder) return
+
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val itemView = viewHolder.itemView
             if (dX < 0) {

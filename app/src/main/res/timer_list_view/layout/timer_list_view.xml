@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:layout_constraintBottom_toTopOf="@id/timer_list_view_container_list"
+        app:layout_constraintBottom_toTopOf="@id/timer_list_view_list_timers"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,40 +20,16 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="@string/timer_list_toolbar_title" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/timer_list_view_container_list"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/timer_list_view_list_timers"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:paddingBottom="56dp"
         app:layout_constraintBottom_toTopOf="@id/timer_list_view_floating_running_timer_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timer_list_view_toolbar">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="40dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/timer_list_view_list_timers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/timer_list_view_total_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:text="Total time: 1:25:36" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toBottomOf="@id/timer_list_view_toolbar" />
 
     <View
         android:layout_width="0dp"

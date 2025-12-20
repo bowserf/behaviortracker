@@ -12,7 +12,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.View.INVISIBLE
-import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.CompoundButton
@@ -25,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -39,11 +37,9 @@ import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.create_timer_view.CreateTimerViewBottomSheetFragment
 import fr.bowser.behaviortracker.explain_permission_request_view.ExplainPermissionRequestViewModel
 import fr.bowser.behaviortracker.timer.Timer
-import fr.bowser.behaviortracker.utils.TimeConverter
 import fr.bowser.behaviortracker.utils.applyStatusBarPadding
 import fr.bowser.feature_review.ReviewActivityContainer
 import javax.inject.Inject
-
 
 class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list_view) {
 
@@ -65,8 +61,6 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
     private lateinit var emptyListView: ImageView
     private lateinit var emptyListText: TextView
     private lateinit var timerList: RecyclerView
-    private lateinit var totalTimeTv: TextView
-    private lateinit var timerListContainer: NestedScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -200,7 +194,7 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
         }
 
         override fun displayEmptyListView() {
-            timerListContainer.visibility = INVISIBLE
+            timerList.visibility = INVISIBLE
             emptyListView.visibility = VISIBLE
             emptyListText.visibility = VISIBLE
 
@@ -219,17 +213,13 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
         }
 
         override fun displayListView() {
-            timerListContainer.visibility = VISIBLE
+            timerList.visibility = VISIBLE
             emptyListView.visibility = INVISIBLE
             emptyListText.visibility = INVISIBLE
         }
 
         override fun updateTotalTime(totalTime: Long) {
-            val totalTimeStr = TimeConverter.convertSecondsToHumanTime(totalTime)
-            totalTimeTv.text = resources.getString(
-                fr.bowser.behaviortracker.R.string.timer_list_total_time,
-                totalTimeStr
-            )
+            timerAdapter.updateTotalTime(totalTime)
         }
 
         override fun displayExportSucceeded() {
@@ -242,8 +232,7 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
 
         override fun scrollToTimer(timerId: Long) {
             val timerIndex = timerAdapter.getTimerList().indexOfFirst { timerId == it.id }
-            val y = timerList.getChildAt(timerIndex).y.toInt()
-            timerListContainer.smoothScrollTo(0, y)
+            timerList.smoothScrollToPosition(timerIndex)
         }
 
         override fun reorderTimer(
@@ -365,7 +354,7 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
 
         override fun displayCancelDeletionView(cancelDuration: Int) {
             Snackbar.make(
-                timerListContainer,
+                timerList,
                 resources.getString(fr.bowser.behaviortracker.R.string.timer_view_timer_has_been_removed),
                 cancelDuration,
             ).setAction(android.R.string.cancel) {
@@ -481,9 +470,6 @@ class TimerListFragment : Fragment(fr.bowser.behaviortracker.R.layout.timer_list
         emptyListText =
             view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_empty_list_text)
         timerList = view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_list_timers)
-        totalTimeTv = view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_total_time)
-        timerListContainer =
-            view.findViewById(fr.bowser.behaviortracker.R.id.timer_list_view_container_list)
     }
 
     companion object {
