@@ -1,3 +1,14 @@
+### Time Tracker v1.03.00
+* Author : Frédéric Torcheux - torcheux.frederic@gmail.com
+* Date :  2025-12-21
+* Change log:
+    - [TimerListView] Fix all animation on items (remove)
+    - [TimerRepository] Add method to restore at the good position an ongoing deletion timer
+    - [TimerListView] Fix timer reordering that made the timer list in a bad order
+    - [TimerListView] Invert fab add timer and interrupt and hide interrupt when no timer is running
+
+
+
 ### Time Tracker v1.02.01
 * Author : Frédéric Torcheux - torcheux.frederic@gmail.com
 * Date :  2025-09-06
