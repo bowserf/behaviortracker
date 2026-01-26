@@ -1,6 +1,5 @@
 import fr.bowser.build_src.ProjectConfig
 import fr.bowser.build_src.getPropertiesFromFile
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
     id("fr.bowser.android.application")
@@ -18,7 +17,7 @@ android {
         versionCode = ProjectConfig.SdkVersions.versionCode
         versionName = ProjectConfig.SdkVersions.versionName
 
-        resourceConfigurations.addAll(
+        androidResources.localeFilters.addAll(
             listOf(
                 "en",
                 "de",
@@ -52,18 +51,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix = ".dev"
+            buildConfigField("boolean", "UA", "false")
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"))
-            proguardFiles("proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             buildConfigField("boolean", "UA", "false")
 
             signingConfig = signingConfigs.findByName("release")
-        }
-        getByName("debug") {
-            versionNameSuffix = ".dev"
-            buildConfigField("boolean", "UA", "false")
         }
         create("ua") {
             initWith(getByName("debug"))
@@ -81,7 +82,7 @@ android {
         getByName("main") {
             // Split resources.
             // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
-            res.setSrcDirs(
+            res.directories.addAll(
                 listOf(
                     "src/main/res/alarm_notification",
                     "src/main/res/alarm_view",
@@ -128,7 +129,7 @@ dependencies {
     implementation(projects.translations)
 
     // Kotlin
-    implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
+    implementation(kotlin("reflect"))
     implementation(libs.kotlinx.coroutine)
     implementation(libs.kotlinx.coroutines.android)
 

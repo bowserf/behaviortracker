@@ -10,9 +10,9 @@
 [versions]
 # buildScript dependencies
 # https://kotlinlang.org/docs/releases.html#release-details
-kotlin = "2.2.10"
+kotlin = "2.2.21"
 # https://developer.android.com/studio/releases/gradle-plugin
-androidBuildTools = "8.12.1"
+androidBuildTools = "9.0.0"
 # https://firebase.google.com/support/release-notes/androi
 # Look for "google-services plugin"
 googleServices="4.4.3"
@@ -20,9 +20,11 @@ googleServices="4.4.3"
 # Look for "crashlytics gradle plugin"
 firebaseCrashlyticsGradle="3.0.6"
 # https://github.com/google/ksp/releases
-ksp="2.2.10-2.0.2"
+# Independant from the Kotlin version since 2.3.0: https://github.com/google/ksp/releases/tag/2.3.0
+# Compatible with AGP 9.0 since 2.3.1
+ksp="2.3.4"
 # https://developer.android.com/jetpack/androidx/releases/navigation
-navigation="2.7.7"
+navigation="2.9.6"
 
 # Others
 # https://firebase.google.com/support/release-notes/android#latest_sdk_versions
