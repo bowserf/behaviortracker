@@ -10,7 +10,7 @@
 [versions]
 # buildScript dependencies
 # https://kotlinlang.org/docs/releases.html#release-details
-kotlin = "2.2.21"
+kotlin = "2.3.21"
 # https://developer.android.com/studio/releases/gradle-plugin
 androidBuildTools = "9.2.0"
 # https://firebase.google.com/support/release-notes/androi
@@ -22,7 +22,7 @@ firebaseCrashlyticsGradle="3.0.6"
 # https://github.com/google/ksp/releases
 # Independant from the Kotlin version since 2.3.0: https://github.com/google/ksp/releases/tag/2.3.0
 # Compatible with AGP 9.0 since 2.3.1
-ksp="2.3.4"
+ksp="2.3.7"
 # https://developer.android.com/jetpack/androidx/releases/navigation
 navigation="2.9.6"
 
