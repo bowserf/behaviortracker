@@ -12,7 +12,7 @@
 # https://kotlinlang.org/docs/releases.html#release-details
 kotlin = "2.2.21"
 # https://developer.android.com/studio/releases/gradle-plugin
-androidBuildTools = "9.0.0"
+androidBuildTools = "9.2.0"
 # https://firebase.google.com/support/release-notes/androi
 # Look for "google-services plugin"
 googleServices="4.4.3"
