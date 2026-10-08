@@ -28,9 +28,14 @@ class TimerItemViewPresenter(
         screen.setTime(timer.time.toLong())
         updateTimerStatus()
 
-        screen.updateLastUpdatedDate(
-            timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp),
-        )
+        if (timer.lastUpdateTimestamp == 0L) {
+            screen.changeVisibilityLastUpdatedDate(false)
+        } else {
+            screen.changeVisibilityLastUpdatedDate(true)
+            screen.updateLastUpdatedDate(
+                timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp),
+            )
+        }
     }
 
     override fun onStop() {
@@ -115,9 +120,14 @@ class TimerItemViewPresenter(
         override fun onTimerStateChanged(updatedTimer: Timer) {
             if (timer == updatedTimer) {
                 updateTimerStatus()
-                screen.updateLastUpdatedDate(
-                    timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp),
-                )
+                if (timer.lastUpdateTimestamp == 0L) {
+                    screen.changeVisibilityLastUpdatedDate(false)
+                } else {
+                    screen.changeVisibilityLastUpdatedDate(true)
+                    screen.updateLastUpdatedDate(
+                        timeProvider.convertTimestampToHumanReadable(timer.lastUpdateTimestamp),
+                    )
+                }
             }
         }
 

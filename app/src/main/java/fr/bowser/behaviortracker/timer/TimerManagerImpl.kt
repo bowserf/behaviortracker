@@ -100,7 +100,7 @@ class TimerManagerImpl(
             timerDAO.updateTimerTime(timer.id, timer.time.toLong())
         }
 
-        updateLastUpdateTimestamp(timer)
+        resetLastUpdateTimestamp(timer)
 
         for (listener in listeners) {
             listener.onTimerTimeChanged(timer)
@@ -158,7 +158,15 @@ class TimerManagerImpl(
         timer.lastUpdateTimestamp = currentTime
 
         coroutineScope.launch {
-            timerDAO.updateLastUpdatedTimestamp(timer.id, currentTime)
+            timerDAO.updateLastUpdatedTimestamp(timer.id, timer.lastUpdateTimestamp)
+        }
+    }
+
+    private fun resetLastUpdateTimestamp(timer: Timer) {
+        timer.lastUpdateTimestamp = 0
+
+        coroutineScope.launch {
+            timerDAO.updateLastUpdatedTimestamp(timer.id, timer.lastUpdateTimestamp)
         }
     }
 

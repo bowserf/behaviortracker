@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.bowser.behaviortracker.R
@@ -252,6 +253,10 @@ class TimerItemView(context: Context) : CardView(context) {
 
         override fun updateLastUpdatedDate(date: String) {
             lastUpdateTimestamp.text = date
+        }
+
+        override fun changeVisibilityLastUpdatedDate(isVisible: Boolean) {
+            lastUpdateTimestamp.isVisible = isVisible
         }
 
         override fun playSelectedAnimation() {

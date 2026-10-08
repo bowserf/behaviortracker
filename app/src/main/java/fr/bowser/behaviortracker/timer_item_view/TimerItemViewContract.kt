@@ -47,6 +47,8 @@ interface TimerItemViewContract {
 
         fun updateLastUpdatedDate(date: String)
 
+        fun changeVisibilityLastUpdatedDate(isVisible: Boolean)
+
         fun playSelectedAnimation()
 
         fun setColorId(colorId: Int)
